@@ -1,0 +1,276 @@
+# Optimized ψ-Trajectory Implementation Plan (12 Weeks)
+with a few ELFIN additions:
+
+keep ELFIN in the loop, but limit its role to what it already does best.
+
+Why ELFIN should stay
+Dimensional-safety layer.
+ELFIN’s compiler/LSP already verifies physical-unit consistency at edit-time (e.g., “meters ≠ seconds”) .
+That’s orthogonal to ψ-oscillator generation and prevents subtle run-time errors in control or robotics code that TORI will ultimately test.
+
+Bridging symbolic ↔ spectral worlds.
+
+ELFIN declarations (variables, units, invariants) are crisp symbolic anchors.
+
+We can hash each ELFIN symbol into the concept graph; when the ψ-engine notices a recurring spectral pattern linked to a unit-checked quantity, it can tag it with that canonical symbol, greatly improving explainability.
+
+IDE value-add already exists.
+The ELFIN Language Server gives live diagnostics, hover, go-to-definition, etc. inside VS Code 
+
+. Dropping it would mean re-implementing those staples or shipping a weaker coding experience.
+
+No architectural collision.
+ELFIN stays in the static-analysis lane. Our ψ-trajectory and oscillator runtime pipeline stays pure math. They meet only in metadata: ELFIN → symbol table → concept labels.
+
+
+
+Minimal Testing
+Unit test: create dummy elfin_symbols.json with known hash, inject a synthetic ψ-cluster that should map → assert ConceptGraph::get_meta(...,"elfin_name") == "wheelDiameter".
+
+Integration smoke: edit code in IDE, trigger ELFIN save, run conversation that references variable; check dashboard shows tag.
+
+Pass = tag appears without manual mapping.
+
+Impact
+Zero runtime overhead in oscillator loop – bind happens only when a concept stabilizes.
+You gain symbolic anchors tied to unit-checked definitions, unlocking traceable explanations (“why did ALAN adjust 0.05 m? because wheelDiameter concept oscillated”).
+
+Drop these snippets into your existing phases (import in Phase 1 build → ingest Phase 3 → UI Phase 5) and ELFIN is seamlessly fused.
+
+
+HERE IS THE PLAN!!!!
+
+
+## Phase 1: Core Architecture (Weeks 1-3)
+
+- __File Format & Compression__
+
+  - Implement `.psiarc` with LEB128 variable-length integers for chunk sizes
+  - Add dedicated "K" tag for keyframes to enable fast seeking
+  - Use CRC32 instead of CRC16 for stronger integrity checking
+  - Store checksums in 4-byte chunk footers
+  - Create comprehensive unit tests for modular delta edge cases (0→65530, 32767→-32767)
+
+- __Buffer & Codec Optimization__
+
+  - Lock manifest fields (version, osc_count, fps_micro) first
+  - Create prototype psiarc writer with synthetic data to verify compression ratios
+  - Implement single-producer single-consumer lock-free queue with batch operations
+  - Build delta-encoder with proper phase wrap handling
+
+- __Early Risk Mitigation__
+
+  - Create parallel spike for mobile encoder integration (MediaCodec/AVAssetWriter)
+  - Establish benchmark suite to validate <1ms capture overhead
+
+- __Export ELFIN’s Symbol Table at Build-Time
+
+    NEW → ELFIN Symbol Export	• Integrate elfin-lsp --export-symbols into the project’s build script/CI.
+	• Output elfin_symbols.json next to compiled binaries.
+	• Call ConceptGraph::import_elfin() at app start.	Tools / Dev-Ops	CI produces .json on every commit & unit test confirms graph nodes exist.
+
+
+## Phase 2: Recording Pipeline (Weeks 3-5, overlapping with Phase 1)
+
+- __Capture Strategy__
+
+  - Simplify band approach: macro as event-driven, meso as regular decimation of micro
+  - Implement OS-level unbuffered writes with fsync at key-chunks instead of emergency flush
+  - Set compression thread priority below normal (desktop) or QoS "background" (mobile)
+
+- __Memory Management__
+
+  - Use moodycamel::ConcurrentQueue or equivalent for efficient memory transfer
+  - Implement buffer pooling to eliminate allocations during capture
+  - Create deterministic flush intervals aligned with keyframe boundaries
+
+## Phase 3: Replay System (Weeks 5-7, overlapping with Phase 2)
+
+- __Playback Architecture__
+
+  - Use audio as master clock; drive video frames based on audio PTS
+  - Implement eager decoding of one key-chunk plus 2-3 forward chunks
+  - Create basic replay first, defer interpolation until core functionality is solid
+
+- __Avatar Integration__
+
+  - Build direct oscillator state injection interface
+  - Create mock player early to enable QA testing in parallel with export development
+  - Implement version compatibility layer (mapping oscillator counts if changed)
+
+- __Ingest into ALAN’s Concept Graph (Phase 3 tweak)
+	File/Module	Add
+	concept_graph.rs	rust fn import_elfin(path: &str) { let j: Value = serde_json::from_reader(File::open(path)?); for s in j["symbols"].as_array().unwrap() 	{ ConceptGraph::ensure_node(s["hash"].as_str().unwrap()) .set_meta("elfin_name", s["name"].as_str().unwrap()) .set_meta("elfin_unit", s["unit"].as_str().unwrap()); }}
+	Boot	call once at startup per workspace.
+
+- __Online Binding Logic in psi_sync_monitor
+
+· Online Binding Logic in psi_sync_monitor
+rust
+Copy
+Edit
+// executed whenever a new attractor is promoted to concept
+fn try_bind_to_elfin(node_id: ConceptId, psi_signature: &[f32]) {
+    // cheap: hash spectral centroid string → 64-bit
+    let h = siphash24(format!("{:.3?}", psi_signature));
+    if let Some(elfin_id) = ConceptGraph::lookup_hash(h) {
+        ConceptGraph::merge(node_id, elfin_id);         // unify nodes
+        ConceptGraph::set_meta(node_id,"source","ELFIN");
+    }
+}
+Rationale
+
+Same hash function, deterministic.
+
+If multiple ψ-clusters hit the same ELFIN hash, evidence counts will compete; you can keep the one with higher stability.
+
+(Optional) fallback: cosine similarity between ψ-vector and any ELFIN-tagged node if hashing misses.
+
+wire the ψ_sync_monitor → ELFIN binding during Phase 3 (the same phase where you stand up deterministic replay and the full Concept Graph runtime).
+
+Rationale for putting it in Phase 3
+Why not Phase 1/2?	Why Phase 3 fits
+• Phases 1–2 are about file I/O and raw capture; the system isn’t yet detecting or promoting attractors.
+• Binding code would sit idle with no data to chew on.	• By Phase 3 the oscillator network is running live, the “stable-attractor” logic is firing, and the Concept Graph is instantiated—exactly the moment a new ψ-node needs a symbolic tag.
+• No replay/regeneration code changes are required; binding just reacts to concept-promotion events.
+
+Micro-task insertion in your Phase 3 checklist
+Day	Existing task	Add this
+Week 6, Day 2	“Design time-base sync with audio clock”	No change
+Week 6, Day 3	NEW: stub psi_sync_monitor::try_bind_to_elfin(); unit-test with dummy spectra	
+Week 7, Day 1	“Implement frame interpolation / buffer pre-loading”	No change
+Week 7, Day 2	Activate binding: hook try_bind_to_elfin() inside attractor-promotion callback; log merge events	
+Week 7, Day 3	Add integration test: feed known ψ pattern → ensure concept graph node merges with ELFIN hash	
+
+Net effort: ~0.5–1 dev-day; zero schedule slip.
+
+Minimal code insertion (recap)
+rust
+Copy
+Edit
+// psi_sync_monitor.rs
+pub fn on_attractor_promoted(node_id: ConceptId, signature: &[f32]) {
+    try_bind_to_elfin(node_id, signature);
+    // … existing stability bookkeeping …
+}
+
+fn try_bind_to_elfin(node: ConceptId, sig: &[f32]) {
+    use crate::concept_graph as cg;
+    let h = siphash24(format!("{:.3?}", sig));        // same hash fn as ELFIN export
+    if let Some(elfin_id) = cg::lookup_hash(h) {
+        cg::merge(node, elfin_id);
+        cg::set_meta(node, "source", "ELFIN");
+    }
+}
+Unit test (phase-3 Day 3):
+
+rust
+Copy
+Edit
+#[test]
+fn binds_wheel_diameter() {
+    let mock_sig = vec![/* values that hash to wheelDiameter */];
+    let n = cg::create_node();
+    on_attractor_promoted(n, &mock_sig);
+    assert_eq!(cg::get_meta(n,"elfin_name"), Some("wheelDiameter"));
+}
+What you gain
+Immediate explainability in the Phase 3 replay UI—any ψ-node that stabilizes will now display its ELFIN-verified name/unit.
+
+Zero extra runtime cost in capture loop (binding only runs at attractor promotion frequency, not every frame).
+
+Result: every ELFIN symbol becomes an empty node (no ψ evidence yet) but with canonical metadata ready for binding.
+
+## Phase 4: Export Pipeline (Weeks 6-9, starting during Phase 3)
+
+- __Platform-Specific Optimizations__
+
+  - Desktop: FFmpeg integration with pipe-based frame feeding
+  - Android: Use Surface input path (GL/EGLSurface directly to encoder)
+  - iOS: Leverage IOSurface for zero-copy transfer to AVAssetWriter
+  - Implement GPU-based YUV conversion only when necessary
+
+- __User Options__
+
+  - Add "Fast export" and "Low-power export" modes
+  - Implement configurable quality presets
+  - Create background export queue with progress notifications
+
+## Phase 5: UI Integration & Testing (Weeks 8-11)
+
+- __Interface Development__
+
+  - Build session browser with metadata display
+  - Create unified playback controls with basic timeline scrubbing
+  - Implement export dialog with presets and progress indicators
+
+- __Quality Assurance__
+
+  - Implement the three key metrics: A/V Sync Drift, Landmark RMS Error, ψ-Phase Stability
+  - Create fuzz re-encode test (bit flipping to verify keyframe recovery)
+  - Build automated regression test suite for core functionality
+
+- __ · Explainability UI Hook (Phase 5 ELFIN UI)
+When user hovers a ψ-node in dashboard:
+
+yaml
+Copy
+Edit
+Name: wheelDiameter
+Unit: meter
+Last seen: 00:14.32 ago
+Confidence: 0.91
+Add “ELFIN verified ✅” badge if meta.source == 'ELFIN'.
+
+## Phase 6: Final Optimization & Documentation (Weeks 10-12)
+
+- __Performance Tuning__
+
+  - Optimize memory footprint through buffer sizing analysis
+  - Implement platform-specific accelerations where available
+  - Create power/thermal management for sustained operations
+
+- __Future-Proofing__
+
+  - Document version upgrade strategy for oscillator count changes
+  - Define encryption path for privacy requirements (ChaCha20-Poly1305)
+  - Align chunk boundaries with WebTransport frames for future network sync
+  - Create comprehensive API documentation and integration guide
+
+## Critical Path Acceleration & Risk Management
+
+1. __Parallel Development Tracks__
+
+   ```javascript
+   Phase 1  ────────────┐
+   Phase 2      ────────┴─┐
+   Mobile-encode Spike ───┘╲
+   Phase 3          ──────┐╲
+   Phase 4            ────┼─┐
+   Phase 5               ─┼─┤
+   Phase 6                └─┘
+   ```
+
+2. __Week 1 Priorities (Immediate Actions)__
+
+   - Lock manifest fields (version, osc_count, fps_micro)
+   - Create psiarc prototype with 1000 fake frames to verify file size & CRC
+   - Implement and benchmark lock-free queue for <1ms capture overhead
+   - Begin MediaCodec/AVAssetWriter exploratory implementation
+
+3. __Key Risk Mitigations__
+
+   - MediaCodec quirks: Begin with Surface-based approach to eliminate pixel transfer overhead
+   - Thread safety: Use battle-tested lock-free queues with robust test coverage
+   - Compression performance: Implement tiered strategy (fast in-memory, higher-ratio for storage)
+   - Version compatibility: Store explicit schema version and oscillator count in manifest
+
+4. __Quality Gates__
+
+   - Week 3: Functional recording pipeline with verified delta-encoding fidelity
+   - Week 6: Basic replay working with perfect sync on desktop
+   - Week 8: Cross-platform export functioning on primary targets
+   - Week 10: Full UI integration with all core features
+   - Week 12: Performance optimization complete, ready for production
+
+This compressed 12-week plan leverages parallel development tracks while focusing on early risk mitigation for the most complex components. The implementation strategy prioritizes a functional core with perfect fidelity before adding advanced features like interpolation or complex seeking.

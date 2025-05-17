@@ -1,0 +1,67 @@
+2025-05-14 13:42:05,181 [INFO] Registered builtin feature exit
+2025-05-14 13:42:05,181 [INFO] Registered builtin feature initialize
+2025-05-14 13:42:05,181 [INFO] Registered builtin feature initialized
+2025-05-14 13:42:05,181 [INFO] Registered builtin feature notebookDocument/didChange
+2025-05-14 13:42:05,181 [INFO] Registered builtin feature notebookDocument/didClose
+2025-05-14 13:42:05,181 [INFO] Registered builtin feature notebookDocument/didOpen
+2025-05-14 13:42:05,181 [INFO] Registered builtin feature $/setTrace
+2025-05-14 13:42:05,181 [INFO] Registered builtin feature shutdown
+2025-05-14 13:42:05,181 [INFO] Registered builtin feature textDocument/didChange
+2025-05-14 13:42:05,181 [INFO] Registered builtin feature textDocument/didClose
+2025-05-14 13:42:05,181 [INFO] Registered builtin feature textDocument/didOpen
+2025-05-14 13:42:05,181 [INFO] Registered builtin feature window/workDoneProgress/cancel
+2025-05-14 13:42:05,181 [INFO] Registered builtin feature workspace/didChangeWorkspaceFolders
+2025-05-14 13:42:05,181 [INFO] Registered builtin feature workspace/executeCommand
+2025-05-14 13:42:05,181 [INFO] Registered "textDocument/hover" with options "None"
+2025-05-14 13:42:05,181 [INFO] Registered "textDocument/definition" with options "None"
+2025-05-14 13:42:05,181 [INFO] Registered "textDocument/codeAction" with options "None"
+2025-05-14 13:42:05,181 [INFO] Registered "initialize" with options "None"
+2025-05-14 13:42:05,181 [ERROR] Feature "initialize" is already registered.
+2025-05-14 13:43:36,828 [INFO] Registered builtin feature exit
+2025-05-14 13:43:36,828 [INFO] Registered builtin feature initialize
+2025-05-14 13:43:36,828 [INFO] Registered builtin feature initialized
+2025-05-14 13:43:36,828 [INFO] Registered builtin feature notebookDocument/didChange
+2025-05-14 13:43:36,828 [INFO] Registered builtin feature notebookDocument/didClose
+2025-05-14 13:43:36,828 [INFO] Registered builtin feature notebookDocument/didOpen
+2025-05-14 13:43:36,828 [INFO] Registered builtin feature $/setTrace
+2025-05-14 13:43:36,828 [INFO] Registered builtin feature shutdown
+2025-05-14 13:43:36,828 [INFO] Registered builtin feature textDocument/didChange
+2025-05-14 13:43:36,828 [INFO] Registered builtin feature textDocument/didClose
+2025-05-14 13:43:36,828 [INFO] Registered builtin feature textDocument/didOpen
+2025-05-14 13:43:36,828 [INFO] Registered builtin feature window/workDoneProgress/cancel
+2025-05-14 13:43:36,828 [INFO] Registered builtin feature workspace/didChangeWorkspaceFolders
+2025-05-14 13:43:36,828 [INFO] Registered builtin feature workspace/executeCommand
+2025-05-14 13:43:36,828 [INFO] Registered "textDocument/hover" with options "None"
+2025-05-14 13:43:36,828 [INFO] Registered "textDocument/definition" with options "None"
+2025-05-14 13:43:36,828 [INFO] Registered "textDocument/codeAction" with options "None"
+2025-05-14 13:43:36,828 [INFO] Registered "initialize" with options "None"
+2025-05-14 13:43:36,828 [INFO] Registered "initialized" with options "None"
+2025-05-14 13:43:36,828 [INFO] Registered "textDocument/didOpen" with options "None"
+2025-05-14 13:43:36,828 [INFO] Registered "textDocument/didChange" with options "None"
+2025-05-14 13:43:36,853 [INFO] Read test file: examples/system_with_missing_helper.elfin
+2025-05-14 13:43:36,853 [ERROR] Error processing document file://C:\Users\jason\Desktop\tori\kha\examples\system_with_missing_helper.elfin: ("'uri' must be <class 'str'> (got PublishDiagnosticsParams(uri='file://C:\\\\Users\\\\jason\\\\Desktop\\\\tori\\\\kha\\\\examples\\\\system_with_missing_helper.elfin', diagnostics=[], version=None) that is a <class 'elfin_lsp.protocol.PublishDiagnosticsParams'>).", Attribute(name='uri', default=NOTHING, validator=<instance_of validator for type <class 'str'>>, repr=True, eq=True, eq_key=None, order=True, order_key=None, hash=None, init=True, metadata=mappingproxy({}), type=<class 'str'>, converter=None, kw_only=False, inherited=False, on_setattr=None, alias='uri'), <class 'str'>, PublishDiagnosticsParams(uri='file://C:\\Users\\jason\\Desktop\\tori\\kha\\examples\\system_with_missing_helper.elfin', diagnostics=[], version=None))
+2025-05-14 13:43:36,855 [ERROR] Error in test: ('\'uri\' must be <class \'str\'> (got PublishDiagnosticsParams(uri=\'file://C:\\\\Users\\\\jason\\\\Desktop\\\\tori\\\\kha\\\\examples\\\\system_with_missing_helper.elfin\', diagnostics=[Diagnostic(range=Range(start=Position(line=0, character=0), end=Position(line=0, character=1)), severity=1, message=\'Error processing document: ("\\\'uri\\\' must be <class \\\'str\\\'> (got PublishDiagnosticsParams(uri=\\\'file://C:\\\\\\\\\\\\\\\\Users\\\\\\\\\\\\\\\\jason\\\\\\\\\\\\\\\\Desktop\\\\\\\\\\\\\\\\tori\\\\\\\\\\\\\\\\kha\\\\\\\\\\\\\\\\examples\\\\\\\\\\\\\\\\system_with_missing_helper.elfin\\\', diagnostics=[], version=None) that is a <class \\\'elfin_lsp.protocol.PublishDiagnosticsParams\\\'>).", Attribute(name=\\\'uri\\\', default=NOTHING, validator=<instance_of validator for type <class \\\'str\\\'>>, repr=True, eq=True, eq_key=None, order=True, order_key=None, hash=None, init=True, metadata=mappingproxy({}), type=<class \\\'str\\\'>, converter=None, kw_only=False, inherited=False, on_setattr=None, alias=\\\'uri\\\'), <class \\\'str\\\'>, PublishDiagnosticsParams(uri=\\\'file://C:\\\\\\\\Users\\\\\\\\jason\\\\\\\\Desktop\\\\\\\\tori\\\\\\\\kha\\\\\\\\examples\\\\\\\\system_with_missing_helper.elfin\\\', diagnostics=[], version=None))\', code=None, source=\'elfin-lsp\', tags=None)], version=None) that is a <class \'elfin_lsp.protocol.PublishDiagnosticsParams\'>).', Attribute(name='uri', default=NOTHING, validator=<instance_of validator for type <class 'str'>>, repr=True, eq=True, eq_key=None, order=True, order_key=None, hash=None, init=True, metadata=mappingproxy({}), type=<class 'str'>, converter=None, kw_only=False, inherited=False, on_setattr=None, alias='uri'), <class 'str'>, PublishDiagnosticsParams(uri='file://C:\\Users\\jason\\Desktop\\tori\\kha\\examples\\system_with_missing_helper.elfin', diagnostics=[Diagnostic(range=Range(start=Position(line=0, character=0), end=Position(line=0, character=1)), severity=1, message='Error processing document: ("\'uri\' must be <class \'str\'> (got PublishDiagnosticsParams(uri=\'file://C:\\\\\\\\Users\\\\\\\\jason\\\\\\\\Desktop\\\\\\\\tori\\\\\\\\kha\\\\\\\\examples\\\\\\\\system_with_missing_helper.elfin\', diagnostics=[], version=None) that is a <class \'elfin_lsp.protocol.PublishDiagnosticsParams\'>).", Attribute(name=\'uri\', default=NOTHING, validator=<instance_of validator for type <class \'str\'>>, repr=True, eq=True, eq_key=None, order=True, order_key=None, hash=None, init=True, metadata=mappingproxy({}), type=<class \'str\'>, converter=None, kw_only=False, inherited=False, on_setattr=None, alias=\'uri\'), <class \'str\'>, PublishDiagnosticsParams(uri=\'file://C:\\\\Users\\\\jason\\\\Desktop\\\\tori\\\\kha\\\\examples\\\\system_with_missing_helper.elfin\', diagnostics=[], version=None))', code=None, source='elfin-lsp', tags=None)], version=None))
+2025-05-14 13:44:35,718 [INFO] Registered builtin feature exit
+2025-05-14 13:44:35,718 [INFO] Registered builtin feature initialize
+2025-05-14 13:44:35,718 [INFO] Registered builtin feature initialized
+2025-05-14 13:44:35,718 [INFO] Registered builtin feature notebookDocument/didChange
+2025-05-14 13:44:35,718 [INFO] Registered builtin feature notebookDocument/didClose
+2025-05-14 13:44:35,718 [INFO] Registered builtin feature notebookDocument/didOpen
+2025-05-14 13:44:35,718 [INFO] Registered builtin feature $/setTrace
+2025-05-14 13:44:35,718 [INFO] Registered builtin feature shutdown
+2025-05-14 13:44:35,718 [INFO] Registered builtin feature textDocument/didChange
+2025-05-14 13:44:35,718 [INFO] Registered builtin feature textDocument/didClose
+2025-05-14 13:44:35,718 [INFO] Registered builtin feature textDocument/didOpen
+2025-05-14 13:44:35,718 [INFO] Registered builtin feature window/workDoneProgress/cancel
+2025-05-14 13:44:35,720 [INFO] Registered builtin feature workspace/didChangeWorkspaceFolders
+2025-05-14 13:44:35,720 [INFO] Registered builtin feature workspace/executeCommand
+2025-05-14 13:44:35,720 [INFO] Registered "textDocument/hover" with options "None"
+2025-05-14 13:44:35,720 [INFO] Registered "textDocument/definition" with options "None"
+2025-05-14 13:44:35,720 [INFO] Registered "textDocument/codeAction" with options "None"
+2025-05-14 13:44:35,720 [INFO] Registered "initialize" with options "None"
+2025-05-14 13:44:35,720 [INFO] Registered "initialized" with options "None"
+2025-05-14 13:44:35,720 [INFO] Registered "textDocument/didOpen" with options "None"
+2025-05-14 13:44:35,720 [INFO] Registered "textDocument/didChange" with options "None"
+2025-05-14 13:44:35,720 [INFO] Read test file: examples/system_with_missing_helper.elfin
+2025-05-14 13:44:35,722 [INFO] Processed document
+2025-05-14 13:44:35,722 [ERROR] Error in test: The workspace is not available - has the server been initialized?

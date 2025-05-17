@@ -1,0 +1,30 @@
+ALAN IDE Test Execution Summary (20s Run)
+========================================
+
+Timestamp: 2025-05-08T22:33:58.935Z
+Duration: 20 seconds (timeout)
+Exit Code: 1
+Total Errors Counted: 0
+
+Test Stats: [STDERR] Test Suites: 3 failed, 1 passed, 4 of 22 total
+Test Count: Tests:       1 failed, 5 passed, 6 total
+
+Error Breakdown:
+  Infinite Loops: 0
+  Missing Mocks: 2
+  Type Errors: 2
+
+Failing Test Suites:
+  [STDERR] FAIL client/src/__tests__/integration/ExecutionTracer_FieldMeditationMode/mockExecutionTracerService.js
+  [STDERR] FAIL client/src/__tests__/integration/Exporter_ConceptGraphService/mockConceptGraphService.js
+  [STDERR] FAIL client/src/__tests__/react-basic.test.js
+  FAIL clie[STDERR] nt/src[STDERR] /__test[STDERR] s__/integration/Exporter_ConceptGraphServ[STDERR] ice/mockConce[STDERR] ptGraphS[STDERR] ervice.[STDERR] js
+  FAIL client/src/__tests__/react-basic.test.js
+
+Actual Test Errors (non-mock):
+      × can render a simple React component (22 ms)
+
+Recommended Next Steps:
+2. Run: node fix-test-issues.js
+3. Focus on the actual test errors listed above
+4. Run individual tests to isolate issues

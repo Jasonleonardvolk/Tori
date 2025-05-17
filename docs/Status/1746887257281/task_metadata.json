@@ -1,0 +1,60 @@
+{
+  "files_in_context": [
+    {
+      "path": "c:\\Users\\jason\\AppData\\Roaming\\Code\\User\\globalStorage\\saoudrizwan.claude-dev\\settings\\cline_mcp_settings.json",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": null,
+      "cline_edit_date": null,
+      "user_edit_date": 1746888906730
+    },
+    {
+      "path": "c:\\Users\\jason\\AppData\\Roaming\\Code\\User\\globalStorage\\saoudrizwan.claude-dev\\settings\\cline_mcp_settings.json",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746888942486,
+      "cline_edit_date": 1746888942486,
+      "user_edit_date": 1746888906730
+    },
+    {
+      "path": "start-all-mcp-servers.bat",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746888955419,
+      "cline_edit_date": 1746888955419,
+      "user_edit_date": null
+    },
+    {
+      "path": "restart-all-mcp-servers.bat",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746888967889,
+      "cline_edit_date": 1746888967889,
+      "user_edit_date": null
+    },
+    {
+      "path": "MCP_TROUBLESHOOTING_STEPS.md",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746889017350,
+      "cline_edit_date": 1746889017350,
+      "user_edit_date": null
+    },
+    {
+      "path": "test-mcp-connections.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746889039486,
+      "cline_edit_date": 1746889039486,
+      "user_edit_date": null
+    }
+  ],
+  "model_usage": [
+    {
+      "ts": 1746888906968,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    }
+  ]
+}

@@ -1,0 +1,270 @@
+ALAN IDE Infinite Loop Analysis Report
+Generated: 2025-05-08T21:32:40.237Z
+
+Files analyzed: 86
+Issues found: 31
+
+
+C:\Users\jason\Desktop\tori\kha\client\src\AffectiveApp.jsx
+-----------------------------------------------------------
+Line 37: useState setter in useEffect without deps
+Suggestion: Add dependency array to useEffect
+Code: useEffect(() => {
+    // Initial fetch of suggestions
+    const fetchInitialSuggestions = async ()...
+
+Line 37: useEffect with empty dependency but changing state
+Suggestion: Check if dependencies are missing
+Code: useEffect(() => {
+    // Initial fetch of suggestions
+    const fetchInitialSuggestions = async ()...
+
+
+C:\Users\jason\Desktop\tori\kha\client\src\AffectiveIntegrationExample.jsx
+--------------------------------------------------------------------------
+Line 73: useState setter in useEffect without deps
+Suggestion: Add dependency array to useEffect
+Code: useEffect(() => {
+    // Fetch initial agent suggestions
+    const fetchSuggestions = async () => {
+...
+
+
+C:\Users\jason\Desktop\tori\kha\client\src\components\AgentPanel\ConsoleAgent.jsx
+---------------------------------------------------------------------------------
+Line 20: useState setter in useEffect without deps
+Suggestion: Add dependency array to useEffect
+Code: useEffect(() => {
+    const initialMessage = {
+      type: 'system',
+      content: 'Alan Console...
+
+Line 20: useEffect with empty dependency but changing state
+Suggestion: Check if dependencies are missing
+Code: useEffect(() => {
+    const initialMessage = {
+      type: 'system',
+      content: 'Alan Console...
+
+
+C:\Users\jason\Desktop\tori\kha\client\src\components\AgentPanel\DocAgent.jsx
+-----------------------------------------------------------------------------
+Line 16: useState setter in useEffect without deps
+Suggestion: Add dependency array to useEffect
+Code: useEffect(() => {
+    const loadDocSuggestions = async () => {
+      setLoading(true);
+      
+  ...
+
+
+C:\Users\jason\Desktop\tori\kha\client\src\components\AgentPanel\MemoryAgent.jsx
+--------------------------------------------------------------------------------
+Line 16: useState setter in useEffect without deps
+Suggestion: Add dependency array to useEffect
+Code: useEffect(() => {
+    const loadMemoryItems = async () => {
+      setLoading(true);
+      
+     ...
+
+
+C:\Users\jason\Desktop\tori\kha\client\src\components\ChatHistory\ChatHistory.jsx
+---------------------------------------------------------------------------------
+Line 48: useState setter in useEffect without deps
+Suggestion: Add dependency array to useEffect
+Code: useEffect(() => {
+    let isMounted = true;
+    
+    const loadConversation = async () => {
+    ...
+
+Line 113: useState setter in useEffect without deps
+Suggestion: Add dependency array to useEffect
+Code: useEffect(() => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ ...
+
+
+C:\Users\jason\Desktop\tori\kha\client\src\components\ConceptEditorPanel\ConceptEditorPanel.jsx
+-----------------------------------------------------------------------------------------------
+Line 53: useState setter in useEffect without deps
+Suggestion: Add dependency array to useEffect
+Code: useEffect(() => {
+    if (!editorElementRef.current) return;
+    
+    // Editor mode based on lan...
+
+Line 134: useState setter in useEffect without deps
+Suggestion: Add dependency array to useEffect
+Code: useEffect(() => {
+    if (editorRef.current && initialCode !== editorRef.current.getValue()) {
+   ...
+
+Line 53: useEffect with empty dependency but changing state
+Suggestion: Check if dependencies are missing
+Code: useEffect(() => {
+    if (!editorElementRef.current) return;
+    
+    // Editor mode based on lan...
+
+
+C:\Users\jason\Desktop\tori\kha\client\src\components\ConceptFieldCanvas\ConceptFieldCanvas.jsx
+-----------------------------------------------------------------------------------------------
+Line 57: useState setter in useEffect without deps
+Suggestion: Add dependency array to useEffect
+Code: useEffect(() => {
+    const loadGraphData = async () => {
+      try {
+        // These would be a...
+
+Line 57: useEffect with empty dependency but changing state
+Suggestion: Check if dependencies are missing
+Code: useEffect(() => {
+    const loadGraphData = async () => {
+      try {
+        // These would be a...
+
+
+C:\Users\jason\Desktop\tori\kha\client\src\components\ConceptGraphVisualizer\ConceptGraphVisualizer.jsx
+-------------------------------------------------------------------------------------------------------
+Line 44: useState setter in useEffect without deps
+Suggestion: Add dependency array to useEffect
+Code: useEffect(() => {
+    if (!graphData || !graphData.nodes) return;
+    
+    // Map nodes to simula...
+
+Line 109: useState setter in useEffect without deps
+Suggestion: Add dependency array to useEffect
+Code: useEffect(() => {
+    if (!isAnimating) return;
+    
+    let startTime;
+    const duration = 200...
+
+
+C:\Users\jason\Desktop\tori\kha\client\src\components\DeveloperStateMonitor\DeveloperStateMonitor.jsx
+-----------------------------------------------------------------------------------------------------
+Line 42: setState in useEffect without dependencies
+Suggestion: Add dependency array to useEffect
+Code: useEffect(() => {
+    if (prevState) {
+      // Calculate change magnitude
+      const focusDelta = ...
+
+Line 42: useState setter in useEffect without deps
+Suggestion: Add dependency array to useEffect
+Code: useEffect(() => {
+    if (prevState) {
+      // Calculate change magnitude
+      const focusDelta = ...
+
+
+C:\Users\jason\Desktop\tori\kha\client\src\components\FieldMeditationMode\FieldMeditationMode.jsx
+-------------------------------------------------------------------------------------------------
+Line 59: useState setter in useEffect without deps
+Suggestion: Add dependency array to useEffect
+Code: useEffect(() => {
+    executionTracerService.initialize({
+      serverUrl: 'ws://localhost:3002/ex...
+
+Line 197: useState setter in useEffect without deps
+Suggestion: Add dependency array to useEffect
+Code: useEffect(() => {
+    if (!playing) return;
+    
+    const animate = (timestamp) => {
+      if (...
+
+Line 283: useState setter in useEffect without deps
+Suggestion: Add dependency array to useEffect
+Code: useEffect(() => {
+    // Only animate when playing or when there are active trace events
+    setPh...
+
+
+C:\Users\jason\Desktop\tori\kha\client\src\components\QuickActionsBar\AffectiveQuickActionsBar.jsx
+--------------------------------------------------------------------------------------------------
+Line 195: useState setter in useEffect without deps
+Suggestion: Add dependency array to useEffect
+Code: useEffect(() => {
+    // Simulated interaction data - in a real implementation this would
+    // c...
+
+Line 195: useEffect with empty dependency but changing state
+Suggestion: Check if dependencies are missing
+Code: useEffect(() => {
+    // Simulated interaction data - in a real implementation this would
+    // c...
+
+
+C:\Users\jason\Desktop\tori\kha\client\src\components\QuickActionsBar\QuickActionsBar.jsx
+-----------------------------------------------------------------------------------------
+Line 28: useState setter in useEffect without deps
+Suggestion: Add dependency array to useEffect
+Code: useEffect(() => {
+    const currentIds = new Set(suggestions.map(s => s.id));
+    const previousIds ...
+
+
+C:\Users\jason\Desktop\tori\kha\client\src\components\SemanticCommitDemo\SemanticCommitDemo.jsx
+-----------------------------------------------------------------------------------------------
+Line 46: useEffect with empty dependency but changing state
+Suggestion: Check if dependencies are missing
+Code: useEffect(() => {
+    // Initialize the specification with sample rules
+    setSpecifications(samp...
+
+
+C:\Users\jason\Desktop\tori\kha\client\src\components\SemanticCommitPanel\SemanticCommitPanel.jsx
+-------------------------------------------------------------------------------------------------
+Line 32: useState setter in useEffect without deps
+Suggestion: Add dependency array to useEffect
+Code: useEffect(() => {
+    const initTracker = async () => {
+      setLoading(true);
+      try {
+    ...
+
+Line 32: useEffect with empty dependency but changing state
+Suggestion: Check if dependencies are missing
+Code: useEffect(() => {
+    const initTracker = async () => {
+      setLoading(true);
+      try {
+    ...
+
+
+C:\Users\jason\Desktop\tori\kha\client\src\components\SemanticSearchPanel\SemanticSearchPanel.jsx
+-------------------------------------------------------------------------------------------------
+Line 37: useState setter in useEffect without deps
+Suggestion: Add dependency array to useEffect
+Code: useEffect(() => {
+    // Initialize with 20 random attractors (concepts) for demo
+    dynamicalSys...
+
+Line 84: useState setter in useEffect without deps
+Suggestion: Add dependency array to useEffect
+Code: useEffect(() => {
+    if (!animationRunning) return;
+    
+    let startTime;
+    const duration ...
+
+
+C:\Users\jason\Desktop\tori\kha\client\src\DemoApp.jsx
+------------------------------------------------------
+Line 18: useState setter in useEffect without deps
+Suggestion: Add dependency array to useEffect
+Code: useEffect(() => {
+    const initializeDatabase = async () => {
+      try {
+        await chatHist...
+
+Line 18: useEffect with empty dependency but changing state
+Suggestion: Check if dependencies are missing
+Code: useEffect(() => {
+    const initializeDatabase = async () => {
+      try {
+        await chatHist...

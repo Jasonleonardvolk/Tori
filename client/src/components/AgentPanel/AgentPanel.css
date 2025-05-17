@@ -1,0 +1,246 @@
+/* AgentPanel.css */
+@import '../../theme.css';
+
+.agent-panel-container {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+}
+
+.agent-panel-tabs {
+  display: flex;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.agent-tab {
+  padding: var(--space-sm) var(--space-md);
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  color: var(--color-text-primary);
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition: all var(--transition-fast) var(--easing-standard);
+  font-size: var(--font-size-sm);
+  position: relative;
+}
+
+.agent-tab.active {
+  border-bottom: 2px solid var(--color-primary);
+  background-color: rgba(0, 255, 204, 0.1);
+}
+
+.agent-tab-icon {
+  font-size: 1.2em;
+}
+
+.agent-tab-badge {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  background-color: var(--color-error);
+  color: white;
+  font-size: 10px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.agent-panel-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-md);
+}
+
+/* Agent Suggestion Cards */
+.agent-suggestion {
+  padding: var(--space-md);
+  margin-bottom: var(--space-md);
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-md);
+  border-left: 3px solid var(--color-primary);
+  transition: all var(--transition-normal) var(--easing-standard);
+}
+
+.agent-suggestion:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.agent-suggestion-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--space-sm);
+}
+
+.agent-suggestion-title {
+  font-weight: 600;
+  margin: 0;
+  font-size: var(--font-size-md);
+  color: var(--color-text-primary);
+}
+
+.agent-suggestion-subtitle {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin-top: var(--space-xs);
+}
+
+.agent-suggestion-tag {
+  display: inline-block;
+  padding: 2px 8px;
+  background-color: rgba(0, 255, 204, 0.2);
+  color: var(--color-primary);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+}
+
+.agent-suggestion-description {
+  margin: var(--space-md) 0;
+  font-size: var(--font-size-sm);
+  line-height: 1.5;
+}
+
+.agent-suggestion-code {
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: var(--space-sm);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-xs);
+  overflow-x: auto;
+  margin: var(--space-md) 0;
+}
+
+.agent-suggestion-metrics {
+  display: flex;
+  gap: var(--space-md);
+  margin-top: var(--space-md);
+  padding-top: var(--space-sm);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+}
+
+.agent-suggestion-metric {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.agent-suggestion-actions {
+  display: flex;
+  gap: var(--space-sm);
+  margin-top: var(--space-md);
+}
+
+.agent-action-button {
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast) var(--easing-standard);
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.agent-action-primary {
+  background-color: var(--color-primary);
+  color: var(--color-bg-dark);
+  border: none;
+}
+
+.agent-action-secondary {
+  background-color: transparent;
+  color: var(--color-text-primary);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.agent-action-tertiary {
+  background-color: transparent;
+  color: var(--color-text-secondary);
+  border: none;
+}
+
+/* Debug Panel Specific Styles */
+.debug-alert {
+  border-left-color: var(--color-error);
+}
+
+.debug-warning {
+  border-left-color: var(--color-warning);
+}
+
+/* Doc Panel Specific Styles */
+.doc-capsule {
+  border-left-color: var(--color-purple);
+}
+
+/* Memory Panel Specific Styles */
+.memory-item {
+  border-left-color: var(--color-gold);
+}
+
+/* Agent Configuration Dock */
+.agent-config-dock {
+  padding: var(--space-md);
+  background-color: rgba(0, 0, 0, 0.2);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.agent-config-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--space-sm);
+}
+
+.agent-config-label {
+  width: 150px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.agent-config-options {
+  display: flex;
+  gap: var(--space-md);
+}
+
+.agent-config-option {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  cursor: pointer;
+}
+
+.agent-config-radio {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--color-primary);
+}
+
+/* Agent Panel Footer */
+.agent-panel-footer {
+  padding: var(--space-sm) var(--space-md);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

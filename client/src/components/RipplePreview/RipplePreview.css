@@ -1,0 +1,252 @@
+/* RipplePreview.css */
+.ripple-preview {
+  border: 1px solid #333;
+  border-radius: 8px;
+  background-color: #1e1e1e;
+  margin: 16px 0;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.ripple-preview-header {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  background-color: #2a2a2a;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.2s;
+}
+
+.ripple-preview-header:hover {
+  background-color: #333;
+}
+
+.ripple-icon {
+  position: relative;
+  margin-right: 12px;
+  font-size: 20px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ripple-dot {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: currentColor;
+  animation: ripple 2s ease-out infinite;
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0.8);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+.ripple-preview-header h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+  color: #fff;
+  flex: 1;
+}
+
+.affected-count {
+  color: #aaa;
+  font-size: 14px;
+  margin-right: 12px;
+}
+
+.expand-button {
+  background: none;
+  border: none;
+  color: #aaa;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.ripple-preview-content {
+  padding: 16px;
+  color: #d4d4d4;
+}
+
+.graph-container {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  margin-bottom: 20px;
+  border: 1px solid #333;
+  border-radius: 4px;
+  background-color: #222;
+  overflow: hidden;
+}
+
+.ripple-graph {
+  width: 100%;
+  height: 100%;
+}
+
+.node-details-popover {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 250px;
+  padding: 12px;
+  background-color: #2a2a2a;
+  border: 1px solid #444;
+  border-radius: 4px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+  max-height: 280px;
+  overflow-y: auto;
+}
+
+.node-details-popover h4 {
+  margin-top: 0;
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: #fff;
+}
+
+.node-details-popover p {
+  margin: 4px 0;
+  font-size: 12px;
+  color: #ccc;
+}
+
+.code-preview {
+  margin-top: 8px;
+  padding: 8px;
+  background-color: #1a1a1a;
+  border-radius: 4px;
+  overflow-x: auto;
+}
+
+.code-preview pre {
+  margin: 0;
+  font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+  font-size: 12px;
+  color: #ddd;
+  white-space: pre-wrap;
+}
+
+.affected-files-list {
+  margin-bottom: 16px;
+}
+
+.affected-files-list h4 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  font-size: 16px;
+  color: #fff;
+}
+
+.affected-files-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid #333;
+  border-radius: 4px;
+}
+
+.affected-files-list li {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  border-bottom: 1px solid #333;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.affected-files-list li:last-child {
+  border-bottom: none;
+}
+
+.affected-files-list li:hover {
+  background-color: #2a2a2a;
+}
+
+.affected-files-list li.active {
+  background-color: #333;
+}
+
+.file-icon {
+  margin-right: 8px;
+  font-size: 16px;
+}
+
+.file-name {
+  flex: 1;
+  font-size: 14px;
+  color: #ddd;
+}
+
+.change-type {
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: #fff;
+  text-transform: capitalize;
+}
+
+.ripple-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.view-details-button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.view-details-button:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .ripple-preview-content {
+    padding: 12px;
+  }
+  
+  .graph-container {
+    height: 250px;
+  }
+  
+  .affected-files-list ul {
+    max-height: 150px;
+  }
+}
+
+/* Accessibility - respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .ripple-dot {
+    animation: none;
+  }
+  
+  .view-details-button:hover {
+    transform: none;
+  }
+}

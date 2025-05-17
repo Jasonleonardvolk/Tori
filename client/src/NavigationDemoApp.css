@@ -1,0 +1,116 @@
+/* ALAN IDE - Navigation Demo App Styles */
+
+.navigation-demo-app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: var(--color-bg, #1E1E1E);
+  color: var(--color-text, #ffffff);
+  font-family: system-ui, sans-serif;
+}
+
+.demo-header {
+  background-color: #2C2C2C;
+  padding: 20px;
+  text-align: center;
+  border-bottom: 1px solid #444;
+}
+
+.demo-header h1 {
+  margin: 0;
+  color: #00FFCC;
+  font-size: 1.8rem;
+}
+
+.demo-header p {
+  margin: 5px 0 0;
+  font-size: 0.9rem;
+  color: #AAAAAA;
+}
+
+.feature-navigation {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  background-color: #252525;
+  padding: 10px;
+  border-bottom: 1px solid #444;
+}
+
+.feature-nav-button {
+  background-color: transparent;
+  color: #AAAAAA;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 15px;
+  margin: 0 5px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.feature-nav-button:hover {
+  background-color: rgba(0, 255, 204, 0.1);
+  color: #FFFFFF;
+}
+
+.feature-nav-button.active {
+  background-color: rgba(0, 255, 204, 0.2);
+  color: #00FFCC;
+}
+
+.feature-icon {
+  margin-right: 8px;
+  font-size: 1.1rem;
+}
+
+.feature-content {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.demo-section {
+  margin-bottom: 30px;
+}
+
+.demo-section h2 {
+  color: #00FFCC;
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 1.5rem;
+}
+
+.demo-section p {
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+.placeholder-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.placeholder-content img {
+  max-width: 100%;
+  border-radius: 4px;
+}
+
+.demo-footer {
+  background-color: #2C2C2C;
+  padding: 15px;
+  text-align: center;
+  font-size: 0.8rem;
+  color: #999999;
+  border-top: 1px solid #444;
+}
+
+.demo-footer p {
+  margin: 2px 0;
+}

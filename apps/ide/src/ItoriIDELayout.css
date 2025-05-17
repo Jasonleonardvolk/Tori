@@ -1,0 +1,105 @@
+/* ITORI IDE Layout styles */
+
+.itori-ide-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  background-color: #f5f7fa;
+  color: #333;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* Header section */
+.ide-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  background-color: #2c3e50;
+  color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+}
+
+.ide-header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.connection-status {
+  display: flex;
+  align-items: center;
+}
+
+/* Main content area - use CSS Grid for the main layout */
+.ide-content {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-gap: 1px;
+  flex: 1;
+  overflow: hidden;
+  background-color: #ddd;
+}
+
+.editor-pane {
+  background-color: white;
+  overflow: hidden;
+  padding: 0.5rem;
+}
+
+.chat-dock {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+}
+
+.chat-dock-header {
+  padding: 0.5rem;
+  border-bottom: 1px solid #eee;
+  background-color: #f8f9fa;
+}
+
+.chat-dock-header h2 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.chat-dock-content {
+  flex: 1;
+  overflow: auto;
+  padding: 0.5rem;
+}
+
+/* Footer with phase visualization */
+.ide-footer {
+  padding: 0.5rem;
+  background-color: white;
+  border-top: 1px solid #eee;
+  height: 150px;
+  overflow: auto;
+}
+
+/* Placeholder styles for components not yet implemented */
+.placeholder-chat {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  border: 2px dashed #ddd;
+  border-radius: 4px;
+  color: #999;
+}
+
+.phase-viz-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  border: 2px dashed #ddd;
+  border-radius: 4px;
+  color: #999;
+}

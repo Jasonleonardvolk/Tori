@@ -1,0 +1,106 @@
+{
+  "files_in_context": [
+    {
+      "path": "package.json",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746982141037,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": ".vscode/extensions.json",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746982147680,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": ".vscode/settings.json",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746982151856,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "LINTING_GUIDE.md",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746982159484,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/services/accessibilityBridgeService.js",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746982350726,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/timecapsule/AgentNuggetGifting.ts",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746982357179,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/timecapsule/AgentNuggetGifting.ts",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746982371807,
+      "cline_edit_date": 1746982371807,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/timecapsule/AgentNuggetGifting.ts",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746982386688,
+      "cline_edit_date": 1746982386688,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/timecapsule/AgentNuggetGifting.ts",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746982400723,
+      "cline_edit_date": 1746982400723,
+      "user_edit_date": null
+    },
+    {
+      "path": "docs-lint-fix.js",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746982405843,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "fix-client-lint-errors.js",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746982450647,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    }
+  ],
+  "model_usage": [
+    {
+      "ts": 1746982130917,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1746982181622,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    }
+  ]
+}

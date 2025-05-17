@@ -1,0 +1,32 @@
+{
+  "name": "@tori/psi",
+  "version": "0.1.0",
+  "description": "ψ-Trajectory Memory Subsystem - JavaScript/TypeScript Bindings",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "npm run build:wasm && npm run build:ts",
+    "build:wasm": "cd rs_impl && wasm-pack build --target web --out-dir ../pkg",
+    "build:ts": "tsc",
+    "prepare": "npm run build"
+  },
+  "files": [
+    "dist/**/*",
+    "pkg/**/*"
+  ],
+  "keywords": [
+    "ψ-trajectory",
+    "psi",
+    "wasm",
+    "oscillator",
+    "elfin"
+  ],
+  "dependencies": {
+    "events": "^3.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.0",
+    "typescript": "^4.9.5",
+    "wasm-pack": "^0.10.3"
+  }
+}

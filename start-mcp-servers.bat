@@ -1,0 +1,3 @@
+@echo off
+echo Starting MCP Servers...
+npx -y @modelcontextprotocol/cli serve .mcp.json

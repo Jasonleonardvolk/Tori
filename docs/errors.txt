@@ -1,0 +1,689 @@
+      at HTMLUnknownElementImpl._dispatch (node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:233:9)
+      at HTMLUnknownElementImpl.dispatchEvent (node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:104:17)
+      at HTMLUnknownElement.dispatchEvent (node_modules/jsdom/lib/jsdom/living/generated/EventTarget.js:241:34)
+      at Object.invokeGuardedCallbackDev (client/node_modules/react-dom/cjs/react-dom.development.js:3994:16)
+      at invokeGuardedCallback (client/node_modules/react-dom/cjs/react-dom.development.js:4056:31)
+      at beginWork$1 (client/node_modules/react-dom/cjs/react-dom.development.js:23964:7)
+      at performUnitOfWork (client/node_modules/react-dom/cjs/react-dom.development.js:22779:12)
+      at workLoopSync (client/node_modules/react-dom/cjs/react-dom.development.js:22707:5)
+      at renderRootSync (client/node_modules/react-dom/cjs/react-dom.development.js:22670:7)
+      at performSyncWorkOnRoot (client/node_modules/react-dom/cjs/react-dom.development.js:22293:18)
+      at scheduleUpdateOnFiber (client/node_modules/react-dom/cjs/react-dom.development.js:21881:7)
+      at updateContainer (client/node_modules/react-dom/cjs/react-dom.development.js:25482:3)
+      at client/node_modules/react-dom/cjs/react-dom.development.js:26021:7
+      at unbatchedUpdates (client/node_modules/react-dom/cjs/react-dom.development.js:22431:12)
+      at legacyRenderSubtreeIntoContainer (client/node_modules/react-dom/cjs/react-dom.development.js:26020:5)
+      at Object.render (client/node_modules/react-dom/cjs/react-dom.development.js:26103:10)
+      at client/node_modules/@testing-library/react/dist/pure.js:101:25
+      at batchedUpdates$1 (client/node_modules/react-dom/cjs/react-dom.development.js:22380:12)
+      at act (client/node_modules/react-dom/cjs/react-dom-test-utils.development.js:1042:14)
+      at render (client/node_modules/@testing-library/react/dist/pure.js:97:26)
+      at Object.<anonymous> (client/src/components/QuickActionsBar/QuickActionsBar.test.jsx:80:11)
+
+    console.error
+      The above error occurred in the <QuickActionItem> component:
+
+          at icon (C:\Users\jason\Desktop\tori\kha\client\src\components\QuickActionsBar\QuickActionItem.jsx:24:3)
+          at div
+          at div
+          at suggestions (C:\Users\jason\Desktop\tori\kha\client\src\components\QuickActionsBar\QuickActionsBar.jsx:14:3)
+
+      Consider adding an error boundary to your tree to customize error handling behavior.
+      Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries.
+
+      78 |
+      79 |   it('calls onDismiss when Dismiss button is clicked', () => {
+    > 80 |     render(
+         |           ^
+      81 |       <QuickActionsBar
+      82 |         suggestions={mockSuggestions}
+      83 |         onApply={mockOnApply}
+
+      at logCapturedError (client/node_modules/react-dom/cjs/react-dom.development.js:20085:23)
+      at update.callback (client/node_modules/react-dom/cjs/react-dom.development.js:20118:5)
+      at callCallback (client/node_modules/react-dom/cjs/react-dom.development.js:12318:12)
+      at commitUpdateQueue (client/node_modules/react-dom/cjs/react-dom.development.js:12339:9)
+      at commitLifeCycles (client/node_modules/react-dom/cjs/react-dom.development.js:20736:11)
+      at commitLayoutEffects (client/node_modules/react-dom/cjs/react-dom.development.js:23426:7)
+      at HTMLUnknownElement.callCallback (client/node_modules/react-dom/cjs/react-dom.development.js:3945:14)
+      at HTMLUnknownElement.callTheUserObjectsOperation (node_modules/jsdom/lib/jsdom/living/generated/EventListener.js:26:30)
+      at innerInvokeEventListeners (node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:350:25)
+      at invokeEventListeners (node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:286:3)
+      at HTMLUnknownElementImpl._dispatch (node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:233:9)
+      at HTMLUnknownElementImpl.dispatchEvent (node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:104:17)
+      at HTMLUnknownElement.dispatchEvent (node_modules/jsdom/lib/jsdom/living/generated/EventTarget.js:241:34)
+      at Object.invokeGuardedCallbackDev (client/node_modules/react-dom/cjs/react-dom.development.js:3994:16)
+      at invokeGuardedCallback (client/node_modules/react-dom/cjs/react-dom.development.js:4056:31)
+      at commitRootImpl (client/node_modules/react-dom/cjs/react-dom.development.js:23151:9)
+      at unstable_runWithPriority (client/node_modules/scheduler/cjs/scheduler.development.js:468:12)
+      at runWithPriority$1 (client/node_modules/react-dom/cjs/react-dom.development.js:11276:10)
+      at commitRoot (client/node_modules/react-dom/cjs/react-dom.development.js:22990:3)
+      at performSyncWorkOnRoot (client/node_modules/react-dom/cjs/react-dom.development.js:22329:3)
+      at scheduleUpdateOnFiber (client/node_modules/react-dom/cjs/react-dom.development.js:21881:7)
+      at updateContainer (client/node_modules/react-dom/cjs/react-dom.development.js:25482:3)
+      at client/node_modules/react-dom/cjs/react-dom.development.js:26021:7
+      at unbatchedUpdates (client/node_modules/react-dom/cjs/react-dom.development.js:22431:12)
+      at legacyRenderSubtreeIntoContainer (client/node_modules/react-dom/cjs/react-dom.development.js:26020:5)
+      at Object.render (client/node_modules/react-dom/cjs/react-dom.development.js:26103:10)
+      at client/node_modules/@testing-library/react/dist/pure.js:101:25
+      at batchedUpdates$1 (client/node_modules/react-dom/cjs/react-dom.development.js:22380:12)
+      at act (client/node_modules/react-dom/cjs/react-dom-test-utils.development.js:1042:14)
+      at render (client/node_modules/@testing-library/react/dist/pure.js:97:26)
+      at Object.<anonymous> (client/src/components/QuickActionsBar/QuickActionsBar.test.jsx:80:11)
+
+    console.error
+      Error: Uncaught [TypeError: window.matchMedia is not a function]
+          at reportException (C:\Users\jason\Desktop\tori\kha\node_modules\jsdom\lib\jsdom\living\helpers\runtime-script-errors.js:66:24)
+          at innerInvokeEventListeners (C:\Users\jason\Desktop\tori\kha\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:353:9)
+          at invokeEventListeners (C:\Users\jason\Desktop\tori\kha\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:286:3)
+          at HTMLUnknownElementImpl._dispatch (C:\Users\jason\Desktop\tori\kha\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:233:9)
+          at HTMLUnknownElementImpl.dispatchEvent (C:\Users\jason\Desktop\tori\kha\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:104:17)
+          at HTMLUnknownElement.dispatchEvent (C:\Users\jason\Desktop\tori\kha\node_modules\jsdom\lib\jsdom\living\generated\EventTarget.js:241:34)
+          at Object.invokeGuardedCallbackDev (C:\Users\jason\Desktop\tori\kha\client\node_modules\react-dom\cjs\react-dom.development.js:3994:16)
+          at invokeGuardedCallback (C:\Users\jason\Desktop\tori\kha\client\node_modules\react-dom\cjs\react-dom.development.js:4056:31)
+          at beginWork$1 (C:\Users\jason\Desktop\tori\kha\client\node_modules\react-dom\cjs\react-dom.development.js:23964:7)
+          at performUnitOfWork (C:\Users\jason\Desktop\tori\kha\client\node_modules\react-dom\cjs\react-dom.development.js:22779:12)
+          at workLoopSync (C:\Users\jason\Desktop\tori\kha\client\node_modules\react-dom\cjs\react-dom.development.js:22707:5)
+          at renderRootSync (C:\Users\jason\Desktop\tori\kha\client\node_modules\react-dom\cjs\react-dom.development.js:22670:7)
+          at performSyncWorkOnRoot (C:\Users\jason\Desktop\tori\kha\client\node_modules\react-dom\cjs\react-dom.development.js:22293:18)
+          at scheduleUpdateOnFiber (C:\Users\jason\Desktop\tori\kha\client\node_modules\react-dom\cjs\react-dom.development.js:21881:7)
+          at updateContainer (C:\Users\jason\Desktop\tori\kha\client\node_modules\react-dom\cjs\react-dom.development.js:25482:3)
+          at C:\Users\jason\Desktop\tori\kha\client\node_modules\react-dom\cjs\react-dom.development.js:26021:7
+          at unbatchedUpdates (C:\Users\jason\Desktop\tori\kha\client\node_modules\react-dom\cjs\react-dom.development.js:22431:12)
+          at legacyRenderSubtreeIntoContainer (C:\Users\jason\Desktop\tori\kha\client\node_modules\react-dom\cjs\react-dom.development.js:26020:5)
+          at Object.render (C:\Users\jason\Desktop\tori\kha\client\node_modules\react-dom\cjs\react-dom.development.js:26103:10)
+          at C:\Users\jason\Desktop\tori\kha\client\node_modules\@testing-library\react\dist\pure.js:101:25
+          at batchedUpdates$1 (C:\Users\jason\Desktop\tori\kha\client\node_modules\react-dom\cjs\react-dom.development.js:22380:12)
+          at act (C:\Users\jason\Desktop\tori\kha\client\node_modules\react-dom\cjs\react-dom-test-utils.development.js:1042:14)
+          at render (C:\Users\jason\Desktop\tori\kha\client\node_modules\@testing-library\react\dist\pure.js:97:26)
+          at Object.<anonymous> (C:\Users\jason\Desktop\tori\kha\client\src\components\QuickActionsBar\QuickActionsBar.test.jsx:100:11)
+          at Promise.then.completed (C:\Users\jason\Desktop\tori\kha\node_modules\jest-circus\build\utils.js:298:28)
+          at new Promise (<anonymous>)
+          at callAsyncCircusFn (C:\Users\jason\Desktop\tori\kha\node_modules\jest-circus\build\utils.js:231:10)
+          at _callCircusTest (C:\Users\jason\Desktop\tori\kha\node_modules\jest-circus\build\run.js:316:40)
+          at processTicksAndRejections (node:internal/process/task_queues:95:5)
+          at _runTest (C:\Users\jason\Desktop\tori\kha\node_modules\jest-circus\build\run.js:252:3)
+          at _runTestsForDescribeBlock (C:\Users\jason\Desktop\tori\kha\node_modules\jest-circus\build\run.js:126:9)
+          at _runTestsForDescribeBlock (C:\Users\jason\Desktop\tori\kha\node_modules\jest-circus\build\run.js:121:9)
+          at run (C:\Users\jason\Desktop\tori\kha\node_modules\jest-circus\build\run.js:71:3)
+          at runAndTransformResultsToJestFormat (C:\Users\jason\Desktop\tori\kha\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapterInit.js:122:21)
+          at jestAdapter (C:\Users\jason\Desktop\tori\kha\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapter.js:79:19)
+          at runTestInternal (C:\Users\jason\Desktop\tori\kha\node_modules\jest-runner\build\runTest.js:367:16)
+          at runTest (C:\Users\jason\Desktop\tori\kha\node_modules\jest-runner\build\runTest.js:444:34)
+          at Object.worker (C:\Users\jason\Desktop\tori\kha\node_modules\jest-runner\build\testWorker.js:106:12) {
+        detail: TypeError: window.matchMedia is not a function
+            at matchMedia (C:\Users\jason\Desktop\tori\kha\client\src\components\QuickActionsBar\QuickActionItem.jsx:50:39)
+            at renderWithHooks (C:\Users\jason\Desktop\tori\kha\client\node_modules\react-dom\cjs\react-dom.development.js:14985:18)
+            at mountIndeterminateComponent (C:\Users\jason\Desktop\tori\kha\client\node_modules\react-dom\cjs\react-dom.development.js:17811:13)
+            at beginWork (C:\Users\jason\Desktop\tori\kha\client\node_modules\react-dom\cjs\react-dom.development.js:19049:16)
+            at HTMLUnknownElement.callCallback (C:\Users\jason\Desktop\tori\kha\client\node_modules\react-dom\cjs\react-dom.development.js:3945:14)
+            at HTMLUnknownElement.callTheUserObjectsOperation (C:\Users\jason\Desktop\tori\kha\node_modules\jsdom\lib\jsdom\living\generated\EventListener.js:26:30)
+            at innerInvokeEventListeners (C:\Users\jason\Desktop\tori\kha\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:350:25)
+            at invokeEventListeners (C:\Users\jason\Desktop\tori\kha\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:286:3)
+            at HTMLUnknownElementImpl._dispatch (C:\Users\jason\Desktop\tori\kha\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:233:9)
+            at HTMLUnknownElementImpl.dispatchEvent (C:\Users\jason\Desktop\tori\kha\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:104:17)
+            at HTMLUnknownElement.dispatchEvent (C:\Users\jason\Desktop\tori\kha\node_modules\jsdom\lib\jsdom\living\generated\EventTarget.js:241:34)
+            at Object.invokeGuardedCallbackDev (C:\Users\jason\Desktop\tori\kha\client\node_modules\react-dom\cjs\react-dom.development.js:3994:16)
+            at invokeGuardedCallback (C:\Users\jason\Desktop\tori\kha\client\node_modules\react-dom\cjs\react-dom.development.js:4056:31)
+            at beginWork$1 (C:\Users\jason\Desktop\tori\kha\client\node_modules\react-dom\cjs\react-dom.development.js:23964:7)
+            at performUnitOfWork (C:\Users\jason\Desktop\tori\kha\client\node_modules\react-dom\cjs\react-dom.development.js:22779:12)
+            at workLoopSync (C:\Users\jason\Desktop\tori\kha\client\node_modules\react-dom\cjs\react-dom.development.js:22707:5)
+            at renderRootSync (C:\Users\jason\Desktop\tori\kha\client\node_modules\react-dom\cjs\react-dom.development.js:22670:7)
+            at performSyncWorkOnRoot (C:\Users\jason\Desktop\tori\kha\client\node_modules\react-dom\cjs\react-dom.development.js:22293:18)
+            at scheduleUpdateOnFiber (C:\Users\jason\Desktop\tori\kha\client\node_modules\react-dom\cjs\react-dom.development.js:21881:7)
+            at updateContainer (C:\Users\jason\Desktop\tori\kha\client\node_modules\react-dom\cjs\react-dom.development.js:25482:3)
+            at C:\Users\jason\Desktop\tori\kha\client\node_modules\react-dom\cjs\react-dom.development.js:26021:7
+            at unbatchedUpdates (C:\Users\jason\Desktop\tori\kha\client\node_modules\react-dom\cjs\react-dom.development.js:22431:12)
+            at legacyRenderSubtreeIntoContainer (C:\Users\jason\Desktop\tori\kha\client\node_modules\react-dom\cjs\react-dom.development.js:26020:5)
+            at Object.render (C:\Users\jason\Desktop\tori\kha\client\node_modules\react-dom\cjs\react-dom.development.js:26103:10)
+            at C:\Users\jason\Desktop\tori\kha\client\node_modules\@testing-library\react\dist\pure.js:101:25
+            at batchedUpdates$1 (C:\Users\jason\Desktop\tori\kha\client\node_modules\react-dom\cjs\react-dom.development.js:22380:12)
+            at act (C:\Users\jason\Desktop\tori\kha\client\node_modules\react-dom\cjs\react-dom-test-utils.development.js:1042:14)
+            at render (C:\Users\jason\Desktop\tori\kha\client\node_modules\@testing-library\react\dist\pure.js:97:26)
+            at Object.<anonymous> (C:\Users\jason\Desktop\tori\kha\client\src\components\QuickActionsBar\QuickActionsBar.test.jsx:100:11)
+            at Promise.then.completed (C:\Users\jason\Desktop\tori\kha\node_modules\jest-circus\build\utils.js:298:28)
+            at new Promise (<anonymous>)
+            at callAsyncCircusFn (C:\Users\jason\Desktop\tori\kha\node_modules\jest-circus\build\utils.js:231:10)
+            at _callCircusTest (C:\Users\jason\Desktop\tori\kha\node_modules\jest-circus\build\run.js:316:40)
+            at processTicksAndRejections (node:internal/process/task_queues:95:5)
+            at _runTest (C:\Users\jason\Desktop\tori\kha\node_modules\jest-circus\build\run.js:252:3)
+            at _runTestsForDescribeBlock (C:\Users\jason\Desktop\tori\kha\node_modules\jest-circus\build\run.js:126:9)
+            at _runTestsForDescribeBlock (C:\Users\jason\Desktop\tori\kha\node_modules\jest-circus\build\run.js:121:9)
+            at run (C:\Users\jason\Desktop\tori\kha\node_modules\jest-circus\build\run.js:71:3)
+            at runAndTransformResultsToJestFormat (C:\Users\jason\Desktop\tori\kha\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapterInit.js:122:21)
+            at jestAdapter (C:\Users\jason\Desktop\tori\kha\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapter.js:79:19)
+            at runTestInternal (C:\Users\jason\Desktop\tori\kha\node_modules\jest-runner\build\runTest.js:367:16)
+            at runTest (C:\Users\jason\Desktop\tori\kha\node_modules\jest-runner\build\runTest.js:444:34)
+            at Object.worker (C:\Users\jason\Desktop\tori\kha\node_modules\jest-runner\build\testWorker.js:106:12),
+        type: 'unhandled exception'
+      }
+
+       98 |
+       99 |   it('calls onOpenPanel when View All button is clicked', () => {
+    > 100 |     render(
+          |           ^
+      101 |       <QuickActionsBar
+      102 |         suggestions={mockSuggestions}
+      103 |         onApply={mockOnApply}
+
+      at VirtualConsole.<anonymous> (node_modules/jest-environment-jsdom/build/index.js:63:23)
+      at reportException (node_modules/jsdom/lib/jsdom/living/helpers/runtime-script-errors.js:70:28)
+      at innerInvokeEventListeners (node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:353:9)
+      at invokeEventListeners (node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:286:3)
+      at HTMLUnknownElementImpl._dispatch (node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:233:9)
+      at HTMLUnknownElementImpl.dispatchEvent (node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:104:17)
+      at HTMLUnknownElement.dispatchEvent (node_modules/jsdom/lib/jsdom/living/generated/EventTarget.js:241:34)
+      at Object.invokeGuardedCallbackDev (client/node_modules/react-dom/cjs/react-dom.development.js:3994:16)
+      at invokeGuardedCallback (client/node_modules/react-dom/cjs/react-dom.development.js:4056:31)
+      at beginWork$1 (client/node_modules/react-dom/cjs/react-dom.development.js:23964:7)
+      at performUnitOfWork (client/node_modules/react-dom/cjs/react-dom.development.js:22779:12)
+      at workLoopSync (client/node_modules/react-dom/cjs/react-dom.development.js:22707:5)
+      at renderRootSync (client/node_modules/react-dom/cjs/react-dom.development.js:22670:7)
+      at performSyncWorkOnRoot (client/node_modules/react-dom/cjs/react-dom.development.js:22293:18)
+      at scheduleUpdateOnFiber (client/node_modules/react-dom/cjs/react-dom.development.js:21881:7)
+      at updateContainer (client/node_modules/react-dom/cjs/react-dom.development.js:25482:3)
+      at client/node_modules/react-dom/cjs/react-dom.development.js:26021:7
+      at unbatchedUpdates (client/node_modules/react-dom/cjs/react-dom.development.js:22431:12)
+      at legacyRenderSubtreeIntoContainer (client/node_modules/react-dom/cjs/react-dom.development.js:26020:5)
+      at Object.render (client/node_modules/react-dom/cjs/react-dom.development.js:26103:10)
+      at client/node_modules/@testing-library/react/dist/pure.js:101:25
+      at batchedUpdates$1 (client/node_modules/react-dom/cjs/react-dom.development.js:22380:12)
+      at act (client/node_modules/react-dom/cjs/react-dom-test-utils.development.js:1042:14)
+      at render (client/node_modules/@testing-library/react/dist/pure.js:97:26)
+      at Object.<anonymous> (client/src/components/QuickActionsBar/QuickActionsBar.test.jsx:100:11)
+
+    console.error
+      The above error occurred in the <QuickActionItem> component:
+
+          at icon (C:\Users\jason\Desktop\tori\kha\client\src\components\QuickActionsBar\QuickActionItem.jsx:24:3)
+          at div
+          at div
+          at suggestions (C:\Users\jason\Desktop\tori\kha\client\src\components\QuickActionsBar\QuickActionsBar.jsx:14:3)
+
+      Consider adding an error boundary to your tree to customize error handling behavior.
+      Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries.
+
+       98 |
+       99 |   it('calls onOpenPanel when View All button is clicked', () => {
+    > 100 |     render(
+          |           ^
+      101 |       <QuickActionsBar
+      102 |         suggestions={mockSuggestions}
+      103 |         onApply={mockOnApply}
+
+      at logCapturedError (client/node_modules/react-dom/cjs/react-dom.development.js:20085:23)
+      at update.callback (client/node_modules/react-dom/cjs/react-dom.development.js:20118:5)
+      at callCallback (client/node_modules/react-dom/cjs/react-dom.development.js:12318:12)
+      at commitUpdateQueue (client/node_modules/react-dom/cjs/react-dom.development.js:12339:9)
+      at commitLifeCycles (client/node_modules/react-dom/cjs/react-dom.development.js:20736:11)
+      at commitLayoutEffects (client/node_modules/react-dom/cjs/react-dom.development.js:23426:7)
+      at HTMLUnknownElement.callCallback (client/node_modules/react-dom/cjs/react-dom.development.js:3945:14)
+      at HTMLUnknownElement.callTheUserObjectsOperation (node_modules/jsdom/lib/jsdom/living/generated/EventListener.js:26:30)
+      at innerInvokeEventListeners (node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:350:25)
+      at invokeEventListeners (node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:286:3)
+      at HTMLUnknownElementImpl._dispatch (node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:233:9)
+      at HTMLUnknownElementImpl.dispatchEvent (node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:104:17)
+      at HTMLUnknownElement.dispatchEvent (node_modules/jsdom/lib/jsdom/living/generated/EventTarget.js:241:34)
+      at Object.invokeGuardedCallbackDev (client/node_modules/react-dom/cjs/react-dom.development.js:3994:16)
+      at invokeGuardedCallback (client/node_modules/react-dom/cjs/react-dom.development.js:4056:31)
+      at commitRootImpl (client/node_modules/react-dom/cjs/react-dom.development.js:23151:9)
+      at unstable_runWithPriority (client/node_modules/scheduler/cjs/scheduler.development.js:468:12)
+      at runWithPriority$1 (client/node_modules/react-dom/cjs/react-dom.development.js:11276:10)
+      at commitRoot (client/node_modules/react-dom/cjs/react-dom.development.js:22990:3)
+      at performSyncWorkOnRoot (client/node_modules/react-dom/cjs/react-dom.development.js:22329:3)
+      at scheduleUpdateOnFiber (client/node_modules/react-dom/cjs/react-dom.development.js:21881:7)
+      at updateContainer (client/node_modules/react-dom/cjs/react-dom.development.js:25482:3)
+      at client/node_modules/react-dom/cjs/react-dom.development.js:26021:7
+      at unbatchedUpdates (client/node_modules/react-dom/cjs/react-dom.development.js:22431:12)
+      at legacyRenderSubtreeIntoContainer (client/node_modules/react-dom/cjs/react-dom.development.js:26020:5)
+      at Object.render (client/node_modules/react-dom/cjs/react-dom.development.js:26103:10)
+      at client/node_modules/@testing-library/react/dist/pure.js:101:25
+      at batchedUpdates$1 (client/node_modules/react-dom/cjs/react-dom.development.js:22380:12)
+      at act (client/node_modules/react-dom/cjs/react-dom-test-utils.development.js:1042:14)
+      at render (client/node_modules/@testing-library/react/dist/pure.js:97:26)
+      at Object.<anonymous> (client/src/components/QuickActionsBar/QuickActionsBar.test.jsx:100:11)
+
+    console.error
+      Error: Uncaught [TypeError: window.matchMedia is not a function]
+          at reportException (C:\Users\jason\Desktop\tori\kha\node_modules\jsdom\lib\jsdom\living\helpers\runtime-script-errors.js:66:24)
+          at innerInvokeEventListeners (C:\Users\jason\Desktop\tori\kha\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:353:9)
+          at invokeEventListeners (C:\Users\jason\Desktop\tori\kha\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:286:3)
+          at HTMLUnknownElementImpl._dispatch (C:\Users\jason\Desktop\tori\kha\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:233:9)
+          at HTMLUnknownElementImpl.dispatchEvent (C:\Users\jason\Desktop\tori\kha\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:104:17)
+          at HTMLUnknownElement.dispatchEvent (C:\Users\jason\Desktop\tori\kha\node_modules\jsdom\lib\jsdom\living\generated\EventTarget.js:241:34)
+          at Object.invokeGuardedCallbackDev (C:\Users\jason\Desktop\tori\kha\client\node_modules\react-dom\cjs\react-dom.development.js:3994:16)
+          at invokeGuardedCallback (C:\Users\jason\Desktop\tori\kha\client\node_modules\react-dom\cjs\react-dom.development.js:4056:31)
+          at beginWork$1 (C:\Users\jason\Desktop\tori\kha\client\node_modules\react-dom\cjs\react-dom.development.js:23964:7)
+          at performUnitOfWork (C:\Users\jason\Desktop\tori\kha\client\node_modules\react-dom\cjs\react-dom.development.js:22779:12)
+          at workLoopSync (C:\Users\jason\Desktop\tori\kha\client\node_modules\react-dom\cjs\react-dom.development.js:22707:5)
+          at renderRootSync (C:\Users\jason\Desktop\tori\kha\client\node_modules\react-dom\cjs\react-dom.development.js:22670:7)
+          at performSyncWorkOnRoot (C:\Users\jason\Desktop\tori\kha\client\node_modules\react-dom\cjs\react-dom.development.js:22293:18)
+          at scheduleUpdateOnFiber (C:\Users\jason\Desktop\tori\kha\client\node_modules\react-dom\cjs\react-dom.development.js:21881:7)
+          at updateContainer (C:\Users\jason\Desktop\tori\kha\client\node_modules\react-dom\cjs\react-dom.development.js:25482:3)
+          at C:\Users\jason\Desktop\tori\kha\client\node_modules\react-dom\cjs\react-dom.development.js:26021:7
+          at unbatchedUpdates (C:\Users\jason\Desktop\tori\kha\client\node_modules\react-dom\cjs\react-dom.development.js:22431:12)
+          at legacyRenderSubtreeIntoContainer (C:\Users\jason\Desktop\tori\kha\client\node_modules\react-dom\cjs\react-dom.development.js:26020:5)
+          at Object.render (C:\Users\jason\Desktop\tori\kha\client\node_modules\react-dom\cjs\react-dom.development.js:26103:10)
+          at C:\Users\jason\Desktop\tori\kha\client\node_modules\@testing-library\react\dist\pure.js:101:25
+          at batchedUpdates$1 (C:\Users\jason\Desktop\tori\kha\client\node_modules\react-dom\cjs\react-dom.development.js:22380:12)
+          at act (C:\Users\jason\Desktop\tori\kha\client\node_modules\react-dom\cjs\react-dom-test-utils.development.js:1042:14)
+          at render (C:\Users\jason\Desktop\tori\kha\client\node_modules\@testing-library\react\dist\pure.js:97:26)
+          at Object.<anonymous> (C:\Users\jason\Desktop\tori\kha\client\src\components\QuickActionsBar\QuickActionsBar.test.jsx:124:11)
+          at Promise.then.completed (C:\Users\jason\Desktop\tori\kha\node_modules\jest-circus\build\utils.js:298:28)
+          at new Promise (<anonymous>)
+          at callAsyncCircusFn (C:\Users\jason\Desktop\tori\kha\node_modules\jest-circus\build\utils.js:231:10)
+          at _callCircusTest (C:\Users\jason\Desktop\tori\kha\node_modules\jest-circus\build\run.js:316:40)
+          at processTicksAndRejections (node:internal/process/task_queues:95:5)
+          at _runTest (C:\Users\jason\Desktop\tori\kha\node_modules\jest-circus\build\run.js:252:3)
+          at _runTestsForDescribeBlock (C:\Users\jason\Desktop\tori\kha\node_modules\jest-circus\build\run.js:126:9)
+          at _runTestsForDescribeBlock (C:\Users\jason\Desktop\tori\kha\node_modules\jest-circus\build\run.js:121:9)
+          at run (C:\Users\jason\Desktop\tori\kha\node_modules\jest-circus\build\run.js:71:3)
+          at runAndTransformResultsToJestFormat (C:\Users\jason\Desktop\tori\kha\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapterInit.js:122:21)
+          at jestAdapter (C:\Users\jason\Desktop\tori\kha\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapter.js:79:19)
+          at runTestInternal (C:\Users\jason\Desktop\tori\kha\node_modules\jest-runner\build\runTest.js:367:16)
+          at runTest (C:\Users\jason\Desktop\tori\kha\node_modules\jest-runner\build\runTest.js:444:34)
+          at Object.worker (C:\Users\jason\Desktop\tori\kha\node_modules\jest-runner\build\testWorker.js:106:12) {
+        detail: TypeError: window.matchMedia is not a function
+            at matchMedia (C:\Users\jason\Desktop\tori\kha\client\src\components\QuickActionsBar\QuickActionItem.jsx:50:39)
+            at renderWithHooks (C:\Users\jason\Desktop\tori\kha\client\node_modules\react-dom\cjs\react-dom.development.js:14985:18)
+            at mountIndeterminateComponent (C:\Users\jason\Desktop\tori\kha\client\node_modules\react-dom\cjs\react-dom.development.js:17811:13)
+            at beginWork (C:\Users\jason\Desktop\tori\kha\client\node_modules\react-dom\cjs\react-dom.development.js:19049:16)
+            at HTMLUnknownElement.callCallback (C:\Users\jason\Desktop\tori\kha\client\node_modules\react-dom\cjs\react-dom.development.js:3945:14)
+            at HTMLUnknownElement.callTheUserObjectsOperation (C:\Users\jason\Desktop\tori\kha\node_modules\jsdom\lib\jsdom\living\generated\EventListener.js:26:30)
+            at innerInvokeEventListeners (C:\Users\jason\Desktop\tori\kha\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:350:25)
+            at invokeEventListeners (C:\Users\jason\Desktop\tori\kha\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:286:3)
+            at HTMLUnknownElementImpl._dispatch (C:\Users\jason\Desktop\tori\kha\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:233:9)
+            at HTMLUnknownElementImpl.dispatchEvent (C:\Users\jason\Desktop\tori\kha\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:104:17)
+            at HTMLUnknownElement.dispatchEvent (C:\Users\jason\Desktop\tori\kha\node_modules\jsdom\lib\jsdom\living\generated\EventTarget.js:241:34)
+            at Object.invokeGuardedCallbackDev (C:\Users\jason\Desktop\tori\kha\client\node_modules\react-dom\cjs\react-dom.development.js:3994:16)
+            at invokeGuardedCallback (C:\Users\jason\Desktop\tori\kha\client\node_modules\react-dom\cjs\react-dom.development.js:4056:31)
+            at beginWork$1 (C:\Users\jason\Desktop\tori\kha\client\node_modules\react-dom\cjs\react-dom.development.js:23964:7)
+            at performUnitOfWork (C:\Users\jason\Desktop\tori\kha\client\node_modules\react-dom\cjs\react-dom.development.js:22779:12)
+            at workLoopSync (C:\Users\jason\Desktop\tori\kha\client\node_modules\react-dom\cjs\react-dom.development.js:22707:5)
+            at renderRootSync (C:\Users\jason\Desktop\tori\kha\client\node_modules\react-dom\cjs\react-dom.development.js:22670:7)
+            at performSyncWorkOnRoot (C:\Users\jason\Desktop\tori\kha\client\node_modules\react-dom\cjs\react-dom.development.js:22293:18)
+            at scheduleUpdateOnFiber (C:\Users\jason\Desktop\tori\kha\client\node_modules\react-dom\cjs\react-dom.development.js:21881:7)
+            at updateContainer (C:\Users\jason\Desktop\tori\kha\client\node_modules\react-dom\cjs\react-dom.development.js:25482:3)
+            at C:\Users\jason\Desktop\tori\kha\client\node_modules\react-dom\cjs\react-dom.development.js:26021:7
+            at unbatchedUpdates (C:\Users\jason\Desktop\tori\kha\client\node_modules\react-dom\cjs\react-dom.development.js:22431:12)
+            at legacyRenderSubtreeIntoContainer (C:\Users\jason\Desktop\tori\kha\client\node_modules\react-dom\cjs\react-dom.development.js:26020:5)
+            at Object.render (C:\Users\jason\Desktop\tori\kha\client\node_modules\react-dom\cjs\react-dom.development.js:26103:10)
+            at C:\Users\jason\Desktop\tori\kha\client\node_modules\@testing-library\react\dist\pure.js:101:25
+            at batchedUpdates$1 (C:\Users\jason\Desktop\tori\kha\client\node_modules\react-dom\cjs\react-dom.development.js:22380:12)
+            at act (C:\Users\jason\Desktop\tori\kha\client\node_modules\react-dom\cjs\react-dom-test-utils.development.js:1042:14)
+            at render (C:\Users\jason\Desktop\tori\kha\client\node_modules\@testing-library\react\dist\pure.js:97:26)
+            at Object.<anonymous> (C:\Users\jason\Desktop\tori\kha\client\src\components\QuickActionsBar\QuickActionsBar.test.jsx:124:11)
+            at Promise.then.completed (C:\Users\jason\Desktop\tori\kha\node_modules\jest-circus\build\utils.js:298:28)
+            at new Promise (<anonymous>)
+            at callAsyncCircusFn (C:\Users\jason\Desktop\tori\kha\node_modules\jest-circus\build\utils.js:231:10)
+            at _callCircusTest (C:\Users\jason\Desktop\tori\kha\node_modules\jest-circus\build\run.js:316:40)
+            at processTicksAndRejections (node:internal/process/task_queues:95:5)
+            at _runTest (C:\Users\jason\Desktop\tori\kha\node_modules\jest-circus\build\run.js:252:3)
+            at _runTestsForDescribeBlock (C:\Users\jason\Desktop\tori\kha\node_modules\jest-circus\build\run.js:126:9)
+            at _runTestsForDescribeBlock (C:\Users\jason\Desktop\tori\kha\node_modules\jest-circus\build\run.js:121:9)
+            at run (C:\Users\jason\Desktop\tori\kha\node_modules\jest-circus\build\run.js:71:3)
+            at runAndTransformResultsToJestFormat (C:\Users\jason\Desktop\tori\kha\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapterInit.js:122:21)
+            at jestAdapter (C:\Users\jason\Desktop\tori\kha\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapter.js:79:19)
+            at runTestInternal (C:\Users\jason\Desktop\tori\kha\node_modules\jest-runner\build\runTest.js:367:16)
+            at runTest (C:\Users\jason\Desktop\tori\kha\node_modules\jest-runner\build\runTest.js:444:34)
+            at Object.worker (C:\Users\jason\Desktop\tori\kha\node_modules\jest-runner\build\testWorker.js:106:12),
+        type: 'unhandled exception'
+      }
+
+      122 |     ];
+      123 |
+    > 124 |     render(
+          |           ^
+      125 |       <QuickActionsBar
+      126 |         suggestions={suggestionsWithStringIcon}
+      127 |         onApply={mockOnApply}
+
+      at VirtualConsole.<anonymous> (node_modules/jest-environment-jsdom/build/index.js:63:23)
+      at reportException (node_modules/jsdom/lib/jsdom/living/helpers/runtime-script-errors.js:70:28)
+      at innerInvokeEventListeners (node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:353:9)
+      at invokeEventListeners (node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:286:3)
+      at HTMLUnknownElementImpl._dispatch (node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:233:9)
+      at HTMLUnknownElementImpl.dispatchEvent (node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:104:17)
+      at HTMLUnknownElement.dispatchEvent (node_modules/jsdom/lib/jsdom/living/generated/EventTarget.js:241:34)
+      at Object.invokeGuardedCallbackDev (client/node_modules/react-dom/cjs/react-dom.development.js:3994:16)
+      at invokeGuardedCallback (client/node_modules/react-dom/cjs/react-dom.development.js:4056:31)
+      at beginWork$1 (client/node_modules/react-dom/cjs/react-dom.development.js:23964:7)
+      at performUnitOfWork (client/node_modules/react-dom/cjs/react-dom.development.js:22779:12)
+      at workLoopSync (client/node_modules/react-dom/cjs/react-dom.development.js:22707:5)
+      at renderRootSync (client/node_modules/react-dom/cjs/react-dom.development.js:22670:7)
+      at performSyncWorkOnRoot (client/node_modules/react-dom/cjs/react-dom.development.js:22293:18)
+      at scheduleUpdateOnFiber (client/node_modules/react-dom/cjs/react-dom.development.js:21881:7)
+      at updateContainer (client/node_modules/react-dom/cjs/react-dom.development.js:25482:3)
+      at client/node_modules/react-dom/cjs/react-dom.development.js:26021:7
+      at unbatchedUpdates (client/node_modules/react-dom/cjs/react-dom.development.js:22431:12)
+      at legacyRenderSubtreeIntoContainer (client/node_modules/react-dom/cjs/react-dom.development.js:26020:5)
+      at Object.render (client/node_modules/react-dom/cjs/react-dom.development.js:26103:10)
+      at client/node_modules/@testing-library/react/dist/pure.js:101:25
+      at batchedUpdates$1 (client/node_modules/react-dom/cjs/react-dom.development.js:22380:12)
+      at act (client/node_modules/react-dom/cjs/react-dom-test-utils.development.js:1042:14)
+      at render (client/node_modules/@testing-library/react/dist/pure.js:97:26)
+      at Object.<anonymous> (client/src/components/QuickActionsBar/QuickActionsBar.test.jsx:124:11)
+
+    console.error
+      The above error occurred in the <QuickActionItem> component:
+
+          at icon (C:\Users\jason\Desktop\tori\kha\client\src\components\QuickActionsBar\QuickActionItem.jsx:24:3)
+          at div
+          at div
+          at suggestions (C:\Users\jason\Desktop\tori\kha\client\src\components\QuickActionsBar\QuickActionsBar.jsx:14:3)
+
+      Consider adding an error boundary to your tree to customize error handling behavior.
+      Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries.
+
+      122 |     ];
+      123 |
+    > 124 |     render(
+          |           ^
+      125 |       <QuickActionsBar
+      126 |         suggestions={suggestionsWithStringIcon}
+      127 |         onApply={mockOnApply}
+
+      at logCapturedError (client/node_modules/react-dom/cjs/react-dom.development.js:20085:23)
+      at update.callback (client/node_modules/react-dom/cjs/react-dom.development.js:20118:5)
+      at callCallback (client/node_modules/react-dom/cjs/react-dom.development.js:12318:12)
+      at commitUpdateQueue (client/node_modules/react-dom/cjs/react-dom.development.js:12339:9)
+      at commitLifeCycles (client/node_modules/react-dom/cjs/react-dom.development.js:20736:11)
+      at commitLayoutEffects (client/node_modules/react-dom/cjs/react-dom.development.js:23426:7)
+      at HTMLUnknownElement.callCallback (client/node_modules/react-dom/cjs/react-dom.development.js:3945:14)
+      at HTMLUnknownElement.callTheUserObjectsOperation (node_modules/jsdom/lib/jsdom/living/generated/EventListener.js:26:30)
+      at innerInvokeEventListeners (node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:350:25)
+      at invokeEventListeners (node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:286:3)
+      at HTMLUnknownElementImpl._dispatch (node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:233:9)
+      at HTMLUnknownElementImpl.dispatchEvent (node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:104:17)
+      at HTMLUnknownElement.dispatchEvent (node_modules/jsdom/lib/jsdom/living/generated/EventTarget.js:241:34)
+      at Object.invokeGuardedCallbackDev (client/node_modules/react-dom/cjs/react-dom.development.js:3994:16)
+      at invokeGuardedCallback (client/node_modules/react-dom/cjs/react-dom.development.js:4056:31)
+      at commitRootImpl (client/node_modules/react-dom/cjs/react-dom.development.js:23151:9)
+      at unstable_runWithPriority (client/node_modules/scheduler/cjs/scheduler.development.js:468:12)
+      at runWithPriority$1 (client/node_modules/react-dom/cjs/react-dom.development.js:11276:10)
+      at commitRoot (client/node_modules/react-dom/cjs/react-dom.development.js:22990:3)
+      at performSyncWorkOnRoot (client/node_modules/react-dom/cjs/react-dom.development.js:22329:3)
+      at scheduleUpdateOnFiber (client/node_modules/react-dom/cjs/react-dom.development.js:21881:7)
+      at updateContainer (client/node_modules/react-dom/cjs/react-dom.development.js:25482:3)
+      at client/node_modules/react-dom/cjs/react-dom.development.js:26021:7
+      at unbatchedUpdates (client/node_modules/react-dom/cjs/react-dom.development.js:22431:12)
+      at legacyRenderSubtreeIntoContainer (client/node_modules/react-dom/cjs/react-dom.development.js:26020:5)
+      at Object.render (client/node_modules/react-dom/cjs/react-dom.development.js:26103:10)
+      at client/node_modules/@testing-library/react/dist/pure.js:101:25
+      at batchedUpdates$1 (client/node_modules/react-dom/cjs/react-dom.development.js:22380:12)
+      at act (client/node_modules/react-dom/cjs/react-dom-test-utils.development.js:1042:14)
+      at render (client/node_modules/@testing-library/react/dist/pure.js:97:26)
+      at Object.<anonymous> (client/src/components/QuickActionsBar/QuickActionsBar.test.jsx:124:11)
+
+  ● QuickActionsBar › renders in collapsed state initially
+
+    TypeError: window.matchMedia is not a function
+
+      48 |
+      49 |   // Determine if we should use the reduced animation mode
+    > 50 |   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+         |                                       ^
+      51 |   return (
+      52 |     <div
+      53 |       className={`quick-action-item ${isNew && !prefersReducedMotion ? 'animate-new-suggestion' : ''}`}
+
+      at matchMedia (client/src/components/QuickActionsBar/QuickActionItem.jsx:50:39)
+      at renderWithHooks (client/node_modules/react-dom/cjs/react-dom.development.js:14985:18)
+      at mountIndeterminateComponent (client/node_modules/react-dom/cjs/react-dom.development.js:17811:13)
+      at beginWork (client/node_modules/react-dom/cjs/react-dom.development.js:19049:16)
+      at HTMLUnknownElement.callCallback (client/node_modules/react-dom/cjs/react-dom.development.js:3945:14)
+      at HTMLUnknownElement.callTheUserObjectsOperation (node_modules/jsdom/lib/jsdom/living/generated/EventListener.js:26:30)
+      at innerInvokeEventListeners (node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:350:25)
+      at invokeEventListeners (node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:286:3)
+      at HTMLUnknownElementImpl._dispatch (node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:233:9)
+      at HTMLUnknownElementImpl.dispatchEvent (node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:104:17)
+      at HTMLUnknownElement.dispatchEvent (node_modules/jsdom/lib/jsdom/living/generated/EventTarget.js:241:34)
+      at Object.invokeGuardedCallbackDev (client/node_modules/react-dom/cjs/react-dom.development.js:3994:16)
+      at invokeGuardedCallback (client/node_modules/react-dom/cjs/react-dom.development.js:4056:31)
+      at beginWork$1 (client/node_modules/react-dom/cjs/react-dom.development.js:23964:7)
+      at performUnitOfWork (client/node_modules/react-dom/cjs/react-dom.development.js:22779:12)
+      at workLoopSync (client/node_modules/react-dom/cjs/react-dom.development.js:22707:5)
+      at renderRootSync (client/node_modules/react-dom/cjs/react-dom.development.js:22670:7)
+      at performSyncWorkOnRoot (client/node_modules/react-dom/cjs/react-dom.development.js:22293:18)
+      at scheduleUpdateOnFiber (client/node_modules/react-dom/cjs/react-dom.development.js:21881:7)
+      at updateContainer (client/node_modules/react-dom/cjs/react-dom.development.js:25482:3)
+      at client/node_modules/react-dom/cjs/react-dom.development.js:26021:7
+      at unbatchedUpdates (client/node_modules/react-dom/cjs/react-dom.development.js:22431:12)
+      at legacyRenderSubtreeIntoContainer (client/node_modules/react-dom/cjs/react-dom.development.js:26020:5)
+      at Object.render (client/node_modules/react-dom/cjs/react-dom.development.js:26103:10)
+      at client/node_modules/@testing-library/react/dist/pure.js:101:25
+      at batchedUpdates$1 (client/node_modules/react-dom/cjs/react-dom.development.js:22380:12)
+      at act (client/node_modules/react-dom/cjs/react-dom-test-utils.development.js:1042:14)
+      at render (client/node_modules/@testing-library/react/dist/pure.js:97:26)
+      at Object.<anonymous> (client/src/components/QuickActionsBar/QuickActionsBar.test.jsx:26:11)
+
+  ● QuickActionsBar › expands when clicked on the header
+
+    TypeError: window.matchMedia is not a function
+
+      48 |
+      49 |   // Determine if we should use the reduced animation mode
+    > 50 |   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+         |                                       ^
+      51 |   return (
+      52 |     <div
+      53 |       className={`quick-action-item ${isNew && !prefersReducedMotion ? 'animate-new-suggestion' : ''}`}
+
+      at matchMedia (client/src/components/QuickActionsBar/QuickActionItem.jsx:50:39)
+      at renderWithHooks (client/node_modules/react-dom/cjs/react-dom.development.js:14985:18)
+      at mountIndeterminateComponent (client/node_modules/react-dom/cjs/react-dom.development.js:17811:13)
+      at beginWork (client/node_modules/react-dom/cjs/react-dom.development.js:19049:16)
+      at HTMLUnknownElement.callCallback (client/node_modules/react-dom/cjs/react-dom.development.js:3945:14)
+      at HTMLUnknownElement.callTheUserObjectsOperation (node_modules/jsdom/lib/jsdom/living/generated/EventListener.js:26:30)
+      at innerInvokeEventListeners (node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:350:25)
+      at invokeEventListeners (node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:286:3)
+      at HTMLUnknownElementImpl._dispatch (node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:233:9)
+      at HTMLUnknownElementImpl.dispatchEvent (node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:104:17)
+      at HTMLUnknownElement.dispatchEvent (node_modules/jsdom/lib/jsdom/living/generated/EventTarget.js:241:34)
+      at Object.invokeGuardedCallbackDev (client/node_modules/react-dom/cjs/react-dom.development.js:3994:16)
+      at invokeGuardedCallback (client/node_modules/react-dom/cjs/react-dom.development.js:4056:31)
+      at beginWork$1 (client/node_modules/react-dom/cjs/react-dom.development.js:23964:7)
+      at performUnitOfWork (client/node_modules/react-dom/cjs/react-dom.development.js:22779:12)
+      at workLoopSync (client/node_modules/react-dom/cjs/react-dom.development.js:22707:5)
+      at renderRootSync (client/node_modules/react-dom/cjs/react-dom.development.js:22670:7)
+      at performSyncWorkOnRoot (client/node_modules/react-dom/cjs/react-dom.development.js:22293:18)
+      at scheduleUpdateOnFiber (client/node_modules/react-dom/cjs/react-dom.development.js:21881:7)
+      at updateContainer (client/node_modules/react-dom/cjs/react-dom.development.js:25482:3)
+      at client/node_modules/react-dom/cjs/react-dom.development.js:26021:7
+      at unbatchedUpdates (client/node_modules/react-dom/cjs/react-dom.development.js:22431:12)
+      at legacyRenderSubtreeIntoContainer (client/node_modules/react-dom/cjs/react-dom.development.js:26020:5)
+      at Object.render (client/node_modules/react-dom/cjs/react-dom.development.js:26103:10)
+      at client/node_modules/@testing-library/react/dist/pure.js:101:25
+      at batchedUpdates$1 (client/node_modules/react-dom/cjs/react-dom.development.js:22380:12)
+      at act (client/node_modules/react-dom/cjs/react-dom-test-utils.development.js:1042:14)
+      at render (client/node_modules/@testing-library/react/dist/pure.js:97:26)
+      at Object.<anonymous> (client/src/components/QuickActionsBar/QuickActionsBar.test.jsx:42:11)
+
+  ● QuickActionsBar › calls onApply when Apply button is clicked
+
+    TypeError: window.matchMedia is not a function
+
+      48 |
+      49 |   // Determine if we should use the reduced animation mode
+    > 50 |   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+         |                                       ^
+      51 |   return (
+      52 |     <div
+      53 |       className={`quick-action-item ${isNew && !prefersReducedMotion ? 'animate-new-suggestion' : ''}`}
+
+      at matchMedia (client/src/components/QuickActionsBar/QuickActionItem.jsx:50:39)
+      at renderWithHooks (client/node_modules/react-dom/cjs/react-dom.development.js:14985:18)
+      at mountIndeterminateComponent (client/node_modules/react-dom/cjs/react-dom.development.js:17811:13)
+      at beginWork (client/node_modules/react-dom/cjs/react-dom.development.js:19049:16)
+      at HTMLUnknownElement.callCallback (client/node_modules/react-dom/cjs/react-dom.development.js:3945:14)
+      at HTMLUnknownElement.callTheUserObjectsOperation (node_modules/jsdom/lib/jsdom/living/generated/EventListener.js:26:30)
+      at innerInvokeEventListeners (node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:350:25)
+      at invokeEventListeners (node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:286:3)
+      at HTMLUnknownElementImpl._dispatch (node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:233:9)
+      at HTMLUnknownElementImpl.dispatchEvent (node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:104:17)
+      at HTMLUnknownElement.dispatchEvent (node_modules/jsdom/lib/jsdom/living/generated/EventTarget.js:241:34)
+      at Object.invokeGuardedCallbackDev (client/node_modules/react-dom/cjs/react-dom.development.js:3994:16)
+      at invokeGuardedCallback (client/node_modules/react-dom/cjs/react-dom.development.js:4056:31)
+      at beginWork$1 (client/node_modules/react-dom/cjs/react-dom.development.js:23964:7)
+      at performUnitOfWork (client/node_modules/react-dom/cjs/react-dom.development.js:22779:12)
+      at workLoopSync (client/node_modules/react-dom/cjs/react-dom.development.js:22707:5)
+      at renderRootSync (client/node_modules/react-dom/cjs/react-dom.development.js:22670:7)
+      at performSyncWorkOnRoot (client/node_modules/react-dom/cjs/react-dom.development.js:22293:18)
+      at scheduleUpdateOnFiber (client/node_modules/react-dom/cjs/react-dom.development.js:21881:7)
+      at updateContainer (client/node_modules/react-dom/cjs/react-dom.development.js:25482:3)
+      at client/node_modules/react-dom/cjs/react-dom.development.js:26021:7
+      at unbatchedUpdates (client/node_modules/react-dom/cjs/react-dom.development.js:22431:12)
+      at legacyRenderSubtreeIntoContainer (client/node_modules/react-dom/cjs/react-dom.development.js:26020:5)
+      at Object.render (client/node_modules/react-dom/cjs/react-dom.development.js:26103:10)
+      at client/node_modules/@testing-library/react/dist/pure.js:101:25
+      at batchedUpdates$1 (client/node_modules/react-dom/cjs/react-dom.development.js:22380:12)
+      at act (client/node_modules/react-dom/cjs/react-dom-test-utils.development.js:1042:14)
+      at render (client/node_modules/@testing-library/react/dist/pure.js:97:26)
+      at Object.<anonymous> (client/src/components/QuickActionsBar/QuickActionsBar.test.jsx:60:11)
+
+  ● QuickActionsBar › calls onDismiss when Dismiss button is clicked
+
+    TypeError: window.matchMedia is not a function
+
+      48 |
+      49 |   // Determine if we should use the reduced animation mode
+    > 50 |   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+         |                                       ^
+      51 |   return (
+      52 |     <div
+      53 |       className={`quick-action-item ${isNew && !prefersReducedMotion ? 'animate-new-suggestion' : ''}`}
+
+      at matchMedia (client/src/components/QuickActionsBar/QuickActionItem.jsx:50:39)
+      at renderWithHooks (client/node_modules/react-dom/cjs/react-dom.development.js:14985:18)
+      at mountIndeterminateComponent (client/node_modules/react-dom/cjs/react-dom.development.js:17811:13)
+      at beginWork (client/node_modules/react-dom/cjs/react-dom.development.js:19049:16)
+      at HTMLUnknownElement.callCallback (client/node_modules/react-dom/cjs/react-dom.development.js:3945:14)
+      at HTMLUnknownElement.callTheUserObjectsOperation (node_modules/jsdom/lib/jsdom/living/generated/EventListener.js:26:30)
+      at innerInvokeEventListeners (node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:350:25)
+      at invokeEventListeners (node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:286:3)
+      at HTMLUnknownElementImpl._dispatch (node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:233:9)
+      at HTMLUnknownElementImpl.dispatchEvent (node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:104:17)
+      at HTMLUnknownElement.dispatchEvent (node_modules/jsdom/lib/jsdom/living/generated/EventTarget.js:241:34)
+      at Object.invokeGuardedCallbackDev (client/node_modules/react-dom/cjs/react-dom.development.js:3994:16)
+      at invokeGuardedCallback (client/node_modules/react-dom/cjs/react-dom.development.js:4056:31)
+      at beginWork$1 (client/node_modules/react-dom/cjs/react-dom.development.js:23964:7)
+      at performUnitOfWork (client/node_modules/react-dom/cjs/react-dom.development.js:22779:12)
+      at workLoopSync (client/node_modules/react-dom/cjs/react-dom.development.js:22707:5)
+      at renderRootSync (client/node_modules/react-dom/cjs/react-dom.development.js:22670:7)
+      at performSyncWorkOnRoot (client/node_modules/react-dom/cjs/react-dom.development.js:22293:18)
+      at scheduleUpdateOnFiber (client/node_modules/react-dom/cjs/react-dom.development.js:21881:7)
+      at updateContainer (client/node_modules/react-dom/cjs/react-dom.development.js:25482:3)
+      at client/node_modules/react-dom/cjs/react-dom.development.js:26021:7
+      at unbatchedUpdates (client/node_modules/react-dom/cjs/react-dom.development.js:22431:12)
+      at legacyRenderSubtreeIntoContainer (client/node_modules/react-dom/cjs/react-dom.development.js:26020:5)
+      at Object.render (client/node_modules/react-dom/cjs/react-dom.development.js:26103:10)
+      at client/node_modules/@testing-library/react/dist/pure.js:101:25
+      at batchedUpdates$1 (client/node_modules/react-dom/cjs/react-dom.development.js:22380:12)
+      at act (client/node_modules/react-dom/cjs/react-dom-test-utils.development.js:1042:14)
+      at render (client/node_modules/@testing-library/react/dist/pure.js:97:26)
+      at Object.<anonymous> (client/src/components/QuickActionsBar/QuickActionsBar.test.jsx:80:11)
+
+  ● QuickActionsBar › calls onOpenPanel when View All button is clicked
+
+    TypeError: window.matchMedia is not a function
+
+      48 |
+      49 |   // Determine if we should use the reduced animation mode
+    > 50 |   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+         |                                       ^
+      51 |   return (
+      52 |     <div
+      53 |       className={`quick-action-item ${isNew && !prefersReducedMotion ? 'animate-new-suggestion' : ''}`}
+
+      at matchMedia (client/src/components/QuickActionsBar/QuickActionItem.jsx:50:39)
+      at renderWithHooks (client/node_modules/react-dom/cjs/react-dom.development.js:14985:18)
+      at mountIndeterminateComponent (client/node_modules/react-dom/cjs/react-dom.development.js:17811:13)
+      at beginWork (client/node_modules/react-dom/cjs/react-dom.development.js:19049:16)
+      at HTMLUnknownElement.callCallback (client/node_modules/react-dom/cjs/react-dom.development.js:3945:14)
+      at HTMLUnknownElement.callTheUserObjectsOperation (node_modules/jsdom/lib/jsdom/living/generated/EventListener.js:26:30)
+      at innerInvokeEventListeners (node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:350:25)
+      at invokeEventListeners (node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:286:3)
+      at HTMLUnknownElementImpl._dispatch (node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:233:9)
+      at HTMLUnknownElementImpl.dispatchEvent (node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:104:17)
+      at HTMLUnknownElement.dispatchEvent (node_modules/jsdom/lib/jsdom/living/generated/EventTarget.js:241:34)
+      at Object.invokeGuardedCallbackDev (client/node_modules/react-dom/cjs/react-dom.development.js:3994:16)
+      at invokeGuardedCallback (client/node_modules/react-dom/cjs/react-dom.development.js:4056:31)
+      at beginWork$1 (client/node_modules/react-dom/cjs/react-dom.development.js:23964:7)
+      at performUnitOfWork (client/node_modules/react-dom/cjs/react-dom.development.js:22779:12)
+      at workLoopSync (client/node_modules/react-dom/cjs/react-dom.development.js:22707:5)
+      at renderRootSync (client/node_modules/react-dom/cjs/react-dom.development.js:22670:7)
+      at performSyncWorkOnRoot (client/node_modules/react-dom/cjs/react-dom.development.js:22293:18)
+      at scheduleUpdateOnFiber (client/node_modules/react-dom/cjs/react-dom.development.js:21881:7)
+      at updateContainer (client/node_modules/react-dom/cjs/react-dom.development.js:25482:3)
+      at client/node_modules/react-dom/cjs/react-dom.development.js:26021:7
+      at unbatchedUpdates (client/node_modules/react-dom/cjs/react-dom.development.js:22431:12)
+      at legacyRenderSubtreeIntoContainer (client/node_modules/react-dom/cjs/react-dom.development.js:26020:5)
+      at Object.render (client/node_modules/react-dom/cjs/react-dom.development.js:26103:10)
+      at client/node_modules/@testing-library/react/dist/pure.js:101:25
+      at batchedUpdates$1 (client/node_modules/react-dom/cjs/react-dom.development.js:22380:12)
+      at act (client/node_modules/react-dom/cjs/react-dom-test-utils.development.js:1042:14)
+      at render (client/node_modules/@testing-library/react/dist/pure.js:97:26)
+      at Object.<anonymous> (client/src/components/QuickActionsBar/QuickActionsBar.test.jsx:100:11)
+
+  ● QuickActionsBar › renders string icons correctly
+
+    TypeError: window.matchMedia is not a function
+
+      48 |
+      49 |   // Determine if we should use the reduced animation mode
+    > 50 |   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+         |                                       ^
+      51 |   return (
+      52 |     <div
+      53 |       className={`quick-action-item ${isNew && !prefersReducedMotion ? 'animate-new-suggestion' : ''}`}
+
+      at matchMedia (client/src/components/QuickActionsBar/QuickActionItem.jsx:50:39)
+      at renderWithHooks (client/node_modules/react-dom/cjs/react-dom.development.js:14985:18)
+      at mountIndeterminateComponent (client/node_modules/react-dom/cjs/react-dom.development.js:17811:13)
+      at beginWork (client/node_modules/react-dom/cjs/react-dom.development.js:19049:16)
+      at HTMLUnknownElement.callCallback (client/node_modules/react-dom/cjs/react-dom.development.js:3945:14)
+      at HTMLUnknownElement.callTheUserObjectsOperation (node_modules/jsdom/lib/jsdom/living/generated/EventListener.js:26:30)
+      at innerInvokeEventListeners (node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:350:25)
+      at invokeEventListeners (node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:286:3)
+      at HTMLUnknownElementImpl._dispatch (node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:233:9)
+      at HTMLUnknownElementImpl.dispatchEvent (node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:104:17)
+      at HTMLUnknownElement.dispatchEvent (node_modules/jsdom/lib/jsdom/living/generated/EventTarget.js:241:34)
+      at Object.invokeGuardedCallbackDev (client/node_modules/react-dom/cjs/react-dom.development.js:3994:16)
+      at invokeGuardedCallback (client/node_modules/react-dom/cjs/react-dom.development.js:4056:31)
+      at beginWork$1 (client/node_modules/react-dom/cjs/react-dom.development.js:23964:7)
+      at performUnitOfWork (client/node_modules/react-dom/cjs/react-dom.development.js:22779:12)
+      at workLoopSync (client/node_modules/react-dom/cjs/react-dom.development.js:22707:5)
+      at renderRootSync (client/node_modules/react-dom/cjs/react-dom.development.js:22670:7)
+      at performSyncWorkOnRoot (client/node_modules/react-dom/cjs/react-dom.development.js:22293:18)
+      at scheduleUpdateOnFiber (client/node_modules/react-dom/cjs/react-dom.development.js:21881:7)
+      at updateContainer (client/node_modules/react-dom/cjs/react-dom.development.js:25482:3)
+      at client/node_modules/react-dom/cjs/react-dom.development.js:26021:7
+      at unbatchedUpdates (client/node_modules/react-dom/cjs/react-dom.development.js:22431:12)
+      at legacyRenderSubtreeIntoContainer (client/node_modules/react-dom/cjs/react-dom.development.js:26020:5)
+      at Object.render (client/node_modules/react-dom/cjs/react-dom.development.js:26103:10)
+      at client/node_modules/@testing-library/react/dist/pure.js:101:25
+      at batchedUpdates$1 (client/node_modules/react-dom/cjs/react-dom.development.js:22380:12)
+      at act (client/node_modules/react-dom/cjs/react-dom-test-utils.development.js:1042:14)
+      at render (client/node_modules/@testing-library/react/dist/pure.js:97:26)
+      at Object.<anonymous> (client/src/components/QuickActionsBar/QuickActionsBar.test.jsx:124:11)
+
+  ● QuickActionsBar › handles empty suggestions array
+
+    TypeError: expect(...).toBeInTheDocument is not a function
+
+      144 |
+      145 |     // Should still render but with 0 count
+    > 146 |     expect(screen.getByText('Agent Suggestions (0)')).toBeInTheDocument();
+          |                                                       ^
+      147 |   });
+      148 | });
+      149 |
+
+      at Object.toBeInTheDocument (client/src/components/QuickActionsBar/QuickActionsBar.test.jsx:146:55)
+
+ RUNS  client/src/__tests__/components/PersonaSelector/PersonaContext.test.js
+
+Test Suites: 12 failed, 1 passed, 13 of 14 total
+Tests:       8 failed, 10 passed, 18 total
+Snapshots:   0 total
+Time:        13 s

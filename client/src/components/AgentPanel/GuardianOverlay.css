@@ -1,0 +1,63 @@
+/* GuardianOverlay animated modal styles */
+.guardian-overlay-modal {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(220,0,0,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s;
+}
+
+.guardian-overlay-content {
+  background: #fffbe6;
+  border: 2px solid #e57373;
+  border-radius: 12px;
+  padding: 2.5em 2em 2em 2em;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+  max-width: 420px;
+  width: 100%;
+  text-align: center;
+  animation: popIn 0.3s;
+}
+
+.guardian-badge {
+  font-size: 2.5em;
+  margin-bottom: 0.5em;
+}
+
+.guardian-rationale {
+  background: #ffebee;
+  border-radius: 7px;
+  padding: 0.6em 1em;
+  margin: 1em 0 0.5em 0;
+  font-size: 1em;
+  color: #b71c1c;
+  text-align: left;
+}
+
+.guardian-btn {
+  background: #e57373;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1.1em;
+  padding: 0.5em 1.5em;
+  margin: 1.5em 0 0 0;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.guardian-btn:hover {
+  background: #d32f2f;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes popIn {
+  0%   { transform: scale(0.8); opacity: 0; }
+  100% { transform: scale(1);   opacity: 1; }
+}

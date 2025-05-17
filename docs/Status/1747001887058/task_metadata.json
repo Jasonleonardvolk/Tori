@@ -1,0 +1,40 @@
+{
+  "files_in_context": [
+    {
+      "path": "ingest_pdf/enhanced_memory_gating.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747001918472,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/enhanced_memory_gating.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747002031003,
+      "cline_edit_date": 1747002031003,
+      "user_edit_date": null
+    }
+  ],
+  "model_usage": [
+    {
+      "ts": 1747001887178,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1747001899364,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1747001908435,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    }
+  ]
+}

@@ -1,0 +1,698 @@
+{
+  "files_in_context": [
+    {
+      "path": "alan2x/lcn/main_loop.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746294059968,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/learning_portal.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746294067528,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/utils/index_io.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746294072069,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/lcn/main_loop.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746294137969,
+      "cline_edit_date": 1746294137969,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/lcn/main_loop.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746294150333,
+      "cline_edit_date": 1746294150333,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/learning_portal.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746294206114,
+      "cline_edit_date": 1746294206114,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/learning_portal.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746294282704,
+      "cline_edit_date": 1746294282704,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/learning_portal.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746294306676,
+      "cline_edit_date": 1746294306676,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/learning_portal.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746294322856,
+      "cline_edit_date": 1746294322856,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/diagnostics_monitor.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746294646966,
+      "cline_edit_date": 1746294646966,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/alan_robust_launcher.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746294718354,
+      "cline_edit_date": 1746294718354,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/README_DIAGNOSTICS.md",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746294746770,
+      "cline_edit_date": 1746294746770,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/alan_robust_launcher.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746294844398,
+      "cline_edit_date": 1746294844398,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/learning_portal.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746295120559,
+      "cline_edit_date": 1746295120559,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/persistence/persistent_memory.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746295127159,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/learning_portal.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746295139350,
+      "cline_edit_date": 1746295139350,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/learning_portal.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746295324877,
+      "cline_edit_date": 1746295324877,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/alan_robust_launcher.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746295501993,
+      "cline_edit_date": 1746295501993,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/diagnostics_monitor.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746295512485,
+      "cline_edit_date": 1746295512485,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/learning_portal.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746295596857,
+      "cline_edit_date": 1746295596857,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/learning_portal.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746295611311,
+      "cline_edit_date": 1746295611311,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/alan_robust_launcher.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746295740307,
+      "cline_edit_date": 1746295740307,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/diagnostics_monitor.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746295752482,
+      "cline_edit_date": 1746295752482,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/learning_portal.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746295914172,
+      "cline_edit_date": 1746295914172,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/learning_portal.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746297132567,
+      "cline_edit_date": 1746295914172,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/learning_portal.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746297298071,
+      "cline_edit_date": 1746297298071,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/alan_robust_launcher.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746297316328,
+      "cline_edit_date": 1746297316328,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/alan_robust_launcher.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746298069089,
+      "cline_edit_date": 1746297316328,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/alan_robust_launcher.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746298085082,
+      "cline_edit_date": 1746298085082,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/alan_robust_launcher.py",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1746298085082,
+      "cline_edit_date": 1746298085082,
+      "user_edit_date": 1746298094179
+    },
+    {
+      "path": "alan2x/alan_robust_launcher.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746298106703,
+      "cline_edit_date": 1746298106703,
+      "user_edit_date": 1746298094179
+    },
+    {
+      "path": "alan2x/alan_robust_launcher.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746298123536,
+      "cline_edit_date": 1746298123536,
+      "user_edit_date": 1746298094179
+    },
+    {
+      "path": "alan2x/diagnostics_monitor.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746298269946,
+      "cline_edit_date": 1746295752482,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/diagnostics_monitor.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746298297405,
+      "cline_edit_date": 1746298297405,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/alan_robust_launcher.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746298314778,
+      "cline_edit_date": 1746298314778,
+      "user_edit_date": 1746298094179
+    },
+    {
+      "path": "alan2x/README_PDF_INTEGRATION_FIX.md",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746298768129,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/emergency_pdf_fix.py",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746298777415,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/utils/index_io.py",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746298789670,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/vector_embedding_service.py",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746298797627,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/README_VECTOR_EMBEDDINGS.md",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746298806220,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/check_concept_index.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746299177875,
+      "cline_edit_date": 1746299177875,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/concept_extractor.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746299254647,
+      "cline_edit_date": 1746299254647,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/concept_extractor.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746299356369,
+      "cline_edit_date": 1746299356369,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/generate_core_concepts.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746299387577,
+      "cline_edit_date": 1746299387577,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/concept_extractor_ui.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746299719858,
+      "cline_edit_date": 1746299719858,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/learning_portal.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746299726536,
+      "cline_edit_date": 1746297298071,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/learning_portal.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746299747044,
+      "cline_edit_date": 1746299747044,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/README_CONCEPT_ARCHITECTURE.md",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746299783456,
+      "cline_edit_date": 1746299783456,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/scaling_concept_index.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746300134494,
+      "cline_edit_date": 1746300134494,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/scaling_concept_index.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746300151032,
+      "cline_edit_date": 1746300151032,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/concept_extractor_ui.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746300856559,
+      "cline_edit_date": 1746299719858,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/concept_extractor_ui.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746300869020,
+      "cline_edit_date": 1746300869020,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/learning_portal.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746300960466,
+      "cline_edit_date": 1746299747044,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/learning_portal.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746300991834,
+      "cline_edit_date": 1746300991834,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/learning_portal.py",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1746300991834,
+      "cline_edit_date": 1746300991834,
+      "user_edit_date": 1746301145848
+    },
+    {
+      "path": "alan2x/learning_portal.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746301649669,
+      "cline_edit_date": 1746300991834,
+      "user_edit_date": 1746301145848
+    },
+    {
+      "path": "alan2x/persistence/persistent_memory.py",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746302056417,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/concept_extractor.py",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746302060826,
+      "cline_edit_date": 1746299356369,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/storage/concept_store.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746303324036,
+      "cline_edit_date": 1746303324036,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/storage/ingest.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746303362286,
+      "cline_edit_date": 1746303362286,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/storage/retrieval.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746303396325,
+      "cline_edit_date": 1746303396325,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/learning_portal.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746303462958,
+      "cline_edit_date": 1746303462958,
+      "user_edit_date": 1746301145848
+    },
+    {
+      "path": "alan2x/storage/requirements.txt",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746303477526,
+      "cline_edit_date": 1746303477526,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/storage/README.md",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746303500669,
+      "cline_edit_date": 1746303500669,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/storage/setup_knowledge_system.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746303544489,
+      "cline_edit_date": 1746303544489,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/storage/__init__.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746303560229,
+      "cline_edit_date": 1746303560229,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/storage/concept_store.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746303731597,
+      "cline_edit_date": 1746303731597,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/storage/concept_store.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746303744201,
+      "cline_edit_date": 1746303744201,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/learning_portal.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746304407212,
+      "cline_edit_date": 1746304407212,
+      "user_edit_date": 1746301145848
+    },
+    {
+      "path": "alan2x/learning_portal.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746304419876,
+      "cline_edit_date": 1746304419876,
+      "user_edit_date": 1746301145848
+    },
+    {
+      "path": "alan2x/learning_portal.py",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1746304419876,
+      "cline_edit_date": 1746304419876,
+      "user_edit_date": 1746304419992
+    },
+    {
+      "path": "alan2x/learning_portal.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746304438645,
+      "cline_edit_date": 1746304438645,
+      "user_edit_date": 1746304419992
+    },
+    {
+      "path": "alan2x/learning_portal.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746304462385,
+      "cline_edit_date": 1746304462385,
+      "user_edit_date": 1746304419992
+    },
+    {
+      "path": "alan2x/learning_portal.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746304477040,
+      "cline_edit_date": 1746304477040,
+      "user_edit_date": 1746304419992
+    },
+    {
+      "path": "alan2x/learning_portal.py",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1746304477040,
+      "cline_edit_date": 1746304477040,
+      "user_edit_date": 1746304477072
+    },
+    {
+      "path": "alan2x/learning_portal.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746304696769,
+      "cline_edit_date": 1746304696769,
+      "user_edit_date": 1746304477072
+    },
+    {
+      "path": "alan2x/storage/retrieval.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746304832583,
+      "cline_edit_date": 1746304832583,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/learning_portal.py",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1746304696769,
+      "cline_edit_date": 1746304696769,
+      "user_edit_date": 1746305723282
+    },
+    {
+      "path": "alan2x/learning_portal.py",
+      "record_state": "active",
+      "record_source": "user_edited",
+      "cline_read_date": 1746304696769,
+      "cline_edit_date": 1746304696769,
+      "user_edit_date": 1746308324707
+    }
+  ],
+  "model_usage": [
+    {
+      "ts": 1746294033785,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1746294125487,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1746296841726,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1746297283780,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1746297929421,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1746298064623,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1746298509272,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1746299132519,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1746301521206,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1746303269279,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    }
+  ]
+}

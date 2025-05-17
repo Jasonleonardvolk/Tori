@@ -1,0 +1,19 @@
+# Ignore mock files
+*.mock.js
+*.mock.jsx
+
+# Ignore common non-test files
+**/mockMcpClientService.js
+**/mockExecutionTracerService.js
+**/mockEditorSyncService.js
+**/mockComponents.js
+**/mockConceptGraphService.js
+
+# Ignore directories
+node_modules/
+coverage/
+build/
+dist/
+
+# Ignore USB drive path
+/data/USB Drive/

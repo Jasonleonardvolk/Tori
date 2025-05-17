@@ -1,0 +1,443 @@
+/**
+ * Field Meditation Mode Styles
+ * 
+ * Styling for the enhanced Field Meditation Mode component.
+ * Includes visualization for Koopman spectrum, entropy wave, and phase field canvas.
+ * 
+ * Part of Sprint 3 - Phase 3 ALAN IDE implementation.
+ */
+
+.meditation-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  background-color: var(--alan-bg-surface, #1e1e1e);
+  color: var(--alan-text-primary, #e0e0e0);
+  overflow: hidden;
+}
+
+/* Header and Controls */
+.meditation-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem;
+  background-color: var(--alan-bg-surface-alt, #252525);
+  border-bottom: 1px solid var(--alan-border-subtle, #444);
+}
+
+.meditation-title {
+  display: flex;
+  align-items: center;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.meditation-title span {
+  margin-right: 0.5rem;
+}
+
+.tracing-badge {
+  background-color: var(--alan-status-success, #28a745);
+  color: white;
+  font-size: 0.75rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 1rem;
+  margin-left: 0.5rem;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.7;
+  }
+}
+
+.meditation-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.control-button {
+  background-color: var(--alan-bg-surface, #333);
+  color: var(--alan-text-primary, #e0e0e0);
+  border: 1px solid var(--alan-border-subtle, #555);
+  border-radius: 4px;
+  padding: 0.4rem 0.75rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.control-button:hover:not(:disabled) {
+  background-color: var(--alan-bg-surface-hover, #444);
+  border-color: var(--alan-border-highlight, #666);
+}
+
+.control-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.control-button.playing {
+  background-color: var(--alan-status-success, #28a745);
+  color: white;
+}
+
+.step-button {
+  padding: 0.4rem 0.5rem;
+  font-size: 0.8rem;
+}
+
+.meditation-time {
+  font-family: var(--alan-font-mono, monospace);
+  font-size: 0.9rem;
+  padding: 0.4rem 0.75rem;
+  background-color: var(--alan-bg-surface-alt, #252525);
+  border: 1px solid var(--alan-border-subtle, #444);
+  border-radius: 4px;
+}
+
+.execute-button {
+  background-color: var(--alan-accent-secondary, #f29d38);
+  color: var(--alan-text-inverted, #000);
+  border: none;
+  border-radius: 4px;
+  padding: 0.4rem 0.75rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 500;
+}
+
+.execute-button:hover:not(:disabled) {
+  background-color: var(--alan-accent-secondary-highlight, #f7b55e);
+}
+
+.execute-button.executing {
+  background-color: var(--alan-status-warning, #ffa500);
+  animation: pulse 1.5s infinite;
+}
+
+.meditation-params {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.meditation-param {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.meditation-param label {
+  margin-right: 0.25rem;
+}
+
+.meditation-param input[type="range"] {
+  width: 80px;
+}
+
+.geometry-button {
+  background: transparent;
+  border: 1px solid var(--alan-border-subtle, #444);
+  border-radius: 4px;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.geometry-button:hover {
+  background-color: var(--alan-bg-surface-hover, #333);
+}
+
+.geometry-button.active {
+  background-color: var(--alan-accent-primary, #4d90fe);
+  border-color: var(--alan-accent-primary, #4d90fe);
+}
+
+/* Connection Status */
+.connection-status {
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.connection-status.error {
+  background-color: var(--alan-status-error, #dc3545);
+  color: white;
+}
+
+/* Meditation Content Grid */
+.meditation-content {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr auto;
+  gap: 1rem;
+  padding: 1rem;
+  overflow: auto;
+}
+
+.meditation-panel {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--alan-bg-surface-alt, #252525);
+  border: 1px solid var(--alan-border-subtle, #444);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.meditation-panel-header {
+  background-color: var(--alan-bg-surface-alt, #2c2c2c);
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  font-size: 0.95rem;
+  border-bottom: 1px solid var(--alan-border-subtle, #444);
+}
+
+.meditation-panel-content {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+  min-height: 200px;
+}
+
+/* Koopman Spectrum Visualization */
+.spectrum-placeholder {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.unit-circle {
+  position: absolute;
+  width: 80%;
+  height: 80%;
+  top: 10%;
+  left: 10%;
+  border: 1px solid var(--alan-border-subtle, #666);
+  border-radius: 50%;
+  opacity: 0.5;
+}
+
+.eigenvalue-point {
+  position: absolute;
+  background-color: var(--alan-accent-primary, #4d90fe);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 5px var(--alan-accent-primary, #4d90fe);
+}
+
+/* Entropy Wave Visualization */
+.entropy-wave-placeholder {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.entropy-plot {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-bottom: 1px solid var(--alan-border-subtle, #666);
+}
+
+.entropy-point {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background-color: var(--alan-accent-secondary, #f29d38);
+  border-radius: 50%;
+  transform: translate(-50%, 50%);
+}
+
+.entropy-point.has-event {
+  width: 6px;
+  height: 6px;
+  background-color: var(--alan-accent-primary, #4d90fe);
+}
+
+.current-time-marker {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background-color: var(--alan-status-success, #28a745);
+  transform: translateX(-50%);
+}
+
+/* Phase Field Canvas */
+.meditation-canvas {
+  width: 100%;
+  height: 100%;
+}
+
+/* Placeholder content */
+.placeholder-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  font-size: 0.9rem;
+  color: var(--alan-text-secondary, #999);
+  font-style: italic;
+}
+
+/* Execution details and divergence warnings */
+.execution-panel {
+  grid-column: 1 / span 2;
+  max-height: 200px;
+}
+
+.execution-details {
+  display: flex;
+  gap: 2rem;
+  padding: 1rem;
+  overflow: auto;
+  height: 100%;
+}
+
+.execution-state,
+.divergence-alerts {
+  flex: 1;
+}
+
+.execution-state h3,
+.divergence-alerts h3 {
+  font-size: 1rem;
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+  color: var(--alan-text-primary, #e0e0e0);
+}
+
+.execution-node,
+.execution-phase,
+.execution-callstack {
+  font-family: var(--alan-font-mono, monospace);
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+}
+
+.divergence-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+.divergence-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  font-size: 0.85rem;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+
+.divergence-item.warning {
+  border-left: 3px solid var(--alan-status-warning, #ffa500);
+}
+
+.divergence-item.error {
+  border-left: 3px solid var(--alan-status-error, #dc3545);
+}
+
+.divergence-type {
+  font-weight: 500;
+  color: var(--alan-accent-secondary, #f29d38);
+}
+
+.divergence-node {
+  font-family: var(--alan-font-mono, monospace);
+  flex: 1;
+}
+
+.divergence-time {
+  font-size: 0.75rem;
+  color: var(--alan-text-secondary, #999);
+}
+
+/* Responsive adaptations */
+@media (max-width: 768px) {
+  .meditation-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .meditation-panel[style*="grid-column"] {
+    grid-column: 1 !important;
+  }
+  
+  .meditation-header {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-start;
+  }
+  
+  .meditation-controls {
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .meditation-params {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .tracing-badge,
+  .execute-button.executing {
+    animation: none;
+  }
+}
+
+/* High contrast mode support */
+@media (forced-colors: active) {
+  .control-button,
+  .meditation-time,
+  .geometry-button,
+  .meditation-panel {
+    border: 1px solid ButtonText;
+  }
+  
+  .control-button.playing,
+  .geometry-button.active {
+    background-color: Highlight;
+    color: HighlightText;
+  }
+  
+  .eigenvalue-point,
+  .entropy-point {
+    background-color: Highlight;
+  }
+  
+  .current-time-marker {
+    background-color: Highlight;
+  }
+  
+  .divergence-item.warning,
+  .divergence-item.error {
+    border-left: 3px solid Highlight;
+  }
+}

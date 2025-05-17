@@ -1,0 +1,96 @@
+{
+  "files_in_context": [
+    {
+      "path": ".mcp.json",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746886848276,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": ".mcp.json",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746886868299,
+      "cline_edit_date": 1746886868299,
+      "user_edit_date": null
+    },
+    {
+      "path": "restart-filesystem-mcp.bat",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746886878246,
+      "cline_edit_date": 1746886878246,
+      "user_edit_date": null
+    },
+    {
+      "path": ".mcp.json",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746887070683,
+      "cline_edit_date": 1746887070683,
+      "user_edit_date": null
+    },
+    {
+      "path": "restart-filesystem-mcp.bat",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746887082300,
+      "cline_edit_date": 1746887082300,
+      "user_edit_date": null
+    },
+    {
+      "path": "test-mcp-filesystem.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746887108384,
+      "cline_edit_date": 1746887108384,
+      "user_edit_date": null
+    },
+    {
+      "path": "update-mcp-settings.ps1",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746887163637,
+      "cline_edit_date": 1746887163637,
+      "user_edit_date": null
+    },
+    {
+      "path": "mcp-filesystem-demo.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746887190630,
+      "cline_edit_date": 1746887190630,
+      "user_edit_date": null
+    },
+    {
+      "path": "start-filesystem-mcp.bat",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746887206473,
+      "cline_edit_date": 1746887206473,
+      "user_edit_date": null
+    }
+  ],
+  "model_usage": [
+    {
+      "ts": 1746886653694,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1746886720968,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1746886832959,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    }
+  ]
+}

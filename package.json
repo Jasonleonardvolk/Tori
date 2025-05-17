@@ -1,0 +1,44 @@
+{
+  "name": "itori-ide",
+  "version": "0.3.0",
+  "description": "ITORI IDE - Development Environment for ITORI Platform",
+  "private": true,
+  "scripts": {
+    "check-ports": "node port-check.js",
+    "dev": "npm run check-ports && vite",
+    "dev:chat": "pnpm --filter @itori/chat dev",
+    "dev:enterprise": "pnpm --filter @itori/chatenterprise dev",
+    "dev:ide": "pnpm --filter @itori/ide dev",
+    "build": "pnpm -r build",
+    "build:chat": "pnpm --filter @itori/chat build",
+    "build:enterprise": "pnpm --filter @itori/chatenterprise build",
+    "build:ide": "pnpm --filter @itori/ide build",
+    "preview": "vite preview",
+    "type-check": "tsc --noEmit",
+    "codemod:apps": "pnpm exec jscodeshift -t scripts/update-imports.js \"apps/**/*.{ts,tsx,jsx}\"",
+    "codemod:client": "pnpm exec jscodeshift -t scripts/update-imports.js \"client/src/**/*.{js,ts,jsx,tsx}\"",
+    "lint": "pnpm turbo run lint",
+    "typecheck": "pnpm turbo run typecheck"
+  },
+  "dependencies": {
+    "preact": "^10.26.6",
+    "react": "^18.2.0",
+    "react-diff-viewer": "^3.1.1",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.22.3"
+  },
+  "devDependencies": {
+    "@codemirror/basic-setup": "^0.20.0",
+    "@codemirror/lang-json": "^6.0.1",
+    "@codemirror/state": "^6.5.2",
+    "@codemirror/view": "^6.36.8",
+    "@types/react": "^18.2.47",
+    "@types/react-dom": "^18.2.18",
+    "@vitejs/plugin-react": "^4.2.1",
+    "turbo": "^2.5.3",
+    "typescript": "^5.3.3",
+    "vite": "^5.0.11",
+    "vite-tsconfig-paths": "^4.3.1"
+  },
+  "packageManager": "pnpm@8.15.4"
+}

@@ -1,0 +1,20 @@
+2025-05-11 16:42:02,526 [INFO] alan_concept_maintenance: Loaded .npz file with 0 concepts
+2025-05-11 16:42:02,529 [ERROR] alan_concept_maintenance: Error loading .json file: 'list' object has no attribute 'get'
+2025-05-11 16:42:02,529 [INFO] alan_concept_maintenance: Found 0 invalid concepts out of 0
+2025-05-11 16:44:50,041 [INFO] alan_concept_maintenance: Loaded .npz file with 0 concepts
+2025-05-11 16:44:50,043 [INFO] alan_concept_maintenance: Loaded .json file with 5 concepts (array format)
+2025-05-11 16:44:50,043 [INFO] alan_concept_maintenance: Found 0 invalid concepts out of 0
+2025-05-11 16:47:10,840 [INFO] alan_concept_maintenance: Loaded .npz file with 5 concepts (legacy format)
+2025-05-11 16:47:10,845 [INFO] alan_concept_maintenance: Loaded .json file with 5 concepts (array format)
+2025-05-11 16:47:10,845 [INFO] alan_concept_maintenance: Found 0 invalid concepts out of 5 (legacy format)
+2025-05-11 16:47:25,845 [WARNING] alan_concept_maintenance: No ingestion tracking files found to reset
+2025-05-11 16:48:12,805 [INFO] alan_concept_maintenance: Created backup of .npz file at backups\concepts_20250511_164812.npz
+2025-05-11 16:48:12,811 [INFO] alan_concept_maintenance: Created backup of .json file at backups\concepts_20250511_164812.json
+2025-05-11 16:48:12,811 [INFO] alan_concept_maintenance: Loaded .npz file with 5 concepts (legacy format)
+2025-05-11 16:48:12,818 [INFO] alan_concept_maintenance: Loaded .json file with 5 concepts (array format)
+2025-05-11 16:48:12,819 [INFO] alan_concept_maintenance: Created backup of .npz file at backups\concepts_20250511_164812.npz
+2025-05-11 16:48:12,820 [INFO] alan_concept_maintenance: Created backup of .json file at backups\concepts_20250511_164812.json
+2025-05-11 16:48:12,825 [INFO] alan_concept_maintenance: Saved .npz file with 0 concepts
+2025-05-11 16:48:12,841 [INFO] alan_concept_maintenance: Created hash file at concepts.npz.sha256
+2025-05-11 16:48:12,845 [INFO] alan_concept_maintenance: Saved .json file with 0 concepts
+2025-05-11 16:48:12,845 [INFO] alan_concept_maintenance: Concept store wiped clean

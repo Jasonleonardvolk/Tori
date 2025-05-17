@@ -1,0 +1,70 @@
+{
+  "files_in_context": [
+    {
+      "path": ".eslintrc.js",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746979952767,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "package.json",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746979957140,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": ".babelrc",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746979964267,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": ".eslintrc.json",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746979986987,
+      "cline_edit_date": 1746979986987,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/components/AgentPanel/MemoryAgent.jsx",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746980088119,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    }
+  ],
+  "model_usage": [
+    {
+      "ts": 1746979936768,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1746979976406,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1746980011565,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1746980041242,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    }
+  ]
+}

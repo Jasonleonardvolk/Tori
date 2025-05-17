@@ -1,0 +1,68 @@
+{
+  "files_in_context": [
+    {
+      "path": "package.json",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746809384360,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": ".env",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746809389345,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/.env",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746809395791,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "server/package.json",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746809399684,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/package.json",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746809404305,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "server/index.js",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746809407924,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "scripts/bootstrap.ps1",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746809413352,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    }
+  ],
+  "model_usage": [
+    {
+      "ts": 1746808893887,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    }
+  ]
+}

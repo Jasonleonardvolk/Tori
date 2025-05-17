@@ -1,0 +1,92 @@
+/**
+ * WebSocket Status Component Styles
+ */
+
+.itori-websocket-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  font-size: 14px;
+}
+
+/* Status indicator dot */
+.itori-websocket-status-indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+  position: relative;
+}
+
+/* Status-based colors */
+.itori-websocket-status[data-status="open"] .itori-websocket-status-indicator {
+  background-color: #2ecc71; /* Green for connected */
+  box-shadow: 0 0 5px rgba(46, 204, 113, 0.5);
+}
+
+.itori-websocket-status[data-status="connecting"] .itori-websocket-status-indicator {
+  background-color: #f39c12; /* Yellow for connecting */
+  box-shadow: 0 0 5px rgba(243, 156, 18, 0.5);
+  animation: pulse 1.5s infinite;
+}
+
+.itori-websocket-status[data-status="disconnected"] .itori-websocket-status-indicator {
+  background-color: #e74c3c; /* Red for disconnected */
+  box-shadow: 0 0 5px rgba(231, 76, 60, 0.5);
+}
+
+/* Status text styles */
+.itori-websocket-status-text {
+  font-weight: 500;
+  color: #333;
+}
+
+/* Reconnect button */
+.itori-websocket-reconnect-button {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.itori-websocket-reconnect-button:hover {
+  background-color: #2980b9;
+}
+
+.itori-websocket-reconnect-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.5);
+}
+
+/* Animation for connecting state */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .itori-websocket-status {
+    font-size: 12px;
+  }
+  
+  .itori-websocket-status-indicator {
+    width: 8px;
+    height: 8px;
+  }
+}

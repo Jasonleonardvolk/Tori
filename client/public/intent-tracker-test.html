@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Intent Specification Tracker Demo</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+      color: #333;
+      background-color: #f8f9fa;
+    }
+    
+    h1 {
+      color: #2d3748;
+      border-bottom: 2px solid #4299e1;
+      padding-bottom: 10px;
+    }
+    
+    .section {
+      margin-bottom: 30px;
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    
+    .section h2 {
+      margin-top: 0;
+      color: #2d3748;
+    }
+    
+    .form-group {
+      margin-bottom: 15px;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 500;
+    }
+    
+    input, textarea {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #cbd5e0;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+    
+    textarea {
+      min-height: 100px;
+    }
+    
+    button {
+      background-color: #4299e1;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 500;
+    }
+    
+    button:hover {
+      background-color: #3182ce;
+    }
+    
+    .intent-list {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .intent-item {
+      padding: 15px;
+      background-color: #f7fafc;
+      border-left: 3px solid #4299e1;
+      margin-bottom: 10px;
+      border-radius: 4px;
+    }
+    
+    .intent-item h3 {
+      margin-top: 0;
+      margin-bottom: 10px;
+      color: #2d3748;
+    }
+    
+    .intent-metadata {
+      font-size: 14px;
+      color: #718096;
+      margin-bottom: 10px;
+    }
+    
+    .intent-specification {
+      padding: 10px;
+      background-color: #edf2f7;
+      border-radius: 4px;
+      font-family: monospace;
+      white-space: pre-wrap;
+    }
+    
+    .code-elements {
+      margin-top: 10px;
+      font-size: 14px;
+    }
+    
+    .code-element {
+      display: inline-block;
+      padding: 3px 6px;
+      background-color: #ebf4ff;
+      border-radius: 4px;
+      margin-right: 5px;
+      margin-bottom: 5px;
+      font-family: monospace;
+    }
+    
+    .conflict-badge {
+      display: inline-block;
+      padding: 3px 8px;
+      background-color: #fed7e2;
+      color: #702459;
+      border-radius: 12px;
+      font-size: 12px;
+      margin-left: 10px;
+      font-weight: 500;
+    }
+    
+    .success-badge {
+      display: inline-block;
+      padding: 3px 8px;
+      background-color: #c6f6d5;
+      color: #22543d;
+      border-radius: 12px;
+      font-size: 12px;
+      margin-left: 10px;
+      font-weight: 500;
+    }
+    
+    .status-msg {
+      padding: 15px;
+      margin: 15px 0;
+      border-radius: 4px;
+    }
+    
+    .success {
+      background-color: #c6f6d5;
+      color: #22543d;
+    }
+    
+    .error {
+      background-color: #fed7e2;
+      color: #702459;
+    }
+    
+    .intent-details {
+      padding: 15px;
+      border: 1px solid #cbd5e0;
+      border-radius: 4px;
+      margin-top: 10px;
+    }
+    
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Intent Specification Tracker Demo</h1>
+  
+  <div class="status-msg" id="status-message"></div>
+  
+  <div class="section">
+    <h2>Create Intent Specification</h2>
+    <div class="form-group">
+      <label for="intent-id">Intent ID</label>
+      <input type="text" id="intent-id" value="intent_1" />
+    </div>
+    
+    <div class="form-group">
+      <label for="intent-specification">Specification</label>
+      <textarea id="intent-specification" placeholder="Describe the intent (e.g. features to implement, requirements, etc.)">Implement a responsive navigation menu that collapses on mobile devices</textarea>
+    </div>
+    
+    <div class="form-group">
+      <label for="code-elements">Code Elements (comma-separated)</label>
+      <input type="text" id="code-elements" placeholder="e.g. src/components/Component.jsx, src/utils/helper.js" value="src/components/Navigation.jsx, src/styles/navigation.css" />
+    </div>
+    
+    <button id="create-intent-btn">Create Intent</button>
+  </div>
+  
+  <div class="section">
+    <h2>Intent List</h2>
+    <button id="refresh-intents-btn">Refresh</button>
+    <ul class="intent-list" id="intent-list">
+      <li class="intent-item">
+        <h3>Loading intents...</h3>
+      </li>
+    </ul>
+  </div>
+  
+  <div class="section">
+    <h2>Record Commit</h2>
+    <div class="form-group">
+      <label for="commit-id">Commit ID</label>
+      <input type="text" id="commit-id" value="commit_1" />
+    </div>
+    
+    <div class="form-group">
+      <label for="commit-intent-id">Intent ID</label>
+      <input type="text" id="commit-intent-id" value="intent_1" />
+    </div>
+    
+    <div class="form-group">
+      <label for="commit-message">Commit Message</label>
+      <input type="text" id="commit-message" value="Implemented responsive navigation with hamburger menu" />
+    </div>
+    
+    <div class="form-group">
+      <label for="commit-code-changes">Code Changes (comma-separated)</label>
+      <input type="text" id="commit-code-changes" value="src/components/Navigation.jsx" />
+    </div>
+    
+    <button id="record-commit-btn">Record Commit</button>
+  </div>
+  
+  <div class="section">
+    <h2>Find Intents For Code Element</h2>
+    <div class="form-group">
+      <label for="code-element-search">Code Element</label>
+      <input type="text" id="code-element-search" value="src/components/Navigation.jsx" />
+    </div>
+    
+    <button id="find-intents-btn">Find Intents</button>
+    
+    <div id="code-intents-result" class="intent-details hidden">
+      <h3>Results</h3>
+      <div id="code-intents-content"></div>
+    </div>
+  </div>
+  
+  <div class="section">
+    <h2>Export/Import Intent History</h2>
+    <button id="export-btn">Export History</button>
+    <button id="import-btn">Import History</button>
+    
+    <div id="export-result" class="intent-details hidden">
+      <h3>Exported History</h3>
+      <pre id="export-content" style="max-height: 200px; overflow: auto;"></pre>
+    </div>
+  </div>
+
+  <script type="module">
+    // Since we can't directly import the modules from our src directory in an HTML file,
+    // we'll simulate the Intent Specification Tracker functionality here
+    
+    class ConceptGraphService {
+      constructor() {
+        console.log('ConceptGraphService initialized');
+      }
+      
+      // Mock methods would go here
+    }
+    
+    class SemanticConflictService {
+      constructor() {
+        console.log('SemanticConflictService initialized');
+      }
+      
+      async initialize() {
+        console.log('Initializing semantic conflict service');
+        return true;
+      }
+      
+      async detectConflicts(newSpec, existingSpecs, options = {}) {
+        console.log('Detecting conflicts for:', newSpec);
+        
+        // For demo purposes, detect conflicts based on simple keyword matching
+        const conflicts = [];
+        
+        // Check if the new specification conflicts with any existing ones
+        existingSpecs.forEach((spec, index) => {
+          // Simple conflict detection: check if one mentions removing/replacing something the other adds
+          const newSpecStr = typeof newSpec === 'string' ? newSpec : JSON.stringify(newSpec);
+          const existingSpecStr = typeof spec === 'string' ? spec : JSON.stringify(spec);
+          
+          // Simple conflict detection - if one mentions navigation menu and the other mentions removing/replacing it
+          if (
+            (newSpecStr.toLowerCase().includes('navigation') && existingSpecStr.toLowerCase().includes('navigation')) &&
+            (
+              (newSpecStr.toLowerCase().includes('remove') && !existingSpecStr.toLowerCase().includes('remove')) ||
+              (newSpecStr.toLowerCase().includes('replace') && !existingSpecStr.toLowerCase().includes('replace')) ||
+              (!newSpecStr.toLowerCase().includes('remove') && existingSpecStr.toLowerCase().includes('remove')) ||
+              (!newSpecStr.toLowerCase().includes('replace') && existingSpecStr.toLowerCase().includes('replace'))
+            )
+          ) {
+            conflicts.push({
+              id: `intent_${index + 1}`,
+              score: 0.85,
+              reason: 'These specifications have conflicting approaches to the navigation element'
+            });
+          }
+        });
+        
+        return conflicts;
+      }
+    }
+    
+    class IntentSpecificationTracker {
+      constructor() {
+        this.graphService = new ConceptGraphService();
+        this.conflictService = new SemanticConflictService();
+        
+        this.intents = new Map();
+        this.codeToIntentMap = new Map();
+        this.commitHistory = [];
+        
+        this.intentStore = {
+          prompts: new Map(),
+          behaviors: new Map(),
+          requirements: new Map(),
+          tests: new Map(),
+        };
+        
+        this.initialized = false;
+      }
+      
+      async initialize(intentSpecifications = {}) {
+        try {
+          // Clear previous state
+          this.intents.clear();
+          this.codeToIntentMap.clear();
+          this.commitHistory = [];
+          
+          // Initialize the semantic conflict service
+          await this.conflictService.initialize();
+          
+          // Load existing intent specifications
+          for (const [intentId, spec] of Object.entries(intentSpecifications)) {
+            this.intents.set(intentId, spec);
+            
+            // Map code elements to intents
+            if (spec.codeElements) {
+              for (const element of spec.codeElements) {
+                if (!this.codeToIntentMap.has(element)) {
+                  this.codeToIntentMap.set(element, new Set());
+                }
+                this.codeToIntentMap.get(element).add(intentId);
+              }
+            }
+          }
+          
+          this.initialized = true;
+          console.log('Intent Specification Tracker initialized with intent count:', this.intents.size);
+          
+          return true;
+        } catch (error) {
+          console.error('Error initializing intent specification tracker:', error);
+          this.initialized = false;
+          return false;
+        }
+      }
+      
+      async recordIntent(intentId, specification, codeElements = []) {
+        if (!this.initialized) {
+          await this.initialize();
+        }
+        
+        try {
+          // Get existing specifications for conflict detection
+          const existingSpecs = Array.from(this.intents.values())
+            .map(intent => intent.specification);
+          
+          // Check for conflicts with existing intents
+          const conflicts = await this.conflictService.detectConflicts(specification, existingSpecs);
+          
+          // Store the intent even if it has conflicts (flagging conflicting intents)
+          const intentData = {
+            id: intentId,
+            specification,
+            codeElements,
+            timestamp: Date.now(),
+            conflicts: conflicts.length > 0 ? conflicts.map(c => c.id) : [],
+            status: conflicts.length > 0 ? 'conflicted' : 'active'
+          };
+          
+          this.intents.set(intentId, intentData);
+          
+          // Update code element to intent mapping
+          for (const element of codeElements) {
+            if (!this.codeToIntentMap.has(element)) {
+              this.codeToIntentMap.set(element, new Set());
+            }
+            this.codeToIntentMap.get(element).add(intentId);
+          }
+          
+          // Return the intent with any conflict information
+          return {
+            stored: true,
+            intent: intentData,
+            conflicts
+          };
+        } catch (error) {
+          console.error('Error recording intent specification:', error);
+          return {
+            stored: false,
+            error: error.message
+          };
+        }
+      }
+      
+      recordCommit(commitId, codeChanges, intentId, message) {
+        if (!this.initialized) {
+          throw new Error('Intent Specification Tracker not initialized');
+        }
+        
+        if (!this.intents.has(intentId)) {
+          throw new Error(`Intent with ID ${intentId} not found`);
+        }
+        
+        const timestamp = Date.now();
+        
+        // Create the commit record
+        const commit = {
+          id: commitId,
+          codeChanges,
+          intentId,
+          message,
+          timestamp,
+          author: 'demo_user',
+        };
+        
+        // Update the code-to-intent mapping
+        for (const change of codeChanges) {
+          if (!this.codeToIntentMap.has(change)) {
+            this.codeToIntentMap.set(change, new Set());
+          }
+          this.codeToIntentMap.get(change).add(intentId);
+        }
+        
+        // Add to commit history
+        this.commitHistory.push(commit);
+        
+        return {
+          success: true,
+          commit
+        };
+      }
+      
+      getIntentsForCode(codeElement) {
+        if (!this.initialized) {
+          throw new Error('Intent Specification Tracker not initialized');
+        }
+        
+        const intentIds = this.codeToIntentMap.get(codeElement) || new Set();
+        
+        return Array.from(intentIds)
+          .map(id => this.intents.get(id))
+          .filter(intent => intent !== undefined);
+      }
+      
+      getCommitHistoryForIntent(intentId) {
+        if (!this.initialized) {
+          throw new Error('Intent Specification Tracker not initialized');
+        }
+        
+        return this.commitHistory.filter(commit => commit.intentId === intentId);
+      }
+      
+      getIntentDetails(intentId) {
+        if (!this.initialized) {
+          throw new Error('Intent Specification Tracker not initialized');
+        }
+        
+        if (!this.intents.has(intentId)) {
+          throw new Error(`Intent with ID ${intentId} not found`);
+        }
+        
+        const intent = this.intents.get(intentId);
+        
+        // Get related commits
+        const commits = this.getCommitHistoryForIntent(intentId);
+        
+        // Get conflicting intents if any
+        const conflicts = intent.conflicts
+          .map(conflictId => this.intents.get(conflictId))
+          .filter(conflict => conflict !== undefined);
+        
+        return {
+          ...intent,
+          commits,
+          conflicts
+        };
+      }
+      
+      exportIntentHistory() {
+        if (!this.initialized) {
+          throw new Error('Intent Specification Tracker not initialized');
+        }
+        
+        return {
+          intents: Array.from(this.intents.entries()),
+          commitHistory: this.commitHistory,
+        };
+      }
+      
+      importIntentHistory(history) {
+        try {
+          // Clear current state
+          this.intents.clear();
+          this.codeToIntentMap.clear();
+          this.commitHistory = [];
+          
+          // Import intents
+          for (const [id, intent] of history.intents) {
+            this.intents.set(id, intent);
+            
+            // Rebuild code-to-intent mapping
+            if (intent.codeElements) {
+              for (const element of intent.codeElements) {
+                if (!this.codeToIntentMap.has(element)) {
+                  this.codeToIntentMap.set(element, new Set());
+                }
+                this.codeToIntentMap.get(element).add(id);
+              }
+            }
+          }
+          
+          // Import commit history
+          this.commitHistory = history.commitHistory;
+          
+          return true;
+        } catch (error) {
+          console.error('Error importing intent history:', error);
+          return false;
+        }
+      }
+    }
+
+    // Initialize the tracker
+    const intentTracker = new IntentSpecificationTracker();
+    await intentTracker.initialize();
+    
+    // Display status message
+    function showStatus(message, isError = false) {
+      const statusElem = document.getElementById('status-message');
+      statusElem.textContent = message;
+      statusElem.className = isError ? 'status-msg error' : 'status-msg success';
+      
+      // Auto-hide after 5 seconds
+      setTimeout(() => {
+        statusElem.textContent = '';
+        statusElem.className = 'status-msg';
+      }, 5000);
+    }
+    
+    // Load and display the intent list
+    async function refreshIntentList() {
+      const intentListElem = document.getElementById('intent-list');
+      intentListElem.innerHTML = '';
+      
+      const intentHistory = intentTracker.exportIntentHistory();
+      const intents = intentHistory.intents.map(([id, intent]) => intent);
+      
+      if (intents.length === 0) {
+        intentListElem.innerHTML = '<li class="intent-item"><h3>No intents created yet</h3></li>';
+        return;
+      }
+      
+      for (const intent of intents) {
+        const intentItem = document.createElement('li');
+        intentItem.className = 'intent-item';
+        
+        const intentTitle = document.createElement('h3');
+        intentTitle.textContent = intent.id;
+        
+        if (intent.conflicts && intent.conflicts.length > 0) {
+          const conflictBadge = document.createElement('span');
+          conflictBadge.className = 'conflict-badge';
+          conflictBadge.textContent = `${intent.conflicts.length} conflicts`;
+          intentTitle.appendChild(conflictBadge);
+        } else {
+          const successBadge = document.createElement('span');
+          successBadge.className = 'success-badge';
+          successBadge.textContent = 'No conflicts';
+          intentTitle.appendChild(successBadge);
+        }
+        
+        const intentMetadata = document.createElement('div');
+        intentMetadata.className = 'intent-metadata';
+        intentMetadata.textContent = `Created: ${new Date(intent.timestamp).toLocaleString()}`;
+        
+        const intentSpec = document.createElement('div');
+        intentSpec.className = 'intent-specification';
+        intentSpec.textContent = intent.specification;
+        
+        const codeElementsDiv = document.createElement('div');
+        codeElementsDiv.className = 'code-elements';
+        codeElementsDiv.innerHTML = '<strong>Code Elements:</strong> ';
+        
+        if (intent.codeElements && intent.codeElements.length > 0) {
+          for (const element of intent.codeElements) {
+            const codeElem = document.createElement('span');
+            codeElem.className = 'code-element';
+            codeElem.textContent = element;
+            codeElementsDiv.appendChild(codeElem);
+          }
+        } else {
+          codeElementsDiv.innerHTML += '<em>None</em>';
+        }
+        
+        intentItem.appendChild(intentTitle);
+        intentItem.appendChild(intentMetadata);
+        intentItem.appendChild(intentSpec);
+        intentItem.appendChild(codeElementsDiv);
+        
+        intentListElem.appendChild(intentItem);
+      }
+    }
+    
+    // Create intent handler
+    document.getElementById('create-intent-btn').addEventListener('click', async () => {
+      const intentId = document.getElementById('intent-id').value.trim();
+      const specification = document.getElementById('intent-specification').value.trim();
+      const codeElements = document.getElementById('code-elements').value
+        .split(',')
+        .map(elem => elem.trim())
+        .filter(elem => elem.length > 0);
+      
+      if (!intentId || !specification) {
+        showStatus('Intent ID and specification are required', true);
+        return;
+      }
+      
+      try {
+        const result = await intentTracker.recordIntent(intentId, specification, codeElements);
+        
+        if (result.stored) {
+          showStatus(`Intent "${intentId}" created successfully`);
+          
+          // If there are conflicts, show them
+          if (result.conflicts && result.conflicts.length > 0) {
+            showStatus(`Warning: ${result.conflicts.length} conflicts detected`, true);
+          }
+          
+          // Refresh the intent list
+          await refreshIntentList();
+          
+          // Clear the form fields
+          document.getElementById('intent-id').value = `intent_${Date.now().toString(36)}`;
+          document.getElementById('intent-specification').value = '';
+          document.getElementById('code-elements').value = '';
+        } else {
+          showStatus(`Failed to create intent: ${result.error}`, true);
+        }
+      } catch (error) {
+        showStatus(`Error: ${error.message}`, true);
+      }
+    });
+    
+    // Record commit handler
+    document.getElementById('record-commit-btn').addEventListener('click', () => {
+      const commitId = document.getElementById('commit-id').value.trim();
+      const intentId = document.getElementById('commit-intent-id').value.trim();
+      const message = document.getElementById('commit-message').value.trim();
+      const codeChanges = document.getElementById('commit-code-changes').value
+        .split(',')
+        .map(elem => elem.trim())
+        .filter(elem => elem.length > 0);
+      
+      if (!commitId || !intentId || !message || codeChanges.length === 0) {
+        showStatus('All commit fields are required', true);
+        return;
+      }
+      
+      try {
+        const result = intentTracker.recordCommit(commitId, codeChanges, intentId, message);
+        
+        if (result.success) {
+          showStatus(`Commit "${commitId}" recorded successfully`);
+          
+          // Clear the form fields
+          document.getElementById('commit-id').value = `commit_${Date.now().toString(36)}`;
+          document.getElementById('commit-message').value = '';
+        } else {
+          showStatus('Failed to record commit', true);
+        }
+      } catch (error) {
+        showStatus(`Error: ${error.message}`, true);
+      }
+    });
+    
+    // Find intents for code element handler
+    document.getElementById('find-intents-btn').addEventListener('click', () => {
+      const codeElement = document.getElementById('code-element-search').value.trim();
+      
+      if (!codeElement) {
+        showStatus('Code element is required', true);
+        return;
+      }
+      
+      try {
+        const intents = intentTracker.getIntentsForCode(codeElement);
+        const resultElem = document.getElementById('code-intents-result');
+        const contentElem = document.getElementById('code-intents-content');
+        
+        resultElem.classList.remove('hidden');
+        
+        if (intents.length === 0) {
+          contentElem.innerHTML = '<p>No intents found for this code element</p>';
+          return;
+        }
+        
+        let html = `<p>Found ${intents.length} intent(s) for ${codeElement}:</p>`;
+        html += '<ul>';
+        
+        for (const intent of intents) {
+          html += `
+            <li>
+              <strong>${intent.id}</strong> - ${new Date(intent.timestamp).toLocaleString()}
+              <div>${intent.specification.substring(0, 100)}${intent.specification.length > 100 ? '...' : ''}</div>
+            </li>
+          `;
+        }
+        
+        html += '</ul>';
+        contentElem.innerHTML = html;
+      } catch (error) {
+        showStatus(`Error: ${error.message}`, true);
+      }
+    });
+    
+    // Export history handler
+    document.getElementById('export-btn').addEventListener('click', () => {
+      try {
+        const history = intentTracker.exportIntentHistory();
+        const exportElem = document.getElementById('export-result');
+        const contentElem = document.getElementById('export-content');
+        
+        exportElem.classList.remove('hidden');
+        contentElem.textContent = JSON.stringify(history, null, 2);
+        
+        showStatus('History exported successfully');
+      } catch (error) {
+        showStatus(`Error: ${error.message}`, true);
+      }
+    });
+    
+    // Import history handler
+    document.getElementById('import-btn').addEventListener('click', () => {
+      try {
+        const contentElem = document.getElementById('export-content');
+        const historyJson = contentElem.textContent;
+        
+        if (!historyJson) {
+          showStatus('No history to import', true);
+          return;
+        }
+        
+        const history = JSON.parse(historyJson);
+        const result = intentTracker.importIntentHistory(history);
+        
+        if (result) {
+          showStatus('History imported successfully');
+          refreshIntentList();
+        } else {
+          showStatus('Failed to import history', true);
+        }
+      } catch (error) {
+        showStatus(`Error: ${error.message}`, true);
+      }
+    });
+    
+    // Refresh intents handler
+    document.getElementById('refresh-intents-btn').addEventListener('click', refreshIntentList);
+    
+    // Initialize the UI
+    refreshIntentList();
+    
+    // Create an initial intent for demonstration
+    setTimeout(async () => {
+      if (intentTracker.intents.size === 0) {
+        await intentTracker.recordIntent(
+          'intent_1',
+          'Implement a responsive navigation menu that collapses on mobile devices',
+          ['src/components/Navigation.jsx', 'src/styles/navigation.css']
+        );
+        refreshIntentList();
+      }
+    }, 1000);
+  </script>
+</body>
+</html>

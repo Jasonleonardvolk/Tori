@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ALAN IDE Demo Page</title>
+    <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f5f5f5;
+      }
+      .container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 2rem;
+      }
+      header {
+        background-color: #1a73e8;
+        color: white;
+        padding: 1rem;
+        text-align: center;
+        border-radius: 4px;
+        margin-bottom: 2rem;
+      }
+      h1 {
+        margin: 0;
+      }
+      .suggestion-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1rem;
+      }
+      .suggestion-card {
+        background: white;
+        border-radius: 8px;
+        padding: 1rem;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        transition: transform 0.2s;
+      }
+      .suggestion-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+      }
+      .suggestion-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 0.5rem;
+      }
+      .suggestion-icon {
+        font-size: 1.5rem;
+        margin-right: 0.5rem;
+      }
+      .suggestion-persona {
+        font-weight: bold;
+        color: #555;
+      }
+      .suggestion-label {
+        font-weight: bold;
+        font-size: 1.1rem;
+        margin-bottom: 0.5rem;
+      }
+      .suggestion-explanation {
+        color: #666;
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+      }
+      .suggestion-code {
+        background-color: #f6f8fa;
+        border-radius: 4px;
+        padding: 0.75rem;
+        overflow-x: auto;
+        font-family: monospace;
+        margin-bottom: 1rem;
+      }
+      .code-old {
+        color: #d32f2f;
+        background-color: #ffebee;
+        padding: 2px 4px;
+        text-decoration: line-through;
+      }
+      .code-new {
+        color: #388e3c;
+        background-color: #e8f5e9;
+        padding: 2px 4px;
+      }
+      .button-group {
+        display: flex;
+        gap: 0.5rem;
+      }
+      button {
+        border: none;
+        border-radius: 4px;
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+        font-weight: 500;
+      }
+      .apply-button {
+        background-color: #1a73e8;
+        color: white;
+      }
+      .dismiss-button {
+        background-color: #f5f5f5;
+        color: #555;
+      }
+      footer {
+        margin-top: 2rem;
+        text-align: center;
+        color: #666;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>ALAN IDE Agent Suggestions</h1>
+      </header>
+      
+      <div class="suggestion-list">
+        <div class="suggestion-card">
+          <div class="suggestion-header">
+            <div class="suggestion-icon">🔧</div>
+            <div class="suggestion-persona">Refactorer</div>
+          </div>
+          <div class="suggestion-label">Optimize loop</div>
+          <div class="suggestion-explanation">
+            This loop can be optimized by using map() instead of a for loop
+          </div>
+          <div class="suggestion-code">
+            <div class="code-old">for (let i = 0; i < items.length; i++) {
+  const item = items[i];
+  results.push(transform(item));
+}</div>
+            <div class="code-new">const results = items.map(item => transform(item));</div>
+          </div>
+          <div class="button-group">
+            <button class="apply-button">Apply</button>
+            <button class="dismiss-button">Dismiss</button>
+          </div>
+        </div>
+        
+        <div class="suggestion-card">
+          <div class="suggestion-header">
+            <div class="suggestion-icon">🔒</div>
+            <div class="suggestion-persona">Security</div>
+          </div>
+          <div class="suggestion-label">Fix XSS vulnerability</div>
+          <div class="suggestion-explanation">
+            This code is vulnerable to XSS attacks. Use proper encoding.
+          </div>
+          <div class="suggestion-code">
+            <div class="code-old">element.innerHTML = userInput;</div>
+            <div class="code-new">element.textContent = userInput;</div>
+          </div>
+          <div class="button-group">
+            <button class="apply-button">Apply</button>
+            <button class="dismiss-button">Dismiss</button>
+          </div>
+        </div>
+        
+        <div class="suggestion-card">
+          <div class="suggestion-header">
+            <div class="suggestion-icon">⚡</div>
+            <div class="suggestion-persona">Performance</div>
+          </div>
+          <div class="suggestion-label">Memoize expensive calculation</div>
+          <div class="suggestion-explanation">
+            This calculation is expensive and could be memoized to improve rendering speed.
+          </div>
+          <div class="suggestion-code">
+            <div class="code-old">const result = expensiveCalculation(props.value);</div>
+            <div class="code-new">const result = useMemo(() => expensiveCalculation(props.value), [props.value]);</div>
+          </div>
+          <div class="button-group">
+            <button class="apply-button">Apply</button>
+            <button class="dismiss-button">Dismiss</button>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <p>ALAN IDE Phase 3 Implementation - 2025</p>
+      </footer>
+    </div>
+  </body>
+</html>

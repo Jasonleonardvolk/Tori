@@ -1,0 +1,83 @@
+site_name: ELFIN Language
+site_description: Documentation for the ELFIN language and tooling
+site_author: ELFIN Development Team
+site_url: https://elfin-lang.github.io/
+
+theme:
+  name: material
+  palette:
+    primary: indigo
+    accent: indigo
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - search.suggest
+    - search.highlight
+  icon:
+    repo: fontawesome/brands/github
+
+repo_name: elfin-lang/elfin
+repo_url: https://github.com/elfin-lang/elfin
+
+nav:
+  - Home: index.md
+  - Getting Started:
+      - Installation: getting-started/installation.md
+      - Quick Start: getting-started/quick-start.md
+      - First System: getting-started/first-system.md
+  - Language Reference:
+      - Syntax: reference/syntax.md
+      - Grammar: reference/grammar.md
+      - Type System: reference/type-system.md
+      - Dimensional Analysis: reference/dimensions.md
+  - Standard Library:
+      - Overview: stdlib/overview.md
+      - Helpers: stdlib/helpers.md
+      - Kinematics: stdlib/kinematics.md
+  - Tools:
+      - Language Server: tools/lsp.md
+      - Formatter: tools/formatter.md
+      - Command Line: tools/cli.md
+  - Tutorials:
+      - Manipulator Control: tutorials/manipulator.md
+      - Mobile Robot: tutorials/mobile-robot.md
+  - Specification: spec.md
+  - Contributing: contributing.md
+
+markdown_extensions:
+  - admonition
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
+  - pymdownx.tabbed
+  - pymdownx.arithmatex:
+      generic: true
+  - def_list
+  - footnotes
+  - meta
+  - toc:
+      permalink: true
+
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
+plugins:
+  - search
+  - mkdocstrings:
+      default_handler: python
+      handlers:
+        python:
+          paths: [elfin_lsp]
+          options:
+            show_source: false
+            show_submodules: true
+            filter: ["!^_"]
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/elfin-lang/elfin
+      name: ELFIN on GitHub

@@ -1,0 +1,7 @@
+{
+  "dl": "https://registry.elfin.dev/blobs",
+  "api": "https://registry.elfin.dev/api/v1",
+  "format": 1,
+  "registry_name": "ELFIN Registry",
+  "registry_version": "0.1.0"
+}

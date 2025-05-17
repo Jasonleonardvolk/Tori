@@ -1,0 +1,225 @@
+/**
+ * ALAN IDE Design System
+ * 
+ * This file contains all design tokens and variables for the ALAN IDE 
+ * Including color palettes, typography, spacing, and other visual elements.
+ */
+
+:root {
+  /* Neutral Bases */
+  --color-bg-dark: #1E1E1E;
+  --color-bg-light: #E0E0E0;
+  --color-surface-dark: #23272F;
+  --color-surface-light: #F5F5F5;
+
+  /* Primary Accent */
+  --color-primary: #00FFCC;
+  --color-primary-dark: #00FFC8;
+  --color-primary-light: #1E90FF;
+
+  /* Secondary Accent */
+  --color-secondary: #FF007F;
+  --color-secondary-alt: #FF6F61;
+
+  /* Tertiary/Extended Accents */
+  --color-purple: #8A2BE2;
+  --color-gold: #FFD700;
+
+  /* Semantic Feedback */
+  --color-success: #32CD32;
+  --color-warning: #FFC857;
+  --color-error: #FF6B6B;
+
+  /* Text/Foreground */
+  --color-text-primary-dark: #E0E0E0;
+  --color-text-primary-light: #23272F;
+  --color-text-secondary: #A9B1BD;
+
+  /* Overlay/States */
+  --color-hover: rgba(0,255,200,0.12);
+  --color-selected: #00FFCC;
+  --color-group: #FF007F;
+  --color-tooltip-bg: #23272F;
+  --color-tooltip-text: #FFFFFF;
+
+  /* Spacing System */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-xxl: 48px;
+
+  /* Typography */
+  --font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  --font-family-mono: 'JetBrains Mono', 'SF Mono', 'Menlo', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+
+  /* Font Sizes */
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-md: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-xxl: 1.5rem;
+
+  /* Line Heights */
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.75;
+
+  /* Border Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+
+  /* Animation */
+  --transition-fast: 150ms;
+  --transition-normal: 250ms;
+  --transition-slow: 400ms;
+  --easing-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* Z-index System */
+  --z-base: 1;
+  --z-overlay: 10;
+  --z-dropdown: 100;
+  --z-modal: 1000;
+  --z-tooltip: 2000;
+}
+
+/* Theme-based tokens (dark theme is default) */
+:root {
+  --color-bg: var(--color-bg-dark);
+  --color-surface: var(--color-surface-dark);
+  --color-text-primary: var(--color-text-primary-dark);
+}
+
+/* Light Theme */
+[data-theme='light'] {
+  --color-bg: var(--color-bg-light);
+  --color-surface: var(--color-surface-light);
+  --color-text-primary: var(--color-text-primary-light);
+}
+
+/* Base Layout Styles */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-md);
+  line-height: var(--line-height-normal);
+  color: var(--color-text-primary);
+  background-color: var(--color-bg);
+}
+
+/* Fields & Canvas Global Styles */
+.field-canvas {
+  background-color: var(--color-surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+}
+
+.field-canvas-node {
+  transition: all var(--transition-normal) var(--easing-standard);
+}
+
+.field-canvas-node:hover {
+  filter: brightness(1.2);
+}
+
+.field-canvas-node.selected {
+  stroke: var(--color-selected);
+  stroke-width: 2px;
+}
+
+.field-canvas-edge {
+  stroke: var(--color-text-secondary);
+  transition: all var(--transition-normal) var(--easing-standard);
+}
+
+/* Agent Panel Styles */
+.agent-panel {
+  background-color: var(--color-surface);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  box-shadow: var(--shadow-md);
+}
+
+.agent-tab {
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition: all var(--transition-fast) var(--easing-standard);
+}
+
+.agent-tab.active {
+  border-bottom: 2px solid var(--color-primary);
+  background-color: rgba(0, 255, 204, 0.1);
+}
+
+.agent-suggestion {
+  padding: var(--space-md);
+  margin-bottom: var(--space-md);
+  border-radius: var(--radius-md);
+  background-color: rgba(255, 255, 255, 0.05);
+  border-left: 3px solid var(--color-primary);
+}
+
+/* Control Styles */
+.control-button {
+  background-color: var(--color-surface);
+  color: var(--color-text-primary);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-sm);
+  padding: var(--space-sm) var(--space-md);
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+  transition: all var(--transition-fast) var(--easing-standard);
+}
+
+.control-button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.control-button.primary {
+  background-color: var(--color-primary);
+  color: var(--color-bg-dark);
+}
+
+.control-button.secondary {
+  background-color: var(--color-secondary);
+  color: var(--color-bg-dark);
+}
+
+/* Meditation Mode Styles */
+.meditation-canvas {
+  background-color: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(5px);
+}
+
+.koopman-spectrum-point {
+  transition: all 500ms var(--easing-standard);
+}
+
+.entropy-wave {
+  stroke: var(--color-primary);
+  stroke-width: 2;
+  fill: none;
+}
+
+/* Tooltips */
+.tooltip {
+  background-color: var(--color-tooltip-bg);
+  color: var(--color-tooltip-text);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-sm);
+  box-shadow: var(--shadow-md);
+}

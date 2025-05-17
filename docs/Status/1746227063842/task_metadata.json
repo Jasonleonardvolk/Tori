@@ -1,0 +1,44 @@
+{
+  "files_in_context": [
+    {
+      "path": "alan2x/emergency_pdf_fix.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746227077852,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/emergency_pdf_fix.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746227090606,
+      "cline_edit_date": 1746227090606,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/emergency_pdf_fix.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746227101220,
+      "cline_edit_date": 1746227101220,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/emergency_pdf_fix.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746227112737,
+      "cline_edit_date": 1746227112737,
+      "user_edit_date": null
+    }
+  ],
+  "model_usage": [
+    {
+      "ts": 1746227063909,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    }
+  ]
+}

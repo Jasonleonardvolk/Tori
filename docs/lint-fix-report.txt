@@ -1,0 +1,12 @@
+
+Lint Cleanup Report
+==================
+Time: 2025-05-11T16:50:55.743Z
+Target directory: C:\Users\jason\Desktop\tori\kha\docs
+
+Statistics:
+- Files scanned: 98
+- Files skipped: 83
+- Files fixed: 1
+- Errors encountered: 0
+  

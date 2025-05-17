@@ -1,0 +1,70 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>ALAN IDE Monitor</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #1a1a1a; color: #e0e0e0; padding: 20px; }
+        .container { max-width: 800px; margin: 0 auto; background: #252525; padding: 20px; border-radius: 5px; }
+        h1 { color: #4da6ff; }
+        .status { margin: 20px 0; padding: 10px; border-radius: 4px; }
+        .online { background: #1a3a1a; border-left: 4px solid #5cff5c; }
+        .offline { background: #3a1a1a; border-left: 4px solid #ff5c5c; }
+        button { background: #4da6ff; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; }
+        .links { margin-top: 20px; }
+        .links a { display: inline-block; margin-right: 10px; background: #4da6ff; color: white; padding: 10px 15px; 
+                   text-decoration: none; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>ALAN IDE Application Monitor</h1>
+        <div id="clientStatus" class="status offline">Client Status: Checking...</div>
+        <div id="serverStatus" class="status offline">Server Status: Checking...</div>
+        <div class="links">
+            <a href="http://localhost:3000" target="_blank">Open Client</a>
+            <a href="http://localhost:3003" target="_blank">Open Server</a>
+            <a href="http://localhost:8082" target="_blank">WebSocket</a>
+        </div>
+        <div style="margin-top: 20px;">
+            <button id="checkButton">Check Status</button>
+        </div>
+    </div>
+
+    <script>
+        function checkStatus() {
+            // Check client
+            fetch('http://localhost:3000', { method: 'HEAD' })
+                .then(() => {
+                    document.getElementById('clientStatus').className = 'status online';
+                    document.getElementById('clientStatus').textContent = 'Client Status: Online';
+                })
+                .catch(() => {
+                    document.getElementById('clientStatus').className = 'status offline';
+                    document.getElementById('clientStatus').textContent = 'Client Status: Offline';
+                });
+            
+            // Check server
+            fetch('http://localhost:3003', { method: 'HEAD' })
+                .then(() => {
+                    document.getElementById('serverStatus').className = 'status online';
+                    document.getElementById('serverStatus').textContent = 'Server Status: Online';
+                })
+                .catch(() => {
+                    document.getElementById('serverStatus').className = 'status offline';
+                    document.getElementById('serverStatus').textContent = 'Server Status: Offline';
+                });
+        }
+        
+        // Initial check
+        checkStatus();
+        
+        // Setup periodic check every 5 seconds
+        setInterval(checkStatus, 5000);
+        
+        // Button click
+        document.getElementById('checkButton').addEventListener('click', checkStatus);
+    </script>
+</body>
+</html>

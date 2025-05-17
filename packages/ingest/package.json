@@ -1,0 +1,20 @@
+{
+  "name": "@itori/ingest",
+  "version": "0.0.1",
+  "description": "Document ingestion utilities for ITORI IDE",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dev": "tsc -p tsconfig.json --watch"
+  },
+  "dependencies": {
+    "@itori/data-model": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.3"
+  }
+}

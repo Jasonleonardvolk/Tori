@@ -1,0 +1,44 @@
+
+> alan-agent-suggestions@1.0.0 test
+> jest --config jest.config.complete.js
+
+[STDERR] PASS client/src/__tests__/integration/RefactorService_EditorSyncService/RefactorService_EditorSyncService.test.js
+[STDERR]   RefactorService + EditorSyncService Integration
+    √ should maintain sync when applying refactoring transformations (8 ms)
+    √ should sync concept selection to editor selection (2 ms)
+    √ should sync editor selection to concept selection (1 ms)
+    √ should detect secrets and sync concept changes to editor (2 ms)
+    √ should sync editor changes to concept graph (3 ms)
+[STDERR] 
+[STDERR] PASS client/src/__tests__/integration/MCPClient_DebugAgent/mockMcpClientService.test.js
+[STDERR]   √ mock mcp client service exists and is not a test suite (2 ms)
+
+[STDERR] FAIL client/src/__tests__/integration/MCPClient_DebugAgent/MCPClient_DebugAgent.test.js
+[STDERR]   MCPClient + DebugAgent Integration
+    √ MCP tool execution generates debug traces and notifications (88 ms)
+[STDERR]     √ Resource access operations are properly traced (20 ms)
+    √ MCP connection status changes are reflected in debug panel (42 ms)
+[STDERR]     × Debug traces are limited to maximum capacity (6 ms)
+
+  ● MCPClient + DebugAgent Integration › Debug traces are limited to maximum capacity
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: 3
+    Received: 5
+
+    [0m [90m 305 |[39m     
+     [90m 306 |[39m     [90m// Verify only the most recent traces are kept[39m
+    [31m[1m>[22m[39m[90m 307 |[39m     expect(mcpClientService[33m.[39mdebugTraces[33m.[39mlength)[33m.[39mtoBe([35m3[39m)[33m;[39m
+     [90m     |[39m                                                 [31m[1m^[22m[39m
+     [90m 308 |[39m     expect(mcpClientService[33m.[39mdebugTraces[[35m0[39m][33m.[39mtoolName)[33m.[39mtoBe([32m'test_tool_2'[39m)[33m;[39m
+     [90m 309 |[39m     expect(mcpClientService[33m.[39mdebugTraces[[35m1[39m][33m.[39mtoolName)[33m.[39mtoBe([32m'test_tool_3'[39m)[33m;[39m
+     [90m 310 |[39m     expect(mcpClientService[33m.[39mdebugTraces[[35m2[39m][33m.[39mtoolName)[33m.[39mtoBe([32m'test_tool_4'[39m)[33m;[39m[0m
+
+      at Object.toBe (client/src/__tests__/integration/MCPClient_DebugAgent/MCPClient_DebugAgent.test.js:307:49)
+
+[STDERR] Test Suites: 1 failed, 2 passed, 3 of 15 total
+Tests:       1 failed, 9 passed, 10 total
+Snapshots:   0 total
+Time:        4.173 s
+Ran all test suites.

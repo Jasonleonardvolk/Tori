@@ -1,0 +1,162 @@
+
+> alan-agent-suggestions@1.0.0 test
+> jest --bail
+
+[STDERR] FAIL client/src/__tests__/integration/MCPClient_DebugAgent/mockMcpClientService.js
+[STDERR]   ● Test suite failed to run
+
+    Your test suite must contain at least one test.
+
+      at onResult (node_modules/@jest/core/build/TestScheduler.js:133:18)
+      at node_modules/@jest/core/build/TestScheduler.js:254:19
+      at node_modules/emittery/index.js:363:13
+          at Array.map (<anonymous>)
+      at Emittery.emit (node_modules/emittery/index.js:361:23)
+
+[STDERR] FAIL client/src/__tests__/integration/ExecutionTracer_FieldMeditationMode/mockExecutionTracerService.js
+[STDERR]   ● Test suite failed to run
+
+    Your test suite must contain at least one test.
+
+      at onResult (node_modules/@jest/core/build/TestScheduler.js:133:18)
+      at node_modules/@jest/core/build/TestScheduler.js:254:19
+      at node_modules/emittery/index.js:363:13
+          at Array.map (<anonymous>)
+      at Emittery.emit (node_modules/emittery/index.js:361:23)
+
+[STDERR] FAIL client/src/__tests__/integration/RefactorService_EditorSyncService/mockEditorSyncService.js
+  ● Test suite failed to run
+
+    Your test suite must contain at least one test.
+
+      at onResult (node_modules/@jest/core/build/TestScheduler.js:133:18)
+      at node_modules/@jest/core/build/TestScheduler.js:254:19
+      at node_modules/emittery/index.js:363:13
+          at Array.map (<anonymous>)
+      at Emittery.emit (node_modules/emittery/index.js:361:23)
+
+[STDERR] FAIL client/src/__tests__/integration/ExecutionTracer_FieldMeditationMode/mockComponents.js
+  ● Test suite failed to run
+
+    Your test suite must contain at least one test.
+
+      at onResult (node_modules/@jest/core/build/TestScheduler.js:133:18)
+      at node_modules/@jest/core/build/TestScheduler.js:254:19
+      at node_modules/emittery/index.js:363:13
+          at Array.map (<anonymous>)
+      at Emittery.emit (node_modules/emittery/index.js:361:23)
+
+[STDERR] FAIL client/src/__tests__/integration/Exporter_ConceptGraphService/mockConceptGraphService.js
+  ● Test suite failed to run
+
+    Your test suite must contain at least one test.
+
+      at onResult (node_modules/@jest/core/build/TestScheduler.js:133:18)
+      at node_modules/@jest/core/build/TestScheduler.js:254:19
+      at node_modules/emittery/index.js:363:13
+          at Array.map (<anonymous>)
+      at Emittery.emit (node_modules/emittery/index.js:361:23)
+
+[STDERR] PASS client/src/__tests__/minimal.test.js
+[STDERR]   Basic Functionality
+[STDERR]     √ basic Jest functionality works (3 ms)
+    √ can import React (2 ms)
+    √ Jest is working properly (1 ms)
+    √ basic JavaScript features work (1 ms)
+[STDERR] 
+[STDERR] FAIL client/src/__tests__/react-basic.test.js
+[STDERR]   Basic React Tests
+    × can render a simple React component (24 ms)
+    √ React Testing Library is working
+[STDERR] 
+[STDERR]   ● Basic React Tests › can render a simple React component
+
+    TypeError: expect(...).toBeInTheDocument is not a function
+
+    [0m [90m  8 |[39m     
+     [90m  9 |[39m     [36mconst[39m { getByText } [33m=[39m render([33m<[39m[33mSimpleComponent[39m [33m/[39m[33m>[39m)[33m;[39m
+    [31m[1m>[22m[39m[90m 10 |[39m     expect(getByText([32m'Hello Test'[39m))[33m.[39mtoBeInTheDocument()[33m;[39m
+     [90m    |[39m                                     [31m[1m^[22m[39m
+     [90m 11 |[39m   })[33m;[39m
+     [90m 12 |[39m   
+     [90m 13 |[39m   test([32m'React Testing Library is working'[39m[33m,[39m () [33m=>[39m {[0m
+
+      at Object.toBeInTheDocument (client/src/__tests__/react-basic.test.js:10:37)
+
+[STDERR] Summary of all failing tests
+[STDERR] F[STDERR] AIL clie[STDERR] nt[STDERR] /src[STDERR] /__t[STDERR] ests__/integration/MCPClient[STDERR] _DebugA[STDERR] gent/[STDERR] mockM[STDERR] cpClientSe[STDERR] rvice[STDERR] .js
+  [STDERR] ● Te[STDERR] st sui[STDERR] te fa[STDERR] iled to [STDERR] run
+
+[STDERR]     [STDERR] Your test suite must contain at [STDERR] least on[STDERR] e tes[STDERR] t.
+
+[STDERR]    [STDERR]    [STDERR] at onResul[STDERR] t (n[STDERR] ode[STDERR] _mod[STDERR] ules/@j[STDERR] est[STDERR] /core/build/TestScheduler.j[STDERR] s:133[STDERR] :18)
+      at node_modules/[STDERR] @jest[STDERR] /co[STDERR] re/bui[STDERR] ld/TestScheduler.js:254:19
+      at node_modules/emittery/index.js:363:13
+          at Array.map (<anonymous>)
+      at Emittery.emit (node_modules/emittery/index.js:361:23)[STDERR] 
+
+FAIL client/src/__tes[STDERR] ts__/integration/ExecutionTracer_FieldMeditati[STDERR] onMode/mockExecutio[STDERR] nTra[STDERR] cerService.js
+[STDERR]   ● Tes[STDERR] t suite failed to run
+
+    Your test suite[STDERR]  must contain at l[STDERR] east one [STDERR] test.
+
+    [STDERR]   at on[STDERR] Result (nod[STDERR] e_modules/@j[STDERR] est/core/bu[STDERR] ild/TestSch[STDERR] eduler.js:[STDERR] 133:18)
+  [STDERR]     at[STDERR]  node_module[STDERR] s/@jest[STDERR] /core/build/TestSc[STDERR] heduler.[STDERR] js:254[STDERR] :19
+   [STDERR]    at [STDERR] node_modules/emittery/index.js:36[STDERR] 3:13
+          at A[STDERR] rray.map [STDERR] (<anon[STDERR] ymous>)[STDERR] 
+      at E[STDERR] mitter[STDERR] y.emit (nod[STDERR] e_modules/e[STDERR] mittery/ind[STDERR] ex.js:361:2[STDERR] 3)
+
+[STDERR] FA[STDERR] IL client/src/__tes[STDERR] ts__/i[STDERR] ntegrat[STDERR] ion/[STDERR] Refact[STDERR] orSer[STDERR] vice_[STDERR] Edito[STDERR] rSyn[STDERR] cServi[STDERR] ce/m[STDERR] ockEd[STDERR] itor[STDERR] SyncS[STDERR] ervi[STDERR] ce.js
+[STDERR]   ● [STDERR] Test [STDERR] suit[STDERR] e fa[STDERR] iled [STDERR] t[STDERR] o [STDERR] run
+
+    Your [STDERR] test su[STDERR] ite mus[STDERR] t co[STDERR] ntain [STDERR] at le[STDERR] as[STDERR] t on[STDERR] e test[STDERR] .
+
+ [STDERR]    [STDERR]   at [STDERR] onRes[STDERR] ult (n[STDERR] ode_m[STDERR] odule[STDERR] s/@je[STDERR] st/co[STDERR] re/[STDERR] build/[STDERR] Test[STDERR] Schedu[STDERR] ler[STDERR] .js:1[STDERR] 33:18[STDERR] )
+  [STDERR]     a[STDERR] t nod[STDERR] e_mo[STDERR] dule[STDERR] s/@[STDERR] jes[STDERR] t/co[STDERR] re/b[STDERR] uild[STDERR] /Tes[STDERR] tSche[STDERR] duler[STDERR] .js:[STDERR] 254:1[STDERR] 9
+   [STDERR]    at[STDERR]  no[STDERR] de_mo[STDERR] dul[STDERR] es/e[STDERR] mit[STDERR] tery/[STDERR] index.js:[STDERR] 363:13
+ [STDERR]         [STDERR]  at A[STDERR] rray.[STDERR] map ([STDERR] <an[STDERR] onym[STDERR] ous[STDERR] >)
+   [STDERR]    at[STDERR]  Em[STDERR] ittery[STDERR] .emit[STDERR]  (nod[STDERR] e_mo[STDERR] dules/[STDERR] emit[STDERR] tery[STDERR] /inde[STDERR] x.js:36[STDERR] 1:23[STDERR] )
+
+[STDERR] FAIL [STDERR] client/src/__tests__[STDERR] /integration/Execu[STDERR] tionT[STDERR] racer_Field[STDERR] Medit[STDERR] ationM[STDERR] ode/mo[STDERR] ckCompone[STDERR] nts.js
+[STDERR]   ● T[STDERR] est suite [STDERR] failed [STDERR] to run
+
+ [STDERR]    You[STDERR] r test sui[STDERR] te mus[STDERR] t cont[STDERR] ain at[STDERR]  least one test.
+
+ [STDERR]      at[STDERR]  onResult (no[STDERR] de_modu[STDERR] les/@jest/[STDERR] core/bu[STDERR] ild/TestSc[STDERR] heduler[STDERR] .js:13[STDERR] 3:18)
+    [STDERR]   at no[STDERR] de_mod[STDERR] ules/@jes[STDERR] t/cor[STDERR] e/buil[STDERR] d/TestS[STDERR] chedul[STDERR] er.js:[STDERR] 254:19
+   [STDERR]    at [STDERR] node_m[STDERR] odules[STDERR] /emittery/[STDERR] index.[STDERR] j[STDERR] s:363:1[STDERR] 3
+      [STDERR]    [STDERR]  at Arr[STDERR] ay.ma[STDERR] p (<[STDERR] anonymo[STDERR] us>)
+[STDERR]      [STDERR]  at E[STDERR] mittery.[STDERR] emit (n[STDERR] ode_mo[STDERR] dules/emit[STDERR] tery/i[STDERR] ndex.[STDERR] js:361:23)
+
+[STDERR] FAIL client/src/__tests[STDERR] __/integration/E[STDERR] xporter_ConceptGraphServ[STDERR] ice/mockConceptGraphService.j[STDERR] s
+  [STDERR] ● Test [STDERR] suite fai[STDERR] led to [STDERR] run
+
+    You[STDERR] r test suite[STDERR]  must contai[STDERR] n at[STDERR]  least one test.
+[STDERR] 
+      at onRes[STDERR] ult (node_modules[STDERR] /@jest/core/build[STDERR] /TestSc[STDERR] heduler.js:133:1[STDERR] 8)
+      at node_mo[STDERR] dules/@jest/core/build[STDERR] /TestScheduler[STDERR] .js:2[STDERR] 54:19
+      [STDERR] at node_module[STDERR] s/emittery/index.js[STDERR] :363:13
+         [STDERR]  at Array.map (<a[STDERR] nonymou[STDERR] s>)
+      at[STDERR]  Emittery.e[STDERR] mit (node_modules/[STDERR] emittery/index.js:361:23)
+[STDERR] 
+FAIL cl[STDERR] ient/src/__tests__[STDERR] /react-basic.test.js
+ [STDERR]  ● Basic React Tes[STDERR] ts › can rend[STDERR] er a simple React c[STDERR] omponent
+
+    TypeErro[STDERR] r: expect(...).toBeI[STDERR] nTheDocument is not a func[STDERR] tion
+
+    [0m [90m[STDERR]   8 |[39m     
+   [STDERR]   [90m  9 |[39m  [STDERR]    [36mconst[39m { getB[STDERR] yText } [33m=[39m r[STDERR] ender([33m<[39m[STDERR] [33mSimpleComponent[STDERR] [39m [33m/[39m[3[STDERR] 3m>[39m)[33m;[STDERR] [39m
+    [31m[[STDERR] 1m>[22m[39m[90m [STDERR] 10 |[39m     expe[STDERR] ct(getByText([32m'[STDERR] Hello Test'[39m))[STDERR] [33m.[39mtoBeIn[STDERR] TheDocument()[33m;[STDERR] [39m
+     [90m    |[STDERR] [39m       [STDERR]               [STDERR]                 [3[STDERR] 1m[1m^[22m[3[STDERR] 9m
+     [90m 11 |[39[STDERR] m   })[33m;[39m
+    [STDERR]  [90m 12 |[39[STDERR] m   
+     [90m[STDERR]  13 |[39m   test([32m'React Testing Library is working'[39m[33m,[39m () [33m=>[39m {[0m
+
+      at Object.toBeInTheDocument (client/src/__tests__/react-basic.test.js:10:37)
+
+
+[STDERR] Test Suites: 6 failed, 1 passed, 7 of 25 total
+Tests:       1 failed, 5 passed, 6 total
+Snapshots:   0 total
+Time:        3.763 s
+Ran all test suites.

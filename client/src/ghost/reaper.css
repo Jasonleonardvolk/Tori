@@ -1,0 +1,80 @@
+/* Reaper Mode CSS for CodeMirror and global overlays */
+
+/* Dimmed code lines */
+.cm-line.reaper-dimmed {
+  opacity: 0.18;
+  filter: blur(1.5px) grayscale(0.7);
+  pointer-events: none;
+  transition: opacity 0.5s, filter 0.5s;
+}
+
+/* Focused sniper-scope line */
+.cm-line.reaper-focused {
+  background: radial-gradient(ellipse at left, #ffebee 80%, transparent 100%);
+  box-shadow: 0 0 18px 2px #ff5252;
+  z-index: 12;
+  position: relative;
+  transition: background 0.5s, box-shadow 0.5s;
+}
+
+/* Locked edits (cool-off) */
+.reaper-locked {
+  background: repeating-linear-gradient(135deg, #ff1744 0 10px, #fff0 10px 20px);
+  border: 2px solid #d50000;
+  pointer-events: none !important;
+  opacity: 0.6;
+  animation: reaper-lock-pulse 1s infinite alternate;
+}
+@keyframes reaper-lock-pulse {
+  0% { box-shadow: 0 0 0 0 #ff1744; }
+  100% { box-shadow: 0 0 12px 4px #ff1744; }
+}
+
+/* Truth serum overlay */
+.reaper-truth-serum {
+  background: #fff3e0;
+  color: #bf360c;
+  font-weight: bold;
+  border-left: 6px solid #ff5722;
+  padding: 7px 15px;
+  margin: 2px 0;
+  font-size: 1.08em;
+  box-shadow: 0 2px 10px #ffab9140;
+  border-radius: 4px;
+  z-index: 99;
+}
+
+/* Heartbeat pulse for anomaly lines */
+.cm-line.reaper-pulse {
+  animation: reaper-heartbeat 1.2s cubic-bezier(.4,0,.2,1) 1;
+  background: #ffebee;
+}
+@keyframes reaper-heartbeat {
+  0% { box-shadow: 0 0 0 0 #ff5252; }
+  30% { box-shadow: 0 0 12px 6px #ff5252; }
+  60% { box-shadow: 0 0 0 0 #ff5252; }
+  100% { box-shadow: 0 0 0 0 #ff5252; }
+}
+
+/* Blood-orange background pulse */
+.reaper-bg-pulse {
+  animation: reaper-bg-pulse-anim 2s cubic-bezier(.4,0,.2,1) 1;
+  background: linear-gradient(90deg, #ff7043 0%, #ff1744 100%);
+}
+@keyframes reaper-bg-pulse-anim {
+  0% { filter: brightness(1.2); }
+  50% { filter: brightness(0.7) saturate(1.2); }
+  100% { filter: brightness(1.2); }
+}
+
+/* No Escape Mode (grayscale + focus) */
+.reaper-no-escape {
+  filter: grayscale(1) brightness(0.93) !important;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Optional: transition for all overlays */
+.reaper-dimmed, .reaper-focused, .reaper-locked, .reaper-truth-serum, .reaper-pulse {
+  transition: all 0.4s cubic-bezier(.4,0,.2,1);
+}

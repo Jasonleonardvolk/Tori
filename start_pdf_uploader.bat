@@ -1,0 +1,3 @@
+@echo off
+echo Starting PDF Upload Server...
+python pdf_upload_server.py

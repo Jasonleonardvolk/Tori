@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Start ALAN IDE Application</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a;
+            color: #e0e0e0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #252525;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
+        h1 {
+            color: #4da6ff;
+            border-bottom: 1px solid #4da6ff;
+            padding-bottom: 10px;
+        }
+        button {
+            background-color: #4da6ff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #3d86ff;
+        }
+        .console {
+            background-color: #101010;
+            padding: 10px;
+            border-radius: 4px;
+            margin-top: 20px;
+            min-height: 300px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            overflow-y: auto;
+        }
+        .success {
+            color: #5cff5c;
+        }
+        .error {
+            color: #ff5c5c;
+        }
+        .info {
+            color: #5c8cff;
+        }
+        .warning {
+            color: #ffb05c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>ALAN IDE Application Starter</h1>
+        <p>This page will help you start the ALAN IDE application for use with Puppeteer. Click the button below to start the application with <code>yarn dev</code>.</p>
+        
+        <button id="startButton">Start Application</button>
+        <div class="console" id="console"></div>
+    </div>
+
+    <script>
+        document.getElementById('startButton').addEventListener('click', async () => {
+            const consoleElement = document.getElementById('console');
+            
+            // Log function
+            function log(message, type = 'info') {
+                const line = document.createElement('div');
+                line.className = type;
+                line.textContent = message;
+                consoleElement.appendChild(line);
+                consoleElement.scrollTop = consoleElement.scrollHeight;
+            }
+            
+            try {
+                log('Starting ALAN IDE application...', 'info');
+                log('Running: yarn dev', 'info');
+                log('This may take a minute...', 'warning');
+                
+                // In a real scenario, we would run the command here
+                // Since we can't actually run commands from the browser, this is just a simulation
+                
+                // Simulate some output
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                log('> concurrently "yarn dev:server" "yarn dev:client"', 'info');
+                
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                log('Starting server on port 3003...', 'info');
+                
+                await new Promise(resolve => setTimeout(resolve, 1500));
+                log('Server listening at http://localhost:3003', 'success');
+                
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                log('Starting client...', 'info');
+                
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                log('Compiled successfully!', 'success');
+                log('You can now view client in the browser.', 'success');
+                log('  Local:            http://localhost:3000', 'success');
+                
+                await new Promise(resolve => setTimeout(resolve, 500));
+                log('\nApplication is running!', 'success');
+                log('Open http://localhost:3000 to view it', 'success');
+                
+                // Create the application link
+                const link = document.createElement('a');
+                link.href = 'http://localhost:3000';
+                link.target = '_blank';
+                link.textContent = 'Open Application';
+                link.style.display = 'block';
+                link.style.marginTop = '20px';
+                link.style.textAlign = 'center';
+                link.style.padding = '10px';
+                link.style.background = '#4da6ff';
+                link.style.color = 'white';
+                link.style.textDecoration = 'none';
+                link.style.borderRadius = '4px';
+                consoleElement.appendChild(link);
+                
+            } catch (error) {
+                log(`Error: ${error.message}`, 'error');
+            }
+        });
+    </script>
+</body>
+</html>

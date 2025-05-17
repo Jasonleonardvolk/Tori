@@ -1,0 +1,68 @@
+{
+  "files_in_context": [
+    {
+      "path": ".mcp.json",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746821032103,
+      "cline_edit_date": 1746821032103,
+      "user_edit_date": null
+    },
+    {
+      "path": "test-mcp-filesystem.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746821053187,
+      "cline_edit_date": 1746821053187,
+      "user_edit_date": null
+    },
+    {
+      "path": "start-mcp-servers.bat",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746821063530,
+      "cline_edit_date": 1746821063530,
+      "user_edit_date": null
+    },
+    {
+      "path": "package.json",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746821088849,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "data/USB Drive/may1move/pyodide/mcp_filesystem_example.py",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746821116789,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "data/USB Drive/may1move/pyodide/temp_mcp_settings.json",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746821127251,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "test-mcp-filesystem.js",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746821135887,
+      "cline_edit_date": 1746821053187,
+      "user_edit_date": null
+    }
+  ],
+  "model_usage": [
+    {
+      "ts": 1746820614144,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    }
+  ]
+}

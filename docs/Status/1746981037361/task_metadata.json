@@ -1,0 +1,150 @@
+{
+  "files_in_context": [
+    {
+      "path": ".eslintrc.js",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746981055159,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": ".eslintrc.json",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746981059763,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "fix-eslint.js",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746981067963,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "docs-lint-fix.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746981133995,
+      "cline_edit_date": 1746981133995,
+      "user_edit_date": null
+    },
+    {
+      "path": "docs-lint-fix.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746981163982,
+      "cline_edit_date": 1746981163982,
+      "user_edit_date": null
+    },
+    {
+      "path": "docs-lint-fix.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746981204744,
+      "cline_edit_date": 1746981204744,
+      "user_edit_date": null
+    },
+    {
+      "path": "docs-lint-fix.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746981296075,
+      "cline_edit_date": 1746981296075,
+      "user_edit_date": null
+    },
+    {
+      "path": "fix-client-lint-errors.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746981345179,
+      "cline_edit_date": 1746981345179,
+      "user_edit_date": null
+    },
+    {
+      "path": "package.json",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746981462890,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "package.json",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746981481153,
+      "cline_edit_date": 1746981481153,
+      "user_edit_date": null
+    },
+    {
+      "path": "package.json",
+      "record_state": "active",
+      "record_source": "user_edited",
+      "cline_read_date": 1746981481153,
+      "cline_edit_date": 1746981481153,
+      "user_edit_date": 1746981481210
+    },
+    {
+      "path": ".vscode/tasks.json",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746981521061,
+      "cline_edit_date": 1746981521061,
+      "user_edit_date": null
+    },
+    {
+      "path": "LINTING_GUIDE.md",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746981543467,
+      "cline_edit_date": 1746981543467,
+      "user_edit_date": null
+    },
+    {
+      "path": ".vscode/settings.json",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746981562194,
+      "cline_edit_date": 1746981562194,
+      "user_edit_date": null
+    },
+    {
+      "path": ".vscode/extensions.json",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746981580272,
+      "cline_edit_date": 1746981580272,
+      "user_edit_date": null
+    }
+  ],
+  "model_usage": [
+    {
+      "ts": 1746981037463,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1746981107601,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1746981428449,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1746981455794,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    }
+  ]
+}

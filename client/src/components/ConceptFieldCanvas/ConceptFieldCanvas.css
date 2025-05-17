@@ -1,0 +1,171 @@
+/* ConceptFieldCanvas.css */
+@import '../../theme.css';
+
+.concept-field-canvas-container {
+  width: 100%;
+  height: 100%;
+  min-height: 600px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.concept-field-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-md) var(--space-lg);
+  background-color: var(--color-surface);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.concept-field-toolbar-section {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.geometry-selector {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.geometry-option {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  cursor: pointer;
+}
+
+.alpha-control {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.alpha-value {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-sm);
+}
+
+.param-control-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-sm);
+  background-color: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: var(--color-text-primary);
+  cursor: pointer;
+  font-size: var(--font-size-sm);
+}
+
+.param-control-btn:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.morph-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.epsilon-control {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.morph-button {
+  background-color: var(--color-primary);
+  color: var(--color-bg-dark);
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: var(--space-xs) var(--space-md);
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.canvas-view {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  background-color: var(--color-bg);
+}
+
+.metrics-display {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-sm);
+}
+
+.attractor-selector {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-sm);
+  padding: var(--space-xs) var(--space-md);
+}
+
+/* Selection and interaction styles */
+.group-selection {
+  position: absolute;
+  border: 2px dashed var(--color-group);
+  background-color: rgba(255, 0, 127, 0.1);
+  pointer-events: none;
+}
+
+.canvas-tooltip {
+  position: absolute;
+  background-color: var(--color-tooltip-bg);
+  color: var(--color-tooltip-text);
+  border-radius: var(--radius-sm);
+  padding: var(--space-sm);
+  box-shadow: var(--shadow-md);
+  max-width: 300px;
+  z-index: var(--z-tooltip);
+  pointer-events: none;
+  font-size: var(--font-size-sm);
+}
+
+/* Canvas content styles handled by child components */
+.concept-node {
+  cursor: pointer;
+}
+
+.edge-connection {
+  pointer-events: none;
+}
+
+.overlay-toggle-section {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin-top: var(--space-md);
+  padding: var(--space-sm) var(--space-lg);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.overlay-toggle {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  cursor: pointer;
+  user-select: none;
+}
+
+.overlay-toggle-checkbox {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--color-primary);
+}

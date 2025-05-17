@@ -1,0 +1,350 @@
+/* SemanticCommitDemo.css */
+.semantic-commit-demo {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #1a1a1a;
+  color: #d4d4d4;
+  padding: 24px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  overflow: hidden;
+}
+
+.demo-header {
+  margin-bottom: 24px;
+}
+
+.demo-header h2 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #fff;
+  margin: 0 0 8px 0;
+}
+
+.demo-header p {
+  font-size: 16px;
+  color: #aaa;
+  margin: 0;
+  max-width: 800px;
+}
+
+.demo-main {
+  display: flex;
+  flex: 1;
+  gap: 24px;
+  overflow: hidden;
+}
+
+.demo-sidebar {
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  background-color: #242424;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.rules-header {
+  padding: 16px;
+  background-color: #2a2a2a;
+  border-bottom: 1px solid #333;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rules-header h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+  color: #fff;
+}
+
+.add-rule-button {
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 6px 10px;
+  font-size: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+
+.add-rule-button:hover {
+  background-color: #2563eb;
+  transform: translateY(-1px);
+}
+
+.add-rule-button .icon {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.rules-list {
+  padding: 8px 16px;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.rule-item {
+  padding: 10px 12px;
+  background-color: #1a1a1a;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #e5e7eb;
+  border-left: 3px solid #4b5563;
+  transition: all 0.2s ease;
+}
+
+.rule-item:hover {
+  background-color: #2a2a2a;
+  border-left-color: #3b82f6;
+}
+
+.demo-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  overflow-y: auto;
+}
+
+.conflict-examples {
+  background-color: #242424;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.conflict-examples h3 {
+  margin: 0 0 8px 0;
+  font-size: 18px;
+  font-weight: 500;
+  color: #fff;
+}
+
+.conflict-examples p {
+  margin: 0 0 16px 0;
+  font-size: 14px;
+  color: #aaa;
+}
+
+.conflict-examples-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.conflict-example {
+  background-color: #1a1a1a;
+  border-radius: 6px;
+  border: 1px solid #333;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.conflict-example:hover {
+  background-color: #2a2a2a;
+  border-color: #3b82f6;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.conflict-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #ef4444;
+  color: white;
+  font-size: 10px;
+  font-weight: 500;
+  padding: 4px 8px;
+  border-bottom-left-radius: 6px;
+}
+
+.conflict-text {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #e5e7eb;
+  margin-bottom: 12px;
+}
+
+.conflict-action {
+  align-self: flex-end;
+  font-size: 12px;
+  color: #3b82f6;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.conflict-action::after {
+  content: '→';
+  font-size: 14px;
+  transition: transform 0.2s ease;
+}
+
+.conflict-example:hover .conflict-action::after {
+  transform: translateX(4px);
+}
+
+.feature-explainer {
+  background-color: #242424;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.feature-explainer h3 {
+  margin: 0 0 16px 0;
+  font-size: 18px;
+  font-weight: 500;
+  color: #fff;
+}
+
+.feature-sections {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+}
+
+.feature-section {
+  display: flex;
+  gap: 12px;
+  padding: 16px;
+  background-color: #1a1a1a;
+  border-radius: 6px;
+  border: 1px solid #333;
+  transition: all 0.2s ease;
+}
+
+.feature-section:hover {
+  background-color: #2a2a2a;
+  border-color: #555;
+}
+
+.feature-icon {
+  font-size: 24px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #2a2a2a;
+  border-radius: 8px;
+}
+
+.feature-info {
+  flex: 1;
+}
+
+.feature-info h4 {
+  margin: 0 0 4px 0;
+  font-size: 16px;
+  font-weight: 500;
+  color: #fff;
+}
+
+.feature-info p {
+  margin: 0;
+  font-size: 14px;
+  color: #aaa;
+  line-height: 1.4;
+}
+
+.panel-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.panel-container {
+  width: 90%;
+  max-width: 1200px;
+  height: 90%;
+  max-height: 800px;
+  background-color: #1a1a1a;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Accessibility - respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .add-rule-button:hover {
+    transform: none;
+  }
+  
+  .conflict-example:hover {
+    transform: none;
+  }
+  
+  .conflict-example:hover .conflict-action::after {
+    transform: none;
+  }
+  
+  .panel-overlay,
+  .panel-container {
+    animation: none;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .demo-main {
+    flex-direction: column;
+  }
+  
+  .demo-sidebar {
+    width: 100%;
+    max-height: 300px;
+  }
+}
+
+@media (max-width: 768px) {
+  .semantic-commit-demo {
+    padding: 16px;
+  }
+  
+  .feature-sections {
+    grid-template-columns: 1fr;
+  }
+  
+  .panel-container {
+    width: 95%;
+    height: 95%;
+  }
+}

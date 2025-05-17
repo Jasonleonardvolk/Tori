@@ -1,0 +1,52 @@
+[package]
+name = "alan_core"
+version = "0.1.0"
+edition = "2021"
+authors = ["ALAN Team"]
+description = "Core Rust implementation of the ALAN neuromorphic system"
+license = "Apache-2.0"
+readme = "../README.md"
+repository = "https://github.com/alan-team/kha"
+
+[lib]
+name = "alan_core"
+path = "src/lib.rs"
+
+[dependencies]
+# Serialization
+flatbuffers = "23.5.26"
+
+# Numerics
+num-traits = "0.2.17"
+nalgebra = "0.32.3"
+
+# Error handling
+thiserror = "1.0.47"
+anyhow = "1.0.75"
+
+# Utilities
+log = "0.4.20"
+bitflags = "2.4.1"
+
+# Optional zstd compression
+zstd = { version = "0.13.0", optional = true }
+
+[dev-dependencies]
+# Testing
+criterion = "0.5.1"
+proptest = "1.2.0"
+tempfile = "3.8.1"
+
+[features]
+default = ["compression"]
+compression = ["zstd"]
+soft_mem = []  # Software memory implementation (no hardware acceleration)
+y4 = []        # Enable Yoshida 4th-order integrator
+
+[[bench]]
+name = "oscillator_bench"
+harness = false
+
+[profile.release]
+panic = "abort"  # Reduce wasm binary size by ~19 kB
+strip = "symbols"  # Further reduce size for wasm targets

@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TORI Chat Standalone</title>
+  
+  <style>
+    :root {
+      /* Color Variables */
+      --color-bg-dark: #121418;
+      --color-bg-light: #f8f9fa;
+      --color-surface-dark: #23272f;
+      --color-surface-light: #ffffff;
+      --color-primary: #3b82f6; /* Blue */
+      --color-primary-dark: #2563eb;
+      --color-primary-light: #60a5fa;
+      --color-secondary: #8b5cf6; /* Purple */
+      --color-secondary-alt: #a78bfa;
+      --color-success: #10b981; /* Green */
+      --color-warning: #f59e0b; /* Orange */
+      --color-error: #ef4444; /* Red */
+      --color-text-primary-dark: #f3f4f6;
+      --color-text-primary-light: #111827;
+      --color-text-secondary: #9ca3af;
+    }
+    
+    /* Reset and Base Styles */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      background-color: var(--color-bg-dark);
+      color: var(--color-text-primary-dark);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      height: 100vh;
+      overflow: hidden;
+    }
+    
+    button {
+      cursor: pointer;
+      border: none;
+      background: none;
+      font: inherit;
+      color: inherit;
+    }
+    
+    /* Glass Effect */
+    .glass {
+      background: rgba(35, 39, 47, 0.6);
+      backdrop-filter: blur(4px) saturate(140%);
+      -webkit-backdrop-filter: blur(4px) saturate(140%);
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35), inset 0 0 0 0.5px rgba(255, 255, 255, 0.1);
+      border-radius: 1.25rem;
+    }
+    
+    /* Layout Structure */
+    .app-container {
+      display: flex;
+      height: 100vh;
+    }
+    
+    /* Left Panel - History */
+    .history-panel {
+      width: 256px;
+      flex-shrink: 0;
+      border-right: 1px solid rgba(255, 255, 255, 0.1);
+      background-color: var(--color-surface-dark);
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .history-header {
+      padding: 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .history-title {
+      font-size: 1.125rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+    
+    .search-container {
+      position: relative;
+    }
+    
+    .search-input {
+      width: 100%;
+      background-color: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 0.375rem;
+      padding: 0.375rem 0.75rem;
+      font-size: 0.875rem;
+      color: var(--color-text-primary-dark);
+      outline: none;
+    }
+    
+    .search-input:focus {
+      border-color: var(--color-primary);
+    }
+    
+    .history-tabs {
+      display: flex;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .chat-tab {
+      flex: 1;
+      padding: 0.5rem 0;
+      text-align: center;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--color-text-secondary);
+    }
+    
+    .chat-tab.active {
+      color: var(--color-primary);
+      border-bottom: 2px solid var(--color-primary);
+    }
+    
+    .history-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: 0.5rem;
+    }
+    
+    .history-item {
+      padding: 0.5rem;
+      border-radius: 0.375rem;
+      margin-bottom: 0.25rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+    }
+    
+    .history-item:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+    
+    .history-icon {
+      margin-right: 0.5rem;
+    }
+    
+    .history-content {
+      flex: 1;
+      min-width: 0;
+    }
+    
+    .history-title {
+      font-size: 0.875rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    
+    .history-date {
+      font-size: 0.75rem;
+      color: var(--color-text-secondary);
+    }
+    
+    .history-footer {
+      padding: 0.75rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .new-chat-button {
+      width: 100%;
+      padding: 0.5rem 1rem;
+      background-color: var(--color-primary);
+      color: white;
+      border-radius: 0.375rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: background-color 0.2s;
+    }
+    
+    .new-chat-button:hover {
+      background-color: var(--color-primary-dark);
+    }
+    
+    /* Center Panel - Chat */
+    .chat-panel {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+    
+    .chat-header {
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .chat-title {
+      font-size: 1.125rem;
+      font-weight: 600;
+    }
+    
+    .chat-status {
+      font-size: 0.875rem;
+      color: var(--color-text-secondary);
+    }
+    
+    .persona-bar {
+      display: flex;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .persona-button {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      font-size: 0.875rem;
+      padding: 0.25rem 0.5rem;
+      border-radius: 0.375rem;
+      transition: transform 0.2s;
+    }
+    
+    .persona-button.active {
+      transform: scale(1.05);
+    }
+    
+    .persona-button[data-persona="ref"] {
+      color: var(--color-primary);
+    }
+    
+    .persona-button[data-persona="bug"] {
+      color: var(--color-warning);
+    }
+    
+    .persona-button[data-persona="sch"] {
+      color: var(--color-success);
+    }
+
+    /* Concepts toggle */
+    .concepts-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 0.5rem 1rem;
+      background-color: var(--color-surface-dark);
+      font-size: 0.75rem;
+      color: var(--color-text-secondary);
+    }
+
+    .toggle-label {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .toggle-switch {
+      position: relative;
+      display: inline-block;
+      width: 36px;
+      height: 18px;
+      margin-left: 0.5rem;
+    }
+
+    .toggle-switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .toggle-slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(255, 255, 255, 0.2);
+      transition: .4s;
+      border-radius: 34px;
+    }
+
+    .toggle-slider:before {
+      position: absolute;
+      content: "";
+      height: 14px;
+      width: 14px;
+      left: 3px;
+      bottom: 2px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+    }
+
+    input:checked + .toggle-slider {
+      background-color: var(--color-primary);
+    }
+
+    input:checked + .toggle-slider:before {
+      transform: translateX(16px);
+    }
+    
+    .chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      background-color: var(--color-surface-dark);
+    }
+    
+    .quick-actions {
+      display: none;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+      flex-wrap: wrap;
+    }
+    
+    .quick-action {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      background-color: rgba(35, 39, 47, 0.6);
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      transition: background-color 0.2s;
+    }
+    
+    .quick-action[data-action="optimize"]:hover {
+      background-color: rgba(59, 130, 246, 0.3);
+    }
+    
+    .quick-action[data-action="explain"]:hover {
+      background-color: rgba(16, 185, 129, 0.3);
+    }
+    
+    .chat-message {
+      max-width: 80%;
+      padding: 0.75rem 1.25rem;
+      border-radius: 1.25rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+      line-height: 1.5;
+      white-space: pre-wrap;
+    }
+    
+    .chat-message-user {
+      align-self: flex-end;
+      background-color: var(--color-primary);
+      color: white;
+    }
+    
+    .chat-message-assistant {
+      align-self: flex-start;
+      background-color: var(--color-surface-light);
+      color: var(--color-text-primary-light);
+      font-style: italic;
+      border-left: 4px solid;
+    }
+    
+    .chat-message-system {
+      align-self: center;
+      background-color: rgba(35, 39, 47, 0.4);
+      color: var(--color-text-secondary);
+      font-size: 0.875rem;
+      padding: 0.5rem 1rem;
+    }
+    
+    .chat-message-loading {
+      align-self: flex-start;
+      background-color: rgba(35, 39, 47, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .typing-indicator {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+    
+    .typing-indicator span {
+      width: 0.5rem;
+      height: 0.5rem;
+      border-radius: 50%;
+      background-color: var(--color-text-secondary);
+      animation: typing 1.4s infinite ease-in-out;
+    }
+    
+    .typing-indicator span:nth-child(1) {
+      animation-delay: 0s;
+    }
+    
+    .typing-indicator span:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+    
+    .typing-indicator span:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+    
+    @keyframes typing {
+      0%, 100% {
+        transform: translateY(0);
+        opacity: 0.3;
+      }
+      50% {
+        transform: translateY(-0.25rem);
+        opacity: 1;
+      }
+    }
+    
+    .chat-input-container {
+      padding: 1rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .chat-input-form {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-end;
+    }
+    
+    .message-input {
+      flex: 1;
+      resize: none;
+      background-color: transparent;
+      border: none;
+      color: var(--color-text-primary-dark);
+      font-family: inherit;
+      font-size: 1rem;
+      padding: 0.5rem 0;
+      outline: none;
+      min-height: 2.5rem;
+    }
+    
+    .message-input::placeholder {
+      color: var(--color-text-secondary);
+    }
+
+    .file-upload-button {
+      background: none;
+      border: none;
+      color: var(--color-text-secondary);
+      font-size: 1.25rem;
+      cursor: pointer;
+      padding: 0.5rem;
+      transition: color 0.2s;
+    }
+
+    .file-upload-button:hover {
+      color: var(--color-primary);
+    }
+
+    .clear-button {
+      background: none;
+      border: none;
+      color: var(--color-text-secondary);
+      font-size: 1rem;
+      cursor: pointer;
+      padding: 0.5rem;
+      transition: color 0.2s;
+    }
+
+    .clear-button:hover {
+      color: var(--color-primary);
+    }
+    
+    .send-button {
+      padding: 0.5rem 1rem;
+      background-color: var(--color-primary);
+      color: white;
+      border-radius: 9999px;
+      font-weight: 500;
+      font-size: 0.875rem;
+      transition: background-color 0.2s, transform 0.1s;
+    }
+    
+    .send-button:hover {
+      background-color: var(--color-primary-dark);
+    }
+    
+    .send-button:active {
+      transform: scale(0.95);
+    }
+    
+    /* Right Panel - Video */
+    .video-panel {
+      width: 448px;
+      flex-shrink: 0;
+      border-left: 1px solid rgba(255, 255, 255, 0.1);
+      background-color: var(--color-surface-dark);
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .video-header {
+      padding: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .video-title {
+      font-size: 1.125rem;
+      font-weight: 500;
+    }
+    
+    .video-toggle {
+      padding: 0.375rem 0.75rem;
+      background-color: var(--color-primary);
+      color: white;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+    
+    .video-toggle:hover {
+      background-color: var(--color-primary-dark);
+    }
+    
+    .video-content {
+      flex: 1;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .video-container {
+      background-color: black;
+      border-radius: 0.5rem;
+      overflow: hidden;
+      aspect-ratio: 16 / 9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-text-secondary);
+    }
+    
+    .video-container.active {
+      border: 2px solid var(--color-primary);
+    }
+    
+    .video-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .video-controls {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    
+    .video-control {
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+    
+    .video-control:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+    
+    .connection-info {
+      margin-top: 1.5rem;
+    }
+    
+    .connection-title {
+      font-size: 0.875rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+    
+    .connection-details {
+      font-size: 0.75rem;
+      color: var(--color-text-secondary);
+    }
+    
+    .connection-item {
+      margin-bottom: 0.25rem;
+    }
+
+    /* Concepts Panel */
+    .concepts-panel {
+      position: fixed;
+      right: 0;
+      top: 20%;
+      width: 250px;
+      background-color: var(--color-surface-dark);
+      border-top-left-radius: 0.75rem;
+      border-bottom-left-radius: 0.75rem;
+      box-shadow: -2px 0 15px rgba(0, 0, 0, 0.2);
+      padding: 1rem;
+      border-left: 2px solid var(--color-primary);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      max-height: 60vh;
+      overflow-y: auto;
+      z-index: 100;
+      display: none;
+    }
+
+    .concepts-panel h3 {
+      font-size: 0.875rem;
+      margin-bottom: 0.75rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .concepts-panel ul {
+      list-style: none;
+    }
+
+    .concepts-panel li {
+      padding: 0.375rem 0.5rem;
+      font-size: 0.8125rem;
+      margin-bottom: 0.25rem;
+      border-radius: 0.25rem;
+      display: flex;
+      align-items: center;
+    }
+
+    .concepts-panel li:hover {
+      background-color: rgba(255, 255, 255, 0.05);
+      cursor: pointer;
+    }
+
+    .concept-dot {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: var(--color-primary);
+      margin-right: 8px;
+    }
+
+    /* Upload Overlay */
+    .upload-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+
+    .upload-modal {
+      background-color: var(--color-surface-dark);
+      border-radius: 0.75rem;
+      width: 90%;
+      max-width: 500px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
+    }
+
+    .upload-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .upload-header h3 {
+      font-size: 1.125rem;
+      font-weight: 500;
+    }
+
+    .upload-close {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: var(--color-text-secondary);
+      cursor: pointer;
+    }
+
+    .upload-file-list {
+      max-height: 200px;
+      overflow-y: auto;
+      margin-bottom: 1.5rem;
+      background-color: rgba(0, 0, 0, 0.2);
+      border-radius: 0.5rem;
+      padding: 0.5rem;
+    }
+
+    .upload-file-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.5rem 0.75rem;
+      margin-bottom: 0.25rem;
+      background-color: rgba(255, 255, 255, 0.05);
+      border-radius: 0.25rem;
+    }
+
+    .upload-file-name {
+      font-size: 0.875rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 80%;
+    }
+
+    .upload-file-size {
+      font-size: 0.75rem;
+      color: var(--color-text-secondary);
+    }
+
+    .upload-progress {
+      margin-top: 1rem;
+    }
+
+    .upload-progress-bar {
+      height: 6px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 3px;
+      overflow: hidden;
+      margin-bottom: 0.5rem;
+    }
+
+    .upload-progress-fill {
+      height: 100%;
+      background-color: var(--color-primary);
+      border-radius: 3px;
+      transition: width 0.2s ease-in-out;
+    }
+
+    .upload-status-text {
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--color-text-secondary);
+    }
+    
+    /* Scrollbar Styling */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background-color: rgba(255, 255, 255, 0.12);
+      border-radius: 4px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+      background-color: rgba(255, 255, 255, 0.24);
+    }
+    
+    /* Responsive Adjustments */
+    @media (max-width: 1200px) {
+      .video-panel {
+        width: 320px;
+      }
+    }
+    
+    @media (max-width: 900px) {
+      .history-panel {
+        display: none;
+      }
+    }
+    
+    @media (max-width: 700px) {
+      .video-panel {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-container">
+    <!-- Left: History Panel -->
+    <div class="history-panel">
+      <div class="history-header">
+        <h2 class="history-title">TORI</h2>
+        <div class="search-container">
+          <input type="text" class="search-input" placeholder="Search...">
+        </div>
+      </div>
+      
+      <div class="history-tabs">
+        <button class="chat-tab active">Chats</button>
+        <button class="chat-tab">Projects</button>
+      </div>
+      
+      <div class="history-list">
+        <div class="history-item">
+          <span class="history-icon">🔧</span>
+          <div class="history-content">
+            <div class="history-title">Refactoring Session</div>
+            <div class="history-date">5/14/2025</div>
+          </div>
+        </div>
+        <div class="history-item">
+          <span class="history-icon">🐛</span>
+          <div class="history-content">
+            <div class="history-title">Bug Hunting</div>
+            <div class="history-date">5/13/2025</div>
+          </div>
+        </div>
+        <div class="history-item">
+          <span class="history-icon">📖</span>
+          <div class="history-content">
+            <div class="history-title">Learning React Hooks</div>
+            <div class="history-date">5/12/2025</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="history-footer">
+        <button class="new-chat-button">New Chat</button>
+      </div>
+    </div>
+    
+    <!-- Center: Chat Panel -->
+    <div class="chat-panel">
+      <div class="chat-header glass">
+        <h1 class="chat-title">TORI Chat</h1>
+        <span class="chat-status">Phase-Sync Mode</span>
+      </div>
+      
+      <div class="persona-bar glass">
+        <button class="persona-tab active" data-persona="ref">
+          <span>🔧</span>Refactorer
+        </button>
+        <button class="persona-tab" data-persona="bug">
+          <span>🐛</span>Debugger
+        </button>
+        <button class="persona-tab" data-persona="sch">
+          <span>📖</span>Scholar
+        </button>
+      </div>
+
+      <!-- Concepts toggle -->
+      <div class="concepts-toggle">
+        <label class="toggle-label">
+          <span>Show Extracted Concepts</span>
+          <div class="toggle-switch">
+            <input type="checkbox" class="concepts-toggle-checkbox" checked>
+            <span class="toggle-slider"></span>
+          </div>
+        </label>
+      </div>
+      
+      <div class="chat-messages">
+        <div class="quick-actions">
+          <button class="quick-action" data-action="optimize">
+            <span>⚡</span> Optimize loop
+          </button>
+          <button class="quick-action" data-action="explain">
+            <span>💡</span> Explain block
+          </button>
+        </div>
+        
+        <!-- Messages will be inserted here by JavaScript -->
+      </div>
+      
+      <div class="chat-input-container glass">
+        <form class="chat-input-form">
+          <button type="button" class="file-upload-button" title="Upload PDF files (max 10 files, 100MB each, 500MB total)">
+            📎
+          </button>
+          <textarea 
+            class="message-input" 
+            placeholder="Type a message…" 
+            rows="1"
+          ></textarea>
+          <button type="button" class="clear-button" title="Clear chat">
+            🗑️
+          </button>
+          <button type="submit" class="send-button">Send</button>
+        </form>
+      </div>
+    </div>
+    
+    <!-- Right: Video Panel -->
+    <div class="video-panel">
+      <div class="video-header">
+        <h2 class="video-title">Video Panel</h2>
+        <button class="video-toggle">📹 Start Video</button>
+      </div>
+      
+      <div class="video-content">
+        <div class="video-container">
+          <span>Click 'Start Video' to activate</span>
+        </div>
+        
+        <div class="video-controls">
+          <button class="video-control">🔇</button>
+          <button class="video-control">📷</button>
+          <button class="video-control">⚙️</button>
+        </div>
+        
+        <div class="connection-info">
+          <h3 class="connection-title">Connection Info</h3>
+          <div class="connection-details">
+            <p class="connection-item">Status: <span class="connection-status">Disconnected</span></p>
+            <p class="connection-item">Resolution: <span class="connection-resolution">N/A</span></p>
+            <p class="connection-item">Latency: <span class="connection-latency">N/A</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Hot Module Replacement for development -->
+  <script type="module">
+    import RefreshRuntime from 'http://localhost:5173/@react-refresh';
+    // hot-reload only when served by Vite dev server
+    if (RefreshRuntime && RefreshRuntime.injectIntoGlobalHook) {
+      RefreshRuntime.injectIntoGlobalHook(window);
+      window.$RefreshReg$ = () => {};
+      window.$RefreshSig$ = () => type => type;
+    }
+  </script>
+  <script src="standalone.js"></script>
+</body>
+</html>

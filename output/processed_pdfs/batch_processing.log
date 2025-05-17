@@ -1,0 +1,10 @@
+2025-05-10 07:43:09,916 DEBUG [batch_processing] Concept extraction for '1' used dummy placeholder. Replace with real pipeline.
+2025-05-10 07:43:10,305 DEBUG [batch_processing] Concept extr2025-05-10 07:43:12,569 INFO [batch_processing] Per-document log saved to output/processed_pdfs\batch_processing.json
+2025-05-10 07:43:12,580 INFO [batch_processing] Saved results for 17 docs to output/processed_pdfs\predictability_results.npz
+2025-05-10 07:43:12,583 INFO [batch_processing] Saved visualization JSON to output/processed_pdfs\predictability_results.json
+2025-05-10 07:43:12,583 INFO [batch_processing] Run summary saved to output/processed_pdfs\last_run_summary.json
+2025-05-10 07:43:12,583 INFO [batch_processing] Batch processing completed in 3.18 seconds.
+ine.
+2025-05-10 07:43:12,011 DEBUG [batch_processing] Concept extraction for '6' used dummy placeholder. Replace with real pipeline.
+2025-05-10 07:43:12,120 DEBUG [batch_processing] Concept extraction for '7' used dummy placeholder. Replace with real pipeline.
+2025-05-102025-05-10 07:43:12,380 DEBUG [batch_processing] Concept extraction for '9' used dummy placeholder. Replace with real pipeline.

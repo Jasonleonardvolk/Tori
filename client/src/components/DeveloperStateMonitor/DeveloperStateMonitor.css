@@ -1,0 +1,156 @@
+/* DeveloperStateMonitor.css */
+
+/* Shared styles for both compact and detailed views */
+.developer-state-monitor {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  margin-bottom: 16px;
+  color: #fff;
+}
+
+/* Highlight when state changes */
+.developer-state-monitor.state-changed {
+  animation: pulse 1.5s ease-in-out;
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.5); }
+  70% { box-shadow: 0 0 0 10px rgba(255, 255, 255, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
+}
+
+/* Compact view styles */
+.developer-state-monitor.compact {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  cursor: default;
+}
+
+.developer-state-monitor.compact .state-icon {
+  font-size: 1.2rem;
+}
+
+.developer-state-monitor.compact .state-label {
+  text-transform: capitalize;
+  font-weight: 500;
+}
+
+/* Detailed view styles */
+.developer-state-monitor.detailed {
+  width: 100%;
+  border: 1px solid #4b5563;
+  background-color: #1f2937;
+}
+
+.developer-state-monitor.detailed .monitor-header {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  gap: 10px;
+}
+
+.developer-state-monitor.detailed .state-icon {
+  font-size: 1.4rem;
+}
+
+.developer-state-monitor.detailed .state-label {
+  flex: 1;
+  font-weight: 500;
+  font-size: 1.1rem;
+}
+
+.developer-state-monitor.detailed .state-level {
+  font-weight: 600;
+  font-size: 0.9rem;
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 4px 8px;
+  border-radius: 12px;
+}
+
+.developer-state-monitor.detailed .monitor-content {
+  padding: 16px;
+}
+
+.developer-state-monitor.detailed .state-description {
+  margin-bottom: 14px;
+  color: #e5e7eb;
+  line-height: 1.4;
+  font-size: 0.95rem;
+}
+
+.developer-state-monitor.detailed .state-metrics {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.developer-state-monitor.detailed .metric {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.developer-state-monitor.detailed .metric label {
+  width: 100px;
+  color: #d1d5db;
+  font-size: 0.9rem;
+}
+
+.developer-state-monitor.detailed .metric-bar-container {
+  flex: 1;
+  height: 8px;
+  background-color: #374151;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.developer-state-monitor.detailed .metric-bar {
+  height: 100%;
+  transition: width 0.5s ease;
+}
+
+.developer-state-monitor.detailed .metric-value {
+  min-width: 40px;
+  text-align: right;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #d1d5db;
+}
+
+/* State-specific styles */
+.developer-state-monitor[data-state="focused"] {
+  border-color: #3b82f6;
+}
+
+.developer-state-monitor[data-state="frustrated"] {
+  border-color: #ef4444;
+}
+
+.developer-state-monitor[data-state="exploring"] {
+  border-color: #8b5cf6;
+}
+
+.developer-state-monitor[data-state="balanced"] {
+  border-color: #6b7280;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .developer-state-monitor.detailed .monitor-header {
+    padding: 10px 12px;
+  }
+  
+  .developer-state-monitor.detailed .monitor-content {
+    padding: 12px;
+  }
+  
+  .developer-state-monitor.detailed .metric label {
+    width: 80px;
+  }
+}

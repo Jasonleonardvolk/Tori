@@ -1,0 +1,128 @@
+[build-system]
+requires = ["setuptools>=42", "wheel", "setuptools_scm[toml]>=6.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "alan-core"
+dynamic = ["version"]
+description = "ALAN Core: Phase-coherent reasoning system with altermagnetic dynamics"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "Apache-2.0 WITH LLVM-exception"}
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+authors = [
+    {name = "ALAN Team", email = "alan@example.com"}
+]
+dependencies = [
+    "numpy>=1.20.0",
+    "scipy>=1.7.0",
+    "flatbuffers>=2.0.0",
+    "zstandard>=0.15.0",
+    "matplotlib>=3.5.0",
+    "psutil>=5.9.0",
+    "pydantic>=1.9.0"
+]
+
+[project.optional-dependencies]
+test = [
+    "pytest>=7.0.0",
+    "pytest-cov>=2.12.0",
+    "pytest-xdist>=2.5.0",
+    "pytest-benchmark>=3.4.0",
+    "tox>=3.24.0",
+]
+dev = [
+    "alan-core[test]",
+    "black>=22.3.0",
+    "isort>=5.10.0",
+    "mypy>=0.910",
+    "ruff>=0.0.220",
+]
+docs = [
+    "sphinx>=4.4.0",
+    "sphinx-rtd-theme>=1.0.0",
+    "sphinx-copybutton>=0.5.0",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/alan-team/kha"
+"Bug Tracker" = "https://github.com/alan-team/kha/issues"
+"Documentation" = "https://alan-team.github.io/kha"
+
+[tool.setuptools]
+packages = ["alan_backend"]
+license-files = ["LICENSE", "THIRD_PARTY_NOTICES.txt"]
+
+[tool.setuptools_scm]
+write_to = "alan_backend/_version.py"
+version_scheme = "post-release"
+local_scheme = "no-local-version"
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+testpaths = ["tests"]
+python_files = "test_*.py"
+python_classes = "Test*"
+python_functions = "test_*"
+xvs = true
+addopts = "-xvs --cov=alan_backend --cov-report=xml:coverage.xml --cov-report=term"
+
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+no_implicit_optional = true
+strict_optional = true
+
+[[tool.mypy.overrides]]
+module = "alan_backend.tests.*"
+disallow_untyped_defs = false
+disallow_incomplete_defs = false
+
+[tool.black]
+line-length = 88
+target-version = ['py38']
+include = '\.pyi?$'
+
+[tool.isort]
+profile = "black"
+line_length = 88
+multi_line_output = 3
+include_trailing_comma = true
+use_parentheses = true
+ensure_newline_before_comments = true
+force_grid_wrap = 0
+
+[tool.ruff]
+line-length = 88
+target-version = "py38"
+select = ["E", "F", "B", "I"]
+ignore = ["E203", "E501"]
+
+[tool.tox]
+legacy_tox_ini = """
+[tox]
+envlist = py38, py39, py310, py311
+isolated_build = True
+
+[testenv]
+deps = 
+    pytest>=7.0.0
+    pytest-cov>=2.12.0
+commands =
+    pytest {posargs:tests}
+"""

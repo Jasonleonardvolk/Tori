@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="ALAN IDE - Agent Suggestions System with real-time updates"
+    />
+    <link rel="apple-touch-icon" href="logo192.png" />
+    <link rel="manifest" href="manifest.json" />
+    <title>ALAN IDE</title>
+    <style>
+      :root {
+        /* Design tokens from ui_wireframes.md */
+        --color-bg-dark: #1E1E1E;
+        --color-bg-light: #E0E0E0;
+        --color-surface-dark: #23272F;
+        --color-surface-light: #F5F5F5;
+        
+        --color-primary: #00FFCC;
+        --color-primary-dark: #00FFC8;
+        --color-primary-light: #1E90FF;
+        
+        --color-secondary: #FF007F;
+        --color-secondary-alt: #FF6F61;
+        
+        --color-purple: #8A2BE2;
+        --color-gold: #FFD700;
+        
+        --color-success: #32CD32;
+        --color-warning: #FFC857;
+        --color-error: #FF6B6B;
+        
+        --color-text-primary-dark: #E0E0E0;
+        --color-text-primary-light: #23272F;
+        --color-text-secondary: #A9B1BD;
+      }
+      
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+          Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        background-color: var(--color-bg-dark);
+        color: var(--color-text-primary-dark);
+      }
+      
+      #root {
+        display: flex;
+        min-height: 100vh;
+        flex-direction: column;
+      }
+      
+      .loading-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        text-align: center;
+        padding: 0 20px;
+      }
+      
+      .loading-logo {
+        font-size: 2.5rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+        color: var(--color-primary);
+      }
+      
+      .loading-message {
+        margin-bottom: 2rem;
+        font-size: 1.2rem;
+      }
+      
+      .loading-spinner {
+        border: 4px solid rgba(0, 255, 204, 0.1);
+        border-radius: 50%;
+        border-top: 4px solid var(--color-primary);
+        width: 40px;
+        height: 40px;
+        animation: spin 1s linear infinite;
+        margin-bottom: 1.5rem;
+      }
+      
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+    </style>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root">
+      <div class="loading-container">
+        <div class="loading-logo">ALAN IDE</div>
+        <div class="loading-message">Connecting to agent suggestion system...</div>
+        <div class="loading-spinner"></div>
+        <p>If the application doesn't load, please check that the backend server is running.</p>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,8 @@
+{
+  "hesitation": 0.5,
+  "recursion": 2,
+  "entropy": 0.7,
+  "anticipation": 0.7,
+  "fatigue": 0.6,
+  "focusLoss": 0.5
+}

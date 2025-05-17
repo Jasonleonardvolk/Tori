@@ -1,0 +1,29 @@
+# ALAN System Requirements
+
+# Core numerical and scientific libraries
+numpy>=1.20.0
+scipy>=1.7.0
+matplotlib>=3.4.0
+networkx>=2.6.0
+
+# PDF processing
+PyPDF2>=2.0.0
+pdf2image>=1.16.0
+pytesseract>=0.3.8  # For OCR if needed
+
+# Utilities
+tqdm>=4.62.0  # Progress bars
+pyyaml>=6.0  # Configuration management
+jsonschema>=4.4.0  # JSON validation
+
+# Optional dependencies for advanced features
+scikit-learn>=1.0.0  # For clustering and ML algorithms
+joblib>=1.1.0  # For parallel processing
+h5py>=3.6.0  # For efficient storage of large matrices
+nltk>=3.6.0  # For natural language processing tasks
+pillow>=9.0.0  # Image processing for visualizations
+
+# Development tools
+pytest>=6.2.5  # Testing
+flake8>=4.0.0  # Linting
+mypy>=0.910  # Type checking

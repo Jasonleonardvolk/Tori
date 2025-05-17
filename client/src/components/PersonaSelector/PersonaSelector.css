@@ -1,0 +1,237 @@
+/**
+ * Persona Selector Styles
+ * 
+ * Styling for the Persona Selector component.
+ * Part of Sprint 2 - Phase 3 ALAN IDE implementation.
+ */
+
+.persona-selector {
+  position: relative;
+  font-family: var(--alan-font-sans, sans-serif);
+  z-index: 1000;
+}
+
+/* Positioning classes */
+.persona-selector.top-right {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+}
+
+.persona-selector.top-left {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+}
+
+.persona-selector.bottom-right {
+  position: absolute;
+  bottom: 0.75rem;
+  right: 0.75rem;
+}
+
+.persona-selector.bottom-left {
+  position: absolute;
+  bottom: 0.75rem;
+  left: 0.75rem;
+}
+
+/* Current persona button */
+.persona-current-btn {
+  display: flex;
+  align-items: center;
+  background-color: var(--alan-bg-surface, #2a2a2a);
+  color: var(--alan-text-primary, #ffffff);
+  border: 1px solid var(--alan-border-subtle, #444444);
+  border-radius: 20px;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.persona-current-btn:hover {
+  background-color: var(--alan-bg-surface-hover, #333333);
+  border-color: var(--alan-border-highlight, #666666);
+}
+
+.persona-current-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--alan-focus-ring, rgba(77, 144, 254, 0.5));
+}
+
+/* Persona icon */
+.persona-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  margin-right: 0.5rem;
+  color: var(--alan-icon-primary, #ffffff);
+}
+
+.fallback-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background-color: var(--alan-accent-primary, #4d90fe);
+  border-radius: 50%;
+  font-weight: bold;
+  font-size: 0.875rem;
+}
+
+/* Persona name */
+.persona-name {
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* Persona dropdown menu */
+.persona-menu {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  background-color: var(--alan-bg-surface, #2a2a2a);
+  border: 1px solid var(--alan-border-subtle, #444444);
+  border-radius: 8px;
+  width: 300px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  animation: persona-menu-fadein 0.2s ease;
+}
+
+@keyframes persona-menu-fadein {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Adjust position for bottom variants */
+.persona-selector.bottom-left .persona-menu,
+.persona-selector.bottom-right .persona-menu {
+  top: auto;
+  bottom: calc(100% + 0.5rem);
+  animation: persona-menu-fadein-bottom 0.2s ease;
+}
+
+@keyframes persona-menu-fadein-bottom {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.persona-selector.top-left .persona-menu,
+.persona-selector.bottom-left .persona-menu {
+  right: auto;
+  left: 0;
+}
+
+/* Persona options */
+.persona-option {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: none;
+  background-color: transparent;
+  color: var(--alan-text-primary, #ffffff);
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.persona-option:hover {
+  background-color: var(--alan-bg-surface-hover, #333333);
+}
+
+.persona-option:focus {
+  outline: none;
+  background-color: var(--alan-bg-surface-focus, #333333);
+}
+
+.persona-option.active {
+  background-color: var(--alan-bg-selected, rgba(77, 144, 254, 0.2));
+}
+
+.persona-option .persona-icon {
+  flex-shrink: 0;
+}
+
+.persona-details {
+  flex-grow: 1;
+  margin-left: 0.5rem;
+}
+
+.persona-details .persona-name {
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.persona-description {
+  font-size: 0.75rem;
+  color: var(--alan-text-secondary, #aaaaaa);
+  line-height: 1.3;
+}
+
+/* Persona footer */
+.persona-footer {
+  border-top: 1px solid var(--alan-border-subtle, #444444);
+  padding: 0.75rem 1rem;
+  font-size: 0.75rem;
+  color: var(--alan-text-secondary, #aaaaaa);
+  background-color: var(--alan-bg-surface-alt, #252525);
+}
+
+.persona-shortcut-hint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.persona-shortcut-hint kbd {
+  display: inline-block;
+  background-color: var(--alan-bg-surface-alt, #333333);
+  border: 1px solid var(--alan-border-subtle, #555555);
+  border-radius: 3px;
+  padding: 0.125rem 0.375rem;
+  font-family: var(--alan-font-mono, monospace);
+  font-size: 0.75rem;
+  margin: 0 0.25rem;
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .persona-menu {
+    animation: none;
+  }
+}
+
+/* High contrast mode support */
+@media (forced-colors: active) {
+  .persona-current-btn {
+    border: 2px solid ButtonText;
+  }
+  
+  .persona-option.active {
+    background-color: Highlight;
+    color: HighlightText;
+  }
+  
+  .persona-option:focus {
+    outline: 2px solid Highlight;
+  }
+}

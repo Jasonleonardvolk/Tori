@@ -1,0 +1,222 @@
+/**
+ * Concept Editor Panel Styles
+ * 
+ * Styling for the integrated CodeMirror editor and ConceptFieldCanvas.
+ * Part of Sprint 2 - Phase 3 ALAN IDE implementation.
+ */
+
+.concept-editor-panel {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  --editor-min-width: 300px;
+  --canvas-min-width: 300px;
+  --toolbar-width: 40px;
+  --gutter-size: 4px;
+}
+
+/* Layout: Split Horizontal (default) */
+.concept-editor-panel.split-horizontal {
+  flex-direction: row;
+}
+
+.concept-editor-panel.split-horizontal .code-editor-container {
+  width: 50%;
+  min-width: var(--editor-min-width);
+  border-right: var(--gutter-size) solid var(--alan-border-subtle, #444);
+}
+
+.concept-editor-panel.split-horizontal .concept-canvas-container {
+  width: 50%;
+  min-width: var(--canvas-min-width);
+}
+
+/* Layout: Split Vertical */
+.concept-editor-panel.split-vertical {
+  flex-direction: column;
+}
+
+.concept-editor-panel.split-vertical .code-editor-container {
+  height: 50%;
+  min-height: 200px;
+  border-bottom: var(--gutter-size) solid var(--alan-border-subtle, #444);
+}
+
+.concept-editor-panel.split-vertical .concept-canvas-container {
+  height: 50%;
+}
+
+/* Layout: Split Vertical Concept First */
+.concept-editor-panel.split-vertical-concept-first {
+  flex-direction: column;
+}
+
+.concept-editor-panel.split-vertical-concept-first .concept-canvas-container {
+  height: 60%;
+  order: -1;
+  border-bottom: var(--gutter-size) solid var(--alan-border-subtle, #444);
+}
+
+.concept-editor-panel.split-vertical-concept-first .code-editor-container {
+  height: 40%;
+  min-height: 150px;
+}
+
+/* Layout: Editor Only */
+.concept-editor-panel.editor-only .code-editor-container {
+  width: 100%;
+  height: 100%;
+}
+
+/* Layout: Concept Only */
+.concept-editor-panel.concept-only .concept-canvas-container {
+  width: 100%;
+  height: 100%;
+}
+
+/* Code Editor Container */
+.code-editor-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.code-editor {
+  flex-grow: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Make CodeMirror take full size of container */
+.code-editor .CodeMirror {
+  height: 100%;
+  font-family: var(--alan-font-mono, 'Menlo', 'Monaco', 'Courier New', monospace);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* Concept gutter markers */
+.CodeMirror .concept-gutter {
+  width: 16px;
+  background-color: var(--alan-bg-surface-alt, #252525);
+  border-right: 1px solid var(--alan-border-subtle, #444);
+}
+
+.concept-marker {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 16px;
+  height: 16px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+/* Highlighted concepts in the editor */
+.highlighted-concept {
+  background-color: var(--alan-bg-selected, rgba(77, 144, 254, 0.2));
+  border-radius: 2px;
+}
+
+/* Concept Canvas Container */
+.concept-canvas-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.integrated-concept-canvas {
+  width: 100%;
+  height: 100%;
+}
+
+/* Editor Toolbar */
+.editor-toolbar {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--alan-bg-surface, #2a2a2a);
+  border-left: 1px solid var(--alan-border-subtle, #444);
+  border-bottom: 1px solid var(--alan-border-subtle, #444);
+  border-bottom-left-radius: 4px;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+  z-index: 10;
+}
+
+.editor-toolbar:hover {
+  opacity: 1;
+}
+
+.editor-toolbar button {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  color: var(--alan-text-secondary, #aaa);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.editor-toolbar button:hover {
+  color: var(--alan-text-primary, #fff);
+  background-color: var(--alan-bg-surface-hover, #333);
+}
+
+.editor-toolbar button.active {
+  color: var(--alan-accent-primary, #4d90fe);
+}
+
+/* Responsive adaptations */
+@media (max-width: 768px) {
+  .concept-editor-panel.split-horizontal {
+    flex-direction: column;
+  }
+  
+  .concept-editor-panel.split-horizontal .code-editor-container {
+    width: 100%;
+    height: 50%;
+    min-height: 200px;
+    border-right: none;
+    border-bottom: var(--gutter-size) solid var(--alan-border-subtle, #444);
+  }
+  
+  .concept-editor-panel.split-horizontal .concept-canvas-container {
+    width: 100%;
+    height: 50%;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .editor-toolbar {
+    transition: none;
+  }
+  
+  .editor-toolbar button {
+    transition: none;
+  }
+}
+
+/* High contrast mode */
+@media (forced-colors: active) {
+  .highlighted-concept {
+    border: 1px solid Highlight;
+    background-color: transparent;
+  }
+  
+  .concept-marker {
+    color: Highlight;
+  }
+  
+  .editor-toolbar button.active {
+    border: 1px solid Highlight;
+  }
+}

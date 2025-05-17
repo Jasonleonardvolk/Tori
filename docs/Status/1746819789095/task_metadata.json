@@ -1,0 +1,76 @@
+{
+  "files_in_context": [
+    {
+      "path": "../../../AppData/Roaming/Code/User/globalStorage/saoudrizwan.claude-dev/settings/cline_mcp_settings.json",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": null,
+      "cline_edit_date": null,
+      "user_edit_date": 1746819849213
+    },
+    {
+      "path": "../../../AppData/Roaming/Code/User/globalStorage/saoudrizwan.claude-dev/settings/cline_mcp_settings.json",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746819855640,
+      "cline_edit_date": 1746819855640,
+      "user_edit_date": 1746819849213
+    },
+    {
+      "path": "../../../AppData/Roaming/Code/User/globalStorage/saoudrizwan.claude-dev/settings/cline_mcp_settings.json",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1746819855640,
+      "cline_edit_date": 1746819855640,
+      "user_edit_date": 1746819855645
+    },
+    {
+      "path": "../../../AppData/Roaming/Code/User/globalStorage/saoudrizwan.claude-dev/settings/cline_mcp_settings.json",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746819978637,
+      "cline_edit_date": 1746819855640,
+      "user_edit_date": 1746819855645
+    },
+    {
+      "path": "../../../AppData/Roaming/Code/User/globalStorage/saoudrizwan.claude-dev/settings/cline_mcp_settings.json",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1746819978637,
+      "cline_edit_date": 1746819855640,
+      "user_edit_date": 1746819993827
+    },
+    {
+      "path": "../../../AppData/Roaming/Code/User/globalStorage/saoudrizwan.claude-dev/settings/cline_mcp_settings.json",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746819993874,
+      "cline_edit_date": 1746819993874,
+      "user_edit_date": 1746819993827
+    },
+    {
+      "path": "../../../AppData/Roaming/Code/User/globalStorage/saoudrizwan.claude-dev/settings/cline_mcp_settings.json",
+      "record_state": "active",
+      "record_source": "user_edited",
+      "cline_read_date": 1746819993874,
+      "cline_edit_date": 1746819993874,
+      "user_edit_date": 1746819993878
+    },
+    {
+      "path": "test-mcp-filesystem.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746820051932,
+      "cline_edit_date": 1746820051932,
+      "user_edit_date": null
+    }
+  ],
+  "model_usage": [
+    {
+      "ts": 1746819855808,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    }
+  ]
+}

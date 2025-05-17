@@ -1,0 +1,18 @@
+{
+  "name": "alan-agent-suggestions-server",
+  "version": "1.0.0",
+  "description": "Server for ALAN IDE agent suggestions",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node dev-server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.2",
+    "express": "^4.18.2",
+    "express-session": "^1.18.1",
+    "google-auth-library": "^9.15.1",
+    "ws": "^8.14.2"
+  }
+}

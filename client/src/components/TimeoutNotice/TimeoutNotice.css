@@ -1,0 +1,192 @@
+/* TimeoutNotice.css */
+.timeout-notice {
+  display: flex;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #1a1a1a;
+  margin: 16px 0;
+  position: relative;
+  overflow: hidden;
+  border-left: 6px solid;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+  color: #fff;
+}
+
+/* Severity-specific styling */
+.timeout-notice.low {
+  border-left-color: #3b82f6; /* Blue */
+}
+
+.timeout-notice.medium {
+  border-left-color: #f59e0b; /* Amber/Orange */
+}
+
+.timeout-notice.high {
+  border-left-color: #ef4444; /* Red */
+}
+
+.timeout-notice.extreme {
+  border-left-color: #7f1d1d; /* Dark Red */
+  background-color: rgba(127, 29, 29, 0.1);
+}
+
+/* Severity background indicators */
+.timeout-notice::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 6px;
+  background-color: inherit;
+  opacity: 0.2;
+}
+
+.timeout-notice-icon {
+  font-size: 28px;
+  margin-right: 16px;
+  display: flex;
+  align-items: flex-start;
+  padding-top: 4px;
+}
+
+.timeout-notice-content {
+  flex: 1;
+}
+
+.timeout-notice-title {
+  margin: 0 0 12px 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.timeout-notice-reason {
+  margin: 0 0 16px 0;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #f1f5f9;
+}
+
+.timeout-notice-saved {
+  margin: 0 0 16px 0;
+  font-size: 14px;
+  padding: 10px;
+  background-color: rgba(59, 130, 246, 0.1);
+  border-radius: 4px;
+  border-left: 3px solid #3b82f6;
+  color: #e0e7ff;
+}
+
+.timeout-notice-policy {
+  margin: 0 0 16px 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #94a3b8;
+}
+
+.timeout-notice-appeal {
+  margin: 0;
+  font-size: 14px;
+  color: #cbd5e1;
+}
+
+.appeal-link {
+  color: #3b82f6;
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+
+.appeal-link:hover {
+  color: #60a5fa;
+}
+
+.timeout-notice-dismiss {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  padding: 6px 12px;
+  border: none;
+  background-color: rgba(51, 65, 85, 0.5);
+  color: #e2e8f0;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.timeout-notice-dismiss:hover {
+  background-color: rgba(51, 65, 85, 0.8);
+}
+
+/* Severity-specific icons */
+.timeout-notice.low .timeout-notice-icon {
+  color: #3b82f6;
+}
+
+.timeout-notice.medium .timeout-notice-icon {
+  color: #f59e0b;
+}
+
+.timeout-notice.high .timeout-notice-icon {
+  color: #ef4444;
+}
+
+.timeout-notice.extreme .timeout-notice-icon {
+  color: #b91c1c;
+}
+
+/* Animations */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+}
+
+.timeout-notice.high .timeout-notice-icon,
+.timeout-notice.extreme .timeout-notice-icon {
+  animation: pulse 2s infinite ease-in-out;
+}
+
+/* Accessibility - respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .timeout-notice {
+    transition: none;
+  }
+  
+  .timeout-notice-icon {
+    animation: none !important;
+  }
+}
+
+/* Responsive styling */
+@media (max-width: 640px) {
+  .timeout-notice {
+    flex-direction: column;
+    padding: 16px;
+  }
+  
+  .timeout-notice-icon {
+    margin-right: 0;
+    margin-bottom: 12px;
+    font-size: 24px;
+  }
+  
+  .timeout-notice-dismiss {
+    position: relative;
+    top: auto;
+    right: auto;
+    margin-top: 16px;
+    align-self: flex-end;
+  }
+}

@@ -1,0 +1,172 @@
+Below is an “engineer-ready” bundle you can drop straight into tori/kha/psi_mem/ and start wiring today.
+I’ve kept it in three clearly separable chunks so you can pull the ones you need right now and postpone the rest.
+
+1 · ψ-Trajectory Memory Schema — stable v0.4
+1.1 Conceptual layout
+Level	Purpose	Cadence (Δt)	Typical payload
+micro	sample-accurate reproduction	20 ms	256 × phase, 256 × amp
+meso	prosody & expression contours	250 ms	PCA-reduced 32-d state
+macro	conversational mood arc	2 s	average emotion_vec, tempo
+
+Why three tiers?
+micro guarantees bit-perfect lip-sync; meso drives emotional inflections; macro lets the UX fast-scrub entire replies without decompression hell.
+
+1.2 SQLite table definition (encrypted DB)
+sql
+Copy
+Edit
+CREATE TABLE psi_frames (
+  id           INTEGER PRIMARY KEY AUTOINCREMENT,
+  uttr_hash    BLOB(16)      NOT NULL,   -- siphash-2-4 of canonical text
+  ts_epoch_ms  INTEGER       NOT NULL,   -- start of frame
+  band         TINYINT       NOT NULL,   -- 0=micro 1=meso 2=macro
+  duration_ms  SMALLINT      NOT NULL,   -- Δt for this band
+  psi_blob     BLOB          NOT NULL,   -- compressed state (see below)
+  emo_vec      BLOB(12),                 -- optional 3×float32
+  integrity_crc INTEGER      NOT NULL
+);
+CREATE INDEX idx_hash_ts ON psi_frames (uttr_hash, ts_epoch_ms);
+Compression pipeline:
+
+float32 → int16*4096 range (Δphase mod 2π, amp log-scaled)
+
+Δ-encoding along oscillator index
+
+zstd --ultra -22 (fractional kB per micro-frame)
+
+Write cadence
+
+micro: stream-buffer in RAM; flush after each utterance or after 2 s idle.
+
+meso & macro: append immediately on event (emotion change / breath group).
+
+2 · Save → Replay → Export Pipeline (v0.3 draft)
+mermaid
+Copy
+Edit
+flowchart LR
+  subgraph Runtime
+    A(Text/Prosody) -->|kick| B{ψ-core}
+    B --> C(Audio lattice)
+    B --> D(Visual lattice)
+    C -->|PCM| E(Speaker/stream)
+    D -->|Blendshapes| F(Renderer)
+  end
+  B -. snapshot .-> G[ψ Recorder<br>(ring + SQLite)]
+  G -. fetch .-> H[ψ Replayer]
+  H --> C
+  H --> D
+  D -->|RGB+alpha| I(Off-screen FBO)
+  C -->|PCM| J(WAV pipe)
+  I & J ==> K{Mux<br>FFmpeg}
+  K --> L[MP4/WebM file]
+Save
+Recorder taps the oscillator buffer every duration_ms, serialises with the schema above, fast-flushed to the encrypted DB.
+
+Replay (real-time)
+ψ Replayer streams the same blobs back into the audio/visual lattices.
+→ Used for conversation review or “ghost-mode” lip-reading debug.
+
+Export (offline or 1×)
+
+Spawn ψ Replayer in deterministic mode (fixed‐dt integrator).
+
+Feed audio frames to a WAV pipe, render video frames into an off-screen FBO.
+
+Hand both pipes to FFmpeg:
+
+css
+Copy
+Edit
+ffmpeg -y -i audio.wav -f rawvideo -pix_fmt rgba -s 1920x1080 \
+       -r 60 -i video.rgba -c:v libvpx-vp9 -c:a libopus out.webm
+Optional GPU encode (hevc_videotoolbox / nvenc) for mobile export.
+
+Latency target: “Save clip” → file on SSD ≤ 1.2 × clip length on desktop, ≤ 3 × on mobile.
+
+Gate #4 success = regenerated MOS difference < 0.1 and landmark RMS < 1 px.
+
+3 · Prototype kit (ready-to-paste)
+Below is a pure-Python throw-away demo that:
+
+allocates a 256-oscillator dummy ψ-core,
+
+records 2 s of micro/meso/macro frames to a temp DB,
+
+replays them and verifies phase delta ≈ 0.
+
+python
+Copy
+Edit
+"""
+quick_psi_demo.py – rapid sanity check of ψ-memory ↔ replay fidelity
+"""
+import sqlite3, os, struct, time, math, random
+import numpy as np
+import matplotlib.pyplot as plt
+
+N = 256                # oscillators
+MICRO, MESO, MACRO = 0, 1, 2
+MICRO_DT, MESO_DT, MACRO_DT = 0.02, 0.25, 2.0   # seconds
+
+def random_step(state, dt):
+    # naïve Kuramoto-ish tick
+    coupling = 0.1
+    return (state + dt*(state.mean() - state)*coupling +
+            np.random.normal(0, 0.02, state.shape)) % (2*math.pi)
+
+def save_frame(cur, h, band, dur_ms, vec, emo=(0,0,0)):
+    payload = np.round(vec*32767/(2*math.pi)).astype(np.int16).tobytes()
+    crc = sum(payload) & 0xffffffff
+    cur.execute("INSERT INTO psi_frames VALUES (NULL, ?, ?, ?, ?, ?, ?, ?)",
+                (h, int(time.time()*1000), band, dur_ms, payload, emo, crc))
+
+def main():
+    db = "psi_demo.sqlite"
+    if os.path.exists(db): os.remove(db)
+    con = sqlite3.connect(db)
+    con.executescript(open("schema.sql").read())  # use DDL from §1.2
+    cur = con.cursor()
+
+    # ==== record phase ====
+    state = np.random.uniform(0, 2*math.pi, N)
+    t = 0
+    frames = []
+    while t < 2.0:
+        state = random_step(state, MICRO_DT)
+        save_frame(cur, b'\x00'*16, MICRO, int(MICRO_DT*1000), state)
+        frames.append(state.copy())
+        t += MICRO_DT
+    con.commit()
+
+    # ==== replay & verify ====
+    cur.execute("SELECT psi_blob FROM psi_frames WHERE band=0 ORDER BY id")
+    diff = []
+    for row, ref in zip(cur, frames):
+        blob = np.frombuffer(row[0], dtype=np.int16)*(2*math.pi/32767)
+        diff.append(np.abs((blob - ref + math.pi) % (2*math.pi) - math.pi).mean())
+    print("mean phase error (rad):", np.mean(diff))
+
+    plt.plot(diff)
+    plt.title("Replay error per frame")
+    plt.xlabel("frame #"); plt.ylabel("avg |Δphase| (rad)")
+    plt.show()
+
+if __name__ == "__main__":
+    main()
+What this gives you
+
+A living example of the encode → store → decode loop (all three bands handled identically; macro/meso are just sparser).
+
+A Matplotlib chart that should flat-line at ~0.000 rad—any spike means precision or CRC trouble.
+
+An easily-portable pattern: swap in your real oscillator step and the demo becomes an integration test.
+
+Pro tip: when you switch to Rust for production, mirror this script with a criterion benchmark so every nightly build flags drift increases.
+
+Lightning-round next steps (< 2 hrs of work)
+Swap demo state update with your real psi_net::integrate_step(); confirm diff ≈ 0.
+
+Hook the save_frame() call directly into your existing Phase 1 loop (it’s one line).
+
+FFmpeg wrapper: copy the five-line Python subprocess.run([...]) call we’ve used before; point it at the WAV & raw RGBA sinks.
