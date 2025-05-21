@@ -1,0 +1,124 @@
+{
+  "files_in_context": [
+    {
+      "path": "client/src/index.js",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746980444278,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/index.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746980555112,
+      "cline_edit_date": 1746980555112,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/index.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746980579969,
+      "cline_edit_date": 1746980579969,
+      "user_edit_date": null
+    },
+    {
+      "path": "server/google-oauth-server.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746980598180,
+      "cline_edit_date": 1746980598180,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/App.jsx",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746980613534,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/components/UserAuthPanel.jsx",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746980620349,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/components/UserAuthPanel.jsx",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746980637282,
+      "cline_edit_date": 1746980637282,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/components/UserAuthPanel.jsx",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746980648995,
+      "cline_edit_date": 1746980648995,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/App.jsx",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746980662750,
+      "cline_edit_date": 1746980662750,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/App.jsx",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746980676731,
+      "cline_edit_date": 1746980676731,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/App.css",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746980690861,
+      "cline_edit_date": 1746980690861,
+      "user_edit_date": null
+    },
+    {
+      "path": "start-google-auth.bat",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746980721767,
+      "cline_edit_date": 1746980721767,
+      "user_edit_date": null
+    },
+    {
+      "path": "start-client.bat",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746980733214,
+      "cline_edit_date": 1746980733214,
+      "user_edit_date": null
+    },
+    {
+      "path": "start-oauth-demo.bat",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746980748091,
+      "cline_edit_date": 1746980748091,
+      "user_edit_date": null
+    }
+  ],
+  "model_usage": [
+    {
+      "ts": 1746980401331,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    }
+  ]
+}

@@ -1,0 +1,1510 @@
+--- PAGE 1 ---
+SWtools: A Python module implementing iterative solvers for soliton solutions of
+nonlinear Schr¨odinger-type equations
+O. Melcherta,b,∗, A. Demircana,b
+aLeibniz Universit¨at Hannover, Institute of Quantum Optics, Welfengarten 1, 30167 Hannover, Germany
+bLeibniz Universit¨at Hannover, Cluster of Excellence PhoenixD, Welfengarten 1A, 30167 Hannover, Germany
+Abstract
+Solitons are ubiquitous in nature and play a pivotal role in the structure and dynamics of solutions of nonlinear propagation equa-
+tions. In many instances where solitons exist, analytical expressions of these special objects are not available. The presented
+software fills this gap, allowing users to numerically calculate soliton solutions for nonlinear Schr¨odinger-type equations by iter-
+atively solving an associated nonlinear eigenvalue problem. The package implements a range of methods, including the spectral
+renormalization method (SRM), and a relaxation method for the problem with additional normalization constraint (NSOM). We
+verify the implemented methods in terms of a problem for which an analytical soliton expression is available, and demonstrate the
+implemented functionality by numerical experiments for example problems in nonlinear optics and matter-wave solitons in quan-
+tum mechanics. The presented Python package is open-source and released under the MIT License in a publicly available software
+repository (https://github.com/omelchert/SWtools).
+Keywords: Nonlinear Schr¨odinger equation, Solitary waves, Relaxation method, Spectral renormalization method, Python
+Contents
+1
+Introduction
+1
+2
+Computational problem solved by the software
+2
+3
+Software description
+2
+3.1
+Software architecture . . . . . . . . . . . . . .
+3
+3.2
+Software functionalities . . . . . . . . . . . . .
+3
+3.2.1
+Description of the spectral renormal-
+ization method (SRM) . . . . . . . . .
+3
+3.2.2
+Description of the nonlinear successive
+overrelaxation method (NSOM) . . . .
+4
+4
+Usage examples
+4
+4.1
+Verification of the implementation . . . . . . .
+4
+4.2
+Application of the NSOM to find ground-state
+solutions for a GPE . . . . . . . . . . . . . . .
+5
+4.3
+Application of the SRM to find solutions of a
+HONSE . . . . . . . . . . . . . . . . . . . . .
+5
+4.4
+Application of the SRM to find solutions of a
+GNSE with periodic nonlinearity
+. . . . . . .
+6
+4.5
+Application of the NSOM to find excited states
+for a model GPE
+. . . . . . . . . . . . . . . .
+7
+4.6
+Software integration with py-fmas . . . . . . .
+7
+4.7
+Extension of the SRM to d = 2 . . . . . . . . .
+8
+5
+Discussion
+9
+∗Corresponding author.
+E-mail address: melchert@iqo.uni-hannover.de
+6
+Conclusions
+10
+Appendix A
+Documentation of subclass SRM
+10
+Appendix B
+Documentation of subclass NSOM
+11
+1. Introduction
+Solitary waves (SWs) describe localized solutions of non-
+linear wave equations [1, 2, 3].
+They travel with constant
+shape and speed and can only exist when the linear effects
+on the pulse envelope are balanced by the effects imposed by
+the nonlinearity. Collisions among SWs are typically inelas-
+tic [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]: the col-
+liding pulses can exchange energy and momentum, may suf-
+fer radiation losses, and even form short-lived bound states.
+However, special SWs – called solitons – exist [1], that in-
+teract elastically and emerge from collisions with unchanged
+shape and speed.
+The mutual interaction of such true soli-
+tons is evidenced only by a phase-shift that both pulses ac-
+quire during their collision [2].
+SWs and solitons arise in
+diverse fields of physics, governed, e.g., by the Korteweg-
+deVries equation in hydrodynamics and plasma physics [1],
+the Schr¨odinger-Poisson system in computational cosmology
+[17, 18], the Gross-Pitaevskii equation in quantum mechanics
+[19, 12], and nonlinear Schr¨odinger-type equations in nonlin-
+ear optics [20]. They play an important role in the structure
+and dynamics of general solutions of the underlying equations.
+Despite the difference between SWs and solitons, we will sub-
+sequently use both terms interchangeably.
+arXiv:2504.10623v1  [physics.comp-ph]  14 Apr 2025
+
+--- PAGE 2 ---
+Soliton propagation is of considerable scientific and techno-
+logical interest [20, 21]. The task of finding soliton solutions for
+nonlinear wave equations, however, is a nontrivial task. Math-
+ematical techniques have been developed that yield analytical
+soliton solutions for several paradigmatic nonlinear equations
+[2, 22, 23, 24, 25, 26, 27, 28]. For most nonlinear problems,
+however, one has to rely on numerical techniques to determine
+the shapes of solitons.
+For this purpose, iterative methods,
+originally developed for linear problems [29, 30], have been
+generalized to nonlinear settings [31, 32, 33, 34, 30]. Com-
+monly used methods are, e.g. the shooting method [35, 36, 37],
+Petviashvili-type iteration methods [38, 39], imaginary time
+evolution methods [40, 41, 42], squared-operator methods [43],
+Newton’s method [44, 45, 46], and conjugate gradient meth-
+ods [47, 48]. We here provide a Python framework that al-
+lows to conveniently implement such iterative methods for
+the numerical computation of SW solutions for a nonlinear
+Schr¨odinger-type equation.
+The article is organized as follows. In Section 2 we state the
+computational problem solved by SWtools. In Section 3 we
+detail the implemented methods. In Section 4 we demonstrate
+different aspects of the software: we report a verification test
+and show the effectiveness of the implemented algorithms for
+various example problems in nonlinear optics and matter-wave
+solitons in quantum mechanics. We comment on impact in Sec-
+tion 5, and conclude in Section 6.
+2. Computational problem solved by the software
+We consider the generalized nonlinear Schr¨odinger equation
+(GNSE) for a complex envelope ψ ≡ψ(η, ξ), given by
+i∂η ψ = −ˆL(i∂ξ) ψ −F[|ψ|2, ξ] ψ,
+(1)
+where η is the propagation distance, ξ is a one-dimensional
+transverse coordinate, ˆL is a linear differential operator, and F
+is a real-valued nonlinear functional. We seek SW solutions of
+Eq. (1) using the stationary-state Ansatz
+ψ(η, ξ) = U(ξ) eiκη,
+(2)
+where the possibly complex function U satisfies the nonlinear
+eigenvalue problem (NEVP)
+κ U = ˆL(i∂ξ) U + F[|U|2, ξ] U,
+(3)
+subject to the boundary conditions U →0 as |ξ| →∞. Solu-
+tions (2) of Eq. (3) are called nonlinear bound states, SWs, or
+stationary states. The parameter κ specifies the eigenvalue, or
+propagation constant of the solution. Evaluated for a solution
+ψ, the functionals
+N[ψ] =
+Z
+|ψ|2 dξ,
+(4a)
+H[ψ] =
+Z
+(ψ∗ˆL ψ + F[|ψ|2, ξ] |ψ|2) dξ,
+(4b)
+are assumed to be finite and independent of the propagation dis-
+tance η, and satisfy H[U] = κ N[U]. Let us emphasize that in
+order to ensure existences, uniqueness, and stability of solu-
+tions (2), the right-hand-side of Eq. (1) can be subject to further
+case-related conditions [49, 50, 42, 51]. For specificity, we as-
+sume a linear differential operator
+ˆL(i∂ξ) = c1(i∂ξ) + c2(i∂ξ)2 + c3(i∂ξ)3 + c4(i∂ξ)4,
+(5)
+with real-valued coefficients cL = (c1, . . . , c4), allowing to ad-
+dress key models in quantum mechanics [52] and nonlinear
+photonics [53].
+The provided software allows a user to numerically ob-
+tain nonlinear bound states (2) of the GNSE (1). Therefore,
+SWtools implements two complementary methods that itera-
+tively solve the NEVP (3), starting from user-supplied initial
+conditions. The first method, detailed in Section 3.2.1, imple-
+ments a spectral renormalization technique [54, 55, 56, 57]. It
+solves Eq. (3) for the function U for a given eigenvalue κ. This
+method works mainly in the Fourier domain associated with the
+coordinate ξ, exhibits especially high accuracy, and is easy to
+customize to common problems in nonlinear optics that can be
+cast in the form of the GNSE (1). The second method, detailed
+in Section 3.2.2, implements a relaxation technique [33, 29].
+It solves Eq. (3) for both, the function U and eigenvalue κ, in
+presence of an additional normalization constraint N[U] = N0.
+Such a problem is posed, e.g., by the Gross-Pitaevskii equa-
+tion (GPE) for ground-state solutions of Bose-Einstein conden-
+sates (BECs) [40, 58, 59]. As additional feature, SWtools al-
+lows to obtain the ground-state of the nonlinear problem and
+excited states by propagating different trial functions in succes-
+sive manner and using an orthogonalization method to elimi-
+nate any overlap with previously found solutions. For a con-
+cise presentation, we consider a one-dimensional (d = 1) trans-
+verse coordinate ξ. The methods provided with SWtools can,
+however, be extended to d-dimensional transverse coordinates
+⃗ξ = (ξ1, . . . , ξd) and to more complex instances of the linear
+operator ˆL in straight forward manner.
+3. Software description
+SWtools is openly available [60], hosted on the code devel-
+opment platform GitHub (https://github.com). It provides
+an extendible software framework for iterative methods that en-
+able a user to calculate solutions to the NEVP (3), and allows
+to treat two variants of the problem:
+1. The “bare” NEVP, where a solution U for a given eigen-
+value κ is computed;
+2. The “constraint” NEVP, with Eq. (3) supplemented by a
+normalization constraint N[U] = N0 [see Eq. (4a)], where
+a solution U for a given norm N0 is computed. In this case,
+however, the eigenvalue κ is a priori unknown and needs
+to be estimated on the go.
+While the bare NEVP is frequently encountered in modeling
+and computation in nonlinear optics [55, 57], the constraint
+NEVP is encountered in the context of BECs [52]. SWtools
+implements tested and reliable algorithms for both variants of
+the NEVP.
+2
+
+--- PAGE 3 ---
+Figure 1: Pictorial outline of SWtools. (a) Superclass IterBase. (b) Subclass
+SRM implementing the spectral renormalization method for solving Eq. (3), see
+Section 3.2.1 and Appendix A. (c) Subclass NSOM implementing the nonlin-
+ear successive overrelaxation method for solving the NEVP (3) with normal-
+ization constraint, see Section 3.2.2 and Appendix B. Solid arrow indicates
+class instantiation (“creates” relationship), dashed arrows indicate data struc-
+tures (“has-a” relationship), dash-dotted arrow indicates reference to an object
+(“is-a” relationship).
+3.1. Software architecture
+SWtools is written using the Python programming language
+[61], and depends on the functionality of numpy, scipy [62],
+and matplotlib [63]. It can be cloned directly from it’s GitHub
+repository, where it is available under a MIT license [60]. A
+pictorial outline of the SWtools Python package is shown in
+Fig. 1. In the current version it features:
+• A class data structure IterBase [Fig. 1(a)], constituting
+a superclass for the implemented methods. It provides the
+class method solve(), which organizes the iterative so-
+lution of the NEVP (3), and keeps track of intermediate
+solutions;
+• The subclass SRM [Fig. 1(b), Section 3.2.1], which im-
+plements the spectral renormalization method (SRM) of
+Refs. [54, 55, 56, 57] for the bare NEVP;
+• The subclass NSOM [Fig. 1(c), Section 3.2.2], which im-
+plements a nonlinear successive overrelaxation method
+(NSOM) for the constraint NEVP.
+In our design of the data structures in SWtools, we decided
+to bundle all solution-characteristic data, i.e. data a user might
+want to routinely interact with, at the class IterBase. This
+comprises the set of data shown in Fig. 1(a), subsequently listed
+in the format “data (class attribute): description”:
+• ξ (xi): Discrete transverse coordinate given by a uniform
+grid ξ = (ξ0, . . . , ξM) with mesh size ∆ξ;
+• n⋆(num iter): Performed number of iterations;
+• U⋆(U): Solution U⋆= (U⋆
+0 , . . . , U⋆
+M) after step n⋆;
+• N⋆(N): Value of functional (4a) after step n⋆;
+• H⋆(H): Value of functional (4b) after step n⋆;
+• κ (kap): Eigenvalue in Eq. (3);
+• ϵ⋆(acc): Terminal accuracy ϵn⋆.
+Given two solutions U(n−1) and U(n) at successive iteration steps
+(n > 0), the accuracy ϵn at step n is calculated as
+ϵn = ∥U(n−1) −U(n)∥,
+(6)
+with discrete ℓ2-norm ∥a∥=
+P
+m |am|2 ∆ξ
+1/2. Let us point out
+that in case of the constrained NEVP, the a priori unknown
+value of κ is estimated as K⋆= H⋆/N⋆. The logic imple-
+menting the linear operator ˆL, and the nonlinear functional F is
+bundled at the subclass level, see Figs. 1(b,c). We consider this
+a reasonable design decision since the precise implementation
+can be method specific. For instance, while the subclass SRM
+implements a Fourier-representation of the operator ˆL, subclass
+NSOM implements all derivatives in ˆL by their corresponding
+five-point finite-difference approximation. A reference man-
+ual, containing a description of the base class IterBase as
+well as an example showing how to extend the functionality
+of SWtools by subclassing is provided online [60].
+3.2. Software functionalities
+SWtools provides a spectral renormalization method for the
+bare NEVP, detailed in Section 3.2.1, and a relaxation method
+for the constraint NEVP, see Section 3.2.2. It allows users to
+specify custom measures of accuracy different from Eq. (6),
+and visualize a solution along with its convergence informa-
+tion. Let us note that in our computational research projects,
+which are usually carried out by scripting, we import the func-
+tionality of SWtools into more specific project code.
+The
+short workflows presented in Section 4 reflect this.
+To fa-
+cilitate a simple presentation, we consider custom applica-
+tions in quantum mechanics and nonlinear photonics where the
+transverse coordinate ξ is one-dimensional (d = 1). Exten-
+sion of the functionality of SWtools to treat the NEVP for a
+problem with two-dimensional (d = 2) transverse coordinate
+⃗ξ = (ξ1, ξ2) is demonstrated by the additional Python module
+SWtools ext SRM2D.py (provided along with SWtools under
+Ref. [60]), which implements a d = 2 SRM [56]. Below we de-
+scribe the implemented methods and cover the main features of
+the corresponding data structures. Numerical experiments that
+verify the implementation are reported in Section 4.1.
+3.2.1. Description of the spectral renormalization method
+(SRM)
+Subsequently we briefly describe the spectral renormaliza-
+tion method thoroughly detailed in Refs. [54, 55, 56, 57, 64].
+We therefore consider the NEVP (3) in the form
+κ U = ˆL(i∂ξ) U + F[|U|2, ξ] U,
+|ξ| ≤∞,
+(7a)
+U(±∞) = 0,
+(7b)
+with boundary conditions (7b) consistent with the localization
+condition U →0 for |ξ| →∞. The function U(ξ) can be re-
+lated to its Fourier transform u(k) by means of the transform
+equations
+u(k) = F U(ξ) =
+Z ∞
+−∞
+U(ξ) eikξ dξ,
+(8a)
+U(ξ) = F −1 [u(k)] = 1
+2π
+Z ∞
+−∞
+u(k) e−ikξ dk,
+(8b)
+3
+
+--- PAGE 4 ---
+implying the identity [(i∂ξ)n −kn] e−ikξ = 0. The Fourier rep-
+resentation of the linear operator (5) then reads L(k) = c1k +
+c2k2 + c3k3 + c4k4. Taking the Fourier transform of Eq. (7a) and
+rearranging yields a fixed-point equation for U, given by
+U = F −1
+"
+1
+κ −L(k)F
+h
+F[|U|2, ξ] U
+i#
+,
+(9)
+for which a convergent iteration scheme can be derived [38, 57,
+64]. The resulting solution U⋆satisfies Eqs. (7), and exhibits
+N[U⋆] > 0 [Eq. (4a)]. Let us note that the existence of solutions
+to Eqs. (7) may be subject to further case-related conditions for
+ˆL and F [49, 50, 42, 51]. The corresponding class SRM, derived
+from SWtools base class IterBase (Fig. 1), is documented
+online [60] and in Appendix A.
+3.2.2. Description of the nonlinear successive overrelaxation
+method (NSOM)
+Below, we briefly describe our approach to solve the con-
+straint NEVP (3). We rewrite Eq. (3) as an auxiliary initial-
+boundary value diffusion problem for a function A = A(t, ξ)
+[30, 29], respecting an auxiliary time coordinate t in the form
+∂t A =
+ ˆL + F −K
+
+A,
+|ξ| ≤∞, t ≥0,
+(10a)
+A(0, ξ) = U0(ξ),
+|ξ| < ∞,
+(10b)
+A(t, ±∞) = 0,
+t > 0,
+(10c)
+N[A] = N0,
+t > 0.
+(10d)
+Above, U0(ξ) is a user-supplied initial condition. N0 is a user-
+supplied value for the normalization constraint (10d), assumed
+to control the evolution of A. In Eq. (10a) we estimate the
+eigenvalue κ, which is a priori unknown, as K = H[A]/N[A]
+[see Eqs. (4)]. We employ the boundary condition (10c), con-
+sistent with the localization condition A(t, ξ) →0 for |ξ| →∞.
+For the solution of Eqs. (10), we derived a custom nonlinear
+relaxation method using a Gauss-Seidel update with successive
+overrelaxation [30, 65, 29]. In our implementation we employ
+an explicit time integration method for Eq. (10a), making it
+easy to handle the nonlinear functional F, and we substitute
+all derivatives in ˆL by their corresponding five-point approx-
+imation. The time increment is chosen dynamically at each
+iteration step and entirely prescribed in terms of the consid-
+ered discretization. It can thus be kept entirely “hidden” from
+the user. Using this method, a user-specified initial condition
+A(0, ξ) = U0(ξ) relaxes to a stationary solution as t →∞. In
+this method, successive iteration steps correspond to successive
+points in time. Again, we note that the existence of solutions to
+Eqs. (10) may be subject to further case-related conditions for ˆL
+and F [49, 50, 42, 51]. The corresponding class NSOM, derived
+from SWtools base class IterBase (Fig. 1), is documented
+online [60] and in Appendix B.
+4. Usage examples
+Below we show examples that demonstrate the function of
+SWtools and help a user to become familiar with its features.
+Figure 2:
+Verification of the solver using an exact soliton solution for the
+HONSE (11). (a-b) Results of the NSOM for different ORP values ω and mesh
+sizes ∆ξ. (a) Approximation of the soliton eigenvalue κ. (b) Relative error (13).
+(c-d) Results of the SRM for different mesh sizes. (c) Approximation of the
+soliton energy N[U]. (d) Relative error (13).
+Python scripts that allow to reproduce all subsequent examples
+are provided online [60]. In Section 4.1 we report a verifi-
+cation test based on a known analytical solution for a higher-
+order nonlinear Schr¨odinger equation (HONSE). Sections 4.2-
+4.4 demonstrate the calculation of ground-states for a GPE,
+soliton solitons for a HONSE, and nonlinear bound states for
+a GNSE with inhomogeneous nonlinearity, respectively.
+To
+demonstrate the calculation of nonlinear excited states, we con-
+sider a GPE with harmonic trapping potential in Section 4.5.
+A workflow that shows software integration of SWtools with
+py-fmas [66], an open-source Python package for the accu-
+rate simulation of the propagation dynamics of optical pulses,
+is detailed in Section 4.6. Finally, Section 4.7 demonstrates the
+calculation of a solitary wave for a two-dimensional (d = 2)
+model system. This example illustrates how the functionality
+of SWtools can be extended by the implementation of further
+methods, such as a d = 2 SRM [56].
+4.1. Verification of the implementation
+We consider the complex envelope ψ ≡ψ(η, ξ), governed by
+the dimensionless HONSE
+i∂η ψ =
+
+c2∂2
+ξ −c4∂4
+ξ
+
+ψ −|ψ|2 ψ,
+(11)
+with propagation distance η and retarded time ξ, modeled after
+Refs. [67, 68, 69]. For parameters c2 < 0, c4 < 0, previous
+analysis of Eq. (11) resulted in an exact, fixed-parameter solu-
+tion ψ(η, ξ) = U(ξ) exp(iκη) with
+U(ξ) =
+s
+3
+10
+c2
+2
+|c4|sech2
+
+r
+1
+20
+c2
+c4
+ξ
+,
+(12)
+and propagation constant κ = 4c2
+2/(25|c4|) [67]. Below we use
+the exact solution for c2 = −1/2 and c4 = −1/24 to verify
+the implementation of the solvers provided by SWtools. For
+the chosen parameters, U is characterized by the soliton energy
+4
+
+--- PAGE 5 ---
+N[U] ≈3.0984 and κ = 0.96. Equation (11) comprises an
+instance of the GNSE (1) with coefficients cL = (0, c2, 0, c4),
+and functional F = |ψ|2. We solve the corresponding NEVP (3)
+for ξ ∈[−20, 20] on uniform grids with various mesh sizes ∆ξ,
+and fixed accuracy threshold tol = 10−12. For a numerical
+solution U⋆, we calculate the relative error with respect to the
+exact solution as
+ϵ = ∥U −U⋆∥/N.
+(13)
+We first assess the performance of the NSOM (Section 3.2.2)
+for the normalization constraint N0 = N[U], and overrelaxation
+parameter ORP = 1.5. As evident from Fig. 2(a), the numeri-
+cal solution U⋆yields an eigenvalue estimate K⋆= H[U⋆]/N0
+that converges to the exact value of κ for decreasing time in-
+crements ∆ξ.
+The RMS error ϵglob can be seen to decrease
+∝∆ξ2 [Fig. 2(b)], in accord with the truncation error of the
+finite-difference approximation for the highest order derivative
+in Eq. (11). (If the highest order derivative in ˆL is of second or-
+der, the RMS error is expected to decrease ∝∆ξ4. We verified
+this using the fundamental soliton for the standard nonlinear
+Schr¨odinger equation.) In case of the SRM, especially high ac-
+curacy and excellent approximation of the soliton energy N[U]
+is evident for all considered mesh sizes [Figs. 2(c,d)]. For in-
+terpreting the RMS error in Figs. 2(b,d) it is useful to note that
+at ∆ξ = 0.16, the full-width at half-maximum of the soliton in-
+tensity distribution (ξFWHM ≈1.56) is coverd by approximately
+10 mesh points.
+4.2. Application of the NSOM to find ground-state solutions for
+a GPE
+We next demonstrate the calculation of ground-state solu-
+tions of one-dimensional BECs, modeled after Ref. [40]. We
+consider the BEC wavefunction ψ ≡ψ(η, ξ), governed by the
+dimensionless GPE
+i∂η ψ = −1
+2∂2
+ξ ψ + V(ξ) ψ + β|ψ|2 ψ,
+(14)
+with evolution time η, spatial coordinate ξ, harmonic trapping
+potential V(ξ) = 1
+2ξ2, and interaction coefficient β > 0. This
+yields an instance of the NEVP (3) with cL = (0, −1/2, 0, 0),
+F = −1
+2ξ2 −β|ψ|2, and normalization constraint N[ψ] = 1. Let
+us note that U denotes the real-valued ground-state solution of
+the BEC with chemical potential µ = −κ.
+We solve this constraint nonlinear eigenvalue problem by the
+NSOM for ξ ∈[−16, 16], using a uniform grid with mesh size
+∆ξ = 1/32, and overrelaxation parameter ORP = 1.5. As initial
+condition we use U0(ξ) = π−1/4 e−ξ2/2, i.e. the exact ground-
+state in absence of interactions (β = 0). To allow for compari-
+son with the results of Ref. [40], we determine the root-mean-
+square (rms) width of the condensate ξrms =
+R
+(ξ U)2 dξ and its
+energy Eβ[U] = µ −β
+2
+R
+U4 dξ. A Python script that facilitates
+this task is detailed in listing 1. For instance, for β = 31.371,
+we find a solution with peak amplitude max(U) ≈0.4557,
+ξrms ≈1.6417, Eβ ≈3.9810, and µ ≈6.5527, in excellent
+agreement with Ref. [40]. Figure 3 shows the ground-state so-
+lution and the convergence of the accuracy for selected values
+of β (cf. Fig. 4.2 of Ref. [40]).
+Figure 3:
+Nonlinear bound states for Eq. (14) with harmonic oscillator po-
+tential, obtained by NSOM. (a) Solutions U for selected values of the interac-
+tion coefficient β. (b) Evolution of the accuracy ϵn. Iteration is stopped when
+ϵn < 10−12.
+Listing 1: Python code for solving the NEVP for Eq. (14) via NSOM.
+1 import
+numpy as np
+2 from
+SWtools
+import
+NSOM
+3
+4 # -- SETUP
+AND
+INITIALIZATION
+5 xi = np.linspace (-16, 16, 1025)
+6 # ...
+NEVP
+INGREDIENTS
+7 cL = (0,
+-0.5, 0, 0)
+8 beta = 31.371
+9 F = lambda I, xi:
+-(0.5* xi **2 + beta*I)
+10 N0 = 1.0
+11 # ...
+INITIAL
+CONDITION
+12 U0 = np.exp(-xi **2/2)/np.pi **0.25
+13 # ...
+NSOM
+INSTANTIATION
+14 myS = NSOM(xi , cL , F, ORP =1.5)
+15
+16 # -- NSOM
+SOLUTION
+PROCEDURE
+17 myS.solve(U0 , N0)
+18
+19 # -- POSTPROCESSING (RMS
+WIDTH
+AND
+ENERGY)
+20 U, mu = myS.U, -myS.kap
+21 xi_rms = np.sqrt(np.trapz ((xi*U)**2,x=xi))
+22 E = mu - 0.5* beta*np.trapz(U**4,x=xi)
+23 print(f"max(U) = {np.max(U):5.4F}")
+24 print(f"xi_rms = {xi_rms :5.4F}")
+25 print(f"E_beta = {E:5.4F}")
+26 print(f"mu
+= {mu :5.4F}")
+4.3. Application of the SRM to find solutions of a HONSE
+We next demonstrate the calculation of “traveling” soliton
+solutions in nonlinear optical media, modeled after Refs. [51,
+16]. We consider the slowly varying envelope ψ ≡ψ(η, ξ), gov-
+erned by the dimensionless HONSE
+i∂η ψ =
+
+ic1∂ξ + c2∂2
+ξ + ic3∂3
+ξ −c4∂4
+ξ
+
+ψ −|ψ|2 ψ,
+(15)
+with propagation distance η and retarded time ξ. Here, we seek
+such traveling solitons as stationary solutions in a reference
+frame moving at nonzero inverse velocity c1. Equation (15)
+is nonintegrable and admits no general analytical soliton solu-
+tion. Depending on the choice of parameters, its solitons can
+exhibit oscillating tails [68, 70, 16]. Secifically, we consider
+5
+
+--- PAGE 6 ---
+Figure 4:
+Soliton solutions for Eq. (15) obtained by the SRM. (a) Solutions
+U for selected values of the propagation constant κ and fixed reference frame
+velocity c1 = −0.07. (b) Evolution of the accuracy ϵn. Iteration is stopped when
+ϵn < 10−12.
+the NEVP (3) for cL = (−0.07, −0.1, 0.0333, −0.0417), and
+F = |ψ|2.
+We solve the NEVP in the interval ξ ∈[−20, 20], using a
+uniform grid with 210 mesh points and initial condition U0(ξ) =
+e−ξ2. A Python script that facilitates this task is detailed in list-
+ing 2. At a given iteration step n, the accuracy is calculated as
+ϵn = max(|U(n−1) −U(n)|) (lines 16 ff. of listing 2). To facili-
+tate comparison with the results of Ref. [51], we determine the
+soliton center frequency kc =
+R
+k |u(k)|2 dk/
+R
+|u(k)|2 dk, where
+u(k) is the Fourier transform of the solution U(ξ) (line 24 f. of
+listing 2). In order to respect the sign choices and normalization
+of the transforms (8), we use the numpy-native function ifft
+to implement Eq. (8a). For κ = 0.867 we find a solution with
+peak amplitude max(|U|) ≈1.215, N[U] ≈2.001, and kc ≈0.
+It reproduces one of the solitons obtained earlier by exploring
+pulse propagation simulations [51]. Results for selected values
+of κ are shown in Fig. 4.
+Listing 2: Python code for solving the NEVP for Eq. (15) via SRM.
+1 import
+numpy as np
+2 from
+numpy.fft
+import
+fftfreq , ifft
+3 from
+SWtools
+import
+SRM
+4
+5 # -- SETUP
+AND
+INITIALIZATION
+6 xi = np.linspace (-20, 20, 2**10)
+7 # ...
+NEVP
+INGREDIENTS
+8 cL = (-0.07,
+-0.2/2, 0.2/6 ,
+-1./24)
+9 F = lambda I, xi: I
+10 kap = 0.867
+11 # ...
+INITIAL
+CONDITION
+12 U0 = np.exp(-xi **2)
+13 # ... SRM
+INSTANTIATION
+14 myS = SRM(xi , cL , F)
+15 # ...
+CUSTOM
+ACCURACY
+16 acc = lambda xi , U, V: np.max(np.abs(U-V))
+17
+18 # -- SRM
+SOLUTION
+PROCEDURE
+19 myS.solve(U0 , kap , acc_fun = acc)
+20
+21 # -- POSTPROCESSING
+22 U, N = myS.U, myS.N
+23 k = fftfreq(xi.size , d=xi[1]-xi [0]) *2* np.pi
+Figure 5: Nonlinear bound states for Eq. (16) obtained by the SRM. (a) Solu-
+tions U for selected microstructure parameters α. The inset shows a close-up
+view of the peak region for α = −0.3 and −0.8. Gray line shows m(ξ)/|α|. (b)
+Evolution of the accuracy ϵn. Iteration is stopped when ϵn < 10−12.
+24 Ik = np.abs(ifft(U))**2
+25 kc = np.trapz(k*Ik , x=k)/np.trapz(Ik , x=k)
+26 print(f"max(U) = {np.max(np.abs(U)):5.4F}")
+27 print(f"N[U]
+= {N:5.4F}")
+28 print(f"kc
+= {kc :5.4F}")
+4.4. Application of the SRM to find solutions of a GNSE with
+periodic nonlinearity
+Below we demonstrate the calculation of nonlinear bound
+states in a medium where the nonlinear refractive index
+is modulated along the transverse direction, modeled after
+Ref. [64]. We consider the slowly varying envelope ψ = ψ(η, ξ),
+goverened by the dimensionless GNSE
+i∂η ψ = −∂2
+ξ ψ −[1 + m(ξ)] |ψ|2ψ,
+(16)
+with propagation distance η, transverse coordinate ξ, and peri-
+odic nonlinear microstructure m(ξ) = α cos(4πξ). This yields
+an instance of the NEVP (3) with cL = (0, −1, 0, 0), and
+F = [1 + m(ξ)] |ψ|2, for which we consider α < 0 and κ = 1.
+To solve the NEVP in the interval ξ ∈[−20, 20], we use
+a uniform grid with 212 mesh points, and initial condition
+U0(ξ) = e−ξ2 centered at a local minimum of m(ξ). A Python
+script that facilitates this task is detailed in listing 3. Results
+for selected values of α are shown in Fig. (5) (cf. Fig. 4 of
+Ref. [64]). Specifically, for α = −0.8 the solution has the lo-
+cal minimum U(0) ≈1.393, and two adjacent global maxima
+max(U) ≈1.396.
+Listing 3: Python code for solving the NEVP for Eq. (16) via SRM.
+1 import
+numpy as np
+2 from
+SWtools
+import
+SRM
+3
+4 # -- SETUP
+AND
+INITIALIZATION
+5 xi = np.linspace (-20, 20, 2**12)
+6 # ...
+NEVP
+INGREDIENTS
+7 cL = (0,
+-1., 0, 0)
+8 m = lambda xi:
+-0.8*np.cos (4* np.pi*xi)
+9 F = lambda I, xi: (1 + m(xi))*I
+10 kap = 1.0
+6
+
+--- PAGE 7 ---
+11 # ...
+INITIAL
+CONDITION
+12 U0 = np.exp(-xi **2)
+13 # ... SRM
+INSTANTIATION
+14 myS = SRM(xi , cL , F)
+15
+16 # -- SRM
+SOLUTION
+PROCEDURE
+17 myS.solve(U0 , kap)
+18
+19 # -- POSTPROCESSING
+20 U, N = myS.U.real , myS.N
+21 print(f"# N
+= {N:4.3F}")
+22 print(f"# max(U) = {np.max(U):4.3F}")
+23 print(f"# U(0)
+= {U[xi.size //2]:4.3F}")
+4.5. Application of the NSOM to find excited states for a model
+GPE
+To demonstrate the calculation of nonlinear excited-states,
+we construct a simple problem based on a quantum harmonic
+oscillator. We consider a wavefunction ψ ≡ψ(η, ξ), governed
+by the dimensionless GPE
+i∂η ψ = −1
+2∂2
+ξ ψ +
+ 1
+2ξ2 + β|ψ|2
+ψ,
+(17)
+with evolution time η, spatial coordinate ξ, harmonic trap-
+ping potential, and interaction coefficient β = 1. This yields
+an instance of the NEVP (3) with cL = (0, −1/2, 0, 0), F =
+−1
+2ξ2 −|ψ|2, and normalization constraint N[ψ] = 1. Ansatz (2)
+then introduces a real-valued function U for the chemical po-
+tential µ = −κ.
+We solve this constraint nonlinear eigenvalue problem by
+the NSOM for ξ ∈[−8, 8], using a discretization with mesh
+size ∆ξ = 1/32, and overrelaxation parameter ORP = 1.5. A
+Python script that facilitates this task is detailed in listing 4.
+The ground-state and first three excited-states are obtained one
+by one using the orthogonalization method implemented with
+SWtools. Therefore, the class method solve() accepts the
+keyword argument ortho set (see Appendix B), allowing to
+specify a list of previously found solutions (see lines 24, 28,
+and 32 of listing 4). During the iteration process, any over-
+lap with these solutions is eliminated. As initial conditions we
+use the exact eigenfunctions of the quantum harmonic oscilla-
+tor (β = 0). Figure 6 shows the obtained solutions and their
+convergence properties. For the ground state (U0) and first ex-
+cited state (U1), the method is highly accurate. The reduced
+accuracy in case of higher order excited states, demonstrated
+by the saturation of the accuracy at approx. 10−6, lies in the ef-
+ficiency of the NSOM to drive a maintained solution away from
+an excited state whenever a lower-lying state of the same parity
+is available. We carefully checked that the exact results for the
+quantum harmonic oscillator are met in the limit β →0. As
+a technical note, let us point out that the Gauss-Seidel update
+implemented with the NSOM does not preserve the symmetry
+of a trial function. Therefore, without the orthogonalization ap-
+proach, an odd-parity initial condition does not automatically
+converge to the first excited state.
+Listing 4: Python code for solving the NEVP for Eq. (17) via NSOM.
+1 import
+numpy as np
+2 from
+SWtools
+import
+NSOM
+Figure 6:
+Nonlinear bound states for Eq. (17) obtained by the NSOM. (a)
+Ground state solution U0 and first three exited states U1, . . . , U3, indicated at
+their respective chemical potential µ. Gray solid line indicates the harmonic
+trapping potential. (b) Evolution of the accuracy ϵn. Iteration is stopped when
+ϵn < 10−12, or when the maximum number of iterations (maxiter = 104) is
+exceeded.
+3
+4 # -- SETUP
+AND
+INITIALIZATION
+5 xi = np.linspace (-8, 8, 512)
+6 # ...
+NEVP
+INGREDIENTS
+7 cL = (0 , -0.5 ,0 ,0)
+8 F = lambda I, xi:
+-0.5*xi **2 - I
+9 N0 = 1.0
+10 # ...
+INITIAL
+CONDITIONS
+11 UI0 = np.exp(-xi **2/2)/np.pi **0.25
+12 UI1 = 2*xi*UI0/np.sqrt (2)
+13 UI2 = (4* xi **2 -2)*UI0/np.sqrt (8)
+14 UI3 = (8* xi **3 -12* xi)*UI0/np.sqrt (48)
+15 # ...
+INSTANTIATE
+NSOM
+16 myS = NSOM(xi , cL , F, ORP =1.5)
+17
+18 # -- NSOM
+SOLUTION
+PROCEDURE
+19 # ...
+GROUND
+STATE
+20 myS.solve(UI0 , N0)
+21 U0 , mu0 = myS.U, -myS.kap
+22 # ... 1ST
+EXCITED
+STATE
+23 myS.solve(UI1 , N0 , ortho_set =[U0])
+24 U1 , mu1 = myS.U, -myS.kap
+25 # ... 2ND
+EXCITED
+STATE
+26 myS.solve(UI2 , N0 , ortho_set =[U0 , U1])
+27 U2 , mu2 = myS.U, -myS.kap
+28 # ... 3RD
+EXCITED
+STATE
+29 myS.solve(UI3 , N0 , ortho_set =[U0 , U1 , U2])
+30 U3 , mu3 = myS.U, -myS.kap
+4.6. Software integration with py-fmas
+Below we demonstrate how SWtools can be used in conjunc-
+tion with py-fmas, allowing to study the interaction dynamics
+of solitons governed by the HONSE (15). A short workflow that
+reproduces one of the propagation scenarios of Ref. [16] for pa-
+rameters cL = (0, −1/2, 1/12, −1/24) and F = |ψ|2 is shown in
+listing 5. First, in lines 14–15, a traveling soliton U0(ξ) with in-
+verse group-velocity 1/v0 = −0.458 and propagation constant
+κ = 0.618 is obtained by solving the NEVP using the SRM
+implemented in SWtools. The resulting complex-valued solu-
+tion is shown in Figs. 7(a,b). In line 18, this soliton is used to
+7
+
+--- PAGE 8 ---
+Figure 7: Combining SWtools and py-fmas to study the interaction of soli-
+tons of Eq. (15). (a-b) Solution of the NEVP using the SRM implemented in
+SWtools. (a) Complex-valued soliton U0 for κ = 0.681. (b) Accuracy ϵn. It-
+eration is stopped when ϵn < 10−12. (c-e) Solution of the initial value problem
+using an adaptive stepsize method implemented in py-fmas. (c) Propagation
+dynamics of the intensity |ψ|2. (d) Variation of the relative local error (RLE) δ.
+(e) Variation of the stepsize h.
+compose the initial condition ψ(0, ξ) = U0(ξ) + U0(ξ −∆ξ) ei∆ϕ,
+consisting of two identical solitons with separation ∆ξ = −5
+and phase mismatch ∆ϕ ≈2.5. Subsequently, in lines 18–25,
+the initial value problem for Eq. (15) is solved using the adap-
+tive stepsize local error method (LEM) [71], implemented in
+py-fmas [66]. The LEM keeps the relative local error δ, esti-
+mated by step-doubling and local extrapolation [29], within the
+target range (δG/2, δG) with goal local error δG = 10−8 speci-
+fied in line 21. After termination of the LEM, the results are
+stored in numpy-native npz-fomat in lines 28–37. The result of
+the pulse propagation simulation is shown in Fig. 7(c), indicat-
+ing the formation of a two-pulse bound state that decays after
+five collisions [16]. As evident from Figs. 7(d,e), guided by the
+relative local error δ, the stepsize h decreases when the pulses
+engage in a collision and it increases in between successive col-
+lisions.
+Listing 5: Python code showing how to combine SWtools and py-fmas [66]
+to study the interaction of solitons of Eq. (15).
+1 import
+numpy as np
+2 from
+SWtools
+import SRM , FT , IFT , FTFREQ
+3 from
+fmas.solver
+import
+LEM
+4
+5 # -- SET UP DOMAIN
+AND
+MODEL
+6 xi = np.linspace (-50, 50, 2**13)
+7 k = FTFREQ(xi.size , d=xi[1]-xi [0]) *2* np.pi
+8 c1 , c2 , c3 , c4 = 0.458 ,
+-1/2, 1/12 ,
+-1/24
+9 F = lambda I, xi: I
+10 N = lambda U: F(np.abs(U)**2,xi)*U
+11 kap = 0.618
+12
+13 # -- SET UP AND
+SOLVE
+NEVP
+14 NEVP = SRM(xi , (c1 ,c2 ,c3 ,c4), F)
+15 NEVP.solve(np.exp(-xi **2) , kap)
+16
+17 # -- SET UP AND
+SOLVE
+IVP
+18 u0 = FT(NEVP.U)*(1+ np.exp(-5j*k+2.49826j))
+19 Lk = 1j*(c2*k**2 + c3*k**3 + c4*k**4)
+20 Nk = lambda u: 1j*FT(N(IFT(u)))
+21 IVP = LEM(Lk , Nk , del_G =1e -8)
+22 IVP. set_initial_condition (k, u0)
+23 IVP.propagate(z_range = 90.,
+24
+n_steps = 1000 ,
+25
+n_skip = 1)
+26
+27 # -- SAVE
+DATA IN NPZ -FORMAT
+28 res = {
+29
+’xi’:
+xi ,
+30
+’U0’:
+NEVP.U,
+31
+’it’:
+NEVP.iter_list ,
+32
+’acc ’: NEVP.acc_list ,
+33
+’eta ’: IVP.z,
+34
+’U’:
+IVP.utz ,
+35
+’del ’: IVP._del_rle ,
+36
+’h’:
+IVP._dz_a }
+37 np. savez_compressed (’res.npz ’ ,**res)
+4.7. Extension of the SRM to d = 2
+In addition to the one-dimensional examples discussed in the
+main text, we here present an example for a d = 2 NSE with
+transverse vector ⃗ξ = (ξ1, ξ2), modeled after Refs. [72, 73, 42].
+We consider the envelope ψ ≡ψ(η, ξ), governed by the dimen-
+sionless NSE
+i∂η ψ = −∂2
+ξ1 ψ −∂2
+ξ2 ψ −V(⃗ξ) ψ −|ψ|2 ψ,
+(18)
+with propagation distance η, transverse coordinates ξ1,2, and pe-
+riodic potential V(⃗ξ) = V0 [cos2(ξ1) + cos2(ξ2)]. This represents
+an instance of the NEVP (3) with ˆL = (i∂ξ1)2 + (i∂ξ2)2 and
+F = V + |ψ|2. To solve the bare NEVP for Eq. (18), we pro-
+vide the extension module SWtools ext SRM2D, documented
+online [60], which extends the functionality of SWtools by im-
+plementing a custom SRM for d = 2.
+To solve the NEVP using the d = 2 SRM in the domain
+⃗ξ ∈[−20, 20] × [−20, 20], we use a uniform grid with 28 × 28
+mesh points, and initial condition U0(⃗ξ) = e−(ξ2
+1+ξ2
+2). A Python
+script that facilitates this task is detailed in listing 6. Results
+for the potential height V0 = 3 and propagation constant κ =
+3.7045 are shown in Fig. (8). The corresponding solution has
+peak-amplitude max(U) ≈1.03, and exhibits N[U] ≈3.00, and
+H[U] ≈11.11.
+8
+
+--- PAGE 9 ---
+Figure 8: Nonlinear bound state of Eq. (14), obtained by the d = 2 SRM. (a)
+Solution U(ξ), with ⃗ξ = (ξ1, ξ2), for potential height V0 = 3 and propagation
+constant κ = 3.7045. (b) Evolution of the accuracy ϵn. Iteration is stopped
+when ϵn < 10−12.
+Listing 6: Python code for solving the NEVP for Eq. (18) using the d = 2 SRM.
+1 import
+numpy as np
+2 from
+SWtools_SRM2D
+import
+SRM2D
+3
+4 # -- SETUP
+AND
+INITIALIZATION
+5 x1 = np.linspace (-20, 20, 2**8)
+6 x2 = np.linspace (-20, 20, 2**8)
+7 X1 , X2 = np.meshgrid(x1 , x2 , indexing=’ij’)
+8 # ...
+NEVP
+INGREDIENTS
+9 cL = (-1.,
+-1.)
+10 V0=3.
+11 cos2 = lambda x: np.cos(x)**2
+12 V = lambda x: V0*( cos2(x[0]) + cos2(x[1]))
+13 F = lambda I, xi: V(xi) + I
+14 kap = 3.7045
+15 # ...
+INITIAL
+CONDITION
+16 U0 = np.exp(-(X1 **2+ X2 **2))
+17 # ... SRM
+INSTANTIATION
+18 myS = SRM2D ((X1 , X2), cL , F)
+19
+20 # -- 2DSRM
+SOLUTION
+PROCEDURE
+21 myS.solve(U0 , kap)
+22
+23 # -- POSTPROCESSING
+24 U, H, N = myS.U, myS.H, myS.N
+25 print(f"max(U) = {np.max(U):5.4F}")
+26 print(f"H[U]
+= {H:5.4F}")
+27 print(f"N[U]
+= {N:5.4F}")
+5. Discussion
+Previous usage. SWtools is derived from our research soft-
+ware and has already successfully contributed to the process
+of scientific discovery in the field of nonlinear optics. It has
+allowed us to calculate numerically exact soliton solutions for
+GNSE type models in parameter ranges that where previously
+not accessible [16, 74]. In these previous works we considered
+Eq. (1) with parameters cL = (0, c2, c3, c4), describing the dis-
+persion characteristics of the optical medium, and F = γ|ψ|2,
+where γ specifies the strength of self-phase modulation.
+In
+Ref. [16] we used the presented tools to determine SW solu-
+tions for c2 < 0, c4 < 0, and 8c2c4 > 3c2
+3, specifying a model
+with anomalous dispersion in the entire frequency domain. The
+obtained solutions where essential for our systematic study of
+inelastic collisions that demonstrated the formation of short-
+lived two-pulse bound states. Let us emphasize that SWtools
+allowed to directly calculate and characterize these solutions,
+complementing previous studies in which localized solutions
+were obtained only indirectly by exploring pulse propagation
+simulations [51].
+In Ref. [74] we employed the presented
+tools to determine SW solutions for a related, yet very different
+GNSE with c2 > 0, c3 = 0, and c4 < 0, exhibiting alternate do-
+mains of normal and anomalous dispersion [14, 75]. This model
+has only recently begun to attract attention in the field of non-
+linear optics [14, 76, 51], and is still essentially unexplored. We
+were able to demonstrate special SW solutions which provide
+properties that are highly demanded in ultrafast science. They
+display carrier-envelop-phase stability and are characterized by
+spectra that can extend over extremely wide frequency-ranges,
+encompassing a domain of normal dispersion in which solitons
+ordinarily cannot persist. They further exhibit unusual energy
+scaling, are robust against nonlinear perturbations and indepen-
+dent of fine details of the dispersion profile. It further allowed
+us to numerically substantiate the existence of nonlinear pho-
+tonic meta-atoms, i.e. simplified solutions for the weakly non-
+linear limit of systems of GNSEs [77, 75].
+Pursuit of research questions. SWtools makes it affordable
+and convenient to perform extensive parameter sweeps for the
+characterization of families of solitary waves κ →U(ξ; κ),
+which emerges as a current topic in the field of nonlinear optics
+[77, 76, 16, 51]. This permits to direcly address questions such
+as “How do the functionals N[U] and H[U] of a soliton solu-
+tion U depend on its propagation constant κ?”, helping to clarity
+whether the obtained solutions are stable or instable [49, 78].
+Let us emphasize that SWtools can be used on its own, or as
+extension module for GNLStools [79] and py-fmas [66], al-
+lowing to study the propagation dynamics of the obtained solu-
+tions in terms of the initial-value problem for Eq. (1). We pre-
+viously benefited from merging the functionality of SWtools
+and py-fmas when studying the collision dynamics of local-
+ized solutions in a nonlinear optics GNSE [16]. This allowed
+us to directly answer questions such as “Is the nonlinear bound
+state a true soliton?” (If they emerge from collisions with un-
+changed shapes and speeds, they can be considered solitons),
+and, “What is the result of the interaction of solitary wave so-
+lutions in the considered model?”. To allow users to proceed
+from idea to numerical experimentation to results as quickly as
+possible, we provide a complete workflow using SWtools in
+conjunction with py-fmas in Section 4.6.
+Extendibility and reusablity. Finally, let us stress that the meth-
+ods provided with SWtools can be extended to d-dimensional
+transverse coordinates ⃗ξ = (ξ1, . . . , ξd) and beyond the specific
+choice for ˆL [see Eq. (5)] in straight forward manner: for the
+NSOM, the differential operators need to be expressed by suit-
+able d-dimensional finite-difference approximants; in case of
+the SRM, the implemented spectral derivatives need to be ex-
+tended to the d-dimensions as well. In this context, additional
+9
+
+--- PAGE 10 ---
+methods for the solution of the NEVP (3) can be implemented
+by subclassing SWtool’s base class IterBase, allowing devel-
+opers to reuse our tested software components. We refer user
+that aim to adapt SWtools to his or her needs to the example in
+Section 4.7, demonstrating a custom d = 2 SRM, and the online
+documentation [60].
+6. Conclusions
+With the SWtools Python package we present an extendible
+resource for researchers, i.e. developers and users alike, that
+face the scientific problem of solving NEVPs of the type of
+Eq. (3). In closing, let us again emphasize that solitons assume
+a leading role in the dynamics of general solutions of propa-
+gation equations, as, e.g., the GNSE (1). Since in most appli-
+cable cases exact soliton expressions are absent, the ability to
+determine such solutions numerically is of fundamental impor-
+tance. Soliton solutions calculated via SWtools can then be
+analyzed further or used as initial conditions in pulse propaga-
+tion simulations [66, 79]. While our interest in the topic lies in
+the field of nonlinear optics, where optical solitons and soliton
+related phenomena do not cease to offer new and exciting per-
+spectives [21], we hope to also spark the interest of researchers
+in other fields of science. We further hope to benefit researchers
+and students that are looking for examples that guide their own
+numerical experimentation. In this regard, the online documen-
+tation [60] and the minimal examples given in Sections 4.2-4.7
+can serve as classroom code or as starting point for seminar
+projects in computational courses.
+Possible directions for improving the presented software by
+extending its range of applicability include the implementation
+of further methods [39, 43, 42, 47, 48, 41, 40], addressing, e.g.,
+systems of coupled equations of the type of Eq. (1). SWtools
+is available for download under Ref. [60].
+Acknowledgements
+We acknowledge support from the Deutsche Forschungsge-
+meinschaft (DFG) under Germany’s Excellence Strategy within
+the Cluster of Excellence PhoenixD (Photonics, Optics, and En-
+gineering – Innovation Across Disciplines) (EXC 2122, projec-
+tID 390833453).
+Appendix A. Documentation of subclass SRM
+SWtools provides the class SRM that implements the method
+of Section 3.2.1, see Fig. 1(b). Instantiating an instance of the
+class SRM requires a user to specify several input parameters.
+Below they are listed as “parameter name (data type): de-
+scription”:
+• xi (array): Discretized coordinate ξ;
+• cL (array): Coefficients cL = (c1, c2, c3, c4) defining the
+linear operator ˆL [Eq. (5)];
+• F (function): Nonlinear functional. Call signature F(I,
+xi) with intensity I = |U|2 (I), and coordinate ξ (xi).
+• tol (float): Iteration is stopped when the accuracy falls
+below this tolerance threshold (default: 10−12);
+• maxiter (int): Maximum number of allowed iterations
+(default: 104);
+• nskip (int): Number of iterations to skip in between stor-
+ing intermediate results (default: 1);
+• verbose (bool): Set to True to print details during itera-
+tion (default: False).
+The class SRM provides the following methods, listed in the for-
+mat “method name(par1, par2, ...): description”:
+solve(U0, kap, **kwargs) : Performs iterative solution of
+the NEVP (7) via the SRM. Inherited from superclass
+IterBase, see Fig. 1(a).
+Parameters:
+• U0 (array): Initial condition in Eq. (10b);
+• kap (float): Eigenvalue κ;
+Optional keyword arguments:
+• ortho set: List of previously found orthogo-
+nal solutions (default: empty list);
+• acc fun: Function for calculating the accuracy
+ϵn at step n. Call signature acc fun(xi, Up,
+Uc) with coordinate ξ (xi), solution U(n−1) at
+the previous step (Up), and solution U(n) at the
+current step (Uc) (default: see Eq. (6)).
+Returns:
+• U (array): SRM solution U⋆;
+• acc (float): Terminal accuracy ϵ⋆;
+• succ (bool): Boolean flag indicating if the iter-
+ation procedure exited successfully;
+• msg (str): Cause of the termination.
+functional N(U) : Implements Eq. (4a).
+Parameters:
+• U (array): Solution at the current iteration step.
+Returns:
+• N (float): Value of the functional N[U].
+functional H(U) :
+Implements Eq. (4b) using spectral
+derivatives to handle ˆL.
+Parameters:
+• U (array): Solution at the current iteration step.
+Returns:
+• H (float): Value of the functional H[U].
+singleUpdate(U, N, H, kap, **kwargs : Implements a
+single step of the d = 1 SRM detailed in Refs. [55, 64].
+Parameters:
+• U (array): Solution at the current iteration step;
+• N (float): Current value of N[U];
+10
+
+--- PAGE 11 ---
+• H (float): Current value of H[U];
+• kap (float): Eigenvalue κ.
+Returns:
+• U (array): Updated solution.
+show(f name=’none’) : Produces a figure of the solution U⋆
+and the convergence of the accuracy.
+Parameters:
+• f name (str): Figure name. If f name is not set,
+the figure is displayed directly.
+Returns: None
+Appendix B. Documentation of subclass NSOM
+SWtools provides a class NSOM that implements the method
+of Section 3.2.2, see Fig. 1(c). Instantiating an instance of the
+class NSOM requires a user to specify several input parameters.
+Below they are listed as “parameter name (data type): de-
+scription”:
+• xi (array): Discretized coordinate ξ;
+• cL (array): Coefficients cL = (c1, c2, c3, c4) defining the
+linear operator ˆL;
+• F (function): Nonlinear functional. Call signature F(I,
+xi) with intensity I = |U|2 (I), and coordinate ξ (xi).
+• ORP (float): Overrelaxation parameter (default: 1);
+• tol (float): Iteration is stopped when the accuracy falls
+below this tolerance threshold (default: 10−12);
+• maxiter (int): Maximum number of allowed iterations
+(default: 104);
+• nskip (int): Number of iterations to skip in between kept
+intermediate results (default: 1);
+• verbose (bool): Set to True to print details during itera-
+tion (default: False).
+The class NSOM provides the following methods, listed in the
+format “method name(par1, par2, ...): description”:
+solve(U0, N0, **kwargs) : Performs iterative solution of
+the NEVP (3), supplemented by the normalization con-
+straint N[U] = N0 [Eq. (10d)]. Inherited from superclass
+IterBase, see Fig. 1(a).
+Parameters:
+• U0 (array): Initial condition in Eq. (10b);
+• N0 (float): Value for constraint (10d);
+Optional keyword arguments:
+• ortho set: List of previously found orthogo-
+nal solutions (default: empty list);
+• acc fun: Function for calculating the accuracy
+ϵn at step n. Call signature acc fun(xi, Up,
+Uc) with coordinate ξ (xi), solution U(n−1) at
+the previous step (Up), and solution U(n) at the
+current step (Uc) (default: see Eq. (6)).
+Returns:
+• U (array): SRM solution U⋆;
+• acc (float): Terminal accuracy ϵ⋆;
+• succ (bool): Boolean flag indicating if the iter-
+ation procedure exited successfully;
+• msg (str): Cause of the termination.
+functional N(U) : Implements Eq. (4a).
+Parameters:
+• U (array): Solution at the current iteration step.
+Returns:
+• N (float): Value of the functional N[U].
+functional H(U) : Implements Eq. (4b) using a five-point
+finite-difference approximation of ˆL.
+Parameters:
+• U (array): Solution at the current iteration step.
+Returns:
+• H (float): Value of the functional H[U].
+singleUpdate(U, N, H, N0, **kwargs) : Implements a
+single step of a nonlinear successive overrelaxation
+method (NSOM) [30] for the NEVP (3). The procedure
+uses a Gauss-Seidel method with overrelaxation to iter-
+atively updata a user-provided initial condition in place
+[29, 65].
+Parameters:
+• U (array): Solution at the current iteration step;
+• N (float): Current value of N[U];
+• H (float): Current value of H[U];
+• N0 (float): Normalization constraint N0.
+Returns:
+• U (array): Updated solution.
+show(f name=’none’) : Produces a figure of the solution U⋆
+and the convergence of the accuracy.
+Parameters:
+• f name (str): Figure name. If f name is not set,
+the figure is displayed directly.
+Returns: None
+References
+[1] N. J. Zabusky, M. D. Kruskal, Interaction of ”solitons” in a collisionless
+plasma and the recurrence of initial states, Phys. Rev. Lett. 15 (1965)
+240–243.
+[2] V. E. Zakharov, A. B. Shabat, Exact theory of two-dimensional self-
+focusing and one-dimensional self-modulation of waves in nonlinear me-
+dia, Sov. Phys. JETP 34 (1972) 62.
+[3] P. G. Drazin, R. S. Johnson, Solitons: An Introduction, Cambridge Uni-
+versity Press, 1989.
+[4] Y. S. Kivshar, Dynamics of solitons in nearly integrable systems, Rev.
+Mod. Phys. 61 (1989) 763.
+11
+
+--- PAGE 12 ---
+[5] H. Frauenkron, Y. S. Kivshar, B. A. Malomed, Multisoliton collisions in
+nearly integrable systems, Phys. Rev. E 54 (1996) R2244.
+[6] M. H. Jakubowski, K. Steiglitz, R. Squier, Information transfer between
+solitary waves in the saturable Schr¨odinger equation, Phys. Rev. E 56
+(1997) 7267.
+[7] C. Anastassiou, M. Segev, K. Steiglitz, J. A. Giordmaine, M. Mitchell,
+M.-F. Shih, S. Lan, J. Martin, Energy-exchange interactions between col-
+liding vector solitons, Phys. Rev. Lett. 83 (1999) 2332.
+[8] J. Yang, Y. Tan, Fractal Structure in the Collision of Vector Solitons, Phys.
+Rev. Lett. 85 (2000) 3624.
+[9] S. V. Dmitriev, T. Shigenari, Short-lived two-soliton bound states in
+weakly perturbed nonlinear Schr¨odinger equation, Chaos 12 (2002) 324.
+[10] E. Feigenbaum, M. Orenstein, Colored solitons interactions: particle-like
+and beyond, Opt. Express 12 (2004) 2193.
+[11] R. H. Goodman, R. Haberman, Chaotic Scattering and the n-Bounce Res-
+onance in Solitary-Wave Interactions, Phys. Rev. Lett. 98 (2007) 104103.
+[12] M. J. Edmonds, T. Bland, R. Doran, N. G. Parker, Engineering bright
+matter-wave solitons of dipolar condensates, New Journal of Physics 19
+(2017) 023019.
+[13] R. J. Dingwall, M. J. Edmonds, J. L. Helm, B. A. Malomed, P. ¨Ohberg,
+Non-integrable dynamics of matter-wave solitons in a density-dependent
+gauge theory, New Journal of Physics 20 (2018) 043004.
+[14] O. Melchert, S. Willms, S. Bose, A. Yulin, B. Roth, F. Mitschke,
+U. Morgner, I. Babushkin, A. Demircan, Soliton molecules with two fre-
+quencies, Phys. Rev. Lett. 123 (2019) 243905.
+[15] J. Rao, J. He, T. Kanna, D. Mihalache, Nonlocal M-component nonlin-
+ear Schr¨odinger equations: Bright solitons, energy-sharing collisions, and
+positons, Phys. Rev. E 102 (2020) 032201.
+[16] O. Melchert, A. Demircan, Numerical investigation of solitary-wave solu-
+tions for the nonlinear schr¨odinger equation perturbed by third-order and
+negative fourth-order dispersion, Phys. Rev. A 110 (2024) 043518.
+[17] A. Paredes, D. N. Olivieri, HumbertoMichinel, From optics to dark mat-
+ter: A review on nonlinear Schr¨odinger–Poisson systems, Physica D:
+Nonlinear Phenomena 403 (2020) 132301.
+[18] J. L. Zagorac, I. Sands, N. Padmanabhan, R. Easther, Schr¨odinger-poisson
+solitons: Perturbation theory, Phys. Rev. D 105 (2022) 103506.
+[19] F. Dalfovo, S. Giorgini, L. P. Pitaevskii, S. Stringari, Theory of Bose-
+Einstein condensation in trapped gases, Rev. Mod. Phys. 71 (1999) 463–
+512.
+[20] F. Mitschke, Fiber Optics: Physics and Technology, Springer, 2016.
+[21] A. Blanco-Redondo, C. M. de Sterke, C. Xu, S. Wabnitz, S. K. Turitsyn,
+The bright prospects of optical solitons after 50 years, Nat. Photon. 17
+(2023) 937.
+[22] C. Gardner, J. Greene, M. Kruskal, R. Miura, Method for solving the
+Korteweg-de Vries equation, Phys. Rev. Lett. 19 (1967) 1095.
+[23] P. Lax, Integrals of nonlinear equations of evolution and solitary waves,
+Comm. Pure Appl. Math. 21 (1968) 467.
+[24] M. J. Ablowitz, D. J. Kaup, A. C. Newell, H. Segur, Nonlinear-Evolution
+Equations of Physical Significance, Phys. Rev. Lett. 31 (1973) 125.
+[25] M. Ablowitz, D. Kaup, A. Newell, H. Segur, The inverse scattering trans-
+form - Fourier analysis for nonlinear problems, Studies Appl. Math. 53
+(1974) 249.
+[26] J. Satsuma, N. Yajima, Initial Value Problems of One-Dimensional Self-
+Modulation of Nonlinear Waves in Dispersive Media, Prog. Theor. Phys.
+(Suppl.) 55 (1974) 284.
+[27] D. J. Kaup, Exact quantization of the nonlinear Schr¨odinger equation, J.
+Math. Phys. 16 (1975) 2036.
+[28] J. W. Miles, An envelope soliton problem, SIAM 41 (1981) 227–230.
+[29] W. Press, S. Teukolsky, W. Vetterling, B. Flannery, Numerical Recipes:
+The Art of Scientific Computing, Cambridge University Press, 2007.
+[30] H. P. Langtangen, K.-A. Mardal, Introduction to Numerical Methods for
+Variational Problems, Springer, 2019.
+[31] S. Schechter, Iteration Methods for Nonlinear Problems, Trans. Amer.
+Math. Soc. 104 (1962) 179–189.
+[32] J. M. Ortega, M. L. Rockoff, Nonlinear Difference Equations and Gauss-
+Seidel Type Iterative Methods, J. SIAM Numer. Anal. 3 (1966) 497–513.
+[33] M. E. Brewster, R. Kannan, Nonlinear Successive Over-Relaxation, Nu-
+mer. Math. 44 (1984) 309–315.
+[34] J. Yang, Nonlinear Waves in Integrable and Nonintegrable Systems,
+SIAM, 2010.
+[35] M. Haelterman, A. Sheppard, Bifurcation phenomena and multiple
+soliton-bound states in isotropic kerr media, Phys. Rev. E 149 (1994)
+3376.
+[36] M. Mitchell, M. Segev, T. Coskun, D. Christodulides, Theory of self-
+trapped spatially incoherent light beams, Phys. Rev. Lett. 79 (1997) 4990.
+[37] J. Yang, Z. Chen, Defect solitons in photonic lattices, Phys. Rev. E 73
+(2006) 026609.
+[38] V. I. Petviashvili, Equation for an extraordinary soliton, Sov. J. Plasma
+Phys. 2 (1976) 257.
+[39] T. Lakoba, J. Yang, A generalized petviashvili iteration method for scalar
+and vector hamiltonian equations with arbitrary form of nonlinearity, J.
+Comp. Phys. 226 (2007) 1668.
+[40] W. Bao, Q. Du, Computing the ground state solution of Bose-Einstein
+condensates by a normalized gradient flow, SIAM J. Sci. Comput. 25
+(2004) 1674–1697.
+[41] L. Lehtovaara, J. Toivanen, J. Eloranta, Solution of the time-independent
+Schr¨odinger equation by the imaginary time propagation method, J.
+Comp. Phys. 221 (2007) 148–157.
+[42] J. Yang, T. I. Lakoba, Accelerated Imaginary-time Evolution Methods for
+the Computation of Solitary Waves, Studies in Applied Mathematics 120
+(2008) 265–292.
+[43] J. Yang, T. I. Lakoba, Universally-Convergent Squared-Operator Iteration
+Methods for Solitary Waves in General Nonlinear Wave Equations, Stud-
+ies in Applied Mathematics 118 (2007) 153–197.
+[44] J. P. Boyd, Deleted Residuals, the QR-Factored Newton Iteration, and
+Other Methods for Formally Overdetermined Determinate Discretizations
+of Nonlinear Eigenproblems for Solitary, Cnoidal, and Shock Waves,
+Journal of Computational Physics 179 (2002) 216–237.
+[45] T. Mayteevarunyoo, B. A. Malomed, Stability limits for gap solitons in
+a Bose-Einstein condensate trapped in a time-modulated optical lattice,
+Phys. Rev. A 74 (2006) 033616.
+[46] O. Melchert, A. Demircan, pyGLLE: A Python toolkit for solving the
+generalized Lugiato–Lefever equation, SoftwareX 15 (2021) 100741.
+[47] J. Yang, Newton-conjugate-gradient methods for solitary wave computa-
+tions, J. Comp. Phys. 228 (2009) 7007.
+[48] T. Lakoba, Conjugate gradient method for finding fundamental solitary
+waves, Physica D 238 (2009) 2308.
+[49] H. A. Rose, M. I. Weinstein, On the bound-states of the nonlinear
+Schr¨odinger equation with a linear potential, Physica D 30 (1988) 207–
+218.
+[50] V. E. Zakharov, E. A. Kuznetsov, Optical solitons and quasisolitons, JETP
+86 (1998) 1035–1046.
+[51] E. N. Tsoy, L. A. Suyunov, Generic quartic solitons in optical media,
+Phys. Rev. A 109 (2024) 053528.
+[52] C. Besse, J.-C. Garreau, Nonlinear Optical and Atomic Systems,
+Springer, 2015.
+[53] G. P. Agrawal, Nonlinear Fiber Optics, Academic Press, 2019.
+[54] M. J. Ablowitz, Z. H. Musslimani, Discrete spatial solitons in a
+diffraction-managed nonlinear waveguide array:
+a unified approach,
+Physica D 184 (2003) 276–303.
+[55] M. J. Ablowitz, Z. H. Musslimani, Spectral renormalization method for
+computing self-localized solutions to nonlinear systems, Opt. Lett. 30
+(2005) 2140.
+[56] Z. Musslimani, J. Yang, Self-trapping of light in a two-dimensional pho-
+tonic lattice, J. Opt. Soc. Am. B 21 (2004) 973.
+[57] M. Ablowitz, T. Horikis, Solitons and spectral renormalization methods
+in nonlinear optics, Eur. Phys. J. Spec. Top. 173 (2009) 147.
+[58] W. Bao, W. Tang, Ground-state solution of Bose–Einstein condensate
+by directly minimizing the energy functional, Journal of Computational
+Physics 187 (2003) 230–254.
+[59] W. Liu, Y. Cai, Normalized Gradient Flow with Lagrange Multiplier for
+Computing Ground States of Bose–Einstein Condensates, SIAM J. Sci.
+Comput. 43 (2021) B219–B242.
+[60] O. Melchert, SWtools – Iterative solvers for solitary wave solu-
+tions of nonlinear Schr¨odinger-type equations, https://github.com/
+omelchert/SWtools.git, [Online; accessed 2025-04-09] (2025).
+[61] G. Rossum, Python Reference Manual, Tech. rep., Amsterdam, The
+Netherlands, The Netherlands (1995).
+[62] P. Virtanen, R. Gommers, T. E. e. a. Oliphant, SciPy 1.0: fundamental
+algorithms for scientific computing in Python, Nature Methods 17 (2020)
+261.
+[63] J. D. Hunter, Matplotlib: A 2D graphics environment, Computing in Sci-
+12
+
+--- PAGE 13 ---
+ence & Engineering 9 (2007) 90.
+[64] G. Fibich, Y. Sivan, M. I. Weinstein, Bound states of nonlinear
+Schr¨odinger equations with a periodic nonlinear microstructure, Physica
+D 217 (2006) 31.
+[65] H. P. Langtangen, S. Linge, Finite-Difference Computing with PDEs,
+Springer, 2017.
+[66] O. Melchert, A. Demircan, py-fmas: A python package for ultrashort op-
+tical pulse propagation in terms of forward models for the analytic signal,
+Computer Physics Communications 273 (2022) 108257.
+[67] M. Karlsson, A. H¨o¨ok, Soliton-like pulses governed by fourth order dis-
+persion in optical fibers, Optics Communications 104 (4) (1994) 303–307.
+[68] N. Akhmediev, A. Buryak, M. Karlsson, Radiationless optical solitons
+with oscillating tails, Opt. Commun. 110 (1994) 540.
+[69] M. Pich´e, J.-F. Cormier, X. Zhu, Bright optical soliton in the presence of
+fourth-order dispersion, Opt. Lett. 21 (1996) 845.
+[70] C. M. de Sterke, A. Blanco-Redondo, Even-order dispersion solitons: A
+pedagogical note, Optics Communications 541 (2023) 129560.
+[71] O. Sinkin, R. Holzlohner, J. Zweck, C. Menyuk, Optimization of the split-
+step Fourier method in modeling optical-fiber communications systems,
+Journal of Lightwave Technology 21 (2003) 61–68.
+[72] J. Yang, Z. H. Musslimani, Fundamental and vortex solitons in a two-
+dimensional optical lattice, Opt. Lett. 28 (21) (2003) 2094–2096.
+[73] E. A. Ostrovskaya, Y. S. Kivshar, Photonic crystals for matter waves:
+Bose-Einstein condensates in optical lattices, Opt. Express 12 (1) (2004)
+19–29.
+[74] O.
+Melchert,
+A.
+Demircan,
+Optical
+Solitary
+Wavelets,
+see
+arXiv.2410.06867 (2024).
+[75] O. Melchert, S. Willms, I. Babushkin, U. Morgner, A. Demircan, (Invited)
+Two-color soliton meta-atoms and molecules, Optik 280 (2023) 170772.
+[76] K. K. K. Tam, T. J. Alexander, A. Blanco-Redondo, C. M. de Sterke,
+Generalized dispersion Kerr solitons, Phys. Rev. A 101 (2020) 043822.
+[77] O. Melchert, S. Bose, S. Willms, I. Babushkin, U. Morgner, A. Demir-
+can, Two-color pulse compounds in waveguides with a zero-nonlinearity
+point, Opt. Lett. 48 (2023) 518–521.
+[78] C. E. Wayne, M. I. Weinstein, Dynamics of Partial Differential Equations,
+Springer, 2015.
+[79] O. Melchert, A. Demircan, GNLStools.py:
+A generalized nonlinear
+Schr¨odinger Python module implementing different models of input pulse
+quantum noise, SoftwareX 20 (2022) 101232.
+13

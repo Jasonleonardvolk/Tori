@@ -11,13 +11,13 @@ echo Preparing temporary test files...
 echo.
 
 REM Backup original index.js
-if not exist "client\src\index.js.backup" (
-  copy "client\src\index.js" "client\src\index.js.backup"
+if not exist "ide_frontend\src\index.js.backup" (
+  copy "ide_frontend\src\index.js" "ide_frontend\src\index.js.backup"
   echo Backed up original index.js
 )
 
 REM Copy test index.js
-copy "client\src\test-index.js" "client\src\index.js" /Y
+copy "ide_frontend\src\test-index.js" "ide_frontend\src\index.js" /Y
 echo Applied test index.js
 
 echo.
@@ -27,7 +27,7 @@ echo.
 echo After testing, run restore-client.bat to restore original files.
 echo.
 
-cd client
+cd ide_frontend
 set NODE_OPTIONS=--openssl-legacy-provider
 npx react-scripts start
 

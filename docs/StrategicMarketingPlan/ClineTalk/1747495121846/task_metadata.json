@@ -1,0 +1,156 @@
+{
+  "files_in_context": [
+    {
+      "path": "project-index.txt",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747506513001,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "project-index.txt",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1747506513001,
+      "cline_edit_date": null,
+      "user_edit_date": 1747506565540
+    },
+    {
+      "path": "project-index.txt",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1747506513001,
+      "cline_edit_date": null,
+      "user_edit_date": 1747506569878
+    },
+    {
+      "path": "project-index.txt",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747506576334,
+      "cline_edit_date": null,
+      "user_edit_date": 1747506569878
+    },
+    {
+      "path": "project-index.txt",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1747506576334,
+      "cline_edit_date": null,
+      "user_edit_date": 1747506593366
+    },
+    {
+      "path": "project-index.txt",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747506599655,
+      "cline_edit_date": null,
+      "user_edit_date": 1747506593366
+    },
+    {
+      "path": "project-index.txt",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1747506599655,
+      "cline_edit_date": null,
+      "user_edit_date": 1747506672046
+    },
+    {
+      "path": "project-index.txt",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747506679189,
+      "cline_edit_date": null,
+      "user_edit_date": 1747506672046
+    },
+    {
+      "path": "upload-to-gcs.ps1",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747506696162,
+      "cline_edit_date": 1747506696162,
+      "user_edit_date": null
+    },
+    {
+      "path": "upload-options.md",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747506728703,
+      "cline_edit_date": 1747506728703,
+      "user_edit_date": null
+    },
+    {
+      "path": "upload-to-github.ps1",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747506906652,
+      "cline_edit_date": 1747506906652,
+      "user_edit_date": null
+    },
+    {
+      "path": "upload-to-github.ps1",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747506919771,
+      "cline_edit_date": 1747506919771,
+      "user_edit_date": null
+    },
+    {
+      "path": "upload-to-github.ps1",
+      "record_state": "active",
+      "record_source": "user_edited",
+      "cline_read_date": 1747506919771,
+      "cline_edit_date": 1747506919771,
+      "user_edit_date": 1747506919801
+    },
+    {
+      "path": "create-concept-index.ps1",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747511422165,
+      "cline_edit_date": 1747511422165,
+      "user_edit_date": null
+    },
+    {
+      "path": "gcs-concept-files-index.txt",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747511654721,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    }
+  ],
+  "model_usage": [
+    {
+      "ts": 1747495121939,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1747506481625,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1747507051742,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1747511393615,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1747585663065,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    }
+  ]
+}

@@ -7,8 +7,11 @@ on:
     branches: [main]
 
 jobs:
-  build:
+  build_ide:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: kha/ide_frontend
     strategy:
       matrix:
         node-version: [18.x]
@@ -46,11 +49,62 @@ jobs:
         
       - name: Check ports
         run: node port-check.js
+        working-directory: kha
         
       - name: Type check
         run: pnpm type-check
         
+      - name: Build IDE frontend
+        run: pnpm --filter @itori/ide build --mode production.ide
+        
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: ide-build
+          path: kha/ide_frontend/dist
+
+  build_chat:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: kha/tori_chat_frontend
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+          run_install: false
+          
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+      - name: Setup pnpm cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        run: pnpm install
+        
       - name: Build shared packages
+        working-directory: kha
         run: |
           pnpm --filter "@itori/runtime-bridge" build
           pnpm --filter "@itori/ui-kit" build
@@ -58,4 +112,10 @@ jobs:
           pnpm --filter "@itori/ingest" build
           
       - name: Build chat app
-        run: pnpm build:chat
+        run: pnpm --filter @itori/chat build --mode production.chat
+        
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: chat-build
+          path: kha/tori_chat_frontend/dist

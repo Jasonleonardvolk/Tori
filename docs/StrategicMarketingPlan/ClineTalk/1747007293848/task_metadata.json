@@ -1,0 +1,82 @@
+{
+  "files_in_context": [
+    {
+      "path": "ingest_pdf/canonical_ingestion.py",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747007346896,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "batch_process_pdfs.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747007447476,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/extract_blocks.py",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747007558982,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/pipeline.py",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747007565796,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/features.py",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747007572498,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "batch_process_pdfs.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747007594511,
+      "cline_edit_date": 1747007594511,
+      "user_edit_date": null
+    },
+    {
+      "path": "batch_process_pdfs_recursive.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747007600740,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "batch_process_pdfs_recursive.py",
+      "record_state": "active",
+      "record_source": "user_edited",
+      "cline_read_date": 1747007600740,
+      "cline_edit_date": null,
+      "user_edit_date": 1747007621977
+    }
+  ],
+  "model_usage": [
+    {
+      "ts": 1747007293950,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1747007458118,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    }
+  ]
+}

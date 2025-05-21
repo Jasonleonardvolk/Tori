@@ -1,0 +1,86 @@
+# Kaizen Ticket Schema
+# Defines the structure of Kaizen improvement tickets
+
+id:
+  type: string
+  required: true
+  pattern: "^KAIZ-\\d+$"
+  description: Unique identifier for the ticket (format KAIZ-XXX)
+  
+title:
+  type: string
+  required: true
+  description: Short, descriptive title of the improvement
+  
+component:
+  type: string
+  required: true
+  description: ID of the component being improved
+  
+owner:
+  type: string
+  required: true
+  description: Team or individual responsible for this improvement
+  
+severity:
+  type: string
+  enum: ["critical", "high", "medium", "low"]
+  required: true
+  description: Impact severity of the improvement
+  
+objective:
+  type: string
+  required: true
+  description: Clear statement of what the improvement aims to achieve
+  
+success_criteria:
+  type: array
+  items:
+    type: string
+  required: true
+  description: Measurable criteria to determine if the improvement was successful
+  
+abort_criteria:
+  type: array
+  items:
+    type: string
+  required: false
+  description: Conditions that would cause an automatic rollback
+  
+rollback_plan:
+  type: string
+  required: true
+  description: Command or procedure to revert changes if needed
+  
+links:
+  type: object
+  properties:
+    repository:
+      type: string
+      description: Link to the Git repository with the code changes
+    dashboard:
+      type: string
+      description: Link to the metrics dashboard for this component
+    documentation:
+      type: string
+      description: Link to relevant documentation
+  required: false
+  
+status:
+  type: string
+  enum: ["draft", "planned", "in_progress", "in_review", "canary", "complete", "aborted"]
+  default: "draft"
+  required: true
+  description: Current status of the Kaizen ticket
+  
+created_at:
+  type: string
+  format: date-time
+  required: true
+  description: When the ticket was created
+  
+updated_at:
+  type: string
+  format: date-time
+  required: true
+  description: When the ticket was last updated

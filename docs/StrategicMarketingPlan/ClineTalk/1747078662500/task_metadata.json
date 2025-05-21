@@ -1,0 +1,612 @@
+{
+  "files_in_context": [
+    {
+      "path": "docs/RevisedMasterPlanandStrategicAnalysis05_12_25.docx",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747078674933,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_core.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747079078979,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/koopman_estimator.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747079085587,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/README_KOOPMAN.md",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747079092135,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "docs/RevisedMasterPlanandStrategicAnalysis05_12_25.docx",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747079100137,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/eigen_alignment.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747079127503,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/stability_reasoning.py",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747079134644,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/lyapunov_spike_detector.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747079155372,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_core.py",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747079178620,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/koopman_estimator.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747079184530,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/README_KOOPMAN.md",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747079189407,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "docs/RevisedMasterPlanandStrategicAnalysis05_12_25.docx",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747079194511,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/eigen_alignment.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747079264046,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/lyapunov_spike_detector.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747079328481,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "batch_process_pdfs.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747079351481,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "docs/RevisedMasterPlanandStrategicAnalysis05_12_25.docx",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747079362240,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/koopman_estimator.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747079435716,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/eigen_alignment.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747079447841,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/README_KOOPMAN.md",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747079461865,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "batch_process_pdfs.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747079472079,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "docs/RevisedMasterPlanandStrategicAnalysis05_12_25.docx",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747079487314,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/koopman_estimator.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747079545995,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/eigen_alignment.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747079556333,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/lyapunov_spike_detector.py",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747079568618,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "docs\\RevisedMasterPlanandStrategicAnalysis05_12_25.docx",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747079580379,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "batch_process_pdfs.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747079608559,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/koopman_estimator.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747079638562,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/lyapunov.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747079659260,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/extract_blocks.py",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747079671299,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "batch_process_pdfs.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747079677747,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "docs/RevisedMasterPlanandStrategicAnalysis05_12_25.docx",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747079683536,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/lyapunov.py",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747079804736,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/koopman_estimator.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747079811935,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/README_KOOPMAN.md",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747079824448,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "docs/RevisedMasterPlanandStrategicAnalysis05_12_25.docx",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747079832371,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/eigen_alignment.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747079873946,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/koopman_reasoning_demo.py",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747079881198,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "batch_process_pdfs.py",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747079908559,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "docs/RevisedMasterPlanandStrategicAnalysis05_12_25.docx",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747079921445,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/README_KOOPMAN.md",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747079949180,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/eigen_alignment.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747079976296,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/koopman_estimator.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747079998419,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "docs/RevisedMasterPlanandStrategicAnalysis05_12_25.docx",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747080311065,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/koopman_estimator.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747080882141,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/eigen_alignment.py",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747080892451,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/koopman_estimator.py",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747083429695,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/banksy/psi_sync_monitor.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747083867983,
+      "cline_edit_date": 1747083867983,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/banksy/__init__.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747083885244,
+      "cline_edit_date": 1747083885244,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/banksy/psi_sync_demo.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747083937547,
+      "cline_edit_date": 1747083937547,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/banksy/psi_sync_demo.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747083955204,
+      "cline_edit_date": 1747083955204,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/banksy/psi_koopman_integration.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747084056175,
+      "cline_edit_date": 1747084056175,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/banksy/alan_psi_sync_bridge.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747084115182,
+      "cline_edit_date": 1747084115182,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/banksy/__init__.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747084136017,
+      "cline_edit_date": 1747084136017,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/banksy/README_PSI_SYNC.md",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747084177937,
+      "cline_edit_date": 1747084177937,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/banksy/run_psi_sync_tests.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747084204442,
+      "cline_edit_date": 1747084204442,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/banksy/run_psi_sync_tests.bat",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747084275364,
+      "cline_edit_date": 1747084275364,
+      "user_edit_date": null
+    },
+    {
+      "path": "run_psi_sync_demo.bat",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747084298495,
+      "cline_edit_date": 1747084298495,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/banksy/PSI_SYNC_IMPLEMENTATION_SUMMARY.md",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747084337966,
+      "cline_edit_date": 1747084337966,
+      "user_edit_date": null
+    },
+    {
+      "path": "RevisedMasterPlanandStrategicAnalysis05_12_25.docx",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747084732659,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend\\elfin\\proto\\elfin.proto",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747087663037,
+      "cline_edit_date": 1747087663037,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend\\elfin\\__init__.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747087785287,
+      "cline_edit_date": 1747087785287,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend\\elfin\\parser\\lexer.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747087846272,
+      "cline_edit_date": 1747087846272,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend\\elfin\\parser\\ast.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747087899430,
+      "cline_edit_date": 1747087899430,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend\\elfin\\parser\\parser.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747088841794,
+      "cline_edit_date": 1747088841794,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend\\elfin\\parser\\parser.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747088867730,
+      "cline_edit_date": 1747088867730,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend\\elfin\\compiler\\compiler.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747088958600,
+      "cline_edit_date": 1747088958600,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend\\elfin\\runtime\\runtime.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747089075449,
+      "cline_edit_date": 1747089075449,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend\\elfin\\examples\\elfin_demo.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747089123518,
+      "cline_edit_date": 1747089123518,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend\\elfin\\README.md",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747089173369,
+      "cline_edit_date": 1747089173369,
+      "user_edit_date": null
+    }
+  ],
+  "model_usage": [
+    {
+      "ts": 1747078662614,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1747078675053,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1747079063843,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1747080034866,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1747083719903,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1747084721892,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1747087515806,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1747088565846,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1747088723565,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    }
+  ]
+}

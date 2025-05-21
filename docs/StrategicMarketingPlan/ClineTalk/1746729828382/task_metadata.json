@@ -1,0 +1,942 @@
+{
+  "files_in_context": [
+    {
+      "path": "client/src/components/PersonaSelector/PersonaContext.js",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746729857021,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/package.json",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746729910499,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/__tests__/test-utils.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746731155767,
+      "cline_edit_date": 1746731155767,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/components/PersonaSelector/PersonaSelector.jsx",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746731162354,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/__tests__/components/PersonaSelector/PersonaContext.test.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746731191370,
+      "cline_edit_date": 1746731191370,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/__tests__/components/PersonaSelector/PersonaContext.test.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746731204226,
+      "cline_edit_date": 1746731204226,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/__tests__/components/PersonaSelector/PersonaContext.test.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746731214748,
+      "cline_edit_date": 1746731214748,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/components/PersonaSelector/PersonaSelector.css",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746731220213,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/__tests__/components/PersonaSelector/PersonaSelector.test.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746731243959,
+      "cline_edit_date": 1746731243959,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/__tests__/components/PersonaSelector/PersonaSelector.test.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746731259069,
+      "cline_edit_date": 1746731259069,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/components/PersonaSelector/PersonaSelector.jsx",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746731269669,
+      "cline_edit_date": 1746731269669,
+      "user_edit_date": null
+    },
+    {
+      "path": "config/phase3_flags.yaml",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746731531490,
+      "cline_edit_date": 1746731531490,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/services/featureFlagsService.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746731562043,
+      "cline_edit_date": 1746731562043,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/__tests__/services/featureFlagsService.test.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746731592782,
+      "cline_edit_date": 1746731592782,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/components/FieldMeditationMode/FieldMeditationMode.jsx",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746731606031,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/services/executionTracerService.js",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746731611880,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/__tests__/integration/ExecutionTracer_FieldMeditationMode/ExecutionTracer_FieldMeditationMode.test.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746731770107,
+      "cline_edit_date": 1746731770107,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/__tests__/integration/ExecutionTracer_FieldMeditationMode/ExecutionTracer_FieldMeditationMode.test.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746731790406,
+      "cline_edit_date": 1746731790406,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/__tests__/integration/ExecutionTracer_FieldMeditationMode/ExecutionTracer_FieldMeditationMode.test.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746731807827,
+      "cline_edit_date": 1746731807827,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/services/refactorService.js",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746731948468,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/services/editorSyncService.js",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746731953676,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/__tests__/integration/RefactorService_EditorSyncService/RefactorService_EditorSyncService.test.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746732031623,
+      "cline_edit_date": 1746732031623,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/services/mcpClientService.js",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746732191874,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "DebugAgentPanel.jsx",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746732208859,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/__tests__/integration/MCPClient_DebugAgent/MCPClient_DebugAgent.test.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746732257129,
+      "cline_edit_date": 1746732257129,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/services/conceptGraphService.js",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746732295753,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/services/exporterService.js",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746732321026,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/__tests__/integration/Exporter_ConceptGraphService/Exporter_ConceptGraphService.test.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746732381657,
+      "cline_edit_date": 1746732381657,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/__tests__/accessibility/accessibilityTestUtils.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746732433262,
+      "cline_edit_date": 1746732433262,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/__tests__/accessibility/accessibilityTestUtils.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746732446870,
+      "cline_edit_date": 1746732446870,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/__tests__/accessibility/accessibilityTestUtils.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746732460966,
+      "cline_edit_date": 1746732460966,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/__tests__/accessibility/PersonaSelector.accessibility.test.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746732495681,
+      "cline_edit_date": 1746732495681,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/__tests__/accessibility/PersonaSelector.accessibility.test.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746732509181,
+      "cline_edit_date": 1746732509181,
+      "user_edit_date": null
+    },
+    {
+      "path": "docs/ALAN_IDE_Phase3_Implementation_Progress.md",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746732540568,
+      "cline_edit_date": 1746732540568,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/__tests__/performance/bulkImportLoadHarness.test.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746732735202,
+      "cline_edit_date": 1746732735202,
+      "user_edit_date": null
+    },
+    {
+      "path": "src/project_vault_service.py",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746733114104,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/__tests__/security/secretDetectionFlow.test.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746733172454,
+      "cline_edit_date": 1746733172454,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/__tests__/security/ImportWizardSecretDetection.test.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746733236560,
+      "cline_edit_date": 1746733236560,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/__tests__/security/ImportWizardSecretDetection.test.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746733259212,
+      "cline_edit_date": 1746733259212,
+      "user_edit_date": null
+    },
+    {
+      "path": "docs/ALAN_IDE_Phase3_Implementation_Progress.md",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746733294025,
+      "cline_edit_date": 1746733294025,
+      "user_edit_date": null
+    },
+    {
+      "path": "docs/ALAN_IDE_Phase3_Implementation_Progress.md",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746733319669,
+      "cline_edit_date": 1746733319669,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/__tests__/accessibility/PersonaSelector.accessibility.test.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746733416737,
+      "cline_edit_date": 1746733416737,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/__tests__/components/PersonaSelector/PersonaContext.test.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746733447367,
+      "cline_edit_date": 1746733447367,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/__tests__/components/PersonaSelector/PersonaSelector.test.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746733464122,
+      "cline_edit_date": 1746733464122,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/__tests__/integration/ExecutionTracer_FieldMeditationMode/ExecutionTracer_FieldMeditationMode.test.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746733477296,
+      "cline_edit_date": 1746733477296,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/__tests__/integration/RefactorService_EditorSyncService/RefactorService_EditorSyncService.test.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746733497037,
+      "cline_edit_date": 1746733497037,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/__tests__/integration/RefactorService_EditorSyncService/RefactorService_EditorSyncService.test.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746733507489,
+      "cline_edit_date": 1746733507489,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/__tests__/integration/MCPClient_DebugAgent/MCPClient_DebugAgent.test.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746733524808,
+      "cline_edit_date": 1746733524808,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/__tests__/integration/MCPClient_DebugAgent/MCPClient_DebugAgent.test.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746733536463,
+      "cline_edit_date": 1746733536463,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/__tests__/security/secretDetectionFlow.test.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746733550042,
+      "cline_edit_date": 1746733550042,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/__tests__/security/ImportWizardSecretDetection.test.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746733579660,
+      "cline_edit_date": 1746733579660,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/__tests__/performance/bulkImportLoadHarness.test.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746733595103,
+      "cline_edit_date": 1746733595103,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/__tests__/performance/bulkImportLoadHarness.test.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746733625842,
+      "cline_edit_date": 1746733625842,
+      "user_edit_date": null
+    },
+    {
+      "path": "package.json",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746733872729,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/package.json",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746733878908,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "docs/test-configuration-requirements.md",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746734346881,
+      "cline_edit_date": 1746734346881,
+      "user_edit_date": null
+    },
+    {
+      "path": ".babelrc",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746734421362,
+      "cline_edit_date": 1746734421362,
+      "user_edit_date": null
+    },
+    {
+      "path": "jest.config.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746734434480,
+      "cline_edit_date": 1746734434480,
+      "user_edit_date": null
+    },
+    {
+      "path": "setupTests.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746734447138,
+      "cline_edit_date": 1746734447138,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/jest.config.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746734460783,
+      "cline_edit_date": 1746734460783,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/.babelrc",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746734473838,
+      "cline_edit_date": 1746734473838,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/setupTests.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746734489912,
+      "cline_edit_date": 1746734489912,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/__mocks__/styleMock.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746734503561,
+      "cline_edit_date": 1746734503561,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/__mocks__/fileMock.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746734516326,
+      "cline_edit_date": 1746734516326,
+      "user_edit_date": null
+    },
+    {
+      "path": "docs/ALAN_IDE_Phase3_Implementation_Progress.md",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746734546062,
+      "cline_edit_date": 1746734546062,
+      "user_edit_date": null
+    },
+    {
+      "path": "setup-test-dependencies.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746734567297,
+      "cline_edit_date": 1746734567297,
+      "user_edit_date": null
+    },
+    {
+      "path": "package.json",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746734654290,
+      "cline_edit_date": 1746734654290,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/package.json",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746734666651,
+      "cline_edit_date": 1746734666651,
+      "user_edit_date": null
+    },
+    {
+      "path": "TESTING.md",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746734694695,
+      "cline_edit_date": 1746734694695,
+      "user_edit_date": null
+    },
+    {
+      "path": "jest.config.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746734748309,
+      "cline_edit_date": 1746734748309,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/jest.config.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746734758949,
+      "cline_edit_date": 1746734758949,
+      "user_edit_date": null
+    },
+    {
+      "path": "jest.config.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746734773796,
+      "cline_edit_date": 1746734773796,
+      "user_edit_date": null
+    },
+    {
+      "path": "jest.config.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746734859563,
+      "cline_edit_date": 1746734859563,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/package.json",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746734918815,
+      "cline_edit_date": 1746734918815,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/jest.config.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746734935545,
+      "cline_edit_date": 1746734935545,
+      "user_edit_date": null
+    },
+    {
+      "path": "docs/test-configuration-requirements.md",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746735134942,
+      "cline_edit_date": 1746734346881,
+      "user_edit_date": null
+    },
+    {
+      "path": ".babelrc",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746735187075,
+      "cline_edit_date": 1746735187075,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/.babelrc",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746735198218,
+      "cline_edit_date": 1746735198218,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/.babelrc",
+      "record_state": "active",
+      "record_source": "user_edited",
+      "cline_read_date": 1746735198218,
+      "cline_edit_date": 1746735198218,
+      "user_edit_date": 1746735198341
+    },
+    {
+      "path": "setupTests.js",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746735204094,
+      "cline_edit_date": 1746734447138,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/setupTests.js",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746735209698,
+      "cline_edit_date": 1746734489912,
+      "user_edit_date": null
+    },
+    {
+      "path": "jest.config.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746735229044,
+      "cline_edit_date": 1746735229044,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/jest.config.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746735246779,
+      "cline_edit_date": 1746735246779,
+      "user_edit_date": null
+    },
+    {
+      "path": "setupTests.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746735263819,
+      "cline_edit_date": 1746735263819,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/__tests__/components/PersonaSelector/PersonaSelector.test.js",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746735541505,
+      "cline_edit_date": 1746733464122,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/__tests__/test-utils.js",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746735547440,
+      "cline_edit_date": 1746731155767,
+      "user_edit_date": null
+    },
+    {
+      "path": "__mocks__/styleMock.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746735644012,
+      "cline_edit_date": 1746735644012,
+      "user_edit_date": null
+    },
+    {
+      "path": "__mocks__/fileMock.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746735654884,
+      "cline_edit_date": 1746735654884,
+      "user_edit_date": null
+    },
+    {
+      "path": "jest.config.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746735667719,
+      "cline_edit_date": 1746735667719,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/jest.config.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746735681914,
+      "cline_edit_date": 1746735681914,
+      "user_edit_date": null
+    },
+    {
+      "path": "babel.config.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746735693198,
+      "cline_edit_date": 1746735693198,
+      "user_edit_date": null
+    },
+    {
+      "path": "jest.config.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746736570122,
+      "cline_edit_date": 1746736570122,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/components/PersonaSelector/PersonaSelector.jsx",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746736669945,
+      "cline_edit_date": 1746731269669,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/components/PersonaSelector/PersonaContext.js",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746736678808,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "jest-transform.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746736695678,
+      "cline_edit_date": 1746736695678,
+      "user_edit_date": null
+    },
+    {
+      "path": "jest.config.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746736709457,
+      "cline_edit_date": 1746736709457,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/jest-transform.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746736721453,
+      "cline_edit_date": 1746736721453,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/jest.config.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746736734267,
+      "cline_edit_date": 1746736734267,
+      "user_edit_date": null
+    },
+    {
+      "path": "docs/ALAN_IDE_Phase3_Implementation_Progress.md",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746736781280,
+      "cline_edit_date": 1746734546062,
+      "user_edit_date": null
+    },
+    {
+      "path": "docs/ALAN_IDE_Phase3_Implementation_Progress.md",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746736798909,
+      "cline_edit_date": 1746736798909,
+      "user_edit_date": null
+    },
+    {
+      "path": "jest.config.js",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1746736709457,
+      "cline_edit_date": 1746736709457,
+      "user_edit_date": 1746737013367
+    },
+    {
+      "path": "client/jest.config.js",
+      "record_state": "active",
+      "record_source": "user_edited",
+      "cline_read_date": 1746736734267,
+      "cline_edit_date": 1746736734267,
+      "user_edit_date": 1746737017953
+    },
+    {
+      "path": "jest.config.js",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1746736709457,
+      "cline_edit_date": 1746736709457,
+      "user_edit_date": 1746737120139
+    },
+    {
+      "path": "jest.config.js",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1746736709457,
+      "cline_edit_date": 1746736709457,
+      "user_edit_date": 1746737285826
+    },
+    {
+      "path": "jest.config.js",
+      "record_state": "active",
+      "record_source": "user_edited",
+      "cline_read_date": 1746736709457,
+      "cline_edit_date": 1746736709457,
+      "user_edit_date": 1746737436097
+    }
+  ],
+  "model_usage": [
+    {
+      "ts": 1746729828447,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1746729983127,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1746730606038,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1746732154390,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1746732179766,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1746732882719,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1746733024411,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1746733065376,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1746733082431,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1746733711301,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1746733844539,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1746734095024,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1746734122718,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1746735012451,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1746735165763,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1746738271842,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    }
+  ]
+}

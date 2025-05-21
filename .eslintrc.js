@@ -31,8 +31,7 @@ module.exports = {
     // Common issues identified in the codebase
     'no-unused-vars': ['warn', { 
       'argsIgnorePattern': '^_', 
-      'varsIgnorePattern': '^_',
-      'destructuredArrayIgnorePattern': '^_'
+      'varsIgnorePattern': '^_'
     }],
     'react-hooks/exhaustive-deps': 'warn',
     'no-template-curly-in-string': 'warn',

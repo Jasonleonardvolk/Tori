@@ -1,0 +1,102 @@
+{
+  "files_in_context": [
+    {
+      "path": ".mcp.json",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746826321789,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "start-mcp-servers.bat",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746826329807,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "start-filesystem-mcp.bat",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746826337784,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "../../../AppData/Roaming/Code/User/globalStorage/saoudrizwan.claude-dev/settings/cline_mcp_settings.json",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746826347551,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "../../../AppData/Roaming/Code/User/globalStorage/saoudrizwan.claude-dev/settings/cline_mcp_settings.json",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746826472189,
+      "cline_edit_date": 1746826472189,
+      "user_edit_date": null
+    },
+    {
+      "path": "test-mcp-filesystem.js",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746826479135,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "mcp-connection-test.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746826511171,
+      "cline_edit_date": 1746826511171,
+      "user_edit_date": null
+    },
+    {
+      "path": "test-mcp-connection.bat",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746826525589,
+      "cline_edit_date": 1746826525589,
+      "user_edit_date": null
+    },
+    {
+      "path": "MCP_TROUBLESHOOTING_GUIDE.md",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746826554112,
+      "cline_edit_date": 1746826554112,
+      "user_edit_date": null
+    }
+  ],
+  "model_usage": [
+    {
+      "ts": 1746826311400,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1746826436045,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1746826459131,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1746826609275,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    }
+  ]
+}

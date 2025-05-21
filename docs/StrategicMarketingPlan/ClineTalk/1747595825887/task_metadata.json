@@ -1,0 +1,20 @@
+{
+  "files_in_context": [
+    {
+      "path": "docs/conversations/cline_split/cline_content_part1.txt",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747595859007,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    }
+  ],
+  "model_usage": [
+    {
+      "ts": 1747595826018,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    }
+  ]
+}

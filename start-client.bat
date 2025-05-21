@@ -1,4 +1,4 @@
 @echo off
-echo Starting Client Application...
-cd client
+echo Starting IDE Frontend Application...
+cd ide_frontend
 npm start

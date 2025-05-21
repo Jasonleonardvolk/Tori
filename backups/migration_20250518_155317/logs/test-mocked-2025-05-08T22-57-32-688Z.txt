@@ -1,0 +1,120 @@
+
+> alan-agent-suggestions@1.0.0 test
+> jest --config jest.config.complete.js
+
+[STDERR] PASS client/src/__tests__/integration/RefactorService_EditorSyncService/RefactorService_EditorSyncService.test.js
+[STDERR]   RefactorService + EditorSyncService Integration
+[STDERR]     √ should maintain sync when applying refactoring transformations (8 ms)
+[STDERR]     √ should sync concept selection to editor selection (1 ms)
+    √ should sync editor selection to concept selection (2 ms)
+    √ should detect secrets and sync concept changes to editor (4 ms)
+    √ should sync editor changes to concept graph (7 ms)
+[STDERR] 
+[STDERR] PASS client/src/__tests__/integration/MCPClient_DebugAgent/mockMcpClientService.test.js
+[STDERR]   √ mock mcp client service exists and is not a test suite (1 ms)
+
+  console.log
+    Python result structure: {"success":true,"code":"# Generated Python code for graph: test-graph\n# Lineage included: true\n\n# CONCEPT[concept_a] (id: concept_a)\ndef process_data():\n    pass\n\n# CONCEPT[concept_b] (id: concept_b)\ndef transform_data():\n    pass\n\n# CONCEPT[concept_c] (id: concept_c)\ndef save_results():\n    pass\n","metadata":{"graphId":"test-graph","language":"python","conceptIds":["concept_a","concept_b","concept_c"],"lineage":{"links":[{"source":"concept_a","target":"concept_b"},{"source":"concept_b","target":"concept_c"}]}}}
+
+      at Object.log (client/src/__tests__/integration/Exporter_ConceptGraphService/Exporter_ConceptGraphService.test.js:141:13)
+
+  console.log
+    JavaScript result structure: {"success":true,"code":"// Generated JavaScript code for graph: test-graph\n// Lineage included: true\n\n// CONCEPT[concept_a] (id: concept_a)\nfunction processData() {\n  // Implementation\n}\n\n// CONCEPT[concept_b] (id: concept_b)\nfunction transformData() {\n  // Implementation\n}\n\n// CONCEPT[concept_c] (id: concept_c)\nfunction saveResults() {\n  // Implementation\n}\n","metadata":{"graphId":"test-graph","language":"javascript","conceptIds":["concept_a","concept_b","concept_c"],"lineage":{"links":[{"source":"concept_a","target":"concept_b"},{"source":"concept_b","target":"concept_c"}]}}}
+
+      at Object.log (client/src/__tests__/integration/Exporter_ConceptGraphService/Exporter_ConceptGraphService.test.js:189:13)
+
+[STDERR] FAIL client/src/__tests__/integration/Exporter_ConceptGraphService/Exporter_ConceptGraphService.test.js
+[STDERR]   Exporter + ConceptGraphService Integration
+    × generates Python code with lineage comments from concept graph (25 ms)
+    × generates JavaScript code with lineage comments from concept graph (4 ms)
+    √ can extract concept identifiers from lineage comments (2 ms)
+    × performs round-trip conversion from graph to code and back
+    × maintains lineage through multiple export-import cycles
+    × exports graph to snapshot format (2 ms)
+
+  ● Exporter + ConceptGraphService Integration › generates Python code with lineage comments from concept graph
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "object"
+    Received: "undefined"
+
+    [0m [90m 142 |[39m     
+     [90m 143 |[39m     [90m// Verify the result contains the expected file - use direct access since toHaveProperty has issues[39m
+    [31m[1m>[22m[39m[90m 144 |[39m     expect([36mtypeof[39m result[33m.[39mfiles)[33m.[39mtoBe([32m'object'[39m)[33m;[39m
+     [90m     |[39m                                 [31m[1m^[22m[39m
+     [90m 145 |[39m     expect(result[33m.[39mfiles[[32m'calculator.py'[39m])[33m.[39mtoBeDefined()[33m;[39m
+     [90m 146 |[39m     [36mconst[39m code [33m=[39m result[33m.[39mfiles[[32m'calculator.py'[39m][33m;[39m
+     [90m 147 |[39m     [0m
+
+      at Object.toBe (client/src/__tests__/integration/Exporter_ConceptGraphService/Exporter_ConceptGraphService.test.js:144:33)
+
+  ● Exporter + ConceptGraphService Integration › generates JavaScript code with lineage comments from concept graph
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "object"
+    Received: "undefined"
+
+    [0m [90m 190 |[39m     
+     [90m 191 |[39m     [90m// Verify the result contains the expected file - use direct access[39m
+    [31m[1m>[22m[39m[90m 192 |[39m     expect([36mtypeof[39m result[33m.[39mfiles)[33m.[39mtoBe([32m'object'[39m)[33m;[39m
+     [90m     |[39m                                 [31m[1m^[22m[39m
+     [90m 193 |[39m     expect(result[33m.[39mfiles[[32m'calculator.py'[39m])[33m.[39mtoBeDefined()[33m;[39m
+     [90m 194 |[39m     [36mconst[39m code [33m=[39m result[33m.[39mfiles[[32m'calculator.py'[39m][33m;[39m
+     [90m 195 |[39m     [0m
+
+      at Object.toBe (client/src/__tests__/integration/Exporter_ConceptGraphService/Exporter_ConceptGraphService.test.js:192:33)
+
+  ● Exporter + ConceptGraphService Integration › performs round-trip conversion from graph to code and back
+
+    TypeError: Cannot read properties of undefined (reading 'calculator.py')
+
+    [0m [90m 275 |[39m     })[33m;[39m
+     [90m 276 |[39m     
+    [31m[1m>[22m[39m[90m 277 |[39m     [36mconst[39m pythonCode [33m=[39m exportResult[33m.[39mfiles[[32m'calculator.py'[39m][33m;[39m
+     [90m     |[39m                                          [31m[1m^[22m[39m
+     [90m 278 |[39m     
+     [90m 279 |[39m     [90m// Mock the document ID for testing[39m
+     [90m 280 |[39m     [36mconst[39m documentId [33m=[39m [32m'calculator.py'[39m[33m;[39m[0m
+
+      at Object.<anonymous> (client/src/__tests__/integration/Exporter_ConceptGraphService/Exporter_ConceptGraphService.test.js:277:42)
+
+  ● Exporter + ConceptGraphService Integration › maintains lineage through multiple export-import cycles
+
+    TypeError: Cannot read properties of undefined (reading 'calculator.py')
+
+    [0m [90m 313 |[39m     })[33m;[39m
+     [90m 314 |[39m     
+    [31m[1m>[22m[39m[90m 315 |[39m     [36mconst[39m pythonCode1 [33m=[39m exportResult1[33m.[39mfiles[[32m'calculator.py'[39m][33m;[39m
+     [90m     |[39m                                            [31m[1m^[22m[39m
+     [90m 316 |[39m     
+     [90m 317 |[39m     [90m// Mock addDocument and extractConceptsFromText to simulate adding back to graph[39m
+     [90m 318 |[39m     [36mlet[39m extractedEntities1 [33m=[39m [][33m;[39m[0m
+
+      at Object.<anonymous> (client/src/__tests__/integration/Exporter_ConceptGraphService/Exporter_ConceptGraphService.test.js:315:44)
+
+  ● Exporter + ConceptGraphService Integration › exports graph to snapshot format
+
+    expect(received).toHaveProperty(path)
+
+    Expected path: "id"
+    Received path: []
+
+    Received value: {"data": {"alpha": 0, "epsilon": 0, "kappa": null, "links": [], "nodes": [], "timestamp": "2025-05-08T22:57:39.999Z"}, "graphId": "test-graph", "metadata": {"createdAt": "2025-05-08T22:57:39.999Z", "linkCount": 0, "nodeCount": 0, "version": "1.0"}, "name": "Test Snapshot", "snapshotId": "snapshot_1746745059999", "success": true}
+
+    [0m [90m 399 |[39m     
+     [90m 400 |[39m     [90m// Verify snapshot properties[39m
+    [31m[1m>[22m[39m[90m 401 |[39m     expect(snapshot)[33m.[39mtoHaveProperty([32m'id'[39m)[33m;[39m
+     [90m     |[39m                      [31m[1m^[22m[39m
+     [90m 402 |[39m     expect(snapshot)[33m.[39mtoHaveProperty([32m'name'[39m[33m,[39m [32m'Test Snapshot'[39m)[33m;[39m
+     [90m 403 |[39m     expect(snapshot)[33m.[39mtoHaveProperty([32m'description'[39m[33m,[39m [32m'Test snapshot for calculator component'[39m)[33m;[39m
+     [90m 404 |[39m     expect(snapshot)[33m.[39mtoHaveProperty([32m'timestamp'[39m)[33m;[39m[0m
+
+      at Object.toHaveProperty (client/src/__tests__/integration/Exporter_ConceptGraphService/Exporter_ConceptGraphService.test.js:401:22)
+
+[STDERR] Test Suites: 1 failed, 2 passed, 3 of 15 total
+Tests:       5 failed, 7 passed, 12 total
+Snapshots:   0 total
+Time:        3.946 s
+Ran all test suites.

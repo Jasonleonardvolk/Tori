@@ -1,0 +1,40 @@
+.itori-quick-actions-bar {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.itori-quick-actions-bar::-webkit-scrollbar {
+  height: 4px;
+}
+
+.itori-quick-actions-bar::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+
+.itori-quick-actions-bar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+}
+
+.itori-action-chip {
+  border-radius: 9999px;
+  background-color: rgba(30, 30, 30, 0.6);
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+  transition: background-color 0.2s ease;
+  white-space: nowrap;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.itori-action-chip:hover {
+  background-color: var(--color-hover, rgba(255, 255, 255, 0.2));
+}

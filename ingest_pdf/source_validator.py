@@ -197,17 +197,22 @@ def analyze_content_quality(text: str) -> Tuple[float, str, float, List[str]]:
     
     return min(1.0, max(0.0, score)), doc_type, subject_score, reasons
 
-def validate_source(pdf_path: str, min_quality_score: float = 0.6) -> SourceValidationResult:
+def validate_source(pdf_path: str, min_quality_score: float = None) -> SourceValidationResult:
     """
     Validate PDF source quality based on multiple criteria.
     
     Args:
         pdf_path: Path to the PDF file
         min_quality_score: Minimum overall quality score (0-1) required for validation
-        
+                           If None, uses SOURCE_VALIDATOR_MIN_SCORE from environment
+                           
     Returns:
         SourceValidationResult object with validation details
     """
+    # Get minimum score from environment if not provided
+    if min_quality_score is None:
+        import os
+        min_quality_score = float(os.environ.get('SOURCE_VALIDATOR_MIN_SCORE', '0.6'))
     result = SourceValidationResult()
     
     try:
@@ -234,11 +239,17 @@ def validate_source(pdf_path: str, min_quality_score: float = 0.6) -> SourceVali
         structure_score, structure_reasons = analyze_structure(text_sample)
         content_score, doc_type, subject_score, content_reasons = analyze_content_quality(text_sample)
         
+        # Get weights from environment variables
+        import os
+        domain_weight = float(os.environ.get('SOURCE_VALIDATOR_DOMAIN_WEIGHT', '0.4'))
+        structure_weight = float(os.environ.get('SOURCE_VALIDATOR_STRUCTURE_WEIGHT', '0.3'))
+        content_weight = float(os.environ.get('SOURCE_VALIDATOR_CONTENT_WEIGHT', '0.3'))
+        
         # Calculate overall quality score (weighted)
         quality_score = (
-            domain_score * 0.4 +
-            structure_score * 0.3 +
-            content_score * 0.3
+            domain_score * domain_weight +
+            structure_score * structure_weight +
+            content_score * content_weight
         )
         
         # Populate result

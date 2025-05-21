@@ -1,0 +1,119 @@
+
+> alan-agent-suggestions@1.0.0 test
+> jest --config jest.config.complete.js
+
+[STDERR] FAIL client/src/__tests__/components/PersonaSelector/PersonaSelector.test.js
+[STDERR]   test-utils
+[STDERR]     √ placeholder test (3 ms)
+[STDERR]   PersonaSelector
+    × renders correctly with default persona (1 ms)
+    × opens menu when clicked (1 ms)
+    × closes menu when a persona is selected
+    × renders with different position props (1 ms)
+    × applies custom className (1 ms)
+    × shows keyboard shortcut hint
+[STDERR]     × has correct accessibility attributes
+
+[STDERR]   ● PersonaSelector › renders correctly with default persona
+
+    TypeError: (0 , _testUtils.renderWithProviders) is not a function
+
+    [0m [90m 13 |[39m describe([32m'PersonaSelector'[39m[33m,[39m () [33m=>[39m {
+     [90m 14 |[39m   test([32m'renders correctly with default persona'[39m[33m,[39m () [33m=>[39m {
+    [31m[1m>[22m[39m[90m 15 |[39m     renderWithProviders([33m<[39m[33mPersonaSelector[39m [33m/[39m[33m>[39m)[33m;[39m
+     [90m    |[39m                        [31m[1m^[22m[39m
+     [90m 16 |[39m     
+     [90m 17 |[39m     [90m// Check if the current persona is displayed[39m
+     [90m 18 |[39m     expect(screen[33m.[39mgetByText([32m'Power Coder'[39m))[33m.[39mtoBeInTheDocument()[33m;[39m[0m
+
+      at Object.<anonymous> (client/src/__tests__/components/PersonaSelector/PersonaSelector.test.js:15:24)
+
+  ● PersonaSelector › opens menu when clicked
+
+    TypeError: (0 , _testUtils.renderWithProviders) is not a function
+
+    [0m [90m 20 |[39m   
+     [90m 21 |[39m   test([32m'opens menu when clicked'[39m[33m,[39m () [33m=>[39m {
+    [31m[1m>[22m[39m[90m 22 |[39m     renderWithProviders([33m<[39m[33mPersonaSelector[39m [33m/[39m[33m>[39m)[33m;[39m
+     [90m    |[39m                        [31m[1m^[22m[39m
+     [90m 23 |[39m     
+     [90m 24 |[39m     [90m// Initially, menu should be closed[39m
+     [90m 25 |[39m     expect(screen[33m.[39mqueryByRole([32m'menu'[39m))[33m.[39mnot[33m.[39mtoBeInTheDocument()[33m;[39m[0m
+
+      at Object.<anonymous> (client/src/__tests__/components/PersonaSelector/PersonaSelector.test.js:22:24)
+
+  ● PersonaSelector › closes menu when a persona is selected
+
+    TypeError: (0 , _testUtils.renderWithProviders) is not a function
+
+    [0m [90m 40 |[39m   
+     [90m 41 |[39m   test([32m'closes menu when a persona is selected'[39m[33m,[39m () [33m=>[39m {
+    [31m[1m>[22m[39m[90m 42 |[39m     renderWithProviders([33m<[39m[33mPersonaSelector[39m [33m/[39m[33m>[39m)[33m;[39m
+     [90m    |[39m                        [31m[1m^[22m[39m
+     [90m 43 |[39m     
+     [90m 44 |[39m     [90m// Open the menu[39m
+     [90m 45 |[39m     fireEvent[33m.[39mclick(screen[33m.[39mgetByRole([32m'button'[39m[33m,[39m { name[33m:[39m [35m/select persona/i[39m }))[33m;[39m[0m
+
+      at Object.<anonymous> (client/src/__tests__/components/PersonaSelector/PersonaSelector.test.js:42:24)
+
+  ● PersonaSelector › renders with different position props
+
+    TypeError: (0 , _testUtils.renderWithProviders) is not a function
+
+    [0m [90m 57 |[39m   
+     [90m 58 |[39m   test([32m'renders with different position props'[39m[33m,[39m () [33m=>[39m {
+    [31m[1m>[22m[39m[90m 59 |[39m     [36mconst[39m { rerender } [33m=[39m renderWithProviders([33m<[39m[33mPersonaSelector[39m position[33m=[39m[32m"top-left"[39m [33m/[39m[33m>[39m)[33m;[39m
+     [90m    |[39m                                             [31m[1m^[22m[39m
+     [90m 60 |[39m     
+     [90m 61 |[39m     [90m// Check if the component has the correct position class[39m
+     [90m 62 |[39m     [36mconst[39m selector [33m=[39m screen[33m.[39mgetByTestId([32m'persona-selector-container'[39m)[33m;[39m[0m
+
+      at Object.<anonymous> (client/src/__tests__/components/PersonaSelector/PersonaSelector.test.js:59:45)
+
+  ● PersonaSelector › applies custom className
+
+    TypeError: (0 , _testUtils.renderWithProviders) is not a function
+
+    [0m [90m 69 |[39m   
+     [90m 70 |[39m   test([32m'applies custom className'[39m[33m,[39m () [33m=>[39m {
+    [31m[1m>[22m[39m[90m 71 |[39m     renderWithProviders([33m<[39m[33mPersonaSelector[39m className[33m=[39m[32m"custom-class"[39m [33m/[39m[33m>[39m)[33m;[39m
+     [90m    |[39m                        [31m[1m^[22m[39m
+     [90m 72 |[39m     
+     [90m 73 |[39m     [36mconst[39m selector [33m=[39m screen[33m.[39mgetByTestId([32m'persona-selector-container'[39m)[33m;[39m
+     [90m 74 |[39m     expect(selector)[33m.[39mtoHaveClass([32m'custom-class'[39m)[33m;[39m[0m
+
+      at Object.<anonymous> (client/src/__tests__/components/PersonaSelector/PersonaSelector.test.js:71:24)
+
+  ● PersonaSelector › shows keyboard shortcut hint
+
+    TypeError: (0 , _testUtils.renderWithProviders) is not a function
+
+    [0m [90m 76 |[39m   
+     [90m 77 |[39m   test([32m'shows keyboard shortcut hint'[39m[33m,[39m () [33m=>[39m {
+    [31m[1m>[22m[39m[90m 78 |[39m     renderWithProviders([33m<[39m[33mPersonaSelector[39m [33m/[39m[33m>[39m)[33m;[39m
+     [90m    |[39m                        [31m[1m^[22m[39m
+     [90m 79 |[39m     
+     [90m 80 |[39m     [90m// Open the menu[39m
+     [90m 81 |[39m     fireEvent[33m.[39mclick(screen[33m.[39mgetByRole([32m'button'[39m[33m,[39m { name[33m:[39m [35m/select persona/i[39m }))[33m;[39m[0m
+
+      at Object.<anonymous> (client/src/__tests__/components/PersonaSelector/PersonaSelector.test.js:78:24)
+
+  ● PersonaSelector › has correct accessibility attributes
+
+    TypeError: (0 , _testUtils.renderWithProviders) is not a function
+
+    [0m [90m 89 |[39m   
+     [90m 90 |[39m   test([32m'has correct accessibility attributes'[39m[33m,[39m () [33m=>[39m {
+    [31m[1m>[22m[39m[90m 91 |[39m     renderWithProviders([33m<[39m[33mPersonaSelector[39m [33m/[39m[33m>[39m)[33m;[39m
+     [90m    |[39m                        [31m[1m^[22m[39m
+     [90m 92 |[39m     
+     [90m 93 |[39m     [90m// Check button accessibility[39m
+     [90m 94 |[39m     [36mconst[39m button [33m=[39m screen[33m.[39mgetByRole([32m'button'[39m[33m,[39m { name[33m:[39m [35m/select persona/i[39m })[33m;[39m[0m
+
+      at Object.<anonymous> (client/src/__tests__/components/PersonaSelector/PersonaSelector.test.js:91:24)
+
+[STDERR] Test Suites: 1 failed, 1 of 15 total
+Tests:       7 failed, 1 passed, 8 total
+Snapshots:   0 total
+Time:        2.634 s
+Ran all test suites.

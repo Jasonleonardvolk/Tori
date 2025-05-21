@@ -1,0 +1,334 @@
+/* BucketViewer Component CSS */
+
+/* Main container */
+.bucket-viewer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  background-color: var(--surface-dark, #1e1e2e);
+  color: var(--text-light, #f8f8f2);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+/* Header */
+.bucket-viewer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
+}
+
+.bucket-viewer-header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+/* Search container */
+.search-container {
+  display: flex;
+  align-items: center;
+}
+
+.search-input {
+  padding: 0.5rem;
+  border-radius: 4px 0 0 4px;
+  border: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
+  background-color: var(--surface, #282a36);
+  color: var(--text-light, #f8f8f2);
+  width: 250px;
+}
+
+.search-button {
+  padding: 0.5rem 1rem;
+  border-radius: 0 4px 4px 0;
+  border: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
+  background-color: var(--primary, #6272a4);
+  color: white;
+  cursor: pointer;
+}
+
+.clear-button {
+  padding: 0.5rem;
+  margin-left: 0.5rem;
+  border-radius: 4px;
+  border: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
+  background-color: var(--warning, #ffb86c);
+  color: var(--text-dark, #282a36);
+  cursor: pointer;
+}
+
+/* Path Navigator */
+.path-navigator {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  background-color: var(--surface, #282a36);
+  border-bottom: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
+}
+
+.parent-button {
+  background-color: var(--surface-dark, #1e1e2e);
+  border: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
+  color: var(--text-light, #f8f8f2);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  margin-right: 0.75rem;
+  cursor: pointer;
+}
+
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.path-segment {
+  padding: 0.25rem 0.5rem;
+  color: var(--primary, #6272a4);
+}
+
+.path-segment.clickable {
+  cursor: pointer;
+}
+
+.path-segment.clickable:hover {
+  text-decoration: underline;
+}
+
+.path-separator {
+  color: var(--text-subtle, #999999);
+  margin: 0 0.25rem;
+}
+
+/* Content area */
+.bucket-viewer-content {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* File list container */
+.file-list-container {
+  width: 40%;
+  border-right: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
+  overflow-y: auto;
+}
+
+/* File list */
+.file-list {
+  padding: 1rem;
+}
+
+.list-section-title {
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  color: var(--text-subtle, #999999);
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.25rem;
+  border-bottom: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
+}
+
+.directory-list ul, .files-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.directory-item, .file-item {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+  border-radius: 4px;
+  margin-bottom: 0.25rem;
+  cursor: pointer;
+}
+
+.directory-item:hover, .file-item:hover {
+  background-color: var(--surface, #282a36);
+}
+
+.file-item.selected {
+  background-color: var(--primary, #6272a4);
+  color: white;
+}
+
+.folder-icon, .file-icon {
+  margin-right: 0.75rem;
+  font-size: 1.25rem;
+}
+
+.item-name {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.item-size {
+  font-size: 0.75rem;
+  color: var(--text-subtle, #999999);
+  margin-left: 0.5rem;
+}
+
+.empty-state {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  color: var(--text-subtle, #999999);
+  font-style: italic;
+}
+
+/* File details container */
+.file-details-container {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem;
+}
+
+/* File details */
+.file-details {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.file-details-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.file-details-header h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  word-break: break-word;
+}
+
+.download-button {
+  padding: 0.5rem 1rem;
+  background-color: var(--primary, #6272a4);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.file-metadata {
+  background-color: var(--surface, #282a36);
+  border-radius: 4px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.metadata-item {
+  display: flex;
+  margin-bottom: 0.5rem;
+}
+
+.metadata-label {
+  width: 120px;
+  color: var(--text-subtle, #999999);
+}
+
+.metadata-value {
+  flex: 1;
+  word-break: break-word;
+}
+
+.file-preview-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--surface, #282a36);
+  border-radius: 4px;
+  padding: 1rem;
+  overflow: hidden;
+}
+
+.pdf-preview, .image-preview, .text-preview {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.pdf-iframe, .text-iframe {
+  flex: 1;
+  border: none;
+  border-radius: 4px;
+  background-color: white;
+}
+
+.preview-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  margin: 0 auto;
+}
+
+.no-preview {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  text-align: center;
+}
+
+.no-preview p {
+  margin-bottom: 1rem;
+  color: var(--text-subtle, #999999);
+}
+
+.file-details-empty, .file-details-loading, .file-details-error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  color: var(--text-subtle, #999999);
+  font-style: italic;
+}
+
+.file-details-error {
+  color: var(--error, #ff5555);
+}
+
+/* Loading state */
+.loading {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+  color: var(--text-subtle, #999999);
+}
+
+/* Error state */
+.error {
+  color: var(--error, #ff5555);
+  padding: 1rem;
+  background-color: rgba(255, 85, 85, 0.1);
+  border-radius: 4px;
+  margin: 1rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .bucket-viewer-content {
+    flex-direction: column;
+  }
+  
+  .file-list-container, .file-details-container {
+    width: 100%;
+    height: 50%;
+  }
+  
+  .file-list-container {
+    border-right: none;
+    border-bottom: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "files_in_context": [
+    {
+      "path": "combine_status_files.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747060458346,
+      "cline_edit_date": 1747060458346,
+      "user_edit_date": null
+    },
+    {
+      "path": "combine_status_files.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747060933962,
+      "cline_edit_date": 1747060933962,
+      "user_edit_date": null
+    },
+    {
+      "path": "combine_status_files_moderate.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747061034754,
+      "cline_edit_date": 1747061034754,
+      "user_edit_date": null
+    },
+    {
+      "path": "combine_status_files_moderate.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747061060389,
+      "cline_edit_date": 1747061060389,
+      "user_edit_date": null
+    },
+    {
+      "path": "combine_status_files_moderate.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747061094064,
+      "cline_edit_date": 1747061094064,
+      "user_edit_date": null
+    },
+    {
+      "path": "combine_status_files_moderate.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747061123369,
+      "cline_edit_date": 1747061123369,
+      "user_edit_date": null
+    },
+    {
+      "path": "combine_status_files_moderate.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747061151705,
+      "cline_edit_date": 1747061151705,
+      "user_edit_date": null
+    },
+    {
+      "path": ".env",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747070610904,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    }
+  ],
+  "model_usage": [
+    {
+      "ts": 1747060420721,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1747060881761,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1747060895328,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1747060980636,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1747060996266,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    }
+  ]
+}

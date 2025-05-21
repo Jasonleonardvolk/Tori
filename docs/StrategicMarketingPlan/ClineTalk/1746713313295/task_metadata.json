@@ -1,0 +1,90 @@
+{
+  "files_in_context": [
+    {
+      "path": "docs/Phase3RoadMap2.docx",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746713319639,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "docs/Phase3RoadMap2addendum.docx",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746713326712,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/components/ConceptFieldCanvas/ConceptFieldCanvas.jsx",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746713337243,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/components/FieldMeditationMode/FieldMeditationMode.jsx",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746713341322,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/components/ConceptFieldCanvas/EdgeConnection.jsx",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746713354532,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/components/ConceptFieldCanvas/KoopmanOverlay.jsx",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746713362115,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    }
+  ],
+  "model_usage": [
+    {
+      "ts": 1746713313375,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1746715650307,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1746716097815,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1746716125827,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1746716138015,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1746716185581,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    }
+  ]
+}

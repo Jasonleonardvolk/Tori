@@ -1,0 +1,1985 @@
+--- PAGE 1 ---
+Manify: A Python Library for Learning
+Non-Euclidean Representations
+Philippe Chlenski
+pac@cs.columbia.edu
+Kaizhu Du
+kd2814@columbia.edu
+Dylan Satow
+dms2315@columbia.edu
+Itsik Pe’er
+itsik@cs.columbia.edu
+Department of Computer Science
+Columbia University
+New York, NY 11227, USA
+Abstract
+We present Manify, an open-source Python library for non-Euclidean representation learn-
+ing. Leveraging manifold learning techniques, Manify provides tools for learning embed-
+dings in (products of) non-Euclidean spaces, performing classification and regression with
+data that lives in such spaces, and estimating the curvature of a manifold. Manify aims to
+advance research and applications in machine learning by offering a comprehensive suite of
+tools for manifold-based data analysis. Our source code, examples, datasets, results, and
+documentation are available at https://github.com/pchlenski/manify.
+Keywords:
+Representation learning, Riemannian manifolds, non-Euclidean geometry
+1 Introduction
+In recent years, there has been an increased interest in non-Euclidean representation learn-
+ing. Embedding data in hyperbolic, spherical, or mixed-curvature product spaces can pro-
+duce much more faithful embeddings (as measured by metric distortion) than traditional
+Euclidean methods(Gu et al., 2018). This has spurred an interest in adapting conventional
+machine learning methods to non-Euclidean spaces.
+To support the maximum possible number of use cases, we design the Manify library
+around Product Manifolds (PMs): Cartesian products of hyperbolic, hyperspherical, and
+Euclidean “component manifolds.” They can model heterogeneous curvature while remain-
+ing mathematically simple; moreover, they are a superclass for all other constant-curvature
+spaces: Euclidean Manifolds ⊂Constant-Curvature Manifolds ⊂PMs. The unified PM
+perspective naturally extends to a wide variety of learning tasks and recovers all hyper-
+bolic/Euclidean variants of machine learning models as special cases.
+Graph Convolu-
+tional Networks (GCNs), which traditionally operate in Euclidean spaces, can be con-
+sidered under this framework with a single component and used to derive other models:
+Logistic Regression ⊂MLP ⊂GCN.
+In this paper, we present Manify, a new open-source Python package that provides three
+core functions: (a) embedding graphs/distance matrices into PMs, (b) training predictors
+for PM-valued features, and (c) measuring curvature and signature estimation for PMs.
+©2022 Author One and Author Two.
+License: CC-BY 4.0, see https://creativecommons.org/licenses/by/4.0/.
+arXiv:2503.09576v1  [cs.LG]  12 Mar 2025
+
+--- PAGE 2 ---
+Chlenski, Du, Satow, and Pe’er
+manify
+manifolds
+predictors
+curvature estimation
+embedders
+utils
+δ-hyperbolicity, sectional curvature, etc.
+Product space GCNs, decision trees, perceptrons, SVMs
+Embedding via coordinate learning, VAEs, or Siamese nets
+Loading data, benchmarking, visuals, and other conveniences
+Figure 1: The structure of the Manify library, annotated with short descriptions of what
+can be found in each submodule.
+2 Related Work
+There are a limited number of Python packages for working with PMs. The most prominent
+one is Geoopt(Kochurov et al., 2020), which implements Riemannian Optimization for a
+variety of non-Euclidean manifolds, including PMs. Manify is built on top of Geoopt base
+classes and uses its optimizers for training.
+Several research groups have explored non-Euclidean machine learning, but existing
+implementations are fragmented across multiple repositories, highlighting the need for a
+unified, maintained library like Manify, which builds upon valuable prior work (credited in
+Appendix A) while providing consistent, modern implementations across the full spectrum
+of non-Euclidean algorithms.
+The closest prior work to Manify is hyperbolic learning library (Spengler et al.,
+2023), which presents a Python library for deep learning in hyperbolic space, including
+implementations for hyperbolic neural net layers and the Poincar´e embedding method de-
+scribed in Nickel and Kiela (2017). In contrast, our library extends to PMs, includes mul-
+tiple embedding methods, and extends to non-deep learning classifiers like Decision Trees
+(Chlenski et al., 2025), Perceptrons, and Support Vector Machines (Tabaghi et al., 2021).
+3 Library structure
+In this section, we will discuss the main features in Manify. Interested readers can find
+thorough mathematical details for all of the methods implemented in Manify in Appen-
+dices C, D, E, and F.
+3.1 Manifolds
+Manify.manifolds consists of two classes: Manifold and ProductManifold, which are
+extension of their respective Geoopt classes. The Manifold class handles single-component
+constant curvature Euclidean, hyperbolic, and hyperspherical manifolds. The ProductMan-
+ifold class supports products of multiple manifolds, combining their geometric properties to
+create mixed-curvature representations. Both classes implement methods supporting key
+manifold operations such as distance computations and logarithmic and exponential maps.
+More details are included in Appendix C.
+2
+
+--- PAGE 3 ---
+Manify: A Python Library for Learning Non-Euclidean Representations
+3.2 Embedders
+Manify.embedders is designed to generate graph and data embeddings in multiple ways.
+Its implementation details can be found in Appendix C. Here are the core features in
+embedders:
+• Manify.embedders.coordinate learning: the coordinate learning algorithm pro-
+posed by Gu et al. (2018)
+• Manify.embedder.siamese: Siamese Neural Networks compatible with product space
+geometry, modeled off of Corso et al. (2021).
+• Manify.embedders.vae: the Mixed-Curvature Variational Autoencoder (VAE) pro-
+posed by Skopek et al. (2020)
+3.3 Predictors
+Manify.predictors implements predictors that work on data with product manifold-valued
+features. All predictors follow Scikit-Learn API conventions such as including fit and
+predict methods. Further mathematical details on these algorithms can be found in Ap-
+pendix E. Here are the core features of predictors:
+• Manify.predictors.decision tree: the Product Space Decision Tree and Random
+Forest predictors proposed by Chlenski et al. (2025)
+• Manify.predictors.kappa gcn: the κ-GCN predictor proposed by Bachmann et al.
+(2020)
+• Manify.predictors.perceptron: Product Space Perceptron proposed by Tabaghi
+et al. (2021)
+• Manify.predictors.svm: the Product Space Support Vector Machine (SVM) pro-
+posed by Tabaghi et al. (2021)
+3.4 Curvature Estimation
+Manify.curvature estimation provides functions for estimating the curvature of a dataset
+based on a graph or matrix of pairwise distances, helping users estimate what manifolds
+are appropriate for embedding their data. More details are included in Appendix F.
+• Manify.curvature estimation.delta hyperbolicity: δ- hyperbolicity estimation,
+as proposed by Gromov (1987). We use the efficient min-max formulation proposed
+by Jonckheere et al. (2010), as seen in Khrulkov et al. (2019).
+• Manify.curvature estimation.sectional curvature: the per-node sectional cur-
+vature estimation method from Gu et al. (2018)
+3.5 Utilities
+Manify.utils also provides a set of convenience functions supporting typical data analysis
+workflows:
+• Manify.utils.benchmarks: Tools to streamline benchmarking.
+• Manify.utils.dataloaders: Tools for loading different datasets.
+• Manify.utils.link prediction: Preprocessing graphs for link prediction tasks
+• Manify.utils.visualization: Tools for visualization
+3
+
+--- PAGE 4 ---
+Chlenski, Du, Satow, and Pe’er
+4 Example Usage
+Manify can simply be downloaded from PyPi by pip install manify. This code snippet
+demonstrates how Manify can be used to load, embed, and classify the polblogs dataset:
+import
+torch
+from
+manify.manifolds
+import
+ProductManifold
+from
+manify.embedders
+import
+coordinate_learning
+from
+manify.predictors.decision_tree
+import
+ProductSpaceDT
+from
+manify.utils
+import
+dataloaders
+from
+sklearn.model_selection
+import
+train_test_split
+# Load
+graph
+data
+dists , labels , _ = dataloaders.load("polblogs")
+# Create
+product
+manifold
+pm = ProductManifold (signature =[(1, 4)]) # S^4_1
+# Learn
+embeddings (Gu et al (2018)
+method)
+X, _ = coordinate_learning .train_coords(
+pm=pm ,
+dists=dists / dists.max(),
+burn_in_iterations =1000 ,
+training_iterations =9000
+)
+# Train and
+evaluate
+classifier (Chlenski et al (2025)
+method)
+X_train , X_test , y_train , y_test = train_test_split (X, graph_labels)
+tree = ProductSpaceDT (pm=pm , max_depth =3)
+tree.fit(X_train , y_train)
+print(tree.score(X_test , y_test ))
+5 Conclusion and Future Work
+We present Manify, an open-source Python package for machine learning in mixed-curvature
+product manifolds. Although it is particularly well-suited for features (or distances) con-
+forming to spaces of heterogeneous curvature, such as hierarchical data, networks, and
+certain types of biological data, it nonetheless provides the tools for carrying out machine
+learning methods in any of the geometries described.
+Future work should include:
+• Carefully validating additional models against their references (VAEs, Siamese Neu-
+ral Nets, Product Space Perceptrons, Product Space SVMs, and sectional curvature
+estimation);
+• Adding additional models (Transformers/Attention (Cho et al., 2023) and PCA (Tabaghi
+et al., 2024));
+• Fully aligning Manify with Scikit-Learn conventions; and, of course
+• Applying Manify to more datasets and workflows!
+4
+
+--- PAGE 5 ---
+Manify: A Python Library for Learning Non-Euclidean Representations
+Acknowledgments and Disclosure of Funding
+All acknowledgements go at the end of the paper before appendices and references. More-
+over, you are required to declare funding (financial activities supporting the submitted
+work) and competing interests (related financial activities outside the submitted work).
+More information about this disclosure can be found on the JMLR website.
+References
+Gregor Bachmann, Gary B´ecigneul, and Octavian-Eugen Ganea.
+Constant Curvature
+Graph Convolutional Networks, May 2020. URL http://arxiv.org/abs/1911.05076.
+arXiv:1911.05076 [cs].
+Leo Breiman.
+Random forests.
+Machine Learning, 45(1):5–32, October 2001.
+ISSN
+1573-0565.
+doi:
+10.1023/A:1010933404324.
+URL https://doi.org/10.1023/A:
+1010933404324.
+Leo Breiman. Classification and Regression Trees. Routledge, New York, October 2017.
+ISBN 978-1-315-13947-0. doi: 10.1201/9781315139470.
+Ines Chami, Rex Ying, Christopher R´e, and Jure Leskovec.
+Hyperbolic Graph Convo-
+lutional Neural Networks, October 2019.
+URL http://arxiv.org/abs/1910.12933.
+arXiv:1910.12933 [cs, stat].
+Philippe Chlenski, Ethan Turok, Antonio Moretti, and Itsik Pe’er.
+Fast hyperboloid
+decision tree algorithms, March 2024.
+URL http://arxiv.org/abs/2310.13841.
+arXiv:2310.13841 [cs].
+Philippe Chlenski, Quentin Chu, Raiyan Khan, Kaizhu Du, Antonio Moretti, and Itsik
+Pe’er. Mixed-curvature decision trees and random forests, October 2025. URL https:
+//arxiv.org/pdf/2410.13879. arXiv:2410.13879v2 [cs].
+Sungjun Cho, Seunghyuk Cho, Sungwoo Park, Hankook Lee, Honglak Lee, and Moontae
+Lee. Curve Your Attention: Mixed-Curvature Transformers for Graph Representation
+Learning, September 2023. URL http://arxiv.org/abs/2309.04082. arXiv:2309.04082
+[cs].
+Gabriele Corso, Rex Ying, Michal P´andy, Petar Velickovic, Jure Leskovec, and Pietro Li`o.
+Neural Distance Embeddings for Biological Sequences, October 2021.
+URL http://
+arxiv.org/abs/2109.09740. arXiv:2109.09740 [cs, q-bio].
+Christopher De Sa, Albert Gu, Christopher R´e, and Frederic Sala. Representation Trade-
+offs for Hyperbolic Embeddings, April 2018. URL http://arxiv.org/abs/1804.03329.
+arXiv:1804.03329 [cs, stat].
+Jia Deng, Wei Dong, Richard Socher, Li-Jia Li, Kai Li, and Li Fei-Fei. Imagenet: A large-
+scale hierarchical image database. In 2009 IEEE Conference on Computer Vision and
+Pattern Recognition, pages 248–255. Ieee, 2009.
+5
+
+--- PAGE 6 ---
+Chlenski, Du, Satow, and Pe’er
+Manfredo Do Carmo. Riemannian Geometry. Springer US, 1992. URL https://link.
+springer.com/book/9780817634902.
+Herv´e Fournier, Anas Ismail, and Antoine Vigneron.
+Computing the gromov hyper-
+bolicity of a discrete metric space.
+Information Processing Letters, 115(6):576–579,
+2015.
+ISSN 0020-0190.
+doi: https://doi.org/10.1016/j.ipl.2015.02.002.
+URL https:
+//www.sciencedirect.com/science/article/pii/S0020019015000198.
+Octavian-Eugen Ganea, Gary B´ecigneul, and Thomas Hofmann. Hyperbolic Neural Net-
+works, June 2018. URL http://arxiv.org/abs/1805.09112. arXiv:1805.09112 [cs].
+Mikhail Gromov. Hyperbolic groups. In S. M. Gersten, editor, Essays in Group Theory, vol-
+ume 8 of Mathematical Sciences Research Institute Publications, pages 75–263. Springer,
+1987. doi: 10.1007/978-1-4613-9586-7 3.
+Albert Gu, Frederic Sala, Beliz Gunel, and Christopher R´e. Learning Mixed-Curvature
+Representations in Product Spaces. September 2018. URL https://openreview.net/
+forum?id=HJxeWnCcF7.
+Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun.
+Deep residual learning for
+image recognition. In Proceedings of the IEEE conference on computer vision and pattern
+recognition, pages 770–778, 2016.
+Edmond A. Jonckheere, Patrice Lohsoonthorn, and Fabrice Bonahon. Scaled gromov four-
+point condition for network graph curvature computation. Internet Mathematics, 7(3):
+137–177, 2010. doi: 10.1080/15427951.2010.10129177.
+Valentin Khrulkov, Leyla Mirvakhabova, Evgeniya Ustinova, Ivan Oseledets, and Victor
+Lempitsky. Hyperbolic image embeddings, April 2019. URL https://arxiv.org/abs/
+1904.02239. arXiv:1904.02239 [cs.CV].
+Diederik Kingma and Max Welling. Auto-encoding variational bayes, December 2013. URL
+https://arxiv.org/abs/1312.6114. arXiv:1312.6114 [stats.ML].
+Max Kochurov, Rasul Karimov, and Serge Kozlukov. Geoopt: Riemannian Optimization in
+PyTorch, July 2020. URL http://arxiv.org/abs/2005.02819. arXiv:2005.02819 [cs].
+Dmitri Krioukov, Fragkiskos Papadopoulos, Maksim Kitsak, Amin Vahdat, and Mari´an
+Bogu˜n´a. Hyperbolic geometry of complex networks. Physical Review E, 82(3):036106,
+September 2010. doi: 10.1103/PhysRevE.82.036106. URL https://link.aps.org/doi/
+10.1103/PhysRevE.82.036106. Publisher: American Physical Society.
+Qi Liu, Maximilian Nickel, and Douwe Kiela. Hyperbolic Graph Neural Networks, October
+2019. URL http://arxiv.org/abs/1910.12892. arXiv:1910.12892 [cs, stat].
+Yoshihiro Nagano, Shoichiro Yamaguchi, Yasuhiro Fujita, and Masanori Koyama.
+A
+Wrapped Normal Distribution on Hyperbolic Space for Gradient-Based Learning, May
+2019. URL http://arxiv.org/abs/1902.02992. arXiv:1902.02992 [cs, stat].
+6
+
+--- PAGE 7 ---
+Manify: A Python Library for Learning Non-Euclidean Representations
+Maximilian Nickel and Douwe Kiela. Poincar´e Embeddings for Learning Hierarchical Rep-
+resentations, May 2017. URL http://arxiv.org/abs/1705.08039. arXiv:1705.08039.
+Fabian Pedregosa, Ga¨el Varoquaux, Alexandre Gramfort, Vincent Michel, Bertrand
+Thirion, Olivier Grisel, Mathieu Blondel, Peter Prettenhofer, Ron Weiss, Vincent
+Dubourg, Jake Vanderplas, Alexandre Passos, David Cournapeau, Matthieu Brucher,
+Matthieu Perrot, and Edouard Duchesnay. Scikit-learn: Machine Learning in Python.
+Journal of Machine Learning Research, 12(85):2825–2830, 2011. ISSN 1533-7928. URL
+http://jmlr.org/papers/v12/pedregosa11a.html.
+Karen Simonyan and Andrew Zisserman. Very deep convolutional networks for large-scale
+image recognition. arXiv preprint arXiv:1409.1556, 2015.
+Ondrej Skopek, Octavian-Eugen Ganea, and Gary B´ecigneul.
+Mixed-curvature Vari-
+ational Autoencoders, February 2020.
+URL http://arxiv.org/abs/1911.08411.
+arXiv:1911.08411 [cs, stat].
+Max Spengler, Philipp Wirth, and Pascal. Mettes. Hypll: The hyperbolic learning library,
+June 2023. URL https://arXiv:2306.06154. arXiv.2306.06154 [cs.LG].
+Christian Szegedy, Vincent Vanhoucke, Sergey Ioffe, Jon Shlens, and Zbigniew Wojna.
+Rethinking the inception architecture for computer vision. In Proceedings of the IEEE
+conference on computer vision and pattern recognition, pages 2818–2826, 2016.
+Puoya Tabaghi, Chao Pan, Eli Chien, Jianhao Peng, and Olgica Milenkovic. Linear Classi-
+fiers in Product Space Forms, February 2021. URL http://arxiv.org/abs/2102.10204.
+arXiv:2102.10204 [cs, stat] version: 1.
+Puoya Tabaghi, Michael Khanzadeh, Yusu Wang, and Sivash Mirarab. Principal Compo-
+nent Analysis in Space Forms, July 2024. URL http://arxiv.org/abs/2301.02750.
+arXiv:2301.02750 [cs, eess, math, stat].
+Felix Wu, Tianyi Zhang, Amauri H. Souza Jr., Christopher Fifty, Tao Yu, and Kilian Q.
+Weinberger. Simplifying graph convolutional networks. CoRR, abs/1902.07153, 2019.
+URL http://arxiv.org/abs/1902.07153.
+7
+
+--- PAGE 8 ---
+Chlenski, Du, Satow, and Pe’er
+Appendix A. Code Referenced in this Work
+While working on Manify, we took inspiration from a variety of existing codebases contain-
+ing implementations of various components of things we have put into Manify. In Table 1,
+we credit the authors of these repos for their work:
+Table 1: This table enumerates and cites any online code resources we consulted during the
+creation of Manify
+Repository URL
+Purpose
+Citation
+https://openreview.net/
+attachment?id=AN5uo4ByWH&
+name=supplementary_material
+Code for κ-Stereographic Logits
+in Product Spaces
+Cho et al. (2023)
+https://github.com/
+HazyResearch/hyperbolics/
+tree/master/products
+Variant of coordinate learning;
+sectional curvature
+Gu et al. (2018);
+De Sa et al. (2018)
+https://github.
+com/thupchnsky/
+product-space-linear-classifiers
+Product Space Perceptron and
+SVM
+Tabaghi
+et
+al.
+(2021)
+https://github.com/oskopek/
+mvae
+Mixed-Curvature VAEs
+Skopek et al. (2020)
+https://github.com/leymir/
+hyperbolic-image-embeddings
+Delta-hyperbolicity
+Khrulkov
+et
+al.
+(2019);
+Fournier
+et al. (2015)
+8
+
+--- PAGE 9 ---
+Manify: A Python Library for Learning Non-Euclidean Representations
+Appendix B. List of Symbols
+Table 2: Glossary of variables and symbols used in this paper.
+Domain
+Symbol
+Used for
+Constants
+N
+Number of samples
+d
+Number of dimensions
+κ
+Curvature of a manifold
+Matrices
+X
+Matrix of samples in Rn×d
+W
+Weight matrix in Rd×e
+y
+Vector of labels in Rn
+Manifolds
+M
+Riemannian manifold
+P
+Product manifold
+p
+Point in a manifold, p ∈M
+TpM
+The tangent space of point p in M (a vector space)
+v
+A vector in a tangent plane
+g
+Riemannian metric defining an inner product on TpM
+⟨u, v⟩M
+Inner product of u, v ∈TpM
+∥v∥M
+Manifold-appropriate norm of v in TpM
+δM(x, y)
+Geodesic distance between x, y ∈M
+Ed
+d-dimensional Euclidean space with curvature κ = 0
+Sd
+κ
+d-dimensional spherical space with curvature κ > 0
+Hd
+κ
+d-dimensional hyperbolic space with curvature κ < 0
+PTx→y(v)
+Parallel transport of v ∈TxM to TyM
+logx (p)
+Logarithmic map of p ∈M to TxM
+expx (v)
+Exponential map of v ∈TxM to M
+µ0
+The origin of M
+κ-stereo-
+std
+κ
+d-dimensional κ-stereographic model
+graphic model
+u ⊕κ v
+κ-stereographic addition
+c ⊗κ v
+κ-stereographic scaling
+x ⊗κ W
+κ-right vector-matrix-multiplication of W ∈Rd×e, x ∈std
+κ
+X ⊗κ W
+κ-right-matrix-multiplication of W ∈Rd×e, X ∈stn×d
+κ
+a ⊠κ X
+κ-weighted midpoint, a ∈Rn, X ∈stn×d
+κ
+A ⊠κ X
+κ-left-matrix-multiplication of A ∈Rn×n, X ∈stn×d
+κ
+Probability
+µ
+Mean of a distribution, µ ∈Rd
+Σ
+Covariance matrix of a distribution, Σ ∈Rd×d
+N(µ, Σ)
+Normal distribution
+WN(µ, Σ)
+Wrapped normal distribution
+Graphs
+G
+A graph: nodes and edges (V, E)
+A
+Adjacency matrix for a graph
+Metrics
+Davg
+Average distortion in an embedding
+mAP
+Mean average precision of a graph embedding
+9
+
+--- PAGE 10 ---
+Chlenski, Du, Satow, and Pe’er
+Appendix C. Mathematical Details: Manifolds
+C.1 Core Riemannian Manifolds
+In this section, we will review fundamental concepts in Riemannian manifolds (Do Carmo,
+1992). Let M be a smooth manifold, p ∈M a point, and TpM the tangent space at p.
+M is considered a Riemannian manifold if M is equipped with a Riemannian metric g.
+The Riemannian metric represents the choice of inner product for each tangent space of the
+manifold, defining key geometric notions such as angle and length. The shortest-distance
+paths are termed geodesics.
+Curvature measures and describes how much a geometric object deviates from a flat
+plane. If M is a constant-curvature manifold, it can be described by its curvature κ and
+dimensionality d. The sign of κ indicates if a single component manifold is hyperbolic,
+Euclidean, or hyperspherical.
+C.1.1 Hyperbolic Space
+Hyperbolic space is defined by its constantly negative curvature.
+Hyperbolic geometry
+is represented in Manify by the hyperboloid model, which is also known as the Lorentz
+model. A d-dimensional hyperbolic space is embedded inside an ambient (d+1)-dimensional
+Minkowski space. Minkowski space is a metric space equipped with the Minkowski inner
+product (for two vectors u, v ∈Rd+1):
+⟨u, v⟩H = −u0v0 +
+d+1
+X
+i=1
+uivi
+(1)
+We thus denote the hyperbolic manifold as a set of points with constant Minkowski norm:
+Hd
+κ =
+
+x ∈Rd+1 : ⟨x, x⟩H = −1
+κ, x0 > 0
+
+,
+(2)
+where the Euclidean tangent space at point p in the hyperboloid model and the distance
+metric in the hyperboloid model is
+δ(x, y)H = cosh−1(−κ⟨x, y⟩H)
+√−κ
+.
+(3)
+C.1.2 Euclidean Space
+Euclidean space is defined by its constant zero curvature. Although vectors spaces behave
+as Euclidean space, we use the symbol Ed to denote the d-dimensional Euclidean space, so
+that we can differentiate it from other uses of Rd (e.g. in defining Minkowski space above).
+The inner product of two vectors u and v is defined as its dot product:
+⟨u, v⟩E = u0v0 + u1v1 + . . . + u2v2.
+(4)
+The norm of a vector u is given by the ℓ2 norm:
+∥u∥E =
+p
+⟨u, u⟩E.
+(5)
+The Euclidean distance between two vectors x, y ∈E is defined as:
+δE(x, y) = ∥u −v∥E.
+(6)
+10
+
+--- PAGE 11 ---
+Manify: A Python Library for Learning Non-Euclidean Representations
+C.1.3 Hyperspherical Space
+Hyperspherical space is defined by its constant positive curvature. It has the same inner
+products as Euclidean space. This space Sd
+κ is most easily modeled and defined in:
+Sd
+κ =
+
+x ∈Rd+1 : ∥x∥E =
+1
+√κ
+
+,
+(7)
+with the following distance function for x, y ∈S:
+δS(u, v) = cos−1(κ2⟨u, v⟩E)
+κ
+.
+(8)
+C.2 The κ-Stereographic Model
+C.2.1 Manifold Definitions
+For the κ-GCN, we further need to describe the κ-stereographic model of constant-curvature
+spaces.
+For a curvature κ ∈R and a dimension d ≥2, the κ-sterographic model in d
+dimensions std
+κ is defined as
+std
+κ = {x ∈Rd : −κ⟨x, x⟩E < 1}
+(9)
+with the Riemannian metric gκ
+x defined in terms of a conformal factor at x, λκ
+x
+gκ
+x = (λκ
+x)2I, where
+(10)
+λκ
+x =
+2
+1 + κ⟨x, x⟩E
+.
+(11)
+C.2.2 Stereographic Projections
+For a point x ∈Mκ, where Mκ is one of Hd
+κ, Ed, or Sd
+κ depending on κ, we can rewrite
+x = (x0, xrest) ∈Rd+1 where x0 ∈R is the first coordinate and xrest ∈Rd contains the
+remaining coordinates.
+Then the stereographic projection ρκ : Mκ →std
+κ and its inverse ρ−1
+κ
+: std
+κ →Mκ are
+defined as:
+ρκ((x0, xrest)) =
+xrest
+1 +
+p
+|κ|x0
+,
+(12)
+ρ−1
+κ (x′) =
+ 
+1 −κ∥x′∥2
+p
+|κ|(1 + κ∥x′∥2)
+,
+2x′
+1 + κ∥x′∥2
+!
+.
+(13)
+These projections establish an isomorphism between the κ-stereographic model and the
+sphere, hyperbolic space, or Euclidean space depending on the sign of κ:
+• For κ > 0: Maps between std
+κ and the sphere Sd
+κ with positive curvature
+• For κ = 0: Simplifies to the identity mapping on Euclidean space Ed
+• For κ < 0: Maps between std
+κ and hyperbolic space Hd
+κ with negative curvature
+The stereographic projection preserves angles (conformal) but not distances. This allows
+us to work with the κ-stereographic model as a unified representation of spaces with different
+curvatures.
+11
+
+--- PAGE 12 ---
+Chlenski, Du, Satow, and Pe’er
+C.2.3 Gyrovector Operations
+An advantage of the κ-stereographic model is that std
+κ makes up a gyrovector space, which
+enables us to compute closed forms for operations such as addition, scalar multiplication,
+and even matrix multiplication directly in std
+κ.
+Addition.
+We define the κ-addition in the κ-stereographic model for x, y ∈std
+κ by:
+x ⊕κ y = (1 −2κx⊤y −κ∥y∥2)x + (1 + κ∥x∥2)y
+1 −2κx⊤y + κ2∥x∥2∥y∥2
+.
+(14)
+Scalar Multiplication.
+For s ∈R and x ∈std
+κ, κ-scaling is defined as:
+s ⊗κ x = tanκ(s · tan−1
+κ ∥x∥) x
+∥x∥∈std
+κ,
+(15)
+where tanκ = tanh if κ < 0, and tan otherwise.
+Right-Multiplication.
+Before we can define κ-right matrix multiplication, we must de-
+fine the κ-right vector-matrix multiplication x ⊗κ W for x ∈std
+κ, W ∈Rd×d:
+x ⊗κ W = exp0(log0(x)W)
+(16)
+= tanκ
+∥(xW)∥
+∥x∥
+tan−1
+κ (∥x∥)
+ (xW)
+∥(xW)∥.
+(17)
+The κ-right matrix-matrix multiplication X ⊗κ W for X ∈stn×d
+κ
+, W ∈Rd×d is just
+the κ-right vector-matrix multiplication applied row-wise.
+For clarity, we can explicitly
+represent the matrix X as a stack of row vectors where each row vector xi ∈std
+κ, and
+express the κ-right matrix multiplication as:
+X =
+
+
+
+
+
+—
+x1
+—
+—
+x2
+—
+...
+—
+xn
+—
+
+
+
+
+,
+X ⊗κ W =
+
+
+
+
+
+—
+x1 ⊗κ W
+—
+—
+x2 ⊗κ W
+—
+...
+—
+xn ⊗κ W
+—
+
+
+
+
+
+(18)
+Left-Multiplication.
+Before we can describe κ-left matrix multiplication, we need to
+establish the definition of a weighted gyromidpoint. For a set of points X ∈stn×d
+κ
+and a
+vector of weights a ∈Rn, the weighted gyromidpoint in std
+κ has a closed-form expression:
+a ⊠κ X = 1
+2 ⊗κ
+n
+X
+i=1
+aiλκ
+xi
+Pn
+j=1 aj(λκxj −1)xi.
+(19)
+Now, for matrices A ∈Rn×n, X ∈Rn×d, we can now define the row-wise κ-left-matrix-
+multiplication. Rewriting A as a stack of column vectors, we have:
+A =
+
+
+|
+|
+|
+a1
+a2
+. . .
+a3
+|
+|
+|
+
+,
+A ⊠κ X =
+
+
+
+
+
+—
+a1 ⊠κ X
+—
+—
+a2 ⊠κ X
+—
+...
+—
+an ⊠κ X
+—
+
+
+
+
+,
+(20)
+.
+12
+
+--- PAGE 13 ---
+Manify: A Python Library for Learning Non-Euclidean Representations
+C.2.4 Manifold Operations in std
+κ
+Although Manify does not make us of the following operations in std
+κ, they are inherited
+from Geoopt’s Stereographic manifold class and therefore usable. We include them for
+completeness:
+δstdκ(x, y) = 2|κ|−1/2 tan−1
+κ | −x ⊕κ y|
+(21)
+γx→y(t) = x ⊕κ (t ⊗κ (−x ⊕κ y))
+(22)
+expx
+
+std
+κ
+
+(v) = x ⊕κ
+
+tanκ
+
+|κ|
+1
+2 λκ
+x|v|
+2
+ v
+|v|
+
+(23)
+logx
+
+std
+κ
+
+(y) = 2|κ|−1
+2
+λκx
+tan−1
+κ | −x ⊕κ y| −x ⊕κ y
+| −x ⊕κ y|
+(24)
+C.3 Product Manifolds
+We follow the definition of product manifolds from Gu et al. (2018).
+Formally, we de-
+fine product manifold as the Cartesian product of one or more Euclidean, hyperbolic, and
+spherical manifolds
+P =
+n
+Y
+i=1
+Ssi
+Ki ×
+m
+Y
+j=1
+Hhj
+K′
+j × Ed.
+(25)
+We describe the product manifold in its signature. The signature includes the number
+of component spaces, each’s dimensions, and curvature. Product manifold is decomposable
+to the individuals manifolds, or component manifolds. If each Mi is equipped with metric
+gi, then distance in P decompose as the ℓ2 norm of the distances in each of the component
+manifolds:
+δP(u, v) =
+s X
+M∈P
+δM(ui, vi)2,
+(26)
+where i represents each individual component manifold. Points are decomposable in that all
+p ∈P have coordinates p = (p1, . . . , pk) where pi ∈Mi. The total number of dimensions
+can be decomposed into Pn
+i si + Pm
+j hj + d.
+Similarly, the tangent vectors v ∈TpP
+decompose as (v1, . . . , vk) with vi ∈TpiMi.
+All operations that we rely on in other work: parallel transport, exponential and log-
+arithmic maps, and gyrovector operations, can be done in product manifolds by applying
+applying these operations componentwise to the factorized embeddings, then concatenat-
+ing them back together. This ensures that product manifolds do not lose expressiveness
+compared to their components.
+C.4 Sampling
+C.4.1 Wrapped Normal Distribution
+Manify’s Manifold and ProductManifold classes are equipped with a sample method,
+which relies on the wrapped normal distribution WN.
+We use the formulation of the
+wrapped normal distribution introduced for H by Nagano et al. (2019) and extended to S
+and std
+κ by Skopek et al. (2020).
+13
+
+--- PAGE 14 ---
+Chlenski, Du, Satow, and Pe’er
+To sample from the wrapped normal distribution WN, we first sample a v′ ∈Rd from a
+normal distribution N(0, Σ); then, we convert v′ to v ∈Tµ0M, where the first dimension
+of all vectors is constant, by pretending a zero; then, we move v to u ∈TµM, where µ ∈M
+is the desired mean, via parallel transport; and deposit u onto M via the exponential map:
+v′ ∼N(0, Σ)
+(27)
+v = (0, v′)
+(28)
+u = PTK
+µ0→µ(v)
+(29)
+z = expx (u) .
+(30)
+To evaluate (log-)likelihoods in WN, we exploit the fact that each of the operations
+defined above—parallel transport and the exponential map—has a corresponding inverse
+to transport points from M back to Tµ0M, and then evaluate the log-likelihood under N,
+adjusting for the change of coordinates via the log-determinant:
+u = logµ (z)
+(31)
+v = PTµ→µ0(u)
+(32)
+v′ = (v2, v3, . . . , vd+1)
+(33)
+log WN(z; µ, Σ) = log N(v; 0, Σ) −log det
+∂expµ (u)
+∂u
+· ∂PTµ0→µ(v)
+∂v
+
+(34)
+= log N(v; 0, Σ) −
+sinh(⟨u, u⟩H)
+⟨u, u⟩H
+d−1
+.
+(35)
+C.4.2 Gaussian Mixtures for Classification and Regression
+Alongside sample, we include the less conventional gaussian mixture method to easily gen-
+erate synthetic classification and regression datasets. We follow the formulation of Gaussian
+mixtures introduced for H in Chlenski et al. (2024) and extended to S and P in Chlenski
+et al. (2025).
+Unlike the previous implementations, our Gaussian mixtures can also be
+defined for std
+κ.
+Features.
+Our approach to generating Gaussian mixtures on manifolds follows a prin-
+cipled process. First, we assign nsamples samples to nclusters clusters by generating cluster
+probabilities pnorm from normalized uniform random values, then sampling categorical
+cluster assignments c from these probabilities:
+praw = ⟨p0, p1, . . . , pnclusters−1⟩,
+pi ∼Uniform(0, 1)
+(36)
+pnorm =
+praw
+Pn−1
+i=0 pi
+(37)
+c = ⟨c0, c1, . . . cnsamples−1⟩,
+ci ∼Categorical(n, pnorm)
+(38)
+Next, we sample our class means matrix M ∈Mnclusters×d:
+M =
+
+
+
+
+
+—
+m1
+—
+—
+m2
+—
+...
+—
+mm
+—
+
+
+
+
+,
+mi ∼WN
+
+0,
+p
+|κ|I
+
+.
+(39)
+14
+
+--- PAGE 15 ---
+Manify: A Python Library for Learning Non-Euclidean Representations
+For each cluster i, we sample a covariance matrix with appropriate scaling:
+Σi ∼Wishart(σ
+p
+|κ|I, d)
+(40)
+where σ is a user-specified variance scale parameter.
+Finally, we sample our feature matrix X ∈Mnsamples×d from wrapped normal distribu-
+tions whose mean and covariance are determined by the cluster assignments in c:
+X =
+
+
+
+
+
+—
+x1
+—
+—
+x2
+—
+...
+—
+xn
+—
+
+
+
+
+,
+xi ∼WN(mci, Σci)
+(41)
+Classification Labels.
+When classifying data, we assign clusters to class labels, making
+sure we have at least as many clusters as labels and that each label corresponds to one or
+more clusters. We establish a bijective mapping between the first nclasses clusters and the
+set of class labels {1, 2, . . . , nclasses}. For the remaining nclusters −nclasses clusters, we assign
+labels by sampling uniformly from DiscreteUniform(1, nclasses), thereby ensuring that the
+surjectivity condition of our mapping is satisfied.
+This mapping is summed up in a vector a ∈{1, 2, . . . , nclasses}nclusters. Finally, we return:
+y = (ac1, ac2, . . . , acnsamples)
+(42)
+Regression Labels.
+For regression tasks, we assign to each cluster a linear function
+parameterized by a slope vector si ∈Rd and an intercept bi ∈R. These parameters are
+sampled as si ∼N(0, 2)d and bi ∼N(0, 20).
+Given a data point x assigned to cluster ci, we compute its regression value using the
+corresponding linear function:
+yi = sci · xi + bci + εi
+(43)
+where εi ∼N(0, σ2) represents additive Gaussian noise with standard deviation σ.
+To facilitate the interpretation of the root mean square error (RMSE), we normalize the
+final regression labels to the range [0, 1] via min-max scaling:
+ˆyi =
+yi −min(y)
+max(y) −min(y)
+(44)
+15
+
+--- PAGE 16 ---
+Chlenski, Du, Satow, and Pe’er
+Appendix D. Mathematical Details: Embedders
+An embedding is the mapping f : U →V between two metric spaces U, V . We provide
+the Manify.embedders submodule for learning embeddings of datasets in product space
+manifolds. We offer three approaches based on the user’s available data:
+• To embed pairwise distances: Manify.embedders.coordinate learning trains
+embeddings directly from distance matrices, following Gu et al. (2018).
+• To embed features: Manify.embedders.vae trains a Variational Autoencoder (VAE)
+with a manifold-valued latent space, as in Skopek et al. (2020).
+• To embed both features and distances:
+Manify.embedders.siamese trains
+Siamese Neural Networks, which balance reconstruction loss and distortion of pairwise
+distances in the latent space, as in Corso et al. (2021).
+D.1 Coordinate Learning
+We follow the coordinate learning formulation in Gu et al. (2018), the objective of which is:
+given a matrix D ∈Rnpoints×npoints, find an embedding X ∈Pnpoints×d such that the pairwise
+geodesic distances between the points in X closely resemble D.
+Objectives.
+To this end, we provide two fidelity measures in —average distortion Davg,
+and, for graphs, mean average precision mAP:
+Davg(X, D) =
+P
+i,j |δP(xi, xj) −di,j|
+n2
+points
+(45)
+mAP(X, G) =
+1
+|V |
+X
+a∈V
+1
+deg(a)
+|Na|
+X
+i=1
+|Na ∩Ra,bi|
+|Ra,bi|
+,
+(46)
+where Ra,bi is the smallest neighborhood around node a that contains its neighbor bi. Intu-
+itively, Davg evaluates how closely pairwise distances in the embeddings match D, whereas
+mAP evaluates the extent to which neighborhoods of various radii match the structure of
+the graph.
+However, Davg or mAP are typically not optimized directly in the literature. We fol-
+low Gu et al. (2018) in substituting the auxiliary loss function
+Ldistortion(X, D) =
+X
+1≤i≤j≤n
+
+δP(xi, xi)
+Di,j
+2
+−1
+
+(47)
+Training Algorithm.
+Since we are trying to learn X ∈Pnpoints×d and P ⊂Rd+1, we
+need some way to optimize the position of all points in X while respecting the constraint
+that keeps X ∈P.
+Typical gradient descent methods, which rely on the vector space
+structure of the underlying parameters, are inadequate for this. Instead, we use Riemannian
+optimization (as implemented in Geoopt (Kochurov et al., 2020)): in a nutshell, the gradient
+of the loss with respect to x ∈P, ∇Ldistortion is projected and then applied to manifold
+parameters using the exponential map from the tangent plane at the existing parameter
+16
+
+--- PAGE 17 ---
+Manify: A Python Library for Learning Non-Euclidean Representations
+value x. Here we describe how this looks for E, S, and H:
+v = vE = ∇Ldistortion(x, D)
+(48)
+vS = v −⟨v, x⟩Sx
+(49)
+vH = (v + v⟨v, x⟩Hx)J, where Ji,j =
+
+
+
+
+
+−1
+if i = j = 1
+1
+if i = j ̸= 1
+0
+otherwise
+(50)
+x′ = expx (αvM) ,
+(51)
+where α is the learning rate hyperparameter.
+For P, these updates can be carried out
+separately by factorizing v and x and applying each update in its respective component.
+The training algorithm itself is quite simple: We initialize X by sampling npoints points
+at random from WN(0, I/d), and then update X via nepochs Riemannian optimization steps.
+Optionally, the user may treat the curvatures of each of the component manifolds Mi ∈P as
+learnable parameters (by setting scale factor learning rate to a nonzero value). Due to
+the extreme gradients in the early training steps, we include a burn-in period during which
+the learning rate is lower for the first several epochs.
+Non-Transductive Training.
+We provide an optional non-transductive training mode
+which is absent from Gu et al. (2018) and is instead inspired by Chlenski et al. (2025). In
+the non-transductive training mode, the user specifies the indices of the points that will
+constitute their test set, and the gradients from the test set to the training set are masked
+out to prevent leakage. The test set coordinates are still optimized with respect to the
+entire training and test set.
+Inside the training loop, we calculate train-train (Ltrain-train), test-test (Ltest-test), and
+test-train (Ltrain-test) loss, respectively. The total loss is, straightforwardly,
+Ltotal = Ltrain-train + Ltest−test + Ltrain−test.
+(52)
+However, by detaching the subset of X from the Pytorch computational graph before
+Ltrain−test is back-propagated, we ensure that the points in the training set are not in-
+fluenced by the test set.
+D.2 Product Space Variational Autoencoders
+We implemented the Product Space Variational Autoencoder (VAE) algorithm from Skopek
+et al. (2020) in Manify.embedders.vae.
+Setup.
+To compute any VAE, we need to choose a probability distribution p as a prior
+and a corresponding posterior distribution in the variational family q. For our prior, we
+use WN(µ0, I). Both p and q need to have a differentiable Kullback-Leibler (KL) diver-
+gence (Kingma and Welling, 2013). However, the wrapped normal distribution WN does
+not have a closed form for the KL-divergence; therefore, we estimate the KL divergence via
+Monte Carlo sampling as the sample mean of the difference in log-likelihoods:
+DKL(q ∥p) ≈1
+L
+L
+X
+l=1
+
+log q(z(l)) −log p(z(l))
+
+(53)
+17
+
+--- PAGE 18 ---
+Chlenski, Du, Satow, and Pe’er
+where z(l) ∼q for all l = 1, . . . , L; log q(·) and log p(·) denote the log-likelihood of WN, as
+defined in Equation 35.
+Implementation.
+We implemented the Product Space VAE using PyTorch in the ProductSpaceVAE
+class. The implementation follows the standard VAE architecture with encoder and decoder
+networks, but operates in mixed-curvature product manifold spaces.
+We assume that Encoder(·) is any Pytorch module that maps inputs from the original
+input feature space RD to Rd ×Rd, and Decoder(·) is any Pytorch module that maps inputs
+from Rd to RD.
+The model encodes input data to parameters zmean, zlogσ ∈Rd which it translates to
+wrapped normal distribution parameters as follows:
+zmean, zlogσ = Encoder(x)
+(54)
+µ = expµ0 (zmean)
+(55)
+Σ = exp(diag(zlogσ))
+(56)
+z ∼WN(µ, Σ)
+(57)
+That is, z is a point sampled from the distribution q = WN(µ, Σ). For the KL divergence
+term, we use Monte Carlo sampling as described in Equation 53, drawing multiple samples
+from the posterior to estimate the difference between log-likelihoods.
+To decode z, we apply the logarithmic map and then feed it into the decoder network:
+z′ = logµ0 (z)
+(58)
+xreconstructed = Decoder(z′)
+(59)
+The model is trained by maximizing the Evidence Lower Bound (ELBO):
+LELBO(x) = Eq(z|x)(log p(x|z))
+|
+{z
+}
+Lreconstruction
+−β DKL(q(z|x) ∥p(z))
+|
+{z
+}
+LKL
+(60)
+where Lreconstruction is computed using MSE loss between x and xreconstructed, and β is
+a hyperparameter controlling the tradeoff between reconstruction accuracy and regular-
+ization. Our implementation supports arbitrary product manifolds, allowing for flexible
+combinations of hyperbolic, Euclidean, and spherical components.
+Avoiding Leakage.
+Unlike with coordinate learning, avoiding train-test leakage with the
+VAE is straightforward: simply train the Encoder and Decoder on the training set and use
+the trained, frozen Encoder and Decoder to create final embeddings for the training and
+test sets.
+D.3 Siamese Neural Networks
+We generalize the Siamese Neural Network approach, as seen in works such as Corso et al.
+(2021), to product manifolds in Manify.embedders.siamese.
+18
+
+--- PAGE 19 ---
+Manify: A Python Library for Learning Non-Euclidean Representations
+Setup.
+The Siamese Neural Network architecture provides an embedding approach when
+both input features and target distances are available. Unlike the VAE approach which
+optimizes for reconstruction and KL-divergence, Siamese networks directly optimize for
+both reconstruction fidelity and the preservation of pairwise distances in the latent space.
+Given input features X ∈Rnpoints×D and a target distance matrix D ∈Rnpoints×npoints,
+our objective is to learn an encoder and decoder mapping between the feature space and
+our product manifold P.
+Objectives.
+The Siamese network optimizes a weighted combination of two losses:
+Ltotal = α
+1
+npoints
+npoints
+X
+i=1
+∥xi −ˆxi∥2
+|
+{z
+}
+Lreconstruction
++(1 −α)
+1
+n2
+points
+npoints
+X
+i,j=1
+|δP(zi, zj) −Di,j|
+|
+{z
+}
+Ldistance
+(61)
+where α ∈[0, 1] controls the trade-off between reconstruction accuracy and distance preser-
+vation, zi is the encoded representation of xi in the product manifold, and ˆxi is the recon-
+structed input.
+Implementation.
+Our implementation uses a similar architecture to our VAE model,
+with the encoder and decoder networks as described in the VAE section. The key difference
+is that there is no sampling involved as we directly map inputs to the latent space. The
+encoder outputs coordinates in the tangent space at the origin, which are then projected
+onto the product manifold using the exponential map. The decoder takes the logarithmic
+map of the latent representation and reconstructs the input.
+Avoiding Leakage.
+Like with VAEs, avoiding train-test leakage with Siamese networks
+is straightforward: we train the encoder and decoder on the training set only, and then use
+the trained, frozen encoder to create final embeddings for both the training and test sets.
+This ensures that information from the test set does not leak into the model parameters
+during training.
+19
+
+--- PAGE 20 ---
+Chlenski, Du, Satow, and Pe’er
+Appendix E. Mathematical Details: Predictors
+Manify offers a menagerie of predictors, supporting classification and regression (and oc-
+casionally link prediction) on product manifold-valued datasets. We follow Scikit-Learn
+(Pedregosa et al., 2011) conventions in our API design for our predictors. In particular, we
+ensure that each predictor has .fit(), .predict(), and (for classifiers) .predict proba()
+methods available.
+We implement the following predictors for product space manifolds:
+• Decision Trees and Random Forests, as in Chlenski et al. (2025).
+• Graph Convolutional Networks, as in the κ-GCN described in Bachmann et al.
+(2020). By ablating certain components of the κ-GCN, we can additionally create
+Mulilayer Perceptrons and Logistic/Linear Regression.
+• Perceptrons, as in Tabaghi et al. (2021).
+• Support Vector Machines, as in Tabaghi et al. (2021).
+E.1 Product Space Decision Trees and Random Forests
+We implemented the ProductDT algorithm from Chlenski et al. (2025), which extends Chlen-
+ski et al. (2024) to product space manifolds, in Manify.predictors.decision tree. These
+works are both non-Euclidean versions of Decision Trees (Breiman, 2017) and Random
+Forests (Breiman, 2001), classic machine learning algorithms.
+Decision Boundaries in Product Spaces.
+The core innovation of ProductDT is adapt-
+ing decision boundaries to the geometry of product manifolds. While traditional decision
+trees partition Euclidean space using hyperplanes, ProductDT uses geodesic decision bound-
+aries appropriate for each component manifold in the product space.
+For points in a product manifold P = M1 × M2 × · · · × Mk, we define splits along
+two-dimensional subspaces for each component manifold. This approach preserves the com-
+putational efficiency of traditional decision trees while respecting the underlying manifold
+geometry.
+Angular representation of splits.
+For each component manifold Mi, we project points
+onto two-dimensional subspaces and represent potential splits using angles. Given a point
+x and a basis dimension d, the projection angle is computed as: where x0 and xd are the
+coordinates in the selected two-dimensional subspace. The splitting criterion then becomes:
+S(x, d, θ) =
+(
+1
+if tan−1 
+x0
+xd
+
+∈[θ, θ + π)
+0
+otherwise
+.
+(62)
+Geodesic midpoints for decision boundaries.
+To place decision boundaries optimally
+between clusters of points, we compute the geodesic midpoint between consecutive angles
+in the sorted list of projection angles. The midpoint calculation is specific to each manifold
+type:
+20
+
+--- PAGE 21 ---
+Manify: A Python Library for Learning Non-Euclidean Representations
+θu = tan−1
+u0
+ud
+
+(63)
+θv = tan−1
+v0
+vd
+
+(64)
+mE(θu, θv) = tan−1
+
+2
+u0 + v0
+
+(65)
+mS(θu, θv) = θu + θv
+2
+(66)
+mH(θu, θv) =
+
+
+
+cot−1 
+V −
+√
+V 2 −1
+
+if θu + θv < π,
+cot−1 
+V +
+√
+V 2 −1
+
+otherwise.
+(67)
+V =
+sin(2θu −2θv)
+2 sin(θu + θv) sin(θv −θu)
+(68)
+These formulas ensure that decision boundaries are placed at points geodesically equidis-
+tant from the nearest points on either side, respecting the intrinsic geometry of each manifold
+component.
+Training algorithm.
+The ProductDT algorithm follows the recursive structure of clas-
+sical decision trees:
+1. For each component manifold in the product space, compute projection angles for all
+points along each basis dimension.
+2. For each projection, sort the angles and evaluate potential splits using the geodesic
+midpoints between consecutive angles.
+3. Select the split that optimizes a chosen impurity criterion (e.g., Gini impurity or
+information gain).
+4. Recursively apply the procedure to each resulting partition until a stopping criterion
+is met (maximum depth, minimum samples per leaf, etc.).
+This decomposition leverages the structure of product spaces to maintain the O(1)
+decision complexity at inference time while adapting to the underlying geometry of the
+data.
+Random Forests.
+Much like their Euclidean (and hyperbolic) counterparts, Product
+Space Random Forests are simply ensembles of bootstrapped Decision Trees. An imple-
+mentation of Product Space Random Forests is available as the ProductSpaceRF class in
+the Manify.predictors.decision tree submodule.
+E.2 Product Space Graph Convolutional Networks
+We implemented the κ-GCN algorithm in Manify.predictors.kappa gcn from
+Bachmann et al. (2020), who introduces gyrovector operation that extends existing frame-
+works (Chami et al., 2019) that are limited to negative curvature to both negative and
+positive values that interpolates smoothly. We start by introducing these concepts.
+21
+
+--- PAGE 22 ---
+Chlenski, Du, Satow, and Pe’er
+Graph Convolutional Networks Background.
+In a typical (Euclidean) graph convo-
+lutional network (GCN), each layer takes the form
+H(0) = X
+(69)
+H(l+1) = σ
+
+ˆAH(l)W(l) + b(l)
+,
+(70)
+where ˆA ∈Rnpoints×npoints is a normalized adjacency matrix with self-connections, X(l) ∈
+Rnpoints×d is a matrix of features, W(l) ∈Rd×e is a weight matrix, b(l) ∈Re is a bias term,
+and σ is some nonlinearity, e.g. ReLU.
+Graph Convolution Layers.
+Bachmann et al. (2020) describes a way to adapt the
+typical GCN model for use with X ∈std
+κ, in terms of gyrovector operations:
+H(l+1) = σ⊗κ 
+ˆA ⊠κ
+
+H(l) ⊗κ W(l)
+,
+(71)
+σ⊗κ(·) = expµ0
+ σ(logµ0 (·))
+
+(72)
+Note that this paper does not include a bias term, although it is reasonable to extend the
+definition of a GCN layer to include one:
+H(l+1) = σ⊗κ 
+ˆA ⊠κ
+
+H(l) ⊗κ W(l)
+⊕b
+
+,
+(73)
+where b ∈std
+κ is a bias vector. Also note that, in order for each H(i) to stay on the same
+manifold, W(i) must be a square matrix; however, it is possible to relax this assumption
+and specify separate dimensionalities and curvatures for each layer instead.
+Stereographic Logits.
+For classification, we need to define a κ-sterographic equivalent
+of a logit layer:
+H(L) = softmax
+
+ˆA logitsstdκ
+
+H(L−1), W(L−1)
+.
+(74)
+In order to implement logits in std
+κ, we first consider the interpretation that Euclidean
+logits are signed distances from a hyperplane. This follows naturally from the linear form
+w⊤
+i x + bi used in traditional classification, where wi is a column vector of the final weight
+matrix and bi is its corresponding bias. The magnitude directly corresponds to the point’s
+distance from the decision boundary (the hyperplane defined by w⊤
+i x+bi = 0), and the sign
+indicates which side of the hyperplane the point lies on—thus encoding both the model’s
+decision and confidence in a single value.
+Bachmann et al. (2020) and Ganea et al. (2018) use this perspective to redefine logits
+in non-Euclidean spaces by substituting the appropriate distance function. In κ-GCN, this
+becomes:
+P(y = k | x) = Softmax (logitsM(x, k))
+(75)
+logitsM(x, k) = ∥ak∥pk
+√
+K
+sin−1
+K
+ 
+2
+p
+|κ|⟨zk, ak⟩
+(1 + κ∥zk∥2)∥ak∥
+!
+,
+(76)
+where ak is a column vector of the final weight matrix corresponding to class k, pk ∈std
+κ is
+a bias term, and zk = −pk ⊕x.
+22
+
+--- PAGE 23 ---
+Manify: A Python Library for Learning Non-Euclidean Representations
+Base model
+Logits
+Classifier
+Regressor
+Link predictor
+stereographic dists
+softmax+ CE loss
+no softmax +MSE loss
+Fermi-Dirac decoder + BCE loss
+Figure 2: The relationships between the classification, regression, and link prediction modes
+of the κ-GCN: both the classifier and the regressor depend on stereographic hy-
+perplane distances (logits); link predictions go through the Fermi-Dirac decoder
+instead.
+Although is not explicit in Bachmann et al. (2020) how the logits aggregate across
+different product manifolds, we follow Cho et al. (2023) and later Chlenski et al. (2025) in
+aggregating logits as the ℓ2-norm of component manifold logits, multiplied by the sign of
+the sum of the component inner products:
+logitsP(x, k) =
+s X
+M∈P
+logitsM(xM, k) ·
+X
+M∈P
+⟨xM, akM⟩.
+(77)
+This is consistent with the interpretation of logits as signed distances to a hyperplane,
+generalized to product space manifolds.
+Generating Adjacency Matrices.
+Following Bachmann et al. (2020), we offer the
+convenience function Manify.predictors.kappa gcn.get A hat to preprocess any square
+adjacency matrix A ∈Rd×d into a normalized, symmetric adjacency matrix with self-
+connections appropriate for use with a GCN as follows:
+A′ = A + A⊤
+(78)
+˜A = A′ + I
+(79)
+˜Dii =
+X
+k
+˜Aik
+(80)
+ˆA = ˜D−1/2 ˜A ˜D−1/2,
+(81)
+Predictions with κ−GCN.
+The stereographic logits described above can be turned into
+classification targets through a standard softmax function. This is the only task for which
+κ-GCN was described, but there are precedents in the literature for using such models for
+regression and link prediction tasks. We describe these variants below, and summarize the
+relationships between these three tasks in Figure 2.
+For regression problems, we follow Liu et al. (2019) in setting the output dimension of
+our κ-GCN to 1, omitting the final Softmax operation, and training with a mean squared
+error loss function.
+23
+
+--- PAGE 24 ---
+Chlenski, Du, Satow, and Pe’er
+Product GCN
+κ-GCN
+GCN
+Product MLP
+κ-MLP
+MLP
+Product MLR
+κ-MLR
+MLR
+1 manifold
+κ = 0
+1 manifold
+κ = 0
+1 manifold
+κ = 0
+˜A = I
+˜A = I
+˜A = I
+No hidden layers
+No hidden layers
+No hidden layers
+Figure 3: We diagram the relationship between 9 different models, demonstrating how they
+are all special cases of κ −GCN. In particular, the horizontal axis tracks the
+relationship E⊂M ⊂P, whereas the vertical axis tracks the relationship MLR ⊂
+MLP ⊂GCN. We use “MLR” to refer generically to all one-layer models.
+Finally, for link prediction, we follow Chami et al. (2019) in adopting the standard
+choice of applying the Fermi-Dirac decoder (Krioukov et al., 2010; Nickel and Kiela, 2017)
+to predict edges:
+P((i, j) ∈E|xi, xj) =
+
+exp
+δM(xi, xj)2 −r
+t
+
++ 1
+−1
+,
+(82)
+where the embeddings for points i and j, xi and xj, may be updated by κ-GCN layers.
+Deriving MLPs and (Multinomial Logistic) Regression from κ-GCN.
+We note
+that κ-GCNs contain 8 other models as special cases, which we diagram in Figure 3. In par-
+ticular, any GCN can be transformed into an MLP by setting ˆA = I (effectively not passing
+messages along the graph edges), and any MLP can further be turned into a (multinomial
+logistic) regressor be removing all of its hidden layers. This has been noted in other work,
+such as Wu et al. (2019).
+E.3 Product Space Perceptrons
+Product Space Perceptrons are currently offered as an experimental feature. Support is
+limited, and we have not thoroughly validated our implementation.
+Interested readers
+should refer to Tabaghi et al. (2021) for full details.
+A linear classifier on P is defined as
+LC(x, w) = sign
+ ⟨wE, xE⟩+ αS sin−1 (⟨wS, xS⟩) + αH sinh−1 (⟨wH, xH⟩H) + b,
+
+(83)
+where XM (xM) denotes the restriction of X ∈P (x ∈P) to one of its component manifolds,
+αS and αH are weights, and b ∈R is a bias term. We further require that ∥wE∥= αE,
+∥wS∥= √κS, and ∥wH∥= √−κH.
+The Product Space Perceptron formulation relies on a kernel function. Letting R =
+maxxn∈X ∥xH,n∥2, that is the maximum Euclidean norm of any hyperbolic component of
+24
+
+--- PAGE 25 ---
+Manify: A Python Library for Learning Non-Euclidean Representations
+X, we define the kernel function as
+K(X, xn) = 1 + X⊤
+E xE,n + αS sin−1 
+κSX⊤
+S xS,n
+
++ αH sin−1 
+R−2X⊤
+HxH,n
+
+,
+(84)
+K =
+
+
+
+
+
+—
+K(X, x1)
+—
+—
+K(X, x2)
+—
+...
+—
+K(X, xnpoints)
+—
+
+
+
+
+,
+(85)
+where X ∈Pnpoints×d is a set of points on the manifold.
+Using this kernel, which we implement in Manify.predictors.kernel, we can train a
+classic kernel perceptron to work in the product space.
+E.4 Product Space Support Vector Machines
+Product Space Support Vector Machines (SVMs) are currently offered as an experimental
+feature. Support is limited, and we have not thoroughly validated our implementation.
+Interested readers should refer to Tabaghi et al. (2021) for full details.
+The Product Space SVM extends the kernel approach of Section E.3by finding a maximum-
+margin classifier in the product space. The optimization problem is formulated as:
+maximize ε −
+npoints
+X
+i=1
+ξi,
+(86)
+subject to yi
+npoints
+X
+j=1
+βjK(xi, xj) ≥ε −ξi for all i ∈{1, . . . , npoints},
+(87)
+where ε > 0 and ξi ≥0
+(88)
+Additionally, we constrain the weight vector β to satisfy:
+β ∈convhull(AE) ∩convhull(AS) ∩f
+AH, where
+(89)
+AE =
+n
+β ∈Rnpoints : β⊤κEβ = α2
+E
+o
+,
+(90)
+AS =
+n
+β ∈Rnpoints : β⊤κSβ = π
+2
+o
+,
+(91)
+AH =
+n
+β ∈Rnpoints : β⊤κHβ = sinh−1(−R2κH)
+o
+.
+(92)
+For practical optimization, we follow Tabaghi et al. (2021) in replacing the Euclidean and
+spherical constraint sets with their convex hulls, and relax the non-convex hyperbolic con-
+straints through a decomposition approach.
+25
+
+--- PAGE 26 ---
+Chlenski, Du, Satow, and Pe’er
+Appendix F. Mathematical Details: Curvature Estimation
+Given a set of distance, one might wish to ask what the curvature of the underlying space
+is. We implement two popular approaches to answering this question:
+• Sectional curvature in Manify.curvature estimation.sectional curvature, to
+measure the (positive or negative) curvature for specific nodes in a graph, and
+• Delta-hyperbolicity, in Manify.curvature estimation.delta hyperbolicity, to
+measure how negatively-curved an entire space is.
+F.1 Sectional curvature
+We follow Gu et al. (2018) in our definition of sectional curvature, which we implement in
+Manify.curvature estimation.sectional curvature. Given a geodesic triangle between
+a, b, c ∈M, the curvature (derived from the parallelogram law in Euclidean geometry) is
+ξM(a, b, c) = δM(a, m)2 + δM(b, c)2
+4
+−δM(a, b)2 + δM(a, c)2
+2
+,
+(93)
+where m is the midpoint of the geodesic connecting b and c.
+Of course, if we were able to take geodesic midpoints between points, we would already
+know the curvature of our space.
+Therefore, it is more interesting to consider that we
+only know some distances between select points. This can be described using distances in
+graphs. Given nodes a, b, c, m ∈V such that (b, c) ∈E, we can compute the graph equivalent
+of sectional curvature:
+ξG(m; b, c; a) =
+1
+2δG(a, m)
+
+δG(a, m)2 + δG(b, c)2
+4
+−δG(a, b)2 + δG(a, c)2
+2
+
+(94)
+ξG(m; b, c) =
+1
+|V| −1
+X
+a̸=m
+ξG(m; b, c; a).
+(95)
+Note that ξG(m; b, c) is just an average over ξG(m; b, c; a) for all a ∈V.
+F.2 δ-hyperbolicity
+While sectional curvature describes local curvature, δ-hyperbolicity is a notion of global
+negative curvature. In particular, δ-hyperbolicity measures the extent to which distances
+in a space deviate from distances in an idealized tree spanning those same points.
+For
+simplicity, we will continue to use the formulation on graphs, noting that any distance
+matrix can be thought of as a dense graph.
+First, we define the Gromov product of x, y, z ∈V:
+(y, z)x = 1
+2 (δG(x, y) + δG(x, z) −δG(y, z)) .
+(96)
+This gives rise to a definition of δ as the minimal value such that
+∀x, y, z, w ∈V,
+(x, z)w ≥min ((x, y)w, (y, z)w) −δ.
+(97)
+26
+
+--- PAGE 27 ---
+Manify: A Python Library for Learning Non-Euclidean Representations
+In practice, a typical simplification is to to fix w = w0, reducing the complexity of the
+δ-hyperbolicity computation from O(n4) to O(n3). In practice, delta is computed as
+δ = max
+
+max
+k
+min{Gi,k, Gk,j} −G
+
+, where
+(98)
+G =
+
+
+
+
+
+(x0, x0)w0
+(x0, x1)w0
+. . .
+(x0, xn)w0
+(x1, x0)w0
+(x1, x1)w0
+. . .
+(x1, xn)w0
+...
+...
+...
+...
+(xn, x0)w0
+(xn, x1)w0
+. . .
+(xn, xn)w0
+
+
+
+
+.
+(99)
+For performance reasons, we include a fast vectorized implementation of the δ-hyperbolicity
+calculation, as well as a sampling-based calculation in which we consider some number
+nsamples ≪n4
+points of 4-tuples of points.
+27
+
+--- PAGE 28 ---
+Chlenski, Du, Satow, and Pe’er
+Appendix G. Experiments
+Whenever possible, we have tried to validate results as reported in the literature, as well as
+our theoretical contributions, to confirm that we have correctly implemented our algorithms.
+In this section, we cover:
+1. Validating Manify.embedders.delta hyperbolicity against a result in Khrulkov
+et al. (2019);
+2. Validating Manify.embedders.coordinate learning against a result in Gu et al.
+(2018); and
+3. Validating the relationships in Figure 3 by directly contrasting various κ-GCN models
+with their Pytorch and Scikit-Learn equivalents.
+G.1 Validating δ-Hyperbolicity Estimation (Khrulkov et al. (2020))
+We repeated the δ-hyperbolicity measurements performed in Khrulkov et al. (2019) on the
+ImageNet-10 and ImageNet-100 datasets (Deng et al., 2009) using all three encoders they
+used: VGG-19 (Simonyan and Zisserman, 2015), ResNet-34 (He et al., 2016), and Inception
+V3 (Szegedy et al., 2016). For speed, we only report relative δ-hyperbolicities (δrel), which
+is defined as
+δrel = δ
+2
+maxi,j D,
+(100)
+where D is the matrix of all pairwise distances. Since we only report the maximum over a
+subset of the data, it is expected that our results slightly underestimate the true δrel, as it
+is a maximum over a larger dataset.
+Table 3: Compaing δ-hyperbolicity estimates for CIFAR-10 and CIFAR-100 test sets with
+Khrulkov et al. (2019). Our δrel is consistently (slightly) less than or equal to
+theirs, which is consistent with their δrel being a maximum taken over a larger
+dataset.
+Dataset
+Encoder
+Our δrel
+Khrulkov et al. (2019) δrel
+CIFAR-10
+VGG19
+0.21
+0.23
+ResNet34
+0.25
+0.26
+Inception v3
+0.22
+0.25
+CIFAR-100
+VGG19
+0.22
+0.22
+ResNet34
+0.27
+0.25
+Inception v3
+0.22
+0.23
+G.1.1 Validating Coordinate Learning (Gu et al 2018)
+To validate our implementation of the coordinate learning algorithm in Gu et al. (2018), we
+trained embeddings for the CS-PhDs dataset and compared our final Davg values to those
+reported in the paper. We trained our model for 3,000 epochs, of which the first 1,000 were
+burn-in epochs, with a burn-in learning rate of 0.001, a training learning rate of 0.01, and
+28
+
+--- PAGE 29 ---
+Manify: A Python Library for Learning Non-Euclidean Representations
+learnable curvatures. We show our final distortion values in Table 4, and plot the loss curve
+for each embedding in Figure 4.
+Table 4: Final Davg values for the CS-PhDs dataset as reproduced by us (left) and as
+reported in Gu et al. (2018) (right).
+Signature
+Our Davg
+Gu et al. (2018) Davg
+E10
+0.0521
+0.0543
+H10
+0.0544
+0.0502
+S10
+0.0614
+0.0569
+(H5)2
+0.0509
+0.0382
+(S5)2
+0.0601
+0.0579
+H5 × S5
+0.0501
+0.0622
+(H2)5
+0.0768
+0.0687
+(S2)5
+0.0915
+0.0638
+(H2)2 × E2 × (S2)2
+0.0689
+0.0765
+0
+500
+1000
+1500
+2000
+2500
+3000
+Iteration
+0.0
+0.1
+0.2
+0.3
+0.4
+0.5
+0.6
+0.7
+Davg
+5 ×
+5: 0.050
+(
+5)2: 0.051
+10: 0.052
+10: 0.054
+(
+5)2: 0.060
+10: 0.061
+(
+2)2 ×
+2 × (
+2)2: 0.069
+(
+2)5: 0.077
+(
+2)5: 0.092
+Progression of Davg during training, by signature
+Figure 4: Loss curves for the embeddings learned in Table 4. Final Davg values are repeated
+in the legend on the right-hand side. Note that the loss curves suggest that all
+embeddings have converged.
+29
+
+--- PAGE 30 ---
+Chlenski, Du, Satow, and Pe’er
+G.2 Validating κ-GCN Model Relations
+In Table 5, we test the relationships laid out in Figure 3. We applied the Wilcoxon rank-sum
+test over prediction accuracies for Gaussian mixtures with 3 clusters and 2 classes in E2 for
+30 trials apiece. We define the models as follows:
+• The κ-MLP is a κ-GCN with κ = 0 and ˆA = I, and one hidden layer;
+• The κ-MLR is a κ-GCN with κ = 0, ˆA = I, and no hidden layers;
+• The Pytorch MLP is a Pytorch neural network with one hidden layer.
+To match
+κ-GCN, it has square weights and no biases;
+• The Pytorch MLR is a single linear layer,
+• The “Scikit-Learn MLR” refers to the ‘LogisticRegression’ class in Scikit-Learn.
+All predictors were trained for 2,000 epochs.
+Table 5: Wilcoxon rank-sum test p-values for accuracies of different models across 30 trials
+of Gaussian mixture classification. By default, we expect MLP models to be similar
+to one another, and MLR models to be similar to one another, but MLR and MLP
+models to differ.
+Pytorch
+Pytorch
+Scikit-Learn
+κ-MLP
+MLP
+κ-MLR
+MLR
+MLR
+κ-MLP
+1.00
+0.477
+1.00
+0.477
+0.142
+Torch MLP
+0.477
+1.00
+0.477
+0.477
+0.524
+κ-MLR
+1.00
+0.477
+1.00
+1.00
+0.142
+Torch MLR
+0.477
+0.477
+1.00
+1.00
+0.142
+Scikit-Learn MLR
+0.142
+0.524
+0.142
+0.142
+1.00
+30

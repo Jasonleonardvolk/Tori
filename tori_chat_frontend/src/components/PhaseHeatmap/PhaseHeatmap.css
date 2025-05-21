@@ -1,0 +1,183 @@
+.phase-heatmap-container {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  margin-bottom: 24px;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.phase-heatmap-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.phase-heatmap-header h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+}
+
+.phase-heatmap-stats {
+  display: flex;
+  gap: 16px;
+  font-size: 14px;
+  color: #666;
+}
+
+.phase-heatmap-stats span {
+  padding: 4px 8px;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+}
+
+.phase-heatmap-canvas-container {
+  position: relative;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.phase-heatmap-canvas-container canvas {
+  display: block;
+  margin: 0 auto;
+  background-color: #ffffff;
+}
+
+.phase-heatmap-legend {
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .phase-heatmap-container {
+    background-color: #1e1e1e;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  .phase-heatmap-header h3 {
+    color: #e0e0e0;
+  }
+
+  .phase-heatmap-stats {
+    color: #b0b0b0;
+  }
+
+  .phase-heatmap-stats span {
+    background-color: #2d2d2d;
+  }
+
+  .phase-heatmap-canvas-container {
+    background-color: #222222;
+  }
+
+  .phase-heatmap-canvas-container canvas {
+    background-color: #2d2d2d;
+  }
+
+  /* Override SVG text colors in dark mode */
+  .phase-heatmap-legend text {
+    fill: #e0e0e0;
+  }
+}
+
+/* Responsive layout */
+@media (max-width: 768px) {
+  .phase-heatmap-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .phase-heatmap-stats {
+    margin-top: 8px;
+    flex-wrap: wrap;
+  }
+}
+
+/* Performance indicators */
+.phase-heatmap-stats span.perf-good {
+  background-color: rgba(0, 200, 0, 0.2);
+  color: rgb(0, 120, 0);
+}
+
+.phase-heatmap-stats span.perf-medium {
+  background-color: rgba(255, 200, 0, 0.2);
+  color: rgb(150, 120, 0);
+}
+
+.phase-heatmap-stats span.perf-poor {
+  background-color: rgba(255, 0, 0, 0.2);
+  color: rgb(150, 0, 0);
+}
+
+/* Tooltip styles */
+.phase-heatmap-tooltip {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 14px;
+  pointer-events: none;
+  z-index: 100;
+  max-width: 200px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.phase-heatmap-tooltip::after {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 6px 6px 0;
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.8) transparent transparent;
+}
+
+/* Loading state */
+.phase-heatmap-loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+.phase-heatmap-loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  border-top-color: #3498db;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Dark mode loading state */
+@media (prefers-color-scheme: dark) {
+  .phase-heatmap-loading {
+    background-color: rgba(30, 30, 30, 0.7);
+  }
+
+  .phase-heatmap-loading-spinner {
+    border-color: rgba(255, 255, 255, 0.1);
+    border-top-color: #3498db;
+  }
+}

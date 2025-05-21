@@ -1,0 +1,132 @@
+{
+  "files_in_context": [
+    {
+      "path": "../../MCP-SuperAssistant/server.js",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746455238880,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "../../MCP-SuperAssistant/server.js",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1746455238880,
+      "cline_edit_date": null,
+      "user_edit_date": 1746455255096
+    },
+    {
+      "path": "../../MCP-SuperAssistant/server.js",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1746455238880,
+      "cline_edit_date": null,
+      "user_edit_date": 1746456162292
+    },
+    {
+      "path": "../../MCP-SuperAssistant/server.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746456415145,
+      "cline_edit_date": 1746456415145,
+      "user_edit_date": 1746456162292
+    },
+    {
+      "path": "../../MCP-SuperAssistant/server.js",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1746456415145,
+      "cline_edit_date": 1746456415145,
+      "user_edit_date": 1746456415161
+    },
+    {
+      "path": "../../MCP-SuperAssistant/server.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746457554157,
+      "cline_edit_date": 1746457554157,
+      "user_edit_date": 1746456415161
+    },
+    {
+      "path": "../../MCP-SuperAssistant/server.js",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1746457554157,
+      "cline_edit_date": 1746457554157,
+      "user_edit_date": 1746457554177
+    },
+    {
+      "path": "../../MCP-SuperAssistant/server.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746457565803,
+      "cline_edit_date": 1746457565803,
+      "user_edit_date": 1746457554177
+    },
+    {
+      "path": "../../MCP-SuperAssistant/server.js",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1746457565803,
+      "cline_edit_date": 1746457565803,
+      "user_edit_date": 1746457565828
+    },
+    {
+      "path": "../../MCP-SuperAssistant/extension/manifest.json",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746457587999,
+      "cline_edit_date": 1746457587999,
+      "user_edit_date": null
+    },
+    {
+      "path": "../../MCP-SuperAssistant/extension/background.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746457595504,
+      "cline_edit_date": 1746457595504,
+      "user_edit_date": null
+    },
+    {
+      "path": "../../MCP-SuperAssistant/extension/content-script.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746457614062,
+      "cline_edit_date": 1746457614062,
+      "user_edit_date": null
+    },
+    {
+      "path": "../../MCP-SuperAssistant/extension/content-script.js",
+      "record_state": "active",
+      "record_source": "user_edited",
+      "cline_read_date": 1746457614062,
+      "cline_edit_date": 1746457614062,
+      "user_edit_date": 1746458989090
+    },
+    {
+      "path": "../../MCP-SuperAssistant/server.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746459324096,
+      "cline_edit_date": 1746459324096,
+      "user_edit_date": 1746457565828
+    },
+    {
+      "path": "../../MCP-SuperAssistant/server.js",
+      "record_state": "active",
+      "record_source": "user_edited",
+      "cline_read_date": 1746459324096,
+      "cline_edit_date": 1746459324096,
+      "user_edit_date": 1746459324122
+    }
+  ],
+  "model_usage": [
+    {
+      "ts": 1746455217600,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    }
+  ]
+}

@@ -1,193 +1,94 @@
-# ITORI Platform
+# TORI Chat Production Deployment
 
-The ITORI Platform is an integrated development environment for concept evolution visualization and manipulation.
+This repository contains tools for building and deploying the TORI Chat application in production mode.
 
-## Project Structure
+## Quick Start
 
-This project is organized as a monorepo using pnpm workspaces:
-
-```
-itori/
-├─ apps/                 # Applications
-│  ├─ chat/              # Chat application
-│  ├─ chatenterprise/    # Enterprise chat application
-│  └─ ide/               # IDE application
-├─ packages/             # Shared packages
-│  ├─ runtime-bridge/    # Runtime communication (WebSockets)
-│  ├─ ui-kit/            # UI components
-│  ├─ data-model/        # Data models and types
-│  └─ ingest/            # Document ingestion utilities
-├─ client/               # Legacy client code (being migrated)
-├─ backend/              # Backend services
-└─ ingest_pdf/           # PDF processing routines
+### Windows
+From Command Prompt:
+```cmd
+deploy-tori-chat.bat
 ```
 
-## Getting Started
+From PowerShell:
+```powershell
+# Option 1: Using the relative path
+.\deploy-tori-chat.bat
 
-### Prerequisites
+# Option 2: Using the & operator (preferred in PowerShell)
+& .\deploy-tori-chat.bat
 
-- Node.js 18+ and pnpm 8+
-- Python 3.10+ for backend services
-
-### Installation
-
-```bash
-# Install dependencies
-pnpm install
-
-# Build all packages
-pnpm -r build
+# Option 3: Using the full path
+& "C:\Users\jason\Desktop\tori\kha\deploy-tori-chat.bat"
 ```
 
-### Development
-
-```bash
-# Start the development server for a specific app
-pnpm --filter @itori/chat dev
-
-# Build a specific package
-pnpm --filter @itori/ui-kit build
-
-# Run all packages in development mode
-pnpm -r dev
+### Mac/Linux
+```
+chmod +x deploy-tori-chat.sh
+./deploy-tori-chat.sh
 ```
 
-## Environment Configuration
+## Key Features
 
-Each application has its own environment configuration in `.env.*` files:
+- **React 18 Compatibility**: Automatically fixes React dependency conflicts
+- **Cross-Platform Support**: Works on Windows, Mac, and Linux
+- **Port Conflict Resolution**: Detects and offers to resolve port conflicts
+- **Build Verification**: Ensures the correct UI is built (not the redirect page)
+- **CI/CD Integration**: GitHub Actions workflow for automated verification
 
-- `.env.development` - Development settings
-- `.env.production` - Production settings
+## Available Tools
 
-Key environment variables:
-
-- `VITE_ITORI_API_URL`: Backend API URL
-- `VITE_ITORI_WS_URL`: WebSocket server URL
-- `VITE_ITORI_API_PORT`: API server port
-- `VITE_ITORI_WS_PORT`: WebSocket server port
-
-## Shared Packages
-
-### @itori/runtime-bridge
-
-Communication layer for WebSocket connections and real-time updates.
-
-```js
-import { useAlanSocket } from '@itori/runtime-bridge';
-
-// Create WebSocket connection
-const { status, send } = useAlanSocket(handleMessage);
+### 1. Dependency Conflict Fixer
+```
+node fix-react-deps.js             # Interactive mode
+node fix-react-deps.js --ci        # Non-interactive (for CI)
+node fix-react-deps.js --upgrade   # Auto-upgrade without prompting
+node fix-react-deps.js --remove    # Auto-remove without prompting
 ```
 
-### @itori/ui-kit
-
-Reusable UI components with consistent styling.
-
-```jsx
-import { WebSocketStatus } from '@itori/ui-kit';
-
-// Display WebSocket status
-<WebSocketStatus status={status} onReconnect={reconnect} />
+### 2. Port Checker
+```
+node check-port.js                 # Check if port 3000 is available
+node check-port.js 8080            # Check a specific port
+node check-port.js --kill          # Check and offer to kill blocking process
 ```
 
-### @itori/data-model
-
-Shared data models and types.
-
-```ts
-import { Document, Concept } from '@itori/data-model';
-
-// Use shared types
-const document: Document = { /* ... */ };
+### 3. Build Verification
+```
+node verify-tori-build.js          # Verify the built UI is correct
 ```
 
-### @itori/ingest
+## Documentation
 
-Document ingestion utilities.
+For detailed information, see:
 
-```ts
-import { pollUploadStatus } from '@itori/ingest';
+- [TORI_CHAT_DEPLOYMENT_PLAN.md](TORI_CHAT_DEPLOYMENT_PLAN.md) - Complete deployment guide
+- [TORI_CHAT_FIX_SUMMARY.md](TORI_CHAT_FIX_SUMMARY.md) - Technical explanation of fixes
 
-// Poll for document processing status
-const document = await pollUploadStatus(jobId);
-```
+## Frequently Asked Questions
 
-## Port Configuration
+### Why does the build show a redirect page instead of the full UI?
 
-The platform uses several ports for different services:
+This can happen if:
+1. The entry point in vite.config.js is incorrect
+2. The script path in src/index.html is incorrect
+3. Environment variables are not set correctly
 
-- `3000`: Main web application (default)
-- `3003`: Backend API server
-- `8000`: WebSocket server
-- `5173`: Vite development server
+Solution: Run `node fix-react-deps.js` first, then build.
 
-To avoid port conflicts, the port-check utility will verify available ports before starting.
+### How do I check if my build is correct?
 
-### Workspace scripts
+A properly built TORI Chat UI will:
+1. Have an index.html file significantly larger than 100 bytes
+2. Not contain text about being "redirected" or "Go to demo"
+3. Include references to JavaScript assets
 
-| Purpose                      | Command                                 |
-|------------------------------|-----------------------------------------|
-| bootstrap deps              | `pnpm install`                          |
-| codemod legacy → workspace  | `pnpm run codemod:apps` / `codemod:client` |
-| lint + typecheck (turbo)    | `pnpm turbo run lint typecheck --parallel` |
-| build everything            | `pnpm build`                            |
-| dev servers                 | `pnpm dev:chat` • `dev:enterprise` • `dev:ide` |
+You can verify this with: `node verify-tori-build.js`
 
-### Codemod helpers
-```bash
-# monorepo apps (new)
-pnpm exec jscodeshift -t scripts/update-imports.js "apps/**/*.{ts,tsx,jsx}"
+### How do I fix React dependency conflicts?
 
-# legacy client folder (old)
-pnpm exec jscodeshift -t scripts/update-imports.js "client/src/**/*.{js,ts,jsx,tsx}"
-```
+The `react-diff-viewer@3.1.1` package is incompatible with React 18. You have two options:
+1. Upgrade to the compatible version: `npm install react-diff-viewer@4.0.0-rc.1 --save-exact`
+2. Remove it if not needed: `npm uninstall react-diff-viewer`
 
-## Environment Setup Instructions
-
-To complete the setup, you'll need to:
-
-1. **Install pnpm globally**:
-
-   ```bash
-   npm install -g pnpm
-   ```
-
-2. **Install workspace dependencies**:
-
-   ```bash
-   pnpm install
-   ```
-
-3. **Build all packages**:
-
-   ```bash
-   pnpm -r build
-   ```
-
-4. **Run the import path migration tool**:
-
-   ```bash
-   # Process monorepo apps
-   pnpm run codemod:apps
-   
-   # Process legacy client code
-   pnpm run codemod:client
-   ```
-
-## Component Migration Plan
-
-For migrating additional components:
-
-1. **Identify shared components** in the client directory
-2. **Create TypeScript versions** in appropriate packages
-3. **Update imports** using the provided codemod tool
-4. **Test the integration** after migration
-
-## IDE Integration Approach
-
-The CodeMirror integration should follow these steps:
-
-1. Add CodeMirror as a dependency in `packages/ui-kit`
-2. Create a reusable editor component with TypeScript typing
-3. Integrate it with the existing IDE layout
-4. Add state management for file editing
+The `fix-react-deps.js` script automates this process.

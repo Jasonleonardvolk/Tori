@@ -1,0 +1,338 @@
+{
+  "files_in_context": [
+    {
+      "path": "concept_store_maintenance.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746999960954,
+      "cline_edit_date": 1746999960954,
+      "user_edit_date": null
+    },
+    {
+      "path": "concept_store_maintenance.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746999997818,
+      "cline_edit_date": 1746999997818,
+      "user_edit_date": null
+    },
+    {
+      "path": "concept_store_maintenance.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747000018025,
+      "cline_edit_date": 1747000018025,
+      "user_edit_date": null
+    },
+    {
+      "path": "batch_process_pdfs.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747000224572,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "batch_process_pdfs_recursive.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747000232941,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "pdf_upload_server.py",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747000240364,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/canonical_ingestion.py",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747000252655,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/memory_gating.py",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747000359487,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/models.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747000366315,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/enhanced_memory_gating.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747000477075,
+      "cline_edit_date": 1747000477075,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/enhanced_memory_gating.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747000593149,
+      "cline_edit_date": 1747000593149,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/enhanced_memory_gating.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747000709010,
+      "cline_edit_date": 1747000709010,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/enhanced_memory_gating.py",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1747000709010,
+      "cline_edit_date": 1747000709010,
+      "user_edit_date": 1747000824228
+    },
+    {
+      "path": "ingest_pdf/enhanced_memory_gating.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747000940189,
+      "cline_edit_date": 1747000940189,
+      "user_edit_date": 1747000824228
+    },
+    {
+      "path": "ingest_pdf/enhanced_memory_gating.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747001034979,
+      "cline_edit_date": 1747000940189,
+      "user_edit_date": 1747000824228
+    },
+    {
+      "path": "ingest_pdf/enhanced_memory_gating.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747001150761,
+      "cline_edit_date": 1747001150761,
+      "user_edit_date": 1747000824228
+    },
+    {
+      "path": "ingest_pdf/enhanced_memory_gating.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747001232069,
+      "cline_edit_date": 1747001150761,
+      "user_edit_date": 1747000824228
+    },
+    {
+      "path": "ingest_pdf/enhanced_memory_gating.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747001346763,
+      "cline_edit_date": 1747001346763,
+      "user_edit_date": 1747000824228
+    },
+    {
+      "path": "ingest_pdf/enhanced_memory_gating.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747001462841,
+      "cline_edit_date": 1747001462841,
+      "user_edit_date": 1747000824228
+    },
+    {
+      "path": "ingest_pdf/enhanced_memory_gating.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747001579377,
+      "cline_edit_date": 1747001579377,
+      "user_edit_date": 1747000824228
+    },
+    {
+      "path": "ingest_pdf/enhanced_memory_gating.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747001732611,
+      "cline_edit_date": 1747001579377,
+      "user_edit_date": 1747000824228
+    },
+    {
+      "path": "ingest_pdf/enhanced_memory_gating.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747001847074,
+      "cline_edit_date": 1747001847074,
+      "user_edit_date": 1747000824228
+    },
+    {
+      "path": "ingest_pdf/models.py",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747003226046,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/time_context.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747003421279,
+      "cline_edit_date": 1747003421279,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/concept_metadata.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747003471236,
+      "cline_edit_date": 1747003471236,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/concept_logger.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747003530081,
+      "cline_edit_date": 1747003530081,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/concept_foundation_test.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747003599502,
+      "cline_edit_date": 1747003599502,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/narrative_recap.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747004056816,
+      "cline_edit_date": 1747004056816,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/stability_reasoning.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747004154044,
+      "cline_edit_date": 1747004154044,
+      "user_edit_date": null
+    },
+    {
+      "path": "batch_process_pdfs.py",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747004984092,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "batch_process_pdfs_recursive.py",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747004994796,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "process_usb_pdfs.bat",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747005002530,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "process_usb_pdfs_recursive.bat",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747005011624,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/expert_router.py",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747005041575,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    }
+  ],
+  "model_usage": [
+    {
+      "ts": 1746999926389,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1747001009265,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1747001028597,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1747001202705,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1747001224536,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1747001608796,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1747001726288,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1747003052329,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1747003380009,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1747071026211,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    }
+  ]
+}

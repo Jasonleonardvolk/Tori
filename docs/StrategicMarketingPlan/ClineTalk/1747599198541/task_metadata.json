@@ -1,0 +1,1616 @@
+{
+  "files_in_context": [
+    {
+      "path": "tori_chat_frontend/src/components/ChatWindow.jsx",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747608856179,
+      "cline_edit_date": 1747608856179,
+      "user_edit_date": null
+    },
+    {
+      "path": "test-pdf-upload.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747608960712,
+      "cline_edit_date": 1747608960712,
+      "user_edit_date": null
+    },
+    {
+      "path": "PDF-UPLOAD-GUIDE.md",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747608985186,
+      "cline_edit_date": 1747608985186,
+      "user_edit_date": null
+    },
+    {
+      "path": "setup_pdf_upload.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747609018589,
+      "cline_edit_date": 1747609018589,
+      "user_edit_date": null
+    },
+    {
+      "path": "backend/routes/bucket.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747611794276,
+      "cline_edit_date": 1747611794276,
+      "user_edit_date": null
+    },
+    {
+      "path": "ide_frontend/src/components/BucketViewer/BucketViewer.jsx",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747611838121,
+      "cline_edit_date": 1747611838121,
+      "user_edit_date": null
+    },
+    {
+      "path": "ide_frontend/src/components/BucketViewer/PathNavigator.jsx",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747611861254,
+      "cline_edit_date": 1747611861254,
+      "user_edit_date": null
+    },
+    {
+      "path": "ide_frontend/src/components/BucketViewer/FileList.jsx",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747611887745,
+      "cline_edit_date": 1747611887745,
+      "user_edit_date": null
+    },
+    {
+      "path": "ide_frontend/src/components/BucketViewer/FileTypeIcon.jsx",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747611907515,
+      "cline_edit_date": 1747611907515,
+      "user_edit_date": null
+    },
+    {
+      "path": "ide_frontend/src/components/BucketViewer/FileDetails.jsx",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747611944720,
+      "cline_edit_date": 1747611944720,
+      "user_edit_date": null
+    },
+    {
+      "path": "ide_frontend/src/components/BucketViewer/BucketViewer.css",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747611986453,
+      "cline_edit_date": 1747611986453,
+      "user_edit_date": null
+    },
+    {
+      "path": "ide_frontend/src/App.jsx",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747612137190,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "ide_frontend/src/App.jsx",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747612153958,
+      "cline_edit_date": 1747612153958,
+      "user_edit_date": null
+    },
+    {
+      "path": "ide_frontend/src/App.jsx",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747612171454,
+      "cline_edit_date": 1747612171454,
+      "user_edit_date": null
+    },
+    {
+      "path": "backend/main.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747612228256,
+      "cline_edit_date": 1747612228256,
+      "user_edit_date": null
+    },
+    {
+      "path": "start-bucket-viewer.bat",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747612253548,
+      "cline_edit_date": 1747612253548,
+      "user_edit_date": null
+    },
+    {
+      "path": "BUCKET-VIEWER-README.md",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747612284410,
+      "cline_edit_date": 1747612284410,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/source_validator.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747612690658,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "pdf_upload_server.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747612710050,
+      "cline_edit_date": 1747612710050,
+      "user_edit_date": null
+    },
+    {
+      "path": "pdf_upload_server.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747612724693,
+      "cline_edit_date": 1747612724693,
+      "user_edit_date": null
+    },
+    {
+      "path": "pdf_upload_server.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747612746292,
+      "cline_edit_date": 1747612746292,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/runtime-bridge/src/useAlanSocket.tsx",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747612818074,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/runtime-bridge/src/SpectralMonitor.ts",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747612876022,
+      "cline_edit_date": 1747612876022,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/runtime-bridge/src/types/websocket.tsx",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747612886864,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/runtime-bridge/src/SpectralMonitor.ts",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747612904922,
+      "cline_edit_date": 1747612904922,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/runtime-bridge/src/SpectralMonitor.ts",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747612922304,
+      "cline_edit_date": 1747612922304,
+      "user_edit_date": null
+    },
+    {
+      "path": "tori_chat_frontend/src/hooks/useSpectral.ts",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747612948073,
+      "cline_edit_date": 1747612948073,
+      "user_edit_date": null
+    },
+    {
+      "path": "tori_chat_frontend/src/hooks/useSpectral.ts",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747612966325,
+      "cline_edit_date": 1747612966325,
+      "user_edit_date": null
+    },
+    {
+      "path": "SOURCE-VALIDATOR-SPECTRAL-README.md",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747613004472,
+      "cline_edit_date": 1747613004472,
+      "user_edit_date": null
+    },
+    {
+      "path": "IMPLEMENTATION-RECOMMENDATIONS.md",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747613516064,
+      "cline_edit_date": 1747613516064,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/stability_reasoning.py",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747617621929,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "STABILITY-REASONING-INTEGRATION-PLAN.md",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747617668496,
+      "cline_edit_date": 1747617668496,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/data-model/src/concept/ConceptStoreWithStability.ts",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747617781709,
+      "cline_edit_date": 1747617781709,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/data-model/src/concept/Concept.ts",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747617803109,
+      "cline_edit_date": 1747617803109,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/runtime-bridge/src/SpectralStabilityBridge.ts",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747617857095,
+      "cline_edit_date": 1747617857095,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/runtime-bridge/python/stability_bridge.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747617944931,
+      "cline_edit_date": 1747617944931,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/concept_metadata.py",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747618118608,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/runtime-bridge/python/stability_bridge.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747618289302,
+      "cline_edit_date": 1747618289302,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/stability_reasoning_factory.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747618323448,
+      "cline_edit_date": 1747618323448,
+      "user_edit_date": null
+    },
+    {
+      "path": "STABILITY-REASONING-INTEGRATION-COMPLETE.md",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747618365579,
+      "cline_edit_date": 1747618365579,
+      "user_edit_date": null
+    },
+    {
+      "path": ".env.example",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747618451021,
+      "cline_edit_date": 1747618451021,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/source_validator.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747618479905,
+      "cline_edit_date": 1747618479905,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/source_validator.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747618495181,
+      "cline_edit_date": 1747618495181,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/stability_reasoning_factory.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747618516157,
+      "cline_edit_date": 1747618516157,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/runtime-bridge/src/SpectralAlertSystem.ts",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747618573681,
+      "cline_edit_date": 1747618573681,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/runtime-bridge/src/SpectralAlertSystem.ts",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747618595965,
+      "cline_edit_date": 1747618595965,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/runtime-bridge/src/SpectralMonitor.ts",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747618619325,
+      "cline_edit_date": 1747618619325,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/runtime-bridge/src/SpectralMonitor.ts",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747618647338,
+      "cline_edit_date": 1747618647338,
+      "user_edit_date": null
+    },
+    {
+      "path": "tori_chat_frontend/src/hooks/useSpectral.ts",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747618669381,
+      "cline_edit_date": 1747618669381,
+      "user_edit_date": null
+    },
+    {
+      "path": "tori_chat_frontend/src/hooks/useSpectral.ts",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747618685788,
+      "cline_edit_date": 1747618685788,
+      "user_edit_date": null
+    },
+    {
+      "path": "tori_chat_frontend/src/hooks/useSpectral.ts",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747618714598,
+      "cline_edit_date": 1747618714598,
+      "user_edit_date": null
+    },
+    {
+      "path": "tori_chat_frontend/src/hooks/useSpectral.ts",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747618745515,
+      "cline_edit_date": 1747618745515,
+      "user_edit_date": null
+    },
+    {
+      "path": "tori_chat_frontend/src/hooks/useSpectral.ts",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747618768903,
+      "cline_edit_date": 1747618768903,
+      "user_edit_date": null
+    },
+    {
+      "path": "tori_chat_frontend/src/components/SpectralDashboard/SpectralDashboard.tsx",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747619140534,
+      "cline_edit_date": 1747619140534,
+      "user_edit_date": null
+    },
+    {
+      "path": "tori_chat_frontend/src/components/SpectralDashboard/SpectralDashboard.jsx",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747619198009,
+      "cline_edit_date": 1747619198009,
+      "user_edit_date": null
+    },
+    {
+      "path": "tori_chat_frontend/src/components/SpectralDashboard/SpectralDashboard.css",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747619249558,
+      "cline_edit_date": 1747619249558,
+      "user_edit_date": null
+    },
+    {
+      "path": "ide_frontend/src/components/SourceValidationAdmin/SourceValidationAdmin.jsx",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747619359862,
+      "cline_edit_date": 1747619359862,
+      "user_edit_date": null
+    },
+    {
+      "path": "ide_frontend/src/components/SourceValidationAdmin/SourceValidationAdmin.css",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747619405625,
+      "cline_edit_date": 1747619405625,
+      "user_edit_date": null
+    },
+    {
+      "path": "ide_frontend/src/App.jsx",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747619436731,
+      "cline_edit_date": 1747619436731,
+      "user_edit_date": null
+    },
+    {
+      "path": "ide_frontend/src/App.jsx",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747619449776,
+      "cline_edit_date": 1747619449776,
+      "user_edit_date": null
+    },
+    {
+      "path": "IMPLEMENTATION-RECOMMENDATIONS.md",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747619504968,
+      "cline_edit_date": 1747619504968,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/runtime-bridge/src/SpectralMonitor.ts",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747621684925,
+      "cline_edit_date": 1747618647338,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/runtime-bridge/src/SpectralStabilityBridge.ts",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747621695521,
+      "cline_edit_date": 1747617857095,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/stability_reasoning_factory.py",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747621708724,
+      "cline_edit_date": 1747618516157,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/runtime-bridge/python/trend_forecast.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747621872429,
+      "cline_edit_date": 1747621872429,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/runtime-bridge/python/forecast_loop.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747621939087,
+      "cline_edit_date": 1747621939087,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/runtime-bridge/src/SpectralMonitor.ts",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747621960788,
+      "cline_edit_date": 1747621960788,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/runtime-bridge/src/SpectralMonitor.ts",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747621984600,
+      "cline_edit_date": 1747621984600,
+      "user_edit_date": null
+    },
+    {
+      "path": "tori_chat_frontend/src/hooks/useCoherenceForecast.ts",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747622023202,
+      "cline_edit_date": 1747622023202,
+      "user_edit_date": null
+    },
+    {
+      "path": "tori_chat_frontend/src/hooks/useCoherenceForecast.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747622066095,
+      "cline_edit_date": 1747622066095,
+      "user_edit_date": null
+    },
+    {
+      "path": "backend/routes/coherence.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747622099766,
+      "cline_edit_date": 1747622099766,
+      "user_edit_date": null
+    },
+    {
+      "path": "backend/main.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747622142956,
+      "cline_edit_date": 1747622142956,
+      "user_edit_date": null
+    },
+    {
+      "path": "backend/main.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747622154708,
+      "cline_edit_date": 1747622154708,
+      "user_edit_date": null
+    },
+    {
+      "path": "tori_chat_frontend/src/components/CoherenceRibbon/CoherenceRibbon.jsx",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747622176768,
+      "cline_edit_date": 1747622176768,
+      "user_edit_date": null
+    },
+    {
+      "path": "tori_chat_frontend/src/components/CoherenceRibbon/CoherenceRibbon.css",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747622205933,
+      "cline_edit_date": 1747622205933,
+      "user_edit_date": null
+    },
+    {
+      "path": "PREDICTIVE-COHERENCE-GUIDE.md",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747622254252,
+      "cline_edit_date": 1747622254252,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/runtime-bridge/python/cluster_stability.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747623903783,
+      "cline_edit_date": 1747623903783,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/runtime-bridge/python/test_cluster_stability.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747623946228,
+      "cline_edit_date": 1747623946228,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/runtime-bridge/python/forecast_loop.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747623960474,
+      "cline_edit_date": 1747623960474,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/runtime-bridge/python/forecast_loop.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747623977328,
+      "cline_edit_date": 1747623977328,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/runtime-bridge/python/forecast_loop.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747624056703,
+      "cline_edit_date": 1747624056703,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/runtime-bridge/python/forecast_loop.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747624072857,
+      "cline_edit_date": 1747624072857,
+      "user_edit_date": null
+    },
+    {
+      "path": "tori_chat_frontend/src/hooks/useClusterAlerts.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747624138886,
+      "cline_edit_date": 1747624138886,
+      "user_edit_date": null
+    },
+    {
+      "path": "tori_chat_frontend/src/components/CoherenceRibbon/CoherenceRibbon.jsx",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747624156165,
+      "cline_edit_date": 1747624156165,
+      "user_edit_date": null
+    },
+    {
+      "path": "tori_chat_frontend/src/components/CoherenceRibbon/CoherenceRibbon.jsx",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747624180573,
+      "cline_edit_date": 1747624180573,
+      "user_edit_date": null
+    },
+    {
+      "path": "tori_chat_frontend/src/components/CoherenceRibbon/CoherenceRibbon.jsx",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747624203210,
+      "cline_edit_date": 1747624203210,
+      "user_edit_date": null
+    },
+    {
+      "path": "tori_chat_frontend/src/components/CoherenceRibbon/CoherenceRibbon.css",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747624224545,
+      "cline_edit_date": 1747624224545,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/runtime-bridge/python/trend_forecast.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747625077966,
+      "cline_edit_date": 1747625077966,
+      "user_edit_date": null
+    },
+    {
+      "path": "backend/metrics.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747625092864,
+      "cline_edit_date": 1747625092864,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/runtime-bridge/python/forecast_loop.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747625113500,
+      "cline_edit_date": 1747625113500,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/runtime-bridge/python/forecast_loop.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747625137777,
+      "cline_edit_date": 1747625137777,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/runtime-bridge/python/cluster_stability.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747625162548,
+      "cline_edit_date": 1747625162548,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/runtime-bridge/python/cluster_stability.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747625179800,
+      "cline_edit_date": 1747625179800,
+      "user_edit_date": null
+    },
+    {
+      "path": "docs/LAUNCH_README.md",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747625215592,
+      "cline_edit_date": 1747625215592,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/banksy/config.yaml",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747625955246,
+      "cline_edit_date": 1747625955246,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/__init__.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747625970060,
+      "cline_edit_date": 1747625970060,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/banksy/clock.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747625991412,
+      "cline_edit_date": 1747625991412,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/banksy/tests/test_clock.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747626008327,
+      "cline_edit_date": 1747626008327,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/banksy/banksy_spin.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747626047394,
+      "cline_edit_date": 1747626047394,
+      "user_edit_date": null
+    },
+    {
+      "path": "backend/routes/mcp/server.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747626081070,
+      "cline_edit_date": 1747626081070,
+      "user_edit_date": null
+    },
+    {
+      "path": "backend/routes/mcp/__init__.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747626095408,
+      "cline_edit_date": 1747626095408,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/banksy/broadcast.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747626123102,
+      "cline_edit_date": 1747626123102,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/banksy/banksy_spin.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747626144478,
+      "cline_edit_date": 1747626144478,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/banksy/banksy_spin.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747626159941,
+      "cline_edit_date": 1747626159941,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/banksy/banksy_spin.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747626186349,
+      "cline_edit_date": 1747626186349,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/banksy/banksy_spin.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747626208669,
+      "cline_edit_date": 1747626208669,
+      "user_edit_date": null
+    },
+    {
+      "path": "tori_chat_frontend/src/hooks/useMcpSocket.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747626236670,
+      "cline_edit_date": 1747626236670,
+      "user_edit_date": null
+    },
+    {
+      "path": "tori_chat_frontend/src/state/pccSlice.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747626256545,
+      "cline_edit_date": 1747626256545,
+      "user_edit_date": null
+    },
+    {
+      "path": "tori_chat_frontend/src/components/PccStatus/PccStatus.jsx",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747626288060,
+      "cline_edit_date": 1747626288060,
+      "user_edit_date": null
+    },
+    {
+      "path": "tori_chat_frontend/src/components/PccStatus/PccStatus.css",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747626312760,
+      "cline_edit_date": 1747626312760,
+      "user_edit_date": null
+    },
+    {
+      "path": "start-mcp-server.bat",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747626330862,
+      "cline_edit_date": 1747626330862,
+      "user_edit_date": null
+    },
+    {
+      "path": "MCP_PCC_GUIDE.md",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747626376389,
+      "cline_edit_date": 1747626376389,
+      "user_edit_date": null
+    },
+    {
+      "path": "MCP_PCC_GUIDE.md",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1747626376389,
+      "cline_edit_date": 1747626376389,
+      "user_edit_date": 1747658359571
+    },
+    {
+      "path": "test_clock_manual.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747659228839,
+      "cline_edit_date": 1747659228839,
+      "user_edit_date": null
+    },
+    {
+      "path": "standalone_test_clock.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747659400718,
+      "cline_edit_date": 1747659400718,
+      "user_edit_date": null
+    },
+    {
+      "path": "test_pcc_broadcast.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747659447059,
+      "cline_edit_date": 1747659447059,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/runtime-bridge/python/forecast_loop.py",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747659862329,
+      "cline_edit_date": 1747625137777,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/runtime-bridge/python/cluster_stability.py",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747659869576,
+      "cline_edit_date": 1747625179800,
+      "user_edit_date": null
+    },
+    {
+      "path": "tori_chat_frontend/src/components/CoherenceRibbon/CoherenceRibbon.jsx",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747659875857,
+      "cline_edit_date": 1747624203210,
+      "user_edit_date": null
+    },
+    {
+      "path": "pcc/q_reservoir.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747659932714,
+      "cline_edit_date": 1747659932714,
+      "user_edit_date": null
+    },
+    {
+      "path": "pcc/__init__.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747659944969,
+      "cline_edit_date": 1747659944969,
+      "user_edit_date": null
+    },
+    {
+      "path": "pcc/test_q_reservoir.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747659978674,
+      "cline_edit_date": 1747659978674,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/banksy/quantum_bridge.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747660012365,
+      "cline_edit_date": 1747660012365,
+      "user_edit_date": null
+    },
+    {
+      "path": "QUANTUM_PCC_GUIDE.md",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747660053393,
+      "cline_edit_date": 1747660053393,
+      "user_edit_date": null
+    },
+    {
+      "path": "backend/routes/mcp/server.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747660376281,
+      "cline_edit_date": 1747626081070,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/banksy/banksy_spin.py",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747660386401,
+      "cline_edit_date": 1747626208669,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/banksy/broadcast.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747660404564,
+      "cline_edit_date": 1747626123102,
+      "user_edit_date": null
+    },
+    {
+      "path": "tori_chat_frontend/src/hooks/useMcpSocket.js",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747660414851,
+      "cline_edit_date": 1747626236670,
+      "user_edit_date": null
+    },
+    {
+      "path": "tori_chat_frontend/src/state/pccSlice.js",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747660422262,
+      "cline_edit_date": 1747626256545,
+      "user_edit_date": null
+    },
+    {
+      "path": "start-mcp-server.bat",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747660427737,
+      "cline_edit_date": 1747626330862,
+      "user_edit_date": null
+    },
+    {
+      "path": "examples/pcc_sample.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747660482372,
+      "cline_edit_date": 1747660482372,
+      "user_edit_date": null
+    },
+    {
+      "path": "memory/hopfield_to_ising.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747660670752,
+      "cline_edit_date": 1747660670752,
+      "user_edit_date": null
+    },
+    {
+      "path": "memory/dw_sim.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747660730773,
+      "cline_edit_date": 1747660730773,
+      "user_edit_date": null
+    },
+    {
+      "path": "memory/__init__.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747660743097,
+      "cline_edit_date": 1747660743097,
+      "user_edit_date": null
+    },
+    {
+      "path": "memory/test_memory.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747660771064,
+      "cline_edit_date": 1747660771064,
+      "user_edit_date": null
+    },
+    {
+      "path": "memory/manager.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747660808843,
+      "cline_edit_date": 1747660808843,
+      "user_edit_date": null
+    },
+    {
+      "path": "jobs/train_forecaster.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747660890111,
+      "cline_edit_date": 1747660890111,
+      "user_edit_date": null
+    },
+    {
+      "path": "memory/hopfield_to_ising.py",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747660996498,
+      "cline_edit_date": 1747660670752,
+      "user_edit_date": null
+    },
+    {
+      "path": "memory/manager.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747661007909,
+      "cline_edit_date": 1747660808843,
+      "user_edit_date": null
+    },
+    {
+      "path": "memory/dw_sim.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747661021614,
+      "cline_edit_date": 1747660730773,
+      "user_edit_date": null
+    },
+    {
+      "path": "memory/dw_sim.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747661055073,
+      "cline_edit_date": 1747661055073,
+      "user_edit_date": null
+    },
+    {
+      "path": "memory/manager.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747661100146,
+      "cline_edit_date": 1747661100146,
+      "user_edit_date": null
+    },
+    {
+      "path": "backend/routes/mcp/__init__.py",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747661211375,
+      "cline_edit_date": 1747626095408,
+      "user_edit_date": null
+    },
+    {
+      "path": "backend/routes/mcp/schema_v2.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747661522317,
+      "cline_edit_date": 1747661522317,
+      "user_edit_date": null
+    },
+    {
+      "path": "backend/routes/mcp/server.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747661529529,
+      "cline_edit_date": 1747626081070,
+      "user_edit_date": null
+    },
+    {
+      "path": "backend/routes/mcp/server.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747661561403,
+      "cline_edit_date": 1747661561403,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/banksy/broadcast.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747661568808,
+      "cline_edit_date": 1747626123102,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/banksy/broadcast.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747661594361,
+      "cline_edit_date": 1747661594361,
+      "user_edit_date": null
+    },
+    {
+      "path": "ide_frontend/src/state/pccSlice.ts",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747661611913,
+      "cline_edit_date": 1747661611913,
+      "user_edit_date": null
+    },
+    {
+      "path": "ide_frontend/src/state/pccSlice.ts",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747661634097,
+      "cline_edit_date": 1747661634097,
+      "user_edit_date": null
+    },
+    {
+      "path": "ide_frontend/src/hooks/useMcpSocket.ts",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747661656073,
+      "cline_edit_date": 1747661656073,
+      "user_edit_date": null
+    },
+    {
+      "path": "ide_frontend/src/hooks/useMcpSocket.ts",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747661679984,
+      "cline_edit_date": 1747661679984,
+      "user_edit_date": null
+    },
+    {
+      "path": "tori_chat_frontend/src/components/PccStatus/PccStatus.css",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747661687617,
+      "cline_edit_date": 1747626312760,
+      "user_edit_date": null
+    },
+    {
+      "path": "tori_chat_frontend/src/components/PccStatus/PccStatus.jsx",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747661715253,
+      "cline_edit_date": 1747661715253,
+      "user_edit_date": null
+    },
+    {
+      "path": "examples/pcc_sample.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747661740905,
+      "cline_edit_date": 1747661740905,
+      "user_edit_date": null
+    },
+    {
+      "path": "start-mcp-server.bat",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747661754033,
+      "cline_edit_date": 1747661754033,
+      "user_edit_date": null
+    },
+    {
+      "path": "MCP_PCC_GUIDE.md",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747661784737,
+      "cline_edit_date": 1747661784737,
+      "user_edit_date": 1747658359571
+    },
+    {
+      "path": "test_pcc_broadcast.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747661834637,
+      "cline_edit_date": 1747661834637,
+      "user_edit_date": null
+    },
+    {
+      "path": "examples/pcc_sample.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747662413016,
+      "cline_edit_date": 1747662413016,
+      "user_edit_date": null
+    },
+    {
+      "path": "examples/pcc_sample.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747662431578,
+      "cline_edit_date": 1747662431578,
+      "user_edit_date": null
+    },
+    {
+      "path": "backend/routes/mcp/server.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747662488106,
+      "cline_edit_date": 1747662488106,
+      "user_edit_date": null
+    },
+    {
+      "path": "start-mcp-server.bat",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747662506294,
+      "cline_edit_date": 1747662506294,
+      "user_edit_date": null
+    },
+    {
+      "path": "test_pcc_broadcast.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747662585518,
+      "cline_edit_date": 1747662585518,
+      "user_edit_date": null
+    },
+    {
+      "path": "backend/metrics_utils.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747664904330,
+      "cline_edit_date": 1747664904330,
+      "user_edit_date": null
+    },
+    {
+      "path": "backend/routes/mcp/server.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747665002733,
+      "cline_edit_date": 1747665002733,
+      "user_edit_date": null
+    },
+    {
+      "path": "memory/traffic_replay.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747665073439,
+      "cline_edit_date": 1747665073439,
+      "user_edit_date": null
+    },
+    {
+      "path": "registry/kaizen/schemas/component.yml",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747665109085,
+      "cline_edit_date": 1747665109085,
+      "user_edit_date": null
+    },
+    {
+      "path": "registry/kaizen/schemas/ticket.yml",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747665135839,
+      "cline_edit_date": 1747665135839,
+      "user_edit_date": null
+    },
+    {
+      "path": "registry/kaizen/components/pcc-main.yml",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747665159983,
+      "cline_edit_date": 1747665159983,
+      "user_edit_date": null
+    },
+    {
+      "path": "registry/kaizen/KAIZ-001/Kaizen-Tkt.yml",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747665182089,
+      "cline_edit_date": 1747665182089,
+      "user_edit_date": null
+    },
+    {
+      "path": "registry/kaizen/KAIZ-001/Patch-Spec.md",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747665217350,
+      "cline_edit_date": 1747665217350,
+      "user_edit_date": null
+    },
+    {
+      "path": "registry/kaizen/cli.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747665293118,
+      "cline_edit_date": 1747665293118,
+      "user_edit_date": null
+    },
+    {
+      "path": "kaizen.bat",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747665306642,
+      "cline_edit_date": 1747665306642,
+      "user_edit_date": null
+    },
+    {
+      "path": "registry/kaizen/README.md",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747665337625,
+      "cline_edit_date": 1747665337625,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/runtime-bridge/src/PhaseEventBus.ts",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747665761540,
+      "cline_edit_date": 1747665761540,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/runtime-bridge/src/PhaseEventBus.ts",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747665792852,
+      "cline_edit_date": 1747665792852,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/runtime-bridge/src/PhaseEventBus.ts",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747665807543,
+      "cline_edit_date": 1747665807543,
+      "user_edit_date": null
+    },
+    {
+      "path": "tori_chat_frontend/src/hooks/usePhaseEvent.ts",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747665844042,
+      "cline_edit_date": 1747665844042,
+      "user_edit_date": null
+    },
+    {
+      "path": "tori_chat_frontend/src/hooks/usePhaseEvent.ts",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747665858507,
+      "cline_edit_date": 1747665858507,
+      "user_edit_date": null
+    },
+    {
+      "path": "tori_chat_frontend/src/hooks/usePhaseEvent.ts",
+      "record_state": "active",
+      "record_source": "user_edited",
+      "cline_read_date": 1747665858507,
+      "cline_edit_date": 1747665858507,
+      "user_edit_date": 1747665858575
+    },
+    {
+      "path": "tori_chat_frontend/src/hooks/usePhaseEvent.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747665896167,
+      "cline_edit_date": 1747665896167,
+      "user_edit_date": null
+    }
+  ],
+  "model_usage": [
+    {
+      "ts": 1747608856755,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1747610628037,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1747611713524,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1747612333031,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1747612633014,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1747613731069,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1747614737334,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1747617995030,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1747618086039,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1747618193178,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1747618213519,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1747619559336,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1747621794047,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1747622799854,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1747623840628,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1747624931592,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1747625057830,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1747625855121,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1747625938845,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1747659728469,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1747659856037,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1747660179437,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1747660369120,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1747661385476,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1747661504561,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1747663521259,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1747664845183,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    }
+  ]
+}

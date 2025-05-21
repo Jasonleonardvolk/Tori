@@ -1,0 +1,440 @@
+{
+  "files_in_context": [
+    {
+      "path": "client/package.json",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746804209539,
+      "cline_edit_date": 1746804209539,
+      "user_edit_date": null
+    },
+    {
+      "path": "package.json",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746804367237,
+      "cline_edit_date": 1746804367237,
+      "user_edit_date": null
+    },
+    {
+      "path": ".eslintrc.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746804447632,
+      "cline_edit_date": 1746804447632,
+      "user_edit_date": null
+    },
+    {
+      "path": "package.json",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1746804367237,
+      "cline_edit_date": 1746804367237,
+      "user_edit_date": 1746804459928
+    },
+    {
+      "path": "package.json",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1746804367237,
+      "cline_edit_date": 1746804367237,
+      "user_edit_date": 1746804485047
+    },
+    {
+      "path": "package.json",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1746804367237,
+      "cline_edit_date": 1746804367237,
+      "user_edit_date": 1746804485189
+    },
+    {
+      "path": "package.json",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1746804367237,
+      "cline_edit_date": 1746804367237,
+      "user_edit_date": 1746804499444
+    },
+    {
+      "path": "package.json",
+      "record_state": "active",
+      "record_source": "user_edited",
+      "cline_read_date": 1746804367237,
+      "cline_edit_date": 1746804367237,
+      "user_edit_date": 1746804499605
+    },
+    {
+      "path": "scripts/eslint-autofix.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746804545929,
+      "cline_edit_date": 1746804545929,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/AffectiveIntegrationExample.jsx",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746804561028,
+      "cline_edit_date": 1746804561028,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/services/affectiveAgentSuggestionsService.js",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746804567042,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/services/affectiveAgentSuggestionsService.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746804582651,
+      "cline_edit_date": 1746804582651,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/services/affectiveAgentSuggestionsService.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746804595887,
+      "cline_edit_date": 1746804595887,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/services/chatHistoryService.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746804613583,
+      "cline_edit_date": 1746804613583,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/services/chatHistoryService.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746804625449,
+      "cline_edit_date": 1746804625449,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/services/intentDetectionService.js",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746804693959,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/services/intentDetectionService.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746804764802,
+      "cline_edit_date": 1746804764802,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/services/manipulationDetectionService.js",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746804808605,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/services/manipulationDetectionService.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746804920979,
+      "cline_edit_date": 1746804920979,
+      "user_edit_date": null
+    },
+    {
+      "path": "server/index.js",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746805130200,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "server/index.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746805143568,
+      "cline_edit_date": 1746805143568,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/services/affectiveAgentSuggestionsService.js",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746805159239,
+      "cline_edit_date": 1746804595887,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/services/affectiveAgentSuggestionsService.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746805171267,
+      "cline_edit_date": 1746805171267,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/AffectiveIntegrationExample.jsx",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746805328676,
+      "cline_edit_date": 1746804561028,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/services/conceptGraphService.js",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746805336021,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/services/conceptGraphService.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746805349802,
+      "cline_edit_date": 1746805349802,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/services/conceptGraphService.js",
+      "record_state": "active",
+      "record_source": "user_edited",
+      "cline_read_date": 1746805349802,
+      "cline_edit_date": 1746805349802,
+      "user_edit_date": 1746805349854
+    },
+    {
+      "path": "client/src/services/affectiveAgentSuggestionsService.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746805367848,
+      "cline_edit_date": 1746805367848,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/components/PersonaSelector/PersonaContext.js",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746806499456,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/components/PersonaSelector/PersonaContext.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746806512360,
+      "cline_edit_date": 1746806512360,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/components/PersonaSelector/PersonaContext.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746806539295,
+      "cline_edit_date": 1746806539295,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/components/ConceptGraphVisualizer/ConceptGraphVisualizer.jsx",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746806549442,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/components/ConceptGraphVisualizer/ConceptGraphVisualizer.jsx",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746806568568,
+      "cline_edit_date": 1746806568568,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/components/ConceptGraphVisualizer/ConceptGraphVisualizer.jsx",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746806589017,
+      "cline_edit_date": 1746806589017,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/components/ConceptGraphVisualizer/ConceptGraphVisualizer.jsx",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746806616859,
+      "cline_edit_date": 1746806616859,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/components/RipplePreview/RipplePreview.jsx",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746806625738,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/components/RipplePreview/RipplePreview.jsx",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1746806625738,
+      "cline_edit_date": null,
+      "user_edit_date": 1746806639398
+    },
+    {
+      "path": "client/src/components/RipplePreview/RipplePreview.jsx",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746806652216,
+      "cline_edit_date": 1746806652216,
+      "user_edit_date": 1746806639398
+    },
+    {
+      "path": "client/src/components/RipplePreview/RipplePreview.jsx",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746806665923,
+      "cline_edit_date": 1746806665923,
+      "user_edit_date": 1746806639398
+    },
+    {
+      "path": "client/src/components/RipplePreview/RipplePreview.jsx",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746806692256,
+      "cline_edit_date": 1746806692256,
+      "user_edit_date": 1746806639398
+    },
+    {
+      "path": "client/src/components/RipplePreview/RipplePreview.jsx",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1746806692256,
+      "cline_edit_date": 1746806692256,
+      "user_edit_date": 1746806706286
+    },
+    {
+      "path": "client/src/components/RipplePreview/RipplePreview.jsx",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746806719453,
+      "cline_edit_date": 1746806719453,
+      "user_edit_date": 1746806706286
+    },
+    {
+      "path": "client/src/components/RipplePreview/RipplePreview.jsx",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746806740157,
+      "cline_edit_date": 1746806740157,
+      "user_edit_date": 1746806706286
+    },
+    {
+      "path": "client/src/components/RipplePreview/RipplePreview.jsx",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746806758635,
+      "cline_edit_date": 1746806758635,
+      "user_edit_date": 1746806706286
+    },
+    {
+      "path": "client/src/components/RipplePreview/RipplePreview.jsx",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746806778868,
+      "cline_edit_date": 1746806778868,
+      "user_edit_date": 1746806706286
+    },
+    {
+      "path": "client/src/AffectiveApp.jsx",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746806790533,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/AffectiveApp.jsx",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746806806769,
+      "cline_edit_date": 1746806806769,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/AffectiveApp.jsx",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746806849543,
+      "cline_edit_date": 1746806849543,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/AffectiveIntegrationExample.jsx",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746806866119,
+      "cline_edit_date": 1746804561028,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/AffectiveIntegrationExample.jsx",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746806881234,
+      "cline_edit_date": 1746806881234,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/services/affectiveAgentSuggestionsService.js",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746806893159,
+      "cline_edit_date": 1746805367848,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/services/affectiveAgentSuggestionsService.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746806909911,
+      "cline_edit_date": 1746806909911,
+      "user_edit_date": null
+    }
+  ],
+  "model_usage": [
+    {
+      "ts": 1746804199166,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1746804329010,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1746804349641,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+# PCC Main Component
+# Defines the mission-critical MCP server for PCC state broadcasting
+
+id: pcc-main
+name: PCC State Broadcaster
+tier: 0  # Mission-critical
+owner: backend-team
+
+slo:
+  metrics:
+    - name: p95_latency_ms
+      threshold: "10"
+      abort_threshold: "15"
+    - name: drop_rate_pct
+      threshold: "0.1"
+      abort_threshold: "0.5"
+    - name: message_broadcast_rate
+      threshold: "200"
+      abort_threshold: "150"
+    - name: memory_usage_mb
+      threshold: "200"
+      abort_threshold: "300"
+
+rollback_plan: "systemctl restart mcp-server@stable"

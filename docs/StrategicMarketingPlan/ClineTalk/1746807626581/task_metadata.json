@@ -1,0 +1,1530 @@
+{
+  "files_in_context": [
+    {
+      "path": "client/src/services/affectiveAgentSuggestionsService.js",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746807741896,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/AffectiveApp.jsx",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746807745843,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/AffectiveIntegrationExample.jsx",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746808027383,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/AffectiveIntegrationExample.jsx",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746808044141,
+      "cline_edit_date": 1746808044141,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/services/affectiveAgentSuggestionsService.js",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746808051650,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/services/affectiveAgentSuggestionsService.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746808071466,
+      "cline_edit_date": 1746808071466,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/services/affectiveAgentSuggestionsService.js",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746808086583,
+      "cline_edit_date": 1746808071466,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/services/intentDetectionService.js",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746808096734,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/services/intentDetectionService.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746808112169,
+      "cline_edit_date": 1746808112169,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/services/intentDetectionService.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746808127284,
+      "cline_edit_date": 1746808127284,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/services/chatHistoryService.js",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746808135204,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/services/chatHistoryService.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746808150142,
+      "cline_edit_date": 1746808150142,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/services/manipulationDetectionService.js",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746808158185,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/services/manipulationDetectionService.js",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746808182065,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/services/manipulationDetectionService.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746808196427,
+      "cline_edit_date": 1746808196427,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/services/manipulationDetectionService.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746808218041,
+      "cline_edit_date": 1746808218041,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/services/manipulationDetectionService.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746808236623,
+      "cline_edit_date": 1746808236623,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/services/manipulationDetectionService.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746808252835,
+      "cline_edit_date": 1746808252835,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/AffectiveIntegrationExample.jsx",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746822409436,
+      "cline_edit_date": 1746808044141,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/services/conceptGraphService.js",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746822414918,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/AffectiveIntegrationExample.jsx",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746822430117,
+      "cline_edit_date": 1746822430117,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/AffectiveIntegrationExample.jsx",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746822446786,
+      "cline_edit_date": 1746822446786,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/AffectiveIntegrationExample.jsx",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746822458816,
+      "cline_edit_date": 1746822458816,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/services/affectiveAgentSuggestionsService.js",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746822467696,
+      "cline_edit_date": 1746808071466,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/services/affectiveAgentSuggestionsService.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746822486832,
+      "cline_edit_date": 1746822486832,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/NavigationDemoApp.jsx",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746822657988,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/NavigationDemoApp.jsx",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746822672249,
+      "cline_edit_date": 1746822672249,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/NavigationDemoApp.jsx",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1746822672249,
+      "cline_edit_date": 1746822672249,
+      "user_edit_date": 1746822672282
+    },
+    {
+      "path": "client/src/DemoApp.jsx",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746822683227,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/DemoApp.jsx",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746822709355,
+      "cline_edit_date": 1746822709355,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/README.md",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746823418096,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/pipeline.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746823424408,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/extract_blocks.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746823432539,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/spectral.py",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746824046831,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/clustering.py",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746824053234,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/scoring.py",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746824059909,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/lyapunov.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746824359532,
+      "cline_edit_date": 1746824359532,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/models.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746824367773,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/models.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746824381806,
+      "cline_edit_date": 1746824381806,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/pipeline.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746824393050,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/pipeline.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746824411052,
+      "cline_edit_date": 1746824411052,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/pipeline.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746824432636,
+      "cline_edit_date": 1746824432636,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/pipeline.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746824447390,
+      "cline_edit_date": 1746824447390,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/pipeline.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746824463522,
+      "cline_edit_date": 1746824463522,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/test_lyapunov.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746824495229,
+      "cline_edit_date": 1746824495229,
+      "user_edit_date": null
+    },
+    {
+      "path": "analyze_pdf_predictability.bat",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746824510365,
+      "cline_edit_date": 1746824510365,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/LYAPUNOV_ANALYSIS.md",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746824539432,
+      "cline_edit_date": 1746824539432,
+      "user_edit_date": null
+    },
+    {
+      "path": "ConceptFieldCanvas.jsx",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746824731027,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "ConceptFieldCanvasInteractive.jsx",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746824737531,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "docs/elfin.pdf",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746825006104,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/pipeline.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746825474629,
+      "cline_edit_date": 1746825474629,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/features.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746825480561,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/pipeline.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746825492623,
+      "cline_edit_date": 1746825492623,
+      "user_edit_date": null
+    },
+    {
+      "path": "ConceptFieldCanvas.jsx",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746825612610,
+      "cline_edit_date": 1746825612610,
+      "user_edit_date": null
+    },
+    {
+      "path": "ConceptFieldCanvas.jsx",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746825626109,
+      "cline_edit_date": 1746825626109,
+      "user_edit_date": null
+    },
+    {
+      "path": "ConceptFieldCanvas.jsx",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746825644341,
+      "cline_edit_date": 1746825644341,
+      "user_edit_date": null
+    },
+    {
+      "path": "ConceptFieldCanvas.jsx",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746825661643,
+      "cline_edit_date": 1746825661643,
+      "user_edit_date": null
+    },
+    {
+      "path": "ConceptFieldCanvasInteractive.jsx",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746825679153,
+      "cline_edit_date": 1746825679153,
+      "user_edit_date": null
+    },
+    {
+      "path": "ConceptFieldCanvasInteractive.jsx",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746825694945,
+      "cline_edit_date": 1746825694945,
+      "user_edit_date": null
+    },
+    {
+      "path": "ConceptFieldCanvasInteractive.jsx",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746825710900,
+      "cline_edit_date": 1746825710900,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/NavigationDemoApp.jsx",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746826066771,
+      "cline_edit_date": 1746822672249,
+      "user_edit_date": 1746822672282
+    },
+    {
+      "path": "client/src/DemoApp.jsx",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746826073022,
+      "cline_edit_date": 1746822709355,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/AffectiveIntegrationExample.jsx",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746826078821,
+      "cline_edit_date": 1746822458816,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/components/LyapunovPredictabilityPanel/LyapunovPredictabilityPanel.jsx",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746826134969,
+      "cline_edit_date": 1746826134969,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/components/LyapunovPredictabilityPanel/LyapunovPredictabilityPanel.css",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746826157172,
+      "cline_edit_date": 1746826157172,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/NavigationDemoApp.jsx",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746826171829,
+      "cline_edit_date": 1746826171829,
+      "user_edit_date": 1746822672282
+    },
+    {
+      "path": "client/src/NavigationDemoApp.jsx",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746826191797,
+      "cline_edit_date": 1746826191797,
+      "user_edit_date": 1746822672282
+    },
+    {
+      "path": "client/src/NavigationDemoApp.jsx",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746826216823,
+      "cline_edit_date": 1746826216823,
+      "user_edit_date": 1746822672282
+    },
+    {
+      "path": "client/src/components/LyapunovPredictabilityPanel/LyapunovPredictabilityPanel.jsx",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746826232320,
+      "cline_edit_date": 1746826232320,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/components/LyapunovPredictabilityPanel/LyapunovPredictabilityPanel.jsx",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746826246075,
+      "cline_edit_date": 1746826246075,
+      "user_edit_date": null
+    },
+    {
+      "path": "LYAPUNOV_README.md",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746826271431,
+      "cline_edit_date": 1746826271431,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/persistence.py",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746826976819,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "PDF_UPLOAD_README.md",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746826985237,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "pdf_upload_server.py",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746826991037,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/lyapunov.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746827321791,
+      "cline_edit_date": 1746827321791,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/NavigationDemoApp.css",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746827342588,
+      "cline_edit_date": 1746827342588,
+      "user_edit_date": null
+    },
+    {
+      "path": "batch_process_pdfs.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746827413925,
+      "cline_edit_date": 1746827413925,
+      "user_edit_date": null
+    },
+    {
+      "path": "process_usb_pdfs.bat",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746827431825,
+      "cline_edit_date": 1746827431825,
+      "user_edit_date": null
+    },
+    {
+      "path": "BATCH_PROCESSING_README.md",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746827459854,
+      "cline_edit_date": 1746827459854,
+      "user_edit_date": null
+    },
+    {
+      "path": "start_navigation_demo.bat",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746827507936,
+      "cline_edit_date": 1746827507936,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/NavigationDemoApp.jsx",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746828029527,
+      "cline_edit_date": 1746826216823,
+      "user_edit_date": 1746822672282
+    },
+    {
+      "path": "client/src/index.js",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746828039226,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/README.md",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746828056280,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/DemoApp.jsx",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746828778013,
+      "cline_edit_date": 1746822709355,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/App.jsx",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746828792339,
+      "cline_edit_date": 1746828792339,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/App.css",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746828810980,
+      "cline_edit_date": 1746828810980,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/index.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746828822668,
+      "cline_edit_date": 1746828822668,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/index.js",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1746828822668,
+      "cline_edit_date": 1746828822668,
+      "user_edit_date": 1746828822717
+    },
+    {
+      "path": "client/package.json",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746828838043,
+      "cline_edit_date": 1746828838043,
+      "user_edit_date": null
+    },
+    {
+      "path": "start_navigation_demo.bat",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746828856308,
+      "cline_edit_date": 1746828856308,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/index.js",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1746828822668,
+      "cline_edit_date": 1746828822668,
+      "user_edit_date": 1746829255088
+    },
+    {
+      "path": "ingest_pdf/lyapunov.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746829751143,
+      "cline_edit_date": 1746829751143,
+      "user_edit_date": null
+    },
+    {
+      "path": "batch_process_pdfs.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746829842652,
+      "cline_edit_date": 1746829842652,
+      "user_edit_date": null
+    },
+    {
+      "path": "process_usb_pdfs.bat",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746829864500,
+      "cline_edit_date": 1746829864500,
+      "user_edit_date": null
+    },
+    {
+      "path": "LYAPUNOV_README.md",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746829909163,
+      "cline_edit_date": 1746829909163,
+      "user_edit_date": null
+    },
+    {
+      "path": "process_usb_pdfs.bat",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1746829864500,
+      "cline_edit_date": 1746829864500,
+      "user_edit_date": 1746829940015
+    },
+    {
+      "path": "analyze_pdf_predictability.bat",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746829955348,
+      "cline_edit_date": 1746829955348,
+      "user_edit_date": null
+    },
+    {
+      "path": "restart-client.bat",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746829975994,
+      "cline_edit_date": 1746829975994,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/index.js",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746830704854,
+      "cline_edit_date": 1746828822668,
+      "user_edit_date": 1746829255088
+    },
+    {
+      "path": "client/src/index.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746830717006,
+      "cline_edit_date": 1746830717006,
+      "user_edit_date": 1746829255088
+    },
+    {
+      "path": "client/src/index.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746830896369,
+      "cline_edit_date": 1746830896369,
+      "user_edit_date": 1746829255088
+    },
+    {
+      "path": "client/src/index.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746830907538,
+      "cline_edit_date": 1746830907538,
+      "user_edit_date": 1746829255088
+    },
+    {
+      "path": "client/.eslintrc.js",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746830914414,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/components/LyapunovPredictabilityPanel/LyapunovPredictabilityPanel.jsx",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746831011058,
+      "cline_edit_date": 1746826246075,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/components/ConceptFieldCanvas.jsx",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746831077311,
+      "cline_edit_date": 1746831077311,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/components/LyapunovPredictabilityPanel/LyapunovPredictabilityPanel.jsx",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746831091328,
+      "cline_edit_date": 1746831091328,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/.env",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746831124233,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "start-with-navigation.bat",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746831144910,
+      "cline_edit_date": 1746831144910,
+      "user_edit_date": null
+    },
+    {
+      "path": "start-full-system.bat",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746831273019,
+      "cline_edit_date": 1746831273019,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/index.js",
+      "record_state": "active",
+      "record_source": "user_edited",
+      "cline_read_date": 1746830907538,
+      "cline_edit_date": 1746830907538,
+      "user_edit_date": 1746831772692
+    },
+    {
+      "path": "client/src/DemoApp.jsx",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746832422342,
+      "cline_edit_date": 1746822709355,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/NavigationDemoApp.jsx",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746832432814,
+      "cline_edit_date": 1746826216823,
+      "user_edit_date": 1746822672282
+    },
+    {
+      "path": "client/src/components/LyapunovPredictabilityPanel/LyapunovPredictabilityPanel.jsx",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746832709295,
+      "cline_edit_date": 1746831091328,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/components/LyapunovPredictabilityPanel/LyapunovPredictabilityPanel.jsx",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746832725960,
+      "cline_edit_date": 1746832725960,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/components/ConceptFieldCanvas.jsx",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746832800009,
+      "cline_edit_date": 1746832800009,
+      "user_edit_date": null
+    },
+    {
+      "path": "start_navigation_app.bat",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746832821494,
+      "cline_edit_date": 1746832821494,
+      "user_edit_date": null
+    },
+    {
+      "path": "process_usb_pdfs.bat",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746833066550,
+      "cline_edit_date": 1746829864500,
+      "user_edit_date": 1746829940015
+    },
+    {
+      "path": "analyze_pdf_predictability.bat",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746833098630,
+      "cline_edit_date": 1746829955348,
+      "user_edit_date": null
+    },
+    {
+      "path": "batch_process_pdfs.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746833249021,
+      "cline_edit_date": 1746829842652,
+      "user_edit_date": null
+    },
+    {
+      "path": "process_all_usb_pdfs.bat",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746833271194,
+      "cline_edit_date": 1746833271194,
+      "user_edit_date": null
+    },
+    {
+      "path": "analyze_sample_pdfs.bat",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746833308379,
+      "cline_edit_date": 1746833308379,
+      "user_edit_date": null
+    },
+    {
+      "path": "docs/2504.12915v2.pdf",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746841806397,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/lyapunov.py",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746841820679,
+      "cline_edit_date": 1746829751143,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/pipeline.py",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746841967824,
+      "cline_edit_date": 1746825492623,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/extract_blocks.py",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746841973476,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/features.py",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746841979474,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "output\\processed_pdfs\\last_run_summary.json",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746880849622,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "output\\processed_pdfs\\batch_processing.log",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746880859312,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "output\\processed_pdfs\\batch_processing.log",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1746880859312,
+      "cline_edit_date": null,
+      "user_edit_date": 1746880989490
+    },
+    {
+      "path": "output\\processed_pdfs\\batch_processing.log",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1746880859312,
+      "cline_edit_date": null,
+      "user_edit_date": 1746880989885
+    },
+    {
+      "path": "output\\processed_pdfs\\batch_processing.log",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1746880859312,
+      "cline_edit_date": null,
+      "user_edit_date": 1746880990028
+    },
+    {
+      "path": "output\\processed_pdfs\\batch_processing.log",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1746880859312,
+      "cline_edit_date": null,
+      "user_edit_date": 1746880990428
+    },
+    {
+      "path": "output\\processed_pdfs\\batch_processing.log",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1746880859312,
+      "cline_edit_date": null,
+      "user_edit_date": 1746880990839
+    },
+    {
+      "path": "output\\processed_pdfs\\batch_processing.log",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1746880859312,
+      "cline_edit_date": null,
+      "user_edit_date": 1746880991236
+    },
+    {
+      "path": "output\\processed_pdfs\\batch_processing.log",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1746880859312,
+      "cline_edit_date": null,
+      "user_edit_date": 1746880991631
+    },
+    {
+      "path": "output\\processed_pdfs\\batch_processing.log",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1746880859312,
+      "cline_edit_date": null,
+      "user_edit_date": 1746880992614
+    },
+    {
+      "path": "output\\processed_pdfs\\batch_processing.log",
+      "record_state": "active",
+      "record_source": "user_edited",
+      "cline_read_date": 1746880859312,
+      "cline_edit_date": null,
+      "user_edit_date": 1746880992734
+    },
+    {
+      "path": "process_usb_pdfs.bat",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746881098450,
+      "cline_edit_date": 1746829864500,
+      "user_edit_date": 1746829940015
+    },
+    {
+      "path": "batch_process_pdfs.py",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746881151821,
+      "cline_edit_date": 1746829842652,
+      "user_edit_date": null
+    },
+    {
+      "path": "batch_process_pdfs_recursive.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746881251451,
+      "cline_edit_date": 1746881251451,
+      "user_edit_date": null
+    },
+    {
+      "path": "process_usb_pdfs_recursive.bat",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746881272616,
+      "cline_edit_date": 1746881272616,
+      "user_edit_date": null
+    },
+    {
+      "path": "process_usb_pdfs_recursive.bat",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1746881272616,
+      "cline_edit_date": 1746881272616,
+      "user_edit_date": 1746881351845
+    },
+    {
+      "path": "ingest_pdf\\lyapunov.py",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746881552774,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "batch_process_pdfs_recursive.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746881590197,
+      "cline_edit_date": 1746881590197,
+      "user_edit_date": null
+    },
+    {
+      "path": "process_usb_pdfs_recursive.bat",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746881604759,
+      "cline_edit_date": 1746881604759,
+      "user_edit_date": 1746881351845
+    },
+    {
+      "path": "batch_process_pdfs_recursive.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746881839451,
+      "cline_edit_date": 1746881839451,
+      "user_edit_date": null
+    },
+    {
+      "path": "export-cline.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746899032362,
+      "cline_edit_date": 1746899032362,
+      "user_edit_date": null
+    },
+    {
+      "path": "export-cline.bat",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746899046690,
+      "cline_edit_date": 1746899046690,
+      "user_edit_date": null
+    },
+    {
+      "path": "export-cline-cjs.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746899064221,
+      "cline_edit_date": 1746899064221,
+      "user_edit_date": null
+    },
+    {
+      "path": "export-cline.bat",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746899077931,
+      "cline_edit_date": 1746899077931,
+      "user_edit_date": null
+    },
+    {
+      "path": "CLINE_EXPORT_README.md",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746899099938,
+      "cline_edit_date": 1746899099938,
+      "user_edit_date": null
+    },
+    {
+      "path": "export-cline.sh",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746899121513,
+      "cline_edit_date": 1746899121513,
+      "user_edit_date": null
+    },
+    {
+      "path": "find-cline-directory.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746899153515,
+      "cline_edit_date": 1746899153515,
+      "user_edit_date": null
+    },
+    {
+      "path": "find-cline-directory.bat",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746899177186,
+      "cline_edit_date": 1746899177186,
+      "user_edit_date": null
+    },
+    {
+      "path": "CLINE_EXPORT_README.md",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746899206978,
+      "cline_edit_date": 1746899206978,
+      "user_edit_date": null
+    },
+    {
+      "path": "export-cline-cjs.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746900049859,
+      "cline_edit_date": 1746900049859,
+      "user_edit_date": null
+    },
+    {
+      "path": "export-cline-cjs.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746900067321,
+      "cline_edit_date": 1746900067321,
+      "user_edit_date": null
+    },
+    {
+      "path": "export-cline.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746900081247,
+      "cline_edit_date": 1746900081247,
+      "user_edit_date": null
+    },
+    {
+      "path": "export-cline.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746900094436,
+      "cline_edit_date": 1746900094436,
+      "user_edit_date": null
+    },
+    {
+      "path": "export-cline.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746900106525,
+      "cline_edit_date": 1746900106525,
+      "user_edit_date": null
+    },
+    {
+      "path": "export-cline-cjs.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746900140056,
+      "cline_edit_date": 1746900140056,
+      "user_edit_date": null
+    },
+    {
+      "path": "export-cline.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746900155293,
+      "cline_edit_date": 1746900155293,
+      "user_edit_date": null
+    }
+  ],
+  "model_usage": [
+    {
+      "ts": 1746807626654,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1746807774967,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1746822334937,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1746822355117,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1746822588334,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1746822593020,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1746822829820,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1746822834290,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1746822877382,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1746822880406,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1746823398426,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1746824319475,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1746824819140,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1746825044115,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1746825300985,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1746825374784,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1746826015217,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1746826098782,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1746826781343,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1746827284554,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1746827894120,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1746828772816,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1746829572664,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1746829664887,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1746830813814,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1746830884172,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1746831948066,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1746832496146,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1746833685825,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1746880815543,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1746881064789,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1746881092823,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1746881524377,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1746881547127,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1746884922473,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1746898772184,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1746899001793,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1746899016626,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    }
+  ]
+}

@@ -1,0 +1,182 @@
+{
+  "files_in_context": [
+    {
+      "path": "client/src/App.jsx",
+      "record_state": "active",
+      "record_source": "user_edited",
+      "cline_read_date": null,
+      "cline_edit_date": null,
+      "user_edit_date": 1747348978029
+    },
+    {
+      "path": "client/src/hooks/useAlanSocket.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747349254459,
+      "cline_edit_date": 1747349254459,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/DemoApp.jsx",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747349456131,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "docs/directorystructure.txt",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747349591890,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/AlanIDELayout.jsx",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747349682180,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/hooks/useAlanSocket.js",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747349688017,
+      "cline_edit_date": 1747349254459,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/AlanIDELayout.jsx",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747349731326,
+      "cline_edit_date": 1747349731326,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/components/AgentPanel/AgentPanel.jsx",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747349740014,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/components/AgentPanel/AgentPanel.jsx",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747349760207,
+      "cline_edit_date": 1747349760207,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/components/AgentPanel/AgentPanel.jsx",
+      "record_state": "active",
+      "record_source": "user_edited",
+      "cline_read_date": 1747349760207,
+      "cline_edit_date": 1747349760207,
+      "user_edit_date": 1747349760290
+    },
+    {
+      "path": "client/src/components/AgentPanel/AgentPanel.css",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747349764992,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/components/AgentPanel/AgentPanel.css",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747349782968,
+      "cline_edit_date": 1747349782968,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/AlanIDELayout.jsx",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747349789984,
+      "cline_edit_date": 1747349731326,
+      "user_edit_date": null
+    }
+  ],
+  "model_usage": [
+    {
+      "ts": 1747348978273,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1747349111339,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1747349226074,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1747349583433,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1747349658224,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1747350544060,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1747355126153,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1747355669903,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1747355683499,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1747383808960,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1747383830766,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1747384183496,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    }
+  ]
+}

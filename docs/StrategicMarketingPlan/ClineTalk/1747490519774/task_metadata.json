@@ -1,0 +1,32 @@
+{
+  "files_in_context": [
+    {
+      "path": ".gitignore",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747490709485,
+      "cline_edit_date": 1747490709485,
+      "user_edit_date": null
+    }
+  ],
+  "model_usage": [
+    {
+      "ts": 1747490520012,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1747490663084,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1747494752102,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    }
+  ]
+}

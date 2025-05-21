@@ -1,0 +1,36 @@
+{
+  "files_in_context": [
+    {
+      "path": "CLINE_EXPORT_README.md",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747668214508,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "export-cline.bat",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747668223850,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "Cline_Conversation_1746900165386.json",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747668231752,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    }
+  ],
+  "model_usage": [
+    {
+      "ts": 1747668203154,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    }
+  ]
+}

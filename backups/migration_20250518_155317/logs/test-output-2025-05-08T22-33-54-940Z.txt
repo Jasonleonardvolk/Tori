@@ -1,0 +1,96 @@
+
+> alan-agent-suggestions@1.0.0 test
+> jest --bail
+
+[STDERR] FAIL client/src/__tests__/integration/ExecutionTracer_FieldMeditationMode/mockExecutionTracerService.js
+  ● Test suite failed to run
+
+    Your test suite must contain at least one test.
+
+      at onResult (node_modules/@jest/core/build/TestScheduler.js:133:18)
+      at node_modules/@jest/core/build/TestScheduler.js:254:19
+      at node_modules/emittery/index.js:363:13
+          at Array.map (<anonymous>)
+      at Emittery.emit (node_modules/emittery/index.js:361:23)
+
+[STDERR] FAIL client/src/__tests__/integration/Exporter_ConceptGraphService/mockConceptGraphService.js
+  ● Test suite failed to run
+
+    Your test suite must contain at least one test.
+
+      at onResult (node_modules/@jest/core/build/TestScheduler.js:133:18)
+      at node_modules/@jest/core/build/TestScheduler.js:254:19
+      at node_modules/emittery/index.js:363:13
+          at Array.map (<anonymous>)
+      at Emittery.emit (node_modules/emittery/index.js:361:23)
+
+[STDERR] PASS client/src/__tests__/minimal.test.js
+[STDERR]   Basic Functionality
+[STDERR]     √ basic Jest functionality works (3 ms)
+    √ can import React (1 ms)
+    √ Jest is working properly
+    √ basic JavaScript features work (1 ms)
+
+[STDERR] FAIL client/src/__tests__/react-basic.test.js
+  Basic React Tests
+    × can render a simple React component (22 ms)
+    √ React Testing Library is working (1 ms)
+
+[STDERR]   ● Basic React Tests › can render a simple React component
+
+    TypeError: expect(...).toBeInTheDocument is not a function
+
+    [0m [90m  8 |[39m     
+     [90m  9 |[39m     [36mconst[39m { getByText } [33m=[39m render([33m<[39m[33mSimpleComponent[39m [33m/[39m[33m>[39m)[33m;[39m
+    [31m[1m>[22m[39m[90m 10 |[39m     expect(getByText([32m'Hello Test'[39m))[33m.[39mtoBeInTheDocument()[33m;[39m
+     [90m    |[39m                                     [31m[1m^[22m[39m
+     [90m 11 |[39m   })[33m;[39m
+     [90m 12 |[39m   
+     [90m 13 |[39m   test([32m'React Testing Library is working'[39m[33m,[39m () [33m=>[39m {[0m
+
+      at Object.toBeInTheDocument (client/src/__tests__/react-basic.test.js:10:37)
+
+[STDERR] Summary of all failing tests
+[STDERR] FAIL[STDERR]  client/src/__tests__/integration/ExecutionTracer_FieldMeditationMode/mockExecutionTracerService.js
+  ● Test suite failed to run
+
+    Your test suite must contain a[STDERR] t least one test.
+
+      at onResult (node_modules/@jest/core/build/TestScheduler.js:133:18)
+      at node_modules/@jest/core/build/TestScheduler.js:254:19
+      a[STDERR] t n[STDERR] ode_modules/emi[STDERR] ttery/index.js[STDERR] :363:13
+ [STDERR]          at Arra[STDERR] y.map (<ano[STDERR] nymous>)
+      at Emittery.emit (node[STDERR] _modules/emi[STDERR] ttery/in[STDERR] dex.js:[STDERR] 361:23)
+
+FAIL clie[STDERR] nt/src[STDERR] /__test[STDERR] s__/integration/Exporter_ConceptGraphServ[STDERR] ice/mockConce[STDERR] ptGraphS[STDERR] ervice.[STDERR] js
+  ●[STDERR]  Test sui[STDERR] te faile[STDERR] d to r[STDERR] un
+
+   [STDERR]  Your t[STDERR] est suite must contain at least one test.
+
+     [STDERR]  at onResult[STDERR]  (node_[STDERR] modules[STDERR] /@jest/[STDERR] core/b[STDERR] uild/Te[STDERR] stSchedul[STDERR] er.js:133:18)
+     [STDERR]  at node_[STDERR] modules[STDERR] /@jest[STDERR] /core/[STDERR] build/TestSch[STDERR] eduler.[STDERR] js:254[STDERR] :19
+  [STDERR]     at node_modules/emittery/index.js:363[STDERR] :13
+      [STDERR]     at [STDERR] Arra[STDERR] y.map[STDERR]  (<anon[STDERR] ymous>)[STDERR] 
+      at Emitte[STDERR] ry.emit (node_modules/emittery/index.js:361:23)
+
+FAIL client/src/__tests__/react-basic.test.js
+  ● Basic React Tests › can render a simple React component
+
+    TypeError: expect(...).toBeInTheDocument is not a function
+
+    [0m [90m  8 |[39m     
+     [90m  9 |[39m     [36mconst[39m { getByText } [33m=[39m render([[STDERR] 33m<[39m[33mSimpl[STDERR] eComponent[39m [33m/[39m[33[STDERR] m>[39m)[33m;[39[STDERR] m
+    [31m[[STDERR] 1m>[22m[39[STDERR] m[90m 10 |[STDERR] [39m     exp[STDERR] ect(getByText([32m'Hello Test'[39m[STDERR] ))[33m.[STDERR] [39m[STDERR] toBeIn[STDERR] TheDocu[STDERR] ment([STDERR] )[33m[STDERR] ;[39m[STDERR] 
+     [STDERR] [90m[STDERR]     |[STDERR] [39m                         [STDERR]          [STDERR]    [31m[1m^[STDERR] [22m[39m
+     [STDERR] [90m 11 |[39m   })[33m;[39m
+     [90m[STDERR]  12 |[39m  [STDERR]  
+     [9[STDERR] 0m 13 |[3[STDERR] 9m   te[STDERR] st([3[STDERR] 2m'Rea[STDERR] ct Tes[STDERR] ting [STDERR] Libra[STDERR] ry is wo[STDERR] rking[STDERR] '[39m[STDERR] [33m,[39m [STDERR] () [3[STDERR] 3m=>[[STDERR] 39m {[0m
+
+[STDERR]       at Obj[STDERR] ect.toB[STDERR] eInThe[STDERR] Documen[STDERR] t (cli[STDERR] ent/s[STDERR] rc/__tests__[STDERR] /react[STDERR] -basic.test[STDERR] .js:10:3[STDERR] 7)
+
+
+[STDERR] Test Suites: 3 failed, 1 passed, 4 of 22 total
+Tests:       1 failed, 5 passed, 6 total
+Snapshots:   0 total
+Time:        2.448 s
+Ran all test suites.

@@ -1,0 +1,27 @@
+ALAN IDE Test Execution Summary (15s Quick Run)
+==========================================
+
+Timestamp: 2025-05-08T22:28:47.186Z
+Duration: ~15 seconds (timeout)
+Exit Code: 1
+Total Errors Counted: 0
+
+Test Stats: [STDERR] Test Suites: 6 failed, 1 passed, 7 of 25 total
+Test Count: Tests:       1 failed, 5 passed, 6 total
+
+Error Breakdown:
+  Infinite Loops: 0
+  Missing Mocks: 1
+  Type Errors: 1
+
+Failing Test Suites:
+  [STDERR] FAIL client/src/__tests__/integration/MCPClient_DebugAgent/mockMcpClientService.js
+  [STDERR] FAIL client/src/__tests__/integration/ExecutionTracer_FieldMeditationMode/mockExecutionTracerService.js
+  [STDERR] FAIL client/src/__tests__/integration/RefactorService_EditorSyncService/mockEditorSyncService.js
+  [STDERR] FAIL client/src/__tests__/integration/ExecutionTracer_FieldMeditationMode/mockComponents.js
+  [STDERR] FAIL client/src/__tests__/integration/Exporter_ConceptGraphService/mockConceptGraphService.js
+
+Recommended Next Steps:
+2. Run: node fix-test-issues.js
+3. Focus on fixing the first failing test suite
+4. Run individual tests to isolate issues

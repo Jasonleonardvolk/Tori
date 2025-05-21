@@ -1,0 +1,28 @@
+{
+  "files_in_context": [
+    {
+      "path": "docs/conversations/cline/cline_task_may-18-2025_1-05-55-pm.md",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747596223890,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "docs/conversations/cline/cline_task_may-18-2025_1-05-55-pm.md",
+      "record_state": "active",
+      "record_source": "user_edited",
+      "cline_read_date": 1747596223890,
+      "cline_edit_date": null,
+      "user_edit_date": 1747596266342
+    }
+  ],
+  "model_usage": [
+    {
+      "ts": 1747596199224,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    }
+  ]
+}

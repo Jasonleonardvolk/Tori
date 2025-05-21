@@ -1,0 +1,296 @@
+{
+  "files_in_context": [
+    {
+      "path": "client/src/README-WIREFRAMES.md",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746716304729,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/components/SemanticCommitPanel/SemanticCommitPanel.jsx",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746716315251,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/services/semanticConflictService.js",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746716319821,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/components/SemanticCommitDemo/SemanticCommitDemo.jsx",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746716323390,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/services/rippleAnalysisService.js",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746716327289,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/components/RipplePreview/RipplePreview.jsx",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746716334603,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "data/USB Drive/1.md",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746717021408,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/services/semanticConflictService.js",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746717180558,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/services/conceptGraphService.js",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746717188790,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/services/semanticConflictService.enhanced.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746717306426,
+      "cline_edit_date": 1746717306426,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/services/semanticConflictService.enhanced.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746717574638,
+      "cline_edit_date": 1746717574638,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/services/semanticConflictService.enhanced.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746717692592,
+      "cline_edit_date": 1746717692592,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/services/semanticConflictServiceEnhanced.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746717812402,
+      "cline_edit_date": 1746717812402,
+      "user_edit_date": null
+    },
+    {
+      "path": "docs/2504.09283v1.pdf",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746719249535,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "docs/2412.08414v1.pdf",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746719263725,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "docs/2502.15096v1.pdf",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746719273129,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "docs/2504.13592v2.pdf",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746719279608,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/services/intentSpecificationTracker.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746719362145,
+      "cline_edit_date": 1746719362145,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/components/SemanticCommitPanel/SemanticCommitPanel.jsx",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746719447537,
+      "cline_edit_date": 1746719447537,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/components/SemanticCommitPanel/SemanticCommitPanel.css",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746719512686,
+      "cline_edit_date": 1746719512686,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/components/SemanticCommitPanel/index.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746719524314,
+      "cline_edit_date": 1746719524314,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/App.jsx",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746719530646,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/App.jsx",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746719551545,
+      "cline_edit_date": 1746719551545,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/App.css",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746719557433,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/App.css",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746719568604,
+      "cline_edit_date": 1746719568604,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/package.json",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746719580773,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/package.json",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746720136398,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "server.js",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746720171299,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/test-intent-tracker.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746720214920,
+      "cline_edit_date": 1746720214920,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/public/intent-tracker-test.html",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746720309665,
+      "cline_edit_date": 1746720309665,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/components/SemanticCommitPanel/README.md",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746720372271,
+      "cline_edit_date": 1746720372271,
+      "user_edit_date": null
+    }
+  ],
+  "model_usage": [
+    {
+      "ts": 1746716292774,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1746716830170,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1746717173462,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1746717834929,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1746719242657,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1746719843419,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1746720002365,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    }
+  ]
+}

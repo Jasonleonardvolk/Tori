@@ -2,6 +2,7 @@ from flask import Flask, request, render_template, jsonify, send_file
 import os
 from pathlib import Path
 from ingest_pdf.pipeline import ingest_pdf_and_update_index
+from ingest_pdf.source_validator import validate_source, SourceValidationResult
 import json
 import time
 import shutil
@@ -58,8 +59,30 @@ def upload_file():
         
         # Save the PDF
         pdf_filename = f"{safe_filename}_{timestamp}.pdf"
+        
+        # Create rejected folder if it doesn't exist
+        REJECTED_FOLDER = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'uploads', 'rejected')
+        os.makedirs(REJECTED_FOLDER, exist_ok=True)
         pdf_path = os.path.join(UPLOAD_FOLDER, pdf_filename)
         file.save(pdf_path)
+        
+        # Validate source quality using the source validator
+        validation_result = validate_source(pdf_path)
+        if not validation_result.is_valid:
+            # Move to rejected folder
+            rejected_path = os.path.join(REJECTED_FOLDER, pdf_filename)
+            shutil.move(pdf_path, rejected_path)
+            
+            # Log rejection for monitoring
+            app.logger.warning(f"Rejected PDF: {pdf_filename} - Score: {validation_result.quality_score:.2f}")
+            
+            # Return 202 Accepted with rejection info
+            return jsonify({
+                "status": "rejected",
+                "reason": validation_result.reasons[0] if validation_result.reasons else "Failed quality validation",
+                "quality_score": validation_result.quality_score,
+                "file": pdf_filename
+            }), 202
         
         # Create unique filenames for NPZ and JSON outputs
         npz_filename = f"{safe_filename}_{timestamp}.npz"

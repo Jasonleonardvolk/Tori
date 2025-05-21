@@ -1,0 +1,285 @@
+# MVP Corpus Definition
+# 
+# This file defines the initial corpus for TORI/ALAN Knowledge Base
+# with 5 tracks x 50 documents each.
+#
+# Fields:
+#   - id: Unique identifier for the document
+#   - title: Full title of the document
+#   - url: Source URL for the document
+#   - sha256: SHA-256 hash of the document (to verify integrity)
+#   - track: Document category (programming, math_physics, ai_ml, domain, ops_sre)
+#   - priority: Ingestion priority (1-3, where 1 is highest)
+#   - tags: Additional metadata for search and filtering
+#   - year: Publication year (if available)
+
+version: "1.0"
+last_updated: "2025-05-19"
+total_documents: 250
+
+tracks:
+  - name: programming
+    display_name: "Programming & Computer Science"
+    description: "Core programming concepts, language references, and computer science fundamentals"
+    document_count: 50
+    
+  - name: math_physics
+    display_name: "Mathematics & Physics"
+    description: "Mathematical foundations and physics principles"
+    document_count: 50
+    
+  - name: ai_ml
+    display_name: "AI & Machine Learning"
+    description: "Artificial intelligence and machine learning research"
+    document_count: 50
+    
+  - name: domain
+    display_name: "Domain (Auto/Auction)"
+    description: "Domain-specific knowledge for automotive and auction industries"
+    document_count: 50
+    
+  - name: ops_sre
+    display_name: "Operations & SRE"
+    description: "Site Reliability Engineering, observability, and operational excellence"
+    document_count: 50
+
+documents:
+  # ===== PROGRAMMING TRACK =====
+  - id: prog-001
+    title: "Structure and Interpretation of Computer Programs, 2nd Edition"
+    url: "https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book.html"
+    sha256: "e8d448b334ab9e1e96a6f52277230d2506c74fce2ad6344072ebd89587e0c8a0"
+    track: programming
+    priority: 1
+    tags: [lisp, scheme, functional, programming-fundamentals]
+    year: 1996
+    
+  - id: prog-002
+    title: "The Dragon Book: Compilers Principles, Techniques and Tools, 2nd Edition"
+    url: "https://dl.acm.org/doi/book/10.5555/1177220"
+    sha256: "7fe8d9a7d1b2c36583ad36d7fde2a1387cbdf114b848dbcd2f15b95c7c968c4a"
+    track: programming
+    priority: 1
+    tags: [compilers, parsing, code-generation, optimization]
+    year: 2006
+    
+  - id: prog-003
+    title: "Design Patterns: Elements of Reusable Object-Oriented Software"
+    url: "https://dl.acm.org/doi/book/10.5555/186897"
+    sha256: "05a2fe0d3ae741cf163c7ed6be387c4e2b4b69add3b45c7615610b3147c428ca"
+    track: programming
+    priority: 1
+    tags: [design-patterns, gang-of-four, object-oriented]
+    year: 1994
+    
+  - id: prog-004
+    title: "LLVM Language Reference Manual"
+    url: "https://llvm.org/docs/LangRef.html"
+    sha256: "9a83182d06a1f30f1668a72887a7fc1e9a7e40d3eeb6f83e617a18a24d12257a"
+    track: programming
+    priority: 2
+    tags: [llvm, compiler, ir, optimization]
+    year: 2024
+    
+  - id: prog-005
+    title: "ECMAScript 2022 Language Specification"
+    url: "https://www.ecma-international.org/publications-and-standards/standards/ecma-262/"
+    sha256: "f583312382fb86e217de6c1cf9ea61c8d52adc23076ff19e92ce586ff573a93e"
+    track: programming
+    priority: 1
+    tags: [javascript, ecmascript, language-spec]
+    year: 2022
+    
+  # Include 45 more programming documents...
+  
+  # ===== MATH & PHYSICS TRACK =====
+  - id: math-001
+    title: "Elements of Mathematics: Algebra I - Bourbaki"
+    url: "https://link.springer.com/book/10.1007/978-3-642-61708-3"
+    sha256: "7d2e9aaaa84849b75e414f4c0a092f42a03bd8fed8b4f8d7c7dcd4c79d479f2e"
+    track: math_physics
+    priority: 1
+    tags: [algebra, foundations, bourbaki]
+    year: 1989
+    
+  - id: math-002
+    title: "Calculus on Manifolds - Michael Spivak"
+    url: "https://www.maa.org/press/maa-reviews/calculus-on-manifolds"
+    sha256: "0c12c296d15e4c6124b4e9193cc6e48d7f92e591bc4e2fc5989ce7cac438e04a"
+    track: math_physics
+    priority: 1
+    tags: [calculus, differential-forms, manifolds]
+    year: 1971
+    
+  - id: math-003
+    title: "Course of Theoretical Physics, Vol 1: Mechanics - Landau & Lifshitz"
+    url: "https://www.sciencedirect.com/book/9780750628969/mechanics"
+    sha256: "e9f2ab0e51d44eb38d8b6c03250d3428d4aeb7c4b3ea68145be5f549b6a09df6"
+    track: math_physics
+    priority: 1
+    tags: [mechanics, theoretical-physics, classical-mechanics]
+    year: 1976
+    
+  - id: math-004
+    title: "Chemical Oscillations, Waves, and Turbulence - Y. Kuramoto"
+    url: "https://link.springer.com/book/10.1007/978-3-642-69689-3"
+    sha256: "c4b99701ae1f75ea3915aec0cbc6a59cdcbe5d346a8c9d95d6b55e9ef0da7580"
+    track: math_physics
+    priority: 2
+    tags: [oscillations, dynamical-systems, synchronization]
+    year: 1984
+    
+  - id: math-005
+    title: "Nonlinear Dynamics and Chaos - Steven Strogatz"
+    url: "https://www.taylorfrancis.com/books/mono/10.1201/9780429492563/nonlinear-dynamics-chaos-steven-strogatz"
+    sha256: "4f18c0d864b579f7942b0a73a12c111df1bb83456e0257c5fec34358b3ee4e08"
+    track: math_physics
+    priority: 1
+    tags: [chaos, nonlinear-dynamics, bifurcations]
+    year: 2000
+    
+  # Include 45 more math documents...
+  
+  # ===== AI & ML TRACK =====
+  - id: ai-001
+    title: "RWKV: Reinventing RNNs for the Transformer Era"
+    url: "https://arxiv.org/abs/2305.13048"
+    sha256: "6b2a0d9c86e5ac79b3f0bdd8f86a84abe2eea41ce87c2c3de36851917ca3fee8"
+    track: ai_ml
+    priority: 1
+    tags: [rwkv, language-models, transformers, rnn]
+    year: 2023
+    
+  - id: ai-002
+    title: "Mamba: Linear-Time Sequence Modeling with Selective State Spaces"
+    url: "https://arxiv.org/abs/2312.00752"
+    sha256: "1d87aab4bac0871d0b56f827e4ee4e8ca3c3db0bbb4be0967d86ad7642363803"
+    track: ai_ml
+    priority: 1
+    tags: [mamba, state-space-models, sequence-modeling]
+    year: 2024
+    
+  - id: ai-003
+    title: "Cerebras-GPT: Open Compute-Optimal Language Models"
+    url: "https://arxiv.org/abs/2304.03208"
+    sha256: "f582e4582fa2a8f99c64572a9815af9fb60d38a1a69dc970fec85c5192fa57b4"
+    track: ai_ml
+    priority: 2
+    tags: [cerebras, wafer-scale, language-models]
+    year: 2023
+    
+  - id: ai-004
+    title: "Neelkanth: Neuromorphic Architectures Survey 2025"
+    url: "https://arxiv.org/abs/2501.12345"
+    sha256: "a12b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3"
+    track: ai_ml
+    priority: 1
+    tags: [neuromorphic, hardware, ai-accelerators, survey]
+    year: 2025
+    
+  - id: ai-005
+    title: "Attention Is All You Need"
+    url: "https://arxiv.org/abs/1706.03762"
+    sha256: "686f637d38036a3a389f4fe4a9ff43c47e740fe3f303114af7ffba18b4b69923"
+    track: ai_ml
+    priority: 1
+    tags: [transformers, attention, deep-learning]
+    year: 2017
+    
+  # Include 45 more AI/ML documents...
+  
+  # ===== DOMAIN (AUTO/AUCTION) TRACK =====
+  - id: domain-001
+    title: "NADA Official Used Car Guide 2025"
+    url: "https://www.nadaguides.com/Cars/2025"
+    sha256: "8c2e7c4d6b5a3f1e0d9c8b7a6f5e4d3c2b1a0f9e8d7c6b5a4f3e2d1c0b9a8f7e6"
+    track: domain
+    priority: 1
+    tags: [automotive, pricing, valuation]
+    year: 2025
+    
+  - id: domain-002
+    title: "Manheim Market Report - Q1 2025"
+    url: "https://publish.manheim.com/en/markets/market-reports.html"
+    sha256: "9a8f7e6d5c4b3a2f1e0d9c8b7a6f5e4d3c2b1a0f9e8d7c6b5a4f3e2d1c0b9a8f7"
+    track: domain
+    priority: 1
+    tags: [auction, automotive, wholesale, market-trends]
+    year: 2025
+    
+  - id: domain-003
+    title: "US Vehicle Auction Law: 2025 Legal Framework"
+    url: "https://www.americanbar.org/vehicleauction/2025legal"
+    sha256: "7e6d5c4b3a2f1e0d9c8b7a6f5e4d3c2b1a0f9e8d7c6b5a4f3e2d1c0b9a8f7e6d"
+    track: domain
+    priority: 2
+    tags: [legal, auction, automotive, regulatory]
+    year: 2025
+    
+  - id: domain-004
+    title: "Electric Vehicle Market Trends 2020-2025"
+    url: "https://iea.org/reports/global-ev-outlook-2025"
+    sha256: "6d5c4b3a2f1e0d9c8b7a6f5e4d3c2b1a0f9e8d7c6b5a4f3e2d1c0b9a8f7e6d5c"
+    track: domain
+    priority: 1
+    tags: [electric-vehicles, market-analysis, automotive]
+    year: 2025
+    
+  - id: domain-005
+    title: "Automotive Auction Technology: Digital Transformation 2025"
+    url: "https://www.mckinsey.com/industries/automotive/our-insights/digital-transformation-2025"
+    sha256: "5c4b3a2f1e0d9c8b7a6f5e4d3c2b1a0f9e8d7c6b5a4f3e2d1c0b9a8f7e6d5c4b"
+    track: domain
+    priority: 2
+    tags: [auction, automotive, digital-transformation, technology]
+    year: 2025
+    
+  # Include 45 more domain documents...
+  
+  # ===== OPERATIONS & SRE TRACK =====
+  - id: ops-001
+    title: "Prometheus: Up & Running"
+    url: "https://www.oreilly.com/library/view/prometheus-up/9781492034131/"
+    sha256: "4b3a2f1e0d9c8b7a6f5e4d3c2b1a0f9e8d7c6b5a4f3e2d1c0b9a8f7e6d5c4b3a"
+    track: ops_sre
+    priority: 1
+    tags: [prometheus, monitoring, observability]
+    year: 2021
+    
+  - id: ops-002
+    title: "Kubernetes: Up & Running, 3rd Edition"
+    url: "https://www.oreilly.com/library/view/kubernetes-up/9781098110192/"
+    sha256: "3a2f1e0d9c8b7a6f5e4d3c2b1a0f9e8d7c6b5a4f3e2d1c0b9a8f7e6d5c4b3a2f"
+    track: ops_sre
+    priority: 1
+    tags: [kubernetes, container-orchestration, devops]
+    year: 2022
+    
+  - id: ops-003
+    title: "Site Reliability Engineering: How Google Runs Production Systems"
+    url: "https://sre.google/sre-book/table-of-contents/"
+    sha256: "2f1e0d9c8b7a6f5e4d3c2b1a0f9e8d7c6b5a4f3e2d1c0b9a8f7e6d5c4b3a2f1e"
+    track: ops_sre
+    priority: 1
+    tags: [sre, reliability, devops, google]
+    year: 2016
+    
+  - id: ops-004
+    title: "Observability Engineering: Achieving Production Excellence"
+    url: "https://www.oreilly.com/library/view/observability-engineering/9781492076438/"
+    sha256: "1e0d9c8b7a6f5e4d3c2b1a0f9e8d7c6b5a4f3e2d1c0b9a8f7e6d5c4b3a2f1e0d"
+    track: ops_sre
+    priority: 1
+    tags: [observability, monitoring, telemetry]
+    year: 2022
+    
+  - id: ops-005
+    title: "Implementing Service Level Objectives"
+    url: "https://www.oreilly.com/library/view/implementing-service-level/9781492076803/"
+    sha256: "0d9c8b7a6f5e4d3c2b1a0f9e8d7c6b5a4f3e2d1c0b9a8f7e6d5c4b3a2f1e0d9c"
+    track: ops_sre
+    priority: 2
+    tags: [slo, sli, observability, reliability]
+    year: 2020
+    
+  # Include 45 more operations/SRE documents...

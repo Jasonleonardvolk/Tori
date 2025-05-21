@@ -1,25 +1,27 @@
-/**
- * UI Kit Package for ITORI IDE
- * 
- * This package provides shared UI components for ITORI applications.
- */
+// UI Kit Component Exports
 
-// Export WebSocketStatus component
-export { 
-  default as WebSocketStatus,
-  type WebSocketStatusProps 
-} from './components/WebSocketStatus/WebSocketStatus';
+// WebSocket Components
+export { WebSocketStatus } from './components/WebSocketStatus/WebSocketStatus';
+export type { WebSocketStatusProps } from './components/WebSocketStatus/WebSocketStatus';
 
-// Export ErrorBoundary component
-export { default as ErrorBoundary } from './components/ErrorBoundary';
+// Chat Components
+export { ChatHistory } from './components/ChatHistory/ChatHistory';
+export type { 
+  ChatHistoryProps, 
+  Message, 
+  Reference 
+} from './components/ChatHistory/ChatHistory';
 
-// Export CodeWorkspace component
-export { 
-  default as CodeWorkspace,
-  type CodeWorkspaceProps 
-} from './components/CodeWorkspace';
+export { PersonaBar } from './components/PersonaBar/PersonaBar';
+export type { 
+  PersonaBarProps, 
+  Persona 
+} from './components/PersonaBar/PersonaBar';
 
-// Export language modes
-export { elfinLanguage } from './languages/elfin';
+export { QuickActionsBar } from './components/QuickActionsBar/QuickActionsBar';
+export type { 
+  QuickActionsBarProps, 
+  ActionChip 
+} from './components/QuickActionsBar/QuickActionsBar';
 
-// Export other components as needed
+// Re-export any other components...

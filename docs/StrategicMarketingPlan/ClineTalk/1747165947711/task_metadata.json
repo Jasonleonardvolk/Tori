@@ -1,0 +1,20 @@
+{
+  "files_in_context": [
+    {
+      "path": "C:/Users/jason/Downloads/cline_task_may-13-2025_2-36-33-pm.md",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747166007538,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    }
+  ],
+  "model_usage": [
+    {
+      "ts": 1747165947819,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    }
+  ]
+}

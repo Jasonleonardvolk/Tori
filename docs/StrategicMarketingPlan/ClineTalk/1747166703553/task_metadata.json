@@ -1,0 +1,1462 @@
+{
+  "files_in_context": [
+    {
+      "path": "alan_backend/elfin/packaging/manifest.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747166716337,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/packaging/lockfile.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747166723182,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/packaging/resolver.py",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747166727963,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/packaging/registry_client.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747166734054,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/cli/packaging_cli.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747166744355,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "dashboard/src/components/SafetyTimeline.tsx",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747166754337,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "dashboard/src/components/IsoSurfaceViewer.tsx",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747166763741,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "dashboard/src/components/ParamSlider.tsx",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747166772884,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "dashboard/src/App.tsx",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747166783271,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/cli.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747166810827,
+      "cline_edit_date": 1747166810827,
+      "user_edit_date": null
+    },
+    {
+      "path": "registry/index/config.json",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747166828320,
+      "cline_edit_date": 1747166828320,
+      "user_edit_date": null
+    },
+    {
+      "path": "registry/index/e/lf/elfin-core",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747166844591,
+      "cline_edit_date": 1747166844591,
+      "user_edit_date": null
+    },
+    {
+      "path": "registry/index/c/v/cvxpy",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747166860241,
+      "cline_edit_date": 1747166860241,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/formatting/elffmt.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747166890072,
+      "cline_edit_date": 1747166890072,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/linting/elfclippy.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747166936506,
+      "cline_edit_date": 1747166936506,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/visualization/api.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747166980004,
+      "cline_edit_date": 1747166980004,
+      "user_edit_date": null
+    },
+    {
+      "path": "run_dashboard.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747167012623,
+      "cline_edit_date": 1747167012623,
+      "user_edit_date": null
+    },
+    {
+      "path": "ci/packaging_test.sh",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747167058923,
+      "cline_edit_date": 1747167058923,
+      "user_edit_date": null
+    },
+    {
+      "path": "dashboard/src/components/FieldHeatmap.tsx",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747167095359,
+      "cline_edit_date": 1747167095359,
+      "user_edit_date": null
+    },
+    {
+      "path": "dashboard/package.json",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747167101607,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "dashboard/package.json",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1747167101607,
+      "cline_edit_date": null,
+      "user_edit_date": 1747167110297
+    },
+    {
+      "path": "dashboard/package.json",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1747167101607,
+      "cline_edit_date": null,
+      "user_edit_date": 1747167149295
+    },
+    {
+      "path": "dashboard/src/App.tsx",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747167189434,
+      "cline_edit_date": 1747167189434,
+      "user_edit_date": null
+    },
+    {
+      "path": "ci/dashboard_test.sh",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747167215175,
+      "cline_edit_date": 1747167215175,
+      "user_edit_date": null
+    },
+    {
+      "path": "docs/packaging.md",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747167249306,
+      "cline_edit_date": 1747167249306,
+      "user_edit_date": null
+    },
+    {
+      "path": "docs/dashboard.md",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747167276643,
+      "cline_edit_date": 1747167276643,
+      "user_edit_date": null
+    },
+    {
+      "path": ".github/workflows/ci.yml",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747167299595,
+      "cline_edit_date": 1747167299595,
+      "user_edit_date": null
+    },
+    {
+      "path": "README.md",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747167325480,
+      "cline_edit_date": 1747167325480,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/stability/core/phase_engine.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747168275559,
+      "cline_edit_date": 1747168275559,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/stability/tests/test_phase_engine.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747168325374,
+      "cline_edit_date": 1747168325374,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/koopman/snapshot_buffer.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747168367926,
+      "cline_edit_date": 1747168367926,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/koopman/spectral_analyzer.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747168416592,
+      "cline_edit_date": 1747168416592,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/koopman/tests/test_spectral_analysis.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747168487281,
+      "cline_edit_date": 1747168487281,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/stability/core/phase_engine.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747168627701,
+      "cline_edit_date": 1747168627701,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/stability/core/phase_engine.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747168651439,
+      "cline_edit_date": 1747168651439,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/stability/core/phase_engine.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747168671894,
+      "cline_edit_date": 1747168671894,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/stability/tests/test_phase_engine.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747168687431,
+      "cline_edit_date": 1747168687431,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/koopman/spectral_analyzer.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747168720853,
+      "cline_edit_date": 1747168720853,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/koopman/spectral_analyzer.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747168735047,
+      "cline_edit_date": 1747168735047,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/koopman/spectral_analyzer.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747168754822,
+      "cline_edit_date": 1747168754822,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/koopman/tests/test_spectral_analysis.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747168778504,
+      "cline_edit_date": 1747168778504,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/examples/phase_spectral_demo.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747168840214,
+      "cline_edit_date": 1747168840214,
+      "user_edit_date": null
+    },
+    {
+      "path": "run_phase_spectral_demo.bat",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747168856707,
+      "cline_edit_date": 1747168856707,
+      "user_edit_date": null
+    },
+    {
+      "path": "docs/core.md",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747168902279,
+      "cline_edit_date": 1747168902279,
+      "user_edit_date": null
+    },
+    {
+      "path": "run_core_tests.bat",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747168935171,
+      "cline_edit_date": 1747168935171,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/stability/core/vectorized_phase_engine.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747169413772,
+      "cline_edit_date": 1747169413772,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/cli/doctor_cli.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747169482435,
+      "cline_edit_date": 1747169482435,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/cli.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747169510247,
+      "cline_edit_date": 1747169510247,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/cli.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747169521163,
+      "cline_edit_date": 1747169521163,
+      "user_edit_date": null
+    },
+    {
+      "path": "dashboard/src/components/SystemHealthTile.tsx",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747169597768,
+      "cline_edit_date": 1747169597768,
+      "user_edit_date": null
+    },
+    {
+      "path": "dashboard/package.json",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747169619799,
+      "cline_edit_date": 1747169619799,
+      "user_edit_date": 1747167149295
+    },
+    {
+      "path": "dashboard/src/components/SystemHealthTile.tsx",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747169644013,
+      "cline_edit_date": 1747169644013,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/visualization/api.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747169713084,
+      "cline_edit_date": 1747169713084,
+      "user_edit_date": null
+    },
+    {
+      "path": "run_dashboard.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747169749982,
+      "cline_edit_date": 1747169749982,
+      "user_edit_date": null
+    },
+    {
+      "path": "standalone_phase_spectral_demo.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747170487848,
+      "cline_edit_date": 1747170487848,
+      "user_edit_date": null
+    },
+    {
+      "path": "standalone_phase_spectral_demo.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747170511237,
+      "cline_edit_date": 1747170511237,
+      "user_edit_date": null
+    },
+    {
+      "path": "run_standalone_demo.bat",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747170530976,
+      "cline_edit_date": 1747170530976,
+      "user_edit_date": null
+    },
+    {
+      "path": "standalone_phase_spectral_demo.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747170610128,
+      "cline_edit_date": 1747170610128,
+      "user_edit_date": null
+    },
+    {
+      "path": "README-SYSTEM-DEMOS.md",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747170805976,
+      "cline_edit_date": 1747170805976,
+      "user_edit_date": null
+    },
+    {
+      "path": "standalone_phase_spectral_demo.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747170915833,
+      "cline_edit_date": 1747170915833,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/packaging/manifest.py",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747171156995,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/cli/packaging_cli.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747171164389,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/packaging/registry_client.py",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747171174096,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/packaging/lockfile.py",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747171183877,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/packaging/setup.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747171235719,
+      "cline_edit_date": 1747171235719,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/cli/packaging_cli.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747171274206,
+      "cline_edit_date": 1747171274206,
+      "user_edit_date": null
+    },
+    {
+      "path": "run_elfpkg.bat",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747171292596,
+      "cline_edit_date": 1747171292596,
+      "user_edit_date": null
+    },
+    {
+      "path": "run_elfpkg.sh",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747171310830,
+      "cline_edit_date": 1747171310830,
+      "user_edit_date": null
+    },
+    {
+      "path": "ELFIN_PACKAGE_ECOSYSTEM.md",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747171350570,
+      "cline_edit_date": 1747171350570,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/formatting/elffmt.py",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747171455418,
+      "cline_edit_date": 1747166890072,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/linting/elfclippy.py",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747171461055,
+      "cline_edit_date": 1747166936506,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/templates/README.md",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747171476200,
+      "cline_edit_date": 1747171476200,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/templates/quadrotor/elfpkg.toml",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747171491495,
+      "cline_edit_date": 1747171491495,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/templates/quadrotor/src/quadrotor_controller.elfin",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747171527534,
+      "cline_edit_date": 1747171527534,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/packaging/auth.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747171582035,
+      "cline_edit_date": 1747171582035,
+      "user_edit_date": null
+    },
+    {
+      "path": "dashboard/src/components/SafetyTimeline.tsx",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747172076613,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "dashboard/src/hooks/useSSE.ts",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747172084091,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "dashboard/src/App.tsx",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747172092059,
+      "cline_edit_date": 1747167189434,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/visualization/api.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747172102886,
+      "cline_edit_date": 1747169713084,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/visualization/barrier_stream.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747172153077,
+      "cline_edit_date": 1747172153077,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/visualization/api.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747172257481,
+      "cline_edit_date": 1747172257481,
+      "user_edit_date": null
+    },
+    {
+      "path": "dashboard/src/components/IsoSurfaceViewer.tsx",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747172270715,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/visualization/isosurface_generator.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747172317796,
+      "cline_edit_date": 1747172317796,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/visualization/api.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747172339117,
+      "cline_edit_date": 1747172339117,
+      "user_edit_date": null
+    },
+    {
+      "path": "dashboard/src/components/ParamSlider.tsx",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747172346891,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "run_dashboard.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747172354625,
+      "cline_edit_date": 1747169749982,
+      "user_edit_date": null
+    },
+    {
+      "path": "run_dashboard.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747172392180,
+      "cline_edit_date": 1747172392180,
+      "user_edit_date": null
+    },
+    {
+      "path": "run_dashboard.bat",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747172412563,
+      "cline_edit_date": 1747172412563,
+      "user_edit_date": null
+    },
+    {
+      "path": "SAFETY_LENS_DASHBOARD.md",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747172447373,
+      "cline_edit_date": 1747172447373,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/templates/README.md",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747172895229,
+      "cline_edit_date": 1747171476200,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/templates/quadrotor/elfpkg.toml",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747172905752,
+      "cline_edit_date": 1747171491495,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/templates/quadrotor/src/quadrotor_controller.elfin",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747172913186,
+      "cline_edit_date": 1747171527534,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/templates/manipulator/elfpkg.toml",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747172954104,
+      "cline_edit_date": 1747172954104,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/templates/manipulator/src/manipulator_controller.elfin",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747173018454,
+      "cline_edit_date": 1747173018454,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/templates/mobile/elfpkg.toml",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747173110801,
+      "cline_edit_date": 1747173110801,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/templates/mobile/src/mobile_robot_controller.elfin",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747173186610,
+      "cline_edit_date": 1747173186610,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/templates/aerial/elfpkg.toml",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747173223532,
+      "cline_edit_date": 1747173223532,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/templates/aerial/src/aerial_vehicle_controller.elfin",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747173338857,
+      "cline_edit_date": 1747173338857,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/templates/hybrid/elfpkg.toml",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747173385874,
+      "cline_edit_date": 1747173385874,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/templates/README.md",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747173407339,
+      "cline_edit_date": 1747173407339,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/templates/hybrid/src/hybrid_controller.elfin",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747173480374,
+      "cline_edit_date": 1747173480374,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/validation/__init__.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747173514644,
+      "cline_edit_date": 1747173514644,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/validation/validation_result.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747173548473,
+      "cline_edit_date": 1747173548473,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/validation/barrier_validator.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747173655048,
+      "cline_edit_date": 1747173655048,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/templates/hybrid/src/hybrid_controller.elfin",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747173773304,
+      "cline_edit_date": 1747173480374,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/templates/hybrid/src/hybrid_controller.elfin",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747173788734,
+      "cline_edit_date": 1747173788734,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/templates/hybrid/src/hybrid_controller.elfin",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747173808538,
+      "cline_edit_date": 1747173808538,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/templates/hybrid/src/hybrid_controller.elfin",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747173829132,
+      "cline_edit_date": 1747173829132,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/templates/hybrid/src/hybrid_controller.elfin",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747173862867,
+      "cline_edit_date": 1747173862867,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/templates/hybrid/src/hybrid_controller.elfin",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747173882547,
+      "cline_edit_date": 1747173882547,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/templates/hybrid/src/hybrid_controller.elfin",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747173899179,
+      "cline_edit_date": 1747173899179,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/templates/README_HYBRID.md",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747173932768,
+      "cline_edit_date": 1747173932768,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/validation/test_barrier_validator.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747173979030,
+      "cline_edit_date": 1747173979030,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/templates/hybrid/src/hybrid_controller.elfin",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747174010855,
+      "cline_edit_date": 1747173899179,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/templates/hybrid/src/hybrid_controller.elfin",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747174123124,
+      "cline_edit_date": 1747174123124,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/templates/hybrid/run_hybrid_demo.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747174177361,
+      "cline_edit_date": 1747174177361,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/templates/hybrid/src/hybrid_controller.elfin",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747174331145,
+      "cline_edit_date": 1747174123124,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/templates/hybrid/src/hybrid_controller.elfin",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747174447079,
+      "cline_edit_date": 1747174447079,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/templates/hybrid/src/hybrid_controller.elfin",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747174568292,
+      "cline_edit_date": 1747174568292,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/templates/hybrid/src/hybrid_controller.elfin",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747174582387,
+      "cline_edit_date": 1747174582387,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/templates/hybrid/src/hybrid_controller.elfin",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1747174582387,
+      "cline_edit_date": 1747174582387,
+      "user_edit_date": 1747174582418
+    },
+    {
+      "path": "alan_backend/elfin/templates/hybrid/src/hybrid_controller.elfin",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747174595841,
+      "cline_edit_date": 1747174595841,
+      "user_edit_date": 1747174582418
+    },
+    {
+      "path": "alan_backend/elfin/templates/hybrid/src/hybrid_controller.elfin",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747174867310,
+      "cline_edit_date": 1747174867310,
+      "user_edit_date": 1747174582418
+    },
+    {
+      "path": "alan_backend/elfin/templates/hybrid/src/hybrid_controller.elfin",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747174881267,
+      "cline_edit_date": 1747174881267,
+      "user_edit_date": 1747174582418
+    },
+    {
+      "path": "alan_backend/elfin/templates/hybrid/src/hybrid_controller.elfin",
+      "record_state": "active",
+      "record_source": "user_edited",
+      "cline_read_date": 1747174881267,
+      "cline_edit_date": 1747174881267,
+      "user_edit_date": 1747174881320
+    },
+    {
+      "path": "alan_backend/elfin/templates/manipulator/src/manipulator_controller.elfin",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747174960560,
+      "cline_edit_date": 1747173018454,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/templates/manipulator/src/manipulator_controller.elfin",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747175062745,
+      "cline_edit_date": 1747175062745,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/templates/manipulator/src/manipulator_controller.elfin",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747175084537,
+      "cline_edit_date": 1747175084537,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/templates/manipulator/sim_manipulator.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747175336505,
+      "cline_edit_date": 1747175336505,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/templates/manipulator/sim_manipulator.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747175440821,
+      "cline_edit_date": 1747175440821,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/templates/manipulator/sim_manipulator.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747175543030,
+      "cline_edit_date": 1747175543030,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/templates/manipulator/sim_manipulator.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747175564179,
+      "cline_edit_date": 1747175543030,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/templates/manipulator/sim_manipulator.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747175685106,
+      "cline_edit_date": 1747175685106,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/templates/manipulator/sim_manipulator.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747175772573,
+      "cline_edit_date": 1747175685106,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/templates/manipulator/sim_manipulator.py",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1747175772573,
+      "cline_edit_date": 1747175685106,
+      "user_edit_date": 1747175800969
+    },
+    {
+      "path": "alan_backend/elfin/templates/manipulator/sim_manipulator.py",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1747175772573,
+      "cline_edit_date": 1747175685106,
+      "user_edit_date": 1747175822461
+    },
+    {
+      "path": "alan_backend/elfin/templates/manipulator/sim_manipulator.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747175822484,
+      "cline_edit_date": 1747175822484,
+      "user_edit_date": 1747175822461
+    },
+    {
+      "path": "alan_backend/elfin/templates/manipulator/sim_manipulator.py",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1747175822484,
+      "cline_edit_date": 1747175822484,
+      "user_edit_date": 1747175822547
+    },
+    {
+      "path": "alan_backend/elfin/templates/manipulator/sim_manipulator.py",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1747175822484,
+      "cline_edit_date": 1747175822484,
+      "user_edit_date": 1747175854227
+    },
+    {
+      "path": "alan_backend/elfin/templates/manipulator/sim_manipulator.py",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1747175822484,
+      "cline_edit_date": 1747175822484,
+      "user_edit_date": 1747175871186
+    },
+    {
+      "path": "alan_backend/elfin/templates/manipulator/sim_manipulator.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747175871219,
+      "cline_edit_date": 1747175871219,
+      "user_edit_date": 1747175871186
+    },
+    {
+      "path": "alan_backend/elfin/templates/manipulator/sim_manipulator.py",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1747175871219,
+      "cline_edit_date": 1747175871219,
+      "user_edit_date": 1747175871256
+    },
+    {
+      "path": "alan_backend/elfin/templates/manipulator/sim_manipulator.py",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1747175871219,
+      "cline_edit_date": 1747175871219,
+      "user_edit_date": 1747175899313
+    },
+    {
+      "path": "alan_backend/elfin/templates/manipulator/sim_manipulator.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747175899433,
+      "cline_edit_date": 1747175899433,
+      "user_edit_date": 1747175899313
+    },
+    {
+      "path": "alan_backend/elfin/templates/manipulator/run_manipulator_sim.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747175927152,
+      "cline_edit_date": 1747175927152,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/templates/mobile/src/mobile_robot_controller.elfin",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747176004390,
+      "cline_edit_date": 1747173186610,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/templates/mobile/src/mobile_robot_controller.elfin",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747176105916,
+      "cline_edit_date": 1747176105916,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/templates/mobile/sim_mobile_robot.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747176214161,
+      "cline_edit_date": 1747176214161,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/templates/mobile/sim_mobile_robot.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747176355073,
+      "cline_edit_date": 1747176355073,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/templates/mobile/src/mobile_robot_controller.elfin",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747176378406,
+      "cline_edit_date": 1747176105916,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/templates/mobile/src/mobile_robot_controller.elfin",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747176706579,
+      "cline_edit_date": 1747176706579,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/templates/mobile/src/mobile_robot_controller.elfin",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747176890977,
+      "cline_edit_date": 1747176706579,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/templates/mobile/src/mobile_robot_controller.elfin",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1747176890977,
+      "cline_edit_date": 1747176706579,
+      "user_edit_date": 1747176956921
+    },
+    {
+      "path": "alan_backend/elfin/templates/mobile/src/mobile_robot_controller.elfin",
+      "record_state": "active",
+      "record_source": "user_edited",
+      "cline_read_date": 1747176890977,
+      "cline_edit_date": 1747176706579,
+      "user_edit_date": 1747177107202
+    },
+    {
+      "path": "alan_backend/elfin/templates/manipulator/src/manipulator_controller.elfin",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747177155381,
+      "cline_edit_date": 1747175084537,
+      "user_edit_date": null
+    }
+  ],
+  "model_usage": [
+    {
+      "ts": 1747166703697,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1747167669932,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1747168234658,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1747168511757,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1747168540368,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1747168579714,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1747168603801,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1747170344626,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1747170365940,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1747172725352,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1747172750922,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1747173741768,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1747173765944,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1747173983654,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1747174004684,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1747174305640,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1747174324543,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1747174465154,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1747174555648,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1747174835717,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1747174854856,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1747174951533,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1747174982402,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1747175211127,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1747175236030,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1747175549353,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1747175586327,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1747175757733,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1747175790281,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1747175997799,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1747176027945,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1747176217324,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1747176248193,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1747176369934,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1747176655412,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1747176803626,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    }
+  ]
+}

@@ -1,0 +1,96 @@
+name: Nightly Fuzzing
+
+on:
+  schedule:
+    # Run every night at 2 AM UTC
+    - cron: '0 2 * * *'
+  # Allow manual triggering
+  workflow_dispatch:
+
+jobs:
+  fuzz-testing:
+    name: Run Nightly Fuzzing
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        target: [frame_decoder, crypto_layer, kernel_dispatcher]
+      # Don't cancel all jobs if one fails
+      fail-fast: false
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Install Rust toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: nightly
+          override: true
+          components: rustfmt, clippy
+      
+      - name: Install AFL++
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential libtool-bin python3 python3-dev automake autoconf bison libglib2.0-dev
+          git clone https://github.com/AFLplusplus/AFLplusplus.git
+          cd AFLplusplus
+          make
+          cd ..
+      
+      - name: Install cargo-fuzz
+        run: cargo install cargo-fuzz
+      
+      - name: Install grcov for coverage reports
+        run: cargo install grcov
+      
+      - name: Build fuzz targets
+        run: |
+          cd client/src/ghost/psi_trajectory
+          RUSTFLAGS="-Z sanitizer=address" cargo fuzz build --sanitizer=address
+      
+      - name: Run AFL++ quick-cross mode
+        run: |
+          cd client/src/ghost/psi_trajectory
+          export AFL_I_DONT_CARE_ABOUT_MISSING_CRASHES=1
+          export AFL_SKIP_CPUFREQ=1
+          ../../../AFLplusplus/afl-fuzz -i fuzz/corpus/${{ matrix.target }} -o fuzz/findings/${{ matrix.target }} -Q -V 30m -- ./target/x86_64-unknown-linux-gnu/release/${{ matrix.target }}
+      
+      - name: Generate coverage report
+        run: |
+          cd client/src/ghost/psi_trajectory
+          RUSTFLAGS="-Zinstrument-coverage" cargo fuzz run ${{ matrix.target }} -- -max_total_time=30
+          grcov . --binary-path ./target/x86_64-unknown-linux-gnu/release/ -s . -t html --branch --ignore-not-existing -o ./fuzz/coverage/${{ matrix.target }}
+      
+      - name: Archive findings
+        uses: actions/upload-artifact@v2
+        with:
+          name: fuzz-findings-${{ matrix.target }}
+          path: client/src/ghost/psi_trajectory/fuzz/findings/${{ matrix.target }}
+          
+      - name: Archive coverage report
+        uses: actions/upload-artifact@v2
+        with:
+          name: coverage-report-${{ matrix.target }}
+          path: client/src/ghost/psi_trajectory/fuzz/coverage/${{ matrix.target }}
+      
+      - name: Check for crashes
+        id: check_crashes
+        run: |
+          cd client/src/ghost/psi_trajectory/fuzz/findings/${{ matrix.target }}/crashes
+          if [ "$(ls -A)" ]; then
+            echo "Found crashes in ${{ matrix.target }} fuzzing"
+            echo "::set-output name=crashed::true"
+          else
+            echo "No crashes found in ${{ matrix.target }} fuzzing"
+            echo "::set-output name=crashed::false"
+          fi
+      
+      - name: Create issue for crashes
+        if: steps.check_crashes.outputs.crashed == 'true'
+        uses: JasonEtco/create-an-issue@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TARGET: ${{ matrix.target }}
+        with:
+          filename: .github/CRASH_TEMPLATE.md

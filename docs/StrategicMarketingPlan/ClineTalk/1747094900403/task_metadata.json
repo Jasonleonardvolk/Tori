@@ -1,0 +1,2578 @@
+{
+  "files_in_context": [
+    {
+      "path": "alan_backend/elfin/examples/complete_standalone_demo.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747094972851,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/examples/complete_standalone_demo.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747095013981,
+      "cline_edit_date": 1747095013981,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/examples/complete_standalone_demo.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747095025233,
+      "cline_edit_date": 1747095025233,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/examples/complete_standalone_demo.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747095087146,
+      "cline_edit_date": 1747095087146,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/examples/complete_standalone_demo.py",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1747095087146,
+      "cline_edit_date": 1747095087146,
+      "user_edit_date": 1747095166825
+    },
+    {
+      "path": "alan_backend/elfin/examples/complete_standalone_demo.py",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1747095087146,
+      "cline_edit_date": 1747095087146,
+      "user_edit_date": 1747095166934
+    },
+    {
+      "path": "alan_backend/elfin/examples/complete_standalone_demo.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747095169463,
+      "cline_edit_date": 1747095169463,
+      "user_edit_date": 1747095166934
+    },
+    {
+      "path": "alan_backend/elfin/examples/complete_standalone_demo.py",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1747095169463,
+      "cline_edit_date": 1747095169463,
+      "user_edit_date": 1747095339429
+    },
+    {
+      "path": "alan_backend/elfin/examples/complete_standalone_demo.py",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1747095169463,
+      "cline_edit_date": 1747095169463,
+      "user_edit_date": 1747095581123
+    },
+    {
+      "path": "alan_backend/elfin/examples/complete_standalone_demo.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747097704760,
+      "cline_edit_date": 1747095169463,
+      "user_edit_date": 1747095581123
+    },
+    {
+      "path": "alan_backend/elfin/examples/complete_standalone_demo.py",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1747097704760,
+      "cline_edit_date": 1747095169463,
+      "user_edit_date": 1747097787894
+    },
+    {
+      "path": "alan_backend/elfin/examples/complete_standalone_demo.py",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1747097704760,
+      "cline_edit_date": 1747095169463,
+      "user_edit_date": 1747097941977
+    },
+    {
+      "path": "alan_backend/elfin/examples/complete_standalone_demo.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747097942044,
+      "cline_edit_date": 1747097942044,
+      "user_edit_date": 1747097941977
+    },
+    {
+      "path": "alan_backend/elfin/parser/elfin_grammar.ebnf",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747099682767,
+      "cline_edit_date": 1747099682767,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/parser/ast.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747099739540,
+      "cline_edit_date": 1747099739540,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/stability/constraint_ir.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747099785997,
+      "cline_edit_date": 1747099785997,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/stability/backends/sos_backend.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747099859847,
+      "cline_edit_date": 1747099859847,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/stability/backends/__init__.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747099874236,
+      "cline_edit_date": 1747099874236,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/stability/learn_neural_lyap.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747099940037,
+      "cline_edit_date": 1747099940037,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/stability/__init__.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747099955804,
+      "cline_edit_date": 1747099955804,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/examples/stability_verification_demo.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747099999969,
+      "cline_edit_date": 1747099999969,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/examples/stability_verification_demo.py",
+      "record_state": "active",
+      "record_source": "user_edited",
+      "cline_read_date": 1747099999969,
+      "cline_edit_date": 1747099999969,
+      "user_edit_date": 1747100387828
+    },
+    {
+      "path": "alan_backend/elfin/parser/parser.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747100417911,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "stability_demo.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747100509507,
+      "cline_edit_date": 1747100509507,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/stability/constraint_ir.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747122331907,
+      "cline_edit_date": 1747122331907,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/stability/constraint_ir.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747122347919,
+      "cline_edit_date": 1747122347919,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/stability/constraint_ir.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747122361252,
+      "cline_edit_date": 1747122361252,
+      "user_edit_date": null
+    },
+    {
+      "path": "stability_demo.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747122481518,
+      "cline_edit_date": 1747122481518,
+      "user_edit_date": null
+    },
+    {
+      "path": "elfin_verify.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747122547689,
+      "cline_edit_date": 1747122547689,
+      "user_edit_date": null
+    },
+    {
+      "path": "lyapunov_trainer_animate.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747122614799,
+      "cline_edit_date": 1747122614799,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/parser/elfin_grammar.ebnf",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747122961312,
+      "cline_edit_date": 1747099682767,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/parser/elfin_grammar.ebnf",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747122986390,
+      "cline_edit_date": 1747122986390,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/proto/elfin.proto",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747123012468,
+      "cline_edit_date": 1747123012468,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/stability/phase_drift_monitor.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747123079290,
+      "cline_edit_date": 1747123079290,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/examples/stability_sync_demo.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747123140981,
+      "cline_edit_date": 1747123140981,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/examples/stability_sync_demo.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747123182847,
+      "cline_edit_date": 1747123182847,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/examples/stability_sync_demo.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747123266235,
+      "cline_edit_date": 1747123266235,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/stability/koopman_bridge_poc.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747123949460,
+      "cline_edit_date": 1747123949460,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/stability/incremental_verifier.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747124054889,
+      "cline_edit_date": 1747124054889,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/stability/jit_guard.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747124147623,
+      "cline_edit_date": 1747124147623,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/examples/elfin_stability_integrated_demo.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747124257781,
+      "cline_edit_date": 1747124257781,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/stability/lyapunov.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747124297384,
+      "cline_edit_date": 1747124297384,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/stability/verifier.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747124372287,
+      "cline_edit_date": 1747124372287,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/stability/phase_drift_monitor.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747124446939,
+      "cline_edit_date": 1747124446939,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/examples/elfin_stability_integrated_demo.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747124474975,
+      "cline_edit_date": 1747124257781,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/examples/elfin_stability_integrated_demo.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747124591477,
+      "cline_edit_date": 1747124591477,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/examples/elfin_stability_integrated_demo.py",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1747124591477,
+      "cline_edit_date": 1747124591477,
+      "user_edit_date": 1747124595470
+    },
+    {
+      "path": "alan_backend/elfin/examples/elfin_stability_integrated_demo.py",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1747124591477,
+      "cline_edit_date": 1747124591477,
+      "user_edit_date": 1747124595552
+    },
+    {
+      "path": "alan_backend/elfin/examples/elfin_stability_integrated_demo.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747124606107,
+      "cline_edit_date": 1747124591477,
+      "user_edit_date": 1747124595552
+    },
+    {
+      "path": "alan_backend/elfin/examples/elfin_stability_integrated_demo.py",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1747124606107,
+      "cline_edit_date": 1747124591477,
+      "user_edit_date": 1747124613330
+    },
+    {
+      "path": "alan_backend/elfin/examples/elfin_stability_integrated_demo.py",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1747124606107,
+      "cline_edit_date": 1747124591477,
+      "user_edit_date": 1747124722704
+    },
+    {
+      "path": "alan_backend/elfin/examples/elfin_stability_integrated_demo.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747124723004,
+      "cline_edit_date": 1747124723004,
+      "user_edit_date": 1747124722704
+    },
+    {
+      "path": "alan_backend/elfin/stability/koopman_bridge_poc.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747124967684,
+      "cline_edit_date": 1747124967684,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/stability/incremental_verifier.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747125073348,
+      "cline_edit_date": 1747125073348,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/stability/incremental_verifier.py",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1747125073348,
+      "cline_edit_date": 1747125073348,
+      "user_edit_date": 1747125091563
+    },
+    {
+      "path": "alan_backend/elfin/stability/incremental_verifier.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747125189086,
+      "cline_edit_date": 1747125189086,
+      "user_edit_date": 1747125091563
+    },
+    {
+      "path": "alan_backend/elfin/stability/jit_guard.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747125373403,
+      "cline_edit_date": 1747125373403,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/stability/incremental_verifier.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747125403961,
+      "cline_edit_date": 1747125189086,
+      "user_edit_date": 1747125091563
+    },
+    {
+      "path": "alan_backend/elfin/stability/incremental_verifier.py",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747125649134,
+      "cline_edit_date": 1747125189086,
+      "user_edit_date": 1747125091563
+    },
+    {
+      "path": "alan_backend/elfin/parser/elfin_grammar.ebnf",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747125779436,
+      "cline_edit_date": 1747122986390,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/parser/stability_parser.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747125853101,
+      "cline_edit_date": 1747125853101,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/compiler/stability_codegen.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747125950358,
+      "cline_edit_date": 1747125950358,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/examples/elfin_stability_example.elfin",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747125975684,
+      "cline_edit_date": 1747125975684,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/examples/elfin_stability_demo.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747126033227,
+      "cline_edit_date": 1747126033227,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/run_stability_demo.bat",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747126046067,
+      "cline_edit_date": 1747126046067,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/visualization/dashboard.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747126320102,
+      "cline_edit_date": 1747126320102,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/visualization/static/dashboard.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747126404492,
+      "cline_edit_date": 1747126404492,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/examples/dashboard_demo.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747126458329,
+      "cline_edit_date": 1747126458329,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/run_dashboard_demo.bat",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747126471251,
+      "cline_edit_date": 1747126471251,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/integration/alan_stability_bridge.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747126559823,
+      "cline_edit_date": 1747126559823,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/run_integration_demo.bat",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747126574407,
+      "cline_edit_date": 1747126574407,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/STABILITY_FRAMEWORK_README.md",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747126617409,
+      "cline_edit_date": 1747126617409,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/stability/samplers/__init__.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747134874860,
+      "cline_edit_date": 1747134874860,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/stability/training/__init__.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747134892790,
+      "cline_edit_date": 1747134892790,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/stability/verify/__init__.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747134911039,
+      "cline_edit_date": 1747134911039,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/stability/demos/__init__.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747134931446,
+      "cline_edit_date": 1747134931446,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/stability/samplers/trajectory_sampler.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747134982655,
+      "cline_edit_date": 1747134982655,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/stability/training/neural_lyapunov_trainer.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747135055741,
+      "cline_edit_date": 1747135055741,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/stability/verify/milp_verifier.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747135168237,
+      "cline_edit_date": 1747135168237,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/stability/demos/vdp_neural_lyap_demo.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747135231904,
+      "cline_edit_date": 1747135231904,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/run_neural_lyapunov_demo.bat",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747135248712,
+      "cline_edit_date": 1747135248712,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/stability/tests/__init__.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747135261935,
+      "cline_edit_date": 1747135261935,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/stability/tests/test_trajectory_sampler.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747135299016,
+      "cline_edit_date": 1747135299016,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/stability/tests/test_neural_lyapunov_trainer.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747135349108,
+      "cline_edit_date": 1747135349108,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/stability/tests/README.md",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747135370880,
+      "cline_edit_date": 1747135370880,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/run_stability_tests.bat",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747135389507,
+      "cline_edit_date": 1747135389507,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/stability/training/neural_lyapunov_trainer.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747135536523,
+      "cline_edit_date": 1747135536523,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/stability/training/neural_lyapunov_trainer.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747135551767,
+      "cline_edit_date": 1747135551767,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/stability/training/neural_lyapunov_trainer.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747135568032,
+      "cline_edit_date": 1747135568032,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/stability/training/neural_lyapunov_trainer.py",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1747135568032,
+      "cline_edit_date": 1747135568032,
+      "user_edit_date": 1747135568088
+    },
+    {
+      "path": "alan_backend/elfin/stability/training/neural_lyapunov_trainer.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747135591370,
+      "cline_edit_date": 1747135591370,
+      "user_edit_date": 1747135568088
+    },
+    {
+      "path": "alan_backend/elfin/stability/training/alpha_scheduler.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747135641854,
+      "cline_edit_date": 1747135641854,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/stability/training/neural_lyapunov_trainer.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747135671269,
+      "cline_edit_date": 1747135671269,
+      "user_edit_date": 1747135568088
+    },
+    {
+      "path": "alan_backend/elfin/stability/training/neural_lyapunov_trainer.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747135690291,
+      "cline_edit_date": 1747135690291,
+      "user_edit_date": 1747135568088
+    },
+    {
+      "path": "alan_backend/elfin/stability/training/neural_lyapunov_trainer.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747135727435,
+      "cline_edit_date": 1747135727435,
+      "user_edit_date": 1747135568088
+    },
+    {
+      "path": "alan_backend/elfin/stability/training/neural_lyapunov_trainer.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747135785151,
+      "cline_edit_date": 1747135785151,
+      "user_edit_date": 1747135568088
+    },
+    {
+      "path": "alan_backend/elfin/stability/verify/milp_verifier.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747135813097,
+      "cline_edit_date": 1747135813097,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/stability/tests/run_sanity_checks.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747139709486,
+      "cline_edit_date": 1747139709486,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/run_stability_sanity_checks.bat",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747139727446,
+      "cline_edit_date": 1747139727446,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/parser/ast.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747139898823,
+      "cline_edit_date": 1747099739540,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/parser/parser.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747139906225,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/stability/tests/run_sanity_checks.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747139927221,
+      "cline_edit_date": 1747139927221,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/run_stability_sanity_checks.bat",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747139960769,
+      "cline_edit_date": 1747139960769,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/run_stability_sanity_checks.bat",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747139972010,
+      "cline_edit_date": 1747139972010,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/run_stability_sanity_checks.bat",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747139994699,
+      "cline_edit_date": 1747139994699,
+      "user_edit_date": null
+    },
+    {
+      "path": "standalone_sanity_checks.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747140113224,
+      "cline_edit_date": 1747140113224,
+      "user_edit_date": null
+    },
+    {
+      "path": "standalone_amp_test.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747140178454,
+      "cline_edit_date": 1747140178454,
+      "user_edit_date": null
+    },
+    {
+      "path": "alpha_scheduler_test.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747140240742,
+      "cline_edit_date": 1747140240742,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/parser/__init__.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747141076347,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/parser/__init__.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747141094985,
+      "cline_edit_date": 1747141094985,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/parser/__init__.py",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1747141094985,
+      "cline_edit_date": 1747141094985,
+      "user_edit_date": 1747141095034
+    },
+    {
+      "path": "alan_backend/elfin/stability/samplers/__init__.py",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747141112881,
+      "cline_edit_date": 1747134874860,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/stability/training/__init__.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747141131347,
+      "cline_edit_date": 1747134892790,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/stability/training/__init__.py",
+      "record_state": "active",
+      "record_source": "user_edited",
+      "cline_read_date": 1747141131347,
+      "cline_edit_date": 1747134892790,
+      "user_edit_date": 1747141147293
+    },
+    {
+      "path": "alan_backend/elfin/stability/verify/__init__.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747141155133,
+      "cline_edit_date": 1747134911039,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/stability/tests/run_sanity_checks.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747141172301,
+      "cline_edit_date": 1747139927221,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/run_stability_sanity_checks.bat",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747141187396,
+      "cline_edit_date": 1747139994699,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/stability/config.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747141239845,
+      "cline_edit_date": 1747141239845,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/stability/configs/neural_lyap_default.yaml",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747141265772,
+      "cline_edit_date": 1747141265772,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/stability/verify/utils.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747141311470,
+      "cline_edit_date": 1747141311470,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/stability/verify/__init__.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747141327672,
+      "cline_edit_date": 1747141327672,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/stability/verify/milp_verifier.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747141335113,
+      "cline_edit_date": 1747135813097,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/stability/verify/milp_verifier.py",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1747141335113,
+      "cline_edit_date": 1747135813097,
+      "user_edit_date": 1747141356831
+    },
+    {
+      "path": "alan_backend/elfin/stability/verify/milp_verifier.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747141371141,
+      "cline_edit_date": 1747141371141,
+      "user_edit_date": 1747141356831
+    },
+    {
+      "path": "alan_backend/elfin/stability/verify/milp_verifier.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747141385807,
+      "cline_edit_date": 1747141385807,
+      "user_edit_date": 1747141356831
+    },
+    {
+      "path": "alan_backend/elfin/stability/verify/milp_verifier.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747141404137,
+      "cline_edit_date": 1747141404137,
+      "user_edit_date": 1747141356831
+    },
+    {
+      "path": "alan_backend/elfin/stability/verify/milp_verifier.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747141422241,
+      "cline_edit_date": 1747141422241,
+      "user_edit_date": 1747141356831
+    },
+    {
+      "path": "alan_backend/elfin/stability/verify/milp_verifier.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747141437470,
+      "cline_edit_date": 1747141437470,
+      "user_edit_date": 1747141356831
+    },
+    {
+      "path": "alan_backend/elfin/stability/tests/run_sanity_checks.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747141455681,
+      "cline_edit_date": 1747141455681,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/STABILITY_FRAMEWORK_README.md",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747141586558,
+      "cline_edit_date": 1747141586558,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/stability/training/neural_lyapunov_trainer.py",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747141912387,
+      "cline_edit_date": 1747135785151,
+      "user_edit_date": 1747135568088
+    },
+    {
+      "path": "alan_backend/elfin/stability/verify/milp_verifier.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747141919543,
+      "cline_edit_date": 1747141437470,
+      "user_edit_date": 1747141356831
+    },
+    {
+      "path": "alan_backend/elfin/stability/core/interactions.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747142240133,
+      "cline_edit_date": 1747142240133,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/stability/core/__init__.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747142259251,
+      "cline_edit_date": 1747142259251,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/stability/agents/stability_agent.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747142329377,
+      "cline_edit_date": 1747142329377,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/stability/agents/__init__.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747142356409,
+      "cline_edit_date": 1747142356409,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/cli.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747142424399,
+      "cline_edit_date": 1747142424399,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/examples/stability_agent_demo.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747142481291,
+      "cline_edit_date": 1747142481291,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/stability/README.md",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747142533442,
+      "cline_edit_date": 1747142533442,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/run_stability_agent_demo.bat",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747142571724,
+      "cline_edit_date": 1747142571724,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/examples/standalone_stability_demo.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747142990741,
+      "cline_edit_date": 1747142990741,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/run_standalone_demo.bat",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747143005493,
+      "cline_edit_date": 1747143005493,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/examples/standalone_stability_demo.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747143209193,
+      "cline_edit_date": 1747142990741,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/examples/standalone_stability_demo.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747143311003,
+      "cline_edit_date": 1747143311003,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/examples/standalone_stability_demo.py",
+      "record_state": "active",
+      "record_source": "user_edited",
+      "cline_read_date": 1747143311003,
+      "cline_edit_date": 1747143311003,
+      "user_edit_date": 1747143311047
+    },
+    {
+      "path": "alan_backend/elfin/stability/verify/dep_graph.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747144436260,
+      "cline_edit_date": 1747144436260,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/stability/verify/parallel_verifier.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747144466044,
+      "cline_edit_date": 1747144466044,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/stability/verify/__init__.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747144480058,
+      "cline_edit_date": 1747144480058,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/stability/verify/milp_verifier.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747144502283,
+      "cline_edit_date": 1747144502283,
+      "user_edit_date": 1747141356831
+    },
+    {
+      "path": "alan_backend/elfin/stability/verify/__init__.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747144516576,
+      "cline_edit_date": 1747144516576,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/stability/agents/stability_agent.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747144523550,
+      "cline_edit_date": 1747142329377,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/stability/agents/stability_agent.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747144536326,
+      "cline_edit_date": 1747144536326,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/stability/agents/stability_agent.py",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1747144536326,
+      "cline_edit_date": 1747144536326,
+      "user_edit_date": 1747144536439
+    },
+    {
+      "path": "alan_backend/elfin/stability/agents/stability_agent.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747144559583,
+      "cline_edit_date": 1747144559583,
+      "user_edit_date": 1747144536439
+    },
+    {
+      "path": "alan_backend/elfin/stability/agents/stability_agent.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747144578298,
+      "cline_edit_date": 1747144578298,
+      "user_edit_date": 1747144536439
+    },
+    {
+      "path": "alan_backend/elfin/stability/agents/stability_agent.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747144613428,
+      "cline_edit_date": 1747144613428,
+      "user_edit_date": 1747144536439
+    },
+    {
+      "path": "alan_backend/elfin/stability/agents/stability_agent.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747144625021,
+      "cline_edit_date": 1747144625021,
+      "user_edit_date": 1747144536439
+    },
+    {
+      "path": "alan_backend/elfin/parser/__init__.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747144637297,
+      "cline_edit_date": 1747144637297,
+      "user_edit_date": 1747141095034
+    },
+    {
+      "path": "alan_backend/elfin/examples/parallel_verifier_demo.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747144669162,
+      "cline_edit_date": 1747144669162,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/run_parallel_demo.bat",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747144680379,
+      "cline_edit_date": 1747144680379,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/parser/ast.py",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747144763361,
+      "cline_edit_date": 1747099739540,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/parser/__init__.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747144777396,
+      "cline_edit_date": 1747144777396,
+      "user_edit_date": 1747141095034
+    },
+    {
+      "path": "alan_backend/elfin/examples/direct_parallel_demo.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747144818360,
+      "cline_edit_date": 1747144818360,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/run_direct_parallel_demo.bat",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747144839154,
+      "cline_edit_date": 1747144839154,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/parser/parser.py",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747144867018,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/examples/run_direct_demo.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747144938495,
+      "cline_edit_date": 1747144938495,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/examples/completely_standalone_demo.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747145000351,
+      "cline_edit_date": 1747145000351,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/examples/completely_standalone_demo.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747145034653,
+      "cline_edit_date": 1747145034653,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/examples/completely_standalone_demo.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747145047377,
+      "cline_edit_date": 1747145047377,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/examples/completely_standalone_demo.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747145123001,
+      "cline_edit_date": 1747145123001,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/cli.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747145286021,
+      "cline_edit_date": 1747142424399,
+      "user_edit_date": null
+    },
+    {
+      "path": "docs/errors/E-LYAP-001.md",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747145340750,
+      "cline_edit_date": 1747145340750,
+      "user_edit_date": null
+    },
+    {
+      "path": "docs/errors/E-LYAP-002.md",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747145365693,
+      "cline_edit_date": 1747145365693,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/errors/__init__.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747145379888,
+      "cline_edit_date": 1747145379888,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/errors/error_handler.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747145413989,
+      "cline_edit_date": 1747145413989,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/errors/elf_errors.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747145458656,
+      "cline_edit_date": 1747145458656,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/cli.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747145472321,
+      "cline_edit_date": 1747145472321,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/cli.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747145490406,
+      "cline_edit_date": 1747145490406,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/cli.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747145522689,
+      "cline_edit_date": 1747145522689,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/cli.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747145542811,
+      "cline_edit_date": 1747145542811,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/cli.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747145565646,
+      "cline_edit_date": 1747145565646,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/run_error_tools.bat",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747145582940,
+      "cline_edit_date": 1747145582940,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/tests/test_error_docs.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747145601229,
+      "cline_edit_date": 1747145601229,
+      "user_edit_date": null
+    },
+    {
+      "path": "test_error_docs_standalone.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747145651111,
+      "cline_edit_date": 1747145651111,
+      "user_edit_date": null
+    },
+    {
+      "path": "test_error_docs_standalone.py",
+      "record_state": "active",
+      "record_source": "user_edited",
+      "cline_read_date": 1747145651111,
+      "cline_edit_date": 1747145651111,
+      "user_edit_date": 1747145688436
+    },
+    {
+      "path": "docs/errors/E-LYAP-003.md",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747145745828,
+      "cline_edit_date": 1747145745828,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/stability/agents/error_integration.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747145791242,
+      "cline_edit_date": 1747145791242,
+      "user_edit_date": null
+    },
+    {
+      "path": "docs/errors/E-VERIF-001.md",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747145852024,
+      "cline_edit_date": 1747145852024,
+      "user_edit_date": null
+    },
+    {
+      "path": "docs/errors/E-VERIF-002.md",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747145877952,
+      "cline_edit_date": 1747145877952,
+      "user_edit_date": null
+    },
+    {
+      "path": "docs/errors/E-PARAM-001.md",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747145903886,
+      "cline_edit_date": 1747145903886,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/koopman/__init__.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747146195743,
+      "cline_edit_date": 1747146195743,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/koopman/dictionaries.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747146245334,
+      "cline_edit_date": 1747146245334,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/koopman/edmd.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747146302700,
+      "cline_edit_date": 1747146302700,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/koopman/koopman_lyap.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747146374288,
+      "cline_edit_date": 1747146374288,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/koopman/koopman_bridge_agent.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747146469773,
+      "cline_edit_date": 1747146469773,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/examples/koopman_bridge_demo.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747146534664,
+      "cline_edit_date": 1747146534664,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/koopman/cli.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747146603422,
+      "cline_edit_date": 1747146603422,
+      "user_edit_date": null
+    },
+    {
+      "path": "run_koopman_demo.bat",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747146623659,
+      "cline_edit_date": 1747146623659,
+      "user_edit_date": null
+    },
+    {
+      "path": "run_koopman_demo.bat",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747146797110,
+      "cline_edit_date": 1747146797110,
+      "user_edit_date": null
+    },
+    {
+      "path": "run_koopman_demo_standalone.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747147021544,
+      "cline_edit_date": 1747147021544,
+      "user_edit_date": null
+    },
+    {
+      "path": "fully_standalone_koopman_demo.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747147161376,
+      "cline_edit_date": 1747147161376,
+      "user_edit_date": null
+    },
+    {
+      "path": "fully_standalone_koopman_demo.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747147212585,
+      "cline_edit_date": 1747147212585,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/koopman/koopman_lyap.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747147532305,
+      "cline_edit_date": 1747147532305,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/koopman/koopman_lyap.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747147557069,
+      "cline_edit_date": 1747147557069,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/koopman/koopman_lyap.py",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1747147557069,
+      "cline_edit_date": 1747147557069,
+      "user_edit_date": 1747147557139
+    },
+    {
+      "path": "alan_backend/elfin/koopman/koopman_lyap.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747147571853,
+      "cline_edit_date": 1747147571853,
+      "user_edit_date": 1747147557139
+    },
+    {
+      "path": "alan_backend/elfin/koopman/koopman_bridge_agent.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747147602745,
+      "cline_edit_date": 1747147602745,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/koopman/koopman_bridge_agent.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747147615901,
+      "cline_edit_date": 1747147615901,
+      "user_edit_date": null
+    },
+    {
+      "path": "docs/errors/E-LYAP-003.md",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747147655044,
+      "cline_edit_date": 1747147655044,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/koopman/tests/test_koopman_lyap.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747147688816,
+      "cline_edit_date": 1747147688816,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/koopman/tests/__init__.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747147708689,
+      "cline_edit_date": 1747147708689,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/koopman/__init__.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747147752070,
+      "cline_edit_date": 1747147752070,
+      "user_edit_date": null
+    },
+    {
+      "path": "test_koopman_standalone.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747148239464,
+      "cline_edit_date": 1747148239464,
+      "user_edit_date": null
+    },
+    {
+      "path": "test_koopman_standalone.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747148366822,
+      "cline_edit_date": 1747148366822,
+      "user_edit_date": null
+    },
+    {
+      "path": "test_koopman_standalone.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747148385149,
+      "cline_edit_date": 1747148385149,
+      "user_edit_date": null
+    },
+    {
+      "path": "test_koopman_standalone.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747148483619,
+      "cline_edit_date": 1747148483619,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/koopman/edmd.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747148926098,
+      "cline_edit_date": 1747148926098,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/koopman/koopman_bridge_agent.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747148958349,
+      "cline_edit_date": 1747148958349,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/koopman/cli.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747148977891,
+      "cline_edit_date": 1747148977891,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/koopman/cli.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747149016789,
+      "cline_edit_date": 1747149016789,
+      "user_edit_date": null
+    },
+    {
+      "path": "demo_koopman_enhanced.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747149116438,
+      "cline_edit_date": 1747149116438,
+      "user_edit_date": null
+    },
+    {
+      "path": "release_alpha2.sh",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747149446197,
+      "cline_edit_date": 1747149446197,
+      "user_edit_date": null
+    },
+    {
+      "path": "docs/model_diagnostics.md",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747149487662,
+      "cline_edit_date": 1747149487662,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/visualization/static/model_health_widget.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747149558032,
+      "cline_edit_date": 1747149558032,
+      "user_edit_date": null
+    },
+    {
+      "path": "docs/koopman_future_roadmap.md",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747157014197,
+      "cline_edit_date": 1747157014197,
+      "user_edit_date": null
+    },
+    {
+      "path": ".github/workflows/nightly-tests.yml",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747157423292,
+      "cline_edit_date": 1747157423292,
+      "user_edit_date": null
+    },
+    {
+      "path": "docs/ci/self-hosted-cuda-runner.md",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747157462326,
+      "cline_edit_date": 1747157462326,
+      "user_edit_date": null
+    },
+    {
+      "path": "run-ci-tests.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747157523156,
+      "cline_edit_date": 1747157523156,
+      "user_edit_date": null
+    },
+    {
+      "path": "run-ci-tests.bat",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747157543805,
+      "cline_edit_date": 1747157543805,
+      "user_edit_date": null
+    },
+    {
+      "path": "docs/_sidebar.md",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747157562419,
+      "cline_edit_date": 1747157562419,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/koopman/cli.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747157589204,
+      "cline_edit_date": 1747157589204,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/koopman/cli.py",
+      "record_state": "active",
+      "record_source": "user_edited",
+      "cline_read_date": 1747157589204,
+      "cline_edit_date": 1747157589204,
+      "user_edit_date": 1747157603668
+    },
+    {
+      "path": "alan_backend/elfin/visualization/static/model_health_widget.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747157621034,
+      "cline_edit_date": 1747157621034,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/visualization/static/model_health_widget.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747157638337,
+      "cline_edit_date": 1747157638337,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/visualization/static/model_health_widget.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747157653148,
+      "cline_edit_date": 1747157653148,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/visualization/static/model_health_widget.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747157667498,
+      "cline_edit_date": 1747157667498,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/planner/guards.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747157949267,
+      "cline_edit_date": 1747157949267,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/planner/tests/test_guards.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747157996843,
+      "cline_edit_date": 1747157996843,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/planner/goal_graph.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747158480745,
+      "cline_edit_date": 1747158480745,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/planner/tests/test_goal_graph.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747158521146,
+      "cline_edit_date": 1747158521146,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/planner/cli.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747158627564,
+      "cline_edit_date": 1747158627564,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/planner/cli.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747158653864,
+      "cline_edit_date": 1747158653864,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/barrier/__init__.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747159197303,
+      "cline_edit_date": 1747159197303,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/barrier/learner.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747159277075,
+      "cline_edit_date": 1747159277075,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/barrier/sos_verifier.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747159342287,
+      "cline_edit_date": 1747159342287,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/barrier/barrier_bridge_agent.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747159458131,
+      "cline_edit_date": 1747159458131,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/barrier/barrier_bridge_agent.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747159494775,
+      "cline_edit_date": 1747159494775,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/examples/demo_barrier.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747159584197,
+      "cline_edit_date": 1747159584197,
+      "user_edit_date": null
+    },
+    {
+      "path": "docs/errors/E-BARR-001.md",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747159623016,
+      "cline_edit_date": 1747159623016,
+      "user_edit_date": null
+    },
+    {
+      "path": "docs/errors/E-BARR-002.md",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747159665797,
+      "cline_edit_date": 1747159665797,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/barrier/cli.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747159765612,
+      "cline_edit_date": 1747159765612,
+      "user_edit_date": null
+    },
+    {
+      "path": "run_barrier_demo.bat",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747159938641,
+      "cline_edit_date": 1747159938641,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/planner/barrier_planner.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747159995180,
+      "cline_edit_date": 1747159995180,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/planner/demo_barrier_planner.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747160074244,
+      "cline_edit_date": 1747160074244,
+      "user_edit_date": null
+    },
+    {
+      "path": "run_barrier_planner_demo.bat",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747160093659,
+      "cline_edit_date": 1747160093659,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/barrier/sos_mosek.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747160341955,
+      "cline_edit_date": 1747160341955,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/barrier/sos_verifier.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747160378121,
+      "cline_edit_date": 1747160378121,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/barrier/barrier_bridge_agent.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747160397633,
+      "cline_edit_date": 1747160397633,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/barrier/barrier_bridge_agent.py",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1747160397633,
+      "cline_edit_date": 1747160397633,
+      "user_edit_date": 1747160397701
+    },
+    {
+      "path": "alan_backend/elfin/barrier/sos_mosek.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747160711280,
+      "cline_edit_date": 1747160711280,
+      "user_edit_date": null
+    },
+    {
+      "path": "docs/safety_recipes/quadrotor_no_fly_cone.md",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747161063232,
+      "cline_edit_date": 1747161063232,
+      "user_edit_date": null
+    },
+    {
+      "path": "docs/safety_recipes/cartpole_keepout.md",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747161138990,
+      "cline_edit_date": 1747161138990,
+      "user_edit_date": null
+    },
+    {
+      "path": "docs/safety_recipes/swarm_collision_avoid.md",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747161257876,
+      "cline_edit_date": 1747161257876,
+      "user_edit_date": null
+    },
+    {
+      "path": "docs/safety_recipes/README.md",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747161288412,
+      "cline_edit_date": 1747161288412,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/barrier/__init__.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747161308035,
+      "cline_edit_date": 1747161308035,
+      "user_edit_date": null
+    },
+    {
+      "path": "scripts/ci/run_barrier_tests.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747161353537,
+      "cline_edit_date": 1747161353537,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/barrier/learner.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747162499817,
+      "cline_edit_date": 1747162499817,
+      "user_edit_date": null
+    },
+    {
+      "path": "docs/errors/_ERRORS.md",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747162524017,
+      "cline_edit_date": 1747162524017,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/barrier/sos_mosek.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747162560341,
+      "cline_edit_date": 1747160711280,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/barrier/barrier_bridge_agent.py",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747162573205,
+      "cline_edit_date": 1747160397633,
+      "user_edit_date": 1747160397701
+    },
+    {
+      "path": "alan_backend/elfin/barrier/sos_mosek.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747162691897,
+      "cline_edit_date": 1747162691897,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/barrier/sos_mosek.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747162811245,
+      "cline_edit_date": 1747162811245,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/barrier/sos_mosek.py",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1747162811245,
+      "cline_edit_date": 1747162811245,
+      "user_edit_date": 1747162811331
+    },
+    {
+      "path": "alan_backend/elfin/barrier/sos_mosek.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747162931532,
+      "cline_edit_date": 1747162931532,
+      "user_edit_date": 1747162811331
+    },
+    {
+      "path": "alan_backend/elfin/barrier/sos_mosek.py",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1747162931532,
+      "cline_edit_date": 1747162931532,
+      "user_edit_date": 1747162931629
+    },
+    {
+      "path": "alan_backend/elfin/barrier/sos_mosek.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747163060697,
+      "cline_edit_date": 1747163060697,
+      "user_edit_date": 1747162931629
+    },
+    {
+      "path": "alan_backend/elfin/barrier/sos_mosek.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747163180327,
+      "cline_edit_date": 1747163180327,
+      "user_edit_date": 1747162931629
+    },
+    {
+      "path": "alan_backend/elfin/barrier/sos_mosek.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747163301137,
+      "cline_edit_date": 1747163301137,
+      "user_edit_date": 1747162931629
+    },
+    {
+      "path": "alan_backend/elfin/barrier/sos_mosek.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747163424379,
+      "cline_edit_date": 1747163424379,
+      "user_edit_date": 1747162931629
+    },
+    {
+      "path": "alan_backend/elfin/barrier/sos_mosek.py",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1747163424379,
+      "cline_edit_date": 1747163424379,
+      "user_edit_date": 1747163424456
+    },
+    {
+      "path": "alan_backend/elfin/barrier/sos_mosek.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747163544157,
+      "cline_edit_date": 1747163544157,
+      "user_edit_date": 1747163424456
+    },
+    {
+      "path": "alan_backend/elfin/barrier/sos_mosek.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747163572604,
+      "cline_edit_date": 1747163572604,
+      "user_edit_date": 1747163424456
+    },
+    {
+      "path": "alan_backend/elfin/packaging/__init__.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747164301238,
+      "cline_edit_date": 1747164301238,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/packaging/manifest.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747164346427,
+      "cline_edit_date": 1747164346427,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/packaging/lockfile.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747164385316,
+      "cline_edit_date": 1747164385316,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/packaging/resolver.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747164427912,
+      "cline_edit_date": 1747164427912,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/packaging/registry_client.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747164495466,
+      "cline_edit_date": 1747164495466,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan_backend/elfin/cli/packaging_cli.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747164575271,
+      "cline_edit_date": 1747164575271,
+      "user_edit_date": null
+    },
+    {
+      "path": "dashboard/src/hooks/useSSE.ts",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747164730434,
+      "cline_edit_date": 1747164730434,
+      "user_edit_date": null
+    },
+    {
+      "path": "dashboard/src/components/SafetyTimeline.tsx",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747164789210,
+      "cline_edit_date": 1747164789210,
+      "user_edit_date": null
+    },
+    {
+      "path": "dashboard/src/components/IsoSurfaceViewer.tsx",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747164855735,
+      "cline_edit_date": 1747164855735,
+      "user_edit_date": null
+    },
+    {
+      "path": "dashboard/src/components/ParamSlider.tsx",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747164908157,
+      "cline_edit_date": 1747164908157,
+      "user_edit_date": null
+    },
+    {
+      "path": "dashboard/src/App.tsx",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747164974355,
+      "cline_edit_date": 1747164974355,
+      "user_edit_date": null
+    }
+  ],
+  "model_usage": [
+    {
+      "ts": 1747094900544,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1747095002103,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1747096952207,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1747097911426,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1747122280877,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1747122315523,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1747124848103,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1747124888719,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1747125281236,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1747125299014,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1747125425147,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1747125634779,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1747126165354,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1747126221451,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1747126692699,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1747134800216,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1747135498680,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1747135523887,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1747135925891,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1747139603127,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1747140511503,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1747140922435,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1747141036873,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1747141068843,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1747141855709,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1747141903066,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1747141991796,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1747142208741,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1747144168384,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1747144401095,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1747145172221,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1747145279983,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1747146125029,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1747146154820,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1747148696181,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1747148910409,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1747157330541,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1747157366930,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    }
+  ]
+}

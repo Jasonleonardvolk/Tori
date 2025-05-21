@@ -1,0 +1,338 @@
+{
+  "files_in_context": [
+    {
+      "path": "alan2x/check_concept_index.py",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746315346370,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/concept_extractor.py",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746315352435,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/storage/ingest.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746315356518,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/storage/concept_store.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746315360185,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/storage/ingest_atomic_utils.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746315363257,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/lcn/main_loop.py",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746315366890,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/fix_concept_index.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746315418553,
+      "cline_edit_date": 1746315418553,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/diagnose_npz_corruption.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746315455410,
+      "cline_edit_date": 1746315455410,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/README_CONCEPT_INDEX_FIX.md",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746315483337,
+      "cline_edit_date": 1746315483337,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/concept_index_repair.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746315537205,
+      "cline_edit_date": 1746315537205,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/storage/concept_store.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746316014916,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/storage/ingest_atomic_utils.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746316027671,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/storage/ingest_atomic_utils.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746316054604,
+      "cline_edit_date": 1746316054604,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/concept_index_repair.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746316187094,
+      "cline_edit_date": 1746316187094,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/storage/ingest_atomic_utils.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746316398453,
+      "cline_edit_date": 1746316398453,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/README_CONCEPT_STORE_FIX.md",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746316419612,
+      "cline_edit_date": 1746316419612,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/fix_concept_index.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746316576616,
+      "cline_edit_date": 1746316576616,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/storage/concept_store.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746316617672,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/fix_concept_index.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746316640277,
+      "cline_edit_date": 1746316640277,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/storage/concept_store.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746316766762,
+      "cline_edit_date": 1746316766762,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/storage/concept_store.py",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1746316766762,
+      "cline_edit_date": 1746316766762,
+      "user_edit_date": 1746316766821
+    },
+    {
+      "path": "alan2x/README_CONCEPT_STORE_FIX.md",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746316787087,
+      "cline_edit_date": 1746316787087,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/README_CONCEPT_STORE_FIX.md",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1746316787087,
+      "cline_edit_date": 1746316787087,
+      "user_edit_date": 1746316787190
+    },
+    {
+      "path": "alan2x/storage/concept_store.py",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1746316766762,
+      "cline_edit_date": 1746316766762,
+      "user_edit_date": 1746316871812
+    },
+    {
+      "path": "alan2x/storage/concept_store.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746316871847,
+      "cline_edit_date": 1746316871847,
+      "user_edit_date": 1746316871812
+    },
+    {
+      "path": "alan2x/storage/ingest_atomic_utils.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746316964702,
+      "cline_edit_date": 1746316398453,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/storage/concept_store.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746316996757,
+      "cline_edit_date": 1746316996757,
+      "user_edit_date": 1746316871812
+    },
+    {
+      "path": "alan2x/storage/ingest.py",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746317018388,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/storage/ingest.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746317041552,
+      "cline_edit_date": 1746317041552,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/README_CONCEPT_STORE_FIX.md",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746317060848,
+      "cline_edit_date": 1746317060848,
+      "user_edit_date": 1746316787190
+    },
+    {
+      "path": "alan2x/README_CONCEPT_STORE_FIX.md",
+      "record_state": "active",
+      "record_source": "user_edited",
+      "cline_read_date": 1746317060848,
+      "cline_edit_date": 1746317060848,
+      "user_edit_date": 1746317060913
+    },
+    {
+      "path": "alan2x/test_concept_extraction.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746317083337,
+      "cline_edit_date": 1746317083337,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/fix_concept_index.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746317123811,
+      "cline_edit_date": 1746317123811,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/diagnose_npz_corruption.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746317154140,
+      "cline_edit_date": 1746317154140,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/README_CONCEPT_INDEX_FIX.md",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746317182021,
+      "cline_edit_date": 1746317182021,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/README_CONCEPT_INDEX_FIX.md",
+      "record_state": "active",
+      "record_source": "user_edited",
+      "cline_read_date": 1746317182021,
+      "cline_edit_date": 1746317182021,
+      "user_edit_date": 1746317182097
+    },
+    {
+      "path": "alan2x/storage/ingest_atomic_utils.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746317565199,
+      "cline_edit_date": 1746317565199,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/storage/ingest_atomic_utils.py",
+      "record_state": "active",
+      "record_source": "user_edited",
+      "cline_read_date": 1746317565199,
+      "cline_edit_date": 1746317565199,
+      "user_edit_date": 1746317565278
+    },
+    {
+      "path": "alan2x/reset_concept_store.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746317595724,
+      "cline_edit_date": 1746317595724,
+      "user_edit_date": null
+    },
+    {
+      "path": "alan2x/restore_concept_store.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746317733572,
+      "cline_edit_date": 1746317733572,
+      "user_edit_date": null
+    }
+  ],
+  "model_usage": [
+    {
+      "ts": 1746315236271,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1746315333285,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    }
+  ]
+}

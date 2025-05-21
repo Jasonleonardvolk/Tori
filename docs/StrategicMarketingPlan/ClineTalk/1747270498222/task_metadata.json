@@ -1,0 +1,136 @@
+{
+  "files_in_context": [
+    {
+      "path": "client/src/ghost/psi_trajectory/rs_impl/Cargo.toml",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747312803040,
+      "cline_edit_date": 1747312803040,
+      "user_edit_date": null
+    },
+    {
+      "path": ".github/workflows/diagnostic-upload.yml",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747312830297,
+      "cline_edit_date": 1747312830297,
+      "user_edit_date": null
+    },
+    {
+      "path": ".github/DIAGNOSTIC_REPORT_TEMPLATE.md",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747312861021,
+      "cline_edit_date": 1747312861021,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/components/settings/DiagnosticsPanel.tsx",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747312899959,
+      "cline_edit_date": 1747312899959,
+      "user_edit_date": null
+    },
+    {
+      "path": "docs/sprint/diagnostics_docs_sprint.md",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747312944590,
+      "cline_edit_date": 1747312944590,
+      "user_edit_date": null
+    },
+    {
+      "path": "ci/triage.sh",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747313434965,
+      "cline_edit_date": 1747313434965,
+      "user_edit_date": null
+    },
+    {
+      "path": ".github/workflows/diagnostic-upload.yml",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747313450762,
+      "cline_edit_date": 1747313450762,
+      "user_edit_date": null
+    },
+    {
+      "path": ".github/DIAGNOSTIC_REPORT_TEMPLATE.md",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747313469699,
+      "cline_edit_date": 1747313469699,
+      "user_edit_date": null
+    },
+    {
+      "path": "docs/beta_quickstart.md",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747313490338,
+      "cline_edit_date": 1747313490338,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/routes/privacy.tsx",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747313512678,
+      "cline_edit_date": 1747313512678,
+      "user_edit_date": null
+    },
+    {
+      "path": "database/supabase/tables/telemetry.sql",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747313529384,
+      "cline_edit_date": 1747313529384,
+      "user_edit_date": null
+    },
+    {
+      "path": "database/supabase/functions/ingest/index.ts",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747313554251,
+      "cline_edit_date": 1747313554251,
+      "user_edit_date": null
+    },
+    {
+      "path": "database/supabase/functions/ingest/deno.json",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747313572373,
+      "cline_edit_date": 1747313572373,
+      "user_edit_date": null
+    },
+    {
+      "path": "database/grafana/dashboards/telemetry-dashboard.json",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747313626002,
+      "cline_edit_date": 1747313626002,
+      "user_edit_date": null
+    }
+  ],
+  "model_usage": [
+    {
+      "ts": 1747312786334,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1747313174056,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1747313417656,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    }
+  ]
+}

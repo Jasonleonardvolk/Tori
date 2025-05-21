@@ -1,0 +1,30 @@
+# Kaizen Ticket: Optimize MCP Server for 200Hz Throughput
+
+id: KAIZ-001
+title: "Optimize MCP server for 200Hz throughput"
+component: pcc-main
+owner: backend-team
+severity: high
+objective: "Achieve p95 latency below 10ms at 200Hz message rate with delta-based JSON encoding"
+
+success_criteria:
+  - "P95 latency < 10ms at 200Hz throughput as measured by test_pcc_broadcast.py"
+  - "Zero message drops during 5-minute stability test"
+  - "Memory usage remains below 200MB during peak load"
+  - "CPU usage remains below 50% on a standard server instance"
+
+abort_criteria:
+  - "Message drop rate exceeds 0.5%"
+  - "P95 latency exceeds 15ms"
+  - "Memory leak detected (continuous growth over time)"
+
+rollback_plan: "systemctl restart mcp-server@stable"
+
+links:
+  repository: "https://github.com/tori/kha"
+  dashboard: "https://grafana.tori.ai/d/pcc-main"
+  documentation: "https://docs.tori.ai/mcp/server"
+
+status: "complete"
+created_at: "2025-05-18T08:30:00Z"
+updated_at: "2025-05-19T09:15:00Z"

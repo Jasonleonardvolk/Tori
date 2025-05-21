@@ -1,0 +1,46 @@
+# Kaizen Component Schema
+# Defines the structure of components that can be improved through Kaizen tickets
+
+id:
+  type: string
+  required: true
+  description: Unique identifier for the component
+  
+name:
+  type: string
+  required: true
+  description: Human-readable name
+  
+tier:
+  type: integer
+  enum: [0, 1, 2, 3]
+  required: true
+  description: Criticality tier (0=mission-critical to 3=experimental)
+  
+owner:
+  type: string
+  required: true
+  description: Team or individual responsible for this component
+  
+slo:
+  type: object
+  properties:
+    metrics:
+      type: array
+      items:
+        type: object
+        properties:
+          name:
+            type: string
+            required: true
+          threshold:
+            type: string
+            required: true
+          abort_threshold:
+            type: string
+            required: true
+  
+rollback_plan:
+  type: string
+  required: true
+  description: Command or procedure to revert changes to this component

@@ -1,0 +1,882 @@
+{
+  "files_in_context": [
+    {
+      "path": "client/src/__tests__/integration/ExecutionTracer_FieldMeditationMode/ExecutionTracer_FieldMeditationMode.test.js",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746743943247,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/__tests__/integration/Exporter_ConceptGraphService/Exporter_ConceptGraphService.test.js",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746743970456,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/__tests__/integration/Exporter_ConceptGraphService/mockConceptGraphService.js",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746743976373,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/services/exporterService.js",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746743983144,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/__tests__/integration/RefactorService_EditorSyncService/RefactorService_EditorSyncService.test.js",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746743990025,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/services/editorSyncService.js",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746744007542,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/__tests__/integration/RefactorService_EditorSyncService/mockEditorSyncService.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746744034737,
+      "cline_edit_date": 1746744034737,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/__tests__/integration/ExecutionTracer_FieldMeditationMode/mockComponents.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746744055357,
+      "cline_edit_date": 1746744055357,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/services/exporterService.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746744109854,
+      "cline_edit_date": 1746744109854,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/__tests__/integration/ExecutionTracer_FieldMeditationMode/mockExecutionTracerService.js",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746744221347,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/__tests__/integration/ExecutionTracer_FieldMeditationMode/mockExecutionTracerService.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746744234723,
+      "cline_edit_date": 1746744234723,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/__tests__/integration/ExecutionTracer_FieldMeditationMode/mockComponents.test.js",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746744243726,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/__tests__/integration/ExecutionTracer_FieldMeditationMode/mockExecutionTracerService.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746744257944,
+      "cline_edit_date": 1746744257944,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/__tests__/integration/ExecutionTracer_FieldMeditationMode/mockExecutionTracerService.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746744275243,
+      "cline_edit_date": 1746744275243,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/services/exporterService.js",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1746744109854,
+      "cline_edit_date": 1746744109854,
+      "user_edit_date": 1746744348023
+    },
+    {
+      "path": "client/src/services/exporterService.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746744363755,
+      "cline_edit_date": 1746744363755,
+      "user_edit_date": 1746744348023
+    },
+    {
+      "path": "client/src/services/exporterService.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746744380079,
+      "cline_edit_date": 1746744380079,
+      "user_edit_date": 1746744348023
+    },
+    {
+      "path": "client/src/services/exporterService.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746744394084,
+      "cline_edit_date": 1746744394084,
+      "user_edit_date": 1746744348023
+    },
+    {
+      "path": "client/src/services/exporterService.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746744464256,
+      "cline_edit_date": 1746744464256,
+      "user_edit_date": 1746744348023
+    },
+    {
+      "path": "client/src/services/exporterService.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746744512224,
+      "cline_edit_date": 1746744512224,
+      "user_edit_date": 1746744348023
+    },
+    {
+      "path": "client/src/services/exporterService.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746744537563,
+      "cline_edit_date": 1746744537563,
+      "user_edit_date": 1746744348023
+    },
+    {
+      "path": "client/src/services/exporterService.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746744597362,
+      "cline_edit_date": 1746744597362,
+      "user_edit_date": 1746744348023
+    },
+    {
+      "path": "client/src/__tests__/integration/Exporter_ConceptGraphService/Exporter_ConceptGraphService.test.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746744631536,
+      "cline_edit_date": 1746744631536,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/__tests__/integration/Exporter_ConceptGraphService/Exporter_ConceptGraphService.test.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746744660389,
+      "cline_edit_date": 1746744660389,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/services/refactorService.js",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746744721511,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/__tests__/integration/RefactorService_EditorSyncService/mockEditorSyncService.js",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746744732116,
+      "cline_edit_date": 1746744034737,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/__tests__/integration/RefactorService_EditorSyncService/RefactorService_EditorSyncService.test.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746744750357,
+      "cline_edit_date": 1746744750357,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/__tests__/integration/RefactorService_EditorSyncService/mockEditorSyncService.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746744780340,
+      "cline_edit_date": 1746744780340,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/__tests__/integration/RefactorService_EditorSyncService/mockEditorSyncService.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746744792644,
+      "cline_edit_date": 1746744792644,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/__tests__/integration/RefactorService_EditorSyncService/RefactorService_EditorSyncService.test.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746744831736,
+      "cline_edit_date": 1746744831736,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/__tests__/integration/RefactorService_EditorSyncService/RefactorService_EditorSyncService.test.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746744886560,
+      "cline_edit_date": 1746744886560,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/__tests__/integration/RefactorService_EditorSyncService/RefactorService_EditorSyncService.test.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746744925320,
+      "cline_edit_date": 1746744925320,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/__tests__/integration/MCPClient_DebugAgent/MCPClient_DebugAgent.test.js",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746744975649,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/__tests__/integration/MCPClient_DebugAgent/mockMcpClientService.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746745017247,
+      "cline_edit_date": 1746745017247,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/__tests__/integration/MCPClient_DebugAgent/mockMcpClientService.test.js",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746745025792,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/DebugAgentPanel.jsx",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746745035228,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/__tests__/integration/MCPClient_DebugAgent/mockMcpClientService.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746745116515,
+      "cline_edit_date": 1746745116515,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/__tests__/integration/MCPClient_DebugAgent/MCPClient_DebugAgent.test.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746745138384,
+      "cline_edit_date": 1746745138384,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/__tests__/components/PersonaSelector/PersonaSelector.test.js",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746745344313,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/components/PersonaSelector/PersonaSelector.jsx",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746745350356,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/components/PersonaSelector/PersonaContext.js",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746745362233,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/test-utils.js",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746745368479,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/__tests__/components/PersonaSelector/__mocks__/PersonaContext.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746745390249,
+      "cline_edit_date": 1746745390249,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/__tests__/components/PersonaSelector/PersonaSelector.test.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746745402777,
+      "cline_edit_date": 1746745402777,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/__tests__/components/PersonaSelector/PersonaSelector.test.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746745421737,
+      "cline_edit_date": 1746745421737,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/__tests__/components/PersonaSelector/PersonaSelector.test.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746745435557,
+      "cline_edit_date": 1746745435557,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/__tests__/components/PersonaSelector/renderWithProviders.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746745455565,
+      "cline_edit_date": 1746745455565,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/__tests__/components/PersonaSelector/PersonaSelector.test.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746745466519,
+      "cline_edit_date": 1746745466519,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/__tests__/components/PersonaSelector/__mocks__/PersonaContext.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746745615884,
+      "cline_edit_date": 1746745615884,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/__tests__/components/PersonaSelector/PersonaSelector.test.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746745633248,
+      "cline_edit_date": 1746745633248,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/__tests__/components/PersonaSelector/PersonaSelector.test.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746745649353,
+      "cline_edit_date": 1746745649353,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/__tests__/components/PersonaSelector/PersonaSelector.test.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746745660794,
+      "cline_edit_date": 1746745660794,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/__tests__/integration/RefactorService_EditorSyncService/mockEditorSyncService.test.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746745866430,
+      "cline_edit_date": 1746745866430,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/__tests__/integration/ExecutionTracer_FieldMeditationMode/mockExecutionTracerService.test.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746745880335,
+      "cline_edit_date": 1746745880335,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/__tests__/integration/Exporter_ConceptGraphService/mockConceptGraphService.test.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746745895181,
+      "cline_edit_date": 1746745895181,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/README.md",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746746090525,
+      "cline_edit_date": 1746746090525,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/package.json",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746746097631,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "server.js",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746746232147,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/package.json",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746746303644,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/App.jsx",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746746940279,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/package.json",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746747132152,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/package.json",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746747343774,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/start-react.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746747360623,
+      "cline_edit_date": 1746747360623,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/package.json",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746747373574,
+      "cline_edit_date": 1746747373574,
+      "user_edit_date": null
+    },
+    {
+      "path": "start-app.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746747390548,
+      "cline_edit_date": 1746747390548,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/package.json",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746749628837,
+      "cline_edit_date": 1746747373574,
+      "user_edit_date": null
+    },
+    {
+      "path": ".env",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746749733423,
+      "cline_edit_date": 1746749733423,
+      "user_edit_date": null
+    },
+    {
+      "path": ".env",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746750176388,
+      "cline_edit_date": 1746750176388,
+      "user_edit_date": null
+    },
+    {
+      "path": "package.json",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746750375886,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/package.json",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746750390507,
+      "cline_edit_date": 1746747373574,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/package.json",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746750409910,
+      "cline_edit_date": 1746750409910,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/package.json",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746750428537,
+      "cline_edit_date": 1746750428537,
+      "user_edit_date": null
+    },
+    {
+      "path": "server.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746750501970,
+      "cline_edit_date": 1746750501970,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/package.json",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746750514111,
+      "cline_edit_date": 1746750514111,
+      "user_edit_date": null
+    },
+    {
+      "path": "serve-static.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746750654470,
+      "cline_edit_date": 1746750654470,
+      "user_edit_date": null
+    },
+    {
+      "path": "serve-static.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746750723573,
+      "cline_edit_date": 1746750723573,
+      "user_edit_date": null
+    },
+    {
+      "path": "serve-static.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746750733557,
+      "cline_edit_date": 1746750733557,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/public/index.html",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746750848840,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/public/index.html",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746750861644,
+      "cline_edit_date": 1746750861644,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/public/demo.html",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746750996099,
+      "cline_edit_date": 1746750996099,
+      "user_edit_date": null
+    },
+    {
+      "path": "ui_wireframes.md",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746751081652,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/components/PersonaSelector/PersonaSelector.jsx",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746751351042,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/components/PersonaSelector/PersonaSelector.css",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746751360160,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/public/improved-demo.html",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746751438642,
+      "cline_edit_date": 1746751438642,
+      "user_edit_date": null
+    },
+    {
+      "path": "start-react.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746751588702,
+      "cline_edit_date": 1746751588702,
+      "user_edit_date": null
+    },
+    {
+      "path": "start-react.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746752616777,
+      "cline_edit_date": 1746752616777,
+      "user_edit_date": null
+    },
+    {
+      "path": "start-react.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746752630282,
+      "cline_edit_date": 1746752630282,
+      "user_edit_date": null
+    },
+    {
+      "path": "public/index.html",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746752833166,
+      "cline_edit_date": 1746752833166,
+      "user_edit_date": null
+    },
+    {
+      "path": "public/manifest.json",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746752846631,
+      "cline_edit_date": 1746752846631,
+      "user_edit_date": null
+    },
+    {
+      "path": "src/index.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746752900172,
+      "cline_edit_date": 1746752900172,
+      "user_edit_date": null
+    },
+    {
+      "path": "src/index.css",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746752921811,
+      "cline_edit_date": 1746752921811,
+      "user_edit_date": null
+    },
+    {
+      "path": "src/App.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746752966006,
+      "cline_edit_date": 1746752966006,
+      "user_edit_date": null
+    },
+    {
+      "path": "src/App.css",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746753008581,
+      "cline_edit_date": 1746753008581,
+      "user_edit_date": null
+    },
+    {
+      "path": "src/index.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746753417192,
+      "cline_edit_date": 1746753417192,
+      "user_edit_date": null
+    },
+    {
+      "path": "public/manifest.json",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746753468786,
+      "cline_edit_date": 1746753468786,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/.env",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746753627934,
+      "cline_edit_date": 1746753627934,
+      "user_edit_date": null
+    },
+    {
+      "path": "docs/ALAN_IDE_Phase3_Implementation_Progress.md",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746753743488,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "docs/ALAN_IDE_Phase3_Sprint2_Implementation.md",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746754405934,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "docs/ALAN_IDE_Phase3_Sprint3_Implementation.md",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746754414252,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    }
+  ],
+  "model_usage": [
+    {
+      "ts": 1746743929415,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1746746182537,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1746746219045,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1746747030856,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1746747087105,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1746748202637,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1746748262984,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1746748505932,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1746748891372,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1746749931719,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1746749953610,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1746751633689,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1746752490120,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1746754157705,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    }
+  ]
+}

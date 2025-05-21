@@ -1,0 +1,148 @@
+{
+  "files_in_context": [
+    {
+      "path": "c:\\Users\\jason\\AppData\\Roaming\\Code\\User\\globalStorage\\saoudrizwan.claude-dev\\settings\\cline_mcp_settings.json",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746810023724,
+      "cline_edit_date": 1746810023724,
+      "user_edit_date": null
+    },
+    {
+      "path": "C:\\Users\\jason\\Documents\\Cline\\MCP\\puppeteer\\test.html",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746810088394,
+      "cline_edit_date": 1746810088394,
+      "user_edit_date": null
+    },
+    {
+      "path": "c:\\Users\\jason\\AppData\\Roaming\\Code\\User\\globalStorage\\saoudrizwan.claude-dev\\settings\\cline_mcp_settings.json",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746810428212,
+      "cline_edit_date": 1746810428212,
+      "user_edit_date": null
+    },
+    {
+      "path": "C:\\Users\\jason\\Documents\\Cline\\MCP\\puppeteer\\run-puppeteer.bat",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746810511462,
+      "cline_edit_date": 1746810511462,
+      "user_edit_date": null
+    },
+    {
+      "path": "c:\\Users\\jason\\AppData\\Roaming\\Code\\User\\globalStorage\\saoudrizwan.claude-dev\\settings\\cline_mcp_settings.json",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746810767369,
+      "cline_edit_date": 1746810767369,
+      "user_edit_date": null
+    },
+    {
+      "path": "C:\\Users\\jason\\Documents\\Cline\\MCP\\puppeteer\\package.json",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746811090015,
+      "cline_edit_date": 1746811090015,
+      "user_edit_date": null
+    },
+    {
+      "path": "C:\\Users\\jason\\Documents\\Cline\\MCP\\puppeteer\\server.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746811871935,
+      "cline_edit_date": 1746811871935,
+      "user_edit_date": null
+    },
+    {
+      "path": "c:\\Users\\jason\\AppData\\Roaming\\Code\\User\\globalStorage\\saoudrizwan.claude-dev\\settings\\cline_mcp_settings.json",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746811919944,
+      "cline_edit_date": 1746811919944,
+      "user_edit_date": null
+    },
+    {
+      "path": "C:\\Users\\jason\\Desktop\\tori\\kha\\run-puppeteer-test.bat",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746812461101,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "C:\\Users\\jason\\Desktop\\tori\\kha\\puppeteer-test.js",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746812467907,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "C:\\Users\\jason\\Desktop\\tori\\kha\\run-puppeteer-recorder.bat",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746812473316,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "C:\\Users\\jason\\Desktop\\tori\\kha\\puppeteer-demo.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746813706348,
+      "cline_edit_date": 1746813706348,
+      "user_edit_date": null
+    },
+    {
+      "path": "C:\\Users\\jason\\Desktop\\tori\\kha\\run-puppeteer-demo.bat",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746813718604,
+      "cline_edit_date": 1746813718604,
+      "user_edit_date": null
+    },
+    {
+      "path": "C:\\Users\\jason\\Desktop\\tori\\kha\\PUPPETEER_README.md",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746813752210,
+      "cline_edit_date": 1746813752210,
+      "user_edit_date": null
+    },
+    {
+      "path": "C:\\Users\\jason\\Desktop\\tori\\kha\\puppeteer-demo.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746813794304,
+      "cline_edit_date": 1746813794304,
+      "user_edit_date": null
+    },
+    {
+      "path": "C:\\Users\\jason\\Desktop\\tori\\kha\\puppeteer-analyzer.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746813857883,
+      "cline_edit_date": 1746813857883,
+      "user_edit_date": null
+    },
+    {
+      "path": "C:\\Users\\jason\\Desktop\\tori\\kha\\run-site-analyzer.bat",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746813871434,
+      "cline_edit_date": 1746813871434,
+      "user_edit_date": null
+    }
+  ],
+  "model_usage": [
+    {
+      "ts": 1746809931289,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    }
+  ]
+}

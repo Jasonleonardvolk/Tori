@@ -1,0 +1,148 @@
+# Kaizen Registry Schema v2
+# Extended with support for tenant isolation and future multi-tenant capabilities
+
+# Ticket schema
+ticket:
+  type: object
+  required:
+    - id
+    - title
+    - status
+    - component
+    - severity
+    - createdDate
+  properties:
+    id:
+      type: string
+      pattern: "^[A-Z]+-[A-Z]+-\\d+$"
+      description: "Unique identifier for the ticket (format: TENANT-KAIZ-001)"
+    
+    title:
+      type: string
+      maxLength: 200
+      description: "Short, descriptive title for the ticket"
+    
+    description:
+      type: string
+      maxLength: 5000
+      description: "Detailed description of the issue or task"
+    
+    status:
+      type: string
+      enum: ["open", "in_progress", "resolved", "closed"]
+      description: "Current ticket status"
+    
+    component:
+      type: string
+      description: "System component affected by the issue"
+    
+    severity:
+      type: string
+      enum: ["low", "medium", "high", "critical"]
+      description: "Issue severity level"
+    
+    createdDate:
+      type: string
+      format: date-time
+      description: "When the ticket was created"
+    
+    resolvedDate:
+      type: string
+      format: date-time
+      description: "When the ticket was resolved (if applicable)"
+    
+    assignee:
+      type: string
+      description: "Person assigned to the ticket"
+    
+    labels:
+      type: array
+      items:
+        type: string
+      description: "Additional categorization labels"
+    
+    rca:
+      type: string
+      description: "Root cause analysis document (for resolved tickets)"
+    
+    metrics:
+      type: object
+      description: "Metrics associated with this ticket"
+    
+    # Multi-tenant support fields - added as part of v2 schema
+    tenant_id:
+      type: string
+      default: "default"
+      description: "Tenant identifier for multi-tenant support"
+    
+    visibility:
+      type: string
+      enum: ["internal", "public", "private"]
+      default: "internal"
+      description: "Visibility scope for the ticket"
+
+# Tenant configuration schema
+tenant:
+  type: object
+  required:
+    - id
+    - name
+    - status
+  properties:
+    id:
+      type: string
+      pattern: "^[a-z0-9-]+$"
+      description: "Unique tenant identifier"
+    
+    name:
+      type: string
+      maxLength: 100
+      description: "Display name for the tenant"
+    
+    api_key:
+      type: string
+      description: "Authentication key (stored as hash)"
+    
+    status:
+      type: string
+      enum: ["active", "inactive", "suspended"]
+      default: "active"
+      description: "Tenant status"
+    
+    created_at:
+      type: string
+      format: date-time
+      description: "When the tenant was created"
+    
+    quota:
+      type: object
+      properties:
+        tickets:
+          type: integer
+          minimum: 0
+          description: "Maximum number of tickets allowed"
+        instances:
+          type: integer
+          minimum: 0
+          description: "Maximum number of instances allowed"
+      description: "Resource quotas for the tenant"
+    
+    access_control:
+      type: array
+      items:
+        type: string
+      description: "List of components the tenant can access"
+    
+    sla:
+      type: object
+      description: "Custom SLA overrides for this tenant"
+      properties:
+        high:
+          type: integer
+          description: "SLA hours for high severity tickets"
+        medium:
+          type: integer
+          description: "SLA hours for medium severity tickets"
+        low:
+          type: integer
+          description: "SLA hours for low severity tickets"

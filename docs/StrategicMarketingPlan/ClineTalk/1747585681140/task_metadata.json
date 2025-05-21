@@ -1,0 +1,66 @@
+{
+  "files_in_context": [
+    {
+      "path": "package.json",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747587362586,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "pnpm-workspace.yaml",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747587366939,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "README.md",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747587371443,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/ui-kit/package.json",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747587378241,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "docs/RevisedMasterPlanandStrategicAnalysis05_12_25.docx",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747587799105,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "docs/conversations/ChatGPT_ConversationAlanIntegration.json",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747588081590,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    }
+  ],
+  "model_usage": [
+    {
+      "ts": 1747585681275,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1747588119264,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "files_in_context": [
+    {
+      "path": "ingest_pdf/koopman_reasoning_demo.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747053041907,
+      "cline_edit_date": 1747053041907,
+      "user_edit_date": null
+    },
+    {
+      "path": "ingest_pdf/README_KOOPMAN.md",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747053094247,
+      "cline_edit_date": 1747053094247,
+      "user_edit_date": null
+    }
+  ],
+  "model_usage": [
+    {
+      "ts": 1747053042475,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    }
+  ]
+}

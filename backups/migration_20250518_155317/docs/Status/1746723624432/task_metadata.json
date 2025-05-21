@@ -1,0 +1,350 @@
+{
+  "files_in_context": [
+    {
+      "path": "docs/Phase3RoadMap2.docx",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746723642133,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "docs/Phase3RoadMap2addendum.docx",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746723646348,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "docs/Hybrid FastMCP and Lastmile Agent Integration for ALAN IDE.docx",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746723653633,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/components/ConceptFieldCanvas/ConceptFieldCanvas.jsx",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746723660927,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/components/FieldMeditationMode/FieldMeditationMode.jsx",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746723670486,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "docs/elfin.pdf",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746723674981,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/components/ConceptFieldCanvas/EdgeConnection.jsx",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746723685126,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/components/ConceptFieldCanvas/KoopmanOverlay.jsx",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746723691272,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "docs/ALAN_IDE_Phase3_Implementation_Plan.md",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746723779076,
+      "cline_edit_date": 1746723779076,
+      "user_edit_date": null
+    },
+    {
+      "path": "src/python_to_concept_graph.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746723868536,
+      "cline_edit_date": 1746723868536,
+      "user_edit_date": null
+    },
+    {
+      "path": "src/project_vault_service.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746723940120,
+      "cline_edit_date": 1746723940120,
+      "user_edit_date": null
+    },
+    {
+      "path": "src/import_wizard.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746724014720,
+      "cline_edit_date": 1746724014720,
+      "user_edit_date": null
+    },
+    {
+      "path": "src/run_alan_ide.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746724057947,
+      "cline_edit_date": 1746724057947,
+      "user_edit_date": null
+    },
+    {
+      "path": "src/python_to_concept_graph.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746724330660,
+      "cline_edit_date": 1746724330660,
+      "user_edit_date": null
+    },
+    {
+      "path": "src/run_alan_ide.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746724342745,
+      "cline_edit_date": 1746724342745,
+      "user_edit_date": null
+    },
+    {
+      "path": "src/import_wizard.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746724353939,
+      "cline_edit_date": 1746724353939,
+      "user_edit_date": null
+    },
+    {
+      "path": "src/README.md",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746724376849,
+      "cline_edit_date": 1746724376849,
+      "user_edit_date": null
+    },
+    {
+      "path": "src/run_alan_ide.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746724391076,
+      "cline_edit_date": 1746724391076,
+      "user_edit_date": null
+    },
+    {
+      "path": "src/import_wizard.py",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746724540860,
+      "cline_edit_date": 1746724540860,
+      "user_edit_date": null
+    },
+    {
+      "path": "src/import_wizard.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746724558936,
+      "cline_edit_date": 1746724558936,
+      "user_edit_date": null
+    },
+    {
+      "path": "src/run_alan_ide.py",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746724583138,
+      "cline_edit_date": 1746724583138,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/services/editorSyncService.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746725001419,
+      "cline_edit_date": 1746725001419,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/utils/performance.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746725034156,
+      "cline_edit_date": 1746725034156,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/components/PersonaSelector/PersonaContext.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746725073229,
+      "cline_edit_date": 1746725073229,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/components/PersonaSelector/PersonaSelector.jsx",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746725102390,
+      "cline_edit_date": 1746725102390,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/components/PersonaSelector/PersonaSelector.css",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746725132078,
+      "cline_edit_date": 1746725132078,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/services/accessibilityBridgeService.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746725204005,
+      "cline_edit_date": 1746725204005,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/components/ConceptEditorPanel/ConceptEditorPanel.jsx",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746725249437,
+      "cline_edit_date": 1746725249437,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/components/ConceptEditorPanel/ConceptEditorPanel.css",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746725280986,
+      "cline_edit_date": 1746725280986,
+      "user_edit_date": null
+    },
+    {
+      "path": "docs/ALAN_IDE_Phase3_Sprint2_Implementation.md",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746725323519,
+      "cline_edit_date": 1746725323519,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/services/executionTracerService.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746725453119,
+      "cline_edit_date": 1746725453119,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/components/FieldMeditationMode/FieldMeditationMode.jsx",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746725542150,
+      "cline_edit_date": 1746725542150,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/components/FieldMeditationMode/FieldMeditationMode.css",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746725594964,
+      "cline_edit_date": 1746725594964,
+      "user_edit_date": null
+    },
+    {
+      "path": "docs/ALAN_IDE_Phase3_Sprint3_Implementation.md",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746725645420,
+      "cline_edit_date": 1746725645420,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/services/refactorService.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746725819637,
+      "cline_edit_date": 1746725819637,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/services/mcpClientService.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746725923682,
+      "cline_edit_date": 1746725923682,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/services/mcpClientService.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746726047360,
+      "cline_edit_date": 1746726047360,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/services/mcpClientService.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746726152673,
+      "cline_edit_date": 1746726152673,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/services/mcpClientService.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746726195053,
+      "cline_edit_date": 1746726195053,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/services/exporterService.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746726264038,
+      "cline_edit_date": 1746726264038,
+      "user_edit_date": null
+    }
+  ],
+  "model_usage": [
+    {
+      "ts": 1746723624735,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1746724914272,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1746724935218,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1746726314255,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    }
+  ]
+}

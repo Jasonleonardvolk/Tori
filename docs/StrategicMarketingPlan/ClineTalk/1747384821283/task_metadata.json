@@ -1,0 +1,796 @@
+{
+  "files_in_context": [
+    {
+      "path": "packages/runtime-bridge/src/useAlanSocket.ts",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747393535240,
+      "cline_edit_date": 1747393535240,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/runtime-bridge/src/types/env.d.ts",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747393559145,
+      "cline_edit_date": 1747393559145,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/runtime-bridge/src/types/websocket.ts",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747393587745,
+      "cline_edit_date": 1747393587745,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/runtime-bridge/src/index.ts",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747393613048,
+      "cline_edit_date": 1747393613048,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/runtime-bridge/.eslintrc.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747393638541,
+      "cline_edit_date": 1747393638541,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/runtime-bridge/README.md",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747393672209,
+      "cline_edit_date": 1747393672209,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/ui-kit/package.json",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747393719530,
+      "cline_edit_date": 1747393719530,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/ui-kit/tsconfig.json",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747393749187,
+      "cline_edit_date": 1747393749187,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/ui-kit/tsconfig.node.json",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747393777027,
+      "cline_edit_date": 1747393777027,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/ui-kit/src/types/env.d.ts",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747393810633,
+      "cline_edit_date": 1747393810633,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/ui-kit/src/components/WebSocketStatus/WebSocketStatus.tsx",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747393841269,
+      "cline_edit_date": 1747393841269,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/ui-kit/src/components/WebSocketStatus/WebSocketStatus.css",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747393873291,
+      "cline_edit_date": 1747393873291,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/ui-kit/src/index.ts",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747393900773,
+      "cline_edit_date": 1747393900773,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/ui-kit/README.md",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747393937639,
+      "cline_edit_date": 1747393937639,
+      "user_edit_date": null
+    },
+    {
+      "path": "tsconfig.json",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747394879623,
+      "cline_edit_date": 1747394879623,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/data-model/package.json",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747394944619,
+      "cline_edit_date": 1747394944619,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/data-model/tsconfig.json",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747394975823,
+      "cline_edit_date": 1747394975823,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/data-model/tsconfig.node.json",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747395006728,
+      "cline_edit_date": 1747395006728,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/ingest/package.json",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747395039331,
+      "cline_edit_date": 1747395039331,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/ingest/tsconfig.json",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747395076157,
+      "cline_edit_date": 1747395076157,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/ingest/tsconfig.node.json",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747395113696,
+      "cline_edit_date": 1747395113696,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/data-model/src/index.ts",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747395142976,
+      "cline_edit_date": 1747395142976,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/ingest/src/index.ts",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747395178950,
+      "cline_edit_date": 1747395178950,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/ingest/README.md",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747395659627,
+      "cline_edit_date": 1747395659627,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/ingest/src/types/env.d.ts",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747395679654,
+      "cline_edit_date": 1747395679654,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/ingest/.eslintrc.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747395706564,
+      "cline_edit_date": 1747395706564,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/ui-kit/.eslintrc.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747395730210,
+      "cline_edit_date": 1747395730210,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/ingest/.eslintrc.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747395750869,
+      "cline_edit_date": 1747395750869,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/data-model/.eslintrc.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747395773806,
+      "cline_edit_date": 1747395773806,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/runtime-bridge/README.md",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747395804749,
+      "cline_edit_date": 1747395804749,
+      "user_edit_date": null
+    },
+    {
+      "path": "README.md",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747396076289,
+      "cline_edit_date": 1747396076289,
+      "user_edit_date": null
+    },
+    {
+      "path": "package.json",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747396160382,
+      "cline_edit_date": 1747396160382,
+      "user_edit_date": null
+    },
+    {
+      "path": "scripts/update-imports.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747396180856,
+      "cline_edit_date": 1747396180856,
+      "user_edit_date": null
+    },
+    {
+      "path": ".github/workflows/ci.yml",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747396202606,
+      "cline_edit_date": 1747396202606,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/runtime-bridge/src/types/messages.schema.ts",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747396228796,
+      "cline_edit_date": 1747396228796,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/runtime-bridge/package.json",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747396251915,
+      "cline_edit_date": 1747396251915,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/runtime-bridge/src/index.ts",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747396273603,
+      "cline_edit_date": 1747396273603,
+      "user_edit_date": null
+    },
+    {
+      "path": "scripts/update-imports.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747396868635,
+      "cline_edit_date": 1747396868635,
+      "user_edit_date": null
+    },
+    {
+      "path": "scripts/update-imports.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747397035530,
+      "cline_edit_date": 1747397035530,
+      "user_edit_date": null
+    },
+    {
+      "path": "README.md",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747397158109,
+      "cline_edit_date": 1747397158109,
+      "user_edit_date": null
+    },
+    {
+      "path": "scripts/update-imports.js",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747397623559,
+      "cline_edit_date": 1747397035530,
+      "user_edit_date": null
+    },
+    {
+      "path": "scripts/update-imports.js",
+      "record_state": "active",
+      "record_source": "user_edited",
+      "cline_read_date": 1747397623559,
+      "cline_edit_date": 1747397035530,
+      "user_edit_date": 1747398174833
+    },
+    {
+      "path": "MONOREPO_SETUP.md",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747398351279,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "IMPORT_MIGRATION.md",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747398360475,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "README.md",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747398515593,
+      "cline_edit_date": 1747398515593,
+      "user_edit_date": null
+    },
+    {
+      "path": "package.json",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747398533687,
+      "cline_edit_date": 1747398533687,
+      "user_edit_date": null
+    },
+    {
+      "path": "turbo.json",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747398580327,
+      "cline_edit_date": 1747398580327,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/components/ErrorBoundary.jsx",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747398606469,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/ui-kit/src/components/ErrorBoundary/ErrorBoundary.tsx",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747398624325,
+      "cline_edit_date": 1747398624325,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/ui-kit/src/components/ErrorBoundary/index.ts",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747398666533,
+      "cline_edit_date": 1747398666533,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/ui-kit/src/index.ts",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747398698000,
+      "cline_edit_date": 1747398698000,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/runtime-bridge/src/RuntimeProvider.tsx",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747398719095,
+      "cline_edit_date": 1747398719095,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/runtime-bridge/src/useAlanSocket.ts",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747398732376,
+      "cline_edit_date": 1747393535240,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/runtime-bridge/src/RuntimeProvider.tsx",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747398753565,
+      "cline_edit_date": 1747398753565,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/runtime-bridge/src/index.ts",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747398766883,
+      "cline_edit_date": 1747396273603,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/runtime-bridge/src/index.ts",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747398786020,
+      "cline_edit_date": 1747398786020,
+      "user_edit_date": null
+    },
+    {
+      "path": "package.json",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1747398533687,
+      "cline_edit_date": 1747398533687,
+      "user_edit_date": 1747398909006
+    },
+    {
+      "path": "packages/ui-kit/src/components/CodeWorkspace/CodeWorkspace.tsx",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747398950455,
+      "cline_edit_date": 1747398950455,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/ui-kit/src/components/CodeWorkspace/CodeWorkspace.tsx",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747399007436,
+      "cline_edit_date": 1747399007436,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/ui-kit/src/components/CodeWorkspace/CodeWorkspace.tsx",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747399035649,
+      "cline_edit_date": 1747399035649,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/ui-kit/src/components/CodeWorkspace/index.ts",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747399060014,
+      "cline_edit_date": 1747399060014,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/ui-kit/src/index.ts",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747399078911,
+      "cline_edit_date": 1747399078911,
+      "user_edit_date": null
+    },
+    {
+      "path": "apps/ide/src/ItoriIDELayout.tsx",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747399166411,
+      "cline_edit_date": 1747399166411,
+      "user_edit_date": null
+    },
+    {
+      "path": "apps/ide/src/ItoriIDELayout.css",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747399193545,
+      "cline_edit_date": 1747399193545,
+      "user_edit_date": null
+    },
+    {
+      "path": "apps/ide/package.json",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747399348221,
+      "cline_edit_date": 1747399348221,
+      "user_edit_date": null
+    },
+    {
+      "path": "apps/ide/tsconfig.json",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747399371593,
+      "cline_edit_date": 1747399371593,
+      "user_edit_date": null
+    },
+    {
+      "path": "apps/ide/tsconfig.node.json",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747399393934,
+      "cline_edit_date": 1747399393934,
+      "user_edit_date": null
+    },
+    {
+      "path": "apps/ide/vite.config.ts",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747399417072,
+      "cline_edit_date": 1747399417072,
+      "user_edit_date": null
+    },
+    {
+      "path": "apps/ide/vite.config.ts",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747399438988,
+      "cline_edit_date": 1747399438988,
+      "user_edit_date": null
+    },
+    {
+      "path": "apps/ide/src/App.tsx",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747399466002,
+      "cline_edit_date": 1747399466002,
+      "user_edit_date": null
+    },
+    {
+      "path": "apps/ide/src/App.css",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747399492468,
+      "cline_edit_date": 1747399492468,
+      "user_edit_date": null
+    },
+    {
+      "path": "apps/ide/src/main.tsx",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747399536708,
+      "cline_edit_date": 1747399536708,
+      "user_edit_date": null
+    },
+    {
+      "path": "apps/ide/src/index.css",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747399578201,
+      "cline_edit_date": 1747399578201,
+      "user_edit_date": null
+    },
+    {
+      "path": "apps/ide/index.html",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747399624283,
+      "cline_edit_date": 1747399624283,
+      "user_edit_date": null
+    },
+    {
+      "path": "apps/ide/.env.development",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747400082107,
+      "cline_edit_date": 1747400082107,
+      "user_edit_date": null
+    },
+    {
+      "path": "package.json",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747400112346,
+      "cline_edit_date": 1747400112346,
+      "user_edit_date": 1747398909006
+    },
+    {
+      "path": "packages/ui-kit/.storybook/main.ts",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747489269241,
+      "cline_edit_date": 1747489269241,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/ui-kit/.storybook/preview.ts",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747489285292,
+      "cline_edit_date": 1747489285292,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/ui-kit/package.json",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747489318904,
+      "cline_edit_date": 1747489318904,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/ui-kit/src/components/WebSocketStatus/WebSocketStatus.stories.tsx",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747489336714,
+      "cline_edit_date": 1747489336714,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/ui-kit/src/components/CodeWorkspace/CodeWorkspace.stories.tsx",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747489358584,
+      "cline_edit_date": 1747489358584,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/ui-kit/src/languages/elfin/index.ts",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747489387839,
+      "cline_edit_date": 1747489387839,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/ui-kit/src/components/CodeWorkspace/CodeWorkspace.tsx",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747489407762,
+      "cline_edit_date": 1747489407762,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/ui-kit/src/index.ts",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747489428494,
+      "cline_edit_date": 1747489428494,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/ui-kit/src/types/codemirror.d.ts",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747489448928,
+      "cline_edit_date": 1747489448928,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/ui-kit/src/types/codemirror.d.ts",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747489469701,
+      "cline_edit_date": 1747489469701,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/ui-kit/src/components/CodeWorkspace/ElfinExample.stories.tsx",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747489496598,
+      "cline_edit_date": 1747489496598,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/ui-kit/src/types/storybook.d.ts",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747489516122,
+      "cline_edit_date": 1747489516122,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/ui-kit/src/types/storybook.d.ts",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747489537455,
+      "cline_edit_date": 1747489537455,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/ui-kit/scripts/run-storybook.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747489570388,
+      "cline_edit_date": 1747489570388,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/ui-kit/package.json",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747489591781,
+      "cline_edit_date": 1747489591781,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/ui-kit/README.md",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747489622859,
+      "cline_edit_date": 1747489622859,
+      "user_edit_date": null
+    }
+  ],
+  "model_usage": [
+    {
+      "ts": 1747393496887,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1747395181278,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1747395609057,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1747397615456,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1747398496319,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1747399313973,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1747399350101,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1747401159303,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1747402066995,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    }
+  ]
+}

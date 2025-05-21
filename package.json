@@ -3,27 +3,32 @@
   "version": "0.3.0",
   "description": "ITORI IDE - Development Environment for ITORI Platform",
   "private": true,
+  "workspaces": [
+    "ide_frontend",
+    "tori_chat_frontend"
+  ],
   "scripts": {
     "check-ports": "node port-check.js",
-    "dev": "npm run check-ports && vite",
+    "dev": "pnpm run check-ports && turbo run dev",
     "dev:chat": "pnpm --filter @itori/chat dev",
     "dev:enterprise": "pnpm --filter @itori/chatenterprise dev",
     "dev:ide": "pnpm --filter @itori/ide dev",
-    "build": "pnpm -r build",
+    "build": "turbo run build",
     "build:chat": "pnpm --filter @itori/chat build",
     "build:enterprise": "pnpm --filter @itori/chatenterprise build",
     "build:ide": "pnpm --filter @itori/ide build",
     "preview": "vite preview",
-    "type-check": "tsc --noEmit",
+    "test": "turbo run test",
+    "type-check": "turbo run typecheck",
     "codemod:apps": "pnpm exec jscodeshift -t scripts/update-imports.js \"apps/**/*.{ts,tsx,jsx}\"",
     "codemod:client": "pnpm exec jscodeshift -t scripts/update-imports.js \"client/src/**/*.{js,ts,jsx,tsx}\"",
-    "lint": "pnpm turbo run lint",
-    "typecheck": "pnpm turbo run typecheck"
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck"
   },
   "dependencies": {
     "preact": "^10.26.6",
     "react": "^18.2.0",
-    "react-diff-viewer": "^3.1.1",
+    "react-diff-viewer-continued": "4.0.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.22.3"
   },

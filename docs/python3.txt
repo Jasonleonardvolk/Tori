@@ -1,0 +1,2743 @@
+--- PAGE 1 ---
+Eurographics Conference on Visualization (EuroVis) 2025
+W. Aigner, N. Andrienko, and B. Wang
+(Guest Editors)
+COMPUTER GRAPHICS forum
+Volume 44 (2025), Number 3
+MatplotAlt: A Python Library for Adding Alt Text to Matplotlib
+Figures in Computational Notebooks
+Kai Nylund1
+and Jennifer Mankoff1
+and Venkatesh Potluri2
+1Paul G. Allen School of Computer Science & Engineering, University of Washington
+2University of Michigan School of Information
+knylund@cs.washington.edu
+Figure 1: MatplotAlt can be used to generate and surface Matplotlib alt text in a single line of code. In this example, we call MatplotAlt’s
+show_with_alt function after creating a Matplotlib bar chart to display heuristic-based alt text in markdown and embedded in a saved
+version of the figure. desc_level=3 indicates that the description includes encodings, statistics, and trends. MatplotAlt also provides
+options to embed alt text directly in Jupyter figures, and generate descriptions using vision language models.
+Abstract
+We present MatplotAlt, an open-source Python package for easily adding alternative text to Matplotlib figures. MatplotAlt equips
+Jupyter notebook authors to automatically generate and surface chart descriptions with a single line of code or command, and
+supports a range of options that allow users to customize the generation and display of captions based on their preferences and
+accessibility needs. Our evaluation indicates that MatplotAlt’s heuristic and LLM-based methods to generate alt text can create
+accurate long-form descriptions of both simple univariate and complex Matplotlib figures. We find that state-of-the-art LLMs still
+struggle with factual errors when describing charts, and improve the accuracy of our descriptions by prompting GPT4-turbo
+with heuristic-based alt text or data tables parsed from the Matplotlib figure.
+© 2025 The Author(s). Computer Graphics Forum published by Eurographics - The European
+Association for Computer Graphics and John Wiley & Sons Ltd.
+This is an open access article under the terms of the Creative Commons Attribution License, which
+permits use, distribution and reproduction in any medium, provided the original work is properly
+cited.
+arXiv:2503.20089v1  [cs.HC]  25 Mar 2025
+
+--- PAGE 2 ---
+2 of 22
+K. Nylund & J. Mankoff & V. Potluri / MatplotAlt: A Python Library for Adding Alt Text to Matplotlib Figures in Computational Notebooks
+1. Introduction
+Computational notebooks centralize code, natural language, and
+visualizations in a single interactive medium. Because of their ver-
+satility and ease of use, Jupyter notebooks have become popular for
+teaching, communicating results and conducting analysis. Despite
+their ubiquity, notebooks remain inaccessible to blind and visually
+impaired (BVI) users due to the authoring practices, tools, and in-
+frastructures used in their creation and sharing [PSTM23]. Notably,
+in their analysis of 100,000 notebooks, Potluri and Singanamalla et
+al. found that 99.81% of programmatically generated images did
+not have associated alternative text [PSTM23], which is a critical
+accessibility barrier [EBM22,C∗08].
+From a sample of 10 million notebooks, the JetBrains Datalore
+team found that about 42% had programatically generated im-
+ages [Guz]. The vast majority of these were found to be data visu-
+alizations created with the Matplotlib or Seaborn libraries, neither
+of which contain methods to easily embed image descriptions or
+alternative text [PSTM23,Hc19]. Other visualization tools like Al-
+tair [VGH∗18] are beginning to include options to create accessible
+text structures for screen reader users, but these updates are not
+compatible with most inaccessible notebooks on the web that do not
+use these libraries [Guz]. Additionally, no popular computational
+notebook software currently supports the addition of descriptive text
+to displayed images.
+To help notebook users create and consume image descriptions
+for the majority of notebooks, we present MatplotAlt, a Python
+package to add alt text to Matplotlib figures. MatplotAlt provides
+functions to automatically generate descriptions from a Matplotlib
+figure object, and several methods to embed and export its alt text.
+These automatically generated captions are informed by Lundgard
+and Satyanarayan’s four-level model of semantic content [LS21], a
+set of guidelines to effectively describe data visualizations. To create
+both accurate and fluent chart descriptions, MatplotAlt provides two
+options for generating alt text: a heuristic based approach which
+directly uses figure attributes and data, and a vision-language model
+(VLM) based method which takes the full image as input. While
+state-of-the-art VLMs can generate relevant alt text [CLD∗23,ZW24,
+SWB24], we confirm that they are still prone to factual errors on
+both simple univariate and complex Matplotlib figures. We show
+that prompting VLMs with template-based alt text is a simple way to
+increase their accuracy and similarity to human-written descriptions.
+In this work, we contribute:
+• MatplotAlt, the first Python library to support programmatic gen-
+eration, inclusion, and dissemination of customizable alternative
+texts for Matplotlib images in computational notebooks.
+• Quantitative and qualitative evaluations of MatplotAlt’s methods
+for generating alt text, including a detailed analysis of errors in
+VLM descriptions.
+• Strategies to improve the quality of VLM descriptions for Mat-
+plotlib figures.
+MatplotAlt’s integration into the notebook pipeline, ease of use,
+and readiness for VLM-generated descriptions have the potential
+to make notebooks accessible to BVI users at scale and serve as
+a blueprint for plotting libraries to build in native support for alt
+text. The scenarios below show how MatplotAlt can help users
+perceive Matplotlib images and work with notebooks. We make
+Matplotalt and our evaluation datasets publicly available at https:
+//github.com/make4all/matplotalt.
+1.1. Example Scenarios
+Aida is a BVI developer in a data analysis team comprised of
+BVI and sighted scientists. Aida wants to visualize data from
+their research project using Matplotlib in a Jupyter notebook,
+then add alt text to their figures for future screen reader users
+and their own reference. To include automatically generated al-
+ternative text in the HTML output of the notebook, they re-
+place calls to matplotlib.pyplot.show with MatplotAlt’s
+show_with_alt function. Rory, Aida’s sighted colleague adds
+additional analysis that results in complex figures. Rory uses
+generate_alt_text, which returns generated alt text for the
+last figure as a string. They check for factual correctness and manu-
+ally add their own context and insights to the returned string. Finally,
+Rory displays their customized alt text with add_alt_text for
+Aida to review.
+Dez is a BVI student trying to learn a new Python package by
+reading its documentation page. Using a screen reader, they notice
+most of the examples are in a computational notebook with several
+Matplotlib figures. Unfortunately, the only text read when they se-
+lect one of the images is “No description has been provided for this
+image”, which is the default in Jupyter. Dez downloads the notebook
+and runs MatplotAlt’s alttextify command from the terminal
+to automatically create and embed descriptions for each figure. After
+reading the generated alt text, Dez feels several figures are still lack-
+ing context, so they rerun alttextify with a VLM by passing
+an API key. Once Dez has read both versions of figure alt text they
+have a clearer idea of how to use the library in their coursework.
+Satisfied with this output, Dez reruns alttextify with the -s
+new_cell argument to store generated alt text as a code comment.
+Dez converts this updated notebook into a python file using standard
+nbconvert tools, then continues to work on the assignments with the
+alt-text and starter code giving them the necessary information to
+use the library effectively.
+These scenarios describe how the various options provided by
+MatplotAlt equip a BVI expert to exercise agency by generating
+customized alternative texts, and overcome accessibility barriers
+previously posed by poor infrastructure and authoring practices.
+2. Related Work
+MatplotAlt is motivated by a growing set of literature on generating
+descriptive alt text and the (in)accessibility of visualization sys-
+tems. We provide a brief summary about accessible visualizations,
+motivate the need to make them accessible in the context of compu-
+tational notebooks, and provide relevant background on emerging
+automatic description techniques.
+2.1. Accessibility of Web Visualizations
+Despite improvements in systems to generate and publish alt text,
+most figures on the web remain inaccessible to screen reader users.
+Extending the Web Content Accessibility Guidelines (WCAG),
+Elavsky et al. developed Chartability, a set of heuristics to evaluate
+© 2025 The Author(s).
+Computer Graphics Forum published by Eurographics and John Wiley & Sons Ltd.
+
+--- PAGE 3 ---
+K. Nylund & J. Mankoff & V. Potluri / MatplotAlt: A Python Library for Adding Alt Text to Matplotlib Figures in Computational Notebooks
+3 of 22
+Figure 2: The MatplotAlt system. Heuristic-based alt text of a given semantic level is generated from Matplotlib figure attributes
+using the generate_alt_text function. Alternatively, VLM-based descriptions can be generated with the figure as input using
+generate_api_alt_text. Descriptions are then embedded in the notebook or exported using add_alt_text.
+the accessibility of data visualizations, including for keyboard nav-
+igation, screen reader inspection, and cognitive barriers [EBM22].
+Their work highlights the changing nature of accessibility standards,
+and the need for context-specific guidelines in visualization.
+Visualizations on the web rarely adhere to these guidelines or
+contain even basic accessibility support necessary for BVI users
+to gain insights from data. BVI users report several common pain
+points, including invisible or incomprehensible figures, a lack of de-
+scription of trends and axes, and the inability to expose data in tables
+and arrays [SCWR21]. Visualization dashboards, which are often
+presented as web interfaces, also frequently contain barriers like
+inconsistent semantic structure and unsurfaced changes [SHHM23].
+These barriers are compounded by a lack of practical methods
+for creating accessible outputs. Joyner et al. survey visualization
+practitioners and identify complex / interactive figures and lack of
+accessibility support in visualization tools as obstacles preventing
+the creation of accessible figures [JRG∗22]. Several systems aim to
+make creating alt text easier [MCLM21,SWB24,MFM∗24]. Mack
+et al. [MCLM21] explore using a template interface for authoring
+figure descriptions in PowerPoint with separate boxes to describe
+subjects, interactions, and other features. Singh et al. support au-
+thoring alt text for scientific publications with an interface that
+extracts figures, captions, and data from uploaded PDFs, then pro-
+vides appropriate guidelines and suggestions generated by a large
+language model (LLM) [SWB24]. They find that most users prefer
+the extra assistance provided by templates, and that they help users
+know what to include in alt text [MCLM21]. Singh et al. also find
+that LLM-generated alt texts were a useful starting point for most
+users [SWB24]. These results inform our decision to support au-
+tomatically generating starter alt text using either a template (with
+no user input) or VLM. MatplotAlt extends the capabilities of this
+growing body of work to Python figures in notebooks, allowing
+us to more easily extract data and features from programmatically
+generated charts, and address the specific accessibility barriers of
+this environment.
+Guidelines for describing figures have also improved in the last
+three years. Lundgard and Satyanarayan define a theory-grounded
+four-level model of semantic content for describing data visualiza-
+tions [LS21]. Different levels include information about encodings
+and axes (level 1), relevant statistics (level 2), trends (level 3), and
+broader context about the chart (level 4). MatplotAlt uses these
+guidelines to generate descriptions depending on users’ desired
+level of detail.
+2.2. Automatically Generating Alt Text
+Several systems focus on automatically generating accessible figures
+from data using heuristics and templates. Mirri et al. explore using
+CSV content to create screen reader compatible XML graphics in-
+cluding basic alt information [MPS∗17], and Sharif et al. develop
+a jQuery plugin which summarizes HTML/Json figure types, val-
+ues, and basic statistics [SF18]. One limitation of alt text created
+from static templates alone is their lack of interactivity [SCWR21].
+Allowing a range of exploration methods, BrailleR [GWS∗24] sup-
+ports both creating templated textual descriptions of graphs in R and
+exploring different chart features with a screen reader in an interac-
+tive SVG. MatplotAlt aims to similarly support exploring charts in
+Python notebooks with both templated and VLM descriptions.
+Recently, there has been growing interest in generating captions
+and interactive descriptions for data visualizations using vision trans-
+formers. MatCha [LPK∗22] and UniChart [MKD∗23], for instance,
+are both pretrained image-to-text Transformer [VSP∗17] models
+to automatically summarize and respond to user questions about
+figures. ChartVLM [XZY∗24] improve on chart QA tasks by scaling
+up their model and using a classifier to transform natural language
+instructions into a discrete set of tasks.
+Though these efforts demonstrate the viability of vision trans-
+former models to generate chart captions and support conversational
+data analysis, they do not account for the nuanced information
+needs of BVI experts. To address this gap, Tang et al. curate Vis-
+Tex [TBS23], a dataset of image / caption pairs adhering to the
+four-level semantic model, which is informed by preferences and
+needs of BVI users. VLMs are also prone to errors that can mislead
+users relying on these descriptions [ZW24, KLL∗22]. Tang et al.
+© 2025 The Author(s).
+Computer Graphics Forum published by Eurographics and John Wiley & Sons Ltd.
+
+--- PAGE 4 ---
+4 of 22
+K. Nylund & J. Mankoff & V. Potluri / MatplotAlt: A Python Library for Adding Alt Text to Matplotlib Figures in Computational Notebooks
+qualitatively analyze errors produced by their models and find that
+approximately half of generated statements were factually incor-
+rect [TBS23]. Using LLMs to generate alt text can also create new
+barriers like API costs, large downloads, and knowledge of natural
+language processing libraries.
+At the same time, heuristic-based alt text is prone to repetition
+over multiple charts and may be unable to capture context that is
+essential to interpreting figures. These limitations motivate our deci-
+sion to provide options to generate both heuristic and VLM-based
+alt text. For high-stakes analysis in the medical domain, for exam-
+ple, MatplotAlt’s dry but interpretable templated descriptions are
+likely more appropriate [Rud19] compared to those generated by
+a VLM that potentially contain errors and hallucinations. Descrip-
+tions for personal learning on well-documented problems, however,
+may benefit from the adaptability and extra context provided by
+VLMs [RNK∗23].
+2.3. Accessibility of Computational Notebooks
+Despite their ubiquity, computational notebooks remain inaccessi-
+ble to BVI users. Computational notebook usage is growing, with
+the number of .ipynb files on Github increasing from 200,000 in
+2015 to 2.5 million in 2018 [Per18], and a dataset of 10 million
+Jupyter notebooks released in 2020 [Guz]. Several authors have
+even suggested making notebooks the primary artifact of scien-
+tific publications [Som18,RMABR20,CSR∗23]; but fundamental
+accessibility barriers remain unaddressed. Building on prior work
+documenting pain points in computational notebooks [CPH∗20],
+Potluri et al. analyze the inaccessibility of Jupyter for BVI develop-
+ers and users [PSTM23]. In their evaluation of 100,000 notebooks,
+they found that 99.81% of programmatically generated images, most
+of which were created with Matplotlib or seaborn, lacked associated
+alt text. They also identify a range of common WCAG failures in
+notebooks including low color contrast, incorrectly nested headers,
+and a lack of correctly formatted data tables.
+Based on these errors, the authors provide a set of guidelines
+for improving the accessibility of Jupyter notebooks. These include
+using the four-level semantic model to generate and include alt text
+for plotting libraries like Matplotlib using the figure object, and auto-
+matically generating markdown tables for applicable visualizations.
+MatplotAlt is directly inspired by these recommendations, with the
+goal of providing an easy interface to include alt text and data tables
+for figures in Jupyter notebooks.
+3. The MatplotAlt System
+We describe the algorithms, templates, and libraries we use to auto-
+matically generate and surface alt text for Matplotlib figures. Figure
+2 depicts a simplified view of the MatplotAlt system highlighting
+components responsible for parsing chart features (§3.1), generat-
+ing heuristic (§3.2) and VLM-based (§3.3) alt text, and surfacing
+descriptions for screen readers (§3.4). To ensure that accessibility
+barriers posed by notebook software do not hinder the utility of
+MatplotAlt, we also provide options to use these tools outside the
+notebook environment (§3.5).
+3.1. Inferring Chart Data and Features
+Chart descriptions should contain information about the chart type,
+and other visual encodings to adhere to the four-level model of
+semantic content [LS21]. To generate alt text that includes these
+details, we parse most features and data directly from Matplotlib
+figures. To get a list of the tick labels on the x-axis, for example,
+we call Matplotlib’s get_xticklabels() method on the most
+recently plotted figure. Chart type is one notable exception, as Mat-
+plotlib only stores abstract elements like rectangles, lines, and points.
+MatplotAlt infers type based on these components. If a plot has mul-
+tiple point objects without any lines, for instance, we label it as a
+scatterplot. If the figure contains both lines and points, then we infer
+that it is a line plot. And if the plot contains a quadmesh, it is likely
+a heatmap or image. In addition to chart features, we also consider
+how data is internally represented when determining type. Heatmaps
+and images, for example, contain 2d arrays of values while line plots
+have an iterable of line objects and values.
+One downside of this approach is that it assumes all charts have
+a single type. For example, our current system cannot correctly
+classify overlaid bar and line plots in the same figure. Our system
+also currently fails on interactive and dynamically updated charts.
+Unlike more complex classification models, however, MatplotAlt
+can be easily extended to new chart types by adding checks for
+new attributes without the need for retraining. Extending previous
+work [KLL∗22, TBS23] that focus on only the one to three most
+popular chart types, MatplotAlt currently supports ten types of
+figures: line, bar, scatter, radial line, pie, strip, contour, heatmap,
+image, and boxplot.
+3.2. Generating Heuristic-based alt text
+To
+automatically
+generate
+alt
+text
+for
+Matplotlib
+figures
+using
+templates
+and
+heuristics,
+MatplotAlt
+provides
+the
+generate_alt_text function. Like our chart type de-
+tection, information used in descriptions is extracted directly from
+the most recent Matplotlib object.
+Users can specify the amount of detail to include in alt text
+through the desc_level parameter, based on L1-L3 semantic
+levels [LS21]:
+L1: Alt text includes the chart’s type, title, color encodings, annota-
+tions, and the scale and range of each axis.
+L2: Includes L1 plus statistics for each variable. We start with the list
+of statistics mentioned in the four-level model of semantic con-
+tent (extrema, outliers, and correlations), and expand to several
+other easily computed metrics like standard deviation and median.
+We also adjust the default supported statistics for different chart
+types. Alt text for scatter plots, for instance, will include minima,
+maxima, and a line of fit; boxplots’ will contain interquartile
+ranges; and contours’ will contain the center point of the min/max
+contour. These defaults were chosen both based on commonly
+performed analyses (e.g., line of fit) and feasibility (e.g., boxplots
+may not display individual points). Users can manually specify
+which stats to include through the stats parameter.
+L3: Includes L2 plus chart trends such as increasing / decreasing pat-
+terns if applicable and the stability (e.g., “fluctuating” vs. “strictly
+increasing”) of each variable. MatplotAlt currently only supports
+© 2025 The Author(s).
+Computer Graphics Forum published by Eurographics and John Wiley & Sons Ltd.
+
+--- PAGE 5 ---
+K. Nylund & J. Mankoff & V. Potluri / MatplotAlt: A Python Library for Adding Alt Text to Matplotlib Figures in Computational Notebooks
+5 of 22
+trends for contiguous two-dimensional data. No L3 description
+is added to scatter, strip, box, and contour plots. Like, stats,
+users can specify included trends with the trends parameter.
+Chart summaries provide an overall picture of Matplotlib figures,
+but consumers of these artifacts may also want to drill down to the
+underlying data [SCWR21, SZRW23]. Elavsky et al. suggest the
+inclusion of tables with figures representing data, an accompani-
+ment overwhelmingly lacking in notebooks [EBM22,PSTM23]. To
+support this interactivity, MatplotAlt provides the option to include
+the underlying chart data as a markdown table in generated alt text.
+To avoid overly large tables that are hard to navigate with screen
+readers [WWJK22], we add an adjustable cap on the max number
+of table rows and columns. If there are multiple subplots in a figure,
+heuristic alt text and tables will be generated for each separately.
+Appendix §B includes more detail about templates used in heuristic-
+based descriptions. To generate L4 descriptions (including context,
+explanations, and insights), we explore using a VLM in the next
+section.
+3.3. VLM-based alt text
+MatplotAlt implements the generate_api_alt_text func-
+tion to generate figure descriptions with models hosted on Ope-
+nAI, Azure, and Huggingface APIs. Like generate_alt_text,
+users can specify the semantic level of VLM alt text with the
+desc_level parameter. Prompts to the language model, docu-
+mented in Appendix §C, include a call to describe figure details
+based on the given desc_level, and two example L1-L4 figure
+descriptions. In addition to L1-L3 alt texts, a desc_level of 4
+can be passed to generate_api_alt_text. Prompts to gener-
+ate L4 captions will also include the line “If possible, briefly explain
+domain-specific insights, current events, and socio-political context
+that explain the data.” Unlike heuristic alt text, we note that there is
+no guarantee VLM descriptions will adhere to semantic guidelines.
+To capture both perceptual phenomena (e.g. overlapping points,
+color patterns) in images and semantic relationships between fig-
+ure elements, we add chart data to prompts by including either a
+markdown data table (VLM + table), the heuristic-based alt text
+for the chart (VLM + heuristic), or both (VLM + table + heuristic).
+We provide examples of alt text generated using each method in
+Appendix Table 5, and evaluate each method in §5.
+3.4. Surfacing alt text in Jupyter notebooks
+To make figure descriptions visible to screen reader users in Jupyter
+notebooks, MatplotAlt provides the add_alt_text function. Sev-
+eral options are supported through the methods parameter:
+• “html”: displays the last figure in html with an alt property con-
+taining the given text. This is the default option in MatplotAlt,
+allowing authors and readers to embed and consume image de-
+scriptions without changing the layout of the notebook.
+• “markdown”: adds text in markdown to the current cell output.
+This method visually displays alt text alongside the figure, allow-
+ing non-screenreader users to view descriptions. Markdown data
+tables are surfaced only in cell or saved output.
+• “new_cell”: creates a new (code) cell after this one containing
+the given text. This method is more disruptive to the notebook
+structure, but allows users to easily include the description in their
+code, e.g. as a string variable for further processing.
+• “img_file”: saves the last Matplotlib figure as a png with the
+given text in its alt property. This allow users to consume only the
+image and description without having to navigate the inaccessible
+notebook environment, and enables users to create accessible
+visualizations for use in other projects.
+For ease of use, we combine generate_alt_text and
+add_alt_text into a single function, show_with_alt, to
+both generate and surface alt text in a single line of code. We
+do the same for VLM alt text with the show_with_api_alt
+command. These functions allow users to easily replace calls to
+matplotlib.pyplot.show with show_with_alt to gen-
+erate accessible figure outputs.
+3.5. Using MatplotAlt outside the notebook environment
+Because the notebook interface itself can be a barrier to BVI
+users [Tea22,Tea24], MatplotAlt also provides the alttextify
+command to add alt text to all Matplotlib figures in a given notebook.
+The command, which can be run from PowerShell on Windows or
+the terminal on Mac, takes a notebook path, and any other argu-
+ments supported by show_with_alt to generate alt text, then
+embeds or exports descriptions for each Matplotlib figure in the note-
+book, allowing BVI users to add consumable alt text to inaccessible
+notebooks they encounter without ever entering the environment.
+4. Datasets
+4.1. VisText Captions
+We quantitatively evaluate MatplotAlt’s methods for generating L3
+alt text on the VisText dataset [TBS23], which consists of pairs
+of univariate bar, area, and line charts, and corresponding L1-L3
+descriptions written by crowdworkers. VisText also contains ta-
+ble and scenegraph representations of charts, which we use to
+reverse-engineer matplotlib code for generating each figure. We then
+call generate_alt_text and generate_api_alt_text
+to create corresponding descriptions for the dev and test splits. These
+Matplotlib versions of VisText figures differ from the original in a
+few qualities like color and bar ordering that may slightly reduce
+our alt text’s similarity to the crowdsourced descriptions.
+We use GPT4-turbo with default temperature and a max output
+length of 225 tokens for all L3 VLM-generated alt text. We chose
+this number as the smallest that did not frequently cutoff captions for
+the dev set, as prior work has shown that BVI users typically prefer
+more concise VLM-generated captions [HXP∗24]. We evaluate
+prompting GPT4-turbo to describe charts directly (turbo) and our
+methods for incorperating chart data and features into prompts (turbo
++ table, turbo + heuristic, and turbo + table + heuristic).
+To match the semantic level of human annotations in VisText,
+we call all generate methods with desc_level=3. Because very
+few of the crowdsourced captions describe chart colors or include
+statistics other than minima and maxima, we disable descriptions of
+color encodings and limit stats to the min/max in our heuristic alt
+text. As a comparison, we reevaluate VisText’s pretrained VL-T5
+© 2025 The Author(s).
+Computer Graphics Forum published by Eurographics and John Wiley & Sons Ltd.
+
+--- PAGE 6 ---
+6 of 22
+K. Nylund & J. Mankoff & V. Potluri / MatplotAlt: A Python Library for Adding Alt Text to Matplotlib Figures in Computational Notebooks
+image-only, image + data table, and image + scenegraph models on
+the original VisText figures. Our datasets are publicly available on
+MatplotAlt’s code repository.
+4.2. Matplotlib Example Gallery Captions
+Although VisText provides a structured set of figures and de-
+scriptions, its limitation to univariate bar, area, and line charts
+makes it unrepresentative of the range of complex visualizations
+in notebooks on the web. As a more challenging snapshot of Mat-
+plotlib figures “in the wild”, we use notebooks from the Matplotlib
+gallery
+(https://matplotlib.org/stable/gallery).
+From 500 notebooks, We call alttextify <notebook
+path> <output> -l 3 -s html img_file to generate
+and export L3 alt text for 200 applicable Matplotlib figures.
+Because many of these charts have data that are not easily rep-
+resented in scenegraphs or tables, we generate their corresponding
+descriptions using only L3 heuristic, turbo, and turbo + heuristic
+methods. While most VisText figures display Statista data for world
+events (e.g., national debt, infant mortality, company sales), the
+gallery figures demonstrate the effect of different Matplotlib settings
+and are therefore tied more closely to the chart format and image
+itself rather than data.
+To summarize, we contribute Matplotlib versions of each of the
+12441 VisText figures, a small dataset of 200 figures extracted from
+Matplotlib Gallery notebooks, and corresponding L3 descriptions
+for each image using the MatplotAlt generation methods.
+5. Evaluation
+We evaluate MatplotAlt’s alt text generation methods on the VisText
+and Matplotlib gallery datasets. We quantitatively measure descrip-
+tion length (§5.1), similarity to reference VisText captions (§5.2),
+and similarity between image and alt text embeddings (§5.3). Next,
+we qualitatively categorize types of errors in MatplotAlt’s descrip-
+tions (§5.4) and compare their frequency in different generation
+methods (§5.5).
+5.1. Length of Generated Alt Texts
+Although we do not know the ideal length of VLM alt texts, prior
+work shows BVI users may prefer shorter captions because they
+find the additional information in longer descriptions more repeti-
+tive and unnecessary [HXP∗24]. In connection to this preference,
+we characterize the length of VLM alt texts generated with each
+of our methods. We measure the length of captions using nltk’s
+word_tokenize function [BKL09]. Figure 3 shows the distribu-
+tion of alt text lengths for each generation method and dataset. On
+VisText, VL-T5 yielded the shortest captions with mean lengths of
+62.4, 64.9, and 75.0 for image + datatable, image + scenegraph, and
+imageonly respectively, followed by human captions (90.0), heuris-
+tic (92.8), and the turbo models. We found that VL-T5 captions’
+length was indicative of a lack of detail, with the model typically
+only adding one or two sentences about the overall data trend or
+max values. The crowdsourced captions are similarly concise, but
+typically contain both trends and descriptions of notable minima
+and maxima.
+Figure 3: MatplotAlt is designed to generate long-form L3 de-
+scriptions for Matplotlib figures. VisText VL-T5 captions were
+shortest on average, followed by human, heuristic, and GPT4-turbo
+methods (set to a max output length of 225 tokens). Matplotlib
+gallery alt texts were generally longer than those for VisText figures.
+Turbo descriptions tended to use most of the token limit, and
+were more likely to contain additional information about outliers,
+specific data values, and labels. The extra context from heuristic
+alt text, data tables, or both increased the length of turbo alt texts
+even closer to the 225 token limit. For charts with simple trends,
+however, these longer descriptions were more prone to repetition and
+unnecessary detail, which are less desired by BVI users [HXP∗24].
+These results extend to the Matplotlib gallery dataset, with slightly
+longer heuristic and turbo alt text, likely due to charts with multiple
+subplots and more features. This difference in lengths between
+VisText VL-T5 / human and VLM captions indicates our shift to
+long-form descriptions for Matplotlib figures. The extra information
+in heuristic and turbo alt texts informs our fine-grained evaluation
+of error types in §5.4 and §5.5.
+5.2. Similarity to Crowdsourced Captions
+Similarity to human captions are widely used to measure the quality
+of generated alt text for data visualizations [TBS23, KLL∗22]. In
+this section, we use two BERT-based metrics to quantify how well
+MatplotAlt’s L3 descriptions match the reference VisText captions.
+5.2.1. Caption Similarity Methods
+For each generation strategy, we measure similarity to the reference
+human captions using Bertscore [ZKW∗19], which averages cosine
+similarity between the BERT [DCLT19] token embeddings for each
+word (ranging from -1 to 1), and BLEURT [SDP20], which uses
+a BERT model trained on human ratings of similarity (ranging
+from slightly below 0 to slightly above 1). If an image has multiple
+human captions, we take the average of similarities to each. A
+© 2025 The Author(s).
+Computer Graphics Forum published by Eurographics and John Wiley & Sons Ltd.
+
+--- PAGE 7 ---
+K. Nylund & J. Mankoff & V. Potluri / MatplotAlt: A Python Library for Adding Alt Text to Matplotlib Figures in Computational Notebooks
+7 of 22
+VisText Alt Text Type
+BertScore
+F1
+BertScore
+recall
+BertScore
+precision
+BLEURT
+VL-T5 image only
+0.8613
+0.8546
+0.8685
+-1.042
+VL-T5 image + scenegraph
+0.9150
+0.8939
+0.9375
+-0.2919
+VL-T5 image + table
+0.9161
+0.8949
+0.9386
+-0.2653
+Heuristic
+0.8850
+0.8953
+0.8753
+-0.1526
+turbo
+0.8826
+0.8954
+0.8705
+-0.1439
+turbo + table
+0.8825
+0.8974
+0.8683
+-0.1370
+turbo + heuristic
+0.8875
+0.9022
+0.8736
+-0.0944
+turbo + table + heuristic
+0.8865
+0.9024
+0.8713
+-0.1000
+Table 1: Adding heuristic alt text to GPT4-prompts can steer
+generations closer to human-written figure captions. Similar-
+ity between reference and generated descriptions for each method.
+Higher (blue) is better for each metric. VisText VL-T5 models pro-
+duce text with the highest BertScore precision and F1, while turbo +
+heuristic generations typically have the highest Bertscore recall and
+BLEURT.
+higher Bertscore indicates that the words in generated captions have
+meanings similar to the human captions. A cosine similarity of 1,
+for example, indicates that the sentences are the same, 0 indicates
+that they are unrelated, and -1 indicates that they have similar but
+opposite meanings. Similarly, a higher BLEURT indicates that the
+generated captions more adequately represent the overall meaning
+of the reference human captions. Bertscore and BLEURT together
+help measure how semantically similar our generated captions are
+to the human-written references in VisText.
+Because we are not aiming to emulate the style and formatting
+of the VisText references, Bertscores are likely more effective than
+exact match n-gram similarity metrics because they capture syn-
+onyms. For example, even though “color” and “hue” are not an
+exact match, their sentences could still have a high Bertscore due to
+the high cosine similarity between their word embeddings. BLEURT
+is similarly less reliant on formatting, and has been shown to have
+slightly higher agreement with human ratings, but may also be bi-
+ased towards more fluent text [SDP20]. Although n-gram overlap
+similarity metrics may not be appropriate due to the formatting and
+length differences between GPT4 and reference captions, we also
+measure BLEU [PRWZ02], Rouge [Lin04], and CHRF [Pop15]
+n-gram scores in Appendix §D to compare with prior studies.
+5.2.2. Caption Similarity Results
+Table 1 shows the similarity scores between Matplotalt and crowd-
+sourced VisText descriptions for each generation strategy. We found
+that adding heuristic alt text in prompts to GPT4-turbo increased
+similarity to the human-written VisText descriptions across all met-
+rics for both turbo + heuristic and turbo + table + heuristic, and
+yielded the highest Bertscore and BLEURT among our generation
+methods. These improvements indicate that prompting with starter
+alt text is a simple way to steer the style of generated captions
+closer to ground truth statements. Turbo + table had scores close to
+turbo, with small increases in Bertscore, indicating data tables do
+not significantly change the style of generated captions.
+The finetuned VL-T5 models from VisText had higher Bertscores,
+but lower BLEURT. The higher Bertscore is not surprising because
+the VL-T5 models were trained on pairs of captions and data /
+images from VisText, while our generation methods are not designed
+to emulate the prose and length of human captions in the dataset. We
+find that most of these increases come from the precision component
+of F1 scores, while turbo descriptions have higher Bertscore recalls.
+This suggests that the GPT4-generated captions contain more of the
+semantic meaning in human references, and that their lower overall
+scores may be due more to the additional context and length of VLM
+descriptions compared to the human written captions.
+5.3. Similarity Between Generated Descriptions and Images
+Similarity scores can help quantify how well generated alt texts
+adhere to the style and content of human descriptions but are still
+dependent on the length and prose of human writers. Reference-
+based metrics have also been shown to be biased toward sighted
+user ratings of alt text over BVI user ratings [KK24]. In an attempt
+to evaluate Matplotalt’s descriptions independently of how well they
+match the dataset-specific formatting of human alt texts, we measure
+the similarity between caption and image embeddings.
+5.3.1. Multimodal Similarity Methods
+We use the pretrained BLIP [LLXH22] model to measure how well
+our generated captions match their corresponding figures. BLIP is a
+multimodal encoder-decoder vision transformer model [DBK∗20]
+pretrained on a variety of tasks including binary classification for
+whether a caption matches an associated image. Using BLIP, we
+measure the probability that a description matches its correspond-
+ing figure, and the cosine similarity between encoded captions and
+figures. A high average probability suggests our captions are a good
+match for their corresponding Matplotlib figures, and a high cosine
+similarity (ranging from -1 to 1) indicates that the encoded represen-
+tations of each figure and caption are aligned, suggesting that their
+content is similar. We average scores for all images and correspond-
+ing captions on both the VisText and Matplotlib gallery datasets.
+Because BLIP was not specifically trained on data visualizations,
+we assess its relevance for this setting in Appendix §E.
+5.3.2. Multimodal Similarity Results
+Our BLIP scores on VisText were inconclusive (shown in our Ap-
+pendix Table 10) with all matching probabilities greater than 0.9975,
+and all cosine similarities within 0.504 ± 0.005. Our results on the
+Matplotlib gallery dataset show greater variation. GPT4-turbo gen-
+erations yielded the highest average matching probability (0.9766)
+and cosine similarity (0.4879) in this setting, followed closely by
+turbo + heuristic (0.9629 / 0.4717), with a larger gap to the heuristic
+captions (0.9270 / 0.4263). Excepting the limitations of BLIP, these
+scores imply that GPT4 alt texts more closely match the challenging
+Matplotlib gallery figures than the heuristic descriptions, and that
+adding heuristics in the prompt slightly reduces this alignment. At
+the same time, the high matching probabilities in VisText and gallery
+datasets suggest that BLIP alone cannot measure caption correct-
+ness. Next, we contrast these similarity measures with a qualitative
+evaluation of caption errors.
+5.4. Types of Errors in Generated Descriptions
+We summarize our qualitative observations on the types of errors
+across generation strategies supported by MatplotAlt. We randomly
+© 2025 The Author(s).
+Computer Graphics Forum published by Eurographics and John Wiley & Sons Ltd.
+
+--- PAGE 8 ---
+8 of 22
+K. Nylund & J. Mankoff & V. Potluri / MatplotAlt: A Python Library for Adding Alt Text to Matplotlib Figures in Computational Notebooks
+sample 50 charts from the VisText test and Matplotlib gallery
+datasets (§4) to determine the types of errors that occur in gen-
+erated descriptions. Including all of our generation methods, each
+VisText image had 5 descriptions, and each gallery image had 3. The
+lead researcher annotated a total of 400 captions. Our initial set of er-
+ror types included those documented in VisText, with the researcher
+adding new types as they occurred in the descriptions [TBS23].
+To assess relevance of these categories, two researchers on the
+team (including the primary) discussed the descriptions for 20 ran-
+domly selected images from each of the two sets of annotated data:
+adding, changing, and removing assigned error types as needed. One
+of the researchers involved in this process used a screen reader full
+time; the descriptions they annotated would serve as their ground
+truth in a real-world scenario. We limited this discussion to 20 im-
+ages from each dataset as both researchers agreed no new error types
+were being discovered.
+From this initial annotation, we identified 13 types of errors. Six
+of the error types correspond to concrete chart features in descrip-
+tions, including:
+• Value: error in dependent variable value (e.g. wrong max value).
+• Identity: error in independent variable (e.g. wrong max location).
+• Chart type: wrong chart type or orientation (e.g. "line chart"
+instead of "scatterplot").
+• Axis: wrong axis range, ticks, or scale.
+• Label: error in transcribing titles, axis labels, or other figure text.
+• Trend: wrong direction or stability of trends (e.g. “strictly in-
+crease” vs. “generally decrease”).
+In addition to these factual errors, we identify five common types of
+formatting mistakes:
+• Cutoff: description ends in the middle of a sentence or claim.
+• Missing data context: description is missing key context about
+L1-L3 features necessary to understand the chart. This includes
+failing to mention specific values for statistics and trends, even if
+the rest of the description is correct.
+• Unnecessary context: Unnecessary or irrelevant L4 context is
+included in L3 descriptions.
+• Number name: Failure to convert number places (e.g. “10,000
+thousand” instead of “10 million”), which causes the same de-
+nomination like ‘thousand’ to be read twice by a screen reader.
+• Repetition: The same claim is repeated multiple times.
+Five of the error types (value, identity, trend, nonsense, and repeti-
+tion) are also documented in VisText. We combine their direction
+and stability errors into a single “trend” category for simplicity.
+Notably, we also distinguish between two types of model halluci-
+nations that do not fit into the other error categories: “nonsense”,
+which are identifiable without ground truth information, and
+“deceptive”, which are undetectable without perceiving the image.
+While weaker language model failures are often obvious (e.g. con-
+taining disruptive grammar errors or repetition), we included this
+distinction because GPT4’s hallucinations overwhelmingly fit in
+with the rest of the description, but contain a nonexistent explana-
+tion for a trend or confidently describe a chart feature that does
+not exist. For example, consider the following turbo description
+for a chart with two line subplots: “In the Periodogram plot, the
+line exhibits a jagged pattern with numerous spikes throughout the
+frequency range, with no single prominent peak. In contrast, the
+Welch plot shows a smoother line with a distinct spike around the
+100 frequency marker.” Although the smoothing explanation is cor-
+rect, both plots have a notable spike around 100. This is particularly
+deceptive, suggesting the Welch method uniquely reveals a peak in
+the data without any other signs that the description is inaccurate.
+In addition to the catchall “deceptive” error, we note that all
+other types except easily identifiable repetition, cutoff, grammar, or
+nonsense are also misleading to BVI users whose ground truth for
+charts may be the description.
+5.5. Error Prevalence in Generated descriptions
+In this section, we compare the frequencies of error types across
+each of our generation strategies and datasets.
+For each dataset, we randomly select 100 figures (distinct from the
+50 selected in §5.4) and manually label errors in their corresponding
+VL-T5 and MatplotAlt descriptions. We exclude the VL-T5 ima-
+geonly model, as we found that its captions never matched the given
+images. In total, we annotated 1000 figure descriptions. For each
+description we assign zero or more error types in order of priority
+based on the list in §5.4. If a caption states an incorrect value in a
+description of a trend but is otherwise correct, for example, we only
+assign it a value error, rather than value + trend or value + trend +
+deceptive errors. We label charts with no errors as “correct”, and
+charts without factual errors (i.e. no value, identity, axis, trend, chart
+type, label, deceptive, or nonsense errors) as “value-correct”. This
+means a blank caption would count as “missing context” under our
+criteria, but would still be value-correct.
+Table 2 records the number and type of errors in the 100 captions
+from each dataset and generation strategy. We find that turbo +
+heuristic and turbo + table + heuristic produce more accurate alt
+texts than GPT4-turbo alone, with lower counts of value (20 →1),
+identity (32 →4), trend (22 →14), label (34 →3), missing
+context (30 →1), and deceptive errors (22 →6). At the same time,
+errors in heuristic alt text tend to carry over to turbo + heuristic
+and turbo + heuristic + table descriptions, even when they could be
+corrected with the given datatable or image. For example, almost
+all of the chart type errors in turbo + heuristic / turbo + table +
+heuristic originated with MatplotAlt’s lack of support for area charts.
+Excluding these chart type errors specifically on area plots, the
+number of correct turbo + heuristic descriptions rises to 61 and
+turbo + heuristic + table increases to 65. Similarly, at the time of
+annotation, most trend errors in turbo + heuristic captions were
+carried over from our simple heuristics for detecting trends.
+Adding markdown data tables to prompts also increased the accu-
+racy of descriptions, with smaller improvements in most error types,
+and the lowest number of trend errors out of all GPT4 generation
+methods. Qualitatively, we observed turbo + table and turbo + table +
+heuristic generations to have more detailed trend descriptions, often
+mentioning notable peaks and troughs outside the global min / max
+and periods of fluctuation not captured by other methods.
+Overall, of the turbo methods, turbo + heuristic + table had the
+most correct captions (50) followed by turbo + heuristic (45), turbo
++ table (33), and turbo (10). This trend indicates that adding extra
+© 2025 The Author(s).
+Computer Graphics Forum published by Eurographics and John Wiley & Sons Ltd.
+
+--- PAGE 9 ---
+K. Nylund & J. Mankoff & V. Potluri / MatplotAlt: A Python Library for Adding Alt Text to Matplotlib Figures in Computational Notebooks
+9 of 22
+Dataset
+Alt Text Type
+Correct
+Value-
+Correct
+Chart
+Type
+Axis
+Value
+Ident-
+ity
+Trend
+Label
+Missing
+Ctx.
+Unnec.
+Ctx.
+Repeti-
+tion
+Cutoff
+Number
+Name
+Decept-
+ive
+Non-
+sense
+VisText
+VL-T5 - image + scene graph
+0
+43
+0
+1
+4
+30
+24
+1
+95
+1
+6
+0
+1
+0
+13
+VisText
+VL-T5 - image + table
+3
+59
+0
+1
+1
+12
+24
+1
+95
+1
+0
+0
+0
+3
+3
+VisText
+Heuristic
+48
+57
+30
+0
+0
+6
+16
+0
+11
+0
+11
+0
+0
+0
+0
+VisText
+turbo
+10
+19
+15
+10
+20
+32
+22
+34
+30
+1
+0
+4
+3
+22
+0
+VisText
+turbo + heuristic
+45
+54
+28
+5
+1
+4
+14
+3
+1
+4
+2
+1
+7
+6
+0
+VisText
+turbo + table
+33
+53
+17
+11
+4
+10
+8
+21
+10
+1
+2
+8
+5
+15
+5
+VisText
+turbo + heuristic + table
+50
+57
+26
+5
+0
+2
+11
+0
+1
+3
+0
+7
+5
+5
+3
+Gallery
+Heuristic
+10
+65
+6
+9
+8
+20
+4
+0
+67
+0
+25
+1
+0
+1
+1
+Gallery
+turbo
+33
+46
+9
+10
+7
+9
+3
+4
+6
+5
+0
+20
+0
+31
+0
+Gallery
+turbo + heuristic
+39
+59
+1
+9
+6
+20
+4
+1
+3
+4
+0
+34
+0
+14
+2
+Table 2: MatplotAlt’s heuristic and VLM methods can produce factually correct and informative long-form alt text, but VLMs still
+struggle without extra supervision about chart data and features. For 100 descriptions from each generation strategy and dataset, this table
+shows the number labeled as correct and value-correct (darker blue is better), and the number containing each type of error (darker red is
+worse).
+supervision to GPT4-turbo prompts reduces the number of deceptive
+factual errors in generated descriptions. Turbo’s low performance is
+also notable, with only 10 of its captions containing no errors, and
+81/100 containing some kind of factual inaccuracy. This suggests
+that, out of the box, GPT4 and possibly other large VLMs have
+improved at generating fluent, but not necessarily correct, alt text
+for visualizations.
+With the smaller finetuned VL-T5 models, captions tended to be
+more broad in addition to shorter, usually only including a line or
+two about general increasing and decreasing trends. We found that
+only 5 captions from each VL-T5 + data strategy contained mentions
+of specific data values, and only 3 of these from image + datatable
+were factually correct. This disqualified all other captions under our
+criteria due to missing context. 43 and 59 of the scenegraph and
+datatable VL-T5 captions were value-correct respectively, mostly
+due to omission. These results highlight the difficulty of our qual-
+itative evaluation. In addition to not containing hallucinations, we
+expect heuristic and turbo alt texts to explicitly reference underlying
+chart data. We note that many crowdsourced L3 captions in VisText
+would also be labeled as missing context.
+There were a lower overall number of correct captions for Mat-
+plotlib gallery figures. Our heuristic alt text in particular tended to
+break down in this setting due to its lack of ability to handle complex
+inputs, with over two thirds of its captions lacking necessary context.
+Mirroring our VisText results, however, heuristics still helped reduce
+deceptive errors in turbo + heuristic, which had the highest number
+of correct descriptions (39/100). This indicates that it is helpful to
+add heuristics in both simple univariate settings and complex ones
+where parsing the chart into a data table is infeasible.
+Interestingly, we also labeled more of turbo’s descriptions as
+correct on gallery figures compared to VisText, largely due to fewer
+identity and trend errors. These decreases are likely because there
+are similarly fewer clear trends and statistics to describe in gallery
+figures. The content of VisText charts may have also overlapped
+with GPT4-turbo’s pretraining data in ways that caused identity
+errors. In several VisText captions, for example, turbo incorrectly
+labels 2008/2009 as a minimum and cites the economic crisis. This
+suggests that large VLMs may counter-intuitively be less likely
+to hallucinate specific data points on out-of-distribution figures,
+although more study is needed to confirm this claim.
+6. Discussion
+We present MatplotAlt, a Python library to facilitate adding alt
+text to Matplotlib figures in computational notebooks. Our design
+decisions to generate and surface alt text for Matplotlib figures
+are informed by prior work documenting barriers BVI users face
+in accessing visualization tools [PSTM23, SHHM23, SCWR21],
+and by previous systems for automatically generating alt text
+[MKD∗23,SWM∗22,LS21,SF18]. Our quantitative evaluation of
+the descriptions shows that MatplotAlt’s heuristic-based descrip-
+tions can adhere to the style of human-written L3 alt texts, and that
+prompting VLMs with heuristic descriptions can be used to steer
+their generations closer to ground-truth human captions without
+significantly harming their ability to describe complex figures. Simi-
+larly, we observe that prompting with heuristic alt text is a simple
+way to reduce hallucinations and improve the factuality of VLM-
+generated figure descriptions, even when chart data cannot be easily
+formatted in text. We provide recommendations to generate and
+surface effective image descriptions, and discuss the implications
+of automatically generating alt-text for BVI and sighted notebook
+authors. We close with limitations of our study.
+6.1. Recommendations to generate alt text
+Based on our evaluation and design considerations, we provide the
+following recommendations for generating alt text with MatplotAlt:
+• We suggest users replace plt.show with show_with_alt or
+show_with_api_alt depending on context. Using heuristic
+alt text in domain-specific notebooks aimed at knowledgeable
+audiences may be desirable as they prefer concise, accurate de-
+scriptions. In more general notebooks for personal data analysis,
+extra VLM context may be preferred [SKZ∗24].
+• Our evaluation shows that prompting models with heuristic alt
+text and data tables increases the factuality of generations, can
+steer captions closer to human-written descriptions, and does not
+significantly harm similarity between descriptions and figures. As
+a result, we include heuristics and tables when possible by default
+in show_with_api_alt.
+• Using the HTML option to surface alt text may lead to a better
+user experience for notebooks that are published on the web. As
+the accessibility of notebook interfaces is evolving, using the op-
+tions to embed descriptions as code comments or markdown cell
+© 2025 The Author(s).
+Computer Graphics Forum published by Eurographics and John Wiley & Sons Ltd.
+
+--- PAGE 10 ---
+10 of 22
+K. Nylund & J. Mankoff & V. Potluri / MatplotAlt: A Python Library for Adding Alt Text to Matplotlib Figures in Computational Notebooks
+content may make these notebooks accessible to BVI users who
+experience barriers with notebook interfaces. Saving descriptions
+into image or text files, on the other hand, may make it easy to
+use them alongside corresponding figures in other contexts such
+as research publications.
+6.2. Implications of Automating Alt Text Generation
+Matplotalt provides a variety of options to generate and surface
+alternative texts for figures with no human input. Using these tools,
+BVI experts can perceive notebook visualizations that they may
+encounter in the wild to learn new concepts or conduct data explo-
+ration. At the same time, MatplotAlt’s current description generation
+methods are error-prone and could be misleading when used by BVI
+notebook users, as seen in our evaluation of description correctness
+(§5.5). We observed that the BVI research collaborator on the team
+was more punishing of error occurrences as he felt they mislead
+him on the insights he would expect to derive from the data. Future
+efforts could study the applicability of VLM-generated descriptions
+and the trust that BVI experts place in these potentially error-prone,
+very detailed descriptions. Additional validation support, such as
+access to the original data or the ability to have a sighted collabora-
+tor check results, would be helpful here. In other words, what is the
+detail-accuracy tradeoff that BVI experts prefer in descriptions of
+data visualizations?
+To alleviate accessibility barriers posed by notebook environ-
+ments, MatplotAlt provides command line tools to generate and
+export notebooks with described Matplotlib images. This function-
+ality has the potential for the system to be integrated into testing
+and quality control processes that developers follow. For example,
+MatplotAlt could be added to existing git pipelines that authors use
+to test notebooks.
+6.3. Implications for interactive data exploration
+Several efforts equip BVI users with the tools to interactively
+explore data [PTD∗22, TMS∗23]. MatplotAlt is complimentary
+to these; it provides a standardized mode to access alternative
+text and requires little to no change in notebook hosting envi-
+ronments. Future efforts could add question-answering abilities
+to MatplotAlt, making the data exploration process for BVI users
+iterable. Similarly, MatplotAlt’s generation mechanisms could be
+integrated into existing data exploration tools such as MAIDR and
+Umwelt [SXL∗24,SKZ∗24,ZPPC∗24]. The approaches explored
+in MatplotAlt to use underlying data to enhance descriptions could
+inform future efforts to create interactive sonifications to help BVI
+users answer their questions.
+6.4. Limitations
+MatplotAlt supports multiple ways of generating and surfacing alt
+text for Matplotlib figures. Alternative text and figure descriptions
+alone, however, do not support the full extent of data exploration
+needs of BVI experts [SCWR21,SWM∗22]. We believe that alter-
+native text and text descriptions, however, serve as a standardized
+way of exposing accessible graphics across a variety of scenarios
+and serve as an important first step. Future versions of MatplotAlt
+could offer functionality for developers to interact with the data via
+Q and A to support interactive explorations of data by integrating
+with systems like MAIDR [SKZ∗24].
+Our evaluations of alt text generations may not be perceived as rig-
+orous as they do not offer definitive guidelines of specific generation
+strategies of MatplotAlt as good defaults. Given the variability in al-
+ternative text quality across different measures as shown in our eval-
+uations, and varying preferences of BVI users on alt text [SKZ∗24],
+providing definitive defaults that work for all contexts is not feasible.
+We trust the developers producing notebooks with Matplotlib figures
+to use their best judgment and expertise to decide on a good alt-text
+generation strategy. Although the desc_level parameter allows
+users to modify the inclusion of information, we leave it to feature
+work to support changing the verbosity and ordering of generated
+descriptions, which are also important modes of customization for
+BVI users [JPPH∗24].
+Additionally, our generation strategies may not be effective for
+several chart types or plotting methods used by Matplotlib users as
+our evaluations used carefully curated images. Future work could
+programmatically evaluate our methods on a larger subset of the
+Jetbrains dataset [Guz], which may be more representative of Mat-
+plotAlt use in-the-wild. The alttextify command begins to
+make the infrastructure to run such at-scale evaluations available,
+but still requires executing arbitrary code, which is potentially dan-
+gerous in untrusted notebooks.
+6.5. Conclusion
+We present MatplotAlt, a Python library to add alt text to Matplotlib
+figures in computational notebooks. MatplotAlt implements func-
+tions to generate and embed or export figure descriptions in a single
+line of code or command. Our initial qualitative evaluations indicate
+that MatplotAlt can generate effective alt text for Matplotlib figures,
+and that heuristic alt text and data tables can be used to increase
+the factuality of VLM descriptions. Our goal is that this work will
+eventually see adoption and start increasing the percentage of note-
+books on the web that are accessible to BVI users. We also hope that
+our project will gain collaborators (including from the Matplotlib
+and Jupyter teams) who contribute their experience to improve its
+accessibility and generations.
+7. Acknowledgements
+This work was supported by GitHub, Microsoft, and Google. The
+contents of this article were developed under a grant from the Na-
+tional Institute on Disability, Independent Living, and Rehabilitation
+Research (NIDILRR grant number 90REGE0026-01-00) funding
+the Center for Research and Education on Accessible Technology
+and Experiences (CREATE). NIDILRR is a Center within the Ad-
+ministration for Community Living (ACL), Department of Health
+and Human Services (HHS). The contents of this article do not
+necessarily represent the policy of NIDILRR, ACL, HHS, and you
+should not assume endorsement by the Federal Government. Open
+Access funding enabled by the University of Michigan School of
+Information. We thank members of the Make4All lab and visual-
+ization system seminar at the University of Washington for their
+valuable feedback.
+© 2025 The Author(s).
+Computer Graphics Forum published by Eurographics and John Wiley & Sons Ltd.
+
+--- PAGE 11 ---
+K. Nylund & J. Mankoff & V. Potluri / MatplotAlt: A Python Library for Adding Alt Text to Matplotlib Figures in Computational Notebooks
+11 of 22
+References
+[BKL09]
+BIRD S., KLEIN E., LOPER E.: Natural language processing
+with Python: analyzing text with the natural language toolkit. " O’Reilly
+Media, Inc.", 2009.
+[C∗08]
+CONSORTIUM W. W. W., ET AL.: Web content accessibility
+guidelines (wcag) 2.0.
+[CLD∗23]
+CHEN L., LI J., DONG X., ZHANG P., HE C., WANG J.,
+ZHAO F., LIN D.: Sharegpt4v: Improving large multi-modal models with
+better captions. arXiv preprint arXiv:2311.12793 (2023).
+[CPH∗20]
+CHATTOPADHYAY S., PRASAD I., HENLEY A. Z., SARMA
+A., BARIK T.: What’s wrong with computational notebooks? pain points,
+needs, and design opportunities. In Proceedings of the 2020 CHI confer-
+ence on human factors in computing systems (2020), pp. 1–12.
+[CSR∗23]
+CAPRARELLI G., SEDORA B., RICCI M., STALL S., GI-
+AMPOALA M.: Notebooks now! the future of reproducible research,
+2023.
+[DBK∗20]
+DOSOVITSKIY A., BEYER L., KOLESNIKOV A., WEIS-
+SENBORN D., ZHAI X., UNTERTHINER T., DEHGHANI M., MIN-
+DERER M., HEIGOLD G., GELLY S., ET AL.:
+An image is worth
+16x16 words: Transformers for image recognition at scale. arXiv preprint
+arXiv:2010.11929 (2020).
+[DCLT19]
+DEVLIN J., CHANG M.-W., LEE K., TOUTANOVA K.: Bert:
+Pre-training of deep bidirectional transformers for language understand-
+ing. In Proceedings of the 2019 conference of the North American chapter
+of the association for computational linguistics: human language tech-
+nologies, volume 1 (long and short papers) (2019), pp. 4171–4186.
+[EBM22]
+ELAVSKY F., BENNETT C., MORITZ D.: How accessible is
+my visualization? evaluating visualization accessibility with chartability.
+In Computer Graphics Forum (2022), vol. 41, Wiley Online Library,
+pp. 57–70.
+[Guz]
+GUZHARINA A.: We downloaded 10,000,000 jupyter notebooks
+from GitHub – this is what we learned. Accessed: 2024-8-1.
+[GWS∗24]
+GODFREY A. J. R., WARREN D., SARKAR D., BECKER
+G., THOMPSON J., MURRELL P., BILTON T., SORGE V.: BrailleR:
+Improved Access for Blind Users, 2024.
+R package version 1.1.0,
+http://ajrgodfrey.github.io/BrailleR/.
+[Hc19]
+HOLDGRAF C., CONTRIBUTORS:
+Improve the accessibility
+of figures shown with ‘_repr_html_‘. GitHub Issue, December 2019.
+Accessed on November 18, 2024. URL: https://github.com/
+matplotlib/matplotlib/issues/15971.
+[HXP∗24]
+HUH M., XU F., PENG Y.-H., CHEN C., MURUGU H., GU-
+RARI D., CHOI E., PAVEL A.: Long-form answers to visual questions
+from blind and low vision people. arXiv preprint arXiv:2408.06303
+(2024).
+[JPPH∗24]
+JONES S., PEDRAZA PINEROS I., HAJAS D., ZONG J.,
+SATYANARAYAN A.: “customization is key”: Reconfigurable textual
+tokens for accessible data visualizations. In Proceedings of the 2024 CHI
+Conference on Human Factors in Computing Systems (2024), pp. 1–14.
+[JRG∗22]
+JOYNER S. C. S., RIEGELHUTH A., GARRITY K., KIM Y.-S.,
+KIM N. W.: Visualization accessibility in the wild: Challenges faced by
+visualization designers. In Proceedings of the 2022 CHI Conference on
+Human Factors in Computing Systems (2022), pp. 1–19.
+[KK24]
+KAPUR R., KREISS E.:
+Reference-based metrics are biased
+against blind and low-vision users’ image description preferences. In
+Proceedings of the Third Workshop on NLP for Positive Impact (Miami,
+Florida, USA, Nov. 2024), Dementieva D., Ignat O., Jin Z., Mihalcea
+R., Piatti G., Tetreault J., Wilson S., Zhao J., (Eds.), Association for
+Computational Linguistics, pp. 308–314.
+[KLL∗22]
+KANTHARAJ S., LEONG R. T. K., LIN X., MASRY A.,
+THAKKAR M., HOQUE E., JOTY S.: Chart-to-text: A large-scale bench-
+mark for chart summarization. arXiv preprint arXiv:2203.06486 (2022).
+[Lin04]
+LIN C.-Y.: Rouge: A package for automatic evaluation of sum-
+maries. In Text summarization branches out (2004), pp. 74–81.
+[LLXH22]
+LI J., LI D., XIONG C., HOI S.: Blip: Bootstrapping language-
+image pre-training for unified vision-language understanding and gener-
+ation. In International conference on machine learning (2022), PMLR,
+pp. 12888–12900.
+[LPK∗22]
+LIU F., PICCINNO F., KRICHENE S., PANG C., LEE K., JOSHI
+M., ALTUN Y., COLLIER N., EISENSCHLOS J. M.: Matcha: Enhancing
+visual language pretraining with math reasoning and chart derendering.
+arXiv preprint arXiv:2212.09662 (2022).
+[LS21]
+LUNDGARD A., SATYANARAYAN A.: Accessible visualization
+via natural language descriptions: A four-level model of semantic content.
+IEEE transactions on visualization and computer graphics 28, 1 (2021),
+1073–1083.
+[MCLM21]
+MACK K., CUTRELL E., LEE B., MORRIS M. R.: Designing
+tools for high-quality alt text authoring. In Proceedings of the 23rd Inter-
+national ACM SIGACCESS Conference on Computers and Accessibility
+(2021), pp. 1–14.
+[MFM∗24]
+MOURED O., FAROOQUI S. A., MÜLLER K., FADAEIJOUY-
+BARI S., SCHWARZ T., JAVED M., STIEFELHAGEN R.: Alt4blind: A
+user interface to simplify charts alt-text creation. In International Confer-
+ence on Computers Helping People with Special Needs (2024), Springer,
+pp. 291–298.
+[MKD∗23]
+MASRY A., KAVEHZADEH P., DO X. L., HOQUE E., JOTY
+S.: Unichart: A universal vision-language pretrained model for chart
+comprehension and reasoning. arXiv preprint arXiv:2305.14761 (2023).
+[MPS∗17]
+MIRRI S., PERONI S., SALOMONI P., VITALI F., RUBANO
+V.: Towards accessible graphs in html-based scientific articles. In 2017
+14th IEEE Annual Consumer Communications & Networking Conference
+(CCNC) (2017), IEEE, pp. 1067–1072.
+[Per18]
+PERKEL J. M.: Why jupyter is data scientists’ computational
+notebook of choice. Nature 563, 7732 (2018), 145–147.
+[Pop15]
+POPOVI ´C M.: chrf: character n-gram f-score for automatic mt
+evaluation. In Proceedings of the tenth workshop on statistical machine
+translation (2015), pp. 392–395.
+[PRWZ02]
+PAPINENI K., ROUKOS S., WARD T., ZHU W.-J.: Bleu: a
+method for automatic evaluation of machine translation. In Proceedings of
+the 40th annual meeting of the Association for Computational Linguistics
+(2002), pp. 311–318.
+[PSTM23]
+POTLURI V., SINGANAMALLA S., TIEANKLIN N., MANKOFF
+J.: Notably inaccessible—data driven understanding of data science
+notebook (in) accessibility. In Proceedings of the 25th International
+ACM SIGACCESS Conference on Computers and Accessibility (2023),
+pp. 1–19.
+[PTD∗22]
+POTLURI V., THOMPSON J., DEVINE J., LEE B., MORSI N.,
+DE HALLEUX P., HODGES S., MANKOFF J.: Psst: Enabling blind or
+visually impaired developers to author sonifications of streaming sensor
+data. In Proceedings of the 35th Annual ACM Symposium on User Inter-
+face Software and Technology (New York, NY, USA, 2022), UIST ’22,
+Association for Computing Machinery.
+[RMABR20]
+ROWE F., MAIER G., ARRIBAS-BEL D., REY S. J.: The
+potential of notebooks for scientific publication: Reproducibility, and
+dissemination. Region 7, 3 (2020).
+[RNK∗23]
+RASUL
+T.,
+NAIR
+S.,
+KALENDRA
+D.,
+ROBIN
+M.,
+DE OLIVEIRA SANTINI F., LADEIRA W. J., SUN M., DAY I., RATHER
+R. A., HEATHCOTE L.: The role of chatgpt in higher education: Benefits,
+challenges, and future research directions. Journal of Applied Learning
+and Teaching 6, 1 (2023), 41–56.
+[Rud19]
+RUDIN C.: Stop explaining black box machine learning models
+for high stakes decisions and use interpretable models instead. Nature
+machine intelligence 1, 5 (2019), 206–215.
+[SCWR21]
+SHARIF A., CHINTALAPATI S. S., WOBBROCK J. O., REI-
+NECKE K.: Understanding screen-reader users’ experiences with online
+data visualizations. In Proceedings of the 23rd International ACM SIGAC-
+CESS Conference on Computers and Accessibility (2021), pp. 1–16.
+© 2025 The Author(s).
+Computer Graphics Forum published by Eurographics and John Wiley & Sons Ltd.
+
+--- PAGE 12 ---
+12 of 22
+K. Nylund & J. Mankoff & V. Potluri / MatplotAlt: A Python Library for Adding Alt Text to Matplotlib Figures in Computational Notebooks
+[SDP20]
+SELLAM T., DAS D., PARIKH A. P.: Bleurt: Learning robust
+metrics for text generation. arXiv preprint arXiv:2004.04696 (2020).
+[SF18]
+SHARIF A., FOROURAGHI B.: evographs—a jquery plugin to
+create web accessible graphs. In 2018 15th IEEE Annual Consumer
+Communications & Networking Conference (CCNC) (2018), IEEE, pp. 1–
+4.
+[SHHM23]
+SRINIVASAN
+A.,
+HARSHBARGER
+T.,
+HILLIKER
+D.,
+MANKOFF J.: Azimuth: Designing accessible dashboards for screen
+reader users. In Proceedings of the 25th International ACM SIGACCESS
+Conference on Computers and Accessibility (2023), pp. 1–16.
+[SKZ∗24]
+SEO J., KAMATH S. S., ZEIDIEH A., VENKATESH S., MC-
+CURRY S.: Maidr meets ai: Exploring multimodal llm-based data vi-
+sualization interpretation by and with blind and low-vision users. In
+Proceedings of the 26th International ACM SIGACCESS Conference on
+Computers and Accessibility (New York, NY, USA, 2024), ASSETS ’24,
+Association for Computing Machinery.
+[Som18]
+SOMERS J.: The scientific paper is obsolete. The Atlantic 4
+(2018).
+[SWB24]
+SINGH N., WANG L. L., BRAGG J.: Figura11y: Ai assistance
+for writing scientific alt text. In Proceedings of the 29th International
+Conference on Intelligent User Interfaces (2024), pp. 886–906.
+[SWM∗22]
+SHARIF A., WANG O. H., MUONGCHAN A. T., REINECKE
+K., WOBBROCK J. O.: Voxlens: Making online data visualizations
+accessible with an interactive javascript plug-in. In Proceedings of the
+2022 CHI conference on human factors in computing systems (2022),
+pp. 1–19.
+[SXL∗24]
+SEO J., XIA Y., LEE B., MCCURRY S., YAM Y. J.: Maidr:
+Making statistical visualizations accessible with multimodal data repre-
+sentation. In Proceedings of the 2024 CHI Conference on Human Factors
+in Computing Systems (New York, NY, USA, 2024), CHI ’24, Association
+for Computing Machinery.
+[SZRW23]
+SHARIF A., ZHANG A. M., REINECKE K., WOBBROCK
+J. O.: Understanding and improving drilled-down information extraction
+from online data visualizations for screen-reader users. In Proceedings
+of the 20th International Web for All Conference (New York, NY, USA,
+2023), W4A ’23, Association for Computing Machinery, p. 18–31.
+[TBS23]
+TANG B. J., BOGGUST A., SATYANARAYAN A.:
+Vistext:
+A benchmark for semantically rich chart captioning.
+arXiv preprint
+arXiv:2307.05356 (2023).
+[Tea22]
+TEAM
+J.
+A.:
+Jupyterlab
+accessibility
+statement.
+Read the Docs, 2022.
+Accessed on Nov 16, 2024.
+URL:
+https://jupyter-accessibility.readthedocs.io/en/
+latest/resources/JupyterLab-a11y-statement.html.
+[Tea24]
+TEAM J. A.:
+Jupyter accessibility documentation.
+Read
+the Docs, 2024.
+Accessed on Nov 16, 2024.
+URL: https://
+jupyter-accessibility.readthedocs.io/en/latest/.
+[TMS∗23]
+THOMPSON J. R., MARTINEZ J. J., SARIKAYA A., CUTRELL
+E., LEE B.: Chart reader: Accessible visualization experiences designed
+with screen reader users. In Proceedings of the 2023 CHI Conference on
+Human Factors in Computing Systems (New York, NY, USA, 2023), CHI
+’23, Association for Computing Machinery.
+[VGH∗18]
+VANDERPLAS J., GRANGER B., HEER J., MORITZ D.,
+WONGSUPHASAWAT K., SATYANARAYAN A., LEES E., TIMOFEEV
+I., WELSH B., SIEVERT S.: Altair: Interactive statistical visualizations
+for python. Journal of Open Source Software 3, 32 (2018), 1057.
+[VSP∗17]
+VASWANI A., SHAZEER N., PARMAR N., USZKOREIT J.,
+JONES L., GOMEZ A. N., KAISER Ł., POLOSUKHIN I.: Attention is all
+you need. Advances in neural information processing systems 30 (2017).
+[WWJK22]
+WANG Y., WANG R., JUNG C., KIM Y.-S.: What makes
+web data tables accessible? insights and a tool for rendering accessible
+tables for people with visual impairments. In Proceedings of the 2022
+CHI Conference on Human Factors in Computing Systems (New York,
+NY, USA, 2022), CHI ’22, Association for Computing Machinery. doi:
+10.1145/3491102.3517469.
+[XZY∗24]
+XIA R., ZHANG B., YE H., YAN X., LIU Q., ZHOU H.,
+CHEN Z., DOU M., SHI B., YAN J., ET AL.: Chartx & chartvlm: A ver-
+satile benchmark and foundation model for complicated chart reasoning.
+arXiv preprint arXiv:2402.12185 (2024).
+[ZKW∗19]
+ZHANG T., KISHORE V., WU F., WEINBERGER K. Q.,
+ARTZI Y.: Bertscore: Evaluating text generation with bert. arXiv preprint
+arXiv:1904.09675 (2019).
+[ZPPC∗24]
+ZONG J., PEDRAZA PINEROS I., CHEN M. K., HAJAS D.,
+SATYANARAYAN A.: Umwelt: Accessible structured editing of multi-
+modal data representations. In Proceedings of the 2024 CHI Conference
+on Human Factors in Computing Systems (New York, NY, USA, 2024),
+CHI ’24, Association for Computing Machinery.
+[ZW24]
+ZHANG C., WANG S.:
+Good at captioning, bad at count-
+ing: Benchmarking gpt-4v on earth observation data. arXiv preprint
+arXiv:2401.17600 (2024).
+© 2025 The Author(s).
+Computer Graphics Forum published by Eurographics and John Wiley & Sons Ltd.
+
+--- PAGE 13 ---
+K. Nylund & J. Mankoff & V. Potluri / MatplotAlt: A Python Library for Adding Alt Text to Matplotlib Figures in Computational Notebooks
+13 of 22
+Appendix A: Example Gallery
+We provide a gallery of MatplotAlt’s supported chart types in Table
+4, a list of their corresponding heuristic-based alt texts in Table 3,
+and an example data table created using generate_alt_text
+in Table 4. We also compare each of our alt text generation methods
+on two charts in Tables 5 and 6, with sections labeled by L1-L3
+semantic level. Finally, we provide two examples from VisText and
+the Matplotlib gallery, labeled with a range of different error types
+in Table 7.
+Appendix B: Heuristic Alt Text Templates
+While our heuristic alt text is formatted differently from figure
+to figure, we use the following templates in most cases. Our L1
+description is usually:
+a [chart type] titled [title].
+[x-label] is plotted on the x-axis
+from [x-axis min] to [x-axis max]
+using a [x-axis scale] scale.
+[y-label] is plotted on the y-axis
+from [y-axis min] to [y-axis max],
+...
+For each variable encoded with a color we add:
+[variable label] is plotted in [label
+color encoding].
+And for each annotation we add:
+An annotation at [annotation x/y
+position] reads [annotation text].
+For L2 descriptions, we compute relevant statistics from the data
+depending on the chart type and then describe them as:
+[variable label] has a [statistic
+name] of [dependent axis]=[value]
+at [independent axis]=[value], a
+[statistic name] of....
+Several statistics do not fit this format. For example: The max
+contour is centered around [x, y].
+For plots displaying one or two-dimensional data, we generate
+simple trend summaries from the difference between subsequent
+points. For instance:
+[variable name] strictly increase to
+a max at [dependent axis]=[end point],
+then generally decrease.
+Future implementations may use more involved methods to capture
+complex trends like fitting piecewise functions. To see a range of the
+different outputs possible with generate_alt_text, we pro-
+vide more examples at https://github.com/make4all/
+matplotalt/blob/main/examples/examples.ipynb
+Appendix C: Vision Language Model Prompts
+We use different versions of our instruction prompt based on the
+given description level and other config options.
+L1:
+You are a helpful assistant that describes
+figures. Here are two example descriptions:
+1. ’This is a vertical bar chart entitled
+’COVID-19 mortality rate by age’ that plots
+Mortality rate by Age. Mortality rate is
+plotted on the vertical y-axis from 0 to
+15%. Age is plotted on the horizontal x-axis
+in bins: 10-19, 20-29, 30-39, 40-49, 50-59,
+60-69, 70-79, 80+.’ 2. ’This is a line chart
+titled ’Big Tech Stock Prices’ that plots
+price by date. The corporations include AAPL
+(Apple), AMZN (Amazon), GOOG (Google), IBM
+(IBM), and MSFT (Microsoft). The years are
+plotted on the horizontal x-axis from 2000
+to 2010 with an increment of 2 years. The
+prices are plotted on the vertical y-axis
+from 0 to 800 with an increment of 200.’
+Only include information about the chart
+type, title, axis ranges, and labels.
+Be concise and limit your response to
+{max_tokens} tokens.
+L2:
+You are a helpful assistant that describes
+figures. Here are two example descriptions:
+1. ’This is a vertical bar chart entitled
+’COVID-19 mortality rate by age’ that plots
+Mortality rate by Age. Mortality rate is
+plotted on the vertical y-axis from 0
+to 15%. Age is plotted on the horizontal
+x-axis in bins: 10-19, 20-29, 30-39, 40-49,
+50-59, 60-69, 70-79, 80+. The highest
+COVID-19 mortality rate is in the 80+ age
+range, while the lowest mortality rate is
+in 10-19, 20-29, 30-39, sharing the same
+rate. COVID-19 mortality rate does not
+linearly correspond to the demographic age.’
+2. ’This is a line chart titled ’Big Tech
+Stock Prices’ that plots price by date. The
+corporations include AAPL (Apple), AMZN
+(Amazon), GOOG (Google), IBM (IBM), and MSFT
+(Microsoft). The years are plotted on the
+horizontal x-axis from 2000 to 2010 with an
+increment of 2 years. The prices are plotted
+on the vertical y-axis from 0 to 800 with
+an increment of 200. GOOG has the greatest
+price over time. MSFT has the lowest price
+over time.’
+Include information about the chart type,
+title, axis ranges, and labels. If possible,
+© 2025 The Author(s).
+Computer Graphics Forum published by Eurographics and John Wiley & Sons Ltd.
+
+--- PAGE 14 ---
+14 of 22
+K. Nylund & J. Mankoff & V. Potluri / MatplotAlt: A Python Library for Adding Alt Text to Matplotlib Figures in Computational Notebooks
+Figure 4: Types of charts supported by MatplotAlt. From top left to bottom right: a bar plot, a scatter plot, multiple subplots, a line plot, a strip
+plot, a boxplot, a radial line plot, a heatmap, an image displayed with imshow, a pie chart, a contour plot, and a blank plot. Example heuristic
+alt texts for each of the charts are listed in Table 3.
+© 2025 The Author(s).
+Computer Graphics Forum published by Eurographics and John Wiley & Sons Ltd.
+
+--- PAGE 15 ---
+K. Nylund & J. Mankoff & V. Potluri / MatplotAlt: A Python Library for Adding Alt Text to Matplotlib Figures in Computational Notebooks
+15 of 22
+Plot type
+Example Heuristic-based Alt Text
+Bar plot
+A bar chart titled ’average number of bikes crossing fremont bridge each month from 2014-2018’. Avg. # bikes
+crossing fremont bridge is plotted on the x-axis from 0 to 250000 using a linear scale and month is plotted on the
+y-axis from jan to dec using a datetime scale. The data has 12 points, a minimum value of x=89700 at y=dec, a
+maximum value of x=234400 at y=july, and an average of x=166300.
+Line plot
+A line plot titled ’average monthly hours of sunshine in seattle vs. Number of bikes that cross fremont bridge’.
+Month is plotted on the x-axis from jan to nov using a datetime scale and change from yearly average (%) is
+plotted on the y-axis from -80 to 100 using a linear scale. # bikes crossing fremont bridge is plotted in dark blue
+and hours of sunshine is plotted in orange. There is a horizontal line at y=0.0. An annotation reads ’234421 bikes
+in july’. # bikes crossing fremont bridge has a minimum value of y=-46.08 at x=12, a maximum value of y=40.93
+at x=7, and an average of y=0. Hours of sunshine has a minimum value of y=-71.15 at x=12, a maximum value of
+y=73.09 at x=7, and an average of y=0.
+Pie chart
+A pie chart titled ’percentage of annual sunshine’. There are 12 slices: jan (3.19%), feb (4.993%), mar (8.229%),
+apr (9.57%), may (11.7%), june (12.39%), july (14.42%), aug (12.99%), sep (10.22%), oct (6.565%), nov (3.329%),
+and dec (2.404%). The data has a standard deviation of x=4.006, an average of x=8.333, a maximum value of
+x=14.42, and a minimum value of x=2.404. The data strictly increase up to their max at x=14.42, then strictly
+decrease.
+Radial line chart
+A radial line plot titled ’avg. Monthly hours of sunshine in seattle’. The x-axis ranges from jan to dec using a
+datetime scale and the y-axis ranges from 0 to 312 using a linear scale. Avg. Hours of sunshine is plotted in orange.
+Avg. Hours of sunshine has a minimum value of y=52 at x=dec, a maximum value of y=312 at x=july, and an
+average of y=180.2.
+Scatter plot
+A scatter plot titled ’points from 2d gaussian distributions’. Random gaussian x is plotted on the x-axis from -12.5
+to 7.5 and random gaussian y is plotted on the y-axis from -4 to 10, both using linear scales. The blue dots is
+plotted in dark blue and the orange dots is plotted in orange. The blue dots has 350 points, an average of x=1.149,
+an average of y=1.915, a linear fit of y=-0.5268x+2.52, and 6 outliers. The orange dots has 250 points, an average
+of x=-4.114, an average of y=3.055, a linear fit of y=-0.3893x+1.453, and 5 outliers.
+Strip plot
+A strip plot. Random gaussian x is plotted on the x-axis from -10 to 8 using a linear scale and the y-axis ranges
+from the blue dots to the orange dots using a categorical scale. Strip 1 has 350 points, a median of x=0.9834, and 1
+outlier at x=-5.01. Strip 2 has 250 points, a median of x=-3.955, and 3 outliers.
+Heatmap
+A 7x6 heatmap titled ’number of points from combined gaussians’. The x-axis ranges from -8 to 6, the y-axis
+ranges from -4 to 8, and number of gaussian points is plotted on the z-axis from 0 to 61, all using linear scales.
+The data has a minimum value of z=0 at (-8, -4), a maximum value of z=61 at (0, -4), and an average of z=14.19.
+Contour plot
+A contour plot titled ’number of points from combined gaussians’. The x-axis ranges from -12 to 6 and the y-axis
+ranges from -4 to 8, both using linear scales. 9 contour lines are plotted with values 0, 0, 8, 16, 24, 32, 32, 40, and
+48. The max contour is centered around (-4.803, 4.432).
+Multiple subplots
+A figure with 4 subplots titled ’anscombe’s quartet’. subplot 1: a line plot. The x-axis ranges from 2.5 to 15 and
+the y-axis ranges from 2 to 12, both using linear scales. The data are plotted in dark blue. The data has a linear fit
+of y=0.5001x+3, an average of y=7.501, and a standard deviation of y=1.937. The data generally increase up to
+their max at x=12. subplot 2: a line plot. The x-axis ranges from 2.5 to 15 and the y-axis ranges from 2 to 10,
+both using linear scales. The data are plotted in dark blue. The data has a linear fit of y=0.5x+3.001, an average
+of y=7.501, and a standard deviation of y=1.937. The data strictly increase up to their max at x=11, then strictly
+decrease. subplot 3: a line plot. The x-axis ranges from 2.5 to 15 and the y-axis ranges from 4 to 14, both using
+linear scales. The data are plotted in dark blue. The data has a linear fit of y=0.4997x+3.002, an average of y=7.5,
+and a standard deviation of y=1.936. The data strictly increase up to their max at x=13, then strictly decrease.
+subplot 4: a line plot. The x-axis ranges from 5 to 20 and the y-axis ranges from 4 to 14, both using linear scales.
+The data are plotted in dark blue. The data has a linear fit of y=0.4999x+3.002, an average of y=7.501, and a
+standard deviation of y=1.936.
+Boxplot
+A boxplot titled ’distributional differences in anscombe’s quartet’. Subplot num is plotted on the x-axis from 0 to
+3 and y value in anscombe’s quartet is plotted on the y-axis from 2 to 14, both using linear scales. Boxplot 0 has a
+median of 7.58, an interquartile range of 2.255, and no outliers. Boxplot 1 has a median of 8.14, an interquartile
+range of 2.255, and 1 outlier at y=3.1. Boxplot 2 has a median of 7.11, an interquartile range of 1.73, and 1 outlier
+at y=12.74. Boxplot 3 has a median of 7.04, an interquartile range of 2.02, and 1 outlier at y=12.5.
+Image
+A 50x50 image titled ’zˆ3 + 0.66 iterations before reaching a threshold of 2’. The x-axis ranges from -0.5 to 49.5
+using a numerical scale, the y-axis ranges from -0.5 to 49.5 using a linear scale, and iterations is plotted on the
+z-axis from 0 to 17 using a linear scale. The data has a minimum value of z=0 at (0, 0), a maximum value of z=17
+at (38, 12), and an average of z=2.511.
+Blank plot
+A blank plot titled ’blank’. X is plotted on the x-axis from -0.06 to 0.06 and y is plotted on the y-axis from -0.06
+to 0.06, both using linear scales.
+T bl 3 H
+i i fi
+d
+i i
+f
+h f h
+ll
+fi
+d b
+lli
+i
+© 2025 The Author(s).
+Computer Graphics Forum published by Eurographics and John Wiley & Sons Ltd.
+
+--- PAGE 16 ---
+16 of 22
+K. Nylund & J. Mankoff & V. Potluri / MatplotAlt: A Python Library for Adding Alt Text to Matplotlib Figures in Computational Notebooks
+month
+# bikes crossing fremont bridge
+(change from yearly average (%))
+hours of sunshine
+(change from yearly average (%))
+0
+-32.52
+-61.72
+1
+-37.78
+-40.08
+2
+-18.13
+-1.248
+3
+-0.7941
+14.84
+4
+39.35
+40.36
+5
+33.02
+48.68
+6
+40.93
+73.09
+7
+34.72
+55.89
+8
+14.37
+22.61
+9
+-0.1582
+-21.22
+10
+-26.93
+-60.06
+11
+-46.08
+-71.15
+Table 4: An example markdown table created using generate_alt_text (converted to LaTeX formatting)
+describe statistics, extrema, outliers,
+correlations, and point-wise comparisons
+between variables. Be concise and limit your
+response to {max_tokens} tokens.
+L3:
+You are a helpful assistant that describes
+figures. Here are two example descriptions:
+1. ’This is a vertical bar chart entitled
+’COVID-19 mortality rate by age’ that plots
+Mortality rate by Age. Mortality rate is
+plotted on the vertical y-axis from 0
+to 15%. Age is plotted on the horizontal
+x-axis in bins: 10-19, 20-29, 30-39, 40-49,
+50-59, 60-69, 70-79, 80+. The highest
+COVID-19 mortality rate is in the 80+ age
+range, while the lowest mortality rate is
+in 10-19, 20-29, 30-39, sharing the same
+rate. COVID-19 mortality rate does not
+linearly correspond to the demographic
+age. The mortality rate increases with age,
+especially around 40-49 years and upwards.
+The mortality rate increases exponentially
+with older people.’ 2. ’This is a line chart
+titled ’Big Tech Stock Prices’ that plots
+price by date. The corporations include AAPL
+(Apple), AMZN (Amazon), GOOG (Google), IBM
+(IBM), and MSFT (Microsoft). The years are
+plotted on the horizontal x-axis from 2000
+to 2010 with an increment of 2 years. The
+prices are plotted on the vertical y-axis
+from 0 to 800 with an increment of 200.
+GOOG has the greatest price over time. MSFT
+has the lowest price over time. Prices of
+particular Big Tech corporations seem to
+fluctuate but nevertheless increase over
+time. Years 2008-2009 are exceptions as we
+can see an extreme drop in prices of all
+given corporations.’
+Include information about the chart type,
+title, axis ranges, and labels. If possible,
+describe statistics, extrema, outliers,
+correlations, point-wise comparisons, and
+trends for each plotted variable. Be concise
+and limit your response to {max_tokens}
+tokens.
+L4:
+You are a helpful assistant that describes
+figures. Here are two example descriptions:
+1. ’This is a vertical bar chart entitled
+’COVID-19 mortality rate by age’ that plots
+Mortality rate by Age. Mortality rate is
+plotted on the vertical y-axis from 0
+to 15%. Age is plotted on the horizontal
+x-axis in bins: 10-19, 20-29, 30-39, 40-49,
+50-59, 60-69, 70-79, 80+. The highest
+COVID-19 mortality rate is in the 80+ age
+range, while the lowest mortality rate is
+in 10-19, 20-29, 30-39, sharing the same
+rate. COVID-19 mortality rate does not
+linearly correspond to the demographic
+age. The mortality rate increases with
+age, especially around 40-49 years and
+upwards. This relates to people’s decrease
+in their immunity and the increase of
+co-morbidity with age. The mortality rate
+increases exponentially with older people.’
+2. ’This is a line chart titled ’Big Tech
+Stock Prices’ that plots price by date. The
+corporations include AAPL (Apple), AMZN
+(Amazon), GOOG (Google), IBM (IBM), and
+MSFT (Microsoft). The years are plotted
+on the horizontal x-axis from 2000 to 2010
+with an increment of 2 years. The prices
+© 2025 The Author(s).
+Computer Graphics Forum published by Eurographics and John Wiley & Sons Ltd.
+
+--- PAGE 17 ---
+K. Nylund & J. Mankoff & V. Potluri / MatplotAlt: A Python Library for Adding Alt Text to Matplotlib Figures in Computational Notebooks
+17 of 22
+Alt Text
+Type
+Sunshine and Bikes Example Alt Text
+Anscombe’s Quartet Example Alt Text
+Figure Image
+Heuristic
+[L1] A line plot titled ’average monthly hours of sunshine in seattle vs. Number of
+bikes that cross fremont bridge’. Month is plotted on the x-axis from jan to nov using
+a datetime scale and change from yearly average (%) is plotted on the y-axis from
+-80 to 100 using a linear scale. # bikes crossing fremont bridge is plotted in dark
+blue and hours of sunshine is plotted in orange. There is a horizontal line at y=0.0.
+An annotation reads ’234421 bikes in july’. [L2] # bikes crossing fremont bridge has
+a minimum value of y=-46.08 at x=12, a maximum value of y=40.93 at x=7, and an
+average of y=0. Hours of sunshine has a minimum value of y=-71.15 at x=12, a
+maximum value of y=73.09 at x=7, and an average of y=0. [L3] Hours of sunshine
+strictly increase up to their max at x=7, then strictly decrease. [L2] # bikes crossing
+fremont bridge and hours of sunshine have a correlation of 0.95.
+[L1] A figure with 4 subplots titled ’anscombe’s quartet’.
+subplot 1: a line plot. The x-axis ranges from 2.5 to 15 and the y-axis ranges from 2 to 12, both using
+linear scales. The data are plotted in dark blue. [L2] The data has a minimum value of y=4.26 at x=4, a
+maximum value of y=10.84 at x=12, and an average of y=7.501. [L3] The data generally increase up to
+their max at x=12.
+[L1] subplot 2: a line plot. The x-axis ranges from 2.5 to 15 and the y-axis ranges from 2 to 10, both
+using linear scales. The data are plotted in dark blue. [L2] The data has a minimum value of y=3.1 at x=4,
+a maximum value of y=9.26 at x=11, and an average of y=7.501. [L3] The data strictly increase up to their
+max at x=11, then strictly decrease.
+[L1] subplot 3: a line plot. The x-axis ranges from 2.5 to 15 and the y-axis ranges from 4 to 14, both
+using linear scales. The data are plotted in dark blue. [L2] The data has a minimum value of y=5.39 at
+x=4, a maximum value of y=12.74 at x=13, and an average of y=7.5. [L3] The data strictly increase up to
+their max at x=13, then strictly decrease.
+[L1] subplot 4: a line plot. The x-axis ranges from 5 to 20 and the y-axis ranges from 4 to 14, both using
+linear scales. The data are plotted in dark blue. [L2] The data has a minimum value of y=5.25 at x=8, a
+maximum value of y=12.5 at x=19, and an average of y=7.501.
+turbo
+[L1] This is a line chart titled ’Average Monthly Hours of Sunshine in Seattle vs.
+Number of Bikes that Cross Fremont Bridge’. Two variables are plotted: the number
+of bikes crossing Fremont Bridge is shown with a dashed blue line, and the hours of
+sunshine with a solid orange line. Both variables are compared against the months of
+the year, plotted on the horizontal x-axis from January to November. The vertical
+y-axis represents the change from yearly average, marked in percentages ranging
+from -60% to 80%. [L2] The number of bikes peaks in July at 234421 bikes, which
+correlates with the highest point of the hours of sunshine. [L3] The winter months
+show a decrease in both bikes crossing and sunshine hours. [L4] This suggests a
+seasonal pattern where more people bike during sunnier months. [L2] The chart
+demonstrates a clear positive correlation between the number of bikers and the
+amount of sunshine.
+[L1] This figure displays Anscombe’s Quartet, consisting of four scatter plots, each
+depicting a different dataset. The x-axis ranges from about 4 to 20, and the y-axis
+ranges from roughly 3 to 14 across the four charts. [L2] All datasets exhibit a similar
+statistical summary yet present distinct distributions:
+[L3] Top-left plot: Appears to show a linear relationship with some variability.
+Top-right plot: Displays a curved, quadratic-like relationship.
+Bottom-left plot: Mostly linear but with a clear outlier that deviates significantly
+from the trend.
+Bottom-right plot: Shows a strong linear relationship with an outlier that lies
+vertically far from the line.
+[L1] Each plot’s data points are in blue with connecting lines. [L4] The consistency
+of these statistical properties, despite differing datasets, underscores the importance
+of graphically analyzing data to avoid misleading interpretations based only on
+statistical summaries.
+turbo + heuristic
+[L1] This line chart depicts ’Average Monthly Hours of Sunshine in Seattle vs.
+Number of Bikes that Cross Fremont Bridge’. The x-axis represents months, ranging
+from January to November, while the y-axis shows the percentage change from the
+yearly average, ranging from -80% to +100%. Two data series are plotted: the
+number of bikes crossing Fremont Bridge is illustrated with a dark blue dashed line,
+and the hours of sunshine are shown with a solid orange line. A horizontal reference
+line is drawn at y=0%.
+[L2] The data shows that both variables reach their peak in July, with the hours of
+sunshine increasing to a maximum of 73.09% and the number of bikes reaching a
+peak change of 40.93%, marked by an annotation indicating "234421 bikes in July".
+Conversely, December experiences the lowest points for both variables, with bikes at
+-46.08% and sunshine at -71.15%. The overall trend suggests a strong correlation
+(0.95) between sunshine and cycling activity, [L4] reflecting a potential increase in
+outdoor activities during sunnier months.
+[L1] The figure consists of four subplots collectively titled "Anscombe’s Quartet,"
+each displaying a line plot with data points in dark blue.
+Subplot 1: x-axis 2.5-15, y-axis 2-12. [L2/L3] Data rises to y=10.84 at x=12 then
+falls slightly.
+Subplot 2: [L1] x-axis 2.5-15, y-axis 2-10. [L2/L3] Data climbs to y=9.26 at x=11
+then decreases.
+Subplot 3: [L1] x-axis 2.5-15, y-axis 4-14. [L2/L3] Data ascends to y=12.74 at
+x=13, followed by a decline.
+Subplot 4: [L1] x-axis 5-20, y-axis 4-14. [L2/L3] Data shows a strong linear
+relationship from the lower left to the upper right corner.
+[L2] Each subplot shares a mean of y=7.5 (approx.) [L4] but displays distinct
+patterns, illustrating how identical statistical properties can arise from very different
+data distributions.
+Table 5: MatplotAlt example alt text for two figures using each generation strategy. Continued in Table 6 for turbo + table and turbo + table +
+heuristic methods. Text is color-coded and tagged by semantic level. Emphasis Added for readability.
+© 2025 The Author(s).
+Computer Graphics Forum published by Eurographics and John Wiley & Sons Ltd.
+
+--- PAGE 18 ---
+18 of 22
+K. Nylund & J. Mankoff & V. Potluri / MatplotAlt: A Python Library for Adding Alt Text to Matplotlib Figures in Computational Notebooks
+Alt Text
+Type
+Sunshine and Bikes Example Alt Text
+Anscombe’s Quartet Example Alt Text
+turbo + heuristic + table
+[L1]This is a line chart titled ’Average Monthly Hours of Sunshine in Seattle vs.
+Number of Bikes that Cross Fremont Bridge’. It compares the monthly change from
+the yearly average for the number of bikes crossing Fremont Bridge (dashed line)
+and the hours of sunshine (solid line) in Seattle. The horizontal x-axis labels the
+months from January to December, while the vertical y-axis represents the percent
+change from the yearly average, ranging from -80% to 60%.
+[L3] Both variables show seasonality with values rising in the warmer months and
+falling in the cooler months. [L2] The highest point is in July for both variables, with
+hours of sunshine around 73% above the average and a peak in bike crossings at
+234421, which corresponds to approximately a 41% increase. The chart suggests a
+positive correlation between the amount of sunshine and the number of bicycles
+crossing the bridge.
+[L1] This figure presents Anscombe’s Quartet, comprising four subplots of line plots,
+each depicting a different trend. The title "Anscombe’s Quartet" is located at the top.
+Each plot has its data points marked in dark blue, [L3] with the plots varying in data
+distribution and trends.
+[L1] Subplot 1: The x-axis ranges from 4 to 14, and the y-axis ranges from 2 to 12.
+[L3] The data display a somewhat erratic pattern, with fluctuations but generally
+trending upwards. [L2] A peak is observed at y=10.84 with x=12.
+[L1] Subplot 2: The x-axis is from 4 to 14, and the y-axis from 2 to 10. [L2 / L3]
+The data exhibit a highly curved trend, first rising to a peak of y=9.26 at x=11 then
+declining smoothly.
+[L1] Subplot 3: The x-axis is between 4 to 14, and the y-axis extends from 4 to 14.
+[L2 / L3] The line plot shows a continuous increase up to a sharp peak at y=12.74,
+x=13, followed by a drop.
+[L1] Subplot 4: Here, the x-axis ranges from 8 to 19, while the y-axis spans from 4
+to 14. [L3] The data is tightly clustered at x=8, except for an outlier at x=19
+turbo + heuristic + table
+[L1] This is a line chart titled ’Average Monthly Hours of Sunshine in Seattle vs.
+Number of Bikes That Cross Fremont Bridge’. The months are plotted from January
+to November on the horizontal x-axis and the change from yearly average is denoted
+in percentage on the vertical y-axis ranging from -80% to 100%. The number of
+bikes crossing Fremont Bridge is represented by a dashed line in dark blue, while
+hours of sunshine is illustrated with a solid orange line. [L2] There is a strong
+positive correlation between the two variables, with a correlation coefficient of 0.95.
+Both metrics peak in July, where the number of bikes reaches a 40.93% increase
+from the yearly average, with 234,421 bikes recorded in that month. Simultaneously,
+hours of sunshine cap at a 73.09% increase. [L3] Both variables exhibit similar
+seasonal patterns, with higher values in the warmer months and lower values in the
+colder months, [L4] reflecting the influence of weather on outdoor activities such as
+biking.
+[L1] This figure, titled ’Anscombe’s Quartet’, consists of four subplots with line
+plots of dark blue data points. [L4] Each chart has a distinct pattern, despite having
+the same mean and variance, demonstrating different data distributions that yield
+similar descriptive statistics.
+[L1] Subplot 1’s x-axis ranges from 2.5 to 15, and y-axis from 2 to 12. [L2/L3] Data
+points generally increase, reaching a maximum at x=12, y=10.84.
+[L1] Subplot 2’s x- and y-axes share the same range as the first, [L2/L3] but the data
+strictly increase to a maximum at x=11, y=9.26, then strictly decrease.
+[L1] Subplot 3’s x-axis is the same, with the y-axis ranging from 4 to 14. [L2/L3]
+Data strictly increase, peaking at x=13, y=12.74, before decreasing.
+[L1] Subplot 4 features an x-axis from 5 to 20 and a y-axis from 4 to 14. [L2/L3]
+Most data cluster at x=8, with an outlier at x=19, y=12.5, creating a steep incline.
+[L4] This quartet is commonly used to illustrate the importance of graphing data
+before analyzing it and the limitations of summary statistics.
+Table 6: MatplotAlt example alt text for two figures using each generation strategy. Continued in Table 5 for Heuristic, turbo, and turbo +
+heuristic methods. Text is color-coded and tagged by semantic level. Emphasis Added for readability.
+are plotted on the vertical y-axis from
+0 to 800 with an increment of 200. GOOG
+has the greatest price over time. MSFT
+has the lowest price over time. Prices of
+particular Big Tech corporations seem to
+fluctuate but nevertheless increase over
+time. Years 2008-2009 are exceptions as we
+can see an extreme drop in prices of all
+given corporations. The big drop in prices
+was caused by financial crisis of 2007-2008.
+The crisis culminated with the bankruptcy of
+Lehman Brothers on September 15, 2008 and an
+international banking crisis.’
+Include information about the chart
+type, title, axis ranges, and labels. If
+possible, describe statistics, extrema,
+outliers, correlations, point-wise
+comparisons, and trends for each plotted
+variable. If possible, briefly explain
+domain-specific insights, current events,
+and socio-political context that explain the
+data. Be concise and limit your response to
+{max_tokens} tokens.
+To incorporate heuristic alt text and markdown data tables,
+we include the following line between the example descriptions
+and instructions about description content: You already
+know the following information about this
+figure and its data: ’{generated heuristic
+alt text, possibly containing a table}’.
+By default, we also prompt models to describe colors,
+sizes, textures, but removed this clause for our evaluation
+to align with crowdsourced VisText captions.
+Appendix D: N-gram similarity between generated and reference
+captions
+In this section we measure BLEU, Rouge, and CHRF n-gram sim-
+ilarity between our generated and reference captions for VisText
+figures. Table 8 summarizes our results. We find that VL-T5 models
+typically have higher n-gram overlap with the human reference than
+GPT4-turbo, while our turbo + heuristic methods have higher Rouge-
+1 and Rouge-L recalls. This indicates turbo + heuristic descriptions
+contain overall more tokens from crowdsourced text compared to
+turbo and turbo + table methods, but do not emulate the style and
+formatting of the references as well as the finetuned VL-T5 models.
+Appendix E: Similarity between shuffled images and descriptions
+To measure whether similarity metrics from our evaluation are bi-
+ased towards specific generation strategies, we compute each score
+using random pairs of alt text and references. For our comparisons
+to crowdsourced captions in §5.2, we randomly sample references
+for each MatplotAlt and VL-T5 description. For our measurement
+© 2025 The Author(s).
+Computer Graphics Forum published by Eurographics and John Wiley & Sons Ltd.
+
+--- PAGE 19 ---
+K. Nylund & J. Mankoff & V. Potluri / MatplotAlt: A Python Library for Adding Alt Text to Matplotlib Figures in Computational Notebooks
+19 of 22
+VisText Example Alt Text
+Matplotlib Gallery Example Alt Text
+turbo description: This is an area chart titled "Malls in the United States with less than
+100,001 sq. feet of gross leasable area." [Label error] It plots the number of shopping malls
+on the vertical y-axis, which ranges from 0 to 80,000 in increments of 20,000. The years are
+plotted on the horizontal x-axis from 1985 to around 2010. The chart shows a noticeable
+increase in the number of shopping malls over time, starting at about 20,000 malls in 1985
+and rising to just under 80,000 by 2010 [Value error]. There’s a steady growth up to around
+1995, after which the rate of increase becomes more gradual, reaching a plateau in the
+mid-2000s before slightly decreasing towards 2010. [Trend error]
+Heuristic description: A contour plot titled ’100z’. The x-axis ranges from -3 to 3 and the
+y-axis ranges from -2 to 2, both using linear scales. 7 contour lines are plotted with values
+10−3, 10−2, 10−1, 100, 101, 102, and 103. The max contour is centered around (-0.06283,
+-0.05828). [Missing data context: lacks description of contour shape including the diagonal
+line and minimum]
+turbo + table description: This is an area chart showing the number of shopping malls in
+the United States with less than 100,001 square feet of gross leasable area over time. The
+horizontal x-axis ranges from the year 1985 to 2010, while the vertical y-axis represents the
+number of shopping malls from 0 to 80,000. The chart shows a substantial increase in the
+number of small malls from 1985, peaking between 2000 and 2005 [Identity error], and
+then a plateau or slight decrease towards 2010. There are no clear outliers, and the trend
+shows overall growth in mall numbers over time, with a stabilization or minor decline in the
+latter part of the series. [Missing data context: lacks chart values, e.g. number of malls in
+1985]
+turbo description: This is a contour plot with labels indicating different levels, likely
+representing a mathematical function’s value over a two-dimensional space. The horizontal
+x-axis ranges from -3 to 3, while the vertical y-axis ranges from -2 to 2. Contour lines are
+presented with four distinct levels, indicated by 10^-2, 10^-1, 10^0, and 10^1 [Axis error:
+z-axis contours extend from 10^-3 to 10^3], each represented in a different color from
+yellow (innermost) to dark blue (outermost). A cyan diagonal line, annotated as 10^2,
+suggests an additional function or constraint cutting across the plot. The title is partially
+visible, reading only "100z." The plot shows a symmetrical pattern about the origin, with
+each contour line indicating a constant value. [Deceptive error: title is fully visible and
+pattern is symmetric around the diagonal line, not the origin]
+turbo + heuristic description: This is an area chart titled ’Number of shopping malls in
+the United States with less than 100,001 sq. feet of gross leasable area from 1986 to 2010’.
+The year is plotted on the horizontal x-axis from 1980 to 2015, and the number of shopping
+malls is plotted on the vertical y-axis from 0 to 100,000, both using linear scales. The chart
+shows one variable plotted over time. The data exhibits a strict increasing trend from the
+year 1985, where the number of shopping malls is at its minimum of 56,910, peaking at its
+maximum in the year 2009 with 88,760 shopping malls. There are no apparent outliers, and
+the strict increase indicates a consistent growth in the number of shopping malls with fewer
+than 100,001 sq. feet of leasable area over the given time period. After reaching the peak in
+2009, there seems to be a slight plateau or very gradual decline towards 2010, though the
+data does not extend beyond that year to visualize any further trends.
+[We consider this alt text correct]
+turbo + heuristic description: This contour plot is titled ’100z’ and visually represents
+three-dimensional data on a two-dimensional plane. The x-axis is labeled and ranges from
+-3 to 3, while the y-axis ranges from -2 to 2. There are seven contour lines corresponding to
+values 10−3, 10−2, 10−1, 100, 101, 102, and 103. These lines indicate the points on the
+plane where the function 100z has the same value. The contour values are increasing as
+they move towards the center, with the max contour centered approximately at (-0.06283,
+-0.05828). The colors transition from green (lower values) to yellow (higher values) and
+then to blue for the highest values towards the center of the plot. [Deceptive error:
+Blue/purple colors represent lowest values] The plot lacks a legend, but the contour values
+are labeled directly on the lines. The overall trend shows that [Cutoff]
+Table 7: Example descriptions containing errors for one VisText figure, and one Matplotlib gallery figure. Errors are colored and tagged by
+type.
+© 2025 The Author(s).
+Computer Graphics Forum published by Eurographics and John Wiley & Sons Ltd.
+
+--- PAGE 20 ---
+20 of 22
+K. Nylund & J. Mankoff & V. Potluri / MatplotAlt: A Python Library for Adding Alt Text to Matplotlib Figures in Computational Notebooks
+VisText Alt Text Type
+BLEU
+Rouge-1
+F1
+Rouge-1
+recall
+Rouge-2
+F1
+Rouge-2
+recall
+Rouge-L
+F1
+Rouge-L
+recall
+CHRF
+VL-T5 - image only
+5.504
+33.28
+30.91
+13.01
+12.14
+24.09
+22.43
+26.36
+VL-T5 - image + scene graph
+29.47
+59.83
+52.03
+43.55
+37.88
+49.29
+42.90
+50.59
+VL-T5 - image + table
+29.45
+60.30
+51.90
+43.93
+37.83
+49.75
+42.86
+50.89
+Heuristic
+15.56
+54.60
+58.37
+32.51
+35.04
+39.56
+42.50
+45.89
+turbo
+14.14
+46.37
+63.77
+22.61
+31.47
+32.32
+44.77
+46.45
+turbo + table
+13.46
+46.06
+66.00
+22.35
+32.47
+31.97
+46.23
+46.62
+turbo + heuristic
+15.66
+48.37
+67.11
+25.97
+36.52
+35.00
+48.96
+49.22
+turbo + table + heuristic
+15.02
+47.55
+67.68
+25.50
+36.84
+34.32
+49.26
+48.94
+Table 8: N-gram similarity scores between crowdsourced and generated descriptions for each method. Higher is better for each metric. VisText
+VL-T5 models typically have higher n-gram overlap with the human references, while turbo + heuristic generations have higher Rouge-2 and
+Rouge-L recalls.
+of similarity between alt texts and images using BLIP in §5.3, we
+select corresponding images randomly. A higher score in this setting
+indicates that the metric is biased towards text from that generation
+strategy regardless of whether its content is aligned to the figure.
+We report all shuffled scores between VisText descriptions and
+crowdsourced references in Table 9. All token n-gram overlap F1
+scores decreased substantially in this setting except for VL-T5 -
+imageonly, suggesting that these similarity metrics are not biased
+towards any one generation method. However, CHRF, Rouge-1
+recall, BertScore recall, and BLEURT are all consistently higher for
+MatplotAlt methods, possibly due to their longer generations and
+the higher fluency of GPT4 generations.
+Our shuffled BLIP results are in Table 10. Matching figures and
+descriptions were overwhelmingly scored higher than the random
+pairs, with an average difference of 0.60 in probability and 0.12 in
+cosine similarity. On the gallery dataset, we find that the shuffled
+turbo captions scored the worst, indicating that its high score on the
+matching pairs is not due to a preference for GPT4-generated texts.
+Appendix F: Correlation Between Evaluation Metrics and Errors
+We measure correlations between each observed error type and
+evaluation metrics, including description length, n-gram and BERT-
+based similarity to human references, and BLIP scores between
+images and captions. Table 11 summarizes our results averaged
+over both VisText and Matplotlib Gallery datasets and each of our
+Heuristic and turbo methods.
+On one hand, we find that several of the error types have no
+significant (p > 0.005) correlations with our other evaluation met-
+rics including axis, value, trend, number name, and nonsense. This
+suggests that even captions with high similarity to a human-written
+reference or image embedding may contain these errors. On the
+other, several error types are correlated to many of the other metrics,
+including label, cutoff, and deceptive. Description length is also cor-
+related to several of the caption similarity metrics, particularly their
+precision components. This is not surprising as longer descriptions
+likely contain words and meanings not present in the shorter human
+references, and confirms that the n-gram matching metrics are likely
+not as relevant due to this discrepancy in lengths. At the same time,
+Rouge2 F1 has the highest correlation to captions being labeled as
+correct or value-correct, suggesting that length and word overlap
+still play a significant role in our manual evaluation of correctness.
+© 2025 The Author(s).
+Computer Graphics Forum published by Eurographics and John Wiley & Sons Ltd.
+
+--- PAGE 21 ---
+K. Nylund & J. Mankoff & V. Potluri / MatplotAlt: A Python Library for Adding Alt Text to Matplotlib Figures in Computational Notebooks
+21 of 22
+VisText Alt Text Type
+BLEU
+Rouge-1
+F1
+Rouge-1
+recall
+Rouge-2
+F1
+Rouge-2
+recall
+Rouge-L
+F1
+Rouge-L
+recall
+CHRF
+BertScore
+F1
+BertScore
+recall
+BLEURT
+VL-T5 - image only
+4.372
+31.29
+29.23
+11.33
+10.64
+22.90
+21.45
+25.09
+0.8565
+0.8499
+-1.084
+VL-T5 - image + scene graph
+4.059
+29.90
+26.08
+11.57
+10.12
+21.54
+18.83
+23.55
+0.8559
+0.8458
+-1.009
+VL-T5 - image + table
+4.063
+30.05
+25.89
+11.88
+10.26
+21.75
+18.76
+23.76
+0.8564
+0.8458
+-1.007
+Heuristic
+3.109
+34.51
+36.77
+10.35
+11.05
+21.47
+22.99
+27.86
+0.8458
+0.8520
+-0.8991
+turbo
+2.170
+28.48
+39.18
+5.909
+8.227
+17.78
+24.62
+28.86
+0.8440
+0.8522
+-0.7965
+turbo + table
+2.116
+28.13
+40.24
+5.868
+8.504
+17.53
+25.27
+28.80
+0.8424
+0.8522
+-0.7944
+turbo + heuristic
+2.621
+29.64
+40.89
+7.541
+10.53
+18.59
+25.85
+29.88
+0.8455
+0.8551
+-0.8234
+turbo + table + heuristic
+2.510
+29.23
+41.46
+7.419
+10.63
+18.29
+26.13
+29.79
+0.8443
+0.8549
+-0.8291
+Table 9: Similarity scores for non-matching shuffled pairs of VisText crowdsourced captions and MatplotAlt-generated descriptions.
+Dataset
+Alt Text Type
+Matching Prob.
+Cosine Sim.
+VisText
+Human
+0.9999 / 0.3166
+0.4992 / 0.3570
+VisText
+Heuristic
+0.9999 / 0.3127
+0.5037 / 0.3576
+VisText
+turbo
+0.9985 / 0.2653
+0.5039 / 0.3675
+VisText
+turbo + heuristic
+0.9999 / 0.3282
+0.5079 / 0.3677
+VisText
+turbo + table
+0.9977 / 0.2726
+0.5050 / 0.3697
+VisText
+turbo + heuristic + table
+0.9999 / 0.3170
+0.5081 / 0.3678
+Gallery
+Heuristic
+0.9270 / 0.5925
+0.4263 / 0.3652
+Gallery
+turbo
+0.9766 / 0.4897
+0.4879 / 0.3883
+Gallery
+turbo + heuristic
+0.9629 / 0.5241
+0.4717 / 0.3816
+Table 10: BLIP scores for matching / shuffled pairs of MatplotAlt
+descriptions and images from each dataset.
+© 2025 The Author(s).
+Computer Graphics Forum published by Eurographics and John Wiley & Sons Ltd.
+
+--- PAGE 22 ---
+22 of 22
+K. Nylund & J. Mankoff & V. Potluri / MatplotAlt: A Python Library for Adding Alt Text to Matplotlib Figures in Computational Notebooks
+Len. & error type →
+Correlated metric ↓
+Description
+length
+Correct
+Value-
+correct
+CTE
+AE
+VE
+IE
+TE
+LE
+MC
+UC
+R
+C
+NS
+DE
+NE
+Description len.
+N/A
+−0.131
+−0.110
+-
+-
+-
+-
+-
+0.150
+−0.161
+-
+0.193
+0.277
+-
+0.201
+-
+BLEU
+−0.233
+0.191
+0.162
+−0.206
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+Rouge1 (f1)
+−0.523
+0.165
+-
+-
+-
+-
+-
+-
+−0.174
+-
+-
+-
+−0.148
+-
+−0.128
+-
+Rouge1 (p)
+−0.660
+0.133
+-
+-
+-
+-
+-
+-
+−0.191
+-
+-
+-
+−0.175
+-
+−0.151
+-
+Rouge1 (r)
+0.397
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+0.138
+-
+-
+-
+Rouge2 (f1)
+−0.534
+0.242
+0.218
+-
+-
+-
+-
+-
+−0.216
+-
+-
+-
+-
+-
+−0.220
+-
+Rouge2 (p)
+−0.688
+0.211
+0.188
+-
+-
+-
+-
+-
+−0.233
+-
+-
+-
+−0.132
+-
+−0.221
+-
+Rouge2 (r)
+-
+0.167
+0.164
+-
+-
+-
+-
+-
+-
+−0.131
+-
+-
+-
+-
+-
+-
+RougeL (f1)
+−0.535
+0.200
+0.178
+-
+-
+-
+-
+-
+−0.269
+-
+-
+-
+−0.144
+-
+−0.219
+-
+RougeL (p)
+−0.713
+0.166
+0.142
+-
+-
+-
+-
+-
+−0.257
+-
+-
+-
+−0.182
+-
+−0.211
+-
+RougeL (r)
+0.241
+-
+-
+-
+-
+-
+-
+-
+-
+-
+0.144
+-
+-
+-
+-
+-
+CHRF
+0.052
+0.193
+0.136
+−0.155
+-
+-
+-
+-
+-
+−0.207
+-
+-
+-
+-
+-
+-
+BertScore (f1)
+−0.298
+0.144
+-
+-
+-
+-
+-
+-
+−0.207
+-
+-
+-
+−0.192
+-
+−0.158
+-
+BertScore (p)
+−0.428
+-
+-
+-
+-
+-
+-
+-
+−0.188
+-
+-
+-
+−0.262
+-
+−0.138
+-
+BertScore (r)
+-
+0.127
+-
+-
+-
+-
+-
+-
+−0.129
+-
+-
+-
+-
+-
+-
+-
+BLEURT
+−0.043
+-
+-
+-
+-
+-
+-
+-
+−0.142
+-
+-
+-
+-
+-
+-
+-
+BLIP matching prob.
+-
+0.126
+-
+-
+-
+-
+-
+-
+-
+−0.140
+-
+-
+−0.117
+-
+-
+-
+BLIP cosine sim.
+-
+0.237
+-
+0.110
+-
+-
+−0.166
+-
+-
+−0.239
+-
+−0.147
+−0.126
+-
+-
+-
+Table 11: Correlations between description length, similarity metrics, and each error type in annotated alt texts. Dashes indicate insignifigant
+correlations with p-values greater than 0.005.
+© 2025 The Author(s).
+Computer Graphics Forum published by Eurographics and John Wiley & Sons Ltd.

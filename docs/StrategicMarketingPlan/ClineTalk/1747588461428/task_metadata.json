@@ -1,0 +1,336 @@
+{
+  "files_in_context": [
+    {
+      "path": "pnpm-workspace.yaml",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747588469550,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "package.json",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747588473815,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/runtime-bridge/package.json",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747588507516,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/runtime-bridge/src/useAlanSocket.ts",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747588513831,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/runtime-bridge/src/types/websocket.ts",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747588519763,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/ui-kit/package.json",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747588527611,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/ui-kit/src/components/WebSocketStatus/WebSocketStatus.tsx",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747588535397,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "client/src/components/ChatHistory/ChatHistory.jsx",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747589396472,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "chat/src/components/PersonaBar.jsx",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747589402786,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "chat/src/components/QuickActionsBar.jsx",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747589408447,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "apps/chat/.env.development",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747589417398,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/ui-kit/src/components/PersonaBar/PersonaBar.tsx",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747589440837,
+      "cline_edit_date": 1747589440837,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/ui-kit/src/components/PersonaBar/PersonaBar.css",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747589454140,
+      "cline_edit_date": 1747589454140,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/ui-kit/src/components/QuickActionsBar/QuickActionsBar.tsx",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747589468579,
+      "cline_edit_date": 1747589468579,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/ui-kit/src/components/QuickActionsBar/QuickActionsBar.css",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747589483151,
+      "cline_edit_date": 1747589483151,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/ui-kit/src/components/ChatHistory/ChatHistory.tsx",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747589530805,
+      "cline_edit_date": 1747589530805,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/ui-kit/src/components/ChatHistory/ChatHistory.css",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747589573938,
+      "cline_edit_date": 1747589573938,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/ui-kit/src/index.ts",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747589590373,
+      "cline_edit_date": 1747589590373,
+      "user_edit_date": null
+    },
+    {
+      "path": "apps/chatenterprise/.env.development",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747589606748,
+      "cline_edit_date": 1747589606748,
+      "user_edit_date": null
+    },
+    {
+      "path": "apps/chat/.env.development",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747589620430,
+      "cline_edit_date": 1747589620430,
+      "user_edit_date": null
+    },
+    {
+      "path": "apps/ide/.env.development",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747589634743,
+      "cline_edit_date": 1747589634743,
+      "user_edit_date": null
+    },
+    {
+      "path": "turbo.json",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747589646672,
+      "cline_edit_date": 1747589646672,
+      "user_edit_date": null
+    },
+    {
+      "path": "package.json",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747589666853,
+      "cline_edit_date": 1747589666853,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/data-model/src/persona/types.ts",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747589688221,
+      "cline_edit_date": 1747589688221,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/data-model/src/persona/defaults.ts",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747589707115,
+      "cline_edit_date": 1747589707115,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/data-model/src/persona/index.ts",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747589718580,
+      "cline_edit_date": 1747589718580,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/data-model/src/index.ts",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747589724810,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/data-model/src/index.ts",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747589736592,
+      "cline_edit_date": 1747589736592,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/ingest/src/config/index.ts",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747589751860,
+      "cline_edit_date": 1747589751860,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/ingest/package.json",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747589760176,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/ingest/package.json",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747589770948,
+      "cline_edit_date": 1747589770948,
+      "user_edit_date": null
+    },
+    {
+      "path": "packages/ingest/src/index.ts",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747589782932,
+      "cline_edit_date": 1747589782932,
+      "user_edit_date": null
+    },
+    {
+      "path": "migration-status.md",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747589807502,
+      "cline_edit_date": 1747589807502,
+      "user_edit_date": null
+    },
+    {
+      "path": "LYAPUNOV_README.md",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747589934431,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "PDF_UPLOAD_README.md",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747589941934,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "demo_koopman_enhanced.py",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747589950917,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "docs/conversations/VSCLINE05_16.txt",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747590242079,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "docs/conversations/VSCLINE05_16b.txt",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747590252253,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "docs/conversations/cline/cline_task_may-14-2025_11-04-09-am.md",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1747591536389,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    }
+  ],
+  "model_usage": [
+    {
+      "ts": 1747588461622,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1747589287145,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1747589926514,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    }
+  ]
+}

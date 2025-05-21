@@ -1,0 +1,216 @@
+{
+  "files_in_context": [
+    {
+      "path": "TORI_CHAT_FIX_SUMMARY.md",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747702901652,
+      "cline_edit_date": 1747702901652,
+      "user_edit_date": null
+    },
+    {
+      "path": "deploy-tori-chat.bat",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747703187934,
+      "cline_edit_date": 1747703187934,
+      "user_edit_date": null
+    },
+    {
+      "path": "TORI_CHAT_DEPLOYMENT_PLAN.md",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747703207825,
+      "cline_edit_date": 1747703207825,
+      "user_edit_date": null
+    },
+    {
+      "path": "fix-react-deps.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747703235208,
+      "cline_edit_date": 1747703235208,
+      "user_edit_date": null
+    },
+    {
+      "path": "fix-react-deps.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747703362483,
+      "cline_edit_date": 1747703362483,
+      "user_edit_date": null
+    },
+    {
+      "path": "fix-react-deps.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747703393076,
+      "cline_edit_date": 1747703393076,
+      "user_edit_date": null
+    },
+    {
+      "path": "deploy-tori-chat.sh",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747703422964,
+      "cline_edit_date": 1747703422964,
+      "user_edit_date": null
+    },
+    {
+      "path": "tori_chat_frontend/vite.config.js",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747703434981,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "tori_chat_frontend/vite.config.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747703449214,
+      "cline_edit_date": 1747703449214,
+      "user_edit_date": null
+    },
+    {
+      "path": "check-port.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747703487217,
+      "cline_edit_date": 1747703487217,
+      "user_edit_date": null
+    },
+    {
+      "path": "package.json",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1747703495893,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "package.json",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747703511315,
+      "cline_edit_date": 1747703511315,
+      "user_edit_date": null
+    },
+    {
+      "path": ".github/workflows/build.yml",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747703530728,
+      "cline_edit_date": 1747703530728,
+      "user_edit_date": null
+    },
+    {
+      "path": "deploy-tori-chat.bat",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747703553938,
+      "cline_edit_date": 1747703553938,
+      "user_edit_date": null
+    },
+    {
+      "path": "README.md",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747703581168,
+      "cline_edit_date": 1747703581168,
+      "user_edit_date": null
+    },
+    {
+      "path": "README.md",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747703955778,
+      "cline_edit_date": 1747703955778,
+      "user_edit_date": null
+    },
+    {
+      "path": "fix-react-deps.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747705364305,
+      "cline_edit_date": 1747705364305,
+      "user_edit_date": null
+    },
+    {
+      "path": "fix-react-deps.js",
+      "record_state": "stale",
+      "record_source": "user_edited",
+      "cline_read_date": 1747705364305,
+      "cline_edit_date": 1747705364305,
+      "user_edit_date": 1747705393248
+    },
+    {
+      "path": "fix-react-deps.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747705393272,
+      "cline_edit_date": 1747705393272,
+      "user_edit_date": 1747705393248
+    },
+    {
+      "path": "fix-react-deps.js",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747705417404,
+      "cline_edit_date": 1747705417404,
+      "user_edit_date": 1747705393248
+    },
+    {
+      "path": "fix-react-deps.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747705430960,
+      "cline_edit_date": 1747705430960,
+      "user_edit_date": 1747705393248
+    },
+    {
+      "path": ".github/workflows/build.yml",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747705448842,
+      "cline_edit_date": 1747705448842,
+      "user_edit_date": null
+    },
+    {
+      "path": "BUILD_AND_DEPLOY_TORI_CHAT.md",
+      "record_state": "stale",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747705524369,
+      "cline_edit_date": 1747705524369,
+      "user_edit_date": null
+    },
+    {
+      "path": "BUILD_AND_DEPLOY_TORI_CHAT.md",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1747705542023,
+      "cline_edit_date": 1747705542023,
+      "user_edit_date": null
+    }
+  ],
+  "model_usage": [
+    {
+      "ts": 1747702883920,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1747704035848,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1747704342388,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    }
+  ]
+}

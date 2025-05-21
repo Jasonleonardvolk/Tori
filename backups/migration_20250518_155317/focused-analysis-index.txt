@@ -1,0 +1,16 @@
+docs/kha/alan_backend\elfin\stability\learn_neural_lyap.py
+docs/kha/alan_backend\elfin\stability\demos\vdp_neural_lyap_demo.py
+docs/kha/alan_backend\elfin\stability\training\neural_lyapunov_trainer.py
+docs/kha/apps\ide\src\App.tsx
+docs/kha/apps\ide\src\ItoriIDELayout.tsx
+docs/kha/client\src\memory\memoryManager.js
+docs/kha/client\src\memory\spectralPhaseMemory.js
+docs/kha/client\src\services\agentSuggestionsService.js
+docs/kha/client\src\services\conceptGraphService.js
+docs/kha/dashboard\src\App.tsx
+docs/kha/data\USB Drive\may1move\merlin\REPLIT\App.tsx
+docs/kha/data\USB Drive\may1move\merlin\REPLIT\auto_agent\App.tsx
+docs/kha/data\USB Drive\may1move\merlin\REPLIT\auto_agent\src\App.tsx
+docs/kha/data\USB Drive\may1move\merlin\REPLIT\src\App.tsx
+docs/kha/data\USB Drive\may1move\pyodide\agent-chat-ui\src\App.tsx
+docs/kha/src\services\agentSuggestionsService.js

@@ -1,0 +1,80 @@
+{
+  "files_in_context": [
+    {
+      "path": "test-mcp-filesystem.js",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746821254522,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": ".mcp.json",
+      "record_state": "stale",
+      "record_source": "read_tool",
+      "cline_read_date": 1746821263382,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": "C:\\Users\\jason\\AppData\\Roaming\\Code\\User\\globalStorage\\saoudrizwan.claude-dev\\settings\\cline_mcp_settings.json",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746821280858,
+      "cline_edit_date": 1746821280858,
+      "user_edit_date": null
+    },
+    {
+      "path": "start-mcp-servers.bat",
+      "record_state": "active",
+      "record_source": "read_tool",
+      "cline_read_date": 1746821318213,
+      "cline_edit_date": null,
+      "user_edit_date": null
+    },
+    {
+      "path": ".mcp.json",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746821333183,
+      "cline_edit_date": 1746821333183,
+      "user_edit_date": null
+    },
+    {
+      "path": "filesystem-demo.js",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746821565531,
+      "cline_edit_date": 1746821565531,
+      "user_edit_date": null
+    },
+    {
+      "path": "start-filesystem-mcp.bat",
+      "record_state": "active",
+      "record_source": "cline_edited",
+      "cline_read_date": 1746821615545,
+      "cline_edit_date": 1746821615545,
+      "user_edit_date": null
+    }
+  ],
+  "model_usage": [
+    {
+      "ts": 1746821184268,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    },
+    {
+      "ts": 1746886570464,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "plan"
+    },
+    {
+      "ts": 1746886652730,
+      "model_id": "claude-3-7-sonnet-20250219",
+      "model_provider_id": "anthropic",
+      "mode": "act"
+    }
+  ]
+}
