@@ -1,0 +1,83 @@
+# KoopmanLearner Configuration
+
+# Dynamic Mode Decomposition (DMD) settings
+dmd:
+  # Rank of the approximation
+  rank: 50
+  # Method to use for DMD computation (standard, exact, tlsq)
+  method: "exact"
+  # Tikhonov regularization parameter
+  regularization: 0.05
+  # Eigenvalue stability threshold
+  stability_threshold: 0.98
+  # Whether to normalize modes
+  normalize: true
+
+# Modes management
+modes:
+  # Maximum number of modes to keep
+  max_modes: 100
+  # Minimum significance threshold for keeping a mode
+  min_significance: 0.01
+  # Sparsity constraint (L1 regularization)
+  # Adaptive based on vault load: lambda = base_lambda * vault_load_factor
+  base_lambda: 0.001
+  # Default load factor (1.0 = normal load)
+  default_load_factor: 1.0
+  # Maximum lambda value
+  max_lambda: 0.01
+  # Confidence decay rate for modes
+  confidence_decay: 0.95
+
+# Coupling management
+couplings:
+  # How often to update oscillator couplings (seconds)
+  update_interval: 3600
+  # Maximum coupling strength
+  max_strength: 0.5
+  # Minimum coupling strength threshold
+  min_strength: 0.001
+  # Safety gate threshold (max allowed change per update)
+  max_change_percentage: 0.2
+
+# Incremental SVD parameters
+incremental_svd:
+  # Whether to use incremental SVD
+  enabled: true
+  # Forgetting factor for older data
+  forgetting_factor: 0.98
+  # Update interval
+  update_interval: 100
+  # Whether to initialize with offline SVD
+  initialize_offline: true
+  # Maximum memory footprint (MB)
+  max_memory_mb: 512
+
+# Processing parameters
+processing:
+  # Batch size for processing
+  batch_size: 256
+  # Number of threads for parallel processing
+  threads: 4
+  # Whether to use GPU if available
+  use_gpu: false
+
+# Storage
+storage:
+  # Where to store KCL modes
+  modes_path: "/app/data/kcl_modes/modes.npz"
+  # Where to listen for new activation traces
+  inbox_dir: "/app/data/kcl_inbox"
+  # Checkpoint interval (seconds)
+  checkpoint_interval: 300
+  # Whether to compress stored modes
+  compress: true
+
+# Logging
+logging:
+  # Log level (DEBUG, INFO, WARNING, ERROR)
+  level: "INFO"
+  # Whether to log performance metrics
+  log_performance: true
+  # Whether to log detailed mode information
+  log_modes: false

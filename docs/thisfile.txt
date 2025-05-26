@@ -1,0 +1,183 @@
+{
+  `content`: `#!/usr/bin/env python3
+\"\"\"
+TORI Koopman gRPC Service Integration Test
+Validates ProcessActivationBatch and GetSpectralModes operations
+\"\"\"
+
+import grpc
+import sys
+import os
+import time
+import json
+import numpy as np
+from datetime import datetime, timezone
+
+# Add proto generated files to path
+sys.path.append(os.path.join(os.path.dirname(__file__), 'proto', 'generated', 'python'))
+
+try:
+    import koopman_learner_pb2
+    import koopman_learner_pb2_grpc
+    import episodic_pb2
+    print(\"✅ Successfully imported Koopman proto modules\")
+except ImportError as e:
+    print(f\"❌ Failed to import Koopman proto modules: {e}\")
+    print(\"Please run regenerate-grpc-protos.bat first\")
+    sys.exit(1)
+
+class KoopmanServiceTester:
+    def __init__(self, server_address='localhost:50052'):
+        self.server_address = server_address
+        self.channel = None
+        self.stub = None
+        
+    def connect(self):
+        \"\"\"Connect to the Koopman gRPC service\"\"\"
+        try:
+            self.channel = grpc.insecure_channel(self.server_address)
+            self.stub = koopman_learner_pb2_grpc.KoopmanLearnerStub(self.channel)
+            
+            # Test connection
+            grpc.channel_ready_future(self.channel).result(timeout=5)
+            print(f\"✅ Connected to Koopman service at {self.server_address}\")
+            return True
+            
+        except grpc.RpcError as e:
+            print(f\"❌ Failed to connect to Koopman service: {e}\")
+            return False
+        except Exception as e:
+            print(f\"❌ Connection error: {e}\")
+            return False
+    
+    def generate_test_activation_traces(self, num_traces=3, trace_length=50):
+        \"\"\"Generate synthetic activation traces for testing\"\"\"
+        traces = []
+        
+        for i in range(num_traces):
+            trace = koopman_learner_pb2.ActivationTrace(
+                trace_id=f\"test_trace_{i}_{int(time.time())}\",
+                source=\"grpc_integration_test\",
+                timestamp=int(time.time()) - (i * 60),  # Stagger timestamps
+                duration_secs=trace_length * 0.1,  # 0.1 seconds per snapshot
+                sampling_rate_hz=10.0,
+                tags=[\"test\", \"synthetic\", f\"trace_{i}\"]
+            )
+            
+            # Generate realistic oscillatory activation patterns
+            for t in range(trace_length):
+                snapshot = koopman_learner_pb2.ActivationSnapshot(
+                    relative_time=t * 0.1,
+                    is_transition=(t % 10 == 0),  # Mark every 10th snapshot as transition
+                    lyapunov_estimate=0.1 * np.sin(t * 0.2) + np.random.normal(0, 0.05)
+                )
+                
+                # Create concept activation pattern
+                activation = episodic_pb2.ConceptActivation()
+                
+                # Generate oscillatory activations for multiple concepts
+                num_concepts = 5
+                for c in range(num_concepts):
+                    # Each concept has different frequency and phase
+                    frequency = 0.1 + c * 0.05
+                    phase = c * np.pi / 4
+                    strength = 0.5 + 0.5 * np.sin(2 * np.pi * frequency * t + phase)
+                    
+                    if strength > 0.3:  # Threshold for active concepts
+                        activation.active_concepts.append(f\"concept_{c}\")
+                        activation.strengths.append(float(strength))
+                
+                snapshot.activation.CopyFrom(activation)
+                trace.snapshots.append(snapshot)
+            
+            traces.append(trace)
+        
+        return traces
+    
+    def test_process_activation_batch(self):
+        \"\"\"Test ProcessActivationBatch operation\"\"\"
+        print(\"\
+🧪 Testing ProcessActivationBatch operation...\")
+        
+        try:
+            # Generate test activation traces
+            traces = self.generate_test_activation_traces(num_traces=3, trace_length=30)
+            
+            # Create processing parameters
+            params = koopman_learner_pb2.ProcessingParameters(
+                dmd_rank=10,
+                use_incremental=False,
+                l1_strength=0.01,
+                max_modes=15,
+                use_sparse_opt=True,
+                min_singular_value=1e-6,
+                mode_combination_threshold=0.1,
+                compute_stability=True,
+                prediction_horizon=10,
+                learning_rate=0.01
+            )
+            
+            # Create batch request
+            request = koopman_learner_pb2.ActivationBatchRequest(
+                traces=traces,
+                parameters=params,
+                update_couplings=True,
+                generate_stability=True,
+                description=\"gRPC integration test batch\",
+                client_id=\"vault_grpc_tester\"
+            )
+            
+            # Execute the request
+            print(f\"   Submitting {len(traces)} activation traces...\")
+            response = self.stub.ProcessActivationBatch(request, timeout=30)
+            
+            if response.accepted:
+                print(f\"✅ ProcessActivationBatch successful!\")
+                print(f\"   Job ID: {response.job_id}\")
+                print(f\"   Trace Count: {response.trace_count}\")
+                print(f\"   Estimated Completion: {datetime.fromtimestamp(response.estimated_completion, tz=timezone.utc)}\")
+                
+                if response.status.state != koopman_learner_pb2.JobState.UNKNOWN:
+                    print(f\"   Status: {koopman_learner_pb2.JobState.Name(response.status.state)}\")
+                    print(f\"   Progress: {response.status.progress:.1f}%\")
+                    print(f\"   Modes Extracted: {response.status.modes_extracted}\")
+                    
+                    if response.status.dominant_eigenvalues:
+                        print(f\"   Dominant Eigenvalues: {len(response.status.dominant_eigenvalues)}\")
+                        for i, eigenval in enumerate(response.status.dominant_eigenvalues[:3]):
+                            print(f\"     λ_{i}: {eigenval.real:.4f} + {eigenval.imag:.4f}j\")
+                    
+                    if response.status.prediction_error > 0:
+                        print(f\"   Prediction Error: {response.status.prediction_error:.6f}\")
+                    
+                    if response.status.mode_sparsity > 0:
+                        print(f\"   Mode Sparsity: {response.status.mode_sparsity:.1f}%\")
+                
+                return response.job_id
+            else:
+                print(f\"❌ ProcessActivationBatch failed: {response.error_message}\")
+                return None
+                
+        except grpc.RpcError as e:
+            print(f\"❌ gRPC error in ProcessActivationBatch: {e.code()} - {e.details()}\")
+            return None
+        except Exception as e:
+            print(f\"❌ Unexpected error in ProcessActivationBatch: {e}\")
+            return None
+    
+    def test_get_processing_status(self, job_id):
+        \"\"\"Test GetProcessingStatus operation\"\"\"
+        print(f\"\
+🧪 Testing GetProcessingStatus operation...\")
+        
+        if not job_id:
+            print(\"❌ No job ID to test processing status\")
+            return False
+        
+        try:
+            request = koopman_learner_pb2.StatusRequest(job_id=job_id)
+            response = self.stub.GetProcessingStatus(request, timeout=10)
+            
+            print(f\"✅ GetProcessingStatus successful!\")
+            print(f\"   `
+}

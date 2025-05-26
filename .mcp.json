@@ -20,6 +20,10 @@
       "env": {
         "GITHUB_PERSONAL_ACCESS_TOKEN": "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"
       }
+    },
+    "ingest-bus": {
+      "url": "http://localhost:8080",
+      "schemaPath": "registry/mcp/ingest.schema.yaml"
     }
   }
 }

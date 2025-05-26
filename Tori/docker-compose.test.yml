@@ -1,0 +1,142 @@
+version: '3.8'
+
+services:
+  # Base test services - these services are used for testing
+  
+  # Redis for caching and messaging between services
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 3
+    networks:
+      - tori-memory-test-net
+
+  # Feed generator - simulates a stream of incoming episodes
+  feedgen:
+    image: ${REGISTRY:-localhost:5000}/tori-memory/episodic_vault:dev-${MEMORY_SYSTEM_VERSION:-1.0.0}
+    entrypoint: ["python", "-m", "scripts.dev.feedgen"]
+    command: ["--rate", "2", "--host", "episodic-vault"]
+    depends_on:
+      - episodic-vault
+    volumes:
+      - .:/app
+      - tori-test-data:/app/data
+    environment:
+      - PYTHONPATH=/app
+      - TORI_ENV=test
+    networks:
+      - tori-memory-test-net
+    restart: "no"
+
+  # Load generator - creates high-volume sustained load for soak testing
+  loadgen:
+    image: ${REGISTRY:-localhost:5000}/tori-memory/episodic_vault:dev-${MEMORY_SYSTEM_VERSION:-1.0.0}
+    entrypoint: ["python", "-m", "scripts.dev.loadgen"]
+    command: ["--rate", "5", "--duration", "86400", "--workers", "4", "--host", "episodic-vault"]
+    depends_on:
+      - episodic-vault
+    volumes:
+      - .:/app
+      - tori-test-data:/app/data
+    environment:
+      - PYTHONPATH=/app
+      - TORI_ENV=test
+    networks:
+      - tori-memory-test-net
+    restart: "no"
+
+  # Vault CLI container for running tests
+  vault-cli:
+    image: ${REGISTRY:-localhost:5000}/tori-memory/episodic_vault:dev-${MEMORY_SYSTEM_VERSION:-1.0.0}
+    entrypoint: ["python", "-m", "scripts.dev.vault-cli"]
+    volumes:
+      - .:/app
+      - tori-test-data:/app/data
+    environment:
+      - PYTHONPATH=/app
+      - TORI_ENV=test
+      - HOST=episodic-vault
+    networks:
+      - tori-memory-test-net
+
+  # Individual service test containers
+  episodic-vault-test:
+    image: ${REGISTRY:-localhost:5000}/tori-memory/episodic_vault:test-${MEMORY_SYSTEM_VERSION:-1.0.0}
+    volumes:
+      - .:/app
+      - tori-test-data:/app/data
+    environment:
+      - TORI_SERVICE_NAME=episodic_vault
+      - TORI_ENV=test
+      - REDIS_HOST=redis
+      - TESTING=1
+    depends_on:
+      - redis
+    networks:
+      - tori-memory-test-net
+
+  sleep-scheduler-test:
+    image: ${REGISTRY:-localhost:5000}/tori-memory/sleep_scheduler:test-${MEMORY_SYSTEM_VERSION:-1.0.0}
+    volumes:
+      - .:/app
+      - tori-test-data:/app/data
+    environment:
+      - TORI_SERVICE_NAME=sleep_scheduler
+      - TORI_ENV=test
+      - REDIS_HOST=redis
+      - VAULT_ADDRESS=episodic-vault:50051
+      - TESTING=1
+    depends_on:
+      - redis
+      - episodic-vault-test
+    networks:
+      - tori-memory-test-net
+
+  sparse-pruner-test:
+    image: ${REGISTRY:-localhost:5000}/tori-memory/sparse_pruner:test-${MEMORY_SYSTEM_VERSION:-1.0.0}
+    volumes:
+      - .:/app
+      - tori-test-data:/app/data
+    environment:
+      - TORI_SERVICE_NAME=sparse_pruner
+      - TORI_ENV=test
+      - REDIS_HOST=redis
+      - SCHEDULER_ADDRESS=sleep-scheduler:50051
+      - TESTING=1
+    depends_on:
+      - redis
+      - sleep-scheduler-test
+    networks:
+      - tori-memory-test-net
+
+  koopman-learner-test:
+    image: ${REGISTRY:-localhost:5000}/tori-memory/koopman_learner:test-${MEMORY_SYSTEM_VERSION:-1.0.0}
+    volumes:
+      - .:/app
+      - tori-test-data:/app/data
+    environment:
+      - TORI_SERVICE_NAME=koopman_learner
+      - TORI_ENV=test
+      - REDIS_HOST=redis
+      - VAULT_ADDRESS=episodic-vault:50051
+      - TESTING=1
+    depends_on:
+      - redis
+      - episodic-vault-test
+    networks:
+      - tori-memory-test-net
+
+networks:
+  tori-memory-test-net:
+    driver: bridge
+
+volumes:
+  redis-data:
+  tori-test-data:

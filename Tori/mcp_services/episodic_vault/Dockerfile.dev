@@ -1,0 +1,39 @@
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# Install dependencies
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Install development dependencies
+RUN pip install --no-cache-dir watchdog[watchmedo] debugpy
+
+# Install protobuf compiler
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    protobuf-compiler && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+# Copy source code
+COPY . .
+
+# Expose ports
+EXPOSE 50051  # gRPC port
+EXPOSE 9091   # Metrics port
+EXPOSE 5678   # Debugger port
+
+# Create needed directories
+RUN mkdir -p ~/.tori
+
+# Set environment variables
+ENV PYTHONPATH=/app
+ENV TORI_ENV=development
+ENV VAULT_DB_PATH=~/.tori/episodic.db
+
+# Run with hot reload
+CMD ["watchmedo", "auto-restart", "--directory=./mcp_services/episodic_vault", "--pattern=*.py", "--recursive", "--", "python", "-m", "mcp_services.episodic_vault.server", "--debug"]
+
+# For debugging:
+# python -m debugpy --listen 0.0.0.0:5678 --wait-for-client -m mcp_services.episodic_vault.server

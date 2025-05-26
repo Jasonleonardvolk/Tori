@@ -1,0 +1,373 @@
+syntax = "proto3";
+
+package tori.sleep;
+
+import "episodic.proto";
+
+// The SleepScheduler service manages memory consolidation through energy-based replay
+service SleepScheduler {
+  // Start a consolidation cycle (either sync or async)
+  rpc StartConsolidation(ConsolidationRequest) returns (ConsolidationResponse);
+  
+  // Check the status of an ongoing consolidation
+  rpc GetConsolidationStatus(StatusRequest) returns (ConsolidationStatus);
+  
+  // Cancel an ongoing consolidation
+  rpc CancelConsolidation(CancelRequest) returns (CancelResponse);
+  
+  // Get replay statistics
+  rpc GetReplayStats(StatsRequest) returns (ReplayStats);
+  
+  // Update the scheduler configuration
+  rpc UpdateConfig(SchedulerConfig) returns (ConfigResponse);
+  
+  // Schedule a consolidation for later
+  rpc ScheduleConsolidation(ScheduleRequest) returns (ScheduleResponse);
+}
+
+// Request to start a consolidation cycle
+message ConsolidationRequest {
+  // Whether to run synchronously (wait for completion)
+  bool synchronous = 1;
+  
+  // Episode selection criteria
+  EpisodeFilter filter = 2;
+  
+  // Max number of episodes to process
+  int32 max_episodes = 3;
+  
+  // Replay parameters to override defaults
+  ReplayParameters replay_params = 4;
+  
+  // Whether to emit ConceptDeltas after consolidation
+  bool emit_deltas = 5;
+  
+  // Description for logging/monitoring
+  string description = 6;
+  
+  // Unique client identifier for tracing
+  string client_id = 7;
+}
+
+// Filter criteria for selecting episodes
+message EpisodeFilter {
+  // Minimum energy level
+  float min_energy = 1;
+  
+  // Maximum age in hours
+  int32 max_age_hours = 2;
+  
+  // Minimum age in hours
+  int32 min_age_hours = 3;
+  
+  // Tags to include (OR logic)
+  repeated string include_tags = 4;
+  
+  // Tags to exclude (NOT logic)
+  repeated string exclude_tags = 5;
+  
+  // Source types to include
+  repeated string source_types = 6;
+}
+
+// Parameters for the replay process
+message ReplayParameters {
+  // Initial temperature for simulated annealing
+  float initial_temperature = 1;
+  
+  // Cooling rate for temperature
+  float cooling_rate = 2;
+  
+  // Number of annealing steps per episode
+  int32 annealing_steps = 3;
+  
+  // Learning rate for weight updates
+  float learning_rate = 4;
+  
+  // Number of negative samples for wake-sleep
+  int32 negative_samples = 5;
+  
+  // L1 regularization strength
+  float l1_regularization = 6;
+  
+  // Whether to use adaptive learning rate
+  bool adaptive_learning_rate = 7;
+  
+  // Minimum energy improvement to continue
+  float min_energy_improvement = 8;
+  
+  // Temperature schedule type (logarithmic, geometric, etc.)
+  string temperature_schedule = 9;
+  
+  // Whether to prioritize edges near pruning threshold
+  bool prioritize_threshold_edges = 10;
+}
+
+// Response to consolidation request
+message ConsolidationResponse {
+  // Unique ID for this consolidation job
+  string job_id = 1;
+  
+  // Whether the request was accepted
+  bool accepted = 2;
+  
+  // Error message if not accepted
+  string error_message = 3;
+  
+  // Estimated completion time (unix timestamp)
+  int64 estimated_completion = 4;
+  
+  // Number of episodes selected for processing
+  int32 selected_episodes = 5;
+  
+  // For synchronous requests, the final status
+  ConsolidationStatus status = 6;
+}
+
+// Request for consolidation status
+message StatusRequest {
+  // Job ID to check
+  string job_id = 1;
+}
+
+// Status of a consolidation job
+message ConsolidationStatus {
+  // Job ID
+  string job_id = 1;
+  
+  // State of the job
+  JobState state = 2;
+  
+  // Progress percentage (0-100)
+  float progress = 3;
+  
+  // Current operation description
+  string current_operation = 4;
+  
+  // Episodes processed so far
+  int32 episodes_processed = 5;
+  
+  // Episodes remaining
+  int32 episodes_remaining = 6;
+  
+  // Current energy improvement
+  float energy_improvement = 7;
+  
+  // Error message if failed
+  string error_message = 8;
+  
+  // Start time (unix timestamp)
+  int64 start_time = 9;
+  
+  // End time (unix timestamp) if completed
+  int64 end_time = 10;
+  
+  // Current temperature
+  float current_temperature = 11;
+  
+  // Weight matrix sparsity (percentage of zeros)
+  float weight_sparsity = 12;
+}
+
+// Job state enum
+enum JobState {
+  UNKNOWN = 0;
+  QUEUED = 1;
+  RUNNING = 2;
+  COMPLETED = 3;
+  FAILED = 4;
+  CANCELLED = 5;
+  PAUSED = 6;
+}
+
+// Request to cancel a consolidation
+message CancelRequest {
+  // Job ID to cancel
+  string job_id = 1;
+}
+
+// Response to cancel request
+message CancelResponse {
+  // Whether the job was cancelled
+  bool cancelled = 1;
+  
+  // Error message if not cancelled
+  string error_message = 2;
+}
+
+// Request for replay statistics
+message StatsRequest {
+  // Time range start (unix timestamp)
+  int64 since = 1;
+  
+  // Time range end (unix timestamp)
+  int64 until = 2;
+}
+
+// Replay statistics
+message ReplayStats {
+  // Total consolidation jobs run
+  int32 total_jobs = 1;
+  
+  // Total episodes processed
+  int32 total_episodes = 2;
+  
+  // Average energy improvement
+  float avg_energy_improvement = 3;
+  
+  // Average job duration in seconds
+  float avg_duration_secs = 4;
+  
+  // Total ConceptDeltas emitted
+  int32 total_deltas_emitted = 5;
+  
+  // Current weight matrix sparsity
+  float current_sparsity = 6;
+  
+  // History of recent jobs
+  repeated JobSummary recent_jobs = 7;
+  
+  // Current scheduler load (0-1)
+  float current_load = 8;
+  
+  // Estimated next consolidation time
+  int64 next_consolidation = 9;
+}
+
+// Summary of a consolidation job
+message JobSummary {
+  // Job ID
+  string job_id = 1;
+  
+  // Start time (unix timestamp)
+  int64 start_time = 2;
+  
+  // End time (unix timestamp)
+  int64 end_time = 3;
+  
+  // Number of episodes processed
+  int32 episodes_processed = 4;
+  
+  // Energy improvement
+  float energy_improvement = 5;
+  
+  // Job description
+  string description = 6;
+  
+  // State of the job
+  JobState state = 7;
+}
+
+// Scheduler configuration
+message SchedulerConfig {
+  // Automatic scheduling enabled
+  bool auto_schedule = 1;
+  
+  // Cron expression for scheduling
+  string schedule_cron = 2;
+  
+  // Default replay parameters
+  ReplayParameters default_replay_params = 3;
+  
+  // Maximum concurrent jobs
+  int32 max_concurrent_jobs = 4;
+  
+  // Maximum episodes per job
+  int32 max_episodes_per_job = 5;
+  
+  // Enable adaptive scheduling based on system load
+  bool adaptive_scheduling = 6;
+  
+  // Default episode filter
+  EpisodeFilter default_filter = 7;
+  
+  // Webhook URL for notifications
+  string webhook_url = 8;
+  
+  // Energy threshold to trigger consolidation
+  float energy_threshold = 9;
+  
+  // Custom temperature calendars
+  repeated TemperatureCalendar temperature_calendars = 10;
+}
+
+// Temperature calendar for different episode age ranges
+message TemperatureCalendar {
+  // Name of the calendar
+  string name = 1;
+  
+  // Minimum episode age in hours
+  int32 min_age_hours = 2;
+  
+  // Maximum episode age in hours
+  int32 max_age_hours = 3;
+  
+  // Initial temperature
+  float initial_temperature = 4;
+  
+  // Cooling rate
+  float cooling_rate = 5;
+  
+  // Schedule type (logarithmic, geometric)
+  string schedule_type = 6;
+  
+  // Learning rate
+  float learning_rate = 7;
+}
+
+// Response to config update
+message ConfigResponse {
+  // Whether the update was successful
+  bool success = 1;
+  
+  // Error message if not successful
+  string error_message = 2;
+}
+
+// Request to schedule a consolidation
+message ScheduleRequest {
+  // When to run (unix timestamp)
+  int64 scheduled_time = 1;
+  
+  // Consolidation request details
+  ConsolidationRequest request = 2;
+  
+  // Recurrence pattern (cron expression)
+  string recurrence = 3;
+}
+
+// Response to schedule request
+message ScheduleResponse {
+  // Scheduled job ID
+  string scheduled_job_id = 1;
+  
+  // Whether scheduling was successful
+  bool success = 2;
+  
+  // Error message if not successful
+  string error_message = 3;
+  
+  // Scheduled time (unix timestamp)
+  int64 scheduled_time = 4;
+}
+
+// Concept delta message (emitted after consolidation)
+message ConceptDelta {
+  // Concept ID
+  string concept_id = 1;
+  
+  // Source episode IDs
+  repeated string source_episode_ids = 2;
+  
+  // Connection strength changes
+  map<string, float> connection_deltas = 3;
+  
+  // New concept activation pattern
+  tori.episodic.ConceptActivation new_activation = 4;
+  
+  // Energy improvement
+  float energy_improvement = 5;
+  
+  // Job ID that generated this delta
+  string job_id = 6;
+}

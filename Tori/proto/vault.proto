@@ -1,0 +1,996 @@
+syntax = "proto3";
+
+package tori.vault;
+
+import "episodic.proto";
+
+// The VaultService provides secure storage and retrieval of memories with phase-aligned protection
+service VaultService {
+  // Store an episode in the vault with optional protection level
+  rpc PutEpisode(VaultPutRequest) returns (VaultPutResponse);
+  
+  // Retrieve an episode from the vault
+  rpc GetEpisode(VaultGetRequest) returns (VaultGetResponse);
+  
+  // List episodes with filtering and access control
+  rpc ListEpisodes(VaultListRequest) returns (VaultListResponse);
+  
+  // Update episode protection level
+  rpc UpdateProtection(ProtectionUpdateRequest) returns (ProtectionUpdateResponse);
+  
+  // Initiate memory consolidation process
+  rpc StartConsolidation(ConsolidationRequest) returns (ConsolidationResponse);
+  
+  // Get consolidation status
+  rpc GetConsolidationStatus(ConsolidationStatusRequest) returns (ConsolidationStatusResponse);
+  
+  // Get vault statistics and health metrics
+  rpc GetVaultStats(VaultStatsRequest) returns (VaultStatsResponse);
+  
+  // Perform vault integrity check
+  rpc CheckIntegrity(IntegrityCheckRequest) returns (IntegrityCheckResponse);
+  
+  // Phase-align vault with soliton memory system
+  rpc PhaseAlign(PhaseAlignRequest) returns (PhaseAlignResponse);
+  
+  // Search episodes by phase signature
+  rpc SearchByPhase(PhaseSearchRequest) returns (PhaseSearchResponse);
+  
+  // Backup vault to external storage
+  rpc BackupVault(BackupRequest) returns (BackupResponse);
+  
+  // Restore vault from backup
+  rpc RestoreVault(RestoreRequest) returns (RestoreResponse);
+}
+
+// Request to store an episode in the vault
+message VaultPutRequest {
+  // Episode to store
+  tori.episodic.Episode episode = 1;
+  
+  // Protection level for this episode
+  ProtectionLevel protection_level = 2;
+  
+  // Access control settings
+  AccessControl access_control = 3;
+  
+  // Whether to perform immediate consolidation
+  bool immediate_consolidation = 4;
+  
+  // Phase signature for soliton alignment
+  PhaseSignature phase_signature = 5;
+  
+  // Vault segment to store in (for sharding)
+  string vault_segment = 6;
+  
+  // Encryption parameters
+  EncryptionParams encryption = 7;
+  
+  // TTL in hours (0 = no expiration)
+  int32 ttl_hours = 8;
+}
+
+// Response to vault put request
+message VaultPutResponse {
+  // Whether the operation was successful
+  bool success = 1;
+  
+  // Unique vault ID assigned to the episode
+  string vault_id = 2;
+  
+  // Episode ID (may be different from input if reassigned)
+  string episode_id = 3;
+  
+  // Error message if not successful
+  string error_message = 4;
+  
+  // Vault segment where episode was stored
+  string vault_segment = 5;
+  
+  // Phase alignment result
+  PhaseAlignmentResult phase_alignment = 6;
+  
+  // Storage metrics
+  StorageMetrics storage_metrics = 7;
+}
+
+// Request to retrieve an episode from the vault
+message VaultGetRequest {
+  // Vault ID or episode ID
+  string id = 1;
+  
+  // Type of ID provided
+  IdType id_type = 2;
+  
+  // Access credentials
+  AccessCredentials credentials = 3;
+  
+  // Whether to update access timestamp
+  bool update_access_time = 4;
+  
+  // Whether to include metadata
+  bool include_metadata = 5;
+  
+  // Phase signature for verification
+  PhaseSignature expected_phase = 6;
+}
+
+// Response to vault get request
+message VaultGetResponse {
+  // Whether the operation was successful
+  bool success = 1;
+  
+  // Retrieved episode (may be null if not found or access denied)
+  tori.episodic.Episode episode = 2;
+  
+  // Error message if not successful
+  string error_message = 3;
+  
+  // Protection level of the episode
+  ProtectionLevel protection_level = 4;
+  
+  // Access metadata
+  AccessMetadata access_metadata = 5;
+  
+  // Phase verification result
+  PhaseVerificationResult phase_verification = 6;
+  
+  // Whether episode was retrieved from cache
+  bool from_cache = 7;
+}
+
+// Request to list episodes from the vault
+message VaultListRequest {
+  // Maximum number of episodes to return
+  int32 limit = 1;
+  
+  // Pagination offset
+  int32 offset = 2;
+  
+  // Filter by protection level
+  repeated ProtectionLevel protection_levels = 3;
+  
+  // Filter by user ID
+  string user_id = 4;
+  
+  // Filter by time range
+  TimeRange time_range = 5;
+  
+  // Filter by tags
+  repeated string tags = 6;
+  
+  // Phase range filter
+  PhaseRange phase_range = 7;
+  
+  // Sort order
+  SortOrder sort_order = 8;
+  
+  // Access credentials
+  AccessCredentials credentials = 9;
+  
+  // Whether to include protected episodes (requires elevated access)
+  bool include_protected = 10;
+}
+
+// Response to vault list request
+message VaultListResponse {
+  // Whether the operation was successful
+  bool success = 1;
+  
+  // List of episodes
+  repeated VaultEpisode episodes = 2;
+  
+  // Total count matching the query
+  int32 total_count = 3;
+  
+  // Whether there are more episodes
+  bool has_more = 4;
+  
+  // Error message if not successful
+  string error_message = 5;
+  
+  // Next page token for pagination
+  string next_page_token = 6;
+}
+
+// Episode with vault-specific metadata
+message VaultEpisode {
+  // The episode data
+  tori.episodic.Episode episode = 1;
+  
+  // Vault-specific metadata
+  VaultMetadata vault_metadata = 2;
+  
+  // Access summary
+  AccessSummary access_summary = 3;
+  
+  // Phase information
+  PhaseInfo phase_info = 4;
+}
+
+// Vault-specific metadata
+message VaultMetadata {
+  // Unique vault ID
+  string vault_id = 1;
+  
+  // Protection level
+  ProtectionLevel protection_level = 2;
+  
+  // Vault segment
+  string vault_segment = 3;
+  
+  // Storage timestamp
+  int64 stored_at = 4;
+  
+  // Last accessed timestamp
+  int64 last_accessed = 5;
+  
+  // Access count
+  int32 access_count = 6;
+  
+  // Storage size in bytes
+  int64 storage_size = 7;
+  
+  // Encryption status
+  bool encrypted = 8;
+  
+  // Backup status
+  BackupStatus backup_status = 9;
+  
+  // Consolidation status
+  ConsolidationStatus consolidation_status = 10;
+}
+
+// Protection levels for vault episodes
+enum ProtectionLevel {
+  UNPROTECTED = 0;        // Normal access
+  USER_SEALED = 1;        // User must explicitly consent to access
+  TIME_LOCKED = 2;        // Access restricted for a time period
+  DEEP_VAULT = 3;         // Maximum protection, requires special authorization
+  SYSTEM_PROTECTED = 4;   // Protected by system policy
+  ENCRYPTED = 5;          // Encrypted with user key
+}
+
+// Access control settings
+message AccessControl {
+  // Owner user ID
+  string owner_id = 1;
+  
+  // Allowed user IDs
+  repeated string allowed_users = 2;
+  
+  // Allowed roles
+  repeated string allowed_roles = 3;
+  
+  // Access expiration timestamp
+  int64 access_expires_at = 4;
+  
+  // Maximum access count
+  int32 max_access_count = 5;
+  
+  // Require explicit consent for access
+  bool require_consent = 6;
+  
+  // Access audit trail enabled
+  bool enable_audit_trail = 7;
+}
+
+// Phase signature for soliton memory alignment
+message PhaseSignature {
+  // Primary phase value (0 to 2π)
+  double primary_phase = 1;
+  
+  // Secondary phase values for multi-dimensional alignment
+  repeated double secondary_phases = 2;
+  
+  // Phase coherence measure
+  double coherence = 3;
+  
+  // Phase stability index
+  double stability = 4;
+  
+  // Frequency components
+  repeated double frequencies = 5;
+  
+  // Amplitude modulation
+  double amplitude = 6;
+  
+  // Phase timestamp
+  int64 phase_timestamp = 7;
+}
+
+// Encryption parameters
+message EncryptionParams {
+  // Encryption algorithm
+  string algorithm = 1;
+  
+  // Key derivation method
+  string key_derivation = 2;
+  
+  // Initialization vector
+  bytes iv = 3;
+  
+  // Salt for key derivation
+  bytes salt = 4;
+  
+  // Key length in bits
+  int32 key_length = 5;
+  
+  // Whether to use hardware security module
+  bool use_hsm = 6;
+}
+
+// Phase alignment result
+message PhaseAlignmentResult {
+  // Whether alignment was successful
+  bool success = 1;
+  
+  // Alignment score (0-1)
+  double alignment_score = 2;
+  
+  // Phase drift correction applied
+  double phase_correction = 3;
+  
+  // Coherence after alignment
+  double final_coherence = 4;
+  
+  // Error message if alignment failed
+  string error_message = 5;
+}
+
+// Storage metrics
+message StorageMetrics {
+  // Time taken to store (milliseconds)
+  int32 storage_time_ms = 1;
+  
+  // Compression ratio achieved
+  double compression_ratio = 2;
+  
+  // Encryption overhead
+  int32 encryption_overhead_bytes = 3;
+  
+  // Storage efficiency score
+  double efficiency_score = 4;
+}
+
+// ID type enum
+enum IdType {
+  VAULT_ID = 0;
+  EPISODE_ID = 1;
+  USER_ID = 2;
+  PHASE_SIGNATURE = 3;
+}
+
+// Access credentials
+message AccessCredentials {
+  // User ID
+  string user_id = 1;
+  
+  // Access token
+  string token = 2;
+  
+  // Role
+  string role = 3;
+  
+  // Session ID
+  string session_id = 4;
+  
+  // Consent timestamp (for protected content)
+  int64 consent_timestamp = 5;
+  
+  // Biometric verification (optional)
+  bytes biometric_hash = 6;
+}
+
+// Access metadata
+message AccessMetadata {
+  // Whether access was granted
+  bool access_granted = 1;
+  
+  // Access timestamp
+  int64 access_timestamp = 2;
+  
+  // Access method used
+  string access_method = 3;
+  
+  // Warning messages
+  repeated string warnings = 4;
+  
+  // Access audit entry ID
+  string audit_entry_id = 5;
+}
+
+// Phase verification result
+message PhaseVerificationResult {
+  // Whether phase verification passed
+  bool verified = 1;
+  
+  // Phase drift detected
+  double phase_drift = 2;
+  
+  // Verification confidence
+  double confidence = 3;
+  
+  // Error message if verification failed
+  string error_message = 4;
+}
+
+// Time range filter
+message TimeRange {
+  // Start timestamp
+  int64 start_time = 1;
+  
+  // End timestamp
+  int64 end_time = 2;
+}
+
+// Phase range filter
+message PhaseRange {
+  // Minimum phase value
+  double min_phase = 1;
+  
+  // Maximum phase value
+  double max_phase = 2;
+  
+  // Phase tolerance
+  double tolerance = 3;
+}
+
+// Sort order specification
+message SortOrder {
+  // Field to sort by
+  string field = 1;
+  
+  // Sort direction
+  SortDirection direction = 2;
+}
+
+// Sort direction enum
+enum SortDirection {
+  ASCENDING = 0;
+  DESCENDING = 1;
+}
+
+// Access summary
+message AccessSummary {
+  // Last access timestamp
+  int64 last_access = 1;
+  
+  // Total access count
+  int32 access_count = 2;
+  
+  // Unique accessor count
+  int32 unique_accessors = 3;
+  
+  // Average access interval (seconds)
+  double avg_access_interval = 4;
+}
+
+// Phase information
+message PhaseInfo {
+  // Current phase signature
+  PhaseSignature current_phase = 1;
+  
+  // Original phase signature
+  PhaseSignature original_phase = 2;
+  
+  // Phase drift over time
+  double phase_drift = 3;
+  
+  // Phase stability score
+  double stability_score = 4;
+}
+
+// Backup status enum
+enum BackupStatus {
+  NOT_BACKED_UP = 0;
+  BACKUP_PENDING = 1;
+  BACKED_UP = 2;
+  BACKUP_FAILED = 3;
+  BACKUP_IN_PROGRESS = 4;
+}
+
+// Consolidation status enum
+enum ConsolidationStatus {
+  NOT_CONSOLIDATED = 0;
+  CONSOLIDATION_PENDING = 1;
+  CONSOLIDATED = 2;
+  CONSOLIDATION_FAILED = 3;
+  CONSOLIDATION_IN_PROGRESS = 4;
+}
+
+// Request to update protection level
+message ProtectionUpdateRequest {
+  // Episode ID or vault ID
+  string id = 1;
+  
+  // ID type
+  IdType id_type = 2;
+  
+  // New protection level
+  ProtectionLevel new_protection_level = 3;
+  
+  // Access credentials
+  AccessCredentials credentials = 4;
+  
+  // Reason for change
+  string reason = 5;
+  
+  // Whether to update phase signature
+  bool update_phase = 6;
+}
+
+// Response to protection update request
+message ProtectionUpdateResponse {
+  // Whether the operation was successful
+  bool success = 1;
+  
+  // Error message if not successful
+  string error_message = 2;
+  
+  // Previous protection level
+  ProtectionLevel previous_level = 3;
+  
+  // New protection level
+  ProtectionLevel new_level = 4;
+  
+  // Audit entry ID
+  string audit_entry_id = 5;
+}
+
+// Request to start consolidation
+message ConsolidationRequest {
+  // User ID or episode filter
+  string filter_user_id = 1;
+  
+  // Time range for consolidation
+  TimeRange time_range = 2;
+  
+  // Consolidation parameters
+  ConsolidationParams params = 3;
+  
+  // Whether to run asynchronously
+  bool async_mode = 4;
+  
+  // Priority level
+  int32 priority = 5;
+}
+
+// Consolidation parameters
+message ConsolidationParams {
+  // Maximum episodes to consolidate in one batch
+  int32 max_episodes_per_batch = 1;
+  
+  // Energy threshold for consolidation
+  double energy_threshold = 2;
+  
+  // Phase coherence threshold
+  double coherence_threshold = 3;
+  
+  // Whether to perform Lyapunov analysis
+  bool perform_lyapunov_analysis = 4;
+  
+  // Whether to update phase signatures
+  bool update_phase_signatures = 5;
+  
+  // Sleep cycle duration (seconds)
+  int32 sleep_cycle_duration = 6;
+  
+  // Memory pressure threshold
+  double memory_pressure_threshold = 7;
+}
+
+// Response to consolidation request
+message ConsolidationResponse {
+  // Whether the operation was started successfully
+  bool success = 1;
+  
+  // Consolidation job ID
+  string job_id = 2;
+  
+  // Error message if not successful
+  string error_message = 3;
+  
+  // Estimated completion time
+  int64 estimated_completion = 4;
+  
+  // Number of episodes to be consolidated
+  int32 episodes_to_consolidate = 5;
+}
+
+// Request for consolidation status
+message ConsolidationStatusRequest {
+  // Job ID to check
+  string job_id = 1;
+}
+
+// Response with consolidation status
+message ConsolidationStatusResponse {
+  // Whether the request was successful
+  bool success = 1;
+  
+  // Job status
+  ConsolidationJobStatus status = 2;
+  
+  // Progress percentage (0-100)
+  double progress = 3;
+  
+  // Episodes processed
+  int32 episodes_processed = 4;
+  
+  // Episodes remaining
+  int32 episodes_remaining = 5;
+  
+  // Current operation
+  string current_operation = 6;
+  
+  // Error message if failed
+  string error_message = 7;
+  
+  // Consolidation metrics
+  ConsolidationMetrics metrics = 8;
+}
+
+// Consolidation job status enum
+enum ConsolidationJobStatus {
+  CONSOLIDATION_UNKNOWN = 0;
+  CONSOLIDATION_QUEUED = 1;
+  CONSOLIDATION_RUNNING = 2;
+  CONSOLIDATION_COMPLETED = 3;
+  CONSOLIDATION_FAILED = 4;
+  CONSOLIDATION_CANCELLED = 5;
+  CONSOLIDATION_PAUSED = 6;
+}
+
+// Consolidation metrics
+message ConsolidationMetrics {
+  // Total processing time (seconds)
+  double total_processing_time = 1;
+  
+  // Average episode processing time (milliseconds)
+  double avg_episode_processing_time = 2;
+  
+  // Memory pressure before consolidation
+  double memory_pressure_before = 3;
+  
+  // Memory pressure after consolidation
+  double memory_pressure_after = 4;
+  
+  // Phase coherence improvement
+  double phase_coherence_improvement = 5;
+  
+  // Energy redistribution score
+  double energy_redistribution_score = 6;
+}
+
+// Request for vault statistics
+message VaultStatsRequest {
+  // Time range for statistics
+  TimeRange time_range = 1;
+  
+  // Whether to include detailed breakdowns
+  bool include_details = 2;
+  
+  // User ID filter
+  string user_id = 3;
+}
+
+// Response with vault statistics
+message VaultStatsResponse {
+  // Whether the request was successful
+  bool success = 1;
+  
+  // Total episodes in vault
+  int32 total_episodes = 2;
+  
+  // Total vault size in bytes
+  int64 total_size_bytes = 3;
+  
+  // Episodes by protection level
+  map<string, int32> episodes_by_protection_level = 4;
+  
+  // Episodes by vault segment
+  map<string, int32> episodes_by_segment = 5;
+  
+  // Average episode size
+  double avg_episode_size = 6;
+  
+  // Average access frequency
+  double avg_access_frequency = 7;
+  
+  // Storage efficiency
+  double storage_efficiency = 8;
+  
+  // Phase coherence distribution
+  PhaseCoherenceDistribution phase_distribution = 9;
+  
+  // Backup coverage percentage
+  double backup_coverage = 10;
+  
+  // Error message if not successful
+  string error_message = 11;
+}
+
+// Phase coherence distribution
+message PhaseCoherenceDistribution {
+  // Distribution buckets
+  repeated CoherenceBucket buckets = 1;
+  
+  // Average coherence
+  double avg_coherence = 2;
+  
+  // Coherence standard deviation
+  double coherence_stddev = 3;
+}
+
+// Coherence distribution bucket
+message CoherenceBucket {
+  // Bucket minimum coherence
+  double min_coherence = 1;
+  
+  // Bucket maximum coherence
+  double max_coherence = 2;
+  
+  // Episode count in bucket
+  int32 episode_count = 3;
+}
+
+// Request for integrity check
+message IntegrityCheckRequest {
+  // Whether to perform deep integrity check
+  bool deep_check = 1;
+  
+  // Whether to fix issues automatically
+  bool auto_fix = 2;
+  
+  // User ID filter
+  string user_id = 3;
+  
+  // Vault segment filter
+  string vault_segment = 4;
+}
+
+// Response to integrity check
+message IntegrityCheckResponse {
+  // Whether the check was successful
+  bool success = 1;
+  
+  // Overall integrity score (0-1)
+  double integrity_score = 2;
+  
+  // Issues found
+  repeated IntegrityIssue issues = 3;
+  
+  // Issues fixed (if auto_fix was enabled)
+  repeated IntegrityIssue issues_fixed = 4;
+  
+  // Check duration (seconds)
+  double check_duration = 5;
+  
+  // Error message if check failed
+  string error_message = 6;
+}
+
+// Integrity issue
+message IntegrityIssue {
+  // Issue type
+  string issue_type = 1;
+  
+  // Severity level
+  IssueSeverity severity = 2;
+  
+  // Affected episode/vault ID
+  string affected_id = 3;
+  
+  // Issue description
+  string description = 4;
+  
+  // Recommended action
+  string recommended_action = 5;
+  
+  // Whether the issue was fixed
+  bool fixed = 6;
+}
+
+// Issue severity enum
+enum IssueSeverity {
+  INFO = 0;
+  WARNING = 1;
+  ERROR = 2;
+  CRITICAL = 3;
+}
+
+// Request for phase alignment
+message PhaseAlignRequest {
+  // Episodes to align (empty = all episodes)
+  repeated string episode_ids = 1;
+  
+  // Target phase coherence
+  double target_coherence = 2;
+  
+  // Maximum phase correction allowed
+  double max_phase_correction = 3;
+  
+  // Whether to run asynchronously
+  bool async_mode = 4;
+}
+
+// Response to phase alignment request
+message PhaseAlignResponse {
+  // Whether the operation was successful
+  bool success = 1;
+  
+  // Job ID (if async)
+  string job_id = 2;
+  
+  // Episodes aligned
+  int32 episodes_aligned = 3;
+  
+  // Average phase correction applied
+  double avg_phase_correction = 4;
+  
+  // Final coherence achieved
+  double final_coherence = 5;
+  
+  // Error message if not successful
+  string error_message = 6;
+}
+
+// Request to search by phase
+message PhaseSearchRequest {
+  // Target phase signature
+  PhaseSignature target_phase = 1;
+  
+  // Phase tolerance
+  double tolerance = 2;
+  
+  // Maximum results
+  int32 max_results = 3;
+  
+  // Search scope
+  PhaseSearchScope scope = 4;
+  
+  // Access credentials
+  AccessCredentials credentials = 5;
+}
+
+// Phase search scope
+message PhaseSearchScope {
+  // User ID filter
+  string user_id = 1;
+  
+  // Time range filter
+  TimeRange time_range = 2;
+  
+  // Protection level filter
+  repeated ProtectionLevel protection_levels = 3;
+  
+  // Vault segment filter
+  repeated string vault_segments = 4;
+}
+
+// Response to phase search
+message PhaseSearchResponse {
+  // Whether the search was successful
+  bool success = 1;
+  
+  // Matching episodes
+  repeated PhaseSearchResult results = 2;
+  
+  // Total matches found
+  int32 total_matches = 3;
+  
+  // Search duration (milliseconds)
+  int32 search_duration_ms = 4;
+  
+  // Error message if not successful
+  string error_message = 5;
+}
+
+// Phase search result
+message PhaseSearchResult {
+  // Episode information
+  VaultEpisode episode = 1;
+  
+  // Phase similarity score
+  double similarity_score = 2;
+  
+  // Phase distance
+  double phase_distance = 3;
+  
+  // Coherence match score
+  double coherence_score = 4;
+}
+
+// Request to backup vault
+message BackupRequest {
+  // Backup destination
+  string destination = 1;
+  
+  // Backup scope
+  BackupScope scope = 2;
+  
+  // Compression enabled
+  bool enable_compression = 3;
+  
+  // Encryption enabled
+  bool enable_encryption = 4;
+  
+  // Whether to verify backup after creation
+  bool verify_backup = 5;
+}
+
+// Backup scope
+message BackupScope {
+  // User ID filter
+  string user_id = 1;
+  
+  // Time range filter
+  TimeRange time_range = 2;
+  
+  // Protection level filter
+  repeated ProtectionLevel protection_levels = 3;
+  
+  // Include metadata
+  bool include_metadata = 4;
+  
+  // Include access logs
+  bool include_access_logs = 5;
+}
+
+// Response to backup request
+message BackupResponse {
+  // Whether the backup was successful
+  bool success = 1;
+  
+  // Backup job ID
+  string job_id = 2;
+  
+  // Backup location
+  string backup_location = 3;
+  
+  // Backup size in bytes
+  int64 backup_size = 4;
+  
+  // Episodes backed up
+  int32 episodes_backed_up = 5;
+  
+  // Error message if not successful
+  string error_message = 6;
+}
+
+// Request to restore vault
+message RestoreRequest {
+  // Backup location
+  string backup_location = 1;
+  
+  // Whether to overwrite existing episodes
+  bool overwrite_existing = 2;
+  
+  // Whether to verify restored data
+  bool verify_restore = 3;
+  
+  // User ID filter for restore
+  string user_id = 4;
+}
+
+// Response to restore request
+message RestoreResponse {
+  // Whether the restore was successful
+  bool success = 1;
+  
+  // Restore job ID
+  string job_id = 2;
+  
+  // Episodes restored
+  int32 episodes_restored = 3;
+  
+  // Episodes skipped (already exist)
+  int32 episodes_skipped = 4;
+  
+  // Episodes failed to restore
+  int32 episodes_failed = 5;
+  
+  // Error message if not successful
+  string error_message = 6;
+}

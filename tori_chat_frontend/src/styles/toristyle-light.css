@@ -1,0 +1,331 @@
+/* TORI Soft Light Theme - Phase 9 UI Enhancement */
+/* Restores the subtle off-white background for calm, low-glare experience */
+
+:root {
+  /* === SOFT LIGHT THEME VARIABLES === */
+  --tori-bg-primary: #f9f9f9;      /* Soft white canvas */
+  --tori-bg-secondary: #ffffff;     /* Pure white for cards */
+  --tori-bg-tertiary: #f5f5f5;     /* Subtle gray for panels */
+  
+  --tori-text-primary: #1a1a1a;    /* Near black for primary text */
+  --tori-text-secondary: #4a4a4a;  /* Medium gray for secondary */
+  --tori-text-muted: #7a7a7a;      /* Light gray for muted text */
+  
+  --tori-accent-primary: #0891b2;   /* Teal primary accent */
+  --tori-accent-secondary: #0e7490; /* Darker teal for hover */
+  --tori-accent-light: #67e8f9;    /* Light teal for highlights */
+  
+  /* === GHOST PERSONA COLORS === */
+  --ghost-mentor: rgba(14, 116, 144, 0.15);     /* Teal aura for Mentor */
+  --ghost-mystic: rgba(139, 69, 19, 0.15);      /* Violet aura for Mystic */
+  --ghost-chaotic: rgba(220, 38, 38, 0.15);     /* Red aura for Chaotic */
+  --ghost-oracular: rgba(79, 70, 229, 0.15);    /* Indigo aura for Oracular */
+  --ghost-dreaming: rgba(147, 197, 253, 0.15);  /* Sky blue aura for Dreaming */
+  --ghost-unsettled: rgba(251, 146, 60, 0.15);  /* Orange aura for Unsettled */
+  
+  /* === AGENT BADGE COLORS === */
+  --agent-refactorer: #3b82f6;     /* Blue for Refactorer 🛠️ */
+  --agent-debugger: #ef4444;       /* Red for Debugger 🐛 */
+  --agent-scholar: #10b981;        /* Green for Scholar 📖 */
+  
+  /* === TYPOGRAPHY === */
+  --font-primary: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+  
+  /* === SPACING & LAYOUT === */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  
+  /* === BORDERS & SHADOWS === */
+  --border-subtle: 1px solid #e5e7eb;
+  --border-accent: 1px solid var(--tori-accent-primary);
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  
+  /* === ANIMATIONS === */
+  --transition-fast: 0.15s ease-in-out;
+  --transition-normal: 0.3s ease-in-out;
+  --transition-slow: 0.5s ease-in-out;
+}
+
+/* === DARK THEME OVERRIDE === */
+[data-theme="dark"] {
+  --tori-bg-primary: #0f172a;      /* Deep slate background */
+  --tori-bg-secondary: #1e293b;    /* Slate for cards */
+  --tori-bg-tertiary: #334155;     /* Light slate for panels */
+  
+  --tori-text-primary: #f8fafc;    /* Near white for primary text */
+  --tori-text-secondary: #cbd5e1;  /* Light gray for secondary */
+  --tori-text-muted: #94a3b8;      /* Medium gray for muted text */
+  
+  --tori-accent-primary: #06b6d4;   /* Bright cyan accent */
+  --tori-accent-secondary: #0891b2; /* Darker cyan for hover */
+  --tori-accent-light: #67e8f9;    /* Light cyan for highlights */
+  
+  /* Darker ghost auras for dark mode */
+  --ghost-mentor: rgba(6, 182, 212, 0.2);
+  --ghost-mystic: rgba(168, 85, 247, 0.2);
+  --ghost-chaotic: rgba(239, 68, 68, 0.2);
+  --ghost-oracular: rgba(99, 102, 241, 0.2);
+  --ghost-dreaming: rgba(147, 197, 253, 0.2);
+  --ghost-unsettled: rgba(251, 146, 60, 0.2);
+  
+  --border-subtle: 1px solid #374151;
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+}
+
+/* === BASE LAYOUT === */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-primary);
+  background-color: var(--tori-bg-primary);
+  color: var(--tori-text-primary);
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  transition: background-color var(--transition-normal), color var(--transition-normal);
+}
+
+/* === CHAT INTERFACE === */
+.chat-container {
+  background-color: var(--tori-bg-primary);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-messages {
+  flex: 1;
+  padding: var(--spacing-md);
+  max-width: 1024px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.message-bubble {
+  background-color: var(--tori-bg-secondary);
+  border: var(--border-subtle);
+  border-radius: 12px;
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+  box-shadow: var(--shadow-sm);
+  font-size: 14px;
+  line-height: 1.5;
+  transition: all var(--transition-fast);
+}
+
+.message-bubble:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.message-bubble.user {
+  background-color: var(--tori-accent-light);
+  margin-left: var(--spacing-xl);
+}
+
+.message-bubble.assistant {
+  background-color: var(--tori-bg-secondary);
+  margin-right: var(--spacing-xl);
+}
+
+/* === GHOST MESSAGE BUBBLES === */
+.message-bubble.ghost-mentor {
+  background: linear-gradient(135deg, var(--tori-bg-secondary), var(--ghost-mentor));
+  border-left: 4px solid var(--tori-accent-primary);
+}
+
+.message-bubble.ghost-mystic {
+  background: linear-gradient(135deg, var(--tori-bg-secondary), var(--ghost-mystic));
+  border-left: 4px solid #8b45ff;
+}
+
+.message-bubble.ghost-chaotic {
+  background: linear-gradient(135deg, var(--tori-bg-secondary), var(--ghost-chaotic));
+  border-left: 4px solid #dc2626;
+  transform: rotate(-0.5deg);
+}
+
+.message-bubble.ghost-oracular {
+  background: linear-gradient(135deg, var(--tori-bg-secondary), var(--ghost-oracular));
+  border-left: 4px solid #4f46e5;
+  box-shadow: 0 0 20px rgba(79, 70, 229, 0.3);
+}
+
+.message-bubble.ghost-dreaming {
+  background: linear-gradient(135deg, var(--tori-bg-secondary), var(--ghost-dreaming));
+  border-left: 4px solid #93c5fd;
+  opacity: 0.95;
+  backdrop-filter: blur(2px);
+}
+
+.message-bubble.ghost-unsettled {
+  background: linear-gradient(135deg, var(--tori-bg-secondary), var(--ghost-unsettled));
+  border-left: 4px solid #fb923c;
+  animation: subtle-shake 0.5s ease-in-out;
+}
+
+@keyframes subtle-shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-1px); }
+  75% { transform: translateX(1px); }
+}
+
+/* === AGENT BADGES === */
+.agent-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: white;
+  margin-bottom: var(--spacing-sm);
+}
+
+.agent-badge.refactorer {
+  background-color: var(--agent-refactorer);
+}
+
+.agent-badge.debugger {
+  background-color: var(--agent-debugger);
+}
+
+.agent-badge.scholar {
+  background-color: var(--agent-scholar);
+}
+
+/* === TYPOGRAPHY IMPROVEMENTS === */
+.message-text {
+  font-size: 14px;
+  line-height: 1.5;
+  font-weight: 500;
+  color: var(--tori-text-primary);
+}
+
+.message-text p {
+  margin-bottom: var(--spacing-sm);
+}
+
+.message-text code {
+  background-color: var(--tori-bg-tertiary);
+  padding: 2px 4px;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+}
+
+.message-text pre {
+  background-color: var(--tori-bg-tertiary);
+  padding: var(--spacing-md);
+  border-radius: 8px;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+/* === CHAT INPUT === */
+.chat-input-container {
+  background-color: var(--tori-bg-secondary);
+  border-top: var(--border-subtle);
+  padding: var(--spacing-md);
+  position: sticky;
+  bottom: 0;
+}
+
+.chat-input {
+  width: 100%;
+  max-width: 1024px;
+  margin: 0 auto;
+  display: flex;
+  gap: var(--spacing-sm);
+  align-items: flex-end;
+}
+
+.chat-textarea {
+  flex: 1;
+  background-color: var(--tori-bg-primary);
+  border: var(--border-subtle);
+  border-radius: 8px;
+  padding: var(--spacing-sm) var(--spacing-md);
+  font-family: var(--font-primary);
+  font-size: 14px;
+  line-height: 1.4;
+  resize: none;
+  min-height: 40px;
+  max-height: 120px;
+  transition: border-color var(--transition-fast);
+}
+
+.chat-textarea:focus {
+  outline: none;
+  border-color: var(--tori-accent-primary);
+  box-shadow: 0 0 0 2px rgba(8, 145, 178, 0.2);
+}
+
+.chat-send-button {
+  background-color: var(--tori-accent-primary);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: var(--spacing-sm) var(--spacing-md);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+}
+
+.chat-send-button:hover {
+  background-color: var(--tori-accent-secondary);
+}
+
+.chat-send-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* === RESPONSIVE DESIGN === */
+@media (max-width: 768px) {
+  .chat-messages {
+    padding: var(--spacing-sm);
+  }
+  
+  .message-bubble.user {
+    margin-left: var(--spacing-sm);
+  }
+  
+  .message-bubble.assistant {
+    margin-right: var(--spacing-sm);
+  }
+  
+  .chat-input-container {
+    padding: var(--spacing-sm);
+  }
+}
+
+/* === ACCESSIBILITY === */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* === HIGH CONTRAST MODE === */
+@media (prefers-contrast: high) {
+  :root {
+    --border-subtle: 2px solid #000000;
+    --shadow-sm: 0 2px 4px 0 rgba(0, 0, 0, 0.8);
+    --shadow-md: 0 4px 8px 0 rgba(0, 0, 0, 0.8);
+  }
+}

@@ -1,0 +1,27 @@
+# Test requirements for TORI Memory System
+-r dev.txt
+
+# Testing frameworks
+pytest>=8.0.0
+pytest-asyncio>=0.23.0
+pytest-cov>=4.1.0
+pytest-xdist>=3.5.0
+pytest-benchmark>=4.0.0
+pytest-timeout>=2.2.0
+
+# Test utilities
+hypothesis>=6.86.0
+factory-boy>=3.3.0
+pytest-mock>=3.11.1
+freezegun>=1.2.2
+responses>=0.23.0
+pytest-httpx>=0.25.0
+
+# Code quality checks
+coverage>=7.3.2
+bandit>=1.7.5
+safety>=2.3.5
+
+# Integration testing
+locust>=2.19.0
+pytest-docker>=2.0.0

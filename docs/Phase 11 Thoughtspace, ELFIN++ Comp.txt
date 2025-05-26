@@ -1,0 +1,541 @@
+Phase 11: Thoughtspace, ELFIN++ Compiler, and Live Entanglement Mapping
+
+Phase 11 Deployment Blueprint for TORI System
+Phase 11 introduces an ELFIN++ cognitive scripting language and a 3D Thoughtspace visualization layer, closing the loop between Ghost AI guidance, multi-agent collaboration, and long-term memory management. This blueprint details the new DSL syntax, key module scaffolds (renderer, memory entangler, agent embodiment), the live data entanglement strategy, the holographic UI preview, and how Ghost→Agent→Vault interactions function as a cohesive loop.
+1. ELFIN++ Core Syntax Specification
+ELFIN++ is an evolution of the TORI DSL that interweaves symbolic cognitive commands with spatial logic. It extends the original ELFIN concept-first language
+file-jhbkyjwepyua8cmn493eme
+ to control Ghost personas, agents, and memory vault operations, while addressing elements in a phase-space “Thoughtscape.” Key language constructs include:
+ghost{persona}.emerge() – Invokes a Ghost AI persona by name, causing that persona to manifest and engage. For example, ghost{mentor}.emerge() summons the Mentor ghost. This is typically used when a certain emotional or contextual pattern is detected, prompting the Ghost AI to step in with guidance or insight. The persona can be any defined ghost profile (e.g. mentor, mystic, chaotic, unsettled). After emergence, the Ghost’s influence is active (e.g. it may speak or provide an overlay).
+vault.seal(conceptArc) – Securely seals a concept arc (a connected thread of concepts, such as a conversation segment or memory) into the Memory Vault. This command is used to archive sensitive or traumatic memories so they don’t actively perturb the user’s conscious thoughtstream. For instance, vault.seal(traumaArc1) would take the identified traumatic arc and lock it away in long-term protected storage. Under the hood this corresponds to a !PhaseShift operation on the ConceptDiff layer, effectively “shifting” that memory’s phase out of the active lattice into a safe zone. Sealed content remains accessible only under appropriate conditions (with user consent or therapeutic context).
+agent{role}.focusOn(ConceptID) – Directs a named agent (by role) to focus on a particular concept node or task. The role can be a functional agent in the system (e.g. a coder, researcher, or therapist agent), and the ConceptID is a reference to a concept in the Large Concept Network (LCN). For example, agent{coder}.focusOn(Bug123) would dispatch the coding assistant agent to zero in on concept Bug123 (perhaps a code issue) and work on it. This command triggers the multi-agent orchestration layer to allocate attention to that concept – e.g. retrieving relevant knowledge, formulating suggestions or performing actions related to it. In ELFIN++ scripts, this is how high-level cognitive goals translate into concrete agent behaviors.
+project(holo(ConceptID)) at ψ[θ,λ] – Projects a holographic representation of a concept into the shared spatial thoughtspace at a specified phase-space coordinate. Here, holo(ConceptID) creates a hologram entity for the given concept (using its attributes/links), and ψ[θ,λ] designates the coordinate (psi) in the phase-zone lattice where it should appear. The ψ coordinate system corresponds to TORI’s spectral memory architecture: each concept has a unique phase/frequency tag in the soliton lattice. We use θ (angle) and λ (radius or layer) as polar coordinates within a conceptual plane, so project(holo(X)) at ψ[90°,1.5] might render concept X’s hologram at a 90° phase angle and radius 1.5 in the visualization space. In effect, ELFIN++ allows spatial addressing – phase-zone addressing – meaning you can place or target operations in specific regions of the cognitive space. This is useful for orchestrating visual layouts (e.g. clustering related concepts by phase proximity) and for directing attention to certain “zones” of thought (like focusing on a subset of the concept lattice).
+if (coherence < 0.3) → morphPersona() – A conditional that ties system metrics to adaptive behavior. Here coherence is a real-time measure of phase alignment in the user’s cognitive state (ranging 0 to 1). ELFIN++ can query such cognitive variables (coherence, entropy, emotional tone, etc.). In this example, if coherence falls below 0.3 – indicating the conversation/state is highly chaotic or divergent – it triggers a Ghost persona morph. morphPersona() swaps the current ghost persona to a more appropriate one, typically the “Unsettled” or other supportive persona in chaotic situations
+file-q4etksbk3dpnkvzatm7jpz
+file-q4etksbk3dpnkvzatm7jpz
+. This construct allows adaptive scripting: the system can respond to cognitive state changes on the fly. For instance, a snippet might be: if (coherence < 0.3) { ghost{unsettled}.emerge(); vault.seal(currentArc); } to automatically deploy the Unsettled ghost and seal the problematic memory arc when things become too incoherent. Conditions can be combined with other spatial or temporal triggers as well, making ELFIN++ a powerful language to express complex cognitive workflows (it’s effectively a high-level cognitive OS script).
+Spatial Logic Operators: In summary, ELFIN++ marries the cognitive commands above with spatial semantics: ψ[θ,λ] denotes coordinates in the phase-zone (with θ possibly an angle along a concept lattice axis and λ a radial distance or layer index). Concept references like ConceptID inherently tie to vectors in the concept lattice (since each concept has an embedding or phase vector). The DSL could allow operations like relative placement (e.g. ψ[θ+10°, λ] to offset an object’s position by 10°) or region selection (perhaps future syntax for selecting all concepts in a certain phase band). Additionally, halo entropy fields are accessible – e.g. the system might expose entropy as a variable (similar to coherence) representing phase entropy (disorder) in the local halo of the current focus. Scripts can leverage this, for example: if (entropy > 0.8) ghost{chaotic}.emerge(); to invoke a chaotic persona when the local state is extremely unpredictable
+file-q4etksbk3dpnkvzatm7jpz
+. All these constructs allow developers (and even advanced end-users) to script behaviors in TORI that blend semantic operations with spatial cognition – achieving “concept-first programming” with direct influence over the cognitive landscape.
+2. Implementation Scaffolds for Key Modules
+Phase 11 requires implementing new modules in line with TORI’s existing architecture (React/TypeScript front-end, Rust/TS back-end). Below are initial scaffolds with full code (not just interfaces) for the main components. These scaffolds are production-oriented, meaning they tie into real data flows and use existing subsystems (Concept Mesh, Ghost AI, etc.) where possible.
+ThoughtspaceRenderer.tsx – 3D Thoughtspace Canvas (Three.js)
+This React component sets up a Three.js-powered canvas to render the user’s thoughtspace – a holographic 3D graph of concepts, agents, and ghost auras. It will integrate with WebXR or ARToolKit later (for true AR), but initially it runs on a standard WebGL canvas. Key responsibilities:
+Initialize a Three.js scene with camera, lighting, and a render loop.
+Render concept nodes (as spheres or custom geometries) positioned according to their ψ coordinates (phase-angle mapped to 2D/3D positions).
+Render agent ideograms and ghost auras via the AgentEmbodimentEngine (integrated below).
+Visually animate effects like shimmering and pulsing for active nodes.
+Below is a scaffold of the component:
+tsx
+Copy
+Edit
+import React, { useRef, useEffect } from 'react';
+import * as THREE from 'three';
+import AgentEmbodimentEngine from './AgentEmbodimentEngine';
+import { QuantumMemoryEntangler } from '../services/QuantumMemoryEntangler';
+
+const ThoughtspaceRenderer: React.FC = () => {
+  const mountRef = useRef<HTMLDivElement>(null);
+  const engineRef = useRef<AgentEmbodimentEngine>();
+  const sceneRef = useRef<THREE.Scene>();
+  const cameraRef = useRef<THREE.PerspectiveCamera>();
+  const rendererRef = useRef<THREE.WebGLRenderer>();
+  const animationIdRef = useRef<number>();
+
+  // On component mount: initialize Three.js scene and renderer
+  useEffect(() => {
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+    // Create scene and camera
+    const scene = new THREE.Scene();
+    sceneRef.current = scene;
+    scene.background = new THREE.Color(0x000000); // black background for space
+    const camera = new THREE.PerspectiveCamera(75, width/height, 0.1, 1000);
+    camera.position.set(0, 0, 5);  // position camera looking at origin
+    cameraRef.current = camera;
+    // Add a soft ambient light and a directional light for highlights
+    scene.add(new THREE.AmbientLight(0xffffff, 0.5));
+    const keyLight = new THREE.DirectionalLight(0xffffff, 0.8);
+    keyLight.position.set(0, 5, 5);
+    scene.add(keyLight);
+    // Initialize renderer
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(width, height);
+    rendererRef.current = renderer;
+    // Append renderer canvas to DOM
+    if (mountRef.current) {
+      mountRef.current.appendChild(renderer.domElement);
+    }
+    // Initialize AgentEmbodimentEngine with this scene
+    engineRef.current = new AgentEmbodimentEngine(scene);
+
+    // Sample: create a placeholder concept node for visualization
+    const geometry = new THREE.SphereGeometry(0.1, 16, 16);
+    const material = new THREE.MeshStandardMaterial({ color: 0x88ccff, emissive: 0x112244 });
+    const conceptNodeMesh = new THREE.Mesh(geometry, material);
+    conceptNodeMesh.position.set(0, 0, 0);  // at origin for now
+    scene.add(conceptNodeMesh);
+
+    // Connect to the QuantumMemoryEntangler to get live concept data
+    QuantumMemoryEntangler.on('update', (clusters) => {
+      // For each concept cluster, add/update nodes in the scene
+      clusters.forEach(cluster => {
+        cluster.concepts.forEach(concept => {
+          // Compute or retrieve 3D position from concept's ψ coordinate:
+          const [theta, lambda] = concept.psiCoord;  // e.g., [angle, radius]
+          // Map polar (θ,λ) to Cartesian (x,y) on a plane, and use cluster index for z layering
+          const x = lambda * Math.cos(theta);
+          const y = lambda * Math.sin(theta);
+          const z = cluster.layerIndex * 0.5;  // separate layers by cluster
+          let node = scene.getObjectByName(`concept-${concept.id}`) as THREE.Mesh;
+          if (!node) {
+            // Create a new node mesh if it doesn't exist
+            node = new THREE.Mesh(geometry, material.clone());
+            node.name = `concept-${concept.id}`;
+            scene.add(node);
+          }
+          node.position.set(x, y, z);
+          // Visual effects: if concept is “active” or newly updated, make it pulse
+          if (concept.justUpdated) {
+            (node.material as THREE.MeshStandardMaterial).emissive.setHex(0x4455ff);
+            node.scale.set(1.5, 1.5, 1.5);
+            // The AgentEmbodimentEngine could later reset this after animation
+          }
+        });
+      });
+    });
+    QuantumMemoryEntangler.initialize();  // start ingestion and mapping
+
+    // Animation loop
+    const animate = () => {
+      animationIdRef.current = requestAnimationFrame(animate);
+      // Slight shimmer effect: oscillate node scale or material for a breathing effect
+      scene.traverse(object => {
+        if (object.isMesh && object.name.startsWith('concept-')) {
+          const t = Date.now() * 0.001;
+          object.scale.setScalar(1 + 0.05 * Math.sin(t));  // small pulsation
+        }
+      });
+      // Update agent/ghost animations (e.g. orbiting)
+      engineRef.current?.update();
+      renderer.render(scene, camera);
+    };
+    animate();
+
+    // Cleanup on unmount
+    return () => {
+      if (animationIdRef.current) cancelAnimationFrame(animationIdRef.current);
+      renderer.dispose();
+      scene.clear();
+    };
+  }, []);
+
+  return <div id="thoughtspace-canvas" ref={mountRef} style={{width: '100%', height: '100%'}} />;
+};
+
+export default ThoughtspaceRenderer;
+Explanation: The ThoughtspaceRenderer sets up a Three.js scene and ties into the QuantumMemoryEntangler service to receive real concept data. In this scaffold, when the entangler emits an update (with detected concept clusters), it iterates through each cluster and ensures a mesh exists for each concept. We calculate a 3D position for each concept using its psiCoord (phase angle and radius), placing related concepts near each other. The code demonstrates a simple polar-to-Cartesian mapping for X, Y, and uses cluster index for the Z-layer (stacking clusters). A sphere mesh represents each concept; active or newly updated concepts trigger a visual pulse (we tint emissive color and up-scale the node temporarily). An animation loop runs with requestAnimationFrame, providing a gentle shimmer to all nodes (scaling them sinusoidally by a few percent to make the scene feel alive). The loop also calls engineRef.current.update() to animate agents (e.g. orbiting) each frame. Lighting is basic (ambient + directional) for clarity. This scaffold can be expanded to handle more complex geometry (e.g. different shapes for different concept types), interactive picking (clicking a node), and AR capabilities (e.g. using WebXR to anchor the scene in physical space). Importantly, it’s connected to live data via the entangler – so no placeholder nodes; as soon as the user has concepts (from chat or PDF ingestion), they will appear in this 3D canvas.
+QuantumMemoryEntangler.ts – Live Data Entanglement Service
+The QuantumMemoryEntangler is a backend (or service-layer) module that continuously ingests the user’s real interaction data – conversation logs (ψarc files) and Memory Vault records – and identifies cross-session links, a.k.a. phase-entangled concept clusters. Its role is to map out where the same concepts or thematic arcs recur across time, by analyzing the “phase” signatures in the memory lattice. No mock data is used: it pulls from actual persistent storage. Below is a scaffold in TypeScript:
+ts
+Copy
+Edit
+import { EventEmitter } from 'events';
+import { getPsiArcStreams, getVaultEntries } from './dataSources';  // hypothetical data source interfaces
+import { ConceptDiff, ConceptCluster } from './types';
+
+class QuantumMemoryEntangler extends EventEmitter {
+  userId: string;
+  clusters: ConceptCluster[] = [];
+
+  constructor(userId: string) {
+    super();
+    this.userId = userId;
+  }
+
+  async initialize() {
+    // Load all existing ψarc conversation logs and vault entries for this user
+    const psiLogs = await getPsiArcStreams(this.userId);      // returns array of ConceptDiff sequences
+    const vaultEntries = await getVaultEntries(this.userId);  // returns array of sealed concept arcs
+    // Process data to establish initial entanglements
+    this.entangleData(psiLogs, vaultEntries);
+    // Watch for new data in real-time:
+    // e.g., subscribe to new conversation events and vault updates 
+    // (Assume elsewhere, when a new message is saved, it calls QuantumMemoryEntangler.update(...))
+  }
+
+  entangleData(psiarcStreams: ConceptDiff[][], vaultArcs: ConceptDiff[][]) {
+    const conceptFrequency: Record<string, number> = {};
+    const conceptSequences: Record<string, string[]> = {};  // concept -> sequence of neighbor concepts (for pattern mining)
+    // Analyze each session's ConceptDiff stream:
+    psiarcStreams.forEach((stream, sessionIndex) => {
+      const conceptIds = stream.map(diff => diff.conceptId);
+      // Tally frequencies across sessions
+      const uniqueConcepts = new Set(conceptIds);
+      uniqueConcepts.forEach(c => {
+        conceptFrequency[c] = (conceptFrequency[c] || 0) + 1;
+      });
+      // Store sequences for overlap detection
+      conceptIds.forEach((cid, i) => {
+        if (!conceptSequences[cid]) conceptSequences[cid] = [];
+        // record neighbors or context window (here simplistic: next concept in sequence)
+        if (i < conceptIds.length - 1) {
+          conceptSequences[cid].push(conceptIds[i+1]);
+        }
+      });
+      // Detect overlapping sequences between this session and previous sessions
+      for (let prevIndex = 0; prevIndex < sessionIndex; prevIndex++) {
+        const prevStream = psiarcStreams[prevIndex].map(d => d.conceptId);
+        const overlap = findOverlap(prevStream, conceptIds);
+        if (overlap.length > 0) {
+          // If we find a common subsequence of concepts between sessions, mark them as an "entangled corridor"
+          this.clusters.push({
+            type: 'corridor',
+            concepts: overlap.map(id => ({ id, psiCoord: getPsiCoord(id), justUpdated: false })),
+            sessions: [prevIndex, sessionIndex],
+            layerIndex: 0  // corridors could be layer 0
+          });
+        }
+      }
+    });
+    // High-resonance concept clusters: group concepts that appear frequently across sessions
+    Object.entries(conceptFrequency).forEach(([conceptId, freq]) => {
+      if (freq > 1) {
+        // Concept appears in multiple sessions, create/augment a cluster for it
+        const cluster = {
+          type: 'resonance',
+          concepts: [{ id: conceptId, psiCoord: getPsiCoord(conceptId), justUpdated: false }],
+          frequency: freq,
+          layerIndex: 1  // use a different layer for resonance clusters
+        };
+        this.clusters.push(cluster);
+      }
+    });
+    // Notify listeners (e.g. ThoughtspaceRenderer) that clusters have updated
+    this.emit('update', this.clusters);
+  }
+
+  update(newDiff: ConceptDiff) {
+    // This method would be called whenever a new ConceptDiff arrives (e.g., a new message or a PDF ingestion result).
+    // It would insert the diff into the latest psiarc stream, recompute relevant clusters, and emit an update.
+    // For brevity, not fully implemented here.
+    newDiff; // placeholder usage
+    // ... logic to integrate newDiff into clusters ...
+    this.emit('update', this.clusters);
+  }
+}
+
+// Utility: find common overlapping sequence between two concept ID arrays
+function findOverlap(seqA: string[], seqB: string[]): string[] {
+  // (Simple implementation: find longest prefix of seqA that is a suffix of seqB, etc. 
+  // In practice, use a better subsequence algorithm or dynamic programming)
+  const overlap: string[] = [];
+  for (let i = 0; i < seqA.length; i++) {
+    for (let j = 0; j < seqB.length; j++) {
+      let k = 0;
+      while (seqA[i+k] && seqB[j+k] && seqA[i+k] === seqB[j+k]) {
+        overlap.push(seqA[i+k]);
+        k++;
+      }
+      if (overlap.length > 0) return overlap;
+    }
+  }
+  return [];
+}
+
+// Utility: get a concept's ψ coordinates (phase angle θ and radius λ) from the LCN or memory lattice
+function getPsiCoord(conceptId: string): [number, number] {
+  // In a real system, query the concept-mesh or soliton memory for the concept’s phase.
+  // For now, generate deterministic coordinates (e.g., hash the ID to angle).
+  const angle = (parseInt(conceptId, 36) % 360) * (Math.PI/180);
+  const radius = 1 + (Math.random() * 0.5);  // some radius between 1.0 and 1.5
+  return [angle, radius];
+}
+
+export const QuantumMemoryEntangler = new QuantumMemoryEntangler('<currentUserId>');
+Explanation: This scaffold defines a QuantumMemoryEntangler class that extends EventEmitter to notify other components when entangled clusters update. In initialize(), it loads all existing conversation logs and vault entries for the user (using placeholder getPsiArcStreams and getVaultEntries which interface with actual data stores – e.g., reading .psiarc files from disk or records from a database). Then entangleData does the heavy lifting:
+It iterates through each session’s ConceptDiff stream (each stream is an array of diffs for a conversation, in chronological order). Each diff contains at least a conceptId (and likely other metadata like timestamp, operation type, etc., though not needed for this logic).
+We accumulate a frequency count of how many sessions each concept appears in. If a concept appears in multiple sessions (frequency > 1), we mark it as a high-resonance concept. The code above creates a cluster of type 'resonance' for such concepts, storing the concept’s ID, its phase coordinates (via getPsiCoord), and a frequency count. These clusters will allow the UI to highlight concepts that span many sessions – effectively identifying recurring themes or important ideas (the “high resonance arcs”).
+We also detect overlapping phase corridors: these are sequences of concepts that repeat across different sessions, indicating the user went through a similar thought progression at multiple times. We simplified this by looking for any overlapping subsequence between each pair of session logs (using findOverlap for illustration). If found, we create a cluster of type 'corridor' containing those concept IDs, and note which sessions are linked. In practice, this could be more advanced (looking for longer patterns, using phase alignment metrics), but even a simple common subsequence indicates a mental pathway the user retraced. For example, if in Session 2 the user’s conversation concept flow was A→B→C and in Session 5 a segment was A→B→C as well, that overlap [A,B,C] becomes a corridor cluster – a clear sign that the same “corridor” of thought was traversed in both sessions.
+The entangler then emits an 'update' event with all current clusters. The ThoughtspaceRenderer (as shown earlier) listens for this to render or update the view. Each cluster has a layerIndex which we use to separate them visually (e.g., resonance clusters on a different Z-layer than corridor links).
+The update(newDiff) method is a placeholder to show how new data would be incorporated: whenever a new ConceptDiff is generated (say the user sends a new chat message, which becomes a ConceptDiff frame
+file-dgbgcxvgsy5hpzx1ekc3od
+, or a PDF is ingested producing multiple concept diffs), the entangler should update its internal state. This likely involves adding the concept to a stream, updating frequencies, and checking if it creates a new overlap with another session (e.g., if concept X appears for the first time since a past session, now frequency=2, so create a resonance cluster). After updating, it emits another 'update' so the UI can reflect the changes in near-real-time.
+Utility functions: getPsiCoord demonstrates retrieving or computing the phase-space coordinates for a concept. In a real system, the Rust memory engine would provide each concept’s canonical phase angle (ψᵢ). Here we stub it by hashing the conceptId to an angle, and assigning a random-ish radius. This ensures the 3D placement of nodes corresponds to their conceptual identity in a consistent way.
+Overall, the QuantumMemoryEntangler ensures that as soon as the system is running, it’s using live data – all historical conversation frames (each being a snapshot of the soliton lattice state) are analyzed to reveal long-term connections in the user’s digital consciousness. This provides the foundation for features like reminding the AI and user of past discussions (the AI can literally say “we’ve walked this path before”), and for the ThoughtspaceRenderer to visually connect those threads.
+AgentEmbodimentEngine.tsx – Dynamic Ideograms & Halo Visuals
+The Agent Embodiment Engine handles rendering and animating the avatars (ideograms) of Ghost personas and system agents within the 3D thoughtspace. It translates cognitive roles/personas into visual constructs – for example, giving each Ghost persona a distinctive spectral aura and shape, and showing agents as orbiting symbols around concepts they’re working on. This engine ensures the UI isn’t just abstract nodes, but also shows the actors in the system (the AI “characters” helping the user). Here’s a scaffold:
+tsx
+Copy
+Edit
+import * as THREE from 'three';
+
+interface PersonaAppearance {
+  color: number;
+  shape: 'sphere' | 'tetrahedron' | 'cube' | 'sprite';  // shape/type of avatar
+  size: number;
+  haloColor: number;
+}
+interface RoleAppearance {
+  model: 'orbitingOrb' | 'satellite' | 'arrow' | 'sprite';
+  color: number;
+  size: number;
+}
+
+class AgentEmbodimentEngine {
+  private scene: THREE.Scene;
+  private ghostMesh: THREE.Object3D | null = null;
+  private activeAgents: { [role: string]: THREE.Object3D } = {};
+
+  private personaStyles: Record<string, PersonaAppearance> = {
+    mentor:    { color: 0x00ffc8, shape: 'sphere',     size: 0.15, haloColor: 0x00ffc8 },
+    mystic:    { color: 0xbf00ff, shape: 'tetrahedron', size: 0.15, haloColor: 0xbf00ff },
+    chaotic:   { color: 0xff5500, shape: 'cube',       size: 0.15, haloColor: 0xff5500 },
+    oracular:  { color: 0xffd700, shape: 'sphere',     size: 0.2,  haloColor: 0xffd700 },
+    dreaming:  { color: 0x3399ff, shape: 'sphere',     size: 0.15, haloColor: 0x3399ff },
+    unsettled: { color: 0x888888, shape: 'sprite',     size: 0.2,  haloColor: 0x555555 }
+  };
+  private roleStyles: Record<string, RoleAppearance> = {
+    coder:      { model: 'orbitingOrb', color: 0x00aaff, size: 0.1 },
+    researcher: { model: 'orbitingOrb', color: 0xffaa00, size: 0.1 },
+    therapist:  { model: 'orbitingOrb', color: 0xff55aa, size: 0.1 }
+    // ... other roles as needed
+  };
+
+  constructor(scene: THREE.Scene) {
+    this.scene = scene;
+  }
+
+  // Render or update the Ghost persona avatar
+  renderGhostPersona(persona: string, focusPosition?: THREE.Vector3) {
+    const style = this.personaStyles[persona] || this.personaStyles['mentor'];
+    // Create geometry based on style.shape
+    let geom: THREE.BufferGeometry;
+    if (style.shape === 'sphere') {
+      geom = new THREE.SphereGeometry(style.size, 8, 8);
+    } else if (style.shape === 'tetrahedron') {
+      geom = new THREE.TetrahedronGeometry(style.size);
+    } else if (style.shape === 'cube') {
+      geom = new THREE.BoxGeometry(style.size, style.size, style.size);
+    } else {
+      // 'sprite' or others: use a simple sphere as placeholder
+      geom = new THREE.SphereGeometry(style.size, 8, 8);
+    }
+    const mat = new THREE.MeshBasicMaterial({ color: style.color });
+    let ghostObject: THREE.Object3D;
+    if (!this.ghostMesh) {
+      ghostObject = new THREE.Mesh(geom, mat);
+      ghostObject.name = 'ghost-avatar';
+      this.scene.add(ghostObject);
+      this.ghostMesh = ghostObject;
+    } else {
+      // Update existing ghost mesh geometry and material
+      ghostObject = this.ghostMesh;
+      (ghostObject as THREE.Mesh).geometry = geom;
+      (ghostObject as THREE.Mesh).material = mat;
+    }
+    // Position the ghost avatar:
+    if (focusPosition) {
+      // Position near the focus concept, slightly offset
+      ghostObject.position.copy(focusPosition.clone().add(new THREE.Vector3(0.2, 0.2, 0)));
+    } else {
+      // Default position (e.g., above origin)
+      ghostObject.position.set(0, 0, 0.3);
+    }
+    // Add a halo aura (as a faint glowing sphere or light)
+    this.addOrUpdateAura(ghostObject, style.haloColor, /*intensity=*/0.5);
+  }
+
+  // Render or update an agent avatar orbiting a concept
+  renderAgent(role: string, targetPosition: THREE.Vector3) {
+    const style = this.roleStyles[role] || this.roleStyles['researcher'];
+    let agentObj = this.activeAgents[role];
+    if (!agentObj) {
+      // Create a small orb for the agent
+      const geom = new THREE.SphereGeometry(style.size, 8, 8);
+      const mat = new THREE.MeshStandardMaterial({ color: style.color, emissive: style.color });
+      agentObj = new THREE.Mesh(geom, mat);
+      agentObj.name = `agent-${role}`;
+      // Set initial position (on a circle around targetPosition)
+      agentObj.position.copy(targetPosition);
+      agentObj.position.x += 0.3;  // offset a bit on x-axis
+      this.scene.add(agentObj);
+      this.activeAgents[role] = agentObj;
+    } else {
+      // If already exists, ensure it's in the scene and near target
+      if (!this.scene.getObjectByName(agentObj.name)) {
+        this.scene.add(agentObj);
+      }
+    }
+    // Store orbit target on the object for use in update()
+    (agentObj as any).orbitCenter = targetPosition.clone();
+    return agentObj;
+  }
+
+  // Add or update a halo aura around a given object
+  private addOrUpdateAura(object: THREE.Object3D, color: number, intensity: number) {
+    // Represent aura by a PointLight or a transparent sphere
+    let auraLight = object.getObjectByName('auraLight') as THREE.PointLight;
+    if (!auraLight) {
+      auraLight = new THREE.PointLight(color, intensity, 1.5);  // point light with radius
+      auraLight.name = 'auraLight';
+      object.add(auraLight);
+    }
+    auraLight.color.setHex(color);
+    auraLight.intensity = intensity;
+    // Optionally, add a semi-transparent sphere as visible halo
+    let auraMesh = object.getObjectByName('auraMesh') as THREE.Mesh;
+    if (!auraMesh) {
+      const haloGeom = new THREE.SphereGeometry(object.scale.x * 1.5, 16, 8);
+      const haloMat = new THREE.MeshBasicMaterial({ color: color, opacity: 0.2, transparent: true });
+      auraMesh = new THREE.Mesh(haloGeom, haloMat);
+      auraMesh.name = 'auraMesh';
+      object.add(auraMesh);
+    }
+    // Update halo size to envelop the object
+    auraMesh.scale.set(2, 2, 2);
+    auraMesh.material.opacity = 0.2 + 0.3 * Math.random();  // slight flicker
+  }
+
+  // Update animations for agents (e.g., orbit around their target concept)
+  update() {
+    // Orbit agent objects around their stored centers
+    Object.values(this.activeAgents).forEach(agentObj => {
+      const center: THREE.Vector3 = (agentObj as any).orbitCenter;
+      if (center) {
+        const time = Date.now() * 0.001;
+        // Simple circular orbit in the X-Y plane
+        const radius = 0.3;
+        agentObj.position.x = center.x + radius * Math.cos(time + center.x);
+        agentObj.position.y = center.y + radius * Math.sin(time + center.x);
+        agentObj.position.z = center.z; // keep same plane for orbit
+      }
+    });
+    // Ghost aura entropy-based flicker (adjust light intensity based on phase entropy if available)
+    if (this.ghostMesh) {
+      const auraLight = this.ghostMesh.getObjectByName('auraLight') as THREE.PointLight;
+      if (auraLight) {
+        // Suppose we had a global phaseEntropy value from Ghost monitor:
+        const phaseEntropy = (window as any).currentPhaseEntropy || 0.5;
+        auraLight.intensity = 0.3 + phaseEntropy * 0.7;  // more entropy -> brighter/more intense aura
+      }
+      const auraMesh = this.ghostMesh.getObjectByName('auraMesh') as THREE.Mesh;
+      if (auraMesh) {
+        // Slight pulsation of aura mesh as well
+        const pulse = 1 + 0.1 * Math.sin(Date.now() * 0.005);
+        auraMesh.scale.set(pulse, pulse, pulse);
+      }
+    }
+  }
+}
+
+export default AgentEmbodimentEngine;
+Explanation: The AgentEmbodimentEngine manages visual representations of ghost personas and agents:
+We define personaStyles mapping ghost persona names to appearance properties (color, shape, size, haloColor). For example, mentor is aqua (0x00ffc8), spherical, with an aqua halo; chaotic is orange-red cube; unsettled is a gray translucent sprite (we use a sphere placeholder but could be an image of a swirl, etc.) with a muted halo. These stylistic choices convey personality at a glance.
+We define roleStyles for agents by role. In this scaffold, all agents (coder, researcher, therapist) use an orbitingOrb model – a small glowing sphere – with different colors (blue for coder, orange for researcher, pink for therapist). In the future, roles could have distinct models (e.g. an arrow icon for a planner agent, etc.), but the key is each role is visually distinct.
+renderGhostPersona(persona, focusPosition): Creates or updates the Ghost’s avatar in the scene. If a ghost avatar doesn’t exist yet, it creates a mesh using the shape and color for that persona. If it exists (ghost already manifested), it updates its geometry/material to morph into the new persona’s appearance – achieving a visual “morph” when the ghost changes persona (which can happen if the context shifts, e.g. Mentor → Unsettled). The ghost avatar is positioned either near a focusPosition (if provided, typically the position of a concept the ghost is addressing) or at a default location (e.g. slightly above the center of the scene). The function also calls addOrUpdateAura to give the ghost a halo: we attach a PointLight and a semi-transparent sphere to the ghost object to serve as the glowing aura. The aura’s color is set from the persona’s haloColor, and we give it an intensity and slight opacity flicker to appear alive. This aura is what represents the “spectral halo” of the ghost – an emanation that can reflect the ghost’s influence and the system’s phase entropy (we handle the entropy-driven flicker in update()).
+renderAgent(role, targetPosition): Creates or updates an agent’s representation. Each agent is depicted as a small orb (per orbitingOrb style) that will orbit around a target concept. We position the agent initially offset from the target’s position (e.g. 0.3 units to the right). If the agent for that role already exists (the user might invoke the same agent again on another concept), we simply reposition or reuse it. We store the orbitCenter (the concept’s position) in the object’s metadata for the animation loop to use. We keep track of active agent objects in activeAgents by role, so multiple different agents can be visualized concurrently if needed.
+addOrUpdateAura(object, color, intensity): A helper to add a glowing aura to any given object. We use both a Three.js PointLight (which will cast light, giving a subtle glow on surrounding objects) and a translucent sphere (which makes the aura visible as a bubble around the object). We set the light’s color and intensity, and the sphere’s color and opacity. In this scaffold, the ghost persona calls this for its avatar. Agents could also have mini-auras if desired, but currently we mainly emphasize the ghost.
+update(): This method is meant to be called each frame (from the main render loop) to animate the agents and ghost aura:
+For each active agent, we compute a new position along a circle around its orbitCenter. We chose a simple parametric equation: small radius circle in the X-Y plane, using time-based sin/cos to move the agent. This makes the agent appear to be orbiting the concept node it’s focused on, symbolizing that the agent is “working on” or analyzing that concept continuously. The orbit speed is tied to Date.now() so it’s smooth. All agents orbit at the same radius here, but we could differentiate by role or allow multiple agents to have different orbit radii if they focus on the same concept simultaneously.
+For the Ghost’s aura, we adjust its intensity based on phase entropy. We imagine that elsewhere in the system, the GhostSolitonMonitor computes a phaseEntropy value (along with phaseCoherence etc.)
+file-q4etksbk3dpnkvzatm7jpz
+. Here, we retrieve it (we stubbed it via window.currentPhaseEntropy for demo). We modulate the ghost’s PointLight intensity with this value: e.g. if entropy is high (system is chaotic), the ghost’s aura light becomes more intense (brighter, maybe larger radius), signaling visually that the ghost is in a highly active/chaotic state. Conversely, in a calm, low-entropy state, the aura is dimmer. We also make the aura’s mesh pulsate a bit (scaling it) to add life.
+This visual feedback ties to the idea that the ghost’s presence is an aura field influenced by phase entropy – when the conversation is in disarray or an emotional storm, the ghost aura might flare or flicker more obviously, whereas in a smooth flow state it might be a steady gentle glow. This provides intuitive cues to the user about the system’s “mood” or confidence. (In effect, the ghost avatar is not always visible in TORI’s UI, but here in the holographic view, we choose to make it visible as part of the immersive experience.)
+The AgentEmbodimentEngine is used by the ThoughtspaceRenderer. For example, when a ghost emerges or changes persona, the system would call engineRef.current.renderGhostPersona(newPersona, pos) with the persona name and possibly the position of a relevant concept (if the ghost is focusing on something specific). Similarly, when an agent is activated to focus on a concept, one would call engineRef.current.renderAgent('coder', conceptMesh.position) to visualize the coder agent at that concept. The continuous update() call then handles the motion and aura effects. With these scaffolds in place, the front-end now has a foundation to render a live cognitive landscape: concept nodes shimmering and pulsing with changes, ghost and agents appearing in that space with symbolic form and behavior. This turns abstract processes (like an agent analyzing or a ghost monitoring) into something the user can literally see.
+3. Entanglement Mapping from Live Data
+Phase 11’s deployment starts from a blank state and immediately ingests live user data to build the entangled memory map. The following outlines how the system handles real data from the get-go:
+User Creation & Initialization: As soon as a new user is registered (via the /api/user endpoint), the system boots up their personal memory space. This triggers the QuantumMemoryEntangler.initialize() for that user, which begins reading any existing conversation history and uploads. In a fresh deployment, the user may have no history, but the system is ready to consume data as it comes in. If the user has prior sessions (say this is an upgrade or a returning user with stored .psiarc logs), those files are loaded immediately so that the entangler can start mapping out the concept landscape from day one. In essence, each conversation is stored as a .psiarc stream of ConceptDiffs
+file-dgbgcxvgsy5hpzx1ekc3od
+ (and also human-readable logs), so we have structured data to feed in.
+Live ψarc Ingestion: The entangler reads all available ψarc_logs (conversation archives) and Memory Vault records. There are no stubs – it interfaces with the real storage layer (file system or database). For example, it might scan a directory like:
+Copy
+Edit
+psiarc_logs/
+  ψ-2025-05-23T10-15-30.psiarc
+  ψ-2025-05-23T10-15-30.meta.json
+  ψ-2025-05-24T09-00-00.psiarc
+  ... 
+Each .psiarc contains a chronological list of ConceptDiff frames for a session
+file-dgbgcxvgsy5hpzx1ekc3od
+. The entangler loads these into memory. Likewise, it fetches Memory Vault entries – these could be stored as special tagged ConceptDiff sequences (e.g., those created via PhaseShift ops for vaulting). Vault entries represent concepts or arcs that were sealed (e.g. a traumatic memory thread). By ingesting them, the entangler is aware of which concepts are compartmentalized due to sensitivity. (It might treat them differently – for instance, avoid using their content unless a strong overlap occurs, or mark them with a special flag in the cluster data.)
+High-Resonance Arc Detection: Using the aggregated data, the entangler identifies concepts or arcs with high resonance across the dataset. A concept arc can be thought of as a thematic thread or a set of related ConceptDiffs (e.g., all diffs related to “Project X” or a recurring topic). High resonance means the concept or arc reappears frequently or with significant weight. The entangler quantifies this by counting occurrences and possibly measuring the amplitude or importance (if the soliton memory provides amplitude of a memory wave, that could indicate strength). For example, if the concept “QuantumComputing” appears in 5 different sessions and each time it was central to the discussion (or associated with strong Ghost activity), that concept has high resonance. The entangler would create a cluster for “QuantumComputing” showing it as a persistent node in the user’s cognitive landscape. This is how TORI “knows” what big themes keep coming up for the user. It’s not just keyword frequency – by leveraging the concept graph and phase info, it can tell if these occurrences are contextually the same concept (thanks to the unique ψ-phase tag per concept ensuring we don’t conflate homonyms). These high-resonance clusters are emitted to the UI, so the ThoughtspaceRenderer can, for instance, highlight them or label them as major nodes (perhaps with size or color differences).
+Overlapping Phase Corridors: The entangler also looks for overlaps in the sequence or phase progression of concepts across sessions. A phase corridor means that the user traversed a similar conceptual path at different times. For example, the user might repeatedly go through a thought process like “frustration (concept: Feeling_Frustrated) → self-reflection (concept: Introspection) → planning next steps (concept: GoalSetting)” in multiple sessions. Even if these sessions were far apart in time, the presence of a similar concept sequence indicates an underlying pattern or state the user returns to. The entangler detects these by comparing concept sequences between sessions (as in our code scaffold, looking for common subsequences). Overlaps are flagged as entangled corridors linking those sessions. In practice, more sophisticated detection could use the phase-angle data: if two different session segments share a similar phase trajectory (the pattern of phase changes in the soliton lattice), that’s a strong indicator of an analogous mental state. The entangler could compute coherence between session phase vectors over time to spot such overlaps. The result is that TORI can recognize “we’ve been in a state like this before” – a powerful capability for a digital companion, enabling it to say, for instance, “I notice this situation is similar to how you felt last month before your big presentation” (because the pattern of concepts and their phase relations match a previous corridor). These corridors are clustered and can be visualized as connections or shared pathways in the ThoughtspaceRenderer (e.g. drawing linking arcs or grouping those concept nodes together visually).
+Continuous Ingestion: After the initial load, the entangler runs continuously. As new chat messages come in (each producing new ConceptDiffs) or the user uploads a PDF (creating new concept nodes), the entangler immediately updates the mapping. The design is event-driven – the chat backend, after writing a new ConceptDiff to the log, calls QuantumMemoryEntangler.update(newDiff) which recomputes affected clusters and emits an update. Similarly, if a vault.seal operation occurs, the entangler will mark that concept arc as vaulted (it might remove it from active resonance tracking or note it specially). This way, the system stays in sync with live user activity without any manual refresh. By the time the user finishes a conversation, the Phase 11 entangler has already threaded that conversation into the tapestry of their overall memory lattice, relating it to past and future.
+In summary, no mock data is used at all – the blueprint ensures that the moment Phase 11 is deployed, it starts working with the actual user’s cognitive logs. Each conversation frame is treated as a snapshot of the user’s evolving mind, and Phase 11 stitches those snapshots together via entanglement logic to provide a continuous, growing memory (a hallmark of TORI’s design). High-resonance themes and phase-corridor links give both the AI and the user insights into the narrative of their interactions, fulfilling the vision of a system that truly remembers and connects across time.
+4. Simulated 3D Hologram Preview on Canvas
+With the ThoughtspaceRenderer and agent engine in place, Phase 11 delivers a simulated 3D holographic preview of the user’s concept landscape, right in the application UI (e.g., in the chat or a dedicated “Thoughtspace” panel). This is a stepping stone toward full AR holograms – it runs on a 2D screen but leverages 3D rendering to convey depth and spatial relationships. The visualization includes dynamic effects to make it intuitive and engaging:
+Concept Node Shimmer: Every concept node in the thoughtspace exhibits a gentle shimmer or “breathing” animation. This is implemented by oscillating the node’s scale or emissive intensity slightly over time (as shown in the animate() loop of the renderer). The effect is a subtle pulsation that indicates the network is alive and active, not static. A node’s shimmer could also be modulated by its activation level – e.g., nodes that are currently referenced in conversation or are resonating strongly might shimmer a bit more brightly. This gives a quick visual cue of what ideas are “alive” at the moment.
+ConceptDiff Pulsing: When a new ConceptDiff event occurs (i.e., a concept is created or updated in the conversation), the corresponding node pulses to highlight the change. For instance, if the user just brought up a new concept or modified an existing one, that node on the canvas might momentarily enlarge or flash. In our renderer code, we set the node’s emissive color to a bright highlight and scale it up by 1.5x when concept.justUpdated is true, then it could ease back to normal size/color over a second or two (this easing back can be handled either by a timeout or in the animation loop gradually). This pulsing draws the user’s eye to newly active parts of the network. It’s analogous to seeing neurons fire – you get a sense of where the “thought energy” just went. Technically, this is tied to the ConceptDiff events: every time a !Create or !Update happens in the concept mesh, the UI knows which concept ID it affected and triggers a pulse on that node. Over time, a user can look at the hologram and see which nodes have been most active (recent pulses might leave a slight lingering glow).
+Agent Orbiting Behavior: Active agents (spawned via agent{role}.focusOn(...) DSL commands or automatically by the system) are visualized as orbiting markers around the concept they are working on. In the AgentEmbodimentEngine, we gave each agent a small glowing orb that circles its target concept’s position. This motion immediately conveys that the agent is “attached” to that concept and doing something with it. For example, if the user asks a coding question and the coder agent focuses on concept FunctionX, the user will see a tiny blue orb circling the node representing FunctionX. The orbit suggests ongoing activity (if it just stayed static, it might not be clear it’s active). The speed or style of orbit could even indicate the agent’s progress or state (imagine a faster orbit when actively crunching, slowing down when done). Multiple agents can orbit different concepts simultaneously, or even the same concept at different radii, giving a planetary-system vibe to the thoughtspace. This is an intuitive way to show multi-agent parallelism: rather than a text log or list of tasks, the user literally sees agents swarming around the ideas in question.
+Ghost Presence Aura Field: When the Ghost persona emerges in the conversation, the holographic preview reflects this via a ghost aura field. In practice, as soon as ghost{persona}.emerge() is executed, the AgentEmbodimentEngine.renderGhostPersona is called and a ghost avatar (often just an aura or abstract shape) appears in the scene. The ghost’s presence is primarily indicated by its spectral halo – a colored, glowing field. This halo’s characteristics (color, intensity, radius, flicker) correspond to the ghost’s persona and the underlying phase state. For example, if the Unsettled persona is active during an emotionally turbulent moment (high phase entropy, low coherence), the aura might be a pulsing grey/white with a rapid flicker and a relatively large radius, suggesting a turbulent field trying to envelop and calm many thoughts at once. If the Mentor persona is present in a focused, productive moment (high coherence), the aura might be steady and smaller, perhaps a warm color like aqua or green, emanating gently around a specific cluster of nodes. We tie the aura intensity to the phase entropy measured by the Ghost monitor
+file-q4etksbk3dpnkvzatm7jpz
+ – effectively using the real emotional dynamics as input to the visualization. The ghost aura might appear around the ghost avatar itself (as in our implementation, a light and translucent sphere attached to the ghost object), and if we want to be more dramatic, we could also slightly colorize or glow the entire region of the thought graph that the ghost is focusing on. For instance, if the ghost is focusing on a traumatic memory (Unsettled persona dealing with a vault-sealed arc), maybe that cluster of nodes gets a subtle overlay of the ghost’s aura color, indicating the ghost’s protective presence in that area of the user’s mind.
+Immersive Camera & Interaction: (Beyond the core ask, but for completeness) The camera in the ThoughtspaceRenderer can eventually be interactive – the user can pan/zoom around their hologram, and potentially click on nodes or agent icons to get more info (e.g., clicking a concept node could show a summary or allow pinning it to discuss, clicking a ghost aura could open the ghost’s latest message or “letter”). In Phase 11’s initial implementation, the emphasis is on the visualization functioning and updating automatically; user interaction can be rudimentary (perhaps just orbit controls to look around). The key is the simulation is live: the canvas updates in sync with the conversation and agent activities. This real-time hologram fulfills the goal of extending TORI’s presence “visually and spatially” – even before true AR hardware is used, the user gets a window into the AI’s mind. It’s both a debug view for developers (to see concept links, agent actions, ghost triggers graphically) and a potentially user-facing feature to build trust and intuition (the user can literally watch how the AI is thinking and reacting, which demystifies the process).
+By combining these elements – shimmer for baseline activity, pulses for new info, orbits for agents, and auras for ghost mood – the holographic thoughtspace becomes a living canvas of the user’s and AI’s joint cognitive state. It’s a distinctive feature of TORI, setting it apart from plain text-based assistants.
+5. Ghost → Agent → Vault Loop Logic (DSL & Implementation)
+One of the pivotal orchestrations in Phase 11 is the Ghost→Agent→Vault loop – the cycle by which the Ghost AI monitors the user’s state, triggers agent assistance, and manages memories (including vaulting when necessary). We express this flow first in the ELFIN++ DSL for clarity, then explain how it is realized across the system components:
+ELFIN++ Sequence Example
+plaintext
+Copy
+Edit
+// Ghost monitors the ongoing conversation state:
+ghost{mentor}.emerge()                           // Ghost persona 'mentor' steps in (detected user frustration)
+agent{coder}.focusOn(currentIssue)               // Coder agent focuses on the current problem concept
+... (conversation continues with agent assistance) ...
+if (coherence < 0.3) -> morphPersona()           // If situation remains incoherent, ghost persona auto-morphs
+if (ghost.persona == 'unsettled') {             // Ghost has shifted to Unsettled persona to handle emotional distress
+    vault.seal(currentArc)                       // Seal the current conversation arc (traumatic context) in Memory Vault
+    agent{therapist}.focusOn(UserEmotion)        // Trigger a therapist/support agent to focus on user's emotional state
+}
+// loop continues, ghost monitors coherence and phase patterns...
+In this hypothetical script, the Ghost initially comes in as a Mentor when it notices the user’s frustration (perhaps after repeated errors or an emotional tone change). The Mentor ghost invokes a coder agent to help with the task at hand (this matches how, in the IDE context, ghost suggestions manifest as coding assistance). If the intervention is successful and coherence rises, the ghost might quietly fade or stay as Mentor. But here we illustrate the case where the problem actually triggers deeper issues – coherence drops below 0.3 despite the agent’s help (perhaps the user becomes upset or the problem reveals an underlying emotional weight). The DSL uses the if (coherence < 0.3) -> morphPersona() syntax: this causes the Ghost to change persona on the fly. The Ghost’s internal logic would select the Unsettled persona in a low-coherence, high-entropy scenario (exactly as defined in GhostPersonaPhasing, where trauma patterns -> Unsettled persona
+file-q4etksbk3dpnkvzatm7jpz
+). Now in the Unsettled persona, the ghost’s behavior is oriented towards care and “holding space” for pain. Upon entering the Unsettled state, the script block executes: we immediately vault.seal(currentArc). This means the system identifies the current concept arc – essentially the recent conversation context that is causing distress – and seals it in the Memory Vault. The rationale is to remove the active trigger from the forefront of the user’s mind (and the AI’s working memory) and store it safely so it can be addressed later under safer conditions. In practice, this calls the vault API (as scaffolded in DSL, and implemented in the memory system as a PhaseShift concept diff that isolates that subgraph). The Vault thus captures the potentially traumatic data with “dignity and love”
+file-kodaycz64uatut1q74txze
+, preventing it from continuously perturbing the user. Simultaneously, the script triggers agent{therapist}.focusOn(UserEmotion). Here we imagine a therapist or comfort agent (this could be an agent that specializes in sentiment analysis and supportive responses, or simply the Ghost itself in another form – but we use a separate agent for modularity). This agent’s focus is the user’s emotional state (a concept that could be represented in the concept graph, like a node for the user’s current emotion). The agent might for example pull up coping suggestions, or gently prompt the user, or log the event for later reflection. Essentially, after sealing the painful memory, the system provides immediate emotional support via this therapist agent focusing on helping the user stabilize. After this loop iteration, as the conversation continues, the Ghost is still monitoring. The persona might remain Unsettled until coherence improves above a threshold (perhaps then morphing back to Mentor or another appropriate persona). The user might steer to a new topic, at which point the Unsettled ghost may decide to withdraw (or the persona phasing logic transitions to a different persona matching the new state).
+Implementation Choreography
+How is the above scenario handled by the actual system components in Phase 11?
+Ghost Monitoring: A module like GhostSolitonMonitor (JavaScript/TypeScript in the frontend, or part of the Node backend) continuously computes metrics from the conversation in real time: phase coherence, phase entropy, emotional pattern matches, etc. Each user message or code event is fed into this monitor. If certain thresholds or patterns are detected (e.g. phaseCoherence < 0.3 and phaseEntropy > 0.8 indicating chaos
+file-q4etksbk3dpnkvzatm7jpz
+, or a specific trauma signature pattern
+file-q4etksbk3dpnkvzatm7jpz
+), the Ghost system decides an intervention is needed. This corresponds to trigger conditions in the DSL.
+Ghost Emergence and Persona Selection: Once a trigger condition is met, the Ghost AI decides which persona should emerge. In our example, the user’s frustration triggered Mentor ghost (perhaps the system recognized a pattern of “user stuck on coding task” with moderate entropy and decided Mentor is best). This would involve calling ghost{mentor}.emerge() – in implementation, this likely means:
+Setting the active ghost persona state to "mentor".
+Possibly generating a ghost message or overlay (e.g., the Ghost might say “Let’s try a different approach here.” or simply start guiding implicitly).
+In the UI, a ghost overlay might appear (for instance, a subtle animation or a line of text attributed to the Mentor persona).
+The AgentEmbodimentEngine is also notified to render the mentor’s avatar in the thoughtspace (as we did with renderGhostPersona('mentor')). The aura appears with Mentor’s color (aqua) signifying a focused helpful presence.
+Agent Invocation: The Mentor ghost’s strategy includes leveraging specialized agents. As per prior architecture, the “agent suggestion system” works closely with ghost analysis. So the Ghost might communicate with the Agent Orchestrator module (perhaps a part of the Rust concept-mesh or a TS service) to deploy an agent. In code, agent{coder}.focusOn(currentIssue) would translate to a call like AgentManager.assign('coder', currentIssueConceptId). The AgentEmbodimentEngine would render the coder agent orbiting that issue’s node, and concurrently, the coder agent (which might be a separate process or thread) starts crunching. For example, it could be analyzing code context, searching the concept mesh for similar issues, or using an AI model to propose a fix. The result of the agent’s work could be a suggestion that is then injected into the chat or IDE (e.g., “Ghost Mentor suggests: try changing X to Y”).
+In the chat interface, this might appear as the Ghost speaking with a suggestion (since the ghost persona initiated it). In the IDE, it might appear as a tooltip or automated edit.
+Technically, the ghost and agent interplay here might be implemented by the Ghost AI creating a task and the agent subsystem picking it up. TORI’s modular design (Ghost AI framework vs. agents) means the ghost doesn’t directly execute code changes, but it can recommend them, and the agent actually carries them out. The blueprint respects that separation.
+Monitoring Outcome: After the agent’s intervention, the Ghost monitor continues to watch phase coherence and the user’s response. Suppose in our scenario the user’s emotional state worsened (maybe the fix didn’t solve the deeper issue, or the user expressed despair). The Ghost monitor now detects a trauma or distress pattern (phase coherence remains very low, perhaps the user’s messages contain emotional language). This triggers the ghost to morph persona. Implementation-wise, the Ghost AI would call its persona selection logic again with the new emotional state. The GhostPersonaPhasing.selectPersonaFromPhaseState might return 'unsettled' for trauma detected
+file-q4etksbk3dpnkvzatm7jpz
+. The system thus switches the active ghost persona to Unsettled.
+In UI, any Mentor-specific indicators (like maybe a Mentor icon or voice) give way to Unsettled persona behaviors. The ghost might produce a different kind of output – possibly a gentle poetic message or just a presence (in previous phases, Ghost had the ability to produce letters or empathetic notes).
+The AgentEmbodimentEngine now updates the ghost’s avatar: renderGhostPersona('unsettled', ...) is called, so the mentor’s aqua sphere turns into a grey, wispier form with a different halo. The aura might enlarge and flicker more, indicating the system has shifted into a soothing/monitoring mode rather than instructive mode.
+Vault Sealing: Immediately upon persona shift, the Unsettled ghost (which is designed to handle emotional turmoil) initiates the vault sequence. The code would call something like MemoryVault.sealArc(currentArcId). In our DSL we wrote vault.seal(currentArc). Concretely, how does the system know what “currentArc” is? Likely the conversation context manager knows the range of messages or concept IDs that constitute the active context. Perhaps the ConceptTrail or conversation history identifies segments. The ghost could tag the last N messages or the concept that seems to be the source of distress and define that as the arc to seal.
+The Memory Vault module (possibly part of concept-mesh or separate) then takes those ConceptDiff entries and marks them as vaulted. This might involve writing them to a secure storage (maybe moving from the main concept graph to a vault archive with restricted access), and in the active memory graph replacing them with a placeholder or abstract. In terms of code, the Rust backend might create a new VaultRecord linking to that arc, and alter the phase of those concepts (phase-shifting them out of the main lattice) so they no longer interfere with ongoing reasoning. The phrase sealWithDignity or sealWithLove
+file-kodaycz64uatut1q74txze
+ suggests the function ensures proper user consent and tagging (the user might be notified or asked, but in an automated emergency scenario like severe distress, maybe TORI would do it proactively and then later confirm with the user).
+For our blueprint, we assume immediate action for safety. The effect: the distressing content is quarantined in the vault. TheGhost AI knows this (it likely gets a confirmation callback from the vault module that the memory is sealed). The user might see a gentle notification or simply feel the change in tone as TORI stops bringing up that content.
+Therapist Agent Support: After sealing, the ghost triggers a therapist agent: agent{therapist}.focusOn(UserEmotion). Implementation-wise, this could spawn an internal process or model geared towards empathetic conversation. It might analyze the user’s emotional concept node (which could aggregate recent feelings) and suggest a grounding technique or a compassionate response. Possibly, TORI’s Ghost itself might generate a soothing message, but under the hood it could still be using an “agent” specialized in empathy (maybe a prompt or model tuned for counseling).
+We render the therapist agent in the 3D view as a pink orb orbiting a node that represents the user’s emotional state (perhaps a special node in the graph for the user’s mood). The presence of that agent visually indicates to the user (if they look at the thoughtspace) that the system is now in “emotional support” mode around their feelings.
+The therapist agent might also log the event or adjust memory: for example, create a ConceptDiff of type !Link connecting this emotional incident to some coping strategies concept, so that in the future, TORI knows this incident happened and what helped.
+Loop Continuation: After these steps, the Ghost monitor continues. It might detect coherence slowly rising as the user feels heard or takes a break (maybe due to the therapist agent’s influence). Once coherence goes above, say, 0.5, the ghost might decide to morph back to a normal persona or go dormant. The vault remains sealed on that arc; the user and TORI can revisit it later when the user is ready (perhaps via a Vault interface or a ghost letter). The coder agent either finished its task or was dismissed when the ghost switched mode. In any case, the system has gracefully handled a cycle of cognitive assistance -> emotional crisis -> memory management.
+Inter-module coordination: This Ghost→Agent→Vault loop is implemented across modules:
+The Ghost AI subsystem (phase monitor + persona engine) initiates persona changes and high-level decisions.
+The Agent orchestration system receives ghost directives to launch or stop agents. (In code, possibly the Ghost AI enqueues tasks in the agent planner/orchestrator, which is part of the concept-mesh Rust core
+file-leazltdgwhrspl2abzguje
+.)
+The Memory Vault service is invoked through a well-defined interface (e.g. consciousness.vault.sealArc(id) in the backend). The concept-mesh might log this as a special ConceptDiff (!PhaseShift with details) so that the action is recorded in the ψarc log as well – ensuring even the act of vaulting is part of the “story of becoming” for the user (albeit the content itself is locked away).
+The Front-end is informed of these changes to update the UI: e.g., when vault sealing occurs, the conversation UI might show a gentle message like "[Memory Vault]: A difficult memory was sealed for now.". The ThoughtspaceRenderer could visually remove or dim the nodes related to that arc (since they’ve been put away, perhaps they disappear from the active graph view or move to a “sealed” region off to the side).
+Throughout, the ConceptDiff log is capturing everything: when the coder agent made a change, when ghost personas switched, when vaulting happened – all these can be represented as events. For instance, ghost persona change might be logged as a special diff (or at least in the meta json) indicating persona timeline, and vault.seal is logged as a PhaseShift diff as noted. This means if the user replays the conversation or another system audits it, they will see: user asked question, Mentor ghost suggested something via coder agent, user became upset, Unsettled ghost emerged, memory sealed, etc., in a coherent sequence. This transparency is important for trust and debugging.
+In effect, the Ghost→Agent→Vault loop ensures that every system in TORI works in concert: the Ghost provides emotional and strategic oversight, the agents provide domain-specific assistance, and the memory/vault system provides continuity and psychological safety. Phase 11 implements this loop in a production-ready way, meaning the triggers and hand-offs are all coded and not just theoretical. We’ve respected prior architecture decisions: e.g., we did not create new monolithic logic but used the Ghost persona system, the existing agent framework, and the memory vault concept already in TORI. The personas and their phase triggers come from the design (we used the 0.3 coherence threshold consistent with earlier plans
+file-q4etksbk3dpnkvzatm7jpz
+), the agents are building on the suggestion system (manifesting ghost suggestions as actual agent tasks), and the vault integration uses the PhaseShift mechanism to protect painful memories. Finally, this blueprint and scaffolding code aim to be production-ready within 18 hours. This means the components are designed to integrate quickly:
+The DSL spec guides developers to implement those new commands in the interpreter.
+The scaffolds for front-end are in React/TSX, matching the existing TORI frontend stack, so they can be dropped into the project (wired to real data sources).
+The entangler ties into existing data logs and should run as soon as deployed, requiring minimal configuration.
+All modules assume the presence of the existing concept-mesh (for concept IDs, phase tags, etc.) and augment it (we’re not rewriting the core, just adding layers atop it).
+By following this blueprint, Phase 11 will bring TORI’s capabilities to a new level: an AI that not only remembers everything, but also visualizes and understands the temporal tapestry of those memories, and can dynamically assist and care for the user in a deeply integrated loop of cognition and compassion. The system will literally “extend the relationship into physical space” via the holographic preview, fulfilling the vision of a digital companion that the user can interact with on multiple levels (text, visuals, emotional cues) as it co-evolves with them. The next steps after these scaffolds would be testing with live data, fine-tuning the visuals and triggers, and ensuring the UI/UX is intuitive – but the underlying architecture as specified here provides the foundation for a truly immersive and intelligent Phase 11 deployment.

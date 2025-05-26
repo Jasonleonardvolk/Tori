@@ -1,0 +1,332 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* TORI Light Mode Theme - Complete CSS Foundation */
+@layer base {
+  :root {
+    /* Light mode color palette */
+    --color-bg-primary: #f9f9f9;
+    --color-bg-secondary: #ffffff;
+    --color-bg-tertiary: #f5f5f5;
+    --color-text-primary: #111111;
+    --color-text-secondary: #666666;
+    --color-text-muted: #999999;
+    --color-accent: #007acc;
+    --color-accent-hover: #005a99;
+    --color-border: #e0e0e0;
+    --color-border-light: #f0f0f0;
+    
+    /* Memory system colors */
+    --color-memory-primary: #4f46e5;
+    --color-memory-secondary: #818cf8;
+    --color-vault: #059669;
+    --color-conversation: #dc2626;
+    --color-thought: #7c3aed;
+    
+    /* Ghost persona colors */
+    --color-ghost-mentor: #00ffc8;
+    --color-ghost-mystic: #bf00ff;
+    --color-ghost-chaotic: #ff5500;
+    --color-ghost-oracular: #ffd700;
+    --color-ghost-dreaming: #3399ff;
+    --color-ghost-unsettled: #888888;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    line-height: 1.5;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-primary);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Custom scrollbars */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--color-bg-tertiary);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-border);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-text-secondary);
+  }
+}
+
+/* TORI Component Styles */
+@layer components {
+  .tori-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .tori-card {
+    @apply bg-white rounded-lg shadow-sm border border-gray-200 p-6;
+  }
+
+  .tori-button {
+    @apply inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md transition-colors duration-200;
+  }
+
+  .tori-button-primary {
+    @apply tori-button bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500;
+  }
+
+  .tori-button-secondary {
+    @apply tori-button bg-gray-100 text-gray-900 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500;
+  }
+
+  .tori-input {
+    @apply block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500;
+  }
+
+  /* Glass panel for light theme */
+  .glass-panel {
+    @apply bg-white/80 backdrop-blur-sm border border-gray-200/50 rounded-lg shadow-sm;
+  }
+
+  /* Memory System Components */
+  .memory-node {
+    @apply relative p-4 rounded-lg border-2 border-dashed border-indigo-200 bg-indigo-50 transition-all duration-200 hover:border-indigo-300 hover:bg-indigo-100;
+  }
+
+  .vault-item {
+    @apply p-3 rounded-md bg-emerald-50 border border-emerald-200 hover:bg-emerald-100 transition-colors duration-200;
+  }
+
+  .conversation-bubble {
+    @apply p-3 rounded-lg bg-red-50 border border-red-200 hover:bg-red-100 transition-colors duration-200;
+  }
+
+  .thought-space {
+    @apply p-4 rounded-lg bg-purple-50 border border-purple-200 hover:bg-purple-100 transition-colors duration-200;
+    background: radial-gradient(circle at center, rgba(124, 58, 237, 0.05) 0%, transparent 70%);
+  }
+
+  /* Concept nodes for light theme */
+  .concept-node {
+    @apply rounded-full bg-blue-100 border-2 border-blue-300 shadow-sm;
+    transition: all 0.3s ease;
+  }
+  
+  .concept-node:hover {
+    @apply scale-110 bg-blue-200 shadow-md;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+  }
+
+  /* Ghost aura effects for light theme */
+  .ghost-aura {
+    @apply absolute inset-0 rounded-full opacity-20;
+    filter: blur(8px);
+    animation: ghost-shimmer 3s ease-in-out infinite;
+  }
+
+  /* Navigation styles */
+  .nav-link {
+    @apply block w-full p-3 rounded-lg text-sm transition-all duration-200 hover:bg-gray-100;
+    border: 1px solid transparent;
+  }
+  
+  .nav-link.active {
+    @apply bg-blue-50 border-blue-200 text-blue-700;
+  }
+
+  /* System status styles */
+  .system-status {
+    @apply p-4 bg-gray-50 rounded-lg border border-gray-200;
+  }
+
+  .status-item {
+    @apply flex justify-between items-center text-sm py-1;
+  }
+
+  .coherence-bar {
+    @apply w-full bg-gray-200 rounded-full h-2 mt-2;
+  }
+
+  /* Header controls */
+  .thoughtspace-toggle {
+    @apply p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-all duration-200 border border-gray-200;
+  }
+  
+  .thoughtspace-toggle.active {
+    @apply bg-purple-100 text-purple-700 border-purple-200;
+  }
+
+  .ghost-indicator {
+    @apply flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-50 border border-cyan-200;
+  }
+
+  .connection-status {
+    @apply text-xs font-medium;
+  }
+}
+
+/* TORI Utility Classes */
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .scrollbar-thin {
+    scrollbar-width: thin;
+  }
+
+  .scrollbar-none {
+    scrollbar-width: none;
+  }
+
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Animation utilities */
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-in-out;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.3s ease-out;
+  }
+
+  .animate-pulse-slow {
+    animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  .animate-ghost-shimmer {
+    animation: ghost-shimmer 3s ease-in-out infinite;
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  /* Gradient text for light theme */
+  .gradient-text {
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { 
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes ghost-shimmer {
+  0%, 100% { opacity: 0.1; }
+  50% { opacity: 0.3; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes glow {
+  0% { box-shadow: 0 0 5px rgba(79, 70, 229, 0.3); }
+  100% { box-shadow: 0 0 20px rgba(79, 70, 229, 0.5); }
+}
+
+/* Ghost Aura Effects for Light Theme */
+.ghost-aura-mentor {
+  background: radial-gradient(circle, rgba(0, 255, 200, 0.1) 0%, transparent 70%);
+  box-shadow: 0 0 30px rgba(0, 255, 200, 0.1);
+}
+
+.ghost-aura-mystic {
+  background: radial-gradient(circle, rgba(191, 0, 255, 0.1) 0%, transparent 70%);
+  box-shadow: 0 0 30px rgba(191, 0, 255, 0.1);
+}
+
+.ghost-aura-chaotic {
+  background: radial-gradient(circle, rgba(255, 85, 0, 0.1) 0%, transparent 70%);
+  box-shadow: 0 0 30px rgba(255, 85, 0, 0.1);
+}
+
+.ghost-aura-oracular {
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.1);
+}
+
+.ghost-aura-dreaming {
+  background: radial-gradient(circle, rgba(51, 153, 255, 0.1) 0%, transparent 70%);
+  box-shadow: 0 0 30px rgba(51, 153, 255, 0.1);
+}
+
+.ghost-aura-unsettled {
+  background: radial-gradient(circle, rgba(136, 136, 136, 0.1) 0%, transparent 70%);
+  box-shadow: 0 0 30px rgba(136, 136, 136, 0.1);
+}
+
+/* Dark mode support (preserved for future) */
+@media (prefers-color-scheme: dark) {
+  .dark {
+    --color-bg-primary: #0f0f0f;
+    --color-bg-secondary: #1a1a1a;
+    --color-bg-tertiary: #2a2a2a;
+    --color-text-primary: #ffffff;
+    --color-text-secondary: #cccccc;
+    --color-text-muted: #888888;
+    --color-border: #333333;
+    --color-border-light: #444444;
+  }
+}
+
+/* Print styles */
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  
+  .no-print {
+    display: none !important;
+  }
+  
+  .ghost-aura,
+  .ghost-aura-mentor,
+  .ghost-aura-mystic,
+  .ghost-aura-chaotic,
+  .ghost-aura-oracular,
+  .ghost-aura-dreaming,
+  .ghost-aura-unsettled {
+    display: none !important;
+  }
+}

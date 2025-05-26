@@ -1,0 +1,195 @@
+syntax = "proto3";
+
+package tori.episodic;
+
+// The EpisodicVault service provides storage and retrieval of episodic memories
+service EpisodicVault {
+  // Store a new episode in the vault
+  rpc PutEpisode(Episode) returns (PutResponse);
+  
+  // Retrieve an episode by its ID
+  rpc GetEpisode(EpisodeRequest) returns (Episode);
+  
+  // List recent episodes, optionally filtered
+  rpc ListRecent(ListRequest) returns (EpisodeList);
+  
+  // Get episode statistics
+  rpc GetStats(StatsRequest) returns (VaultStats);
+  
+  // Purge old episodes according to TTL policy
+  rpc PurgeTTL(PurgeRequest) returns (PurgeResponse);
+}
+
+// An episode represents a discrete memory unit with concept activations
+message Episode {
+  // Unique identifier for the episode
+  string id = 1;
+  
+  // Timestamp when the episode was created (unix timestamp)
+  int64 timestamp = 2;
+  
+  // Reference count - how many other concepts point to this episode
+  int32 ref_count = 3;
+  
+  // Tags associated with this episode for filtering
+  repeated string tags = 4;
+  
+  // Source information (e.g., conversation, document, etc.)
+  SourceInfo source = 5;
+  
+  // Energy level - higher energy episodes are prioritized for replay
+  float energy = 6;
+  
+  // Concept activation pattern (binary vector)
+  ConceptActivation activation = 7;
+  
+  // Additional metadata as key-value pairs
+  map<string, string> metadata = 8;
+}
+
+// Concept activation pattern
+message ConceptActivation {
+  // List of concept IDs that are active in this episode
+  repeated string active_concepts = 1;
+  
+  // Alternative: binary vector representation
+  bytes binary_vector = 2;
+  
+  // Activation strengths (optional, parallel to active_concepts)
+  repeated float strengths = 3;
+}
+
+// Source information for an episode
+message SourceInfo {
+  // Type of source (conversation, document, etc.)
+  string type = 1;
+  
+  // ID of the source
+  string id = 2;
+  
+  // User ID associated with this episode
+  string user_id = 3;
+  
+  // Additional source-specific data
+  map<string, string> data = 4;
+}
+
+// Request to retrieve an episode
+message EpisodeRequest {
+  // ID of the episode to retrieve
+  string id = 1;
+}
+
+// Response to storing an episode
+message PutResponse {
+  // Whether the operation was successful
+  bool success = 1;
+  
+  // ID of the stored episode
+  string id = 2;
+  
+  // Error message if not successful
+  string error_message = 3;
+}
+
+// Request to list recent episodes
+message ListRequest {
+  // Maximum number of episodes to return
+  int32 limit = 1;
+  
+  // Optional tag filter
+  repeated string tags = 2;
+  
+  // Optional time range (start timestamp)
+  int64 since = 3;
+  
+  // Optional time range (end timestamp)
+  int64 until = 4;
+  
+  // Minimum energy level
+  float min_energy = 5;
+  
+  // Source type filter
+  string source_type = 6;
+}
+
+// List of episodes
+message EpisodeList {
+  // Episodes matching the query
+  repeated Episode episodes = 1;
+  
+  // Total count of episodes matching the query
+  int32 total_count = 2;
+  
+  // Whether there are more episodes available
+  bool has_more = 3;
+}
+
+// Request for vault statistics
+message StatsRequest {
+  // Optional time range (start timestamp)
+  int64 since = 1;
+  
+  // Optional time range (end timestamp)
+  int64 until = 2;
+}
+
+// Vault statistics
+message VaultStats {
+  // Total number of episodes in the vault
+  int32 total_episodes = 1;
+  
+  // Total size of the vault in bytes
+  int64 total_size_bytes = 2;
+  
+  // Number of episodes by tag
+  map<string, int32> episodes_by_tag = 3;
+  
+  // Number of episodes by source type
+  map<string, int32> episodes_by_source = 4;
+  
+  // Average energy level
+  float avg_energy = 5;
+  
+  // Distribution of episode ages in hours
+  repeated AgeBucket age_distribution = 6;
+}
+
+// Age distribution bucket
+message AgeBucket {
+  // Bucket age range start (hours)
+  int32 hour_start = 1;
+  
+  // Bucket age range end (hours)
+  int32 hour_end = 2;
+  
+  // Count of episodes in this age range
+  int32 count = 3;
+}
+
+// Request to purge old episodes
+message PurgeRequest {
+  // Maximum age to keep (in hours)
+  int32 max_age_hours = 1;
+  
+  // Minimum reference count to exempt from purging
+  int32 min_ref_count = 2;
+  
+  // Whether to actually purge or just simulate
+  bool dry_run = 3;
+}
+
+// Response to purge request
+message PurgeResponse {
+  // Number of episodes purged
+  int32 purged_count = 1;
+  
+  // Total space freed in bytes
+  int64 freed_bytes = 2;
+  
+  // Whether the operation was successful
+  bool success = 3;
+  
+  // Error message if not successful
+  string error_message = 4;
+}

@@ -1,0 +1,501 @@
+TORI Genesis UI Integration Kit – Phase 1 (UI Integration)
+Overview and Project Structure
+Phase 1 delivers a complete UI Integration Kit for the TORI Genesis Package. This includes a SvelteKit front-end structured with idiomatic Svelte components and Tailwind CSS styling following the “tori” light theme (light gray backgrounds #f9f9f9, dark text #111111, etc.). All components are fully functional (using dummy data where needed) and ready for immediate testing. The layout is minimalist and full-screen, combining three main areas: a Chat interface, a Document upload panel, and a Memory drawer for stored concepts. State is managed via Svelte stores (for ghost persona state and concept mesh memory), ensuring reactivity across the app. Key components and stores delivered in Phase 1 include:
+Main Page Layout (routes/+page.svelte): Defines the high-level layout – a full-screen view with the chat panel, suggestion bar, and memory drawer (with upload panel).
+UploadPanel (components/UploadPanel.svelte): A drag-and-drop (or click-to-browse) file upload interface integrated with Vault.save() to ingest documents into the system.
+DocumentSummary (components/DocumentSummary.svelte): A card component that displays an auto-summarized view of an uploaded document, highlighting key extracted concepts.
+ChatPanel (components/ChatPanel.svelte): The main chat interface where the user converses with the Ghost AI. It displays the dialogue and is wired to create new ConceptDiffs when messages are sent (simulating concept extraction).
+GhostOverlay (components/GhostOverlay.svelte): A UI overlay representing the Ghost persona’s presence – showing an avatar and a phase-state shimmer effect reflecting the ghost’s current mood/stability.
+SuggestionBar (components/SuggestionBar.svelte): A suggestion strip below the chat, showing ELFIN++-generated prompts or actions (dummy suggestions in Phase 1) for the user to click on.
+MemoryDrawer (components/MemoryDrawer.svelte): A scrollable side-panel that lists stored concepts and past dialogue “anchors” (concept diffs from chats), including document summaries. This serves as the system’s working memory view.
+Ghost Persona Store (stores/ghostPersona.ts): A Svelte store holding the current ghost persona’s state (e.g. which persona is active, mood, stability metric). UI components (like GhostOverlay) read from this store to reflect persona changes.
+Concept Mesh Store (stores/conceptMesh.ts): A reactive store representing the living concept network (knowledge graph). It holds an array of ConceptDiff entries and vault data references. In Phase 1, it’s used to track new concepts from document uploads and chat messages (dummy data simulating concept extraction).
+All components are implemented with Tailwind CSS classes for styling consistent with the tori theme. The UI is minimalist (clean backgrounds, subtle borders, simple typography) with no placeholder text or demo-only elements – everything is wired up for basic interactions. Dummy data flows are used to simulate the AI behavior: when a file is uploaded or a chat message sent, a new ConceptDiff with placeholder content is created and added to the concept mesh, triggering the memory drawer and other reactive components to update. This ensures the interface can be tested end-to-end even before the AI backend is connected. Below, each component and store is detailed with code and explanations:
+Main Page Layout (routes/+page.svelte)
+This SvelteKit page component defines the overall layout of the application’s main screen. It uses a full-viewport flex container to arrange the Chat/Suggestion area and the Memory drawer side by side. The GhostOverlay is included at the top level to float above the UI (with pointer events disabled so it doesn’t block clicks). The Tailwind classes set the light background and dark text theme across the app.
+svelte
+Copy
+<script lang="ts">
+  import UploadPanel from '$lib/components/UploadPanel.svelte';
+  import DocumentSummary from '$lib/components/DocumentSummary.svelte';
+  import ChatPanel from '$lib/components/ChatPanel.svelte';
+  import GhostOverlay from '$lib/components/GhostOverlay.svelte';
+  import SuggestionBar from '$lib/components/SuggestionBar.svelte';
+  import MemoryDrawer from '$lib/components/MemoryDrawer.svelte';
+</script>
+
+<!-- Full-screen flex container for main layout -->
+<div class="flex flex-row w-screen h-screen bg-[#f9f9f9] text-[#111111]">
+  <!-- Ghost persona overlay (absolute positioned, floats over UI) -->
+  <GhostOverlay />
+  
+  <!-- Main chat area: occupies remaining space beside memory drawer -->
+  <div class="flex flex-col flex-grow relative">
+    <!-- Chat interface panel (messages and input) fills available space -->
+    <ChatPanel class="flex-1" />
+    <!-- Suggestion bar is docked below the chat panel -->
+    <SuggestionBar />
+  </div>
+  
+  <!-- Memory drawer side panel (includes upload panel and memory list) -->
+  <MemoryDrawer />
+</div>
+Explanation:
+The main page uses a horizontal flex layout (flex flex-row) to allocate space for the chat area and the memory drawer. The chat side (flex-grow) expands to fill all remaining width not taken by the memory panel. Inside the chat column (flex-col flex-grow), we stack the ChatPanel and SuggestionBar vertically. We give ChatPanel a flex-1 class so that it expands to fill all available vertical space above the SuggestionBar. The SuggestionBar is placed just below the chat (at the bottom of the column) and will size itself based on its content (a small fixed-height strip of suggestions). The MemoryDrawer is included as the rightmost panel; it has a fixed width (set in its component) and will show the upload interface and memory contents. The <GhostOverlay /> is placed as a child of the outer container but is absolutely positioned (within itself) to overlay on top of other elements without disrupting layout. Its implementation uses position: fixed (or absolute with a parent relative) so it spans the entire viewport, showing an avatar and shimmer effect to represent the ghost persona. Importantly, it uses pointer-events: none so that underlying UI elements (chat input, buttons) remain interactive. All elements use the light theme: the page background is bg-[#f9f9f9] (a very light gray), and text defaults to text-[#111111] (near-black) for high contrast. We’ll also use subtle borders (e.g. a border between the chat and memory panels) and background shades of white or gray within components to create visual separation while keeping the minimalist aesthetic.
+File Upload Panel (components/UploadPanel.svelte)
+The UploadPanel provides an area for users to add documents to the system, either by dragging files onto it or by clicking to browse. It integrates with the Vault.save() mechanism to store the file content in the knowledge vault and triggers the creation of a new ConceptDiff in the concept mesh (so the rest of the UI can reflect the new document). The component is designed to be placed inside the MemoryDrawer (at the top) so that uploaded documents immediately show up as new memory items.
+svelte
+Copy
+<script lang="ts">
+  import { addConceptDiff } from '$lib/stores/conceptMesh';
+  // We assume Vault is a global module or will be implemented; using a stub for now
+  // import { Vault } from '$lib/vault';  // (Vault.save would handle actual storage)
+  
+  let fileInput: HTMLInputElement;
+  
+  function handleDrop(event: DragEvent) {
+    event.preventDefault();
+    const files = event.dataTransfer?.files;
+    if (files && files.length > 0) {
+      handleFiles(files);
+    }
+  }
+  
+  function handleFiles(fileList: FileList) {
+    for (const file of fileList) {
+      // Integrate with Vault.save (store the file in the knowledge vault)
+      // Vault.save(file);  // (In Phase 1, we skip actual saving and focus on UI effect)
+      
+      // Create a dummy ConceptDiff for this document and add to concept mesh
+      addConceptDiff({
+        type: 'document',
+        title: file.name,
+        concepts: ["ExampleConcept1", "ExampleConcept2"],  // placeholder extracted concepts
+        summary: `Imported document "${file.name}"`       // a short summary or placeholder
+      });
+    }
+    // Clear the file input value to allow re-uploading same file if needed
+    if (fileInput) fileInput.value = "";
+  }
+  
+  function handleBrowse() {
+    fileInput.click();
+  }
+  
+  function onFileSelected(event: Event) {
+    const files = (event.target as HTMLInputElement).files;
+    if (files && files.length > 0) {
+      handleFiles(files);
+    }
+  }
+</script>
+
+<!-- Drag-and-drop upload panel UI -->
+<div class="bg-white border border-dashed border-gray-400 rounded-md text-center p-4 my-2 
+            hover:border-gray-600 transition-colors"
+     on:dragover|preventDefault
+     on:dragenter|preventDefault
+     on:drop|preventDefault={handleDrop}>
+  <p class="text-sm text-gray-700">
+    <strong>Upload Documents:</strong> Drag & drop files here or 
+    <button class="underline text-blue-600 hover:text-blue-800" on:click={handleBrowse}>
+      browse
+    </button>
+    to select.
+  </p>
+  <!-- Hidden file input for browsing -->
+  <input type="file" multiple bind:this={fileInput} class="hidden" on:change={onFileSelected} />
+</div>
+Explanation:
+The UploadPanel component creates a drop zone for file uploads. The outer <div> has a dashed border style (border-dashed border-gray-400) to indicate a drop target, and we change its border on hover for a subtle interactive cue. It is styled with a white background and rounded corners to distinguish it from the memory panel background. The text inside gives instructions (“Drag & drop files here or browse…”), and the “browse” word is a button that triggers the hidden file input. We use DOM event handlers to manage drag-and-drop:
+on:dragover|preventDefault and on:dragenter|preventDefault are used to allow dropping by preventing the browser’s default behavior of opening the file.
+on:drop|preventDefault={handleDrop} catches the drop event and calls our handleDrop function.
+In handleDrop, we extract the dropped files (event.dataTransfer.files) and pass them to a helper handleFiles. The handleFiles function iterates over each File:
+It calls Vault.save(file) – here we assume a Vault module exists to handle persistence (this could save the file’s content or metadata to the backend). In Phase 1, we skip actual saving, but the call is placed for future integration.
+It then creates a new ConceptDiff object representing the imported document. We use a helper addConceptDiff imported from the conceptMesh store to append this new diff to the global concept mesh. The diff object includes:
+type: 'document' to indicate this is a document input,
+title: file.name to display the file name,
+concepts: ["ExampleConcept1", "ExampleConcept2"] as a placeholder list of extracted key concepts (in a real scenario, this would come from an auto-summarizer or concept extractor),
+summary: "Imported document 'X'" which is a short description or echo of the action. (This summary can be displayed if needed, but the key details will be the title and concept tags.)
+After processing, we reset the file input’s value so the same file can be re-selected if needed (this is a common practice to allow uploading an updated version of the same file, for example). The component supports selecting multiple files at once (multiple attribute on input) to handle batch uploads. Integration: The UploadPanel will typically be rendered at the top of the MemoryDrawer. When a user drops or selects a file, the dummy ConceptDiff is added to the conceptMesh store. Because the MemoryDrawer is reactive to changes in the conceptMesh, a new DocumentSummary card will appear immediately in the memory list. This simulates the system ingesting the document and extracting its key concepts into memory. Styling notes: We gave the drop zone a white background (bg-white) against the memory panel’s light gray background, plus a dashed gray border for the drop area effect. On hover, the border turns a slightly darker gray to invite interaction. These subtle indicators keep with the minimalist aesthetic while providing feedback. The “browse” link is styled in a blue (text-blue-600) to indicate interactivity (using Tailwind’s default blue for links) and becomes darker on hover.
+Document Summary Card (components/DocumentSummary.svelte)
+The DocumentSummary component displays a summarized view of an uploaded document. It is typically used in the memory drawer list to represent a document that has been added to the knowledge vault. It shows the document’s title and a summary of extracted concepts or key points. The style is a card-like panel with a white background to stand out slightly from the drawer background, and uses small text for the concepts.
+svelte
+Copy
+<script lang="ts">
+  export let title: string;
+  export let concepts: string[] = [];
+  export let summary: string | undefined;
+</script>
+
+<div class="bg-white rounded-md shadow-sm p-3 mb-2">
+  <!-- Document title -->
+  <h3 class="text-sm font-bold text-[#111111] mb-1 truncate" title={title}>
+    📄 {title}
+  </h3>
+  
+  <!-- Extracted concepts as tags -->
+  {#if concepts && concepts.length > 0}
+    <div class="mb-1">
+      {#each concepts as concept}
+        <span class="inline-block bg-gray-200 text-xs text-[#111111] font-medium 
+                     rounded px-2 py-0.5 mr-1 mb-1">
+          {concept}
+        </span>
+      {/each}
+    </div>
+  {/if}
+  
+  <!-- Optional summary text (if provided) -->
+  {#if summary}
+    <p class="text-xs text-gray-600 italic">{summary}</p>
+  {/if}
+</div>
+Explanation:
+DocumentSummary is a presentational component to neatly format the information about an uploaded document. It receives three props:
+title: The name of the document (likely the file name or a user-defined title).
+concepts: An array of key concept names extracted from the document.
+summary (optional): A short summary or description of the document’s content.
+In the template, we first display the title with a document icon 📄 and bold styling. We use a small font (text-sm) and ensure the text is dark (#111) for readability. If the title is long, we apply truncate with an HTML title attribute so that the full name is available on hover. Next, we display the list of concepts as a series of inline tags. Each concept is wrapped in a <span> styled as a pill: a small rounded label with a gray background (bg-gray-200) and dark text. We use a very small font (text-xs) for these tags to indicate they are metadata. We also add a bit of margin (mr-1 mb-1) so if there are many concepts, they wrap nicely with spacing. Finally, if a summary is provided, we show it in an italic, muted text (text-gray-600 text-xs) block. This might be a one-line synopsis of the document or any additional info. In our dummy data in Phase 1, we might not have a meaningful summary beyond perhaps echoing “Imported document X” – it’s optional to display. The card as a whole has a slight drop shadow (shadow-sm) and padding, giving it the appearance of a separate “card” in the memory list. The white background helps it stand out on the memory drawer’s background. The overall effect is a compact card that the user can scan to recall what document was uploaded and what concepts it contributed to the knowledge base.
+Chat Interface Panel (components/ChatPanel.svelte)
+The ChatPanel component implements the core chat interface where the user interacts with the Ghost AI. It displays the conversation messages and provides an input box for the user to send new messages. In Phase 1, we wire this component such that sending a message will echo a dummy AI response and create a new ConceptDiff (simulating that the system extracted a concept from the exchange). The chat UI uses a scrollable message area and a fixed input area at the bottom.
+svelte
+Copy
+<script lang="ts">
+  import { onMount } from 'svelte';
+  import { addConceptDiff } from '$lib/stores/conceptMesh';
+  
+  // Simple message structure
+  type Message = { sender: 'user' | 'ghost', text: string };
+  
+  let messages: Message[] = [];
+  let userInput: string = "";
+  let messagesEnd: HTMLDivElement;  // to auto-scroll to bottom
+  
+  // Ensure the latest message is visible when messages update
+  onMount(() => {
+    scrollToBottom();
+  });
+  $: { scrollToBottom(); }  // reactive: scroll whenever messages change
+  
+  function scrollToBottom() {
+    if (messagesEnd) {
+      messagesEnd.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+  
+  function sendMessage() {
+    const text = userInput.trim();
+    if (!text) return;
+    // Add user's message to chat
+    messages = [...messages, { sender: 'user', text }];
+    // Clear input field
+    userInput = "";
+    // Simulate an AI/Ghost response (dummy for now)
+    const responseText = generateDummyResponse(text);
+    messages = [...messages, { sender: 'ghost', text: responseText }];
+    // Create a dummy ConceptDiff from this interaction
+    addConceptDiff({
+      type: 'chat',
+      title: 'Conversation',
+      concepts: ["ChatConcept"],   // placeholder concept gleaned
+      summary: `Discussion about "${text.slice(0, 20)}..."`
+    });
+  }
+  
+  // Dummy ghost response generator (for demo purposes)
+  function generateDummyResponse(userMessage: string): string {
+    // Simply echo or respond generically
+    if (userMessage.toLowerCase().includes('hello')) {
+      return "Hello! 👻 (Ghost is here to help.)";
+    }
+    // Default generic response
+    return "👻 [Ghost] I have noted your message and updated my understanding.";
+  }
+  
+  // Allow pressing Enter to send the message
+  function handleKeydown(event: KeyboardEvent) {
+    if (event.key === 'Enter' && !event.shiftKey) {
+      event.preventDefault();
+      sendMessage();
+    }
+  }
+</script>
+
+<div class="flex flex-col h-full">
+  <!-- Messages display area, scrollable -->
+  <div class="flex-1 overflow-y-auto p-4 space-y-2">
+    {#each messages as msg}
+      <div class="flex {msg.sender === 'user' ? 'justify-end' : 'justify-start'}">
+        <div class="{msg.sender === 'user' ? 'bg-blue-100' : 'bg-white'} 
+                    text-[#111111] rounded-lg px-3 py-2 shadow-sm max-w-[70%] break-words">
+          {#if msg.sender === 'ghost'}<strong class="text-gray-700">Ghost:</strong> {/if}
+          {#if msg.sender === 'user'}<strong class="text-gray-700">You:</strong> {/if}
+          {msg.text}
+        </div>
+      </div>
+    {/each}
+    <!-- Dummy element to maintain scroll to bottom -->
+    <div bind:this={messagesEnd}></div>
+  </div>
+  
+  <!-- Input area for sending new message -->
+  <div class="border-t border-gray-300 bg-[#f9f9f9] p-3 flex items-center">
+    <input class="flex-1 border border-gray-300 rounded-md p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-300"
+           type="text" bind:value={userInput} placeholder="Type your message..." 
+           on:keydown={handleKeydown} />
+    <button class="ml-2 bg-[#111111] text-white text-sm font-medium px-4 py-2 rounded-md hover:bg-black"
+            on:click={sendMessage}>
+      Send
+    </button>
+  </div>
+</div>
+Explanation:
+ChatPanel manages a list of messages and user input. We define a Message type for clarity (sender is either 'user' or 'ghost', plus the text). The component’s state consists of:
+messages: an array of Message objects to render the conversation.
+userInput: a string bound to the text input field.
+A messagesEnd dummy element to help auto-scroll.
+We use Svelte’s reactivity to auto-scroll the message view whenever messages update. Using an $: reactive block that calls scrollToBottom() whenever messages changes ensures that the latest message is visible. When the user sends a message (either by clicking Send or pressing Enter), the sendMessage() function is invoked:
+It trims the input and returns if empty (so we don’t send blank messages).
+The user’s message is added to the messages array with sender 'user'.
+We clear the input field (userInput = "").
+We then simulate an immediate Ghost AI response by calling generateDummyResponse(userMessage). In Phase 1 this function just returns a canned response: if the user said “hello”, it greets back, otherwise it gives a generic acknowledgement. This is purely for demo— in Phase 2 the actual AI response would come from the Ghost AI engine.
+We add the ghost’s response to the messages list with sender 'ghost'.
+Next, we create a dummy ConceptDiff representing the “conceptual change” from this chat turn. We call addConceptDiff from conceptMesh store with:
+type: 'chat' indicating this diff came from a conversation,
+title: 'Conversation' (or we could use a snippet of the content),
+concepts: ["ChatConcept"] as a placeholder concept name derived from the exchange,
+summary: 'Discussion about "XYZ..."' giving a brief idea of the chat topic (we used the first part of the user’s message as context).
+Adding this concept diff means the memory will record that a new concept emerged in conversation. (For example, if the user asked about “quantum physics”, the concept might be "Quantum Physics" and the memory summary could note that it was discussed.) The UI markup for messages uses a series of conditional classes and elements:
+We loop over messages with {#each}.
+Each message is wrapped in a <div class="flex ..."> that either justifies content to the start or end depending on sender (user messages are right-aligned, ghost messages left-aligned).
+The message bubble <div> has either a light blue background (bg-blue-100) for user or white for ghost, to differentiate the two speakers. Both have dark text and some padding, with rounded-lg corners and a slight shadow for a chat bubble effect. We constrain the max width to 70% of the container so they don’t stretch full width, and use break-words to wrap long text.
+Inside each bubble, we optionally prepend a label in bold (“You:” or “Ghost:”) with a gray tint. This makes it clear who is speaking (especially useful if alignment alone isn’t obvious or for accessibility). This label is followed by the message text.
+We include an empty <div bind:this={messagesEnd}> at the bottom of the messages list. This element is used as a target for scrolling; whenever a new message is added, scrollToBottom() will scroll this into view, effectively scrolling the container to the bottom.
+Below the messages display, we have the input area:
+It’s wrapped in a container with a top border (border-t border-gray-300) to separate it from the message history. We use the same background #f9f9f9 as the overall page for the input area.
+The text <input> is styled with a border and rounded corners. We also add a focus ring (focus:ring-2 focus:ring-blue-300) for accessibility, so it gets a blue outline when selected.
+The input is bound to userInput and we listen for on:keydown. The handleKeydown function captures the Enter key (excluding Shift+Enter to allow multiline in theory) to send the message.
+The Send button is a dark button matching the theme: background #111111 (almost black) with white text. It has a slight hover effect to an even darker shade. The button calls sendMessage() on click.
+With this setup, the chat interface is interactive: the user types and hits Enter (or clicks Send), their message appears in the chat, a ghost reply appears immediately, and the memory drawer will update with a new entry summarizing the interaction. This covers the UI functionality; the actual intelligent response and concept extraction would be implemented behind generateDummyResponse and how addConceptDiff is used in the future.
+Ghost Persona Overlay (components/GhostOverlay.svelte)
+The GhostOverlay provides a visual representation of the Ghost AI persona that “haunts” the interface. It is an overlay with an avatar (or icon) and a subtle animated shimmer indicating the ghost’s phase state or mood. The overlay does not interfere with user interaction (it’s purely cosmetic and non-interactive, using pointer-events none). It reflects data from the ghostPersona store – for example, showing the current persona’s avatar and potentially varying the shimmer effect based on mood or stability.
+svelte
+Copy
+<script lang="ts">
+  import { ghostPersona } from '$lib/stores/ghostPersona';
+  import { derived } from 'svelte/store';
+  
+  // Optionally derive a visual indicator from ghostPersona (e.g., mood-based color)
+  const glowColor = derived(ghostPersona, $gp => {
+    // Choose a glow color or intensity based on mood or stability (placeholder logic)
+    if ($gp.mood === 'calm') return 'rgba(255,255,255,0.3)';     // soft white glow
+    if ($gp.mood === 'alert') return 'rgba(255,215,0,0.4)';       // golden glow for alert
+    return 'rgba(255,255,255,0.2)';  // default faint glow
+  });
+</script>
+
+<!-- Full-screen ghost overlay (non-interactive) -->
+<div class="pointer-events-none fixed inset-0">
+  <!-- Shimmering background aura -->
+  <div class="absolute inset-0 bg-[rgba(0,0,0,0)] 
+              animate-pulse"
+       style="background: radial-gradient(circle at 50% 50%, { $glowColor }, transparent 70%);">
+  </div>
+  <!-- Ghost avatar icon in bottom-right corner -->
+  <div class="absolute bottom-4 right-4 flex items-center">
+    <!-- Example avatar circle with initial (could be replaced by an image) -->
+    <div class="w-10 h-10 rounded-full bg-[#111111] text-[#f9f9f9] flex items-center justify-center 
+                opacity-80">
+      {#if $ghostPersona.persona}
+        {@html $ghostPersona.persona.charAt(0)}  <!-- first letter of persona name -->
+      {:else}
+        👻
+      {/if}
+    </div>
+  </div>
+</div>
+Explanation:
+GhostOverlay is rendered as a fixed-position overlay that spans the entire screen (using fixed inset-0). It contains two main elements: a shimmering aura background and an avatar icon.
+Aura/Shimmer: We create a full-size absolutely positioned <div> that covers the whole viewport. We use a radial-gradient background that can give a subtle glow effect around the center. The color of this glow is derived from the ghost’s mood via a Svelte derived store. In the script, we import ghostPersona (a store with fields like mood and stability) and create glowColor as a derived store. This watches $ghostPersona and picks a color:
+If mood is 'calm', we use a soft white glow (rgba with low opacity).
+If mood is 'alert' (just an example of another state), maybe a golden/yellowish glow.
+Default is a faint white glow.
+The <div> uses animate-pulse (a Tailwind utility for pulsing animation) to create a gentle throbbing effect, making the aura appear to shimmer or breathe. The gradient goes from the glow color at the center to transparent at 70% radius, so it fades out toward the edges. This aura is very subtle (especially with low opacity colors) so it doesn’t distract the user, but gives a “living presence” feel to the UI. It’s also set to pointer-events: none (inherited from the parent) so it doesn’t block any clicks.
+Avatar: In the bottom-right corner of the screen, we place a small avatar. Currently, we show a simple circular placeholder (a dark circle with the first letter of the persona in white, e.g., “M” for Mentor). This is a stand-in for an actual avatar image. In a real setup, we could replace this with an <img> tag if we have persona avatar graphics. The avatar container has partial opacity (opacity-80) to blend slightly with the background. If there’s no persona name available, we fall back to a ghost emoji 👻 just for fun (though normally $ghostPersona.persona will be set). The positioning is absolute bottom-4 right-4 to sit above the SuggestionBar and above the MemoryDrawer. (If the memory drawer overlaps, we could adjust positioning or z-index, but pointer-events-none ensures it won’t block the memory drawer’s interactions.)
+The GhostOverlay thus ensures that at all times the user has a subtle visual cue of the AI’s presence. The “phase-state shimmer” can be interpreted as a dynamic indicator of the ghost’s state; for example, one could modulate the animation speed or color intensity based on the ghost’s stability or engagement level. For now, we simply have a constant pulse. In Phase 2 or beyond, this component could be extended to do more (e.g., flash or change color when the ghost persona changes or when important events occur, etc.).
+AI Suggestion Bar (components/SuggestionBar.svelte)
+The SuggestionBar appears below the chat panel and provides quick action suggestions or prompts to guide the user. These suggestions would be generated by the ELFIN++ engine (an AI script system to be implemented in Phase 2) based on the current context. In Phase 1, we include a static set of dummy suggestions to illustrate the UI. The bar is styled as a horizontal strip with suggestion “chips” and an optional “More” button to expand a full suggestions panel (the expanded panel could be implemented later).
+svelte
+Copy
+<script lang="ts">
+  // Dummy suggestions for now; in future, this could come from a store or props
+  let suggestions: string[] = [
+    "Summarize document",
+    "Explain this concept",
+    "Suggest next step"
+  ];
+</script>
+
+<div class="bg-white border-t border-gray-300 px-3 py-2 flex items-center space-x-2">
+  {#each suggestions as suggestion, i}
+    <button class="text-xs text-[#111111] bg-gray-100 hover:bg-gray-200 font-medium 
+                   px-3 py-1 rounded-full shadow-sm">
+      {suggestion}
+    </button>
+  {/each}
+  <!-- "More" ellipsis or expand button aligned to right -->
+  <button class="text-xs text-gray-600 ml-auto hover:text-gray-800">
+    ⋯ More
+  </button>
+</div>
+Explanation:
+The SuggestionBar is a simple flex container that holds a few suggestion buttons. In this initial version, we define a static suggestions array of strings (e.g., “Summarize document”, “Explain this concept”, “Suggest next step”). These are meant to simulate what ELFIN++ might produce given the current conversation and memory (for instance, after uploading a doc, it might suggest “Summarize document”). For each suggestion, we render a <button> with styling:
+We use a small font (text-xs) and medium font weight to make them unobtrusive but legible.
+The button style is like a “chip”: a pill-shaped button (rounded-full) with a light gray background that darkens on hover. We add a slight shadow to make them raised.
+They are all in a line with space-x-2 providing some gap between each.
+We also include a "More" button at the far right (ml-auto pushes it to the rightmost end of the flex container). The "More" is represented with a typographic ellipsis character (⋯) and the text “More”. This would toggle or open a more extensive suggestions panel if many suggestions are available. In Phase 1, it’s just a static placeholder with no on:click, but visually it indicates that the suggestions list is expandable. The bar itself has a white background (bg-white) and a top border (border-t border-gray-300) to separate it from the chat area above. We pad it slightly (px-3 py-2) so the buttons aren’t clinging to the edges. By using white, we ensure it stands out against the overall page background (#f9f9f9) and matches the chat input area which is also on a light background. This SuggestionBar component is included at the bottom of the main chat column (in +page.svelte). It will always be visible, updating its content when suggestions change. In a future iteration, we might connect it to a store that the ELFIN++ engine updates dynamically (e.g., suggestions = $elfinSuggestions store). For now, it demonstrates the intended UI: a quick access bar for intelligent suggestions that enhance user productivity.
+Memory Drawer Panel (components/MemoryDrawer.svelte)
+The MemoryDrawer is a side panel (initially visible at all times in Phase 1) that displays the AI’s memory – a combination of knowledge from uploaded documents and key concepts from the conversation (dialogue anchors). This component integrates the UploadPanel at the top and then lists out memory entries. The memory entries come from the conceptMesh store’s data (specifically the array of ConceptDiffs we add on uploads and chat messages). The drawer is scrollable so it can accommodate many items. It’s designed to be expandable/collapsible (hence the “drawer” terminology), although we keep it open by default for now.
+svelte
+Copy
+<script lang="ts">
+  import UploadPanel from '$lib/components/UploadPanel.svelte';
+  import DocumentSummary from '$lib/components/DocumentSummary.svelte';
+  import { conceptMesh } from '$lib/stores/conceptMesh';
+  
+  // Optionally, a toggle for collapsing the drawer (default expanded)
+  let expanded = true;
+  
+  function toggleDrawer() {
+    expanded = !expanded;
+  }
+</script>
+
+<!-- Memory Drawer Container -->
+<div class="flex flex-col h-full bg-[#f9f9f9] border-l border-gray-300" style="width: {expanded ? '320px' : '30px'}">
+  <!-- Header with optional collapse toggle -->
+  <div class="flex items-center justify-between px-2 py-1 bg-[#f9f9f9]">
+    <h2 class="text-sm font-semibold">Memory</h2>
+    <button class="text-xl px-1" on:click={toggleDrawer} aria-label="Toggle memory drawer">
+      {#if expanded}
+        «
+      {:else}
+        »
+      {/if}
+    </button>
+  </div>
+  
+  {#if expanded}
+    <!-- Upload panel at top for adding documents -->
+    <UploadPanel />
+  
+    <!-- Scrollable memory list -->
+    <div class="flex-1 overflow-y-auto px-2 py-2">
+      {#each $conceptMesh as diff, index (index)}
+        {#if diff.type === 'document'}
+          <!-- Document entry: use DocumentSummary component -->
+          <DocumentSummary title={diff.title} concepts={diff.concepts} summary={diff.summary} />
+        {:else if diff.type === 'chat'}
+          <!-- Chat anchor entry: show a brief note of the conversation diff -->
+          <div class="bg-white rounded-md shadow-sm p-2 mb-2 text-sm">
+            <div class="text-gray-500 text-xs font-semibold mb-1">💬 Conversation</div>
+            {#if diff.summary}
+              <p class="text-[#111111]">{diff.summary}</p>
+            {:else}
+              <p class="text-[#111111]">Conversation update: new concepts added.</p>
+            {/if}
+          </div>
+        {/if}
+      {/each}
+    </div>
+  {/if}
+</div>
+Explanation:
+MemoryDrawer serves as a container for both document knowledge and conversation memory. We break it down:
+Structure & Sizing: The <div> for the drawer is set to full height (h-full to match the parent container height, which is the full screen). We give it a light background #f9f9f9 (same as the page background for continuity) and a left border (border-l border-gray-300) to clearly separate it from the chat area. The width is set via a style bound to an expanded variable: if expanded, we use 320px (which is a reasonable width for a side panel); if collapsed, we shrink it to 30px (just enough to show a partial toggle button). We also make the drawer a flex column (flex flex-col) so that we can easily position the header, then the upload panel, then the scrollable list.
+Header & Toggle: At the top of the drawer, we included a small header bar with the title "Memory" and a toggle button. The toggle is a simple « or » arrow that switches based on the expanded state, allowing the user to collapse or expand the memory panel. (In Phase 1 testing, this allows verifying that the layout adjusts when the memory panel is hidden or shown. The chat area behind it will naturally flex to fill the space when collapsed, since our main layout uses flex-grow on the chat panel container.) The header is given a tiny bit of padding and uses the same background as the drawer. The text "Memory" is small and semi-bold to label the panel.
+UploadPanel: Right under the header (when expanded) we include the <UploadPanel /> component. This provides the file drag/drop area as described earlier. It will occupy a small area at the top and is not scrollable (being above the scroll container).
+Memory List: The main content of the drawer is a scrollable list (overflow-y-auto with flex-1 to take remaining height). We iterate over the $conceptMesh store value, which is an array of diff objects. For each diff:
+If diff.type === 'document', we render a DocumentSummary component, passing the diff’s title, concepts, and summary.
+If diff.type === 'chat', we render a chat memory entry. For now, we make it a small white card similar to DocumentSummary but simpler. It has an icon 💬 and label "Conversation" to indicate this entry came from chat. We then display the diff.summary if available (which might say something like “Discussion about X…” as we set when adding the diff). If for some reason summary is missing, we fall back to a generic line "Conversation update: new concepts added." The chat memory card is styled with a white background, small text, and slight padding/margin.
+Each memory entry (document or chat) is given some bottom margin (mb-2) so they don’t stick together visually. The scroll container’s padding (px-2 py-2) ensures contents aren’t flush against the sides. Functionality: As new ConceptDiffs are added to the conceptMesh store (via UploadPanel or ChatPanel), Svelte’s reactivity will automatically update this list. If the user uploads a document, a DocumentSummary card appears here summarizing it. If the user sends a chat and a chat ConceptDiff is created, a conversation summary entry appears here. This allows the user to see at a glance what knowledge has been accumulated and remember key points from the dialogue – fulfilling the “memory, not logs” principle by focusing on conceptual summaries rather than raw chat transcripts. We provided a collapse/expand mechanism for completeness. In expanded mode (default), the width is 320px; in collapsed mode, we shrink the panel to a slim bar showing only the toggle arrow. When collapsed, the memory items are hidden ({#if expanded} ... {/if} wraps the content). This can be useful if the user needs more screen space for the chat and wants to hide the memory temporarily. The main layout will adjust because we still render the container (with a small width) so the flexbox will allow the chat area to grow. All interactive elements of MemoryDrawer are within the expanded section, and since we maintain pointer-events on the collapsed bar (the button is still clickable), the user can reopen it. Styling wise, the MemoryDrawer uses the same base background as the app to blend in. DocumentSummary and chat entries use white cards to stand out on this background. We use simple text and minimal color, consistent with the theme.
+Ghost Persona State Store (stores/ghostPersona.ts)
+The ghostPersona store holds the global state of the Ghost AI’s persona. This can include which persona or role is currently active, the mood of the ghost, and a stability level (for example, how consistent or “coherent” the ghost is at the moment). This state can be read by any component to adjust the UI – for instance, GhostOverlay uses it to decide the avatar and shimmer. Other potential uses: perhaps changing the avatar image when the persona role changes (e.g., a “Debugger” persona could have a different icon than a “Scholar”), or altering suggestion tone based on mood.
+ts
+Copy
+// stores/ghostPersona.ts
+import { writable } from 'svelte/store';
+
+interface GhostState {
+  persona: string;
+  mood: string;
+  stability: number;
+}
+
+// Initialize with a default persona state
+export const ghostPersona = writable<GhostState>({
+  persona: "Mentor",      // active persona name (e.g., Mentor/Scholar/Refactorer)
+  mood: "calm",           // current mood state, e.g., calm, alert, curious
+  stability: 1.0          // stability/confidence level (0 to 1)
+});
+Explanation:
+We use Svelte’s writable store to create a ghostPersona store with an initial value. The GhostState interface defines the shape:
+persona: a string identifying the persona. We default to "Mentor" (assuming a general helper persona). This could later be dynamically set to other personas like "Scholar" or "Debugger" depending on context.
+mood: a simple descriptor of the ghost’s emotional state or mode. We use "calm" initially. This could be things like "curious", "excited", "frustrated", etc., depending on how the system monitors the interaction.
+stability: a numeric value between 0 and 1 indicating how stable or phase-aligned the ghost is. 1.0 means completely stable (phase synced with the user), whereas lower values might indicate the ghost is in a more chaotic or exploratory phase. (This is inspired by the “phase alignment” concept; for now it’s static at 1.0.)
+By exporting the store, any Svelte component can import ghostPersona and use $ghostPersona to bind to its values reactively. For example, GhostOverlay subscribes to it to update the glow effect. If in the future the ghost persona changes (say the user triggers a different mode or as time passes the mood shifts), updating this store will automatically cause the UI to reflect the new state wherever it’s used. In Phase 1, we are not yet dynamically changing persona or mood via code (there’s no logic altering this store yet, aside from possible manual toggling for testing). Phase 2 might involve the Ghost AI adjusting its persona or mood in response to user input or internal script (via ELFIN++ commands), at which point the UI will respond accordingly (e.g., change avatar, color scheme, etc.). The store is structured to easily extend with additional properties if needed (for instance, an avatar URL or persona description could be added).
+Concept Mesh Memory Store (stores/conceptMesh.ts)
+The conceptMesh store represents the evolving network of concepts known to the system. It will eventually include a full graph (nodes and relationships) and perhaps a more complex data structure, but for Phase 1 we simplify it to a list of ConceptDiff entries. Each ConceptDiff captures a set of new or changed concepts resulting from a single event (like a document upload or a chat turn). This store is updated whenever knowledge is added, and components like MemoryDrawer subscribe to display the current list of conceptual knowledge.
+ts
+Copy
+// stores/conceptMesh.ts
+import { writable } from 'svelte/store';
+
+export type ConceptDiff = {
+  type: 'document' | 'chat';
+  title: string;
+  concepts: string[];    // key concepts extracted or discussed
+  summary?: string;      // short description of this diff (optional)
+};
+
+// Initialize with an empty concept diff list
+const initialDiffs: ConceptDiff[] = [];
+export const conceptMesh = writable<ConceptDiff[]>(initialDiffs);
+
+/**
+ * Add a new ConceptDiff to the concept mesh store.
+ * This updates the store's array and can be called from anywhere (e.g., upload or chat).
+ */
+export function addConceptDiff(diff: ConceptDiff) {
+  conceptMesh.update(currentList => {
+    return [...currentList, diff];
+  });
+}
+Explanation:
+We define a TypeScript type ConceptDiff for clarity, with:
+type: either 'document' or 'chat' (to distinguish origin of the diff).
+title: a label for the diff. For documents, this might be the document name or topic; for chat, we use a generic "Conversation" or brief topic indicator.
+concepts: an array of concept names involved in this diff (for a document, key topics; for chat, perhaps newly mentioned concepts).
+summary: (optional) a human-readable one-liner describing the knowledge added. This is used in the UI memory list to give context.
+We initialize conceptMesh as a writable store with an empty array (no knowledge at start). We also provide a convenience function addConceptDiff that takes a diff object and appends it to the store’s array. This abstracts the update logic so components don’t need to import writable or manipulate the store directly beyond calling this function. Whenever addConceptDiff is called (as we do in UploadPanel and ChatPanel), the store is updated and any subscribers (like MemoryDrawer) will update their views. This simple approach treats concept diffs as an append-only log of knowledge changes. In a more advanced implementation, the conceptMesh might not just be a flat list — it could be a complex graph structure where each diff mutates the graph. But even then, capturing a history of diffs is useful for audit trail or memory timeline (which the memory drawer essentially shows). By structuring it as a Svelte store, we ensure reactivity. For example, if an uploaded document yields concept "Alpha" and "Beta", and a chat yields concept "Gamma", the memory drawer will show entries for those, in the order they were added. The store could also be used by other components (the SuggestionBar might listen for new concepts to adjust suggestions, GhostOverlay might respond to concept changes if needed, etc.). Dummy Data in Phase 1: We use placeholder concept names like "ExampleConcept1" or "ChatConcept" when adding diffs. These illustrate the flow but are not derived from actual NLP. In a future phase, these would come from real analysis (e.g., running an NLP model on the document text to extract topics, or interpreting the user’s question to identify the key concept). The design of the store and its usage in the UI means once the backend logic is in place, the front-end will automatically reflect the real data with minimal changes.
+Putting It All Together: Interaction Flow in Phase 1
+With all the components and stores in place, the TORI Chat interface is fully integrated. Here’s how a typical interaction would work (in this Phase 1 implementation):
+Document Upload: The user drags a file into the UploadPanel (in the Memory drawer) or clicks to select a file. This triggers handleDrop/handleFiles in UploadPanel, which calls Vault.save() (stubbed) and then addConceptDiff() to record a new document entry in the concept mesh. Immediately, the MemoryDrawer (which is subscribed to conceptMesh) updates – a new DocumentSummary card appears, showing the file name and some dummy concepts. The user can see that the document has been ingested and what key ideas it contains. (In a real system, the ghost AI would also internally store the document content and possibly incorporate it into its knowledge base for use in chat.)
+User sends a Chat Message: The user types a question or statement in the ChatPanel input and hits Enter/Send. The ChatPanel adds the user’s message to the conversation view. It then (for demo purposes) immediately adds a dummy ghost response message. Alongside this, ChatPanel calls addConceptDiff() to log that a new concept was discussed in the conversation. For example, if the user asked about “quantum entanglement”, the dummy diff might include that as a concept. The MemoryDrawer again reacts to this change: it shows a new chat memory entry (💬 Conversation) summarizing the latest dialogue snippet. This way, even if the conversation continues on other topics, the important concept from that turn is captured in the persistent memory panel.
+Ghost Persona Overlay: Throughout the above interactions, the GhostOverlay is visible in the corner, gently pulsing. If the ghostPersona store were to change (say the ghost becomes “alert” due to a complex question), the overlay could change its glow color or intensity. In Phase 1 we keep it static “calm”. The avatar remains the same “Mentor” letter (or ghost emoji) indicating the persona overseeing the chat. This adds a bit of character to the UI, reminding the user of the AI’s presence in a non-intrusive way.
+Suggestion Bar Updates: In Phase 1, the SuggestionBar is static, showing generic suggestions. However, one can imagine that after the user uploads a document, the system might suggest “Summarize document”, and after a user asks a question, it might suggest “Find related info” or “Explain concept X”. As a placeholder, our static suggestions cover a few typical actions. The SuggestionBar sits right below the chat input, readily clickable. (Currently the buttons don’t perform actions, but they could be wired to trigger certain commands or fill the chat input with a prompt. This will likely tie into the ELFIN++ script system in Phase 2.)
+Throughout, the design uses Svelte’s reactivity and shared stores to keep everything in sync without manual DOM manipulation. For instance, when addConceptDiff updates the store, we don’t have to imperatively tell the MemoryDrawer to add an item; it happens automatically via the {#each $conceptMesh} binding. This makes the architecture clean and maintainable. All UI components are styled with the tori light theme in mind:
+Predominantly light backgrounds (#f9f9f9 and white) with dark text (#111 for primary text, gray shades for secondary text).
+Minimal use of saturated colors – just a touch of blue for links or user message bubbles to create visual distinctions.
+Borders and shadows used sparingly to separate sections and elevate elements like chat bubbles and cards.
+A consistent typography scale (mostly small text) to fit a lot of information without overwhelming the user, and to give a sleek, modern look.
+The result is a minimalist yet functional interface that forms the foundation for TORI’s more advanced capabilities to come.
+Next Steps (Phase 2 Preview)
+With the UI Integration Kit in place, Phase 2 will focus on implementing the ELFIN++ interpreter and script runner and deeper integration of the Ghost AI’s logic:
+ELFIN++ Scripting Engine: Develop the domain-specific language that the ghost personas use to coordinate actions (as described, e.g., commands like Ghost("Scholar").focus("topic") -> search(...) and Vault.save(...)). This will involve creating a parser and interpreter (likely in TypeScript) that can execute these scripted sequences.
+Connecting AI Backend: Phase 2 will hook up the actual AI components – the Ghost AI model that generates responses and extracts concepts. The ChatPanel’s dummy response will be replaced with calls to the Ghost AI, and real concept extraction will populate the conceptMesh.
+Suggestion Generation: Integrate the ELFIN++ engine to dynamically populate the SuggestionBar with context-aware suggestions. The UI is already prepared to display them; the next step is to have the back-end provide meaningful suggestions and handle the actions when a suggestion is clicked.
+Enhanced GhostOverlay: Use the ghostPersona store to reflect real-time changes (for example, if the ghost persona switches roles or exhibits different “moods” based on the conversation, update the avatar or glow). The infrastructure is ready for this; it will be driven by data from the AI engine.
+Refinement of Memory Management: As conceptMesh grows more complex (with actual graph relationships), the MemoryDrawer may be refined to show concept links or allow the user to explore the concept network. We might introduce filtering (e.g., separate sections for Documents vs Conversations) or interactive elements (clicking a concept to highlight related ones, etc.).
+Phase 2 will thus bridge the gap between this functional UI and the intelligent behaviors that power TORI, resulting in a cohesive system where the UI elements we built start to show their true purpose with live data. For now, Phase 1’s deliverables provide a solid, testable UI foundation to build on.

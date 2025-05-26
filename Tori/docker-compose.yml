@@ -1,0 +1,193 @@
+version: '3.8'
+
+services:
+  # DuckDB backing storage service
+  duckdb:
+    image: duckdb/duckdb:latest
+    volumes:
+      - ./data:/data
+    environment:
+      - DUCKDB_DATA_DIR=/data
+    networks:
+      - tori-memory-net
+
+  # Redis for caching and pub/sub messaging
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    command: redis-server --appendonly yes
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - tori-memory-net
+
+  # Prometheus for metrics
+  prometheus:
+    image: prom/prometheus:latest
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus-data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--web.enable-lifecycle'
+    networks:
+      - tori-memory-net
+
+  # Grafana for dashboards
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./grafana/provisioning:/etc/grafana/provisioning
+      - ./grafana/dashboards:/var/lib/grafana/dashboards
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=tori-memory
+      - GF_USERS_ALLOW_SIGN_UP=false
+      - GF_SERVER_DOMAIN=localhost
+    depends_on:
+      - prometheus
+    networks:
+      - tori-memory-net
+
+  # EpisodicVault gRPC service
+  episodic-vault:
+    build:
+      context: .
+      dockerfile: ./mcp_services/episodic_vault/Dockerfile.dev
+    ports:
+      - "50051:50051"
+      - "9091:9091"  # Metrics port
+    volumes:
+      - .:/app
+      - ~/.tori:/root/.tori
+    environment:
+      - PYTHONPATH=/app
+      - TORI_ENV=development
+      - VAULT_DB_PATH=/root/.tori/episodic.db
+      - METRICS_PORT=9091
+      - REDIS_HOST=redis
+    depends_on:
+      - redis
+      - duckdb
+    networks:
+      - tori-memory-net
+    command: python -m mcp_services.episodic_vault.server --dev
+
+  # SleepScheduler gRPC service
+  sleep-scheduler:
+    build:
+      context: .
+      dockerfile: ./mcp_services/sleep_scheduler/Dockerfile.dev
+    ports:
+      - "50052:50052"
+      - "9092:9092"  # Metrics port
+    volumes:
+      - .:/app
+      - ~/.tori:/root/.tori
+    environment:
+      - PYTHONPATH=/app
+      - TORI_ENV=development
+      - SCHEDULER_WEIGHTS_PATH=/root/.tori/scheduler_weights.npz
+      - METRICS_PORT=9092
+      - REDIS_HOST=redis
+      - VAULT_ADDRESS=episodic-vault:50051
+    depends_on:
+      - episodic-vault
+      - redis
+    networks:
+      - tori-memory-net
+    command: python -m mcp_services.sleep_scheduler.server --dev
+
+  # SparsePruner gRPC service
+  sparse-pruner:
+    build:
+      context: .
+      dockerfile: ./mcp_services/sparse_pruner/Dockerfile.dev
+    ports:
+      - "50053:50053"
+      - "9093:9093"  # Metrics port
+    volumes:
+      - .:/app
+      - ~/.tori:/root/.tori
+    environment:
+      - PYTHONPATH=/app
+      - TORI_ENV=development
+      - PRUNER_BACKUP_DIR=/root/.tori/pruner_backups
+      - METRICS_PORT=9093
+      - REDIS_HOST=redis
+      - SCHEDULER_ADDRESS=sleep-scheduler:50052
+    depends_on:
+      - sleep-scheduler
+      - redis
+    networks:
+      - tori-memory-net
+    command: python -m mcp_services.sparse_pruner.server --dev
+
+  # KoopmanLearner gRPC service
+  koopman-learner:
+    build:
+      context: .
+      dockerfile: ./mcp_services/koopman_learner/Dockerfile.dev
+    ports:
+      - "50054:50054"
+      - "9094:9094"  # Metrics port
+    volumes:
+      - .:/app
+      - ~/.tori:/root/.tori
+    environment:
+      - PYTHONPATH=/app
+      - TORI_ENV=development
+      - KCL_MODES_PATH=/root/.tori/kcl_modes.npz
+      - KCL_INBOX_DIR=/root/.tori/kcl_inbox
+      - METRICS_PORT=9094
+      - REDIS_HOST=redis
+      - VAULT_ADDRESS=episodic-vault:50051
+    depends_on:
+      - episodic-vault
+      - redis
+    networks:
+      - tori-memory-net
+    command: python -m mcp_services.koopman_learner.server --dev
+
+  # Control Panel Web UI
+  control-panel:
+    build:
+      context: .
+      dockerfile: ./control_panel/Dockerfile.dev
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./control_panel:/app/control_panel
+    environment:
+      - NODE_ENV=development
+      - VAULT_ADDRESS=http://episodic-vault:50051
+      - SCHEDULER_ADDRESS=http://sleep-scheduler:50052
+      - PRUNER_ADDRESS=http://sparse-pruner:50053
+      - KCL_ADDRESS=http://koopman-learner:50054
+    depends_on:
+      - episodic-vault
+      - sleep-scheduler
+      - sparse-pruner
+      - koopman-learner
+    networks:
+      - tori-memory-net
+
+networks:
+  tori-memory-net:
+    driver: bridge
+
+volumes:
+  redis-data:
+  prometheus-data:

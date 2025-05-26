@@ -10,7 +10,7 @@ This document provides step-by-step instructions for building and deploying the 
 deploy-tori-chat.bat
 
 # From PowerShell
-.\deploy-tori-chat.bat
+.\deploy-i wtori-chat.bat
 ```
 
 ### Mac/Linux

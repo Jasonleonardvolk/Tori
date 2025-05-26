@@ -5,7 +5,6 @@ import path from 'path'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  root: __dirname,
   resolve: {
     alias: {
       '@chat': path.resolve(__dirname, 'src')
@@ -16,9 +15,7 @@ export default defineConfig({
     emptyOutDir: true,
     base: './', // Ensures assets are loaded correctly when served from a subfolder
     rollupOptions: {
-      input: {
-        main: path.resolve(__dirname, 'src/index.html')  // Ensure we use the correct entry point
-      }
+      input: path.resolve(__dirname, 'src/index.html') // Build the REAL TORI Chat interface
     }
   },
   server: {

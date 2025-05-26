@@ -1,0 +1,330 @@
+# TORI Ingest Bus MCP Schema
+# This file defines the MCP tools and resources for integrating CLINE with the ingest-bus service
+
+description: |
+  TORI Ingest-Bus interface for content ingestion, processing, and ScholarSphere integration.
+  This MCP server enables seamless ingestion of documents, conversations, and media files
+  into ScholarSphere's concept-based knowledge system.
+
+version: 1.0.0
+server: http://localhost:8080
+
+tools:
+  - name: ingest.queue
+    description: |
+      Add a document to the ingest queue for processing.
+      This will extract content, chunk it, vectorize it, map it to concepts, 
+      and store it in ScholarSphere.
+    input_schema:
+      type: object
+      required:
+        - document_type
+      properties:
+        document_type:
+          type: string
+          enum: [pdf, markdown, text, html, conversation, image, audio, video, code]
+          description: Type of document being ingested
+        source_url:
+          type: string
+          description: Source URL of the document if applicable
+        title:
+          type: string
+          description: Title of the document
+        description:
+          type: string
+          description: Description of the document
+        tags:
+          type: array
+          items:
+            type: string
+          description: Tags for the document
+        metadata:
+          type: object
+          description: Additional metadata for the document
+        priority:
+          type: integer
+          minimum: 1
+          maximum: 5
+          default: 1
+          description: Priority of the ingest job (1-5, higher is higher priority)
+        callback_url:
+          type: string
+          description: Webhook to call when ingest is complete
+        file_content:
+          type: string
+          format: binary
+          description: Document content as binary data (if not providing source_url)
+    output_schema:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the ingest job
+        status:
+          type: string
+          enum: [queued, processing, extracting, chunking, vectorizing, concept_mapping, storing, completed, failed]
+          description: Current status of the job
+        created_at:
+          type: string
+          format: date-time
+          description: When the job was created
+        percent_complete:
+          type: number
+          minimum: 0
+          maximum: 100
+          description: Percentage of completion (0-100)
+
+  - name: ingest.status
+    description: |
+      Check the status of an ingest job.
+      Provides detailed information about the job's progress, completion, and any errors.
+    input_schema:
+      type: object
+      required:
+        - job_id
+      properties:
+        job_id:
+          type: string
+          description: ID of the ingest job to check
+    output_schema:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the ingest job
+        status:
+          type: string
+          enum: [queued, processing, extracting, chunking, vectorizing, concept_mapping, storing, completed, failed]
+          description: Current status of the job
+        created_at:
+          type: string
+          format: date-time
+          description: When the job was created
+        updated_at:
+          type: string
+          format: date-time
+          description: When the job was last updated
+        completed_at:
+          type: string
+          format: date-time
+          description: When the job was completed
+        percent_complete:
+          type: number
+          minimum: 0
+          maximum: 100
+          description: Percentage of completion (0-100)
+        chunks_processed:
+          type: integer
+          description: Number of chunks processed
+        chunks_total:
+          type: integer
+          description: Total number of chunks
+        concepts_mapped:
+          type: integer
+          description: Number of concepts mapped
+        failure_code:
+          type: string
+          description: Failure code if the job failed
+        failure_message:
+          type: string
+          description: Detailed failure message if the job failed
+        chunk_ids:
+          type: array
+          items:
+            type: string
+          description: IDs of the chunks created from this document
+        concept_ids:
+          type: array
+          items:
+            type: string
+          description: IDs of the concepts mapped from this document
+
+  - name: ingest.metrics
+    description: |
+      Get metrics about the ingest system.
+      Provides statistics on job processing, success rates, and system performance.
+    input_schema:
+      type: object
+      properties: {}
+    output_schema:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+          description: When the metrics were collected
+        ingest_files_queued_total:
+          type: integer
+          description: Total number of files queued for ingestion
+        ingest_files_processed_total:
+          type: integer
+          description: Total number of files processed
+        ingest_failures_total:
+          type: integer
+          description: Total number of ingest failures
+        chunk_avg_len_chars:
+          type: number
+          description: Average length of chunks in characters
+        concept_recall_accuracy:
+          type: number
+          description: Accuracy of concept recall (0-1)
+        active_jobs:
+          type: integer
+          description: Number of active ingest jobs
+        queue_depth:
+          type: integer
+          description: Number of jobs waiting in the queue
+        processing_time_avg_ms:
+          type: number
+          description: Average processing time in milliseconds
+        failure_by_code:
+          type: object
+          description: Count of failures by code
+
+  - name: ingest.cancel
+    description: |
+      Cancel an in-progress ingest job.
+      This will stop the job and mark it as failed.
+    input_schema:
+      type: object
+      required:
+        - job_id
+      properties:
+        job_id:
+          type: string
+          description: ID of the ingest job to cancel
+    output_schema:
+      type: object
+      properties:
+        success:
+          type: boolean
+          description: Whether the job was successfully canceled
+        message:
+          type: string
+          description: Status message
+
+  - name: kb.search
+    description: |
+      Search for content in the knowledge base.
+      Retrieves relevant chunks based on query and returns them with source attribution.
+    input_schema:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: Search query text
+        limit:
+          type: integer
+          minimum: 1
+          maximum: 50
+          default: 10
+          description: Maximum number of results to return
+        min_relevance:
+          type: number
+          minimum: 0
+          maximum: 1
+          default: 0.7
+          description: Minimum relevance score (0-1)
+        include_source:
+          type: boolean
+          default: true
+          description: Whether to include source information
+    output_schema:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            type: object
+            properties:
+              chunk_id:
+                type: string
+                description: ID of the chunk
+              text:
+                type: string
+                description: Chunk text content
+              relevance:
+                type: number
+                description: Relevance score (0-1)
+              concepts:
+                type: array
+                items:
+                  type: string
+                description: Concept IDs associated with this chunk
+              source:
+                type: string
+                description: Source attribution (document title, page, etc.)
+              metadata:
+                type: object
+                description: Additional metadata
+
+  - name: kb.retrieve
+    description: |
+      Retrieve specific content from the knowledge base by ID.
+      Gets detailed information about a specific chunk, including all metadata and concept links.
+    input_schema:
+      type: object
+      required:
+        - chunk_id
+      properties:
+        chunk_id:
+          type: string
+          description: ID of the chunk to retrieve
+        include_concepts:
+          type: boolean
+          default: true
+          description: Whether to include concept links
+        include_vector:
+          type: boolean
+          default: false
+          description: Whether to include the vector embedding
+    output_schema:
+      type: object
+      properties:
+        chunk_id:
+          type: string
+          description: ID of the chunk
+        text:
+          type: string
+          description: Chunk text content
+        sha256:
+          type: string
+          description: SHA256 hash of the chunk content
+        source:
+          type: string
+          description: Source attribution
+        document_type:
+          type: string
+          description: Type of source document
+        concepts:
+          type: array
+          items:
+            type: object
+            properties:
+              concept_id:
+                type: string
+                description: Concept ID
+              strength:
+                type: number
+                description: Strength of association (0-1)
+              encoder_version:
+                type: string
+                description: Version of the encoder used
+        vector:
+          type: array
+          items:
+            type: number
+          description: Vector embedding (if requested)
+        metadata:
+          type: object
+          description: Additional metadata
+
+resources:
+  - uri: /health
+    description: Health check endpoint for the ingest service
+  - uri: /metrics/prometheus
+    description: Prometheus metrics endpoint
+  - uri: /docs
+    description: API documentation (OpenAPI/Swagger)

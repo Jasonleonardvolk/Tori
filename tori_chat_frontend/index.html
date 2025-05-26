@@ -1,106 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TORI Chat - Redirecting to Demo</title>
-  <style>
-    body {
-      background-color: #121418;
-      color: #f3f4f6;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-      text-align: center;
-    }
-    .container {
-      max-width: 600px;
-      padding: 2rem;
-      background-color: rgba(35, 39, 47, 0.6);
-      backdrop-filter: blur(4px);
-      border-radius: 1rem;
-      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35);
-    }
-    h1 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-    }
-    p {
-      margin-bottom: 1.5rem;
-      line-height: 1.5;
-    }
-    .button-container {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      justify-content: center;
-    }
-    .button {
-      background-color: #3b82f6;
-      color: white;
-      border: none;
-      padding: 0.75rem 1.5rem;
-      border-radius: 0.5rem;
-      font-weight: 500;
-      cursor: pointer;
-      transition: background-color 0.2s;
-      text-decoration: none;
-    }
-    .button:hover {
-      background-color: #2563eb;
-    }
-    .secondary {
-      background-color: transparent;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-    }
-    .secondary:hover {
-      background-color: rgba(255, 255, 255, 0.1);
-    }
-    .loading {
-      font-size: 0.875rem;
-      margin-top: 1rem;
-      color: #9ca3af;
-    }
-  </style>
-  <script>
-    // Automatic redirect after 3 seconds
-    setTimeout(function() {
-      window.location.href = 'standalone.html';
-    }, 3000);
-  </script>
-</head>
-<body>
-  <div class="container">
-    <h1>TORI Chat Interface</h1>
-    <p>
-      This is a standalone implementation of the TORI Chat interface.
-      You're being redirected to the interactive demo version...
-    </p>
-    <div class="button-container">
-      <a href="standalone.html" class="button">Go to demo now</a>
-      <a href="https://github.com/your-repo/tori-chat" class="button secondary">View source code</a>
-    </div>
-    <p class="loading">Redirecting in 3 seconds...</p>
-  </div>
-
-  <script>
-    // Countdown timer display
-    let seconds = 3;
-    const countdownEl = document.querySelector('.loading');
-    
-    const interval = setInterval(function() {
-      seconds--;
-      if (seconds <= 0) {
-        clearInterval(interval);
-        countdownEl.textContent = 'Redirecting...';
-      } else {
-        countdownEl.textContent = `Redirecting in ${seconds} second${seconds !== 1 ? 's' : ''}...`;
-      }
-    }, 1000);
-  </script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TORI Chat</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+    <script type="module" src="/src/mcp-client.js"></script>
+  </body>
 </html>

@@ -1,0 +1,245 @@
+# MCP Gateway Tools Configuration for TORI Memory System
+# This file defines the tools that the MCP gateway exposes for the memory system
+
+tools:
+  # EpisodicVault tools
+  - name: memory.put
+    description: Store an episode in the EpisodicVault
+    target: episodic-vault:50051
+    rpc: EpisodicVault/PutEpisode
+    schema:
+      input:
+        type: object
+        properties:
+          episode_blob:
+            type: string
+            description: Base64-encoded episode data
+          meta:
+            type: object
+            description: Episode metadata
+      output:
+        type: object
+        properties:
+          success:
+            type: boolean
+          id:
+            type: string
+          message:
+            type: string
+
+  - name: memory.get
+    description: Retrieve an episode from the EpisodicVault
+    target: episodic-vault:50051
+    rpc: EpisodicVault/GetEpisode
+    schema:
+      input:
+        type: object
+        properties:
+          id:
+            type: string
+            description: Episode ID
+      output:
+        type: object
+        properties:
+          episode:
+            type: object
+          success:
+            type: boolean
+          message:
+            type: string
+
+  - name: memory.list
+    description: List recent episodes from the EpisodicVault
+    target: episodic-vault:50051
+    rpc: EpisodicVault/ListRecent
+    schema:
+      input:
+        type: object
+        properties:
+          limit:
+            type: integer
+            description: Maximum number of episodes to return
+          offset:
+            type: integer
+            description: Offset for pagination
+      output:
+        type: object
+        properties:
+          episodes:
+            type: array
+            items:
+              type: object
+          total:
+            type: integer
+          success:
+            type: boolean
+
+  # SleepScheduler tools
+  - name: memory.sleep
+    description: Trigger memory consolidation
+    target: sleep-scheduler:50052
+    rpc: SleepScheduler/StartConsolidation
+    schema:
+      input:
+        type: object
+        properties:
+          max_episodes:
+            type: integer
+            description: Maximum number of episodes to process
+          once:
+            type: boolean
+            description: Run only once
+          wait_for_completion:
+            type: boolean
+            description: Wait for consolidation to complete
+      output:
+        type: object
+        properties:
+          success:
+            type: boolean
+          consolidation_id:
+            type: string
+          energy_delta:
+            type: number
+          episodes_processed:
+            type: integer
+          message:
+            type: string
+
+  - name: memory.sleep_status
+    description: Get the status of memory consolidation
+    target: sleep-scheduler:50052
+    rpc: SleepScheduler/GetConsolidationStatus
+    schema:
+      input:
+        type: object
+        properties:
+          consolidation_id:
+            type: string
+            description: Consolidation job ID
+      output:
+        type: object
+        properties:
+          status:
+            type: string
+          energy_delta:
+            type: number
+          progress:
+            type: number
+          success:
+            type: boolean
+
+  # SparsePruner tools
+  - name: memory.prune
+    description: Trigger graph pruning
+    target: sparse-pruner:50053
+    rpc: SparsePruner/TriggerPruning
+    schema:
+      input:
+        type: object
+        properties:
+          threshold:
+            type: number
+            description: Weight threshold for pruning
+          target_sparsity:
+            type: number
+            description: Target sparsity ratio
+          dry_run:
+            type: boolean
+            description: Preview without making changes
+          create_backup:
+            type: boolean
+            description: Create a backup before pruning
+      output:
+        type: object
+        properties:
+          success:
+            type: boolean
+          pruning_id:
+            type: string
+          edges_pruned:
+            type: integer
+          quality_impact:
+            type: number
+          message:
+            type: string
+
+  - name: memory.prune_preview
+    description: Preview pruning impact
+    target: sparse-pruner:50053
+    rpc: SparsePruner/PreviewPruning
+    schema:
+      input:
+        type: object
+        properties:
+          threshold:
+            type: number
+            description: Weight threshold for pruning
+          target_sparsity:
+            type: number
+            description: Target sparsity ratio
+      output:
+        type: object
+        properties:
+          total_edges:
+            type: integer
+          prunable_edges:
+            type: integer
+          prunable_percentage:
+            type: number
+          estimated_quality_impact:
+            type: number
+          success:
+            type: boolean
+
+  # KoopmanLearner tools
+  - name: memory.kcl_process
+    description: Process activation batch through Koopman Learner
+    target: koopman-learner:50054
+    rpc: KoopmanLearner/ProcessActivationBatch
+    schema:
+      input:
+        type: object
+        properties:
+          batch_id:
+            type: string
+            description: Batch identifier
+          traces:
+            type: array
+            description: Activation traces
+      output:
+        type: object
+        properties:
+          success:
+            type: boolean
+          batch_id:
+            type: string
+          modes_extracted:
+            type: integer
+          total_modes:
+            type: integer
+          message:
+            type: string
+
+  - name: memory.kcl_status
+    description: Get spectral modes from Koopman Learner
+    target: koopman-learner:50054
+    rpc: KoopmanLearner/GetSpectralModes
+    schema:
+      input:
+        type: object
+        properties:
+          max_modes:
+            type: integer
+            description: Maximum number of modes to return
+      output:
+        type: object
+        properties:
+          modes:
+            type: array
+            items:
+              type: object
+          success:
+            type: boolean
+          message:
+            type: string

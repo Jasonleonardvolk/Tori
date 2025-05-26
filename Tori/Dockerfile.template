@@ -1,0 +1,154 @@
+# Dockerfile.template - Master template for TORI memory consolidation services
+ARG PYTHON_VERSION=3.11
+
+# Base stage - Common foundation
+FROM python:${PYTHON_VERSION}-slim AS base
+ARG SERVICE_NAME
+ARG MEMORY_LIMIT=512m
+ARG CPU_LIMIT=1
+
+# Build metadata
+LABEL maintainer="TORI Memory System"
+LABEL version="1.0.0"
+LABEL description="TORI Memory Consolidation & Koopman Continual Learner Services"
+
+WORKDIR /app
+
+# System dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    curl \
+    protobuf-compiler \
+    git \
+    ca-certificates \
+    procps \
+    htop \
+    && rm -rf /var/lib/apt/lists/* \
+    && apt-get clean
+
+# Python environment setup
+COPY requirements.txt .
+COPY requirements/ ./requirements/ 2>/dev/null || mkdir -p ./requirements
+
+# Install Python dependencies
+RUN pip install --no-cache-dir --upgrade pip setuptools wheel \
+    && (test -f requirements.txt && pip install --no-cache-dir -r requirements.txt || echo "Using default requirements") \
+    && (test -f requirements/base.txt && pip install --no-cache-dir -r requirements/base.txt || echo "No base requirements found")
+
+# Core modules
+COPY mcp_services/__init__.py ./mcp_services/ 2>/dev/null || mkdir -p ./mcp_services
+COPY mcp_services/metrics.py ./mcp_services/ 2>/dev/null || echo "Metrics module will be mounted"
+COPY mcp_services/common/ ./mcp_services/common/ 2>/dev/null || mkdir -p ./mcp_services/common
+COPY proto/ ./proto/ 2>/dev/null || mkdir -p ./proto
+COPY config/ ./config/ 2>/dev/null || mkdir -p ./config
+
+# Create directories for data and logs
+RUN mkdir -p /app/logs /app/data /app/checkpoints
+
+# Development stage
+FROM base AS dev
+ARG SERVICE_NAME
+
+# Development tools
+RUN pip install --no-cache-dir \
+    watchdog[watchmedo] \
+    debugpy \
+    black \
+    isort \
+    pytest \
+    pytest-asyncio \
+    pytest-cov \
+    memory-profiler \
+    line-profiler
+
+# Development configuration
+ENV PYTHONPATH=/app:$PYTHONPATH
+ENV PYTHONUNBUFFERED=1
+ENV DEBUG=1
+ENV LOG_LEVEL=DEBUG
+ENV MEMORY_CONSOLIDATION_MODE=debug
+ENV TORI_SERVICE_NAME=${SERVICE_NAME}
+
+# Development scripts
+COPY scripts/ ./scripts/ 2>/dev/null || mkdir -p ./scripts
+RUN if [ -f ./scripts/dev-entrypoint.sh ]; then chmod +x ./scripts/*.sh; fi
+
+# Service-specific development setup
+COPY mcp_services/${SERVICE_NAME}/ ./mcp_services/${SERVICE_NAME}/ 2>/dev/null || mkdir -p ./mcp_services/${SERVICE_NAME}
+
+# Development ports
+EXPOSE 50051  # gRPC main
+EXPOSE 50052  # gRPC secondary  
+EXPOSE 9091   # Episodic vault metrics
+EXPOSE 9092   # Sleep scheduler metrics
+EXPOSE 9093   # Sparse pruner metrics
+EXPOSE 9094   # Koopman learner metrics
+EXPOSE 9095   # Memory consolidation metrics
+EXPOSE 5678   # Debugger
+EXPOSE 8000   # Health/Admin interface
+
+CMD ["sh", "-c", "if [ -f ./scripts/dev-entrypoint.sh ]; then ./scripts/dev-entrypoint.sh; else python -m mcp_services.${TORI_SERVICE_NAME}.server --debug; fi"]
+
+# Production stage
+FROM base AS prod
+ARG SERVICE_NAME
+
+# Production optimizations
+ENV PYTHONOPTIMIZE=2
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+ENV MEMORY_CONSOLIDATION_MODE=production
+ENV LOG_LEVEL=INFO
+ENV TORI_SERVICE_NAME=${SERVICE_NAME}
+
+# Production security settings
+ENV PYTHONHASHSEED=random
+
+# Service-specific setup
+COPY mcp_services/${SERVICE_NAME}/ ./mcp_services/${SERVICE_NAME}/ 2>/dev/null || echo "Service directory will be mounted"
+
+# Production scripts
+COPY scripts/prod-entrypoint.sh ./scripts/ 2>/dev/null || echo "Production entrypoint script will be mounted"
+COPY scripts/health-check.sh ./scripts/ 2>/dev/null || echo "Health check script will be mounted"
+RUN if [ -f ./scripts/prod-entrypoint.sh ]; then chmod +x ./scripts/*.sh; fi
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+    CMD curl -f http://localhost:$(if [ "$SERVICE_NAME" = "episodic_vault" ]; then echo "9091"; \
+        elif [ "$SERVICE_NAME" = "sleep_scheduler" ]; then echo "9092"; \
+        elif [ "$SERVICE_NAME" = "sparse_pruner" ]; then echo "9093"; \
+        elif [ "$SERVICE_NAME" = "koopman_learner" ]; then echo "9094"; \
+        else echo "9090"; fi)/metrics || exit 1
+
+# Service-specific ports
+EXPOSE 50051  # gRPC
+EXPOSE 9091   # Base metrics port
+
+CMD ["sh", "-c", "if [ -f ./scripts/prod-entrypoint.sh ]; then ./scripts/prod-entrypoint.sh; else python -m mcp_services.${TORI_SERVICE_NAME}.server; fi"]
+
+# Testing stage
+FROM dev AS test
+ARG SERVICE_NAME
+
+# Additional test dependencies
+RUN pip install --no-cache-dir \
+    pytest-xdist \
+    pytest-benchmark \
+    hypothesis \
+    factory-boy
+
+# Test configuration
+ENV TESTING=1
+ENV MEMORY_CONSOLIDATION_MODE=test
+ENV PYTEST_TIMEOUT=300
+
+# Test files
+COPY tests/ ./tests/ 2>/dev/null || mkdir -p ./tests
+
+# Test data and fixtures
+COPY test_data/ ./test_data/ 2>/dev/null || mkdir -p ./test_data
+
+CMD ["python", "-m", "pytest", "tests/", "-v", "--tb=short", "--cov=mcp_services", "--cov-report=term-missing"]
+
+# Final stage selection
+FROM ${BUILD_ENV:-prod} AS final

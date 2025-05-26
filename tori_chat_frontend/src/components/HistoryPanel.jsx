@@ -1,130 +1,224 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import ConversationHistory from './ConversationHistory';
 
 /**
  * HistoryPanel Component
- * Displays the chat history and project list in the left panel
+ * Displays the conversation history with ψarc storage integration
  */
-export default function HistoryPanel() {
-  const [activeTab, setActiveTab] = useState('chats');
+export default function HistoryPanel({ user }) {
+  const [activeTab, setActiveTab] = useState('conversations');
   const [searchTerm, setSearchTerm] = useState('');
+  const [searchResults, setSearchResults] = useState(null);
   
-  // Mock data - would be fetched from FileStore in a real implementation
-  const chatHistory = [
-    { id: 'chat1', title: 'Refactoring Session', date: '5/14/2025', persona: 'ref' },
-    { id: 'chat2', title: 'Bug Hunting', date: '5/13/2025', persona: 'bug' },
-    { id: 'chat3', title: 'Learning React Hooks', date: '5/12/2025', persona: 'sch' },
-  ];
+  // Search conversations by concept
+  const searchByConcept = async () => {
+    if (!searchTerm.trim()) {
+      setSearchResults(null);
+      return;
+    }
+    
+    try {
+      const response = await fetch(`/api/chat/search?concept=${encodeURIComponent(searchTerm)}`, {
+        credentials: 'include'
+      });
+      
+      if (response.ok) {
+        const data = await response.json();
+        setSearchResults(data.results);
+      }
+    } catch (error) {
+      console.error('Search failed:', error);
+    }
+  };
   
-  const projects = [
-    { id: 'proj1', title: 'TORI Chat', language: 'JavaScript' },
-    { id: 'proj2', title: 'API Integration', language: 'Python' },
-    { id: 'proj3', title: 'Data Visualization', language: 'TypeScript' },
-  ];
+  // Trigger search when search term changes
+  useEffect(() => {
+    const debounceTimer = setTimeout(() => {
+      if (searchTerm) {
+        searchByConcept();
+      } else {
+        setSearchResults(null);
+      }
+    }, 300);
+    
+    return () => clearTimeout(debounceTimer);
+  }, [searchTerm]);
   
-  // Filter based on search term
-  const filteredChats = chatHistory.filter(chat => 
-    chat.title.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-  
-  const filteredProjects = projects.filter(project => 
-    project.title.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-  
-  // Helper to render the persona icon
-  const getPersonaIcon = (persona) => {
-    switch(persona) {
-      case 'ref': return '🔧';
-      case 'bug': return '🐛';
-      case 'sch': return '📖';
-      default: return '💬';
+  // Save current session
+  const saveCurrentSession = async () => {
+    try {
+      const response = await fetch('/api/chat/save-session', {
+        method: 'POST',
+        credentials: 'include'
+      });
+      
+      if (response.ok) {
+        const data = await response.json();
+        console.log('Session saved:', data.sessionId);
+        // Trigger refresh of history
+        window.location.reload();
+      }
+    } catch (error) {
+      console.error('Failed to save session:', error);
     }
   };
   
   return (
-    <div className="h-full flex flex-col">
+    <div className="h-full flex flex-col bg-surface-dark">
       {/* Header */}
-      <div className="p-4 border-b border-surface-light/10">
-        <h2 className="text-lg font-medium mb-2">TORI</h2>
+      <div className="p-4 border-b border-gray-800">
+        <h2 className="text-lg font-medium mb-2 text-text-dark">TORI Memory</h2>
         
-        {/* Search Box */}
+        {/* Concept Search Box */}
         <div className="relative">
           <input
             type="text"
-            placeholder="Search..."
+            placeholder="Search by concept..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full bg-surface-light/5 border border-surface-light/10 rounded-md py-1 px-3 text-sm focus:outline-none focus:ring-1 focus:ring-primary"
+            className="w-full bg-surface border border-gray-700 rounded-md py-1.5 px-3 text-sm text-text-dark placeholder-text-subtle focus:outline-none focus:ring-1 focus:ring-primary"
           />
           {searchTerm && (
             <button 
-              onClick={() => setSearchTerm('')}
-              className="absolute right-2 top-1/2 transform -translate-y-1/2 text-text-subtle"
+              onClick={() => {
+                setSearchTerm('');
+                setSearchResults(null);
+              }}
+              className="absolute right-2 top-1/2 transform -translate-y-1/2 text-text-subtle hover:text-text-dark"
             >
               ✕
             </button>
           )}
         </div>
+        
+        {/* Search Results */}
+        {searchResults && (
+          <div className="mt-2 text-xs text-text-subtle">
+            Found {searchResults.length} conversation{searchResults.length !== 1 ? 's' : ''} with "{searchTerm}"
+          </div>
+        )}
       </div>
       
       {/* Tabs */}
-      <div className="flex border-b border-surface-light/10">
+      <div className="flex border-b border-gray-800">
         <button 
-          className={`flex-1 py-2 text-sm font-medium ${activeTab === 'chats' ? 'text-primary border-b-2 border-primary' : 'text-text-subtle'}`}
-          onClick={() => setActiveTab('chats')}
+          className={`flex-1 py-2 text-sm font-medium transition-colors ${
+            activeTab === 'conversations' 
+              ? 'text-primary border-b-2 border-primary' 
+              : 'text-text-subtle hover:text-text-dark'
+          }`}
+          onClick={() => setActiveTab('conversations')}
         >
-          Chats
+          Conversations
         </button>
         <button 
-          className={`flex-1 py-2 text-sm font-medium ${activeTab === 'projects' ? 'text-primary border-b-2 border-primary' : 'text-text-subtle'}`}
-          onClick={() => setActiveTab('projects')}
+          className={`flex-1 py-2 text-sm font-medium transition-colors ${
+            activeTab === 'concepts' 
+              ? 'text-primary border-b-2 border-primary' 
+              : 'text-text-subtle hover:text-text-dark'
+          }`}
+          onClick={() => setActiveTab('concepts')}
         >
-          Projects
+          My Concepts
         </button>
       </div>
       
       {/* Content */}
       <div className="flex-1 overflow-y-auto">
-        {activeTab === 'chats' ? (
-          <div className="p-2 space-y-1">
-            {filteredChats.length > 0 ? (
-              filteredChats.map(chat => (
-                <div key={chat.id} className="p-2 hover:bg-surface-light/10 rounded cursor-pointer flex items-center">
-                  <span className="mr-2">{getPersonaIcon(chat.persona)}</span>
-                  <div className="flex-1 min-w-0">
-                    <div className="text-sm truncate">{chat.title}</div>
-                    <div className="text-xs text-text-subtle">{chat.date}</div>
-                  </div>
-                </div>
-              ))
-            ) : (
-              <div className="text-center py-4 text-text-subtle text-sm">
-                {searchTerm ? 'No matching chats found' : 'No chat history yet'}
-              </div>
-            )}
-          </div>
+        {activeTab === 'conversations' ? (
+          user ? (
+            <ConversationHistory userId={user.id} />
+          ) : (
+            <div className="p-4 text-center text-text-subtle">
+              Sign in to view your conversation history
+            </div>
+          )
         ) : (
-          <div className="p-2 space-y-1">
-            {filteredProjects.length > 0 ? (
-              filteredProjects.map(project => (
-                <div key={project.id} className="p-2 hover:bg-surface-light/10 rounded cursor-pointer">
-                  <div className="text-sm">{project.title}</div>
-                  <div className="text-xs text-text-subtle">{project.language}</div>
-                </div>
-              ))
-            ) : (
-              <div className="text-center py-4 text-text-subtle text-sm">
-                {searchTerm ? 'No matching projects found' : 'No projects yet'}
-              </div>
-            )}
+          <div className="p-4">
+            <UserConcepts user={user} />
           </div>
         )}
       </div>
       
-      {/* New Chat Button */}
-      <div className="p-3 border-t border-surface-light/10">
-        <button className="w-full py-2 px-4 bg-primary hover:bg-primary-dark text-surface-dark rounded-md text-sm font-medium transition">
-          New Chat
+      {/* Actions */}
+      <div className="p-3 border-t border-gray-800 space-y-2">
+        <button 
+          onClick={saveCurrentSession}
+          className="w-full py-2 px-4 bg-surface hover:bg-surface-light text-text-dark rounded-md text-sm font-medium transition border border-gray-700"
+        >
+          💾 Save Current Session
         </button>
+        <button className="w-full py-2 px-4 bg-primary hover:bg-primary-dark text-surface-dark rounded-md text-sm font-medium transition">
+          ➕ New Conversation
+        </button>
+      </div>
+    </div>
+  );
+}
+
+// Component to display user's concepts
+function UserConcepts({ user }) {
+  const [concepts, setConcepts] = useState(null);
+  const [loading, setLoading] = useState(true);
+  
+  useEffect(() => {
+    if (user) {
+      loadUserConcepts();
+    }
+  }, [user]);
+  
+  const loadUserConcepts = async () => {
+    try {
+      const response = await fetch('/api/concepts/user', {
+        credentials: 'include'
+      });
+      
+      if (response.ok) {
+        const data = await response.json();
+        setConcepts(data);
+      }
+    } catch (error) {
+      console.error('Failed to load concepts:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+  
+  if (!user) {
+    return (
+      <div className="text-center text-text-subtle">
+        Sign in to view your concept map
+      </div>
+    );
+  }
+  
+  if (loading) {
+    return <div className="text-text-subtle">Loading concepts...</div>;
+  }
+  
+  if (!concepts || concepts.concepts.length === 0) {
+    return (
+      <div className="text-center text-text-subtle">
+        No concepts yet. Upload PDFs or chat to build your knowledge graph!
+      </div>
+    );
+  }
+  
+  return (
+    <div className="space-y-2">
+      <div className="text-sm text-text-subtle mb-2">
+        {concepts.totalConcepts} concepts in your cognitive map
+      </div>
+      <div className="flex flex-wrap gap-2">
+        {concepts.concepts.map((concept, idx) => (
+          <div
+            key={idx}
+            className="px-3 py-1.5 text-sm rounded-full bg-primary bg-opacity-20 text-primary hover:bg-opacity-30 transition-colors cursor-pointer"
+            title="Click to search conversations with this concept"
+          >
+            {concept}
+          </div>
+        ))}
       </div>
     </div>
   );

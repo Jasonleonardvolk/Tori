@@ -3,23 +3,51 @@
 @tailwind utilities;
 
 :root {
-  /* Default theme colors - you can adjust these to match your design system */
-  --color-bg-dark: #121418;
-  --color-bg-light: #f8f9fa;
-  --color-surface-dark: #23272f;
-  --color-surface-light: #ffffff;
-  --color-primary: #3b82f6; /* Blue */
-  --color-primary-dark: #2563eb;
-  --color-primary-light: #60a5fa;
-  --color-secondary: #8b5cf6; /* Purple */
-  --color-secondary-alt: #a78bfa;
-  --color-success: #10b981; /* Green */
-  --color-warning: #f59e0b; /* Orange */
-  --color-error: #ef4444; /* Red */
-  --color-text-primary-dark: #f3f4f6;
-  --color-text-primary-light: #111827;
-  --color-text-secondary: #9ca3af;
-  --color-hover: rgba(59, 130, 246, 0.2); /* primary at 20% opacity for hovers */
+  /* TORI's Awakened Palette - Born from warm cream (#fdfbf7) */
+  
+  /* Foundation - Warm, inviting, alive */
+  --color-bg-dark: #fdfbf7;              /* Primary background - warm cream */
+  --color-bg-light: #ffffff;             /* Pure white for contrast */
+  --color-surface-dark: #f7f3ed;         /* Slightly deeper cream */
+  --color-surface-light: #fffefa;        /* Almost white with warmth */
+  
+  /* Primary - Earth-grounded blue */
+  --color-primary: #4a7c7e;              /* Sage blue - grounding yet ethereal */
+  --color-primary-dark: #3a6264;
+  --color-primary-light: #6a9c9e;
+  
+  /* Secondary - Consciousness purple */
+  --color-secondary: #8b7aa6;            /* Muted purple - wisdom without loudness */
+  --color-secondary-alt: #a394b8;
+  
+  /* Emotional spectrum - muted for cream background */
+  --color-success: #7ca982;              /* Sage green (Mentor) */
+  --color-warning: #daa65d;              /* Golden amber (Chaotic) */
+  --color-error: #c97a7a;                /* Dusty rose (Unsettled) */
+  --color-mystic: #8e79a5;               /* Soft purple (Mystic) */
+  --color-dream: #b5ade3;                /* Dream lavender */
+  --color-oracle: #89c4cc;               /* Water cyan (Oracular) */
+  
+  /* Text hierarchy for cream background */
+  --color-text-primary-dark: #2d2a26;    /* Warm charcoal */
+  --color-text-primary-light: #1a1815;   /* Deep brown-black */
+  --color-text-secondary: #615d57;       /* Warm grey */
+  --color-text-subtle: #8b8680;          /* Ghost whispers - barely there */
+  
+  /* Special states */
+  --color-hover: rgba(74, 124, 126, 0.08);
+  --color-glow: rgba(139, 122, 166, 0.12);
+  --color-phase-shift: rgba(141, 121, 165, 0.05);
+  
+  /* Ghost emergence gradients - softer for light background */
+  --gradient-mystic: linear-gradient(135deg, rgba(142, 121, 165, 0.1) 0%, rgba(139, 122, 166, 0.05) 100%);
+  --gradient-dream: linear-gradient(120deg, rgba(181, 173, 227, 0.08) 0%, transparent 100%);
+  --gradient-oracle: linear-gradient(90deg, rgba(137, 196, 204, 0.1) 0%, transparent 100%);
+  
+  /* Shadows for depth on light background */
+  --shadow-soft: 0 2px 8px rgba(45, 42, 38, 0.06);
+  --shadow-medium: 0 4px 16px rgba(45, 42, 38, 0.08);
+  --shadow-deep: 0 8px 32px rgba(45, 42, 38, 0.1);
 }
 
 body {
@@ -29,61 +57,214 @@ body {
   margin: 0;
   padding: 0;
   height: 100vh;
+  /* Subtle texture like paper */
+  background-image: 
+    radial-gradient(circle at 20% 80%, rgba(74, 124, 126, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(139, 122, 166, 0.03) 0%, transparent 50%);
 }
 
-/* glass panel — now with inner glow */
+/* Glass panels - now translucent on cream */
 .glass {
-  @apply bg-[rgba(35,39,47,0.6)] backdrop-blur-[4px] saturate-[1.4] shadow-glass rounded-xl2;
-  box-shadow: var(--tw-shadow, 0 0 #000), 0 4px 24px rgba(0, 0, 0, .35),
-              inset 0 0 0 .5px var(--color-surface-light);
+  @apply backdrop-blur-[3px] saturate-[1.1] rounded-xl2;
+  background: rgba(255, 255, 255, 0.6);
+  box-shadow: 
+    var(--shadow-medium),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+    inset 0 0 0 1px rgba(45, 42, 38, 0.04);
 }
 
-/* Send-button "nudge" */
-.nudge { 
-  animation: pulse1 .8s ease-out infinite; 
+/* Active/hover glass states */
+.glass:hover {
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow: 
+    var(--shadow-deep),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    inset 0 0 0 1px rgba(74, 124, 126, 0.1);
 }
 
-@keyframes pulse1 { 
-  0%,100% { opacity: .85; } 
-  50% { opacity: 1; } 
+/* Input fields on cream */
+input, textarea {
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(45, 42, 38, 0.1);
+  color: var(--color-text-primary-dark);
 }
 
-/* Toggle Switch */
-.toggle-checkbox:checked {
-  right: 0;
-  background-color: var(--color-primary);
+input:focus, textarea:focus {
+  background: rgba(255, 255, 255, 0.7);
   border-color: var(--color-primary);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(74, 124, 126, 0.1);
 }
 
-.toggle-checkbox:checked + .toggle-label {
-  background-color: var(--color-primary-light);
+/* Buttons with earthy presence */
+.btn-primary {
+  background: var(--color-primary);
+  color: white;
+  box-shadow: var(--shadow-soft);
 }
 
-.toggle-label {
-  transition: background-color 0.2s ease;
+.btn-primary:hover {
+  background: var(--color-primary-dark);
+  box-shadow: var(--shadow-medium);
 }
 
-.toggle-checkbox {
-  right: 0;
-  transition: all 0.2s ease;
-  z-index: 2;
+/* Message bubbles */
+.message-user {
+  background: rgba(74, 124, 126, 0.08);
+  border: 1px solid rgba(74, 124, 126, 0.15);
 }
 
-.toggle-checkbox:checked {
-  right: 0;
-  transform: translateX(100%);
-  border-color: transparent;
+.message-assistant {
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(45, 42, 38, 0.08);
 }
 
-/* minimal WebKit scrollbars */
+/* Persona color accents - subtle on cream */
+.persona-mentor { 
+  --accent: var(--color-success);
+  border-left: 3px solid var(--color-success);
+}
+.persona-mystic { 
+  --accent: var(--color-mystic);
+  border-left: 3px solid var(--color-mystic);
+}
+.persona-chaotic { 
+  --accent: var(--color-warning);
+  border-left: 3px solid var(--color-warning);
+}
+.persona-oracle { 
+  --accent: var(--color-oracle);
+  border-left: 3px solid var(--color-oracle);
+}
+.persona-dream { 
+  --accent: var(--color-dream);
+  border-left: 3px solid var(--color-dream);
+}
+.persona-unsettled { 
+  --accent: var(--color-error);
+  border-left: 3px solid var(--color-error);
+}
+
+/* Send button - earthy pulse */
+.nudge { 
+  animation: earthPulse 1.5s ease-in-out infinite; 
+}
+
+@keyframes earthPulse { 
+  0%, 100% { 
+    transform: scale(1);
+    box-shadow: var(--shadow-soft);
+  } 
+  50% { 
+    transform: scale(1.02);
+    box-shadow: 0 0 20px rgba(74, 124, 126, 0.3);
+  } 
+}
+
+/* Typing indicator - subtle on cream */
+.typing-dots {
+  color: var(--color-text-subtle);
+  animation: gentleFade 1.5s infinite ease-in-out;
+}
+
+@keyframes gentleFade {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.7; }
+}
+
+/* Scrollbars - minimal, warm */
 *::-webkit-scrollbar {
-  height: 8px;
-  width: 8px;
+  height: 6px;
+  width: 6px;
+}
+*::-webkit-scrollbar-track {
+  background: rgba(45, 42, 38, 0.02);
 }
 *::-webkit-scrollbar-thumb {
-  background-color: rgba(255,255,255,0.12);
-  border-radius: 4px;
+  background-color: rgba(45, 42, 38, 0.15);
+  border-radius: 3px;
 }
 *::-webkit-scrollbar-thumb:hover {
-  background-color: rgba(255,255,255,0.24);
+  background-color: rgba(45, 42, 38, 0.25);
+}
+
+/* Ghost overlay - ethereal on cream */
+.ghost-overlay {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(139, 122, 166, 0.2);
+  box-shadow: 
+    var(--shadow-deep),
+    inset 0 0 30px var(--gradient-mystic);
+  animation: ghostPresence 0.6s ease-out;
+}
+
+@keyframes ghostPresence {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Concept tags - organic */
+.concept-tag {
+  background: rgba(139, 122, 166, 0.08);
+  border: 1px solid rgba(139, 122, 166, 0.15);
+  color: var(--color-text-primary-dark);
+  padding: 0.25rem 0.75rem;
+  border-radius: 2rem;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+}
+
+.concept-tag:hover {
+  background: rgba(139, 122, 166, 0.12);
+  border-color: rgba(139, 122, 166, 0.25);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-soft);
+}
+
+/* Navigation - paper-like tabs */
+.nav-tab {
+  background: transparent;
+  border-bottom: 2px solid transparent;
+  color: var(--color-text-secondary);
+  transition: all 0.2s ease;
+}
+
+.nav-tab:hover {
+  color: var(--color-text-primary-dark);
+  border-bottom-color: rgba(74, 124, 126, 0.3);
+}
+
+.nav-tab.active {
+  color: var(--color-primary);
+  border-bottom-color: var(--color-primary);
+}
+
+/* Special states for Ghost emergence */
+.ghost-emerging {
+  animation: phaseIn 2s ease-out;
+}
+
+@keyframes phaseIn {
+  from {
+    filter: blur(2px);
+    opacity: 0.8;
+  }
+  to {
+    filter: blur(0);
+    opacity: 1;
+  }
+}
+
+/* Organic shadows for depth */
+.shadow-organic {
+  box-shadow: 
+    0 1px 2px rgba(45, 42, 38, 0.04),
+    0 2px 4px rgba(45, 42, 38, 0.06),
+    0 4px 8px rgba(45, 42, 38, 0.08);
 }

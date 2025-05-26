@@ -1,181 +1,252 @@
 @echo off
-:: TORI Chat One-Step Deployment Script
-:: This script handles all steps to build and deploy the TORI Chat interface
+setlocal enabledelayedexpansion
+:: Simplified TORI Chat Deployment Script (Direct Method)
+:: Now includes conversation extraction functionality
 
 echo.
 echo =======================================
 echo    TORI Chat Production Deployment
 echo =======================================
 echo.
-echo This script will build and deploy the TORI Chat interface
-echo and launch it on http://localhost:3000
-echo.
+
+:: Parse extraction-related arguments
+set "EXTRACT_CONVERSATION="
+set "VERIFY_EXTRACTION=false"
+set "OUTPUT_DIR="
+set "EXTRACT_ONLY=false"
+
+:parse_args
+if "%~1"=="" goto :end_parse_args
+set "ARG=%~1"
+if "!ARG:~0,10!"=="--extract=" (
+    set "EXTRACT_CONVERSATION=!ARG:~10!"
+) else if "%~1"=="--verify" (
+    set "VERIFY_EXTRACTION=true"
+) else if "!ARG:~0,9!"=="--outdir=" (
+    set "OUTPUT_DIR=!ARG:~9!"
+) else if "%~1"=="--extract-only" (
+    set "EXTRACT_ONLY=true"
+)
+shift
+goto :parse_args
+:end_parse_args
+
+:: Process extraction if requested
+if not "!EXTRACT_CONVERSATION!"=="" (
+    echo Conversation extraction requested for: !EXTRACT_CONVERSATION!
+    
+    set "EXTRACT_ARGS=--conversation !EXTRACT_CONVERSATION!"
+    
+    if "!VERIFY_EXTRACTION!"=="true" (
+        set "EXTRACT_ARGS=!EXTRACT_ARGS! --verify"
+    )
+    
+    if not "!OUTPUT_DIR!"=="" (
+        set "EXTRACT_ARGS=!EXTRACT_ARGS! --output !OUTPUT_DIR!"
+    )
+    
+    echo Running extraction with arguments: !EXTRACT_ARGS!
+    node extraction-integration.js !EXTRACT_ARGS!
+    
+    :: Exit after extraction if --extract-only is specified
+    if "!EXTRACT_ONLY!"=="true" (
+        echo Extraction complete. Exiting as requested by --extract-only flag.
+        exit /b 0
+    )
+    
+    echo.
+    echo Continuing with deployment...
+    echo.
+)
+
 
 :: Navigate to the correct directory
 cd /d %~dp0tori_chat_frontend
 
 :: Verify we're in the right place
-if not exist "vite.config.js" (
+if not exist "package.json" (
     echo ERROR: Not in the correct directory!
-    echo Expected to find vite.config.js in %CD%
+    echo Expected to find package.json in %CD%
     echo.
     pause
     exit /b 1
 )
 
-:: Clean any existing build
-echo Cleaning previous build...
-if exist "dist" rd /s /q dist
-
-:: Fix React dependency conflicts by removing problematic packages
-echo Checking for React dependency conflicts...
-echo Running: npm ls react-diff-viewer
-call npm ls react-diff-viewer
-if %ERRORLEVEL% equ 0 (
-    echo.
-    echo WARNING: Found react-diff-viewer which conflicts with React 18
-    echo Would you like to: 
-    echo 1. Upgrade to compatible version (react-diff-viewer@4.0.0-rc.1)
-    echo 2. Remove the package (if not needed for production)
-    echo 3. Continue anyway (might fail)
-    echo.
-    set /p choice=Enter choice (1, 2, or 3): 
-    
-    if "%choice%"=="1" (
-        echo Upgrading react-diff-viewer to compatible version...
-        call npm install react-diff-viewer@4.0.0-rc.1 --save-exact
-        if %ERRORLEVEL% neq 0 (
-            echo ERROR: Failed to upgrade react-diff-viewer.
-            echo.
-            pause
-            exit /b 1
-        )
-    ) else if "%choice%"=="2" (
-        echo Removing react-diff-viewer...
-        call npm uninstall react-diff-viewer
-        if %ERRORLEVEL% neq 0 (
-            echo ERROR: Failed to remove react-diff-viewer.
-            echo.
-            pause
-            exit /b 1
-        )
-    ) else (
-        echo Continuing with potential dependency conflicts...
-    )
-)
-
-:: Install dependencies
-echo Installing production dependencies...
-echo Running: npm ci --omit dev
-call npm ci --omit dev
-if %ERRORLEVEL% neq 0 (
-    echo ERROR: Failed to install dependencies.
-    echo Trying alternative approach...
-    call npm ci --omit dev --legacy-peer-deps
-    if %ERRORLEVEL% neq 0 (
-        echo ERROR: All dependency installation methods failed.
-        echo You may need to manually fix dependency conflicts.
-        echo See TORI_CHAT_DEPLOYMENT_PLAN.md for details.
-        echo.
-        pause
-        exit /b 1
-    )
-)
-
-:: Verify Vite config has correct entry point
-echo Checking Vite configuration...
-findstr /C:"src/index.html" vite.config.js >nul
-if %ERRORLEVEL% neq 0 (
-    echo WARNING: Your vite.config.js might not be using the correct entry point.
-    echo This could result in building the redirect page instead of the full UI.
-    echo See TORI_CHAT_DEPLOYMENT_PLAN.md for details on fixing this.
-    echo.
-    echo Press any key to continue anyway...
-    pause >nul
-)
-
-:: Verify .env.production exists
+:: Make sure .env.production exists
 if not exist ".env.production" (
-    echo Creating .env.production...
+    echo Creating .env.production file...
     echo VITE_APP_MODE=chat> .env.production
     echo PUBLIC_URL=/>> .env.production
 )
 
-:: Build the application directly with Vite
-echo Building production version...
-echo Running: npx vite build
-call npx vite build
-call :checkError "Build failed. See error messages above."
+:: Clean up and install directly
+echo.
+echo Step 1: Cleaning up node_modules and installing dependencies...
+if exist "node_modules" rd /s /q node_modules
+if exist "package-lock.json" del package-lock.json
 
-goto :build_success
-
-:checkError
+:: Install all dependencies including dev dependencies
+echo Installing all dependencies...
+call npm install
 if %ERRORLEVEL% neq 0 (
-    echo ERROR: %~1
+    echo ERROR: Failed to install dependencies.
     echo.
     pause
     exit /b 1
 )
-goto :EOF
 
-:build_success
-
-:: Verify build size
-for %%F in (dist\index.html) do set size=%%~zF
-echo Built index.html size: %size% bytes
-if %size% LSS 1000 (
-    echo WARNING: The built index.html is very small (%size% bytes)
-    echo This might indicate it's still the redirect page rather than the full UI.
-    echo.
-    echo Press any key to continue anyway...
-    pause >nul
+:: Verify the Vite config and handle the index.html issue
+echo.
+echo Step 2: Setting up Vite configuration...
+if not exist "vite.config.js" (
+    echo ERROR: vite.config.js not found!
+    pause
+    exit /b 1
 )
 
-:: Install express if needed
-echo Checking for express dependency...
+:: Copy index.html to project root (in case Vite expects it there)
+echo Checking index.html placement...
+if not exist "index.html" (
+    echo Copying index.html to project root...
+    copy src\index.html .\ > nul
+)
+
+:: Ensure src/index.html exists
+if not exist "src\index.html" (
+    echo ERROR: src/index.html not found!
+    pause
+    exit /b 1
+)
+
+echo ✓ Vite configuration and index.html verified
+
+:: Build using Vite CLI
+echo.
+echo Step 3: Building the application...
+echo Running: npx vite build --debug
+call npx vite build --debug
+echo Build exit code: %ERRORLEVEL%
+if %ERRORLEVEL% neq 0 (
+    echo ERROR: Build failed.
+    echo.
+    pause
+    exit /b 1
+)
+echo ✓ Build completed
+
+:: Verify build was successful
+echo.
+echo Step 4: Verifying build output...
+if exist "dist\src\index.html" (
+    echo Found index.html in dist/src/ - Moving to dist/ for server compatibility...
+    if not exist "dist" mkdir dist
+    copy dist\src\index.html dist\ > nul
+) else if not exist "dist\index.html" (
+    echo ERROR: Build failed - index.html not found in expected locations.
+    echo Expected in either dist/index.html or dist/src/index.html
+    echo.
+    pause
+    exit /b 1
+)
+echo ✓ Build output verified
+
+:: Serve the application using a simple server
+echo.
+echo Step 5: Preparing to start the server
+echo.
+echo The application will be available at http://localhost:3000 or alternative port if 3000 is busy.
+echo Press Ctrl+C to stop the server when finished.
+echo.
+
+:: Copy the build assets to proper locations if needed
+echo Preparing build assets for serving...
+dir /b dist >nul 2>nul
+if exist "dist\src\assets" (
+    echo Moving assets to correct location...
+    if not exist "dist\assets" mkdir dist\assets
+    xcopy dist\src\assets\*.* dist\assets\ /Y /Q >nul
+)
+
+:: List the contents of the dist directory for debugging
+echo.
+echo Build output directory structure:
+dir dist /s /b
+
+:: Ensure express is installed before creating server file
 call npm list express --depth=0 >nul 2>nul
 if %ERRORLEVEL% neq 0 (
     echo Installing express...
-    call npm install express
+    call npm install express --save
 )
 
-:: Check if port is in use
+:: Create a server.cjs file (CommonJS syntax) with proper escaping
+echo.
+echo Creating Express server (CommonJS)...
+echo const express = require('express'); > server.cjs
+echo const path = require('path'); >> server.cjs
+echo const fs = require('fs'); >> server.cjs
+echo const app = express(); >> server.cjs
+echo const PORT = process.env.PORT ^|^| 3000; >> server.cjs
+echo. >> server.cjs
+echo // Serve static files from dist directory >> server.cjs
+echo app.use^(express.static^(path.join^(__dirname, 'dist'^)^)^); >> server.cjs
+echo. >> server.cjs
+echo // Also serve from dist/src if needed ^(for assets^) >> server.cjs
+echo app.use^(express.static^(path.join^(__dirname, 'dist/src'^)^)^); >> server.cjs
+echo. >> server.cjs
+echo // Fallback route for SPA >> server.cjs
+echo app.get^('*', ^(req, res^) ^=^> { >> server.cjs
+echo   // Check if index.html exists in dist >> server.cjs
+echo   const indexPath = path.join^(__dirname, 'dist', 'index.html'^); >> server.cjs
+echo   const srcIndexPath = path.join^(__dirname, 'dist', 'src', 'index.html'^); >> server.cjs
+echo. >> server.cjs
+echo   if ^(fs.existsSync^(indexPath^)^) { >> server.cjs
+echo     res.sendFile^(indexPath^); >> server.cjs
+echo   } else if ^(fs.existsSync^(srcIndexPath^)^) { >> server.cjs
+echo     res.sendFile^(srcIndexPath^); >> server.cjs
+echo   } else { >> server.cjs
+echo     res.status^(404^).send^('Application not found. Build may be incomplete.'^); >> server.cjs
+echo   } >> server.cjs
+echo }^); >> server.cjs
+echo. >> server.cjs
+echo // Start server >> server.cjs
+echo app.listen^(PORT, ^(^) ^=^> { >> server.cjs
+echo   console.log^(`TORI Chat running on http://localhost:${PORT}`^); >> server.cjs
+echo   console.log^(`Press Ctrl+C to stop the server.`^); >> server.cjs
+echo }^); >> server.cjs
+
+:: Check if port 3000 is in use
 echo.
 echo Checking if port 3000 is available...
-node ..\check-port.js
-if %ERRORLEVEL% neq 0 (
-    echo Would you like to try an alternative port? (Y/N)
-    set /p choice=
-    if /i "%choice%"=="Y" (
-        echo Using port 3001 instead...
+set PORT=3000
+for /f "tokens=5" %%a in ('netstat -aon ^| find ":3000" ^| find "LISTENING"') do (
+    echo WARNING: Port 3000 is already in use by PID %%a
+    tasklist /FI "PID eq %%a"
+    echo.
+    echo Would you like to: 
+    echo 1. Try an alternative port (3001)
+    echo 2. Exit and manage the process manually
+    set /p portChoice=Enter choice (1 or 2): 
+    
+    if "!portChoice!"=="1" (
+        echo Using alternative port 3001...
         set PORT=3001
-        echo Access the application at: http://localhost:3001
     ) else (
         echo.
-        echo Please manually stop the process using port 3000 and try again.
-        echo Use: netstat -ano ^| findstr :3000
-        echo Then: taskkill /F /PID PID_NUMBER
-        echo.
+        echo Please stop the process using port 3000 and try again.
+        echo You can use: taskkill /PID %%a /F
         pause
         exit /b 1
     )
-) else (
-    set PORT=3000
-    echo Access the application at: http://localhost:3000
 )
 
-:: Start the production server
+:: Start the server with improved error handling
 echo.
-echo Starting production server...
-echo Running: node start-production.cjs
-echo.
-echo Press Ctrl+C to stop the server when finished.
-echo.
-node start-production.cjs
-
-:: If we get here, something went wrong
-echo.
-echo The server has stopped unexpectedly.
-echo Check the error messages above for more information.
-echo.
-pause
+echo Starting server on port %PORT%...
+set NODE_ENV=production
+node server.cjs
+if %ERRORLEVEL% neq 0 (
+    echo ERROR: Server failed to start.
+    pause
+    exit /b 1
+)

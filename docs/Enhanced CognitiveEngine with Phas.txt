@@ -1,0 +1,195 @@
+// Enhanced CognitiveEngine with Phase 3 Memory Metrics & Paradox Analysis
+import {
+  cognitiveState,
+  updateCognitiveState,
+  LoopRecord,
+  incrementLoopDepth,
+  decrementLoopDepth,
+  CognitiveThresholds,
+  addScar,
+  healScar
+} from './cognitiveState';
+import { contradictionMonitor } from './contradictionMonitor';
+import { phaseController } from './phaseController';
+import { closureGuard, ClosureResult, FeedbackOptions } from './closureGuard';
+import { braidMemory } from './braidMemory';
+import { NoveltyGlyph } from './loopRecord';
+import { memoryMetrics, MemoryHealth } from './memoryMetrics';
+import { paradoxAnalyzer, AssociatorResult } from './paradoxAnalyzer';
+import { get } from 'svelte/store';
+
+export interface CognitiveEngineConfig {
+  enablePhaseGating: boolean;
+  enableContradictionMonitoring: boolean;
+  enableClosureGuard: boolean;
+  enableBraidMemory: boolean;
+  enableMemoryMetrics: boolean;
+  enableParadoxAnalysis: boolean;
+  autoStabilization: boolean;
+  autoNoveltyInjection: boolean;
+  autoReflectiveLoops: boolean;
+  debugMode: boolean;
+}
+
+export class CognitiveEngine {
+  private config: CognitiveEngineConfig;
+  private isInitialized: boolean = false;
+  private loopCounter: number = 0;
+  private activeLoops: Map<string, LoopRecord> = new Map();
+  private reflectiveLoops: Map<string, string> = new Map(); // paradoxId -> loopId
+  private eventListeners: Map<string, Array<(...args: any[]) => void>> = new Map();
+
+  private recursiveBurstMonitor = {
+    contextNorm: 0,
+    compressionGain: 1,
+    gammaThreshold: 2.5,
+    burstRisk: false
+  };
+
+  constructor(config: Partial<CognitiveEngineConfig> = {}) {
+    this.config = {
+      enablePhaseGating: true,
+      enableContradictionMonitoring: true,
+      enableClosureGuard: true,
+      enableBraidMemory: true,
+      enableMemoryMetrics: true,
+      enableParadoxAnalysis: true,
+      autoStabilization: true,
+      autoNoveltyInjection: true,
+      autoReflectiveLoops: true,
+      debugMode: false,
+      ...config
+    };
+  }
+
+  public initialize(): void {
+    if (this.isInitialized) return;
+    this.isInitialized = true;
+    this.registerSystemHooks();
+    if (this.config.debugMode) console.info('🧠 CognitiveEngine initialized');
+  }
+
+  public startLoop(id: string, prompt: string): void {
+    const phase = phaseController.getPhase();
+    const loop = new LoopRecord(id, prompt, phase);
+    this.activeLoops.set(id, loop);
+    incrementLoopDepth();
+    this.emit('loop:start', loop);
+  }
+
+  public addGlyph(id: string, glyph: NoveltyGlyph): void {
+    const loop = this.activeLoops.get(id);
+    if (!loop) return;
+    loop.addGlyph(glyph);
+    this.emit('loop:glyph', { id, glyph });
+  }
+
+  public closeLoop(id: string, feedback?: FeedbackOptions): void {
+    const loop = this.activeLoops.get(id);
+    if (!loop) return;
+
+    loop.finalize();
+    decrementLoopDepth();
+    this.activeLoops.delete(id);
+
+    if (this.config.enableMemoryMetrics) memoryMetrics.update(loop);
+
+    const closureResult = this.config.enableClosureGuard
+      ? closureGuard.evaluate(loop, feedback)
+      : { valid: true };
+
+    if (!closureResult.valid) {
+      addScar(loop.id);
+      this.emit('loop:scarred', loop);
+    } else {
+      healScar(loop.id);
+    }
+
+    if (this.config.enableBraidMemory) braidMemory.integrate(loop);
+
+    if (this.config.enableParadoxAnalysis) {
+      const paradox = paradoxAnalyzer.inspect(loop);
+      if (paradox?.isCritical) {
+        this.emit('loop:paradox', { loopId: id, paradox });
+        if (this.config.autoReflectiveLoops) {
+          this.spawnReflectiveLoop(id, paradox);
+        }
+      }
+    }
+
+    updateCognitiveState({ loopCount: ++this.loopCounter });
+    this.emit('loop:closed', loop);
+  }
+
+  private spawnReflectiveLoop(originId: string, paradox: AssociatorResult): void {
+    const reflectiveId = `${originId}:reflect`;
+    const prompt = `[REFLECT:${paradox.type}] ${paradox.description}`;
+
+    if (this.reflectiveLoops.has(paradox.id)) return;
+    this.reflectiveLoops.set(paradox.id, reflectiveId);
+
+    if (this.config.debugMode)
+      console.warn('⚠️ Spawning reflective loop for paradox:', paradox);
+
+    this.startLoop(reflectiveId, prompt);
+    this.addGlyph(reflectiveId, { token: 'reflect:start', phase: 0 });
+    this.addGlyph(reflectiveId, { token: 'analyze', phase: 1 });
+    this.addGlyph(reflectiveId, { token: 'stabilize', phase: 2 });
+    this.addGlyph(reflectiveId, { token: 'resolve', phase: 3 });
+    this.closeLoop(reflectiveId);
+  }
+
+  public runHealthCheck(): MemoryHealth {
+    const health = memoryMetrics.updateAll();
+    updateCognitiveState({ scarCount: health.scarCount });
+    return health;
+  }
+
+  public reset(): void {
+    this.activeLoops.clear();
+    this.reflectiveLoops.clear();
+    this.loopCounter = 0;
+    this.recursiveBurstMonitor = {
+      contextNorm: 0,
+      compressionGain: 1,
+      gammaThreshold: 2.5,
+      burstRisk: false
+    };
+    updateCognitiveState({ loopCount: 0 });
+  }
+
+  public on(event: string, handler: (...args: any[]) => void): void {
+    const handlers = this.eventListeners.get(event) || [];
+    handlers.push(handler);
+    this.eventListeners.set(event, handlers);
+  }
+
+  private emit(event: string, payload?: any): void {
+    const handlers = this.eventListeners.get(event);
+    if (handlers) {
+      handlers.forEach((fn) => {
+        try {
+          fn(payload);
+        } catch (err) {
+          console.error(`Listener for ${event} failed`, err);
+        }
+      });
+    }
+  }
+
+  private registerSystemHooks(): void {
+    window.addEventListener('tori:cognitive:loop-scarred', () => {
+      memoryMetrics.updateAll();
+    });
+
+    window.addEventListener('tori:cognitive:paradox-detected', (event) => {
+      const paradox = event.detail;
+      if (paradox?.type === 'godelian') {
+        console.warn('🧠 Gödelian risk detected — initiating lockdown');
+        this.spawnReflectiveLoop(`auto_godel_${Date.now()}`, paradox);
+      }
+    });
+  }
+}
+
+export const cognitiveEngine = new CognitiveEngine();

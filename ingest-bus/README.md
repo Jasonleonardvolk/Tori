@@ -1,155 +1,157 @@
-# Ingest Bus Service
+# TORI Ingest Bus
 
-A microservice for document ingestion with MCP integration, efficient delta-based transport, and special handling for mathematical content.
+A microservice for ingesting documents, conversations, and other content into the ScholarSphere knowledge system.
 
-## Features
+## Overview
 
-- **MCP Tool Integration**: Expose document ingestion capabilities as MCP tools
-- **SHA-256 Deduplication**: Prevent duplicate document processing
-- **Delta Protocol**: Efficient state transfer for high-frequency updates
-- **Math-Aware Processing**: Special handling for LaTeX math formulas
-- **Chart Detection**: Extract and generate alt text for charts
-- **WebSocket Updates**: Real-time job status updates
-- **Prometheus Metrics**: Extensive monitoring capabilities
-- **VS Code Integration**: Task-based workflow for developers
+The TORI Ingest Bus serves as the central ingestion pipeline for the TORI system, enabling the following capabilities:
 
-## Components
+- Queue and process documents of various types (PDF, markdown, conversations, etc.)
+- Extract text content and structure it appropriately
+- Chunk content for optimal knowledge representation
+- Vectorize content for semantic search and concept mapping
+- Map content to ScholarSphere concepts with phase vectors
+- Store processed content with full provenance tracking
+- Provide status monitoring and metrics for the ingestion process
+- Expose functionality through a REST API and MCP interface
 
-- **API Service**: FastAPI service exposing REST and WebSocket endpoints
-- **Worker**: Background worker for document processing
-- **MCP Tools**: Exposes ingest.queue, ingest.status, and ingest.metrics
-- **Client Utilities**: Examples and utilities for interacting with the service
+## Architecture
 
-## Getting Started
+```
+ingest-bus/
+├── main.py                 # FastAPI application entry point
+├── routes/                 # API route handlers
+│   ├── queue.py            # Document queue endpoints
+│   ├── status.py           # Job status endpoints
+│   └── metrics.py          # System metrics endpoints
+├── workers/                # Background processing workers
+│   └── extract.py          # Content extraction and processing
+├── models/                 # Data models and schemas
+│   └── schemas.py          # Pydantic models
+└── utils/                  # Utility modules
+    ├── config_loader.py    # Configuration loading
+    └── logger.py           # Logging utilities
+```
+
+## Integration Points
+
+### ScholarSphere
+
+The Ingest Bus connects to ScholarSphere for concept mapping and storage:
+
+- Phase vectors are generated for all chunks
+- Content is mapped to existing concepts in ScholarSphere
+- New concepts may be created if needed
+- Full provenance tracking links chunks to source documents
+
+### CLINE Integration
+
+CLINE can use the Ingest Bus through the MCP interface (defined in `registry/mcp/ingest.schema.yaml`):
+
+- `ingest.queue`: Queue a document for processing
+- `ingest.status`: Check the status of an ingest job
+- `ingest.metrics`: Get system metrics
+- `kb.search`: Search for content in the knowledge base
+- `kb.retrieve`: Retrieve specific content by ID
+
+### Conversation Extractor
+
+The Ingest Bus leverages the existing conversation extractor (`extract_conversation.js`) to process CLINE conversations:
+
+- Code snippets are properly extracted and processed
+- Notes and documentation are captured
+- Conversation text is cleaned and structured
+- Metadata is preserved for provenance
+
+## Running the Service
 
 ### Prerequisites
 
 - Python 3.8+
-- Poetry (optional, for dependency management)
-- PyMuPDF (for PDF processing)
-- Python-Magic (for MIME type detection)
-- MathPix API key (optional, for improved math formula recognition)
+- FastAPI and dependencies: `pip install fastapi uvicorn pydantic prometheus_client`
+- Node.js (for conversation extraction)
 
-### Installation
+### Starting the Server
 
-1. Clone the repository
-2. Install dependencies:
-   ```
-   pip install -r requirements.txt
-   ```
-
-### Starting the Service
-
-Run the service using the provided batch file:
-
-```
-start-ingest-bus.bat
+```bash
+cd ingest-bus
+uvicorn main:app --reload --port 8080
 ```
 
-This will start the service on http://localhost:8000 with:
-- REST API at /api
-- WebSocket endpoint at /api/ws
-- Prometheus metrics at :8081/metrics
-- MCP schema at /mcp/v2/schema
+The server will be available at http://localhost:8080 with API documentation at http://localhost:8080/docs.
 
-### Starting the Worker
+### Configuration
 
-Run the enhanced worker with math-awareness:
+Configuration is loaded from the `conversation_config.json` file in the project root. Key settings include:
 
-```
-start-enhanced-worker.bat
-```
+- ScholarSphere connection parameters
+- Chunking settings (size, overlap)
+- Vectorization parameters
+- MCP registry settings
 
-For improved math formula recognition with MathPix:
+## API Usage Examples
 
-```
-start-enhanced-worker.bat --mathpix
-```
+### Queue a Document
 
-## VS Code Integration
-
-The project includes VS Code tasks for common operations:
-
-- **Run ingest-bus**: Start the ingest-bus service
-- **Run math-aware worker**: Start the worker with math awareness
-- **Queue sample PDFs**: Upload sample PDFs for processing
-- **Tail metrics**: View real-time metrics
-- **Run math chunking tests**: Run tests for math-aware chunking
-
-To use these tasks, press `Ctrl+Shift+P` and select "Tasks: Run Task".
-
-## API Reference
-
-### REST API
-
-- `POST /api/jobs`: Queue a document for processing
-- `GET /api/jobs`: List jobs
-- `GET /api/jobs/{job_id}`: Get job status
-- `PATCH /api/jobs/{job_id}/status`: Update job status
-- `PATCH /api/jobs/{job_id}/progress`: Update job progress
-- `POST /api/jobs/{job_id}/chunks`: Add a chunk to a job
-- `POST /api/jobs/{job_id}/concepts`: Add a concept to a job
-- `GET /api/metrics`: Get ingestion metrics
-
-### WebSocket API
-
-- Connect to `/api/ws`
-- Subscribe to updates with `{"type": "subscribe", "topic": "{job_id}"}`
-- Receive updates with `{"type": "update", "topic": "{job_id}", "data": {...}}`
-
-### MCP Tools
-
-- `ingest.queue`: Queue a document for processing
-- `ingest.status`: Get job status or list jobs
-- `ingest.metrics`: Get processing metrics
-
-## Math-Aware Processing
-
-The system includes special handling for mathematical content:
-
-- **Formula Detection**: Identifies LaTeX formulas in documents
-- **Chunk Preservation**: Ensures formulas aren't split across chunks
-- **MathPix Integration**: Optional improved formula recognition
-- **Math Block Metrics**: Track math blocks and potential splitting issues
-
-## Configuration
-
-Configuration options are available through environment variables:
-
-- `INGEST_BUS_URL`: URL of the ingest-bus service (default: http://localhost:8000)
-- `INGEST_API_KEY`: API key for authentication (optional)
-- `INGEST_REQUIRE_API_KEY`: Whether to require API key authentication (default: false)
-- `USE_MATHPIX`: Whether to use MathPix for formula recognition (default: false)
-- `MAX_CHUNK_SIZE`: Maximum chunk size in characters (default: 1800)
-- `MAX_WORKERS`: Maximum number of worker threads (default: 2)
-
-## Deployment
-
-For production deployment instructions, see [DEPLOYMENT.md](DEPLOYMENT.md).
-
-## Testing
-
-Run the test suite:
-
-```
-python -m unittest discover tests
+```bash
+curl -X POST http://localhost:8080/queue \
+  -H "Content-Type: application/json" \
+  -d '{
+    "document_type": "pdf",
+    "title": "Example Document",
+    "tags": ["example", "documentation"],
+    "metadata": {"author": "TORI Team"}
+  }' \
+  --data-binary @path/to/document.pdf
 ```
 
-For math-aware chunking tests:
+### Check Job Status
 
+```bash
+curl http://localhost:8080/status/job/12345
 ```
-python -m unittest tests/test_math_aware_chunking.py
+
+### Get Metrics
+
+```bash
+curl http://localhost:8080/metrics
 ```
 
-## Examples
+## Monitoring
 
-Example scripts are provided in the `examples` directory:
+The service exposes Prometheus metrics at http://localhost:8080/metrics/prometheus for integration with monitoring systems.
 
-- `simple_client.py`: Simple client for interacting with the service
-- `test_delta_encoder.py`: Example of using the delta encoder/decoder
-- `worker_extract.py`: Basic worker implementation
-- `worker_extract_enhanced.py`: Enhanced worker with math awareness
+Key metrics include:
 
-## Launch Checklist
+- `ingest_files_queued_total`
+- `ingest_files_processed_total`
+- `ingest_failures_total`
+- `chunk_avg_len_chars`
+- `concept_recall_accuracy`
+- `active_jobs`
+- `queue_depth`
 
-For a step-by-step guide to deploying and verifying the service, see [LAUNCH_CHECKLIST.md](LAUNCH_CHECKLIST.md).
+## Development
+
+### Running Tests
+
+```bash
+pytest
+```
+
+### Adding New Document Types
+
+To add support for a new document type:
+
+1. Add the type to the `DocumentType` enum in `models/schemas.py`
+2. Implement an extraction function in `workers/extract.py`
+3. Update the extraction routing in `process_ingest_job` in `routes/queue.py`
+4. Update the MCP schema in `registry/mcp/ingest.schema.yaml`
+
+## Future Enhancements
+
+- Database persistence for jobs and metrics
+- Advanced chunking strategies based on semantic boundaries
+- Support for more multimedia content types (images, audio, video)
+- Integration with TORI's phase-aligned reasoning system
+- Hologram and spectral emotion mapping for audio/video content

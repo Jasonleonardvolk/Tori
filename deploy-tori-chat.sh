@@ -1,6 +1,7 @@
 #!/bin/bash
 # TORI Chat One-Step Deployment Script (Unix/Mac version)
 # This script handles all steps to build and deploy the TORI Chat interface
+# Now includes conversation extraction functionality
 
 echo ""
 echo "======================================="
@@ -10,6 +11,59 @@ echo ""
 echo "This script will build and deploy the TORI Chat interface"
 echo "and launch it on http://localhost:3000"
 echo ""
+
+# Check for extraction-related arguments
+EXTRACT_CONVERSATION=""
+VERIFY_EXTRACTION=false
+OUTPUT_DIR=""
+
+# Parse arguments
+for arg in "$@"
+do
+  case $arg in
+    --extract=*)
+      EXTRACT_CONVERSATION="${arg#*=}"
+      shift
+      ;;
+    --verify)
+      VERIFY_EXTRACTION=true
+      shift
+      ;;
+    --outdir=*)
+      OUTPUT_DIR="${arg#*=}"
+      shift
+      ;;
+  esac
+done
+
+# Process extraction if requested
+if [ ! -z "$EXTRACT_CONVERSATION" ]; then
+  echo "Conversation extraction requested for: $EXTRACT_CONVERSATION"
+  
+  EXTRACT_ARGS="--conversation $EXTRACT_CONVERSATION"
+  
+  if [ "$VERIFY_EXTRACTION" = true ]; then
+    EXTRACT_ARGS="$EXTRACT_ARGS --verify"
+  fi
+  
+  if [ ! -z "$OUTPUT_DIR" ]; then
+    EXTRACT_ARGS="$EXTRACT_ARGS --output $OUTPUT_DIR"
+  fi
+  
+  echo "Running extraction with arguments: $EXTRACT_ARGS"
+  node extraction-integration.js $EXTRACT_ARGS
+  
+  # Exit after extraction if --extract-only is specified
+  if [[ "$*" == *"--extract-only"* ]]; then
+    echo "Extraction complete. Exiting as requested by --extract-only flag."
+    exit 0
+  fi
+  
+  echo ""
+  echo "Continuing with deployment..."
+  echo ""
+fi
+
 
 # Navigate to the correct directory
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"

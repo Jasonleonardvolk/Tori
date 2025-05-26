@@ -1,0 +1,22 @@
+{
+  "id": "sprint-user-12345",
+  "name": "Sprint User",
+  "email": "sprint@tori.dev",
+  "oauth_provider": "google",
+  "persona_mode": "researcher",
+  "created_at": "2025-05-23T20:58:00Z",
+  "settings": {
+    "preferred_memory_architecture": "soliton",
+    "concept_visualization": "phase_coherent",
+    "extraction_mode": "advanced"
+  },
+  "session": {
+    "active": true,
+    "last_activity": "2025-05-23T20:58:00Z",
+    "context": {
+      "current_project": "tori_sprint",
+      "active_documents": [],
+      "concept_focus": []
+    }
+  }
+}

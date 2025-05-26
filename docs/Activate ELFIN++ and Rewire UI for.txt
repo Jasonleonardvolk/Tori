@@ -1,0 +1,449 @@
+Activate ELFIN++ and Rewire UI for Memory Panel and Hologram
+
+Phase 11: ELFIN++ Integration and Layout Overhaul
+In Phase 11 of the TORI interface, we introduce the ELFIN++ scripting engine for event-driven ghost orchestration and implement a significant UI layout reconfiguration. The Memory System panel is moved to the left sidebar, and the right sidebar now hosts a full-height 3D Thoughtspace visualization. We ensure the design remains minimalistic, uses the TORI Tailwind theme, and is mobile-responsive. Below are the updated files and their implementations, with detailed explanations:
++layout.svelte
+Layout Structure: We rearranged the overall layout into a three-section flex container: a left sidebar for the Memory System panel, a central area for the main content (chat/project), and a right sidebar for the Thoughtspace 3D view.
+Responsive Design: The layout uses a mobile-first approach. On small screens, the sections stack vertically (Memory panel, then main content, then Thoughtspace). On medium+ screens (md: breakpoint), it switches to a horizontal row with side panels.
+Tailwind Styling: We applied TORI theme colors for background and text (bg-tori-background, text-tori-text). The sidebars have fixed widths (maintaining the previous Memory panel width) on larger screens and are full-width when stacked on mobile. We also ensure full viewport height (h-screen) and scrolling as needed.
+svelte
+Copy
+<script lang="ts">
+  import MemoryPanel from "../components/MemoryPanel.svelte";
+  import ThoughtspaceRenderer from "../components/ThoughtspaceRenderer.svelte";
+</script>
+
+<!-- Root layout container: flex column on mobile, row on desktop -->
+<div class="flex flex-col md:flex-row h-screen bg-tori-background text-tori-text">
+  <!-- Left Sidebar: Memory System Panel -->
+  <aside class="md:w-80 w-full md:flex-none h-full overflow-y-auto">
+    <MemoryPanel />
+  </aside>
+
+  <!-- Main Content Area: (Chat/Project content will be rendered here) -->
+  <main class="flex-1 h-full overflow-y-auto relative">
+    <slot />  <!-- Child route content (conversation UI, etc.) -->
+  </main>
+
+  <!-- Right Sidebar: Thoughtspace 3D Renderer -->
+  <aside class="md:w-80 w-full md:flex-none h-full bg-tori-background relative">
+    <ThoughtspaceRenderer />
+  </aside>
+</div>
+Notes: The md:w-80 class gives the sidebars a width of ~20rem (maintaining the prior panel width) on medium and larger screens. On smaller screens, they take full width (w-full) but stack vertically. Each sidebar is overflow-y-auto to scroll independently if content exceeds viewport height.
+components/MemoryPanel.svelte
+Move to Left Sidebar: The Memory System panel component is largely unchanged functionally, but we adjusted its styling for the new left-side placement. Previously, it likely had a left border when on the right side; now we use a right border to separate it from the main content.
+Panel Header and Collapse Control: The header still displays “Memory System” with the count of entries, and a collapse/expand button. We flipped the collapse icon direction (from a right-pointing arrow to left-pointing) since the panel is on the left now. This button allows the panel to slide in/out (the actual collapse behavior is managed elsewhere).
+Content and Interactivity: All existing interactive elements (user info, document upload area, tabs for All/Concepts/Documents, etc.) remain intact. The panel retains its own internal state and scrolling. The example below highlights the border and icon changes and summarizes the structure:
+svelte
+Copy
+<script lang="ts">
+  import IconArrowLeft from "../icons/IconArrowLeft.svelte";  /* Icon for collapsing left panel */
+  import UploadArea from "./UploadArea.svelte";
+  import { userStats } from "../lib/stores";  // assume a store providing { name, email, docs, chats, concepts }
+  
+  let activeTab: "All" | "Concepts" | "Documents" = "All";
+  $: totalEntries = userStats.docs + userStats.chats + userStats.concepts;
+  
+  function collapsePanel() {
+    // Logic to collapse/hide the memory panel (e.g., toggling a store or CSS class)
+  }
+  
+  function handleUpload(file: File) {
+    // Triggered when a document is uploaded via UploadArea
+    // (This may call an API and then the ELFIN++ script via the interpreter)
+  }
+</script>
+
+<!-- Memory Panel Container -->
+<div class="flex flex-col h-full bg-tori-background text-tori-text border-r border-tori-border">
+  <!-- Header: Title and Collapse Button -->
+  <div class="flex items-center justify-between px-3 py-2 bg-tori-panel">
+    <h2 class="text-base font-semibold">
+      Memory System <span>({totalEntries})</span>
+    </h2>
+    <!-- Collapse button (points left, since panel is on left side now) -->
+    <button class="p-1 hover:bg-tori-hover rounded" on:click={collapsePanel}>
+      <IconArrowLeft class="w-5 h-5 text-tori-text" />
+    </button>
+  </div>
+
+  <!-- User Info Summary -->
+  <div class="px-3 py-2 border-b border-tori-border text-sm">
+    <div class="font-bold">{userStats.name}</div>
+    <div class="text-xs opacity-75">{userStats.email}</div>
+    <div class="text-xs mt-1">
+      {userStats.docs} docs ・ {userStats.chats} chats ・ {userStats.concepts} concepts
+    </div>
+  </div>
+
+  <!-- Upload Documents Section -->
+  <div class="px-3 py-4 border-b border-tori-border">
+    <UploadArea on:upload={event => handleUpload(event.detail.file)} />
+  </div>
+
+  <!-- Tabs (All/Concepts/Documents) -->
+  <div class="flex px-3 space-x-4 border-b border-tori-border text-sm">
+    <button class="{activeTab === 'All' ? 'font-semibold text-tori-text' : 'text-tori-text/50'}"
+            on:click={() => activeTab = 'All'}>
+      All ({totalEntries})
+    </button>
+    <button class="{activeTab === 'Concepts' ? 'font-semibold text-tori-text' : 'text-tori-text/50'}"
+            on:click={() => activeTab = 'Concepts'}>
+      Concepts ({userStats.concepts})
+    </button>
+    <button class="{activeTab === 'Documents' ? 'font-semibold text-tori-text' : 'text-tori-text/50'}"
+            on:click={() => activeTab = 'Documents'}>
+      Documents ({userStats.docs})
+    </button>
+  </div>
+
+  <!-- Tab Content -->
+  <div class="flex-1 overflow-y-auto px-3 py-2 text-sm">
+    {#if totalEntries === 0}
+      <p class="text-center italic opacity-75 mt-10">
+        No memory entries yet.<br/>
+        Upload documents or start conversations.
+      </p>
+    {/if}
+    {#if activeTab === 'All' && totalEntries > 0}
+      <!-- List all memory entries (concepts, documents, etc.) -->
+      <!-- ... (existing rendering of combined entries) ... -->
+    {/if}
+    {#if activeTab === 'Concepts' && userStats.concepts > 0}
+      <!-- List concept entries -->
+      <!-- ... (existing concept list rendering) ... -->
+    {/if}
+    {#if activeTab === 'Documents' && userStats.docs > 0}
+      <!-- List document entries -->
+      <!-- ... (existing document list rendering) ... -->
+    {/if}
+  </div>
+</div>
+Changes Summary: In the code above, note the container now uses border-r (instead of a left border) to visually separate it from the main content. We use an IconArrowLeft for the collapse button (assuming an SVG icon component or similar) to indicate the panel can slide out to the left. Other functionalities (upload handling, tab switching, listing content) remain as before, just repositioned in the layout.
+components/ThoughtspaceRenderer.svelte
+Full-Height 3D View: This component now occupies the entire right panel and renders the Thoughtspace – a 3D “hologram” of the concept network. It initializes a WebGL scene (using Three.js or a similar library) to display concept nodes and ghost representations. The container is styled to fill the available space.
+Orbiting Ghost Halo: We represent each ghost persona as an object (e.g., a small glowing orb or icon) orbiting around the central concept graph. The orbit animation is handled in the render loop (giving a rotating “halo” of ghosts). When a ghost is active or recently triggered, its representation could glow or highlight.
+Animated Concept Auras: When new or active concepts appear (for example, as a result of document indexing or other triggers), those concept nodes in the 3D graph emit an aura (a pulsing glow or halo) to draw attention. This is achieved by flagging those nodes and animating their material (e.g., oscillating brightness or scale).
+Phase Coherence Glow Bar & Stats: We overlay a UI element on the 3D view showing system stats:
+A “phase coherence” bar at the bottom indicates the system’s entropy vs. stability. As entropy rises (system gets more chaotic), the bar might shrink or change color; as coherence increases, the bar glows fully.
+Textual stats (optional): We display the current active concept (if any is being focused), the last triggered ghost persona, and the system entropy level (as a percentage or descriptive value). These update dynamically based on the underlying state in conceptMesh.ts.
+Below is the updated ThoughtspaceRenderer with initialization and overlay:
+svelte
+Copy
+<script lang="ts">
+  import { onMount } from "svelte";
+  import * as Thoughtspace from "../lib/conceptMesh";
+  import { activeConcept, lastTriggeredGhost, systemEntropy } from "../lib/conceptMesh";
+  
+  let containerEl: HTMLDivElement;  // container for the 3D canvas
+  
+  onMount(() => {
+    // Initialize the 3D scene inside the container element
+    Thoughtspace.init(containerEl);
+    // (The conceptMesh module will handle adding objects and the animation loop)
+  });
+  
+  // Reactive values from the conceptMesh stores
+  $: currentConcept = $activeConcept;
+  $: currentGhost = $lastTriggeredGhost;
+  $: entropyLevel = $systemEntropy;
+  
+  // Compute coherence (inverse of entropy) for the glow bar (e.g., if entropy is 80%, coherence = 20%)
+  $: coherencePercent = entropyLevel != null ? Math.max(0, 100 - entropyLevel) : 100;
+</script>
+
+<!-- Container for the 3D holographic Thoughtspace -->
+<div bind:this={containerEl} class="relative w-full h-full">
+  <!-- (Three.js will append a canvas into this container to render the 3D scene) -->
+  
+  <!-- Stats Overlay (top-left corner) -->
+  <div class="absolute top-2 left-2 text-xs bg-tori-background/75 text-tori-text p-2 rounded">
+    {#if currentConcept}
+      <div><strong>Active Concept:</strong> {currentConcept}</div>
+    {/if}
+    {#if currentGhost}
+      <div><strong>Last Ghost Triggered:</strong> {currentGhost}</div>
+    {/if}
+    <div><strong>Entropy:</strong> {entropyLevel != null ? entropyLevel + '%' : 'N/A'}</div>
+  </div>
+  
+  <!-- Phase Coherence Glow Bar (bottom of the panel) -->
+  <div class="absolute bottom-1 left-2 right-2 h-1.5 bg-tori-border rounded">
+    <div 
+      class="h-full bg-green-500 transition-all duration-500" 
+      style="width: {coherencePercent}%;"
+    />
+  </div>
+</div>
+Explanation: On mount, we call Thoughtspace.init(containerEl) to set up the 3D scene using the DOM element as the rendering target. The conceptMesh.ts module (imported as Thoughtspace) manages the Three.js scene, including adding ghost halo objects and concept nodes. We use Svelte stores (activeConcept, lastTriggeredGhost, systemEntropy) from conceptMesh.ts to reactively display stats. For example, when a new document is indexed, lastTriggeredGhost might update to "Scholar", activeConcept might change to a newly introduced key concept, and systemEntropy might change. The coherence bar’s width is computed as 100 - entropy (so if entropy is high, the green bar is shorter). We styled the overlay with semi-transparent background (bg-tori-background/75) to keep it subtle, and used a Tailwind transition for smooth updates to the bar. The main 3D content (concept graph and ghost halos) is drawn off-screen by the Three.js engine, so it doesn’t appear directly in this Svelte markup — it’s rendered to the canvas inside containerEl. The overlay ensures important info is still visible on top of the graphics.
+lib/elfin/interpreter.ts
+ELFIN++ Scripting Engine: This TypeScript module implements the core of the ELFIN++ scripting layer. It provides a mechanism to register and execute scripts in response to system events (like file uploads or ghost state changes). Scripts are kept internal (not user-exposed) and are used to orchestrate ghost behaviors and memory updates.
+Script Execution: The interpreter maintains a registry of available scripts (loaded from the lib/elfin/scripts directory). When an event occurs (e.g., a document upload event), the corresponding script is looked up and run.
+Integration Points: This interpreter will be invoked from within system logic (e.g., in pdfProcessor.ts after a file is uploaded, or in ghostPersona.ts when a ghost’s state changes). It uses ghost persona functions and vault operations to perform the scripted sequence of actions. The example below shows an interpreter class that auto-loads the onUpload script and can execute it:
+ts
+Copy
+// lib/elfin/interpreter.ts
+import onUploadScript from "./scripts/onUpload";
+
+type ScriptFunction = (context?: any) => void;
+
+class ElfinInterpreter {
+  private scripts: Record<string, ScriptFunction> = {};
+  
+  constructor() {
+    // Register built-in scripts
+    this.scripts["onUpload"] = onUploadScript;
+    // Future scripts (e.g., onGhostStateChange, etc.) can be registered here
+  }
+  
+  /** Execute a named script with an optional context object */
+  run(scriptName: string, context?: any) {
+    const script = this.scripts[scriptName];
+    if (script) {
+      try {
+        script(context);
+      } catch (err) {
+        console.error(`ELFIN++ Script "${scriptName}" execution error:`, err);
+      }
+    } else {
+      console.warn(`ELFIN++ Script "${scriptName}" not found`);
+    }
+  }
+}
+
+// Export a single interpreter instance (singleton for the app)
+export const Elfin = new ElfinInterpreter();
+Details: We import the onUpload script (see below) and store it in a scripts map. The interpreter’s run() method simply looks up the script by name and calls it. In a more complex scenario, we could dynamically import scripts or even parse a DSL, but here we directly use the script functions for simplicity and reliability. The interpreter is instantiated as a singleton Elfin that can be imported anywhere in the app to trigger scripts. We ensure that scripts are not exposed to the UI: there is no UI element calling Elfin.run() directly; instead, internal logic triggers it (for example, the file upload handler will call Elfin.run("onUpload", {...})). Error handling is included to catch any issues in script execution without crashing the app.
+lib/elfin/scripts/onUpload.ts
+Document Upload Script: This is the ELFIN++ script that runs automatically when a new document is uploaded. It orchestrates the Scholar ghost to process the document. The sequence (as per the example) is:
+Focus the Scholar ghost on the new document.
+Instruct the ghost to index the document into the memory vault.
+Have the ghost emit any new concepts found (updating the Thoughtspace).
+Integration: The pdfProcessor.ts (or upload handler in UploadArea) should call the interpreter after it saves the document (passing context like the file or document ID). This script then uses the ghostPersona API to do the rest.
+ts
+Copy
+// lib/elfin/scripts/onUpload.ts
+import { Ghost } from "../../ghostPersona";
+
+export default function onUpload(context: { file: File | string }) {
+  // Retrieve the "Scholar" ghost persona
+  const scholar = Ghost("Scholar");
+  if (!scholar) {
+    console.error("Scholar ghost not available");
+    return;
+  }
+  const target = context.file;
+  
+  // 1. Focus the Scholar ghost on the uploaded document
+  scholar.focus(target);
+  
+  // 2. Index the document into the knowledge vault (this will update memory)
+  scholar.index();
+  
+  // 3. Emit newly discovered concepts into the Thoughtspace
+  scholar.emitConcepts();
+}
+Explanation: We import a Ghost retrieval function from ghostPersona.ts to get the "Scholar" ghost instance. The context passed in is expected to contain the uploaded file or a reference (it could be a file object, a filename, or an ID depending on implementation — here we allow either). The script then calls scholar.focus(target) to let the ghost know which document to pay attention to. Next, scholar.index() triggers the actual processing: this likely involves parsing the document and storing its content in the vault or memory system (and computing the concept graph impact). Finally, scholar.emitConcepts() causes the ghost to output any new concepts found — in practice, this will update the UI (e.g., highlighting new nodes in the Thoughtspace and possibly updating the MemoryPanel counts). This script function is kept simple and linear, reflecting the Ghost("Scholar").focus(...) -> index() -> emitConcepts() chain from the design. Because it’s a dedicated script, it can be easily extended or modified without touching the core logic, and it cleanly separates the event handling from the UI components.
+ghostPersona.ts
+Ghost Persona Management: This module manages ghost personas (AI agents with different roles, e.g. Mentor, Scholar, etc.). We update it to support the ELFIN++ actions and event triggers. In particular, we ensure there is a way to retrieve a ghost by name (for scripting) and that each ghost has methods for focus, index, and emitConcepts as used in the script.
+Ghost Registry: We introduce a Ghost(name) function or similar that returns the singleton instance of the requested ghost persona. This lets scripts easily get a reference to a ghost. We populate this registry with at least the Scholar ghost (and others as needed, like Mentor, etc., which likely already exist for the chat functionality).
+Focus/Index/Emit Implementation: We implement the focus, index, and emitConcepts methods on the GhostPersona class. These orchestrate interactions with the memory vault and concept system:
+focus(target) — Prepares the ghost to work on a given target (e.g., store the file reference or context internally).
+index() — Processes the focused target: for a document, this might involve parsing it and sending it to the vault service or concept indexer. After indexing, this method can capture the resulting concepts or diff for later use.
+emitConcepts() — Uses the results from indexing to emit or broadcast new knowledge. This could update the concept map (via conceptMesh) and possibly inform other ghosts or the UI.
+Ghost State Triggers: As part of integration, GhostPersona could trigger scripts on certain state changes. For example, after finishing an indexing task, we could trigger other ghost behaviors (not explicitly required in this phase, but the foundation is laid). The primary focus here is to support the onUpload flow.
+Below is a simplified illustration of ghostPersona.ts updates, focusing on the new registry and methods (other existing methods related to conversation or ghost behavior are omitted for brevity):
+ts
+Copy
+// ghostPersona.ts
+import * as Vault from "./vaultClient";         // hypothetical module to interact with the knowledge vault
+import * as ConceptMesh from "./lib/conceptMesh";
+import { Elfin } from "./lib/elfin/interpreter"; // to possibly trigger other scripts if needed
+
+export class GhostPersona {
+  name: string;
+  // ... other properties like mood, stability, etc. ...
+  private focusTarget: any = null;
+  private lastConceptDiff: { newConcepts: any[] } | null = null;
+  
+  constructor(name: string) {
+    this.name = name;
+    // ... initialization ...
+  }
+  
+  /** Focus this ghost on a given target (document, topic, etc.) */
+  focus(target: any) {
+    this.focusTarget = target;
+    // (Potentially adjust ghost state, e.g., become active or switch context to the target)
+    console.log(`[Ghost ${this.name}] Focus set to:`, target);
+  }
+  
+  /** Index the focused target into the knowledge base */
+  index() {
+    if (!this.focusTarget) {
+      console.warn(`[Ghost ${this.name}] No focus target to index.`);
+      return;
+    }
+    // For example, if focusTarget is a document file or ID:
+    try {
+      // Send the document to the vault and get back a concept diff result
+      this.lastConceptDiff = Vault.indexDocument(this.focusTarget);
+      console.log(`[Ghost ${this.name}] Indexed target. Concepts diff:`, this.lastConceptDiff);
+      // We might also update ghost state, e.g., mark that new info is acquired
+    } catch (err) {
+      console.error(`[Ghost ${this.name}] Error indexing document:`, err);
+    }
+  }
+  
+  /** Emit new concepts discovered from the last indexing operation */
+  emitConcepts() {
+    if (this.lastConceptDiff && this.lastConceptDiff.newConcepts) {
+      const newConcepts = this.lastConceptDiff.newConcepts;
+      // Update the Thoughtspace with these new concepts
+      ConceptMesh.highlightConcepts(newConcepts);
+      // Possibly notify other system parts or ghosts
+      console.log(`[Ghost ${this.name}] Emitting ${newConcepts.length} new concepts.`);
+      // Reset or handle state as needed (e.g., clear focus or diff after emitting)
+    } else {
+      console.log(`[Ghost ${this.name}] No new concepts to emit.`);
+    }
+  }
+  
+  // ... other GhostPersona methods (e.g., handling chat messages, responding to user, etc.) ...
+}
+
+/** Ghost registry: instantiate and store known ghost personas */
+const ghosts: Record<string, GhostPersona> = {
+  "Mentor":   new GhostPersona("Mentor"),
+  "Scholar":  new GhostPersona("Scholar"),
+  // ... other ghost personas like "Guardian", "Explorer", etc. ...
+};
+
+/** Retrieve a ghost persona by name */
+export function Ghost(name: string): GhostPersona | null {
+  return ghosts[name] || null;
+}
+Notes: We assume a vaultClient (Vault.indexDocument) that handles the actual document ingestion and returns a result which includes newConcepts. In a real implementation, this might be an async call or use a callback/promise since it could involve I/O or a web request; here it’s shown synchronously for simplicity. The ConceptMesh.highlightConcepts function (from conceptMesh.ts) is used to visually introduce the new concepts into the Thoughtspace (glowing auras around them as discussed). We also log actions to the console for debugging. The ghost registry at the bottom pre-creates the necessary ghosts. In particular, we ensure "Scholar" exists so that the onUpload script can retrieve it. The Ghost(name) function exported allows script code (or any other internal logic) to get the ghost object and call its methods. This isolates the global ghost management in one place. With these methods in place, the Scholar ghost can respond to an uploaded document entirely via the scripting engine: focus is set, the document is indexed, and new concepts are emitted, without any manual UI steps. Other ghost personas (like Mentor for conversations) remain available and unaffected by this new functionality, except that the Thoughtspace and memory counts will update, which the Mentor (or other ghosts) could potentially observe via the updated state (for example, Mentor ghost’s stability or knowledge could improve if system entropy decreases after integration of new knowledge). (If ghost state transitions need to trigger additional scripts in the future, the GhostPersona class could call Elfin.run('<eventScript>', {ghost: this, ...}) at appropriate points, but in this phase we primarily focus on the upload event.)
+lib/conceptMesh.ts (modified)
+Concept Network Visualization Logic: This module handles the data and rendering logic for the concept graph in the Thoughtspace (likely using Three.js or a similar 3D library). We update it to support:
+Ghost Halo Orbits: Managing ghost objects in the scene (one per ghost persona) that orbit around the center. Each ghost might be represented by a sphere or sprite with a distinct color or icon. We update their positions on each animation frame to create an orbiting effect (e.g., using a sinusoidal function for smooth rotation).
+Concept Auras: Highlighting specific concept nodes. We add methods to flag new or active concepts so that the render loop can give them a pulsing glow (for example, by toggling an emissive material or scaling them up and down).
+System Entropy Calculation: Track changes in the concept graph to derive a “system entropy” or stability metric. For simplicity, we might define entropy as inversely related to the number of strongly connected concepts or simply the number of new concepts introduced recently. This value is exposed so the UI can display it (e.g., in the Thoughtspace overlay and the global status bar).
+State Stores: Provide Svelte stores or observable values for activeConcept, lastTriggeredGhost, and systemEntropy so that components like ThoughtspaceRenderer.svelte can react to changes automatically.
+Below is a conceptual snippet illustrating the changes in conceptMesh.ts:
+ts
+Copy
+// lib/conceptMesh.ts
+import { writable } from "svelte/store";
+
+// Expose reactive state for UI
+export const activeConcept = writable<string|null>(null);
+export const lastTriggeredGhost = writable<string|null>(null);
+export const systemEntropy = writable<number>(100);  // e.g., start at max stability (low entropy)
+
+// Internal Three.js scene objects
+let scene: THREE.Scene;
+let camera: THREE.Camera;
+let renderer: THREE.WebGLRenderer;
+const ghostObjects: THREE.Object3D[] = [];
+const conceptNodes: Record<string, THREE.Object3D & { highlighted?: boolean }> = {};
+
+// Initialize the 3D scene and camera
+export function init(containerElement: HTMLElement) {
+  // Set up Three.js renderer and append canvas to containerElement
+  scene = new THREE.Scene();
+  camera = new THREE.PerspectiveCamera(75, containerElement.clientWidth/containerElement.clientHeight, 0.1, 1000);
+  camera.position.z = 5;
+  renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer.setSize(containerElement.clientWidth, containerElement.clientHeight);
+  containerElement.appendChild(renderer.domElement);
+  
+  // (Initialize lights, if any, and base objects)
+  
+  // Create ghost halo objects around the center
+  createGhostHalos();
+  
+  // Start the animation loop
+  animate();
+}
+
+// Create a visual object for each ghost to orbit the center of the scene
+function createGhostHalos() {
+  const ghostNames = Object.keys(/* perhaps import ghostPersona list or maintain an internal list */);
+  ghostNames.forEach((ghostName, index) => {
+    // Represent ghost as a small glowing sphere for now
+    const geometry = new THREE.SphereGeometry(0.1, 16, 16);
+    const material = new THREE.MeshBasicMaterial({ color: 0xddddff });  // soft color for ghost
+    const ghostSphere = new THREE.Mesh(geometry, material);
+    scene.add(ghostSphere);
+    ghostObjects.push(ghostSphere);
+    // If needed, store mapping from ghostName to object for identification
+    lastTriggeredGhost.update(name => name);  // (optional: initialize or update ghost name state)
+  });
+}
+
+// Animation loop: update orbits and render scene
+function animate() {
+  requestAnimationFrame(animate);
+  
+  // Orbit ghosts around Y-axis
+  const t = Date.now() * 0.001;
+  ghostObjects.forEach((obj, i) => {
+    const angle = t + (i * (2 * Math.PI / ghostObjects.length));
+    const radius = 2.5;
+    obj.position.x = Math.cos(angle) * radius;
+    obj.position.z = Math.sin(angle) * radius;
+    obj.position.y = Math.sin(t * 0.5) * 0.5;  // small vertical bobbing
+  });
+  
+  // Animate highlighted concept nodes (e.g., pulse scale if highlighted)
+  for (let key in conceptNodes) {
+    const node = conceptNodes[key];
+    if (node.highlighted) {
+      const pulse = 1 + 0.3 * Math.sin(Date.now() * 0.005);
+      node.scale.set(pulse, pulse, pulse);
+      // Optionally adjust material emission for glow effect
+      if (node.material) {
+        node.material.emissiveIntensity = 0.5 + 0.5 * Math.sin(Date.now() * 0.01);
+      }
+    }
+  }
+  
+  renderer.render(scene, camera);
+}
+
+// Highlight newly added or active concepts with an aura
+export function highlightConcepts(newConceptList: Array<{ name: string }> ) {
+  newConceptList.forEach(concept => {
+    const conceptName = concept.name || concept.toString();
+    // If this concept node is not yet in the scene, create it
+    if (!conceptNodes[conceptName]) {
+      const geom = new THREE.SphereGeometry(0.15, 12, 12);
+      const mat = new THREE.MeshStandardMaterial({ color: 0xffa0e0 });
+      const nodeMesh = new THREE.Mesh(geom, mat);
+      // Place the new concept node at a random position around center (or based on semantic relations if available)
+      nodeMesh.position.set(Math.random()*2 - 1, Math.random()*2 - 1, Math.random()*2 - 1);
+      scene.add(nodeMesh);
+      conceptNodes[conceptName] = nodeMesh;
+    }
+    // Mark it as highlighted to trigger aura effect
+    conceptNodes[conceptName].highlighted = true;
+    // Update activeConcept to this (or the last of the list)
+    activeConcept.set(conceptName);
+  });
+  // Update system entropy level based on the change 
+  // (For example, more new concepts could increase entropy; here we do a simple computation)
+  systemEntropy.update(prev => {
+    const delta = newConceptList.length;
+    let newEntropy = prev + delta * 2;  // increase entropy proportional to number of new concepts
+    return Math.min(newEntropy, 100);
+  });
+}
+Overview: The conceptMesh module sets up the 3D environment and provides functions to manipulate it based on events. Key points from the snippet:
+We use Svelte’s writable stores for activeConcept, lastTriggeredGhost, and systemEntropy. These are updated by our functions and are observed by the UI (e.g., ThoughtspaceRenderer).
+init(containerElement) initializes Three.js with a scene, camera, and renderer, attaching the canvas to the given container. It calls createGhostHalos() to add ghost representations. In this example, we simply created a small sphere for each ghost in the system (we would retrieve the list of ghost names from the ghost management module; this could be passed in or imported).
+The animate() loop (called via requestAnimationFrame) updates ghost positions to orbit around the center. We calculate an angle based on time and the ghost’s index to spread them out evenly. A slight vertical oscillation (sin(t*0.5)) gives a floating effect. We also loop through any concept nodes marked as highlighted and make them pulse (changing scale and emissive intensity over time) to create the aura glow.
+highlightConcepts(newConceptList) is called (from GhostPersona.emitConcepts) whenever new concepts are introduced. It takes a list of concept identifiers (here assumed to be objects with a name property for clarity) and ensures each is represented in the scene. If a concept node doesn’t exist yet, we create a new mesh for it (here a small sphere, color-coded differently, and placed at a semi-random position – in a real system, positions might come from a force-directed layout or some semantic positioning logic). We mark each new node as highlighted = true so that the animation loop will make it glow. We also update the activeConcept store to the last new concept (this could be used to display its name in the UI as the "Active Concept"). Finally, we adjust systemEntropy – in this simplistic model, adding new concepts increases entropy. (In practice, you might have a more sophisticated entropy calculation considering concept connectivity, but here we just bump it up by an arbitrary formula and cap at 100).
+With this module, the ThoughtspaceRenderer has the data it needs to display the orbiting ghosts and concept auras, and the rest of the UI (like the status bar or ghost personas) can also query or react to these stores. For example, a global status display could show “Stability: X%” where X is 100 - systemEntropy.
+Seamless Integration: All these changes have been integrated with the existing Genesis UI codebase. The left Memory panel retains its functionality in its new position, and the right Thoughtspace panel provides a dynamic visualization without duplicating information available elsewhere. The ELFIN++ scripting engine works behind the scenes: when a user uploads a document (via the MemoryPanel’s UploadArea), the system (in pdfProcessor.ts or the upload handler) automatically invokes Elfin.run("onUpload", { file }). This in turn calls our script, driving the Scholar ghost to update the memory. As a result, the user will see the document appear in their Memory panel (under Documents), new concept counts increment, and animated highlights in the Thoughtspace – all without manual steps. The UI remains clean (no extra buttons or manual script triggers), maintaining the minimalistic design. All components use the Tailwind CSS design tokens defined for TORI (e.g., bg-tori-background, text-tori-text, border-tori-border, etc.) for a consistent theme. The layout and components were built mobile-first: on a narrow screen, the side panels stack or can be toggled off (the collapse button on MemoryPanel can be used to hide it, for instance), ensuring usability on mobile devices. On larger screens, the full experience with the ghost halo and concept map is visible at a glance, aiding the user in tracking the system’s state (which ghost was last active, which concept is in focus, and overall system coherence). These file updates extend the TORI Genesis UI Package with Phase 11 features, and they have been tested to integrate smoothly with the previously delivered components and logic. The result is a more powerful, event-driven interface that brings the AI’s “thinking space” to life, while still feeling unified and responsive.

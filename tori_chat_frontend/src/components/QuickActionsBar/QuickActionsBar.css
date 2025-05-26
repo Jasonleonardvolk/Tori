@@ -1,0 +1,225 @@
+/* QuickActionsBar.css */
+
+.quick-actions-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  border-top: 1px solid #333;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  z-index: 1000;
+  font-family: 'Inter', sans-serif;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+.bar-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 200px;
+}
+
+.bar-title {
+  color: #fff;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.suggestion-count {
+  color: #888;
+  font-size: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 2px 8px;
+  border-radius: 12px;
+}
+
+.bar-suggestions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex: 1;
+  overflow-x: auto;
+  padding: 0 10px;
+}
+
+.suggestion-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  padding: 8px 12px;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+  min-width: 200px;
+}
+
+.suggestion-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.suggestion-item.priority-high {
+  border-left: 3px solid #ef4444;
+}
+
+.suggestion-item.priority-medium {
+  border-left: 3px solid #f59e0b;
+}
+
+.suggestion-item.priority-low {
+  border-left: 3px solid #10b981;
+}
+
+.suggestion-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+}
+
+.suggestion-icon {
+  font-size: 14px;
+}
+
+.suggestion-title {
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 150px;
+}
+
+.suggestion-confidence {
+  color: #888;
+  font-size: 11px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 2px 6px;
+  border-radius: 8px;
+}
+
+.suggestion-actions {
+  display: flex;
+  gap: 5px;
+}
+
+.action-button {
+  width: 24px;
+  height: 24px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: bold;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.action-button.apply {
+  background: #10b981;
+  color: white;
+}
+
+.action-button.apply:hover {
+  background: #059669;
+  transform: scale(1.1);
+}
+
+.action-button.dismiss {
+  background: #ef4444;
+  color: white;
+}
+
+.action-button.dismiss:hover {
+  background: #dc2626;
+  transform: scale(1.1);
+}
+
+.show-all-button {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.show-all-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.expand-panel-button {
+  background: linear-gradient(45deg, #0096ff, #9600ff);
+  border: none;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.expand-panel-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 150, 255, 0.3);
+}
+
+/* Scrollbar styling for suggestions */
+.bar-suggestions::-webkit-scrollbar {
+  height: 4px;
+}
+
+.bar-suggestions::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+}
+
+.bar-suggestions::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
+}
+
+.bar-suggestions::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .quick-actions-bar {
+    padding: 8px 12px;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .bar-header {
+    min-width: auto;
+  }
+  
+  .bar-suggestions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+  
+  .suggestion-item {
+    min-width: 150px;
+  }
+  
+  .suggestion-title {
+    max-width: 100px;
+  }
+}

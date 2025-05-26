@@ -1,0 +1,624 @@
+syntax = "proto3";
+
+package tori.koopman;
+
+import "episodic.proto";
+
+// The KoopmanLearner service manages spectral mode extraction and oscillator coupling updates
+service KoopmanLearner {
+  // Process a batch of activation traces to update spectral modes
+  rpc ProcessActivationBatch(ActivationBatchRequest) returns (ProcessingResponse);
+  
+  // Get the status of a processing job
+  rpc GetProcessingStatus(StatusRequest) returns (ProcessingStatus);
+  
+  // Get the current spectral modes
+  rpc GetSpectralModes(ModesRequest) returns (SpectralModes);
+  
+  // Update oscillator couplings based on current spectral modes
+  rpc UpdateOscillatorCouplings(CouplingRequest) returns (CouplingResponse);
+  
+  // Get KCL statistics and performance metrics
+  rpc GetKclStats(StatsRequest) returns (KclStats);
+  
+  // Update KCL configuration
+  rpc UpdateConfig(KclConfig) returns (ConfigResponse);
+  
+  // Predict future concept activations
+  rpc PredictActivations(PredictionRequest) returns (PredictionResponse);
+  
+  // Get stability analysis for the current spectral modes
+  rpc GetStabilityAnalysis(StabilityRequest) returns (StabilityAnalysis);
+  
+  // Reset the KCL system to initial state
+  rpc ResetSystem(ResetRequest) returns (ResetResponse);
+}
+
+// Request to process a batch of activation traces
+message ActivationBatchRequest {
+  // Activation traces (time series of concept activations)
+  repeated ActivationTrace traces = 1;
+  
+  // Processing parameters
+  ProcessingParameters parameters = 2;
+  
+  // Whether to update oscillator couplings after processing
+  bool update_couplings = 3;
+  
+  // Whether to generate stability analysis after processing
+  bool generate_stability = 4;
+  
+  // Description for this processing batch
+  string description = 5;
+  
+  // Client ID for tracing
+  string client_id = 6;
+}
+
+// Time series of concept activations
+message ActivationTrace {
+  // Unique ID for this trace
+  string trace_id = 1;
+  
+  // Source of this trace (e.g., reasoning, consolidation)
+  string source = 2;
+  
+  // Timestamp when this trace was recorded
+  int64 timestamp = 3;
+  
+  // Duration of the trace in seconds
+  float duration_secs = 4;
+  
+  // Sequence of activation snapshots
+  repeated ActivationSnapshot snapshots = 5;
+  
+  // Sampling rate in Hz
+  float sampling_rate_hz = 6;
+  
+  // Tags for filtering
+  repeated string tags = 7;
+}
+
+// Snapshot of concept activations at a point in time
+message ActivationSnapshot {
+  // Timestamp relative to trace start (seconds)
+  float relative_time = 1;
+  
+  // Concept activation pattern
+  tori.episodic.ConceptActivation activation = 2;
+  
+  // Whether this is a phase transition point
+  bool is_transition = 3;
+  
+  // Lyapunov exponent estimate at this point
+  float lyapunov_estimate = 4;
+}
+
+// Parameters for processing activation traces
+message ProcessingParameters {
+  // DMD rank to use
+  int32 dmd_rank = 1;
+  
+  // Whether to use incremental DMD
+  bool use_incremental = 2;
+  
+  // L1 sparsity regularization strength
+  float l1_strength = 3;
+  
+  // Maximum number of modes to extract
+  int32 max_modes = 4;
+  
+  // Whether to use sparse optimization
+  bool use_sparse_opt = 5;
+  
+  // Minimum singular value to consider
+  float min_singular_value = 6;
+  
+  // Mode combination threshold
+  float mode_combination_threshold = 7;
+  
+  // Whether to compute mode stability
+  bool compute_stability = 8;
+  
+  // Number of timesteps to use for prediction validation
+  int32 prediction_horizon = 9;
+  
+  // Learning rate for mode updates
+  float learning_rate = 10;
+}
+
+// Response to processing request
+message ProcessingResponse {
+  // Unique ID for this processing job
+  string job_id = 1;
+  
+  // Whether the request was accepted
+  bool accepted = 2;
+  
+  // Error message if not accepted
+  string error_message = 3;
+  
+  // Number of traces being processed
+  int32 trace_count = 4;
+  
+  // Estimated completion time (unix timestamp)
+  int64 estimated_completion = 5;
+  
+  // For synchronous requests, the final status
+  ProcessingStatus status = 6;
+}
+
+// Request for processing status
+message StatusRequest {
+  // Job ID to check
+  string job_id = 1;
+}
+
+// Status of a processing job
+message ProcessingStatus {
+  // Job ID
+  string job_id = 1;
+  
+  // State of the job
+  JobState state = 2;
+  
+  // Progress percentage (0-100)
+  float progress = 3;
+  
+  // Current operation description
+  string current_operation = 4;
+  
+  // Traces processed so far
+  int32 traces_processed = 5;
+  
+  // Traces remaining
+  int32 traces_remaining = 6;
+  
+  // Number of modes extracted
+  int32 modes_extracted = 7;
+  
+  // Dominant eigenvalues extracted
+  repeated complex64 dominant_eigenvalues = 8;
+  
+  // Prediction error (L2 norm)
+  float prediction_error = 9;
+  
+  // Mode sparsity (percentage of zeros)
+  float mode_sparsity = 10;
+  
+  // Error message if failed
+  string error_message = 11;
+  
+  // Start time (unix timestamp)
+  int64 start_time = 12;
+  
+  // End time (unix timestamp) if completed
+  int64 end_time = 13;
+  
+  // Oscillator coupling updates
+  CouplingResponse coupling_updates = 14;
+}
+
+// Job state enum
+enum JobState {
+  UNKNOWN = 0;
+  QUEUED = 1;
+  RUNNING = 2;
+  COMPLETED = 3;
+  FAILED = 4;
+  CANCELLED = 5;
+}
+
+// Complex number representation
+message complex64 {
+  // Real part
+  float real = 1;
+  
+  // Imaginary part
+  float imag = 2;
+}
+
+// Request for spectral modes
+message ModesRequest {
+  // Maximum number of modes to return
+  int32 max_modes = 1;
+  
+  // Sort order (by eigenvalue magnitude, frequency, etc.)
+  string sort_by = 2;
+  
+  // Minimum eigenvalue magnitude to include
+  float min_eigenvalue_magnitude = 3;
+  
+  // Exclude modes with growth factor > 1
+  bool exclude_unstable = 4;
+}
+
+// Spectral modes
+message SpectralModes {
+  // List of spectral modes
+  repeated SpectralMode modes = 1;
+  
+  // Total number of modes available
+  int32 total_modes = 2;
+  
+  // Timestamp when these modes were last updated
+  int64 last_updated = 3;
+  
+  // Average mode sparsity
+  float avg_sparsity = 4;
+  
+  // Average prediction error using these modes
+  float avg_prediction_error = 5;
+}
+
+// A single spectral mode (Koopman eigenfunction)
+message SpectralMode {
+  // Mode ID
+  string mode_id = 1;
+  
+  // Eigenvalue
+  complex64 eigenvalue = 2;
+  
+  // Mode vector (Koopman eigenfunction)
+  repeated float mode_vector = 3;
+  
+  // Natural frequency in Hz
+  float natural_frequency = 4;
+  
+  // Damping ratio
+  float damping_ratio = 5;
+  
+  // Growth factor (magnitude of eigenvalue)
+  float growth_factor = 6;
+  
+  // Sparsity (percentage of near-zero elements)
+  float sparsity = 7;
+  
+  // Time constant (seconds)
+  float time_constant = 8;
+  
+  // Stability index (-1 to 1, where 1 is completely stable)
+  float stability_index = 9;
+  
+  // Last update timestamp
+  int64 last_updated = 10;
+  
+  // Dominant concept IDs (sparse representation)
+  repeated ConceptContribution dominant_concepts = 11;
+}
+
+// Contribution of a concept to a mode
+message ConceptContribution {
+  // Concept ID
+  string concept_id = 1;
+  
+  // Contribution weight
+  float weight = 2;
+  
+  // Normalized weight (0-1)
+  float normalized_weight = 3;
+  
+  // Phase shift (radians)
+  float phase_shift = 4;
+}
+
+// Request to update oscillator couplings
+message CouplingRequest {
+  // Maximum number of oscillator pairs to update
+  int32 max_pairs = 1;
+  
+  // Whether to apply immediately or just compute
+  bool apply_immediately = 2;
+  
+  // Coupling strength gain factor
+  float coupling_gain = 3;
+  
+  // Minimum eigenvalue magnitude to consider
+  float min_eigenvalue_magnitude = 4;
+  
+  // Whether to enforce stability constraints
+  bool enforce_stability = 5;
+  
+  // Maximum allowed coupling strength
+  float max_coupling_strength = 6;
+}
+
+// Response to coupling update request
+message CouplingResponse {
+  // Whether the update was successful
+  bool success = 1;
+  
+  // Error message if not successful
+  string error_message = 2;
+  
+  // Number of oscillator pairs updated
+  int32 pairs_updated = 3;
+  
+  // Average coupling strength change
+  float avg_strength_change = 4;
+  
+  // Oscillator coupling updates
+  repeated OscillatorCoupling coupling_updates = 5;
+  
+  // Timestamp when the update was completed
+  int64 update_time = 6;
+  
+  // Estimated stability improvement
+  float stability_improvement = 7;
+}
+
+// Oscillator coupling update
+message OscillatorCoupling {
+  // First oscillator concept ID
+  string oscillator_id_1 = 1;
+  
+  // Second oscillator concept ID
+  string oscillator_id_2 = 2;
+  
+  // New coupling strength
+  float coupling_strength = 3;
+  
+  // Previous coupling strength
+  float previous_strength = 4;
+  
+  // Phase shift (radians)
+  float phase_shift = 5;
+  
+  // Spectral mode ID that influenced this coupling
+  string source_mode_id = 6;
+}
+
+// Request for KCL statistics
+message StatsRequest {
+  // Time range start (unix timestamp)
+  int64 since = 1;
+  
+  // Time range end (unix timestamp)
+  int64 until = 2;
+}
+
+// KCL statistics
+message KclStats {
+  // Total activation traces processed
+  int32 total_traces_processed = 1;
+  
+  // Total number of spectral modes
+  int32 total_spectral_modes = 2;
+  
+  // Average prediction error
+  float avg_prediction_error = 3;
+  
+  // Average mode sparsity
+  float avg_mode_sparsity = 4;
+  
+  // Average processing time per trace (ms)
+  float avg_processing_time_ms = 5;
+  
+  // Total oscillator coupling updates
+  int32 total_coupling_updates = 6;
+  
+  // System stability index (-1 to 1)
+  float system_stability_index = 7;
+  
+  // History of prediction errors
+  repeated ErrorDataPoint prediction_error_history = 8;
+  
+  // History of stability indices
+  repeated ErrorDataPoint stability_history = 9;
+  
+  // Dominant modes by influence
+  repeated SpectralMode dominant_modes = 10;
+  
+  // Total memory usage (bytes)
+  int64 memory_usage_bytes = 11;
+}
+
+// Data point for error or stability history
+message ErrorDataPoint {
+  // Timestamp (unix timestamp)
+  int64 timestamp = 1;
+  
+  // Value
+  float value = 2;
+  
+  // Label (optional)
+  string label = 3;
+}
+
+// KCL configuration
+message KclConfig {
+  // Maximum number of spectral modes to maintain
+  int32 max_modes = 1;
+  
+  // Default processing parameters
+  ProcessingParameters default_parameters = 2;
+  
+  // Automatic coupling update interval (seconds)
+  int32 coupling_update_interval_secs = 3;
+  
+  // Whether to drop unstable modes automatically
+  bool drop_unstable_modes = 4;
+  
+  // Directory for activation trace inbox
+  string trace_inbox_dir = 5;
+  
+  // Webhook URL for notifications
+  string webhook_url = 6;
+  
+  // Automatic processing enabled
+  bool auto_processing = 7;
+  
+  // DMD algorithm to use (standard, exact, compressed, etc.)
+  string dmd_algorithm = 8;
+  
+  // Stability threshold for alarms
+  float stability_alarm_threshold = 9;
+  
+  // Default coupling parameters
+  CouplingRequest default_coupling = 10;
+}
+
+// Response to config update
+message ConfigResponse {
+  // Whether the update was successful
+  bool success = 1;
+  
+  // Error message if not successful
+  string error_message = 2;
+}
+
+// Request to predict future activations
+message PredictionRequest {
+  // Initial state (concept activation)
+  tori.episodic.ConceptActivation initial_state = 1;
+  
+  // Number of timesteps to predict
+  int32 timesteps = 2;
+  
+  // Timestep size in seconds
+  float timestep_size_secs = 3;
+  
+  // Whether to include uncertainty estimates
+  bool include_uncertainty = 4;
+  
+  // Maximum number of modes to use for prediction
+  int32 max_modes = 5;
+}
+
+// Response with activation predictions
+message PredictionResponse {
+  // Predicted activation states
+  repeated PredictedState predictions = 1;
+  
+  // Whether the prediction was successful
+  bool success = 2;
+  
+  // Error message if not successful
+  string error_message = 3;
+  
+  // Prediction confidence (0-1)
+  float confidence = 4;
+  
+  // Number of modes used for prediction
+  int32 modes_used = 5;
+}
+
+// Predicted activation state
+message PredictedState {
+  // Timestep index
+  int32 timestep = 1;
+  
+  // Time in seconds from initial state
+  float time_secs = 2;
+  
+  // Predicted concept activation
+  tori.episodic.ConceptActivation activation = 3;
+  
+  // Prediction uncertainty (0-1 per concept)
+  repeated float uncertainties = 4;
+  
+  // Stability estimate at this timestep
+  float stability_estimate = 5;
+}
+
+// Request for stability analysis
+message StabilityRequest {
+  // Maximum number of modes to analyze
+  int32 max_modes = 1;
+  
+  // Whether to include detailed mode contributions
+  bool include_details = 2;
+  
+  // Whether to include recommended actions
+  bool include_recommendations = 3;
+}
+
+// Stability analysis
+message StabilityAnalysis {
+  // Overall system stability index (-1 to 1)
+  float system_stability = 1;
+  
+  // Unstable modes
+  repeated SpectralMode unstable_modes = 2;
+  
+  // Top stable modes
+  repeated SpectralMode stable_modes = 3;
+  
+  // Lyapunov exponent estimates
+  repeated float lyapunov_exponents = 4;
+  
+  // Stability by concept group
+  map<string, float> stability_by_group = 5;
+  
+  // Recommended actions to improve stability
+  repeated RecommendedAction recommendations = 6;
+  
+  // Potential phase transition regions
+  repeated PhaseTransitionRegion transition_regions = 7;
+}
+
+// Recommended action to improve stability
+message RecommendedAction {
+  // Action type
+  string action_type = 1;
+  
+  // Description of the action
+  string description = 2;
+  
+  // Estimated impact on stability
+  float estimated_impact = 3;
+  
+  // Affected concepts
+  repeated string affected_concepts = 4;
+  
+  // Affected modes
+  repeated string affected_modes = 5;
+}
+
+// Phase transition region
+message PhaseTransitionRegion {
+  // Region ID
+  string region_id = 1;
+  
+  // Concepts involved in the transition
+  repeated string involved_concepts = 2;
+  
+  // Transition probability
+  float transition_probability = 3;
+  
+  // Estimated time to transition (seconds)
+  float time_to_transition = 4;
+  
+  // Stability before transition
+  float stability_before = 5;
+  
+  // Stability after transition
+  float stability_after = 6;
+}
+
+// Request to reset the KCL system
+message ResetRequest {
+  // Whether to keep learned modes
+  bool keep_modes = 1;
+  
+  // Whether to keep coupling updates
+  bool keep_couplings = 2;
+  
+  // Initial number of modes after reset
+  int32 initial_modes = 3;
+}
+
+// Response to reset request
+message ResetResponse {
+  // Whether the reset was successful
+  bool success = 1;
+  
+  // Error message if not successful
+  string error_message = 2;
+  
+  // Number of modes kept
+  int32 modes_kept = 3;
+  
+  // Number of couplings kept
+  int32 couplings_kept = 4;
+}

@@ -1,49 +1,16 @@
 {
-  "name": "itori-ide",
-  "version": "0.3.0",
-  "description": "ITORI IDE - Development Environment for ITORI Platform",
-  "private": true,
-  "workspaces": [
-    "ide_frontend",
-    "tori_chat_frontend"
-  ],
+  "name": "tori-upload-proxy",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Upload proxy for TORI Chat",
+  "main": "tori-upload-proxy.mjs",
   "scripts": {
-    "check-ports": "node port-check.js",
-    "dev": "pnpm run check-ports && turbo run dev",
-    "dev:chat": "pnpm --filter @itori/chat dev",
-    "dev:enterprise": "pnpm --filter @itori/chatenterprise dev",
-    "dev:ide": "pnpm --filter @itori/ide dev",
-    "build": "turbo run build",
-    "build:chat": "pnpm --filter @itori/chat build",
-    "build:enterprise": "pnpm --filter @itori/chatenterprise build",
-    "build:ide": "pnpm --filter @itori/ide build",
-    "preview": "vite preview",
-    "test": "turbo run test",
-    "type-check": "turbo run typecheck",
-    "codemod:apps": "pnpm exec jscodeshift -t scripts/update-imports.js \"apps/**/*.{ts,tsx,jsx}\"",
-    "codemod:client": "pnpm exec jscodeshift -t scripts/update-imports.js \"client/src/**/*.{js,ts,jsx,tsx}\"",
-    "lint": "turbo run lint",
-    "typecheck": "turbo run typecheck"
+    "start": "node tori-upload-proxy.mjs"
   },
   "dependencies": {
-    "preact": "^10.26.6",
-    "react": "^18.2.0",
-    "react-diff-viewer-continued": "4.0.0",
-    "react-dom": "^18.2.0",
-    "react-router-dom": "^6.22.3"
-  },
-  "devDependencies": {
-    "@codemirror/basic-setup": "^0.20.0",
-    "@codemirror/lang-json": "^6.0.1",
-    "@codemirror/state": "^6.5.2",
-    "@codemirror/view": "^6.36.8",
-    "@types/react": "^18.2.47",
-    "@types/react-dom": "^18.2.18",
-    "@vitejs/plugin-react": "^4.2.1",
-    "turbo": "^2.5.3",
-    "typescript": "^5.3.3",
-    "vite": "^5.0.11",
-    "vite-tsconfig-paths": "^4.3.1"
-  },
-  "packageManager": "pnpm@8.15.4"
+    "express": "^4.18.2",
+    "multer": "^1.4.5",
+    "node-fetch": "^3.3.2",
+    "form-data": "^4.0.0"
+  }
 }

@@ -1,0 +1,55 @@
+{
+  "default_output_dir": "ingest_pdf/extracted_conversations",
+  "preserve_id_folder": true,
+  "use_timestamp_prefix": false,
+  "supported_extensions": [".md", ".json", ".txt"],
+  "extraction": {
+    "default_format": "default",
+    "auto_verify": false,
+    "scholar_sphere_integration": true,
+    "code_languages": {
+      "include": ["javascript", "typescript", "python", "java", "c", "cpp", "csharp", "html", "css", "bash", "sh", "sql", "json", "jsx", "tsx"],
+      "exclude": ["plaintext", "text", "output", "console", "log"]
+    },
+    "note_patterns": ["^(#{1,6}|\\*|\\-|\\d+\\.)\\s+"],
+    "metadata_fields": [
+      "originalFile",
+      "extractionDate",
+      "totalLines",
+      "codeBlocks",
+      "codeLanguages",
+      "noteItems",
+      "conversationLines"
+    ],
+    "scholar_sphere_fields": [
+      "concept_ids",
+      "phase_vector",
+      "encoder_version",
+      "chunk_sha256",
+      "spectral_emotion_map"
+    ]
+  },
+  "scholar_sphere": {
+    "enabled": true,
+    "encoder_version": "v2.5.0",
+    "chunk_size": 512,
+    "chunk_overlap": 128,
+    "max_concepts_per_chunk": 12,
+    "phase_vector_dim": 1024,
+    "citation_enabled": true,
+    "citation_preview": true
+  },
+  "verification": {
+    "auto_fix": false,
+    "max_search_depth": 5,
+    "search_locations": [
+      "ingest_pdf/extracted_conversations",
+      "docs/conversations"
+    ]
+  },
+  "integration": {
+    "extraction_timeout_ms": 30000,
+    "verification_timeout_ms": 15000,
+    "max_recent_conversations": 5
+  }
+}

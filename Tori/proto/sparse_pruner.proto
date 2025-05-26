@@ -1,0 +1,542 @@
+syntax = "proto3";
+
+package tori.pruner;
+
+import "sleep_scheduler.proto";
+
+// The SparsePruner service manages the pruning of concept connections using L1 regularization
+service SparsePruner {
+  // Trigger a pruning operation
+  rpc TriggerPruning(PruningRequest) returns (PruningResponse);
+  
+  // Get the status of a pruning operation
+  rpc GetPruningStatus(StatusRequest) returns (PruningStatus);
+  
+  // Cancel a pruning operation
+  rpc CancelPruning(CancelRequest) returns (CancelResponse);
+  
+  // Get pruning statistics
+  rpc GetPruningStats(StatsRequest) returns (PruningStats);
+  
+  // Update pruning configuration
+  rpc UpdateConfig(PrunerConfig) returns (ConfigResponse);
+  
+  // Schedule a pruning operation
+  rpc SchedulePruning(ScheduleRequest) returns (ScheduleResponse);
+  
+  // Get edge usage statistics
+  rpc GetEdgeUsage(EdgeUsageRequest) returns (EdgeUsageResponse);
+  
+  // Preview pruning impact (dry run)
+  rpc PreviewPruning(PreviewRequest) returns (PreviewResponse);
+  
+  // Roll back a pruning operation
+  rpc RollbackPruning(RollbackRequest) returns (RollbackResponse);
+}
+
+// Request to trigger pruning
+message PruningRequest {
+  // Whether to run synchronously
+  bool synchronous = 1;
+  
+  // Pruning parameters
+  PruningParameters parameters = 2;
+  
+  // Filter for concepts to prune
+  ConceptFilter filter = 3;
+  
+  // Whether to backup before pruning
+  bool create_backup = 4;
+  
+  // Whether to perform a dry run
+  bool dry_run = 5;
+  
+  // Description for this pruning operation
+  string description = 6;
+  
+  // Client ID for tracing
+  string client_id = 7;
+}
+
+// Pruning parameters
+message PruningParameters {
+  // L1 regularization strength
+  float l1_strength = 1;
+  
+  // Minimum edge weight to keep
+  float min_edge_weight = 2;
+  
+  // Maximum number of edges to prune
+  int32 max_edges_to_prune = 3;
+  
+  // Retention target (quality vs. sparsity tradeoff, 0-1)
+  float retention_target = 4;
+  
+  // Maximum allowed quality drop (0-1)
+  float max_quality_drop = 5;
+  
+  // Importance sampling weight for edges near threshold
+  float threshold_sampling_weight = 6;
+  
+  // Whether to use warm start from previous pruning
+  bool use_warm_start = 7;
+  
+  // CVXPY solver to use
+  string solver = 8;
+  
+  // Solver tolerance
+  float solver_tolerance = 9;
+  
+  // Maximum solver iterations
+  int32 max_solver_iterations = 10;
+}
+
+// Filter for selecting concepts to prune
+message ConceptFilter {
+  // Concept types to include
+  repeated string include_types = 1;
+  
+  // Concept types to exclude
+  repeated string exclude_types = 2;
+  
+  // Tags to include (OR logic)
+  repeated string include_tags = 3;
+  
+  // Tags to exclude (NOT logic)
+  repeated string exclude_tags = 4;
+  
+  // Minimum edge usage count
+  int32 min_edge_usage = 5;
+  
+  // Minimum number of connections per concept
+  int32 min_connections = 6;
+  
+  // Maximum number of connections per concept
+  int32 max_connections = 7;
+}
+
+// Response to pruning request
+message PruningResponse {
+  // Unique ID for this pruning job
+  string job_id = 1;
+  
+  // Whether the request was accepted
+  bool accepted = 2;
+  
+  // Error message if not accepted
+  string error_message = 3;
+  
+  // Estimated completion time (unix timestamp)
+  int64 estimated_completion = 4;
+  
+  // Number of concepts selected for pruning
+  int32 selected_concepts = 5;
+  
+  // For synchronous requests, the final status
+  PruningStatus status = 6;
+  
+  // Backup ID if backup was created
+  string backup_id = 7;
+}
+
+// Request for pruning status
+message StatusRequest {
+  // Job ID to check
+  string job_id = 1;
+}
+
+// Status of a pruning job
+message PruningStatus {
+  // Job ID
+  string job_id = 1;
+  
+  // State of the job
+  tori.sleep.JobState state = 2;
+  
+  // Progress percentage (0-100)
+  float progress = 3;
+  
+  // Current operation description
+  string current_operation = 4;
+  
+  // Concepts processed so far
+  int32 concepts_processed = 5;
+  
+  // Concepts remaining
+  int32 concepts_remaining = 6;
+  
+  // Edges pruned so far
+  int32 edges_pruned = 7;
+  
+  // Total edge weight pruned
+  float total_weight_pruned = 8;
+  
+  // Quality metrics before pruning
+  QualityMetrics before_metrics = 9;
+  
+  // Quality metrics after pruning
+  QualityMetrics after_metrics = 10;
+  
+  // Error message if failed
+  string error_message = 11;
+  
+  // Start time (unix timestamp)
+  int64 start_time = 12;
+  
+  // End time (unix timestamp) if completed
+  int64 end_time = 13;
+  
+  // Backup ID if backup was created
+  string backup_id = 14;
+  
+  // Whether this was a dry run
+  bool was_dry_run = 15;
+}
+
+// Quality metrics for the concept graph
+message QualityMetrics {
+  // Recall score (0-1)
+  float recall_score = 1;
+  
+  // Precision score (0-1)
+  float precision_score = 2;
+  
+  // F1 score (0-1)
+  float f1_score = 3;
+  
+  // Average retrieval latency (ms)
+  float avg_retrieval_latency_ms = 4;
+  
+  // Memory usage (bytes)
+  int64 memory_usage_bytes = 5;
+  
+  // Edge count
+  int32 edge_count = 6;
+  
+  // Average edges per concept
+  float avg_edges_per_concept = 7;
+  
+  // Edge sparsity (percentage of potential edges that exist)
+  float edge_sparsity = 8;
+}
+
+// Request to cancel pruning
+message CancelRequest {
+  // Job ID to cancel
+  string job_id = 1;
+}
+
+// Response to cancel request
+message CancelResponse {
+  // Whether the job was cancelled
+  bool cancelled = 1;
+  
+  // Error message if not cancelled
+  string error_message = 2;
+}
+
+// Request for pruning statistics
+message StatsRequest {
+  // Time range start (unix timestamp)
+  int64 since = 1;
+  
+  // Time range end (unix timestamp)
+  int64 until = 2;
+}
+
+// Pruning statistics
+message PruningStats {
+  // Total pruning jobs run
+  int32 total_jobs = 1;
+  
+  // Total edges pruned
+  int32 total_edges_pruned = 2;
+  
+  // Total edge weight pruned
+  float total_weight_pruned = 3;
+  
+  // Average quality impact (delta in f1 score)
+  float avg_quality_impact = 4;
+  
+  // Average pruning job duration in seconds
+  float avg_duration_secs = 5;
+  
+  // Current edge count
+  int32 current_edge_count = 6;
+  
+  // Current edge sparsity
+  float current_edge_sparsity = 7;
+  
+  // History of recent jobs
+  repeated PruningJobSummary recent_jobs = 8;
+  
+  // Most frequently pruned concept types
+  map<string, int32> pruned_by_type = 9;
+  
+  // Average memory reduction per job
+  int64 avg_memory_reduction_bytes = 10;
+}
+
+// Summary of a pruning job
+message PruningJobSummary {
+  // Job ID
+  string job_id = 1;
+  
+  // Start time (unix timestamp)
+  int64 start_time = 2;
+  
+  // End time (unix timestamp)
+  int64 end_time = 3;
+  
+  // Number of concepts processed
+  int32 concepts_processed = 4;
+  
+  // Edges pruned
+  int32 edges_pruned = 5;
+  
+  // Job description
+  string description = 6;
+  
+  // State of the job
+  tori.sleep.JobState state = 7;
+  
+  // Quality impact (delta in f1 score)
+  float quality_impact = 8;
+  
+  // Whether rollback was needed
+  bool was_rolled_back = 9;
+}
+
+// Pruner configuration
+message PrunerConfig {
+  // Automatic scheduling enabled
+  bool auto_schedule = 1;
+  
+  // Cron expression for scheduling
+  string schedule_cron = 2;
+  
+  // Default pruning parameters
+  PruningParameters default_parameters = 3;
+  
+  // Maximum concurrent jobs
+  int32 max_concurrent_jobs = 4;
+  
+  // Default concept filter
+  ConceptFilter default_filter = 5;
+  
+  // Webhook URL for notifications
+  string webhook_url = 6;
+  
+  // Always create backups
+  bool always_backup = 7;
+  
+  // Retention policy for backups (days)
+  int32 backup_retention_days = 8;
+  
+  // Threshold for auto-pruning (edge count)
+  int32 auto_prune_threshold = 9;
+  
+  // Maximum allowed quality drop
+  float max_allowed_quality_drop = 10;
+  
+  // Number of test queries for quality assessment
+  int32 quality_test_queries = 11;
+}
+
+// Response to config update
+message ConfigResponse {
+  // Whether the update was successful
+  bool success = 1;
+  
+  // Error message if not successful
+  string error_message = 2;
+}
+
+// Request to schedule pruning
+message ScheduleRequest {
+  // When to run (unix timestamp)
+  int64 scheduled_time = 1;
+  
+  // Pruning request details
+  PruningRequest request = 2;
+  
+  // Recurrence pattern (cron expression)
+  string recurrence = 3;
+}
+
+// Response to schedule request
+message ScheduleResponse {
+  // Scheduled job ID
+  string scheduled_job_id = 1;
+  
+  // Whether scheduling was successful
+  bool success = 2;
+  
+  // Error message if not successful
+  string error_message = 3;
+  
+  // Scheduled time (unix timestamp)
+  int64 scheduled_time = 4;
+}
+
+// Request for edge usage statistics
+message EdgeUsageRequest {
+  // Concept IDs to get usage for
+  repeated string concept_ids = 1;
+  
+  // Whether to include low usage edges
+  bool include_low_usage = 2;
+  
+  // Minimum usage count to include
+  int32 min_usage_count = 3;
+}
+
+// Response with edge usage statistics
+message EdgeUsageResponse {
+  // Usage data per concept
+  repeated ConceptEdgeUsage concept_usages = 1;
+  
+  // Global edge usage distribution
+  EdgeUsageDistribution global_distribution = 2;
+}
+
+// Edge usage for a concept
+message ConceptEdgeUsage {
+  // Concept ID
+  string concept_id = 1;
+  
+  // Total edge count
+  int32 total_edges = 2;
+  
+  // Usage counts per connected concept
+  map<string, EdgeUsage> edges = 3;
+}
+
+// Usage data for a single edge
+message EdgeUsage {
+  // Connected concept ID
+  string connected_concept_id = 1;
+  
+  // Usage count
+  int32 usage_count = 2;
+  
+  // Current weight
+  float weight = 3;
+  
+  // Last used timestamp
+  int64 last_used = 4;
+  
+  // Is this edge near the pruning threshold?
+  bool near_threshold = 5;
+}
+
+// Edge usage distribution
+message EdgeUsageDistribution {
+  // Count of edges by usage bucket
+  map<string, int32> count_by_usage = 1;
+  
+  // Average usage
+  float avg_usage = 2;
+  
+  // Median usage
+  int32 median_usage = 3;
+  
+  // 95th percentile usage
+  int32 p95_usage = 4;
+  
+  // Distribution of edge weights
+  repeated WeightBucket weight_distribution = 5;
+}
+
+// Edge weight distribution bucket
+message WeightBucket {
+  // Minimum weight in bucket
+  float min_weight = 1;
+  
+  // Maximum weight in bucket
+  float max_weight = 2;
+  
+  // Count of edges in this bucket
+  int32 count = 3;
+}
+
+// Request to preview pruning impact
+message PreviewRequest {
+  // Pruning parameters
+  PruningParameters parameters = 1;
+  
+  // Concept filter
+  ConceptFilter filter = 2;
+  
+  // Number of test queries to run
+  int32 test_queries = 3;
+}
+
+// Response with pruning preview
+message PreviewResponse {
+  // Estimated edges to be pruned
+  int32 estimated_edges_pruned = 1;
+  
+  // Estimated edge weight to be pruned
+  float estimated_weight_pruned = 2;
+  
+  // Estimated memory savings (bytes)
+  int64 estimated_memory_savings = 3;
+  
+  // Estimated quality impact (delta in f1 score)
+  float estimated_quality_impact = 4;
+  
+  // Before metrics (projected)
+  QualityMetrics before_metrics = 5;
+  
+  // After metrics (projected)
+  QualityMetrics after_metrics = 6;
+  
+  // Edge pruning details
+  repeated EdgePruningDetail edge_details = 7;
+}
+
+// Edge pruning detail
+message EdgePruningDetail {
+  // Source concept ID
+  string source_concept_id = 1;
+  
+  // Target concept ID
+  string target_concept_id = 2;
+  
+  // Current weight
+  float current_weight = 3;
+  
+  // Usage count
+  int32 usage_count = 4;
+  
+  // Pruning confidence (0-1)
+  float pruning_confidence = 5;
+}
+
+// Request to roll back a pruning operation
+message RollbackRequest {
+  // Job ID to roll back
+  string job_id = 1;
+  
+  // Alternatively, backup ID to restore
+  string backup_id = 2;
+  
+  // Whether to run verification after rollback
+  bool verify_after_rollback = 3;
+}
+
+// Response to rollback request
+message RollbackResponse {
+  // Whether the rollback was successful
+  bool success = 1;
+  
+  // Error message if not successful
+  string error_message = 2;
+  
+  // Verification results if requested
+  QualityMetrics restored_metrics = 3;
+  
+  // Completion time (unix timestamp)
+  int64 completion_time = 4;
+}
