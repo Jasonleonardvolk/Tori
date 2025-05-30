@@ -9,7 +9,7 @@ This module provides universal concept extraction that works across ALL domains:
 
 import logging
 import json
-from typing import List, Dict, Any
+from typing import List, Dict, Any, Set
 
 # Configure logging
 logger = logging.getLogger(__name__)
@@ -19,6 +19,30 @@ _yake_extractor = None
 _kb_model = None
 _nlp = None
 _entity_linking = False
+
+# Global frequency counter for current document
+concept_frequency_counter = {}
+
+def reset_frequency_counter():
+    """Reset counter between documents"""
+    global concept_frequency_counter
+    concept_frequency_counter = {}
+
+def track_concept_frequency(concept_name: str, chunk_index: int):
+    """Track concept frequency across chunks"""
+    global concept_frequency_counter
+    if concept_name not in concept_frequency_counter:
+        concept_frequency_counter[concept_name] = {
+            "count": 0,
+            "chunks": set()
+        }
+    concept_frequency_counter[concept_name]["count"] += 1
+    concept_frequency_counter[concept_name]["chunks"].add(chunk_index)
+
+def get_concept_frequency(concept_name: str) -> Dict[str, Any]:
+    """Get frequency data for a concept"""
+    global concept_frequency_counter
+    return concept_frequency_counter.get(concept_name, {"count": 1, "chunks": {0}})
 
 def _initialize_models():
     """Initialize all models once at module load time for performance"""
@@ -70,7 +94,7 @@ def _initialize_models():
         logger.error("Please install: pip install yake keybert sentence-transformers spacy")
         raise
 
-def extractConceptsUniversal(chunk: str) -> List[Dict[str, Any]]:
+def extractConceptsUniversal(chunk: str, chunk_index: int = 0, chunk_section: str = "body") -> List[Dict[str, Any]]:
     """
     🌍 UNIVERSAL CONCEPT EXTRACTION
     
@@ -81,6 +105,8 @@ def extractConceptsUniversal(chunk: str) -> List[Dict[str, Any]]:
     
     Args:
         chunk: Text to extract concepts from
+        chunk_index: Index of this chunk in the document
+        chunk_section: Section this chunk belongs to
         
     Returns:
         List of concept dictionaries with name, score, method, metadata
@@ -94,7 +120,7 @@ def extractConceptsUniversal(chunk: str) -> List[Dict[str, Any]]:
     if not text:
         return []
     
-    logger.info(f"🌍 UNIVERSAL EXTRACTION: Processing {len(text)} chars")
+    logger.info(f"🌍 UNIVERSAL EXTRACTION: Processing {len(text)} chars from chunk {chunk_index} ({chunk_section})")
     
     # Accumulate concepts: name_key -> concept_data
     concepts = {}
@@ -129,11 +155,17 @@ def extractConceptsUniversal(chunk: str) -> List[Dict[str, Any]]:
                         "name": name, 
                         "score": 0.0, 
                         "methods": set(), 
-                        "metadata": {}
+                        "metadata": {
+                            "chunk_sections": set()
+                        }
                     }
                 
                 concepts[name_key]["score"] += weighted_score
                 concepts[name_key]["methods"].add("YAKE")
+                concepts[name_key]["metadata"]["chunk_sections"].add(chunk_section)
+                
+                # Track frequency
+                track_concept_frequency(name, chunk_index)
                 
         logger.debug(f"🔤 YAKE found {len(yake_keywords)} candidates")
         
@@ -169,11 +201,17 @@ def extractConceptsUniversal(chunk: str) -> List[Dict[str, Any]]:
                         "name": name, 
                         "score": 0.0, 
                         "methods": set(), 
-                        "metadata": {}
+                        "metadata": {
+                            "chunk_sections": set()
+                        }
                     }
                 
                 concepts[name_key]["score"] += weighted_score
                 concepts[name_key]["methods"].add("KeyBERT")
+                concepts[name_key]["metadata"]["chunk_sections"].add(chunk_section)
+                
+                # Track frequency
+                track_concept_frequency(name, chunk_index)
                 
         logger.debug(f"🧠 KeyBERT found {len(kb_keywords)} candidates")
         
@@ -218,12 +256,18 @@ def extractConceptsUniversal(chunk: str) -> List[Dict[str, Any]]:
                         "name": ent_text, 
                         "score": 0.0, 
                         "methods": set(), 
-                        "metadata": {}
+                        "metadata": {
+                            "chunk_sections": set()
+                        }
                     }
                 
                 concepts[ent_key]["score"] += weighted_score
                 concepts[ent_key]["methods"].add("NER")
                 concepts[ent_key]["metadata"]["entity_type"] = val["label"]
+                concepts[ent_key]["metadata"]["chunk_sections"].add(chunk_section)
+                
+                # Track frequency
+                track_concept_frequency(ent_text, chunk_index)
                 
                 # Add Wikidata linking if available
                 if _entity_linking:
@@ -267,6 +311,9 @@ def extractConceptsUniversal(chunk: str) -> List[Dict[str, Any]]:
         methods_list = sorted(list(concept["methods"]))
         method_string = "+".join(methods_list)
         
+        # Convert sets to lists for JSON serialization
+        chunk_sections_list = list(concept["metadata"].get("chunk_sections", set()))
+        
         formatted_concept = {
             "name": concept["name"],
             "score": concept["score"],
@@ -281,13 +328,18 @@ def extractConceptsUniversal(chunk: str) -> List[Dict[str, Any]]:
                 "extraction_method": "universal_pipeline",
                 "universal": True,
                 "method_count": len(methods_list),
-                **concept.get("metadata", {})
+                "chunk_sections": chunk_sections_list,
+                **{k: v for k, v in concept.get("metadata", {}).items() if k != "chunk_sections"}
             }
         }
         
         # Remove empty metadata
         if not formatted_concept["metadata"] or len(formatted_concept["metadata"]) <= 3:
-            formatted_concept["metadata"] = {"universal": True, "extraction_method": "universal_pipeline"}
+            formatted_concept["metadata"] = {
+                "universal": True, 
+                "extraction_method": "universal_pipeline",
+                "chunk_sections": chunk_sections_list
+            }
         
         formatted_concepts.append(formatted_concept)
     
@@ -303,7 +355,7 @@ def extractConceptsUniversal(chunk: str) -> List[Dict[str, Any]]:
     
     return formatted_concepts
 
-def extractConceptsFromDocument(chunk: str, threshold: float = 0.0) -> List[Dict[str, Any]]:
+def extractConceptsFromDocument(chunk: str, threshold: float = 0.0, chunk_index: int = 0, chunk_section: str = "body") -> List[Dict[str, Any]]:
     """
     🌍 MAIN EXTRACTION FUNCTION - Universal concept extraction
     
@@ -313,6 +365,8 @@ def extractConceptsFromDocument(chunk: str, threshold: float = 0.0) -> List[Dict
     Args:
         chunk: Text chunk to extract concepts from
         threshold: Minimum score threshold for filtering (0.0 = no filtering)
+        chunk_index: Index of this chunk in the document
+        chunk_section: Section this chunk belongs to
         
     Returns:
         List of concept dictionaries compatible with existing pipeline
@@ -321,7 +375,7 @@ def extractConceptsFromDocument(chunk: str, threshold: float = 0.0) -> List[Dict
     logger.info(f"🔬 Text length: {len(chunk)} chars, Threshold: {threshold}")
     
     # Extract concepts using universal method
-    universal_concepts = extractConceptsUniversal(chunk)
+    universal_concepts = extractConceptsUniversal(chunk, chunk_index, chunk_section)
     
     # Apply threshold filtering if specified
     if threshold > 0:

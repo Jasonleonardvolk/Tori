@@ -1,0 +1,153 @@
+Roadmap for Safe Metadata and Context Extraction Enhancements
+
+Safe Enhancements for Context-Aware Concept Filtering (Checklist)
+ Infer Approximate Section Context (Abstract/Intro/Conclusion): Tag each PDF chunk with a likely section label using simple cues, without full parsing.
+Approach: Use chunk position and keywords to guess the section. For example, the first one or two chunks often contain the Abstract or Introduction, and the last chunk is likely the Conclusion. Scanning for section heading words (e.g., "Abstract", "Introduction", "Conclusion") near chunk boundaries can guide labeling. These heuristics are low-risk since they rely on obvious cues:
+• Location-based: If chunk.index == 0, assume front matter (title/abstract). If chunk.index is the last (or last few), assume it’s the conclusion or closing section.
+• Keyword-based: If a chunk’s text starts with or contains "Abstract" (case-insensitive) within its first few lines, mark it as "abstract". If the first or second chunk contains "Introduction" as a heading or early keyword, label it "introduction". If the final chunk contains "Conclusion" or "Summary", mark it "conclusion".
+• Default: Chunks not matching any clue get a default tag (e.g., "body" for general content).
+Example Code: (pseudo-code for assigning section context during chunking)
+python
+Copy
+Edit
+def infer_section_context(chunks):
+    total = len(chunks)
+    for i, chunk in enumerate(chunks):
+        text = chunk.text.strip()
+        text_lower = text.lower()
+        # Heuristic: first chunk likely Abstract/Intro
+        if i == 0:
+            if text_lower.startswith("abstract") or "abstract" in text_lower[:200]:
+                chunk.context = "abstract"
+                continue
+        # Heuristic: Introduction in early chunks
+        if i <= 1 and ("introduction" in text_lower[:100] or text.startswith("1. ") 
+                       or text.strip().startswith("Introduction")):
+            chunk.context = "introduction"
+            continue
+        # Heuristic: last chunk likely Conclusion
+        if i == total - 1 or i == total - 2:
+            if "conclusion" in text_lower or "concluding remarks" in text_lower:
+                chunk.context = "conclusion"
+                continue
+        # Fallback: default to 'body'
+        chunk.context = "body"
+Fallback: If no clear markers are found, label the first chunk as "body" (to avoid mis-tagging) and only use position-based cues cautiously (e.g., mark the very last chunk as "conclusion" by default only if its text length is moderate, to avoid labeling an appendix or references as conclusion). This ensures that in unusual documents without standard sections, all chunks just default to "body" context, which preserves existing behavior.
+Safety: These rules are additive and do not disrupt the pipeline structure. They run in O(n) for n chunks (very fast) and require only a few string checks per chunk. By keeping the logic simple (no complex parsing), we avoid crashes or misidentification. We also ensure every chunk gets some context label (default "body"), so downstream logic isn’t confronted with None. The approach has minimal performance impact even at 100k-document scale, and if a section tag is wrong, it won’t break anything (the tag is just extra metadata). Thorough testing on a sample of documents can fine-tune the keyword list (e.g., detect if references are mistakenly tagged as conclusion and adjust accordingly).
+ Estimate Concept Frequency Across Document: Count how often each concept appears in the document without extra passes.
+Approach: Leverage the existing concept extraction loop to track frequency on the fly. As each chunk is processed for concepts, increment a counter for each concept found. This one-pass tally avoids any significant overhead. You can use a lightweight dictionary or counter structure to accumulate counts for each unique concept. This way, by the end of processing all chunks, you have the total occurrences of each concept in the document.
+Example Code: (pseudo-code integrated in concept extraction)
+python
+Copy
+Edit
+concept_counts = {}  # dict to accumulate frequencies
+for chunk in chunks:
+    concepts = extract_concepts_from_chunk(chunk)  # existing extraction logic
+    for c in concepts:
+        # Increment count (using concept text as key)
+        concept_counts[c] = concept_counts.get(c, 0) + 1
+        # ... (continue any existing processing)
+In this example, each concept found in a chunk updates its count. If the same concept appears multiple times in one chunk, ensure your extract_concepts_from_chunk yields it appropriately (either once per mention or once per unique concept). For simplicity and speed, counting unique occurrence per chunk is often enough (treating one mention in a chunk as representative), but if needed, the extraction could count multiple mentions in text. The overhead is minimal: a dictionary insertion per concept occurrence, which is negligible compared to NLP extraction work.
+Fallback: If for some reason frequency counting is skipped or a concept isn’t in the counter (which shouldn’t happen if it was extracted), default to a frequency of 1 for safety. This ensures that every extracted concept has a reasonable frequency value. For example: freq = concept_counts.get(concept, 1).
+Safety: This method is very safe and low-impact. It does not require an extra document scan – it piggybacks on the existing loop. Memory usage is modest: the counter holds at most one entry per unique concept in a document. Even for large documents with many concepts, this is manageable (and it’s cleared each document). Runtime complexity is O(m) for m concept mentions; at 100k-document scale, this scales linearly and has been observed to add only a tiny fraction to processing time. We avoid any external I/O or heavy computation, so there’s no risk of slowing down extraction significantly. Still, monitor memory when enabling this at scale – the added dictionary should be trivial compared to the document text itself.
+ Extract/Approximate Document Title and Abstract: Safely retrieve the paper’s title and abstract text to enable title-aware concept boosting.
+Approach: Use simple heuristics on the first chunk (or document metadata) to get the title and abstract:
+Title inference: If the PDF parser doesn’t give a structured title, assume the document title appears at the very top of the text. For example, take the first non-blank line of the first chunk as the title if it’s reasonably short (e.g., < 150 characters and not a full paragraph). Often, academic papers have the title on the first line, followed by authors, then the abstract. You can also check the filename: if the filename is descriptive (not an alphanumeric ID), use a cleaned version of it (replace underscores, etc.) as a fallback title.
+Abstract extraction: Look for the word "Abstract" in the first chunk. If found, treat the text following that keyword as the abstract content (at least until an obvious boundary like "Introduction" or a section heading is encountered). For example, if first_chunk_text.lower().find("abstract") returns an index, you can take everything from that point onward (or up to a keyword "Introduction") as the abstract text. If the word "Abstract" is literally present as a heading, skip that word and capture the subsequent sentences as the abstract. In documents without an explicit "Abstract" label, you might assume the first chunk itself (minus the title and authors) is the abstract or introduction.
+Example Code: (pseudo-code to get title and abstract from first chunk)
+python
+Copy
+Edit
+title_text = None
+abstract_text = None
+first_text = chunks[0].text
+
+# Try PDF metadata title first (if available)
+if pdf.metadata.get("Title"):
+    title_text = pdf.metadata["Title"].strip()
+
+# Heuristic: first non-empty line as title
+lines = [ln.strip() for ln in first_text.splitlines() if ln.strip()]
+if not title_text and lines:
+    candidate = lines[0]
+    # Use it if it's reasonably short and not obviously part of abstract
+    if 10 < len(candidate) < 150 and not candidate.endswith('.'):
+        title_text = candidate
+
+# Find abstract content in first chunk
+lower_text = first_text.lower()
+if "abstract" in lower_text:
+    idx = lower_text.index("abstract")
+    # Skip the word "Abstract" and any following colon/newline
+    abstract_start = idx + len("abstract")
+    # Clean prefix punctuation or colon
+    while abstract_start < len(first_text) and first_text[abstract_start] in ": \n":
+        abstract_start += 1
+    abstract_text = first_text[abstract_start:].strip()
+    # If we have an 'Introduction' heading later, truncate abstract at that point
+    intro_pos = abstract_text.lower().find("introduction")
+    if intro_pos != -1:
+        abstract_text = abstract_text[:intro_pos].strip()
+
+# Fallback: if no explicit "Abstract" found, use first chunk after title as pseudo-abstract
+if not abstract_text:
+    if title_text and len(lines) > 1:
+        # assume lines after title (e.g., from second line onward) form the abstract/introduction
+        abstract_text = " ".join(lines[1:]).strip()
+    else:
+        # if no clear title either, use the whole first chunk as a fallback abstract
+        abstract_text = first_text.strip()
+In this snippet, we first try metadata, then use the first non-empty line as a potential title. We then look for "Abstract" in the text to isolate the abstract. We also handle edge cases: skipping any colon or newline right after "Abstract", and stopping if "Introduction" appears (to avoid bleeding into the next section).
+Fallback: If these methods fail (e.g., a non-academic PDF or unusual formatting), we proceed without a distinct title or abstract. In that case, we set title_text to None (or use the filename as a last resort) and use the first chunk’s text as the abstract context. All concepts will simply not get any title/abstract boost (which is the same as current behavior, so it’s safe). For instance, if the filename is just an ID (like "2502.19311v1.pdf") and the first chunk doesn’t yield a clean title, it’s safer to leave title_text empty rather than guessing.
+Safety: This title/abstract extraction is done with simple string operations on a single chunk, making it fast. It doesn’t require new libraries or heavy parsing, so the risk of crashes or slowdowns is minimal. We encapsulate this in a try/except if parsing strings, to avoid any unexpected errors from weird encoding. Because we only add a feature (title-aware boosting) and default to no-boost if uncertain, the existing concept extraction logic remains unchanged. Ensure that when using the title/abstract for boosting, you handle cases where these are empty or None (no boosting applied). By keeping the logic optional and using clear fallback defaults, we prevent any regression in pipelines that might not have a title or abstract (they will behave exactly as before).
+ Backfill New Fields into Concept Metadata with Fallbacks: Enrich each concept’s metadata with section context, frequency, and title/abstract flags in a backward-compatible way.
+Approach: After extracting all concepts from the document, augment their metadata dictionary (or object) with the new fields. The additional fields might include:
+frequency: the count of occurrences in the document (from the counter in the previous step).
+sections: the set or list of section labels where the concept appears (e.g., {"abstract","body"} if it showed up in both the abstract and main body).
+in_title: boolean flag indicating the concept text appears in the title.
+in_abstract: boolean flag indicating the concept appears in the abstract.
+These fields provide context but should not override any existing keys. Use .get() or defaults when populating to avoid KeyErrors. For example, if we maintain a map of concept -> sections during extraction, we can safely retrieve it; if a concept isn’t found in the map, default to {"body"} (meaning assume it’s only in the general body).
+Example Code: (pseudo-code to build and backfill concept metadata)
+python
+Copy
+Edit
+concepts = []  # list to hold concept metadata dicts
+concept_sections = {}  # e.g., {"ConceptX": {"abstract","body"}, ...}
+
+# After extraction loop, populate concept_sections using chunk context info:
+for chunk in chunks:
+    for concept in extract_concepts_from_chunk(chunk):
+        # ensure concept has an entry
+        if concept not in concept_sections:
+            concept_sections[concept] = set()
+        section_label = getattr(chunk, "context", None) or "body"
+        concept_sections[concept].add(section_label)
+
+# Build concept metadata list
+for concept, base_meta in extracted_concepts.items():  # however concepts are stored
+    meta = base_meta.copy()  # start from existing metadata (name, score, etc.)
+    # Add new fields with safe defaults
+    meta["frequency"] = concept_counts.get(concept, 1)
+    meta["sections"] = list(concept_sections.get(concept, {"body"}))
+    meta["in_title"] = bool(title_text and concept.lower() in title_text.lower())
+    meta["in_abstract"] = bool(abstract_text and concept.lower() in abstract_text.lower())
+    concepts.append(meta)
+In this pseudo-code, extracted_concepts could be a dict or list of initial concept info. We make sure to not assume any of the new data is present: use .get for concept_counts and concept_sections, and use the computed title_text/abstract_text if available. The sections field is stored as a list (for easy JSON serialization) but can be treated as a set internally. We lowercase the concept and title/abstract when checking for inclusion to avoid case mismatches.
+Fallback: Every new field is assigned a reasonable fallback: if a concept wasn’t counted (shouldn’t happen unless logic skipped it), frequency defaults to 1. If we have no section info, we default to ["body"]. Title/abstract flags default to False if no title/abstract was found or if the concept string isn’t present. This way, even if the new context data is missing, the concept metadata remains complete and the rest of the pipeline sees no difference (it just ignores the new fields).
+Safety: By adding fields instead of changing existing ones, we maintain backward compatibility. Existing code that doesn’t know about frequency or sections will simply ignore them. Ensure that any serialization or database schema that stores concept metadata can handle extra fields (e.g., if using a fixed schema, you might need to add nullable columns or a flexible JSON field). The new fields use basic Python types (int, list, bool) which are safe to handle. It’s wise to wrap the extraction of title/abstract flags in a try/except if doing any complex operations, but here it’s just a substring check. These enhancements should be gated behind configuration flags or environment toggles during rollout: you can compute and attach the fields but refrain from using them in critical scoring decisions until validated. By providing default values and not altering existing keys, we avoid any KeyError or missing attribute issues in downstream processing.
+ Integrate Changes into Pipeline & Maintain Stability: Incorporate the above enhancements at the appropriate stages with minimal disruption.
+Integration Points:
+PDF Chunking (extract_chunks): After splitting the document into chunks, apply the section context heuristic to tag each chunk before concept extraction. This can be done by calling an infer_section_context() helper (like the one above) on the list of chunks. This step is lightweight and can be added at the end of extract_chunks without affecting the chunk content. If the chunk object has a metadata field or attribute, store the context label there (e.g., chunk.context = "introduction").
+Concept Extraction (extractConceptsFromDocument): This function processes all chunks to produce concept candidates. Here is where we integrate frequency counting and title/abstract detection:
+Title/Abstract detection: At the start of this function (after reading chunks), invoke the title/abstract extraction logic. For example, determine title_text and abstract_text from chunks[0] (or wherever appropriate) as shown earlier. Keep these in local variables.
+Frequency and section accumulation: As concepts are extracted from each chunk, update the concept_counts dictionary and concept_sections map (as shown in the code snippet above). This can be done inline with concept extraction to avoid a separate loop. Ensure concept_sections is updated using the chunk’s context label (with a default of "body" if none).
+Metadata backfill: After processing all chunks, loop through the unique concepts and enrich their metadata with the new fields (frequency, sections, in_title, in_abstract). This could be done by constructing a new list of concept metadata or by updating objects in place. For safety, do this augmentation in a separate structure or make a copy of the concept list, so the original data remains untouched if something goes wrong.
+Output/return: Pass along the enriched concept list to the next stage (analyze_concept_purity). If that stage expects a particular format, ensure the new fields are either ignored or handled appropriately (for now, they might be ignored until we utilize them).
+Concept Analysis (analyze_concept_purity): This stage can optionally use the new metadata to make filtering decisions. To avoid regressions, initially keep the logic the same, but log the new metadata for analysis. For example, you might log if a concept with frequency 1 is being kept, or if a concept appears only in the conclusion. Once confident, you could introduce new rules gradually, such as: drop concepts that appear exclusively in the "references" section or only once in the whole document (since those might be trivial mentions). Similarly, boost the score of concepts with in_title=True. Any new rule should be behind a feature flag or threshold (e.g., only apply if frequency is above a certain count) to prevent sudden changes in output.
+Safety Notes:
+Isolation of Changes: Each enhancement is added in an additive manner. They do not replace or remove existing steps. This isolation means that if something goes wrong (e.g., a bug in section tagging), we can disable that feature flag and the pipeline continues as before. It’s crucial to test each part independently (e.g., ensure extract_chunks with context tagging still returns the same text data and chunk count as before).
+Performance: Monitor the runtime after adding these features. They are designed to be low-impact (string searches and dictionary operations only). At scale, the biggest overhead is a few extra dictionary lookups and string comparisons per chunk or concept, which is negligible. Still, profile on a batch of 100k documents to confirm there’s no unexpected slow-down (e.g., extremely large chunks causing slow string searches – if so, one can limit the keyword search to the first few hundred characters of each chunk to be safe).
+Memory: The new data structures (concept_counts, concept_sections) are cleared or go out of scope after each document. Ensure they are local to the document processing loop so they don’t accumulate across documents. This avoids any memory bloat when processing many documents in succession.
+Regression Testing: Before deploying, run the enhanced pipeline on a wide sample of documents and compare the resulting concept lists with the previous version. They should be identical in terms of chosen concepts (since initially we’re not altering filtering logic, just adding metadata). Any differences would indicate an unintended effect that needs fixing. Once verified, gradually introduce the use of the new metadata in scoring or filtering, watching for changes in output.
+Gradual Rollout: Incorporate feature flags or configuration toggles for each enhancement (e.g., ENABLE_SECTION_CONTEXT, ENABLE_TITLE_BOOST). Start with them off in production, then enable one at a time, measuring impact. This way, if something causes a problem at scale (like a particular document’s weird formatting breaking a regex), you can pinpoint it and roll back that specific feature without affecting the others.
+By integrating at these specific points (extract_chunks for chunk labeling, extractConceptsFromDocument for counting and title extraction, analyze_concept_purity for using the data), we ensure the changes blend naturally into the pipeline. Each addition comes with safe defaults and can be ignored by downstream components until we choose to use it, thereby avoiding any breakage in the current logic.

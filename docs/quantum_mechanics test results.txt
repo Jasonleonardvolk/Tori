@@ -1,0 +1,737 @@
+
+
+PS C:\windows\system32> cd C:\Users\jason\Desktop\tori\kha
+PS C:\Users\jason\Desktop\tori\kha> python test_natural_filtering.py
+🔬 Testing natural consensus filtering...
+======================================================================
+
+📊 TEST 1: With 50-concept cap
+2025-05-30 11:19:56,581 - time_context - INFO - TimeContext e802139b initialized at 2025-05-30T11:19:56.581035
+2025-05-30 11:19:56 | INFO | BIRTH | LOGGER | ConceptLogger initialized | log_file=concept_events.log | json_format=False
+2025-05-30 11:19:56,587 - concept_events - INFO - BIRTH | LOGGER | ConceptLogger initialized | log_file=concept_events.log | json_format=False
+2025-05-30 11:19:56,587 - cognitive_interface - INFO - Registered ConceptMesh callback: notify_ui_update
+2025-05-30 11:19:56,587 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 INITIALIZING UNIVERSAL CONCEPT EXTRACTION MODELS...
+2025-05-30 11:19:57,009 - ingest_pdf.extractConceptsFromDocument - INFO - ✅ YAKE extractor initialized
+2025-05-30 11:20:06,221 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-05-30 11:20:06,221 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: sentence-transformers/all-mpnet-base-v2
+2025-05-30 11:20:07,825 - ingest_pdf.extractConceptsFromDocument - INFO - ✅ KeyBERT with universal embeddings initialized
+2025-05-30 11:20:10,611 - ingest_pdf.extractConceptsFromDocument - INFO - ✅ spaCy universal NER initialized
+2025-05-30 11:20:10,611 - ingest_pdf.extractConceptsFromDocument - INFO - ℹ️ spacy-entity-linker not installed; proceeding without entity linking
+2025-05-30 11:20:10,611 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL CONCEPT EXTRACTION MODULE LOADED
+2025-05-30 11:20:10,611 - ingest_pdf.extractConceptsFromDocument - INFO - ✅ Ready for cross-domain concept extraction: Science, Humanities, Arts, Philosophy, Mathematics!
+2025-05-30 11:20:10,661 - pdf_ingestion - INFO - ✅ Main concept database loaded: 2248 concepts
+2025-05-30 11:20:10,661 - pdf_ingestion - INFO - 🌍 Universal seed concepts loaded: 48 concepts
+2025-05-30 11:20:10,669 - pdf_ingestion - INFO - 🌍 UNIVERSAL DATABASE READY: 2248 total concepts
+2025-05-30 11:20:10,669 - pdf_ingestion - INFO - 📊 Added 0 universal seed concepts
+2025-05-30 11:20:10,669 - pdf_ingestion - INFO - 📊 Domain coverage: {'Anthropology': 1, 'Art': 21, 'Biology': 234, 'Chemistry': 2, 'Computer Science': 145, 'Economics': 2, 'Environmental Science': 2, 'History': 2, 'Linguistics': 2, 'Literature': 4, 'Mathematics': 17, 'Music': 8, 'Philosophy': 5, 'Physics': 151, 'Political Science': 2, 'Psychology': 2, 'Sociology': 1, 'education': 1, 'environment': 2, 'finance': 1, 'medicine': 1, 'science': 2, 'technology': 7, 'transportation': 1, 'universal_extraction': 1632}
+2025-05-30 11:20:10,669 - pdf_ingestion - INFO - 🏆 🧬 PURITY-BASED UNIVERSAL PDF PIPELINE LOADED
+2025-05-30 11:20:10,669 - pdf_ingestion - INFO - 📥 Cross-domain auto-discovery enabled across all academic fields
+2025-05-30 11:20:10,669 - pdf_ingestion - INFO - 🏆 Purity-based analysis: Quality over quantity - extracting the 'truth'
+2025-05-30 11:20:10,669 - pdf_ingestion - INFO - 🌍 2248 concepts ready: Science, Humanities, Arts, Philosophy, Mathematics, and more!
+2025-05-30 11:20:10,669 - pdf_ingestion - INFO - 📏 Small file (0.0MB): 3 chunks, 200 max concepts
+2025-05-30 11:20:10,669 - pdf_ingestion - INFO - 🏆 🌍 PURITY-BASED UNIVERSAL PDF INGESTION: test_consensus.txt
+2025-05-30 11:20:10,669 - pdf_ingestion - INFO - 🔬 ZERO THRESHOLD MODE: 0.0 (maximum coverage)
+2025-05-30 11:20:10,669 - pdf_ingestion - INFO - 🌍 UNIVERSAL PIPELINE: Cross-domain concept extraction enabled
+2025-05-30 11:20:10,675 - pdf_ingestion - INFO - 📊 Database ready: 2248 concepts across all domains
+2025-05-30 11:20:10,675 - pdf_ingestion - INFO - 🏆 PURITY-BASED: Quality over quantity - extracting the 'truth'
+2025-05-30 11:20:10,676 - pdf_ingestion - INFO - 🚨 DYNAMIC PERFORMANCE LIMITS: Max 3 chunks, stop at 200 concepts
+2025-05-30 11:20:10,698 - pdf_ingestion - WARNING - Could not extract PDF metadata: EOF marker not found
+2025-05-30 11:20:10,702 - pdf_ingestion - ERROR - Failed to extract chunks from test_consensus.txt: EOF marker not found
+2025-05-30 11:20:10,702 - pdf_ingestion - WARNING - ⚠️ No chunks extracted from test_consensus.txt
+  Final concepts: 0
+
+📊 TEST 2: WITHOUT 50-concept cap (natural filtering only)
+2025-05-30 11:20:10,783 - pdf_ingestion - INFO - ✅ Main concept database loaded: 2248 concepts
+2025-05-30 11:20:10,783 - pdf_ingestion - INFO - 🌍 Universal seed concepts loaded: 48 concepts
+2025-05-30 11:20:10,783 - pdf_ingestion - INFO - 🌍 UNIVERSAL DATABASE READY: 2248 total concepts
+2025-05-30 11:20:10,783 - pdf_ingestion - INFO - 📊 Added 0 universal seed concepts
+2025-05-30 11:20:10,792 - pdf_ingestion - INFO - 📊 Domain coverage: {'Anthropology': 1, 'Art': 21, 'Biology': 234, 'Chemistry': 2, 'Computer Science': 145, 'Economics': 2, 'Environmental Science': 2, 'History': 2, 'Linguistics': 2, 'Literature': 4, 'Mathematics': 17, 'Music': 8, 'Philosophy': 5, 'Physics': 151, 'Political Science': 2, 'Psychology': 2, 'Sociology': 1, 'education': 1, 'environment': 2, 'finance': 1, 'medicine': 1, 'science': 2, 'technology': 7, 'transportation': 1, 'universal_extraction': 1632}
+2025-05-30 11:20:10,793 - pdf_ingestion - INFO - 🏆 🧬 PURITY-BASED UNIVERSAL PDF PIPELINE LOADED
+2025-05-30 11:20:10,793 - pdf_ingestion - INFO - 📥 Cross-domain auto-discovery enabled across all academic fields
+2025-05-30 11:20:10,793 - pdf_ingestion - INFO - 🏆 Purity-based analysis: Quality over quantity - extracting the 'truth'
+2025-05-30 11:20:10,793 - pdf_ingestion - INFO - 🌍 2248 concepts ready: Science, Humanities, Arts, Philosophy, Mathematics, and more!
+2025-05-30 11:20:10,793 - pdf_ingestion - INFO - 📏 Small file (0.0MB): 3 chunks, 200 max concepts
+2025-05-30 11:20:10,793 - pdf_ingestion - INFO - 🏆 🌍 PURITY-BASED UNIVERSAL PDF INGESTION: test_consensus.txt
+2025-05-30 11:20:10,793 - pdf_ingestion - INFO - 🔬 ZERO THRESHOLD MODE: 0.0 (maximum coverage)
+2025-05-30 11:20:10,799 - pdf_ingestion - INFO - 🌍 UNIVERSAL PIPELINE: Cross-domain concept extraction enabled
+2025-05-30 11:20:10,799 - pdf_ingestion - INFO - 📊 Database ready: 2248 concepts across all domains
+2025-05-30 11:20:10,799 - pdf_ingestion - INFO - 🏆 PURITY-BASED: Quality over quantity - extracting the 'truth'
+2025-05-30 11:20:10,799 - pdf_ingestion - INFO - 🚨 DYNAMIC PERFORMANCE LIMITS: Max 3 chunks, stop at 200 concepts
+2025-05-30 11:20:10,799 - pdf_ingestion - WARNING - Could not extract PDF metadata: EOF marker not found
+2025-05-30 11:20:10,799 - pdf_ingestion - ERROR - Failed to extract chunks from test_consensus.txt: EOF marker not found
+2025-05-30 11:20:10,799 - pdf_ingestion - WARNING - ⚠️ No chunks extracted from test_consensus.txt
+  Final concepts: 0
+
+======================================================================
+🤔 ANALYSIS:
+✅ Natural filtering is working well!
+   Only 0 concepts without hard cap
+
+💡 The hard cap is just a safety net
+
+📝 To make natural filtering stronger, consider:
+  1. Raise single-method threshold to 0.95+ (currently 0.9)
+  2. Require word_count = 1 for single-method (currently ≤2)
+  3. Increase consensus boost factors
+PS C:\Users\jason\Desktop\tori\kha> python test_quantum_paper_filtering.py
+🔬 Testing natural consensus filtering with real PDF...
+======================================================================
+📄 Using quantum physics paper: data/2502.19311v1.pdf
+
+📊 TEST 1: With 50-concept cap
+2025-05-30 11:26:20,088 - time_context - INFO - TimeContext f2d99964 initialized at 2025-05-30T11:26:20.088272
+2025-05-30 11:26:20 | INFO | BIRTH | LOGGER | ConceptLogger initialized | log_file=concept_events.log | json_format=False
+2025-05-30 11:26:20,090 - concept_events - INFO - BIRTH | LOGGER | ConceptLogger initialized | log_file=concept_events.log | json_format=False
+2025-05-30 11:26:20,091 - cognitive_interface - INFO - Registered ConceptMesh callback: notify_ui_update
+2025-05-30 11:26:20,092 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 INITIALIZING UNIVERSAL CONCEPT EXTRACTION MODELS...
+2025-05-30 11:26:20,307 - ingest_pdf.extractConceptsFromDocument - INFO - ✅ YAKE extractor initialized
+2025-05-30 11:26:26,257 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-05-30 11:26:26,257 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: sentence-transformers/all-mpnet-base-v2
+2025-05-30 11:26:27,537 - ingest_pdf.extractConceptsFromDocument - INFO - ✅ KeyBERT with universal embeddings initialized
+2025-05-30 11:26:29,472 - ingest_pdf.extractConceptsFromDocument - INFO - ✅ spaCy universal NER initialized
+2025-05-30 11:27:57,231 - ingest_pdf.extractConceptsFromDocument - INFO - ℹ️ spacy-entity-linker not installed; proceeding without entity linking
+2025-05-30 11:27:57,237 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL CONCEPT EXTRACTION MODULE LOADED
+2025-05-30 11:27:57,238 - ingest_pdf.extractConceptsFromDocument - INFO - ✅ Ready for cross-domain concept extraction: Science, Humanities, Arts, Philosophy, Mathematics!
+2025-05-30 11:27:57,261 - pdf_ingestion - INFO - ✅ Main concept database loaded: 2248 concepts
+2025-05-30 11:27:57,262 - pdf_ingestion - INFO - 🌍 Universal seed concepts loaded: 48 concepts
+2025-05-30 11:27:57,264 - pdf_ingestion - INFO - 🌍 UNIVERSAL DATABASE READY: 2248 total concepts
+2025-05-30 11:27:57,264 - pdf_ingestion - INFO - 📊 Added 0 universal seed concepts
+2025-05-30 11:27:57,264 - pdf_ingestion - INFO - 📊 Domain coverage: {'Anthropology': 1, 'Art': 21, 'Biology': 234, 'Chemistry': 2, 'Computer Science': 145, 'Economics': 2, 'Environmental Science': 2, 'History': 2, 'Linguistics': 2, 'Literature': 4, 'Mathematics': 17, 'Music': 8, 'Philosophy': 5, 'Physics': 151, 'Political Science': 2, 'Psychology': 2, 'Sociology': 1, 'education': 1, 'environment': 2, 'finance': 1, 'medicine': 1, 'science': 2, 'technology': 7, 'transportation': 1, 'universal_extraction': 1632}
+2025-05-30 11:27:57,267 - pdf_ingestion - INFO - 🏆 🧬 PURITY-BASED UNIVERSAL PDF PIPELINE LOADED
+2025-05-30 11:27:57,267 - pdf_ingestion - INFO - 📥 Cross-domain auto-discovery enabled across all academic fields
+2025-05-30 11:27:57,267 - pdf_ingestion - INFO - 🏆 Purity-based analysis: Quality over quantity - extracting the 'truth'
+2025-05-30 11:27:57,267 - pdf_ingestion - INFO - 🌍 2248 concepts ready: Science, Humanities, Arts, Philosophy, Mathematics, and more!
+2025-05-30 11:27:57,268 - pdf_ingestion - INFO - 📏 Medium file (3.2MB): 5 chunks, 500 max concepts
+2025-05-30 11:27:57,268 - pdf_ingestion - INFO - 🏆 🌍 PURITY-BASED UNIVERSAL PDF INGESTION: 2502.19311v1.pdf
+2025-05-30 11:27:57,268 - pdf_ingestion - INFO - 🔬 ZERO THRESHOLD MODE: 0.0 (maximum coverage)
+2025-05-30 11:27:57,269 - pdf_ingestion - INFO - 🌍 UNIVERSAL PIPELINE: Cross-domain concept extraction enabled
+2025-05-30 11:27:57,269 - pdf_ingestion - INFO - 📊 Database ready: 2248 concepts across all domains
+2025-05-30 11:27:57,269 - pdf_ingestion - INFO - 🏆 PURITY-BASED: Quality over quantity - extracting the 'truth'
+2025-05-30 11:27:57,269 - pdf_ingestion - INFO - 🚨 DYNAMIC PERFORMANCE LIMITS: Max 5 chunks, stop at 500 concepts
+2025-05-30 11:27:57,659 - pdf_ingestion - INFO - 📄 Extracted 22 chunks from 2502.19311v1.pdf
+2025-05-30 11:27:57,659 - pdf_ingestion - INFO - 🔬 Chunk 1: 2588 chars, preview: Faithful Logic Embeddings in HOL – A recipe to
+have it all: deep and shallow, automated and
+interact...
+2025-05-30 11:27:57,662 - pdf_ingestion - INFO - 🔬 Chunk 2: 3558 chars, preview: 2 Christoph Benzmüller
+shallow logic embeddings in metalogic HOL, with the effect that computer-
+sup...
+2025-05-30 11:27:57,662 - pdf_ingestion - INFO - 🔬 Chunk 3: 2979 chars, preview: Faithful Logic Embeddings in HOL – A recipe to have it all 3
+2 Popositional modal logic (PML)
+Thesyn...
+2025-05-30 11:27:57,662 - pdf_ingestion - INFO - 🚨 PERFORMANCE LIMITING: Processing 5 of 22 total chunks
+2025-05-30 11:27:57,662 - pdf_ingestion - INFO - 🚨 Skipping 17 chunks to prevent Beautiful Overkill
+2025-05-30 11:27:57,663 - pdf_ingestion - INFO - 🔬 =============== UNIVERSAL CHUNK 1/5 ===============
+2025-05-30 11:27:57,663 - pdf_ingestion - INFO - 📊 Processing chunk 1/5 (2588 chars)
+2025-05-30 11:27:57,664 - pdf_ingestion - INFO - 🔧 🌍 UNIVERSAL EXTRACT AND BOOST: threshold: 0.0
+2025-05-30 11:27:57,664 - pdf_ingestion - INFO - 🔬 Chunk length: 2588 chars
+2025-05-30 11:27:57,665 - pdf_ingestion - INFO - 🔬 STEP 1: Calling universal extractConceptsFromDocument...
+2025-05-30 11:27:57,665 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL CONCEPT EXTRACTION START
+2025-05-30 11:27:57,665 - ingest_pdf.extractConceptsFromDocument - INFO - 🔬 Text length: 2588 chars, Threshold: 0.0
+2025-05-30 11:27:57,665 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION: Processing 2588 chars
+2025-05-30 11:28:01,615 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION COMPLETE: 49 concepts extracted
+2025-05-30 11:28:01,616 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 TOP UNIVERSAL CONCEPTS:
+2025-05-30 11:28:01,623 - ingest_pdf.extractConceptsFromDocument - INFO -   1. Faithful Logic Embeddings (score: 1.000, methods: KeyBERT+NER+YAKE)
+2025-05-30 11:28:01,623 - ingest_pdf.extractConceptsFromDocument - INFO -   2. shallow embeddings logics (score: 0.608, methods: KeyBERT+YAKE)
+2025-05-30 11:28:01,623 - ingest_pdf.extractConceptsFromDocument - INFO -   3. Logic Embeddings (score: 0.576, methods: KeyBERT+YAKE)
+2025-05-30 11:28:01,624 - ingest_pdf.extractConceptsFromDocument - INFO -   4. Universität Berlin (score: 0.481, methods: NER+YAKE)
+2025-05-30 11:28:01,624 - ingest_pdf.extractConceptsFromDocument - INFO -   5. Kaiserswerther Str (score: 0.473, methods: NER+YAKE)
+2025-05-30 11:28:01,624 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 EXTRACTION METHOD BREAKDOWN:
+2025-05-30 11:28:01,625 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT+NER+YAKE: 1 concepts
+2025-05-30 11:28:01,625 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT+YAKE: 2 concepts
+2025-05-30 11:28:01,625 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER+YAKE: 5 concepts
+2025-05-30 11:28:01,625 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT: 17 concepts
+2025-05-30 11:28:01,625 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 YAKE: 12 concepts
+2025-05-30 11:28:01,626 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER: 12 concepts
+2025-05-30 11:28:01,626 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL EXTRACTION END: 49 concepts ready
+2025-05-30 11:28:01,626 - pdf_ingestion - INFO - 📊 UNIVERSAL SEMANTIC EXTRACTION RESULT: 49 concepts
+2025-05-30 11:28:01,626 - pdf_ingestion - INFO - 🔬 STEP 2: Calling quality-focused boost_known_concepts...
+2025-05-30 11:28:01,626 - pdf_ingestion - INFO - 🚀 QUALITY BOOST: Checking top 300 priority concepts (max 25 quality matches)
+2025-05-30 11:28:01,631 - pdf_ingestion - INFO - 🌍 Quality boost domain matches: {'technology': 1, 'Computer Science': 12, 'universal_extraction': 9, 'Mathematics': 2}
+2025-05-30 11:28:01,631 - pdf_ingestion - INFO - 🚀 Quality-focused boost complete: 24 high-priority concepts found
+2025-05-30 11:28:01,631 - pdf_ingestion - INFO - 🚀 QUALITY-FOCUSED DATABASE BOOST RESULT: 24 concepts
+2025-05-30 11:28:01,631 - pdf_ingestion - INFO - 🔧 UNIVERSAL COMBINED RESULT: 73 total concepts (before purity analysis)
+2025-05-30 11:28:01,632 - pdf_ingestion - INFO - 🔬 CHUNK 1 RAW RESULTS: 73 concepts
+2025-05-30 11:28:01,632 - pdf_ingestion - INFO -    🌍 49 universal extraction, 🚀 24 database boosted
+2025-05-30 11:28:01,632 - pdf_ingestion - INFO - 🔬 Total concepts so far: 73
+2025-05-30 11:28:01,632 - pdf_ingestion - INFO - 🔬 =============== END CHUNK 1 ===============
+2025-05-30 11:28:01,632 - pdf_ingestion - INFO - 🔬 =============== UNIVERSAL CHUNK 2/5 ===============
+2025-05-30 11:28:01,633 - pdf_ingestion - INFO - 📊 Processing chunk 2/5 (3558 chars)
+2025-05-30 11:28:01,633 - pdf_ingestion - INFO - 🔧 🌍 UNIVERSAL EXTRACT AND BOOST: threshold: 0.0
+2025-05-30 11:28:01,633 - pdf_ingestion - INFO - 🔬 Chunk length: 3558 chars
+2025-05-30 11:28:01,633 - pdf_ingestion - INFO - 🔬 STEP 1: Calling universal extractConceptsFromDocument...
+2025-05-30 11:28:01,633 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL CONCEPT EXTRACTION START
+2025-05-30 11:28:01,633 - ingest_pdf.extractConceptsFromDocument - INFO - 🔬 Text length: 3558 chars, Threshold: 0.0
+2025-05-30 11:28:01,633 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION: Processing 3558 chars
+2025-05-30 11:28:06,417 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION COMPLETE: 57 concepts extracted
+2025-05-30 11:28:06,418 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 TOP UNIVERSAL CONCEPTS:
+2025-05-30 11:28:06,424 - ingest_pdf.extractConceptsFromDocument - INFO -   1. Benzmüller shallow logic (score: 1.000, methods: KeyBERT+YAKE)
+2025-05-30 11:28:06,425 - ingest_pdf.extractConceptsFromDocument - INFO -   2. shallow logic embeddings (score: 0.831, methods: KeyBERT+YAKE)
+2025-05-30 11:28:06,425 - ingest_pdf.extractConceptsFromDocument - INFO -   3. Christoph Benzmüller (score: 0.818, methods: NER+YAKE)
+2025-05-30 11:28:06,425 - ingest_pdf.extractConceptsFromDocument - INFO -   4. logic embeddings (score: 0.734, methods: KeyBERT+YAKE)
+2025-05-30 11:28:06,425 - ingest_pdf.extractConceptsFromDocument - INFO -   5. HOL (score: 0.734, methods: NER+YAKE)
+2025-05-30 11:28:06,425 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 EXTRACTION METHOD BREAKDOWN:
+2025-05-30 11:28:06,426 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT+YAKE: 3 concepts
+2025-05-30 11:28:06,426 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER+YAKE: 2 concepts
+2025-05-30 11:28:06,426 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT: 17 concepts
+2025-05-30 11:28:06,426 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 YAKE: 15 concepts
+2025-05-30 11:28:06,426 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER: 20 concepts
+2025-05-30 11:28:06,426 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL EXTRACTION END: 57 concepts ready
+2025-05-30 11:28:06,426 - pdf_ingestion - INFO - 📊 UNIVERSAL SEMANTIC EXTRACTION RESULT: 57 concepts
+2025-05-30 11:28:06,426 - pdf_ingestion - INFO - 🔬 STEP 2: Calling quality-focused boost_known_concepts...
+2025-05-30 11:28:06,426 - pdf_ingestion - INFO - 🚀 QUALITY BOOST: Checking top 300 priority concepts (max 25 quality matches)
+2025-05-30 11:28:06,429 - pdf_ingestion - INFO - 🛑 Quality boost limit reached (25 concepts)
+2025-05-30 11:28:06,429 - pdf_ingestion - INFO - 🌍 Quality boost domain matches: {'Physics': 2, 'universal_extraction': 10, 'Computer Science': 12, 'Mathematics': 1}
+2025-05-30 11:28:06,429 - pdf_ingestion - INFO - 🚀 Quality-focused boost complete: 25 high-priority concepts found
+2025-05-30 11:28:06,430 - pdf_ingestion - INFO - 🚀 QUALITY-FOCUSED DATABASE BOOST RESULT: 25 concepts
+2025-05-30 11:28:06,430 - pdf_ingestion - INFO - 🔧 UNIVERSAL COMBINED RESULT: 82 total concepts (before purity analysis)
+2025-05-30 11:28:06,431 - pdf_ingestion - INFO - 🔬 CHUNK 2 RAW RESULTS: 82 concepts
+2025-05-30 11:28:06,431 - pdf_ingestion - INFO -    🌍 57 universal extraction, 🚀 25 database boosted
+2025-05-30 11:28:06,432 - pdf_ingestion - INFO - 🔬 Total concepts so far: 155
+2025-05-30 11:28:06,432 - pdf_ingestion - INFO - 🔬 =============== END CHUNK 2 ===============
+2025-05-30 11:28:06,432 - pdf_ingestion - INFO - 🔬 =============== UNIVERSAL CHUNK 3/5 ===============
+2025-05-30 11:28:06,432 - pdf_ingestion - INFO - 📊 Processing chunk 3/5 (2979 chars)
+2025-05-30 11:28:06,432 - pdf_ingestion - INFO - 🔧 🌍 UNIVERSAL EXTRACT AND BOOST: threshold: 0.0
+2025-05-30 11:28:06,432 - pdf_ingestion - INFO - 🔬 Chunk length: 2979 chars
+2025-05-30 11:28:06,432 - pdf_ingestion - INFO - 🔬 STEP 1: Calling universal extractConceptsFromDocument...
+2025-05-30 11:28:06,432 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL CONCEPT EXTRACTION START
+2025-05-30 11:28:06,433 - ingest_pdf.extractConceptsFromDocument - INFO - 🔬 Text length: 2979 chars, Threshold: 0.0
+2025-05-30 11:28:06,433 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION: Processing 2979 chars
+2025-05-30 11:28:10,517 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION COMPLETE: 58 concepts extracted
+2025-05-30 11:28:10,517 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 TOP UNIVERSAL CONCEPTS:
+2025-05-30 11:28:10,518 - ingest_pdf.extractConceptsFromDocument - INFO -   1. Faithful Logic Embeddings (score: 1.000, methods: KeyBERT+NER+YAKE)
+2025-05-30 11:28:10,519 - ingest_pdf.extractConceptsFromDocument - INFO -   2. Popositional modal logic (score: 0.644, methods: KeyBERT+YAKE)
+2025-05-30 11:28:10,519 - ingest_pdf.extractConceptsFromDocument - INFO -   3. modal logic (score: 0.545, methods: KeyBERT+YAKE)
+2025-05-30 11:28:10,519 - ingest_pdf.extractConceptsFromDocument - INFO -   4. Logic Embeddings (score: 0.531, methods: KeyBERT+YAKE)
+2025-05-30 11:28:10,519 - ingest_pdf.extractConceptsFromDocument - INFO -   5. PML (score: 0.449, methods: NER+YAKE)
+2025-05-30 11:28:10,519 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 EXTRACTION METHOD BREAKDOWN:
+2025-05-30 11:28:10,520 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT+NER+YAKE: 1 concepts
+2025-05-30 11:28:10,520 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT+YAKE: 5 concepts
+2025-05-30 11:28:10,520 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER+YAKE: 3 concepts
+2025-05-30 11:28:10,520 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT: 14 concepts
+2025-05-30 11:28:10,520 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 YAKE: 11 concepts
+2025-05-30 11:28:10,520 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER: 24 concepts
+2025-05-30 11:28:10,521 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL EXTRACTION END: 58 concepts ready
+2025-05-30 11:28:10,521 - pdf_ingestion - INFO - 📊 UNIVERSAL SEMANTIC EXTRACTION RESULT: 58 concepts
+2025-05-30 11:28:10,521 - pdf_ingestion - INFO - 🔬 STEP 2: Calling quality-focused boost_known_concepts...
+2025-05-30 11:28:10,522 - pdf_ingestion - INFO - 🚀 QUALITY BOOST: Checking top 300 priority concepts (max 25 quality matches)
+2025-05-30 11:28:10,524 - pdf_ingestion - INFO - 🛑 Quality boost limit reached (25 concepts)
+2025-05-30 11:28:10,525 - pdf_ingestion - INFO - 🌍 Quality boost domain matches: {'Computer Science': 12, 'Physics': 2, 'universal_extraction': 10, 'Mathematics': 1}
+2025-05-30 11:28:10,525 - pdf_ingestion - INFO - 🚀 Quality-focused boost complete: 25 high-priority concepts found
+2025-05-30 11:28:10,525 - pdf_ingestion - INFO - 🚀 QUALITY-FOCUSED DATABASE BOOST RESULT: 25 concepts
+2025-05-30 11:28:10,525 - pdf_ingestion - INFO - 🔧 UNIVERSAL COMBINED RESULT: 83 total concepts (before purity analysis)
+2025-05-30 11:28:10,526 - pdf_ingestion - INFO - 🔬 CHUNK 3 RAW RESULTS: 83 concepts
+2025-05-30 11:28:10,526 - pdf_ingestion - INFO -    🌍 58 universal extraction, 🚀 25 database boosted
+2025-05-30 11:28:10,526 - pdf_ingestion - INFO - 🔬 Total concepts so far: 238
+2025-05-30 11:28:10,527 - pdf_ingestion - INFO - 🔬 =============== END CHUNK 3 ===============
+2025-05-30 11:28:10,527 - pdf_ingestion - INFO - 🔬 =============== UNIVERSAL CHUNK 4/5 ===============
+2025-05-30 11:28:10,527 - pdf_ingestion - INFO - 📊 Processing chunk 4/5 (3181 chars)
+2025-05-30 11:28:10,527 - pdf_ingestion - INFO - 🔧 🌍 UNIVERSAL EXTRACT AND BOOST: threshold: 0.0
+2025-05-30 11:28:10,527 - pdf_ingestion - INFO - 🔬 Chunk length: 3181 chars
+2025-05-30 11:28:10,528 - pdf_ingestion - INFO - 🔬 STEP 1: Calling universal extractConceptsFromDocument...
+2025-05-30 11:28:10,528 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL CONCEPT EXTRACTION START
+2025-05-30 11:28:10,528 - ingest_pdf.extractConceptsFromDocument - INFO - 🔬 Text length: 3181 chars, Threshold: 0.0
+2025-05-30 11:28:10,528 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION: Processing 3181 chars
+2025-05-30 11:28:16,162 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION COMPLETE: 68 concepts extracted
+2025-05-30 11:28:16,162 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 TOP UNIVERSAL CONCEPTS:
+2025-05-30 11:28:16,163 - ingest_pdf.extractConceptsFromDocument - INFO -   1. Christoph Benzmüller (score: 1.000, methods: NER+YAKE)
+2025-05-30 11:28:16,164 - ingest_pdf.extractConceptsFromDocument - INFO -   2. HOL (score: 0.955, methods: NER+YAKE)
+2025-05-30 11:28:16,164 - ingest_pdf.extractConceptsFromDocument - INFO -   3. Henkin (score: 0.789, methods: NER+YAKE)
+2025-05-30 11:28:16,164 - ingest_pdf.extractConceptsFromDocument - INFO -   4. higher order logic (score: 0.727, methods: KeyBERT)
+2025-05-30 11:28:16,164 - ingest_pdf.extractConceptsFromDocument - INFO -   5. hol logic terms (score: 0.645, methods: KeyBERT)
+2025-05-30 11:28:16,165 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 EXTRACTION METHOD BREAKDOWN:
+2025-05-30 11:28:16,165 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER+YAKE: 3 concepts
+2025-05-30 11:28:16,165 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT: 19 concepts
+2025-05-30 11:28:16,165 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT+YAKE: 1 concepts
+2025-05-30 11:28:16,166 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER: 29 concepts
+2025-05-30 11:28:16,166 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 YAKE: 16 concepts
+2025-05-30 11:28:16,167 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL EXTRACTION END: 68 concepts ready
+2025-05-30 11:28:16,167 - pdf_ingestion - INFO - 📊 UNIVERSAL SEMANTIC EXTRACTION RESULT: 68 concepts
+2025-05-30 11:28:16,167 - pdf_ingestion - INFO - 🔬 STEP 2: Calling quality-focused boost_known_concepts...
+2025-05-30 11:28:16,167 - pdf_ingestion - INFO - 🚀 QUALITY BOOST: Checking top 300 priority concepts (max 25 quality matches)
+2025-05-30 11:28:16,171 - pdf_ingestion - INFO - 🛑 Quality boost limit reached (25 concepts)
+2025-05-30 11:28:16,171 - pdf_ingestion - INFO - 🌍 Quality boost domain matches: {'universal_extraction': 13, 'Physics': 1, 'Computer Science': 11}
+2025-05-30 11:28:16,172 - pdf_ingestion - INFO - 🚀 Quality-focused boost complete: 25 high-priority concepts found
+2025-05-30 11:28:16,172 - pdf_ingestion - INFO - 🚀 QUALITY-FOCUSED DATABASE BOOST RESULT: 25 concepts
+2025-05-30 11:28:16,172 - pdf_ingestion - INFO - 🔧 UNIVERSAL COMBINED RESULT: 93 total concepts (before purity analysis)
+2025-05-30 11:28:16,173 - pdf_ingestion - INFO - 🔬 CHUNK 4 RAW RESULTS: 93 concepts
+2025-05-30 11:28:16,173 - pdf_ingestion - INFO -    🌍 68 universal extraction, 🚀 25 database boosted
+2025-05-30 11:28:16,173 - pdf_ingestion - INFO - 🔬 Total concepts so far: 331
+2025-05-30 11:28:16,174 - pdf_ingestion - INFO - 🔬 =============== END CHUNK 4 ===============
+2025-05-30 11:28:16,174 - pdf_ingestion - INFO - 🔬 =============== UNIVERSAL CHUNK 5/5 ===============
+2025-05-30 11:28:16,174 - pdf_ingestion - INFO - 📊 Processing chunk 5/5 (3437 chars)
+2025-05-30 11:28:16,174 - pdf_ingestion - INFO - 🔧 🌍 UNIVERSAL EXTRACT AND BOOST: threshold: 0.0
+2025-05-30 11:28:16,174 - pdf_ingestion - INFO - 🔬 Chunk length: 3437 chars
+2025-05-30 11:28:16,174 - pdf_ingestion - INFO - 🔬 STEP 1: Calling universal extractConceptsFromDocument...
+2025-05-30 11:28:16,174 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL CONCEPT EXTRACTION START
+2025-05-30 11:28:16,174 - ingest_pdf.extractConceptsFromDocument - INFO - 🔬 Text length: 3437 chars, Threshold: 0.0
+2025-05-30 11:28:16,175 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION: Processing 3437 chars
+2025-05-30 11:28:21,210 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION COMPLETE: 61 concepts extracted
+2025-05-30 11:28:21,210 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 TOP UNIVERSAL CONCEPTS:
+2025-05-30 11:28:21,212 - ingest_pdf.extractConceptsFromDocument - INFO -   1. Faithful Logic Embeddings (score: 1.000, methods: KeyBERT+NER+YAKE)
+2025-05-30 11:28:21,213 - ingest_pdf.extractConceptsFromDocument - INFO -   2. PML (score: 0.560, methods: NER+YAKE)
+2025-05-30 11:28:21,213 - ingest_pdf.extractConceptsFromDocument - INFO -   3. logic language PML (score: 0.558, methods: KeyBERT+YAKE)
+2025-05-30 11:28:21,214 - ingest_pdf.extractConceptsFromDocument - INFO -   4. Faithful Logic (score: 0.473, methods: KeyBERT+YAKE)
+2025-05-30 11:28:21,214 - ingest_pdf.extractConceptsFromDocument - INFO -   5. Sof PML (score: 0.404, methods: NER+YAKE)
+2025-05-30 11:28:21,214 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 EXTRACTION METHOD BREAKDOWN:
+2025-05-30 11:28:21,214 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT+NER+YAKE: 1 concepts
+2025-05-30 11:28:21,214 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER+YAKE: 2 concepts
+2025-05-30 11:28:21,215 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT+YAKE: 2 concepts
+2025-05-30 11:28:21,215 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT: 17 concepts
+2025-05-30 11:28:21,215 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER: 24 concepts
+2025-05-30 11:28:21,215 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 YAKE: 15 concepts
+2025-05-30 11:28:21,216 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL EXTRACTION END: 61 concepts ready
+2025-05-30 11:28:21,216 - pdf_ingestion - INFO - 📊 UNIVERSAL SEMANTIC EXTRACTION RESULT: 61 concepts
+2025-05-30 11:28:21,216 - pdf_ingestion - INFO - 🔬 STEP 2: Calling quality-focused boost_known_concepts...
+2025-05-30 11:28:21,216 - pdf_ingestion - INFO - 🚀 QUALITY BOOST: Checking top 300 priority concepts (max 25 quality matches)
+2025-05-30 11:28:21,221 - pdf_ingestion - INFO - 🛑 Quality boost limit reached (25 concepts)
+2025-05-30 11:28:21,221 - pdf_ingestion - INFO - 🌍 Quality boost domain matches: {'universal_extraction': 12, 'Computer Science': 13}
+2025-05-30 11:28:21,221 - pdf_ingestion - INFO - 🚀 Quality-focused boost complete: 25 high-priority concepts found
+2025-05-30 11:28:21,222 - pdf_ingestion - INFO - 🚀 QUALITY-FOCUSED DATABASE BOOST RESULT: 25 concepts
+2025-05-30 11:28:21,222 - pdf_ingestion - INFO - 🔧 UNIVERSAL COMBINED RESULT: 86 total concepts (before purity analysis)
+2025-05-30 11:28:21,222 - pdf_ingestion - INFO - 🔬 CHUNK 5 RAW RESULTS: 86 concepts
+2025-05-30 11:28:21,222 - pdf_ingestion - INFO -    🌍 61 universal extraction, 🚀 25 database boosted
+2025-05-30 11:28:21,222 - pdf_ingestion - INFO - 🔬 Total concepts so far: 417
+2025-05-30 11:28:21,223 - pdf_ingestion - INFO - 🔬 =============== END CHUNK 5 ===============
+2025-05-30 11:28:21,223 - pdf_ingestion - INFO - 🔬 Raw extraction complete: 417 concepts
+2025-05-30 11:28:21,223 - pdf_ingestion - INFO - 🏆 APPLYING PURITY ANALYSIS - Extracting the 'truth'...
+2025-05-30 11:28:21,223 - pdf_ingestion - INFO - 🔬 CONCEPT PURITY ANALYSIS for 2502.19311v1.pdf
+2025-05-30 11:28:21,224 - pdf_ingestion - INFO - 📊 Analyzing 417 raw concepts
+2025-05-30 11:28:21,226 - pdf_ingestion - INFO - ======================================================================
+2025-05-30 11:28:21,226 - pdf_ingestion - INFO - 🏆 CONCEPT PURITY REPORT
+2025-05-30 11:28:21,227 - pdf_ingestion - INFO - ======================================================================
+2025-05-30 11:28:21,227 - pdf_ingestion - INFO -
+🤝 CONSENSUS CONCEPTS (16) - The Most 'True':
+2025-05-30 11:28:21,227 - pdf_ingestion - INFO -    1. Faithful Logic Embeddings           score:1.000 purity:2.340 methods:3 indicators:[multi_method+cross_reference]
+2025-05-30 11:28:21,227 - pdf_ingestion - INFO -    2. shallow embeddings logics           score:0.608 purity:0.730 methods:2 indicators:[multi_method]
+2025-05-30 11:28:21,227 - pdf_ingestion - INFO -    3. Logic Embeddings                    score:0.576 purity:0.691 methods:2 indicators:[multi_method]
+2025-05-30 11:28:21,228 - pdf_ingestion - INFO -    4. Benzmüller shallow logic            score:1.000 purity:2.340 methods:2 indicators:[multi_method+cross_reference]
+2025-05-30 11:28:21,228 - pdf_ingestion - INFO -    5. shallow logic embeddings            score:0.831 purity:0.997 methods:2 indicators:[multi_method]
+2025-05-30 11:28:21,228 - pdf_ingestion - INFO -    6. Christoph Benzmüller                score:0.818 purity:1.914 methods:2 indicators:[multi_method+cross_reference]
+2025-05-30 11:28:21,228 - pdf_ingestion - INFO -    7. logic embeddings                    score:0.734 purity:0.881 methods:2 indicators:[multi_method]
+2025-05-30 11:28:21,229 - pdf_ingestion - INFO -    8. Faithful Logic Embeddings           score:1.000 purity:2.340 methods:3 indicators:[multi_method+cross_reference]
+2025-05-30 11:28:21,229 - pdf_ingestion - INFO -    9. Popositional modal logic            score:0.644 purity:0.773 methods:2 indicators:[multi_method]
+2025-05-30 11:28:21,229 - pdf_ingestion - INFO -   10. modal logic                         score:0.545 purity:0.654 methods:2 indicators:[multi_method]
+2025-05-30 11:28:21,229 - pdf_ingestion - INFO -   11. Logic Embeddings                    score:0.531 purity:0.638 methods:2 indicators:[multi_method]
+2025-05-30 11:28:21,229 - pdf_ingestion - INFO -   12. Christoph Benzmüller                score:1.000 purity:2.340 methods:2 indicators:[multi_method+cross_reference]
+2025-05-30 11:28:21,229 - pdf_ingestion - INFO -   13. Henkin                              score:0.789 purity:0.947 methods:2 indicators:[multi_method]
+2025-05-30 11:28:21,229 - pdf_ingestion - INFO -   14. logical connectives                 score:0.558 purity:0.669 methods:2 indicators:[multi_method]
+2025-05-30 11:28:21,229 - pdf_ingestion - INFO -   15. Faithful Logic Embeddings           score:1.000 purity:2.340 methods:3 indicators:[multi_method+cross_reference]
+2025-05-30 11:28:21,230 - pdf_ingestion - INFO -       ... and 1 more consensus concepts
+2025-05-30 11:28:21,230 - pdf_ingestion - INFO -
+🚀 DATABASE BOOSTED (123) - Domain Validated:
+2025-05-30 11:28:21,230 - pdf_ingestion - INFO -    1. Faithful Logic Embeddings           score:0.980 domain:Computer Science
+2025-05-30 11:28:21,230 - pdf_ingestion - INFO -    2. Benzmüller shallow logic            score:0.980 domain:universal_extraction
+2025-05-30 11:28:21,230 - pdf_ingestion - INFO -    3. Faithful Logic Embeddings           score:0.980 domain:Computer Science
+2025-05-30 11:28:21,230 - pdf_ingestion - INFO -    4. Faithful Logic Embeddings           score:0.980 domain:Computer Science
+2025-05-30 11:28:21,230 - pdf_ingestion - INFO -    5. Faithful Logic Embeddings           score:0.980 domain:Computer Science
+2025-05-30 11:28:21,231 - pdf_ingestion - INFO -    6. Faithful Logic Embeddings           score:0.980 domain:Computer Science
+2025-05-30 11:28:21,231 - pdf_ingestion - INFO -    7. Faithful Logic Embeddings           score:0.980 domain:Computer Science
+2025-05-30 11:28:21,231 - pdf_ingestion - INFO -    8. quantified modal logics             score:0.980 domain:universal_extraction
+2025-05-30 11:28:21,231 - pdf_ingestion - INFO -       ... and 115 more database-boosted concepts
+2025-05-30 11:28:21,232 - pdf_ingestion - INFO -
+❌ REJECTIONS (278 total) - Quality Control:
+2025-05-30 11:28:21,232 - pdf_ingestion - INFO -   - insufficient_consensus_or_confidence: 175 concepts (42.0%)
+2025-05-30 11:28:21,232 - pdf_ingestion - INFO -   - very_low_score: 59 concepts (14.1%)
+2025-05-30 11:28:21,232 - pdf_ingestion - INFO -   - too_short: 28 concepts (6.7%)
+2025-05-30 11:28:21,232 - pdf_ingestion - INFO -   - insufficient_content: 13 concepts (3.1%)
+2025-05-30 11:28:21,232 - pdf_ingestion - INFO -   - generic_term: 3 concepts (0.7%)
+2025-05-30 11:28:21,232 - pdf_ingestion - INFO -
+📝 Sample rejected concepts (for transparency):
+2025-05-30 11:28:21,233 - pdf_ingestion - INFO -   insufficient_consensus_or_confidence:
+2025-05-30 11:28:21,233 - pdf_ingestion - INFO -     - 'Universität Berlin' (score: 0.481)
+2025-05-30 11:28:21,233 - pdf_ingestion - INFO -     - 'Kaiserswerther Str' (score: 0.473)
+2025-05-30 11:28:21,233 - pdf_ingestion - INFO -   too_short:
+2025-05-30 11:28:21,233 - pdf_ingestion - INFO -     - '16' (score: 0.207)
+2025-05-30 11:28:21,233 - pdf_ingestion - INFO -     - 'AI' (score: 0.207)
+2025-05-30 11:28:21,233 - pdf_ingestion - INFO -   very_low_score:
+2025-05-30 11:28:21,233 - pdf_ingestion - INFO -     - 'heavy and light' (score: 0.197)
+2025-05-30 11:28:21,233 - pdf_ingestion - INFO -     - 'automated reasoning' (score: 0.162)
+2025-05-30 11:28:21,233 - pdf_ingestion - INFO -   generic_term:
+2025-05-30 11:28:21,234 - pdf_ingestion - INFO -     - 'artificial intelligence' (score: 0.980)
+2025-05-30 11:28:21,237 - pdf_ingestion - INFO -     - 'paper' (score: 0.276)
+2025-05-30 11:28:21,237 - pdf_ingestion - INFO -   insufficient_content:
+2025-05-30 11:28:21,237 - pdf_ingestion - INFO -     - 'HOL' (score: 0.734)
+2025-05-30 11:28:21,237 - pdf_ingestion - INFO -     - 'PML' (score: 0.455)
+2025-05-30 11:28:21,238 - pdf_ingestion - INFO -
+======================================================================
+2025-05-30 11:28:21,238 - pdf_ingestion - INFO - 📊 FINAL PURITY SUMMARY:
+2025-05-30 11:28:21,238 - pdf_ingestion - INFO -   - Raw concepts extracted: 417
+2025-05-30 11:28:21,238 - pdf_ingestion - INFO -   - Consensus concepts (most true): 16
+2025-05-30 11:28:21,238 - pdf_ingestion - INFO -   - High confidence: 0
+2025-05-30 11:28:21,238 - pdf_ingestion - INFO -   - Database boosted: 123
+2025-05-30 11:28:21,239 - pdf_ingestion - INFO -   - Single method accepted: 0
+2025-05-30 11:28:21,239 - pdf_ingestion - INFO -   - Total rejected: 278 (66.7%)
+2025-05-30 11:28:21,239 - pdf_ingestion - INFO -   - Natural quality cutoff: 42
+2025-05-30 11:28:21,239 - pdf_ingestion - INFO -   - 🏆 FINAL PURE CONCEPTS: 42
+2025-05-30 11:28:21,240 - pdf_ingestion - INFO -
+🏆 TOP 10 PUREST CONCEPTS:
+2025-05-30 11:28:21,240 - pdf_ingestion - INFO -    1. Faithful Logic Embeddings           purity:2.340 (triple_consensus) [consensus(2),cross-ref,multi-method(3)]
+2025-05-30 11:28:21,240 - pdf_ingestion - INFO -    2. Benzmüller shallow logic            purity:2.340 (double_consensus) [consensus(2),cross-ref,multi-method(2)]
+2025-05-30 11:28:21,241 - pdf_ingestion - INFO -    3. Christoph Benzmüller                purity:1.914 (double_consensus) [consensus(2),cross-ref,multi-method(2)]
+2025-05-30 11:28:21,241 - pdf_ingestion - INFO -    4. network couplings defined           purity:1.089 (db_boost) [db-boost]
+2025-05-30 11:28:21,241 - pdf_ingestion - INFO -    5. Modern Hopfield networks            purity:1.089 (db_boost) [db-boost]
+2025-05-30 11:28:21,241 - pdf_ingestion - INFO -    6. modern Hopfield network             purity:1.089 (db_boost) [db-boost]
+2025-05-30 11:28:21,242 - pdf_ingestion - INFO -    7. various values 50                   purity:1.089 (db_boost) [db-boost]
+2025-05-30 11:28:21,242 - pdf_ingestion - INFO -    8. associative neural                  purity:1.089 (db_boost) [db-boost]
+2025-05-30 11:28:21,242 - pdf_ingestion - INFO -    9. obtained comparing predictions      purity:1.089 (db_boost) [db-boost]
+2025-05-30 11:28:21,242 - pdf_ingestion - INFO -   10. modular wave function               purity:1.089 (db_boost) [db-boost]
+2025-05-30 11:28:21,243 - pdf_ingestion - INFO - ======================================================================
+2025-05-30 11:28:21,243 - pdf_ingestion - INFO - 🏆 Using 42 PURE concepts for final output
+2025-05-30 11:28:21,243 - pdf_ingestion - INFO - 🔥 Purity filter efficiency: 42/417 = 10.1% kept
+2025-05-30 11:28:21,244 - pdf_ingestion - INFO - 📥 RUNNING PURITY-BASED AUTO-PREFILL ANALYSIS...
+2025-05-30 11:28:21,244 - pdf_ingestion - INFO - 📥 PURITY-BASED AUTO-PREFILL: Analyzing 42 pure concepts from 2502.19311v1.pdf
+2025-05-30 11:28:21,244 - pdf_ingestion - INFO - 📥 PURITY-BASED AUTO-PREFILL: No pure concepts met prefill criteria (threshold: 0.6)
+2025-05-30 11:28:21,245 - pdf_ingestion - INFO - 🔬 INJECTING 42 PURE CONCEPTS INTO CONCEPTMESH
+2025-05-30 11:28:23,883 - cognitive_interface - INFO - ConceptMesh saved to concept_mesh_data.json (22 diffs)
+2025-05-30 11:28:23,930 - cognitive_interface - INFO - [UI] ConceptMesh update available: 2502.19311v1.pdf
+2025-05-30 11:28:23,931 - cognitive_interface - INFO - [ConceptMesh] Injected 42 concepts for '2502.19311v1.pdf' (ID: diff_1748622501245_4496)
+2025-05-30 11:28:23,932 - cognitive_interface - INFO - [ψArc] Logged concept injection trajectory with 42 eigen IDs
+2025-05-30 11:28:23,958 - pdf_ingestion - INFO - ✅ 🏆 PERFORMANCE-LIMITED PURITY-BASED UNIVERSAL PDF INGESTION COMPLETE: 2502.19311v1.pdf
+2025-05-30 11:28:23,959 - pdf_ingestion - INFO - 📊 FINAL RESULTS: 42 pure concepts (from 417 raw)
+2025-05-30 11:28:23,959 - pdf_ingestion - INFO -    🚨 Performance: 5/22 chunks processed in 26.7s
+2025-05-30 11:28:23,960 - pdf_ingestion - INFO -    🤝 11 consensus concepts (most true)
+2025-05-30 11:28:23,960 - pdf_ingestion - INFO -    ⭐ 0 high confidence concepts
+2025-05-30 11:28:23,960 - pdf_ingestion - INFO -    🚀 31 database boosted concepts
+2025-05-30 11:28:23,961 - pdf_ingestion - INFO -    ✅ 0 single method accepted
+2025-05-30 11:28:23,961 - pdf_ingestion - INFO -    📥 0 pure concepts auto-prefilled to database
+2025-05-30 11:28:23,961 - pdf_ingestion - INFO -    🧬 Universal methods used: ['YAKE', 'KeyBERT', 'NER']
+2025-05-30 11:28:23,962 - pdf_ingestion - INFO - ⏱️ Total processing time: 26.69s (vs estimated 88s without limits)
+2025-05-30 11:28:23,962 - pdf_ingestion - INFO - 📊 Database now contains: 2248 total concepts
+  Final concepts: 42
+  Raw → Pure: 417 → 42
+  Consensus: 11
+  High conf: 0
+  Database boosted: 31
+  Single method: 0
+
+📊 TEST 2: WITHOUT 50-concept cap (natural filtering only)
+2025-05-30 11:28:24,042 - pdf_ingestion - INFO - ✅ Main concept database loaded: 2248 concepts
+2025-05-30 11:28:24,043 - pdf_ingestion - INFO - 🌍 Universal seed concepts loaded: 48 concepts
+2025-05-30 11:28:24,048 - pdf_ingestion - INFO - 🌍 UNIVERSAL DATABASE READY: 2248 total concepts
+2025-05-30 11:28:24,048 - pdf_ingestion - INFO - 📊 Added 0 universal seed concepts
+2025-05-30 11:28:24,049 - pdf_ingestion - INFO - 📊 Domain coverage: {'Anthropology': 1, 'Art': 21, 'Biology': 234, 'Chemistry': 2, 'Computer Science': 145, 'Economics': 2, 'Environmental Science': 2, 'History': 2, 'Linguistics': 2, 'Literature': 4, 'Mathematics': 17, 'Music': 8, 'Philosophy': 5, 'Physics': 151, 'Political Science': 2, 'Psychology': 2, 'Sociology': 1, 'education': 1, 'environment': 2, 'finance': 1, 'medicine': 1, 'science': 2, 'technology': 7, 'transportation': 1, 'universal_extraction': 1632}
+2025-05-30 11:28:24,051 - pdf_ingestion - INFO - 🏆 🧬 PURITY-BASED UNIVERSAL PDF PIPELINE LOADED
+2025-05-30 11:28:24,051 - pdf_ingestion - INFO - 📥 Cross-domain auto-discovery enabled across all academic fields
+2025-05-30 11:28:24,052 - pdf_ingestion - INFO - 🏆 Purity-based analysis: Quality over quantity - extracting the 'truth'
+2025-05-30 11:28:24,054 - pdf_ingestion - INFO - 🌍 2248 concepts ready: Science, Humanities, Arts, Philosophy, Mathematics, and more!
+2025-05-30 11:28:24,062 - pdf_ingestion - INFO - 📏 Medium file (3.2MB): 5 chunks, 500 max concepts
+2025-05-30 11:28:24,062 - pdf_ingestion - INFO - 🏆 🌍 PURITY-BASED UNIVERSAL PDF INGESTION: 2502.19311v1.pdf
+2025-05-30 11:28:24,063 - pdf_ingestion - INFO - 🔬 ZERO THRESHOLD MODE: 0.0 (maximum coverage)
+2025-05-30 11:28:24,064 - pdf_ingestion - INFO - 🌍 UNIVERSAL PIPELINE: Cross-domain concept extraction enabled
+2025-05-30 11:28:24,064 - pdf_ingestion - INFO - 📊 Database ready: 2248 concepts across all domains
+2025-05-30 11:28:24,065 - pdf_ingestion - INFO - 🏆 PURITY-BASED: Quality over quantity - extracting the 'truth'
+2025-05-30 11:28:24,065 - pdf_ingestion - INFO - 🚨 DYNAMIC PERFORMANCE LIMITS: Max 5 chunks, stop at 500 concepts
+2025-05-30 11:28:24,411 - pdf_ingestion - INFO - 📄 Extracted 22 chunks from 2502.19311v1.pdf
+2025-05-30 11:28:24,411 - pdf_ingestion - INFO - 🔬 Chunk 1: 2588 chars, preview: Faithful Logic Embeddings in HOL – A recipe to
+have it all: deep and shallow, automated and
+interact...
+2025-05-30 11:28:24,412 - pdf_ingestion - INFO - 🔬 Chunk 2: 3558 chars, preview: 2 Christoph Benzmüller
+shallow logic embeddings in metalogic HOL, with the effect that computer-
+sup...
+2025-05-30 11:28:24,413 - pdf_ingestion - INFO - 🔬 Chunk 3: 2979 chars, preview: Faithful Logic Embeddings in HOL – A recipe to have it all 3
+2 Popositional modal logic (PML)
+Thesyn...
+2025-05-30 11:28:24,413 - pdf_ingestion - INFO - 🚨 PERFORMANCE LIMITING: Processing 5 of 22 total chunks
+2025-05-30 11:28:24,414 - pdf_ingestion - INFO - 🚨 Skipping 17 chunks to prevent Beautiful Overkill
+2025-05-30 11:28:24,414 - pdf_ingestion - INFO - 🔬 =============== UNIVERSAL CHUNK 1/5 ===============
+2025-05-30 11:28:24,415 - pdf_ingestion - INFO - 📊 Processing chunk 1/5 (2588 chars)
+2025-05-30 11:28:24,415 - pdf_ingestion - INFO - 🔧 🌍 UNIVERSAL EXTRACT AND BOOST: threshold: 0.0
+2025-05-30 11:28:24,415 - pdf_ingestion - INFO - 🔬 Chunk length: 2588 chars
+2025-05-30 11:28:24,416 - pdf_ingestion - INFO - 🔬 STEP 1: Calling universal extractConceptsFromDocument...
+2025-05-30 11:28:24,416 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL CONCEPT EXTRACTION START
+2025-05-30 11:28:24,416 - ingest_pdf.extractConceptsFromDocument - INFO - 🔬 Text length: 2588 chars, Threshold: 0.0
+2025-05-30 11:28:24,416 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION: Processing 2588 chars
+2025-05-30 11:28:28,260 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION COMPLETE: 49 concepts extracted
+2025-05-30 11:28:28,261 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 TOP UNIVERSAL CONCEPTS:
+2025-05-30 11:28:28,262 - ingest_pdf.extractConceptsFromDocument - INFO -   1. Faithful Logic Embeddings (score: 1.000, methods: KeyBERT+NER+YAKE)
+2025-05-30 11:28:28,262 - ingest_pdf.extractConceptsFromDocument - INFO -   2. shallow embeddings logics (score: 0.608, methods: KeyBERT+YAKE)
+2025-05-30 11:28:28,262 - ingest_pdf.extractConceptsFromDocument - INFO -   3. Logic Embeddings (score: 0.576, methods: KeyBERT+YAKE)
+2025-05-30 11:28:28,262 - ingest_pdf.extractConceptsFromDocument - INFO -   4. Universität Berlin (score: 0.481, methods: NER+YAKE)
+2025-05-30 11:28:28,263 - ingest_pdf.extractConceptsFromDocument - INFO -   5. Kaiserswerther Str (score: 0.473, methods: NER+YAKE)
+2025-05-30 11:28:28,263 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 EXTRACTION METHOD BREAKDOWN:
+2025-05-30 11:28:28,263 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT+NER+YAKE: 1 concepts
+2025-05-30 11:28:28,263 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT+YAKE: 2 concepts
+2025-05-30 11:28:28,263 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER+YAKE: 5 concepts
+2025-05-30 11:28:28,264 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT: 17 concepts
+2025-05-30 11:28:28,264 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 YAKE: 12 concepts
+2025-05-30 11:28:28,264 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER: 12 concepts
+2025-05-30 11:28:28,264 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL EXTRACTION END: 49 concepts ready
+2025-05-30 11:28:28,264 - pdf_ingestion - INFO - 📊 UNIVERSAL SEMANTIC EXTRACTION RESULT: 49 concepts
+2025-05-30 11:28:28,264 - pdf_ingestion - INFO - 🔬 STEP 2: Calling quality-focused boost_known_concepts...
+2025-05-30 11:28:28,265 - pdf_ingestion - INFO - 🚀 QUALITY BOOST: Checking top 300 priority concepts (max 25 quality matches)
+2025-05-30 11:28:28,269 - pdf_ingestion - INFO - 🌍 Quality boost domain matches: {'technology': 1, 'Computer Science': 12, 'universal_extraction': 9, 'Mathematics': 2}
+2025-05-30 11:28:28,270 - pdf_ingestion - INFO - 🚀 Quality-focused boost complete: 24 high-priority concepts found
+2025-05-30 11:28:28,270 - pdf_ingestion - INFO - 🚀 QUALITY-FOCUSED DATABASE BOOST RESULT: 24 concepts
+2025-05-30 11:28:28,270 - pdf_ingestion - INFO - 🔧 UNIVERSAL COMBINED RESULT: 73 total concepts (before purity analysis)
+2025-05-30 11:28:28,271 - pdf_ingestion - INFO - 🔬 CHUNK 1 RAW RESULTS: 73 concepts
+2025-05-30 11:28:28,271 - pdf_ingestion - INFO -    🌍 49 universal extraction, 🚀 24 database boosted
+2025-05-30 11:28:28,272 - pdf_ingestion - INFO - 🔬 Total concepts so far: 73
+2025-05-30 11:28:28,272 - pdf_ingestion - INFO - 🔬 =============== END CHUNK 1 ===============
+2025-05-30 11:28:28,272 - pdf_ingestion - INFO - 🔬 =============== UNIVERSAL CHUNK 2/5 ===============
+2025-05-30 11:28:28,272 - pdf_ingestion - INFO - 📊 Processing chunk 2/5 (3558 chars)
+2025-05-30 11:28:28,272 - pdf_ingestion - INFO - 🔧 🌍 UNIVERSAL EXTRACT AND BOOST: threshold: 0.0
+2025-05-30 11:28:28,273 - pdf_ingestion - INFO - 🔬 Chunk length: 3558 chars
+2025-05-30 11:28:28,273 - pdf_ingestion - INFO - 🔬 STEP 1: Calling universal extractConceptsFromDocument...
+2025-05-30 11:28:28,273 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL CONCEPT EXTRACTION START
+2025-05-30 11:28:28,273 - ingest_pdf.extractConceptsFromDocument - INFO - 🔬 Text length: 3558 chars, Threshold: 0.0
+2025-05-30 11:28:28,273 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION: Processing 3558 chars
+2025-05-30 11:28:33,700 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION COMPLETE: 57 concepts extracted
+2025-05-30 11:28:33,701 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 TOP UNIVERSAL CONCEPTS:
+2025-05-30 11:28:33,703 - ingest_pdf.extractConceptsFromDocument - INFO -   1. Benzmüller shallow logic (score: 1.000, methods: KeyBERT+YAKE)
+2025-05-30 11:28:33,703 - ingest_pdf.extractConceptsFromDocument - INFO -   2. shallow logic embeddings (score: 0.831, methods: KeyBERT+YAKE)
+2025-05-30 11:28:33,703 - ingest_pdf.extractConceptsFromDocument - INFO -   3. Christoph Benzmüller (score: 0.818, methods: NER+YAKE)
+2025-05-30 11:28:33,703 - ingest_pdf.extractConceptsFromDocument - INFO -   4. logic embeddings (score: 0.734, methods: KeyBERT+YAKE)
+2025-05-30 11:28:33,704 - ingest_pdf.extractConceptsFromDocument - INFO -   5. HOL (score: 0.734, methods: NER+YAKE)
+2025-05-30 11:28:33,704 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 EXTRACTION METHOD BREAKDOWN:
+2025-05-30 11:28:33,704 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT+YAKE: 3 concepts
+2025-05-30 11:28:33,704 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER+YAKE: 2 concepts
+2025-05-30 11:28:33,704 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT: 17 concepts
+2025-05-30 11:28:33,705 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 YAKE: 15 concepts
+2025-05-30 11:28:33,705 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER: 20 concepts
+2025-05-30 11:28:33,705 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL EXTRACTION END: 57 concepts ready
+2025-05-30 11:28:33,705 - pdf_ingestion - INFO - 📊 UNIVERSAL SEMANTIC EXTRACTION RESULT: 57 concepts
+2025-05-30 11:28:33,705 - pdf_ingestion - INFO - 🔬 STEP 2: Calling quality-focused boost_known_concepts...
+2025-05-30 11:28:33,706 - pdf_ingestion - INFO - 🚀 QUALITY BOOST: Checking top 300 priority concepts (max 25 quality matches)
+2025-05-30 11:28:33,708 - pdf_ingestion - INFO - 🛑 Quality boost limit reached (25 concepts)
+2025-05-30 11:28:33,709 - pdf_ingestion - INFO - 🌍 Quality boost domain matches: {'Physics': 2, 'universal_extraction': 10, 'Computer Science': 12, 'Mathematics': 1}
+2025-05-30 11:28:33,709 - pdf_ingestion - INFO - 🚀 Quality-focused boost complete: 25 high-priority concepts found
+2025-05-30 11:28:33,709 - pdf_ingestion - INFO - 🚀 QUALITY-FOCUSED DATABASE BOOST RESULT: 25 concepts
+2025-05-30 11:28:33,709 - pdf_ingestion - INFO - 🔧 UNIVERSAL COMBINED RESULT: 82 total concepts (before purity analysis)
+2025-05-30 11:28:33,709 - pdf_ingestion - INFO - 🔬 CHUNK 2 RAW RESULTS: 82 concepts
+2025-05-30 11:28:33,710 - pdf_ingestion - INFO -    🌍 57 universal extraction, 🚀 25 database boosted
+2025-05-30 11:28:33,710 - pdf_ingestion - INFO - 🔬 Total concepts so far: 155
+2025-05-30 11:28:33,710 - pdf_ingestion - INFO - 🔬 =============== END CHUNK 2 ===============
+2025-05-30 11:28:33,710 - pdf_ingestion - INFO - 🔬 =============== UNIVERSAL CHUNK 3/5 ===============
+2025-05-30 11:28:33,710 - pdf_ingestion - INFO - 📊 Processing chunk 3/5 (2979 chars)
+2025-05-30 11:28:33,710 - pdf_ingestion - INFO - 🔧 🌍 UNIVERSAL EXTRACT AND BOOST: threshold: 0.0
+2025-05-30 11:28:33,711 - pdf_ingestion - INFO - 🔬 Chunk length: 2979 chars
+2025-05-30 11:28:33,711 - pdf_ingestion - INFO - 🔬 STEP 1: Calling universal extractConceptsFromDocument...
+2025-05-30 11:28:33,711 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL CONCEPT EXTRACTION START
+2025-05-30 11:28:33,711 - ingest_pdf.extractConceptsFromDocument - INFO - 🔬 Text length: 2979 chars, Threshold: 0.0
+2025-05-30 11:28:33,711 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION: Processing 2979 chars
+2025-05-30 11:28:38,964 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION COMPLETE: 58 concepts extracted
+2025-05-30 11:28:38,965 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 TOP UNIVERSAL CONCEPTS:
+2025-05-30 11:28:38,966 - ingest_pdf.extractConceptsFromDocument - INFO -   1. Faithful Logic Embeddings (score: 1.000, methods: KeyBERT+NER+YAKE)
+2025-05-30 11:28:38,966 - ingest_pdf.extractConceptsFromDocument - INFO -   2. Popositional modal logic (score: 0.644, methods: KeyBERT+YAKE)
+2025-05-30 11:28:38,967 - ingest_pdf.extractConceptsFromDocument - INFO -   3. modal logic (score: 0.545, methods: KeyBERT+YAKE)
+2025-05-30 11:28:38,967 - ingest_pdf.extractConceptsFromDocument - INFO -   4. Logic Embeddings (score: 0.531, methods: KeyBERT+YAKE)
+2025-05-30 11:28:38,967 - ingest_pdf.extractConceptsFromDocument - INFO -   5. PML (score: 0.449, methods: NER+YAKE)
+2025-05-30 11:28:38,967 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 EXTRACTION METHOD BREAKDOWN:
+2025-05-30 11:28:38,968 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT+NER+YAKE: 1 concepts
+2025-05-30 11:28:38,968 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT+YAKE: 5 concepts
+2025-05-30 11:28:38,968 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER+YAKE: 3 concepts
+2025-05-30 11:28:38,969 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT: 14 concepts
+2025-05-30 11:28:38,969 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 YAKE: 11 concepts
+2025-05-30 11:28:38,969 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER: 24 concepts
+2025-05-30 11:28:38,970 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL EXTRACTION END: 58 concepts ready
+2025-05-30 11:28:38,970 - pdf_ingestion - INFO - 📊 UNIVERSAL SEMANTIC EXTRACTION RESULT: 58 concepts
+2025-05-30 11:28:38,970 - pdf_ingestion - INFO - 🔬 STEP 2: Calling quality-focused boost_known_concepts...
+2025-05-30 11:28:38,970 - pdf_ingestion - INFO - 🚀 QUALITY BOOST: Checking top 300 priority concepts (max 25 quality matches)
+2025-05-30 11:28:38,973 - pdf_ingestion - INFO - 🛑 Quality boost limit reached (25 concepts)
+2025-05-30 11:28:38,973 - pdf_ingestion - INFO - 🌍 Quality boost domain matches: {'Computer Science': 12, 'Physics': 2, 'universal_extraction': 10, 'Mathematics': 1}
+2025-05-30 11:28:38,974 - pdf_ingestion - INFO - 🚀 Quality-focused boost complete: 25 high-priority concepts found
+2025-05-30 11:28:38,974 - pdf_ingestion - INFO - 🚀 QUALITY-FOCUSED DATABASE BOOST RESULT: 25 concepts
+2025-05-30 11:28:38,974 - pdf_ingestion - INFO - 🔧 UNIVERSAL COMBINED RESULT: 83 total concepts (before purity analysis)
+2025-05-30 11:28:38,974 - pdf_ingestion - INFO - 🔬 CHUNK 3 RAW RESULTS: 83 concepts
+2025-05-30 11:28:38,975 - pdf_ingestion - INFO -    🌍 58 universal extraction, 🚀 25 database boosted
+2025-05-30 11:28:38,975 - pdf_ingestion - INFO - 🔬 Total concepts so far: 238
+2025-05-30 11:28:38,975 - pdf_ingestion - INFO - 🔬 =============== END CHUNK 3 ===============
+2025-05-30 11:28:38,976 - pdf_ingestion - INFO - 🔬 =============== UNIVERSAL CHUNK 4/5 ===============
+2025-05-30 11:28:38,976 - pdf_ingestion - INFO - 📊 Processing chunk 4/5 (3181 chars)
+2025-05-30 11:28:38,976 - pdf_ingestion - INFO - 🔧 🌍 UNIVERSAL EXTRACT AND BOOST: threshold: 0.0
+2025-05-30 11:28:38,976 - pdf_ingestion - INFO - 🔬 Chunk length: 3181 chars
+2025-05-30 11:28:38,976 - pdf_ingestion - INFO - 🔬 STEP 1: Calling universal extractConceptsFromDocument...
+2025-05-30 11:28:38,976 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL CONCEPT EXTRACTION START
+2025-05-30 11:28:38,977 - ingest_pdf.extractConceptsFromDocument - INFO - 🔬 Text length: 3181 chars, Threshold: 0.0
+2025-05-30 11:28:38,977 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION: Processing 3181 chars
+2025-05-30 11:28:48,055 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION COMPLETE: 68 concepts extracted
+2025-05-30 11:28:48,056 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 TOP UNIVERSAL CONCEPTS:
+2025-05-30 11:28:48,058 - ingest_pdf.extractConceptsFromDocument - INFO -   1. Christoph Benzmüller (score: 1.000, methods: NER+YAKE)
+2025-05-30 11:28:48,058 - ingest_pdf.extractConceptsFromDocument - INFO -   2. HOL (score: 0.955, methods: NER+YAKE)
+2025-05-30 11:28:48,058 - ingest_pdf.extractConceptsFromDocument - INFO -   3. Henkin (score: 0.789, methods: NER+YAKE)
+2025-05-30 11:28:48,059 - ingest_pdf.extractConceptsFromDocument - INFO -   4. higher order logic (score: 0.727, methods: KeyBERT)
+2025-05-30 11:28:48,059 - ingest_pdf.extractConceptsFromDocument - INFO -   5. hol logic terms (score: 0.645, methods: KeyBERT)
+2025-05-30 11:28:48,059 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 EXTRACTION METHOD BREAKDOWN:
+2025-05-30 11:28:48,059 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER+YAKE: 3 concepts
+2025-05-30 11:28:48,060 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT: 19 concepts
+2025-05-30 11:28:48,060 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT+YAKE: 1 concepts
+2025-05-30 11:28:48,060 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER: 29 concepts
+2025-05-30 11:28:48,061 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 YAKE: 16 concepts
+2025-05-30 11:28:48,061 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL EXTRACTION END: 68 concepts ready
+2025-05-30 11:28:48,062 - pdf_ingestion - INFO - 📊 UNIVERSAL SEMANTIC EXTRACTION RESULT: 68 concepts
+2025-05-30 11:28:48,062 - pdf_ingestion - INFO - 🔬 STEP 2: Calling quality-focused boost_known_concepts...
+2025-05-30 11:28:48,062 - pdf_ingestion - INFO - 🚀 QUALITY BOOST: Checking top 300 priority concepts (max 25 quality matches)
+2025-05-30 11:28:48,064 - pdf_ingestion - INFO - 🛑 Quality boost limit reached (25 concepts)
+2025-05-30 11:28:48,065 - pdf_ingestion - INFO - 🌍 Quality boost domain matches: {'universal_extraction': 13, 'Physics': 1, 'Computer Science': 11}
+2025-05-30 11:28:48,065 - pdf_ingestion - INFO - 🚀 Quality-focused boost complete: 25 high-priority concepts found
+2025-05-30 11:28:48,066 - pdf_ingestion - INFO - 🚀 QUALITY-FOCUSED DATABASE BOOST RESULT: 25 concepts
+2025-05-30 11:28:48,066 - pdf_ingestion - INFO - 🔧 UNIVERSAL COMBINED RESULT: 93 total concepts (before purity analysis)
+2025-05-30 11:28:48,066 - pdf_ingestion - INFO - 🔬 CHUNK 4 RAW RESULTS: 93 concepts
+2025-05-30 11:28:48,066 - pdf_ingestion - INFO -    🌍 68 universal extraction, 🚀 25 database boosted
+2025-05-30 11:28:48,067 - pdf_ingestion - INFO - 🔬 Total concepts so far: 331
+2025-05-30 11:28:48,067 - pdf_ingestion - INFO - 🔬 =============== END CHUNK 4 ===============
+2025-05-30 11:28:48,067 - pdf_ingestion - INFO - 🔬 =============== UNIVERSAL CHUNK 5/5 ===============
+2025-05-30 11:28:48,067 - pdf_ingestion - INFO - 📊 Processing chunk 5/5 (3437 chars)
+2025-05-30 11:28:48,068 - pdf_ingestion - INFO - 🔧 🌍 UNIVERSAL EXTRACT AND BOOST: threshold: 0.0
+2025-05-30 11:28:48,068 - pdf_ingestion - INFO - 🔬 Chunk length: 3437 chars
+2025-05-30 11:28:48,068 - pdf_ingestion - INFO - 🔬 STEP 1: Calling universal extractConceptsFromDocument...
+2025-05-30 11:28:48,068 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL CONCEPT EXTRACTION START
+2025-05-30 11:28:48,068 - ingest_pdf.extractConceptsFromDocument - INFO - 🔬 Text length: 3437 chars, Threshold: 0.0
+2025-05-30 11:28:48,068 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION: Processing 3437 chars
+2025-05-30 11:28:55,775 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION COMPLETE: 61 concepts extracted
+2025-05-30 11:28:55,775 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 TOP UNIVERSAL CONCEPTS:
+2025-05-30 11:28:55,777 - ingest_pdf.extractConceptsFromDocument - INFO -   1. Faithful Logic Embeddings (score: 1.000, methods: KeyBERT+NER+YAKE)
+2025-05-30 11:28:55,777 - ingest_pdf.extractConceptsFromDocument - INFO -   2. PML (score: 0.560, methods: NER+YAKE)
+2025-05-30 11:28:55,777 - ingest_pdf.extractConceptsFromDocument - INFO -   3. logic language PML (score: 0.558, methods: KeyBERT+YAKE)
+2025-05-30 11:28:55,777 - ingest_pdf.extractConceptsFromDocument - INFO -   4. Faithful Logic (score: 0.473, methods: KeyBERT+YAKE)
+2025-05-30 11:28:55,778 - ingest_pdf.extractConceptsFromDocument - INFO -   5. Sof PML (score: 0.404, methods: NER+YAKE)
+2025-05-30 11:28:55,778 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 EXTRACTION METHOD BREAKDOWN:
+2025-05-30 11:28:55,779 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT+NER+YAKE: 1 concepts
+2025-05-30 11:28:55,779 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER+YAKE: 2 concepts
+2025-05-30 11:28:55,779 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT+YAKE: 2 concepts
+2025-05-30 11:28:55,779 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT: 17 concepts
+2025-05-30 11:28:55,780 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER: 24 concepts
+2025-05-30 11:28:55,780 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 YAKE: 15 concepts
+2025-05-30 11:28:55,780 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL EXTRACTION END: 61 concepts ready
+2025-05-30 11:28:55,780 - pdf_ingestion - INFO - 📊 UNIVERSAL SEMANTIC EXTRACTION RESULT: 61 concepts
+2025-05-30 11:28:55,781 - pdf_ingestion - INFO - 🔬 STEP 2: Calling quality-focused boost_known_concepts...
+2025-05-30 11:28:55,781 - pdf_ingestion - INFO - 🚀 QUALITY BOOST: Checking top 300 priority concepts (max 25 quality matches)
+2025-05-30 11:28:55,785 - pdf_ingestion - INFO - 🛑 Quality boost limit reached (25 concepts)
+2025-05-30 11:28:55,786 - pdf_ingestion - INFO - 🌍 Quality boost domain matches: {'universal_extraction': 12, 'Computer Science': 13}
+2025-05-30 11:28:55,786 - pdf_ingestion - INFO - 🚀 Quality-focused boost complete: 25 high-priority concepts found
+2025-05-30 11:28:55,786 - pdf_ingestion - INFO - 🚀 QUALITY-FOCUSED DATABASE BOOST RESULT: 25 concepts
+2025-05-30 11:28:55,786 - pdf_ingestion - INFO - 🔧 UNIVERSAL COMBINED RESULT: 86 total concepts (before purity analysis)
+2025-05-30 11:28:55,786 - pdf_ingestion - INFO - 🔬 CHUNK 5 RAW RESULTS: 86 concepts
+2025-05-30 11:28:55,786 - pdf_ingestion - INFO -    🌍 61 universal extraction, 🚀 25 database boosted
+2025-05-30 11:28:55,786 - pdf_ingestion - INFO - 🔬 Total concepts so far: 417
+2025-05-30 11:28:55,787 - pdf_ingestion - INFO - 🔬 =============== END CHUNK 5 ===============
+2025-05-30 11:28:55,787 - pdf_ingestion - INFO - 🔬 Raw extraction complete: 417 concepts
+2025-05-30 11:28:55,787 - pdf_ingestion - INFO - 🏆 APPLYING PURITY ANALYSIS - Extracting the 'truth'...
+2025-05-30 11:28:55,787 - pdf_ingestion - INFO - 🔬 CONCEPT PURITY ANALYSIS for 2502.19311v1.pdf
+2025-05-30 11:28:55,787 - pdf_ingestion - INFO - 📊 Analyzing 417 raw concepts
+2025-05-30 11:28:55,790 - pdf_ingestion - INFO - ======================================================================
+2025-05-30 11:28:55,790 - pdf_ingestion - INFO - 🏆 CONCEPT PURITY REPORT
+2025-05-30 11:28:55,791 - pdf_ingestion - INFO - ======================================================================
+2025-05-30 11:28:55,791 - pdf_ingestion - INFO -
+🤝 CONSENSUS CONCEPTS (16) - The Most 'True':
+2025-05-30 11:28:55,791 - pdf_ingestion - INFO -    1. Faithful Logic Embeddings           score:1.000 purity:2.340 methods:3 indicators:[multi_method+cross_reference]
+2025-05-30 11:28:55,791 - pdf_ingestion - INFO -    2. shallow embeddings logics           score:0.608 purity:0.730 methods:2 indicators:[multi_method]
+2025-05-30 11:28:55,791 - pdf_ingestion - INFO -    3. Logic Embeddings                    score:0.576 purity:0.691 methods:2 indicators:[multi_method]
+2025-05-30 11:28:55,792 - pdf_ingestion - INFO -    4. Benzmüller shallow logic            score:1.000 purity:2.340 methods:2 indicators:[multi_method+cross_reference]
+2025-05-30 11:28:55,792 - pdf_ingestion - INFO -    5. shallow logic embeddings            score:0.831 purity:0.997 methods:2 indicators:[multi_method]
+2025-05-30 11:28:55,792 - pdf_ingestion - INFO -    6. Christoph Benzmüller                score:0.818 purity:1.914 methods:2 indicators:[multi_method+cross_reference]
+2025-05-30 11:28:55,793 - pdf_ingestion - INFO -    7. logic embeddings                    score:0.734 purity:0.881 methods:2 indicators:[multi_method]
+2025-05-30 11:28:55,798 - pdf_ingestion - INFO -    8. Faithful Logic Embeddings           score:1.000 purity:2.340 methods:3 indicators:[multi_method+cross_reference]
+2025-05-30 11:28:55,798 - pdf_ingestion - INFO -    9. Popositional modal logic            score:0.644 purity:0.773 methods:2 indicators:[multi_method]
+2025-05-30 11:28:55,798 - pdf_ingestion - INFO -   10. modal logic                         score:0.545 purity:0.654 methods:2 indicators:[multi_method]
+2025-05-30 11:28:55,799 - pdf_ingestion - INFO -   11. Logic Embeddings                    score:0.531 purity:0.638 methods:2 indicators:[multi_method]
+2025-05-30 11:28:55,799 - pdf_ingestion - INFO -   12. Christoph Benzmüller                score:1.000 purity:2.340 methods:2 indicators:[multi_method+cross_reference]
+2025-05-30 11:28:55,799 - pdf_ingestion - INFO -   13. Henkin                              score:0.789 purity:0.947 methods:2 indicators:[multi_method]
+2025-05-30 11:28:55,799 - pdf_ingestion - INFO -   14. logical connectives                 score:0.558 purity:0.669 methods:2 indicators:[multi_method]
+2025-05-30 11:28:55,799 - pdf_ingestion - INFO -   15. Faithful Logic Embeddings           score:1.000 purity:2.340 methods:3 indicators:[multi_method+cross_reference]
+2025-05-30 11:28:55,800 - pdf_ingestion - INFO -       ... and 1 more consensus concepts
+2025-05-30 11:28:55,800 - pdf_ingestion - INFO -
+🚀 DATABASE BOOSTED (123) - Domain Validated:
+2025-05-30 11:28:55,800 - pdf_ingestion - INFO -    1. Faithful Logic Embeddings           score:0.980 domain:Computer Science
+2025-05-30 11:28:55,801 - pdf_ingestion - INFO -    2. Benzmüller shallow logic            score:0.980 domain:universal_extraction
+2025-05-30 11:28:55,801 - pdf_ingestion - INFO -    3. Faithful Logic Embeddings           score:0.980 domain:Computer Science
+2025-05-30 11:28:55,801 - pdf_ingestion - INFO -    4. Faithful Logic Embeddings           score:0.980 domain:Computer Science
+2025-05-30 11:28:55,801 - pdf_ingestion - INFO -    5. Faithful Logic Embeddings           score:0.980 domain:Computer Science
+2025-05-30 11:28:55,802 - pdf_ingestion - INFO -    6. Faithful Logic Embeddings           score:0.980 domain:Computer Science
+2025-05-30 11:28:55,802 - pdf_ingestion - INFO -    7. Faithful Logic Embeddings           score:0.980 domain:Computer Science
+2025-05-30 11:28:55,802 - pdf_ingestion - INFO -    8. quantified modal logics             score:0.980 domain:universal_extraction
+2025-05-30 11:28:55,802 - pdf_ingestion - INFO -       ... and 115 more database-boosted concepts
+2025-05-30 11:28:55,802 - pdf_ingestion - INFO -
+❌ REJECTIONS (278 total) - Quality Control:
+2025-05-30 11:28:55,803 - pdf_ingestion - INFO -   - insufficient_consensus_or_confidence: 175 concepts (42.0%)
+2025-05-30 11:28:55,803 - pdf_ingestion - INFO -   - very_low_score: 59 concepts (14.1%)
+2025-05-30 11:28:55,803 - pdf_ingestion - INFO -   - too_short: 28 concepts (6.7%)
+2025-05-30 11:28:55,803 - pdf_ingestion - INFO -   - insufficient_content: 13 concepts (3.1%)
+2025-05-30 11:28:55,803 - pdf_ingestion - INFO -   - generic_term: 3 concepts (0.7%)
+2025-05-30 11:28:55,803 - pdf_ingestion - INFO -
+📝 Sample rejected concepts (for transparency):
+2025-05-30 11:28:55,803 - pdf_ingestion - INFO -   insufficient_consensus_or_confidence:
+2025-05-30 11:28:55,803 - pdf_ingestion - INFO -     - 'Universität Berlin' (score: 0.481)
+2025-05-30 11:28:55,804 - pdf_ingestion - INFO -     - 'Kaiserswerther Str' (score: 0.473)
+2025-05-30 11:28:55,804 - pdf_ingestion - INFO -   too_short:
+2025-05-30 11:28:55,804 - pdf_ingestion - INFO -     - '16' (score: 0.207)
+2025-05-30 11:28:55,804 - pdf_ingestion - INFO -     - 'AI' (score: 0.207)
+2025-05-30 11:28:55,805 - pdf_ingestion - INFO -   very_low_score:
+2025-05-30 11:28:55,805 - pdf_ingestion - INFO -     - 'heavy and light' (score: 0.197)
+2025-05-30 11:28:55,806 - pdf_ingestion - INFO -     - 'automated reasoning' (score: 0.162)
+2025-05-30 11:28:55,807 - pdf_ingestion - INFO -   generic_term:
+2025-05-30 11:28:55,807 - pdf_ingestion - INFO -     - 'artificial intelligence' (score: 0.980)
+2025-05-30 11:28:55,807 - pdf_ingestion - INFO -     - 'paper' (score: 0.276)
+2025-05-30 11:28:55,808 - pdf_ingestion - INFO -   insufficient_content:
+2025-05-30 11:28:55,812 - pdf_ingestion - INFO -     - 'HOL' (score: 0.734)
+2025-05-30 11:28:55,812 - pdf_ingestion - INFO -     - 'PML' (score: 0.455)
+2025-05-30 11:28:55,813 - pdf_ingestion - INFO -
+======================================================================
+2025-05-30 11:28:55,813 - pdf_ingestion - INFO - 📊 FINAL PURITY SUMMARY:
+2025-05-30 11:28:55,814 - pdf_ingestion - INFO -   - Raw concepts extracted: 417
+2025-05-30 11:28:55,815 - pdf_ingestion - INFO -   - Consensus concepts (most true): 16
+2025-05-30 11:28:55,815 - pdf_ingestion - INFO -   - High confidence: 0
+2025-05-30 11:28:55,815 - pdf_ingestion - INFO -   - Database boosted: 123
+2025-05-30 11:28:55,816 - pdf_ingestion - INFO -   - Single method accepted: 0
+2025-05-30 11:28:55,816 - pdf_ingestion - INFO -   - Total rejected: 278 (66.7%)
+2025-05-30 11:28:55,816 - pdf_ingestion - INFO -   - Natural quality cutoff: 42
+2025-05-30 11:28:55,817 - pdf_ingestion - INFO -   - 🏆 FINAL PURE CONCEPTS: 42
+2025-05-30 11:28:55,817 - pdf_ingestion - INFO -
+🏆 TOP 10 PUREST CONCEPTS:
+2025-05-30 11:28:55,817 - pdf_ingestion - INFO -    1. Faithful Logic Embeddings           purity:2.340 (triple_consensus) [consensus(2),cross-ref,multi-method(3)]
+2025-05-30 11:28:55,818 - pdf_ingestion - INFO -    2. Benzmüller shallow logic            purity:2.340 (double_consensus) [consensus(2),cross-ref,multi-method(2)]
+2025-05-30 11:28:55,818 - pdf_ingestion - INFO -    3. Christoph Benzmüller                purity:1.914 (double_consensus) [consensus(2),cross-ref,multi-method(2)]
+2025-05-30 11:28:55,818 - pdf_ingestion - INFO -    4. network couplings defined           purity:1.089 (db_boost) [db-boost]
+2025-05-30 11:28:55,819 - pdf_ingestion - INFO -    5. Modern Hopfield networks            purity:1.089 (db_boost) [db-boost]
+2025-05-30 11:28:55,819 - pdf_ingestion - INFO -    6. modern Hopfield network             purity:1.089 (db_boost) [db-boost]
+2025-05-30 11:28:55,819 - pdf_ingestion - INFO -    7. various values 50                   purity:1.089 (db_boost) [db-boost]
+2025-05-30 11:28:55,820 - pdf_ingestion - INFO -    8. associative neural                  purity:1.089 (db_boost) [db-boost]
+2025-05-30 11:28:55,820 - pdf_ingestion - INFO -    9. obtained comparing predictions      purity:1.089 (db_boost) [db-boost]
+2025-05-30 11:28:55,820 - pdf_ingestion - INFO -   10. modular wave function               purity:1.089 (db_boost) [db-boost]
+2025-05-30 11:28:55,820 - pdf_ingestion - INFO - ======================================================================
+2025-05-30 11:28:55,821 - pdf_ingestion - INFO - 🏆 Using 42 PURE concepts for final output
+2025-05-30 11:28:55,821 - pdf_ingestion - INFO - 🔥 Purity filter efficiency: 42/417 = 10.1% kept
+2025-05-30 11:28:55,821 - pdf_ingestion - INFO - 📥 RUNNING PURITY-BASED AUTO-PREFILL ANALYSIS...
+2025-05-30 11:28:55,821 - pdf_ingestion - INFO - 📥 PURITY-BASED AUTO-PREFILL: Analyzing 42 pure concepts from 2502.19311v1.pdf
+2025-05-30 11:28:55,822 - pdf_ingestion - INFO - 📥 PURITY-BASED AUTO-PREFILL: No pure concepts met prefill criteria (threshold: 0.6)
+2025-05-30 11:28:55,823 - pdf_ingestion - INFO - 🔬 INJECTING 42 PURE CONCEPTS INTO CONCEPTMESH
+2025-05-30 11:28:58,921 - cognitive_interface - INFO - ConceptMesh saved to concept_mesh_data.json (23 diffs)
+2025-05-30 11:28:58,993 - cognitive_interface - INFO - [UI] ConceptMesh update available: 2502.19311v1.pdf
+2025-05-30 11:28:58,993 - cognitive_interface - INFO - [ConceptMesh] Injected 42 concepts for '2502.19311v1.pdf' (ID: diff_1748622535823_4496)
+2025-05-30 11:28:58,996 - cognitive_interface - INFO - [ψArc] Logged concept injection trajectory with 42 eigen IDs
+2025-05-30 11:28:59,027 - pdf_ingestion - INFO - ✅ 🏆 PERFORMANCE-LIMITED PURITY-BASED UNIVERSAL PDF INGESTION COMPLETE: 2502.19311v1.pdf
+2025-05-30 11:28:59,028 - pdf_ingestion - INFO - 📊 FINAL RESULTS: 42 pure concepts (from 417 raw)
+2025-05-30 11:28:59,031 - pdf_ingestion - INFO -    🚨 Performance: 5/22 chunks processed in 35.0s
+2025-05-30 11:28:59,031 - pdf_ingestion - INFO -    🤝 11 consensus concepts (most true)
+2025-05-30 11:28:59,032 - pdf_ingestion - INFO -    ⭐ 0 high confidence concepts
+2025-05-30 11:28:59,032 - pdf_ingestion - INFO -    🚀 31 database boosted concepts
+2025-05-30 11:28:59,033 - pdf_ingestion - INFO -    ✅ 0 single method accepted
+2025-05-30 11:28:59,033 - pdf_ingestion - INFO -    📥 0 pure concepts auto-prefilled to database
+2025-05-30 11:28:59,033 - pdf_ingestion - INFO -    🧬 Universal methods used: ['YAKE', 'KeyBERT', 'NER']
+2025-05-30 11:28:59,034 - pdf_ingestion - INFO - ⏱️ Total processing time: 34.97s (vs estimated 88s without limits)
+2025-05-30 11:28:59,034 - pdf_ingestion - INFO - 📊 Database now contains: 2248 total concepts
+  Final concepts: 42
+  Raw → Pure: 417 → 42
+  Consensus: 11
+  High conf: 0
+  Database boosted: 31
+  Single method: 0
+
+======================================================================
+🤔 ANALYSIS:
+✅ Natural filtering is working well!
+   Only 42 concepts without hard cap
+
+💡 The 50-cap is just a safety net - good job!
+
+📊 Distribution comparison:
+                     With Cap | Without Cap
+  Consensus:               11 |       11
+  High confidence:          0 |        0
+  Database boosted:        31 |       31
+  Single method:            0 |        0
+
+✅ Test complete! Pipeline restored to original state.
+
+🎯 Next steps based on results above!
+PS C:\Users\jason\Desktop\tori\kha>

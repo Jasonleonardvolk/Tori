@@ -43779,5 +43779,276 @@
       "discovery_date": "2025-05-30T09:24:08.172474",
       "domain_detected": "universal_extraction"
     }
+  },
+  {
+    "name": "Metadata Augmentation",
+    "priority": 0.97,
+    "category": "universal_extraction",
+    "aliases": [
+      "MA",
+      "metadata",
+      "augmentation"
+    ],
+    "boost_multiplier": 1.5,
+    "source": {
+      "auto_prefill": true,
+      "purity_based": true,
+      "purity_decision": "TRIPLE_CONSENSUS",
+      "universal_extraction": true,
+      "document": "1748621069654_2504.17189v1.pdf",
+      "extraction_method": "universal_keybert+ner+yake",
+      "original_score": 1.0,
+      "purity_score": 1.2,
+      "discovery_date": "2025-05-30T11:04:58.896111",
+      "domain_detected": "universal_extraction"
+    }
+  },
+  {
+    "name": "thesis college assignment",
+    "priority": 0.97,
+    "category": "universal_extraction",
+    "aliases": [
+      "thesis",
+      "college",
+      "assignment"
+    ],
+    "boost_multiplier": 1.35,
+    "source": {
+      "auto_prefill": true,
+      "purity_based": true,
+      "purity_decision": "DOUBLE_CONSENSUS",
+      "universal_extraction": true,
+      "document": "1748621069654_2504.17189v1.pdf",
+      "extraction_method": "universal_keybert+yake",
+      "original_score": 1.0,
+      "purity_score": 1.2,
+      "discovery_date": "2025-05-30T11:04:58.896111",
+      "domain_detected": "universal_extraction"
+    }
+  },
+  {
+    "name": "metadata augmentation process",
+    "priority": 0.97,
+    "category": "universal_extraction",
+    "aliases": [
+      "metadata",
+      "augmentation",
+      "process"
+    ],
+    "boost_multiplier": 1.35,
+    "source": {
+      "auto_prefill": true,
+      "purity_based": true,
+      "purity_decision": "DOUBLE_CONSENSUS",
+      "universal_extraction": true,
+      "document": "1748621069654_2504.17189v1.pdf",
+      "extraction_method": "universal_keybert+yake",
+      "original_score": 1.0,
+      "purity_score": 1.2,
+      "discovery_date": "2025-05-30T11:04:58.896111",
+      "domain_detected": "universal_extraction"
+    }
+  },
+  {
+    "name": "metadata augmentation tasks",
+    "priority": 0.9392,
+    "category": "universal_extraction",
+    "aliases": [
+      "metadata",
+      "augmentation",
+      "tasks"
+    ],
+    "boost_multiplier": 1.35,
+    "source": {
+      "auto_prefill": true,
+      "purity_based": true,
+      "purity_decision": "DOUBLE_CONSENSUS",
+      "universal_extraction": true,
+      "document": "1748621069654_2504.17189v1.pdf",
+      "extraction_method": "universal_keybert+yake",
+      "original_score": 0.9392,
+      "purity_score": 1.127,
+      "discovery_date": "2025-05-30T11:04:58.896111",
+      "domain_detected": "universal_extraction"
+    }
+  },
+  {
+    "name": "Probabilistic injectivity",
+    "priority": 0.97,
+    "category": "universal_extraction",
+    "aliases": [
+      "PI",
+      "probabilistic",
+      "injectivity"
+    ],
+    "boost_multiplier": 1.35,
+    "source": {
+      "auto_prefill": true,
+      "purity_based": true,
+      "purity_decision": "DOUBLE_CONSENSUS",
+      "universal_extraction": true,
+      "document": "1748623175111_2502.19311v1.pdf",
+      "extraction_method": "universal_keybert+yake",
+      "original_score": 1.0,
+      "purity_score": 1.2,
+      "discovery_date": "2025-05-30T11:40:13.662162",
+      "domain_detected": "universal_extraction"
+    }
+  },
+  {
+    "name": "recursive self improvement",
+    "priority": 0.97,
+    "category": "universal_extraction",
+    "aliases": [
+      "recursive",
+      "improvement"
+    ],
+    "boost_multiplier": 1.35,
+    "source": {
+      "auto_prefill": true,
+      "purity_based": true,
+      "purity_decision": "HIGH_CONF",
+      "universal_extraction": true,
+      "document": "1748623175111_2502.19311v1.pdf",
+      "extraction_method": "universal_keybert",
+      "original_score": 1.0,
+      "purity_score": 1.0,
+      "discovery_date": "2025-05-30T11:40:13.671908",
+      "domain_detected": "universal_extraction"
+    }
+  },
+  {
+    "name": "noise meaning recursive",
+    "priority": 0.9683,
+    "category": "universal_extraction",
+    "aliases": [
+      "noise",
+      "meaning",
+      "recursive"
+    ],
+    "boost_multiplier": 1.35,
+    "source": {
+      "auto_prefill": true,
+      "purity_based": true,
+      "purity_decision": "HIGH_CONF",
+      "universal_extraction": true,
+      "document": "1748623175111_2502.19311v1.pdf",
+      "extraction_method": "universal_keybert",
+      "original_score": 0.9683,
+      "purity_score": 0.968,
+      "discovery_date": "2025-05-30T11:40:13.673918",
+      "domain_detected": "universal_extraction"
+    }
+  },
+  {
+    "name": "internal complexity grow",
+    "priority": 0.9398,
+    "category": "universal_extraction",
+    "aliases": [
+      "internal",
+      "complexity"
+    ],
+    "boost_multiplier": 1.35,
+    "source": {
+      "auto_prefill": true,
+      "purity_based": true,
+      "purity_decision": "HIGH_CONF",
+      "universal_extraction": true,
+      "document": "1748623175111_2502.19311v1.pdf",
+      "extraction_method": "universal_keybert",
+      "original_score": 0.9398,
+      "purity_score": 0.94,
+      "discovery_date": "2025-05-30T11:40:13.673918",
+      "domain_detected": "universal_extraction"
+    }
+  },
+  {
+    "name": "meaning recursive self",
+    "priority": 0.9153,
+    "category": "universal_extraction",
+    "aliases": [
+      "meaning",
+      "recursive"
+    ],
+    "boost_multiplier": 1.35,
+    "source": {
+      "auto_prefill": true,
+      "purity_based": true,
+      "purity_decision": "HIGH_CONF",
+      "universal_extraction": true,
+      "document": "1748623175111_2502.19311v1.pdf",
+      "extraction_method": "universal_keybert",
+      "original_score": 0.9153,
+      "purity_score": 0.915,
+      "discovery_date": "2025-05-30T11:40:13.675923",
+      "domain_detected": "universal_extraction"
+    }
+  },
+  {
+    "name": "complexity grow",
+    "priority": 0.9046,
+    "category": "universal_extraction",
+    "aliases": [
+      "CG",
+      "complexity"
+    ],
+    "boost_multiplier": 1.35,
+    "source": {
+      "auto_prefill": true,
+      "purity_based": true,
+      "purity_decision": "HIGH_CONF",
+      "universal_extraction": true,
+      "document": "1748623175111_2502.19311v1.pdf",
+      "extraction_method": "universal_keybert",
+      "original_score": 0.9046,
+      "purity_score": 0.905,
+      "discovery_date": "2025-05-30T11:40:13.675923",
+      "domain_detected": "universal_extraction"
+    }
+  },
+  {
+    "name": "recursive self",
+    "priority": 0.9041,
+    "category": "universal_extraction",
+    "aliases": [
+      "RS",
+      "recursive"
+    ],
+    "boost_multiplier": 1.35,
+    "source": {
+      "auto_prefill": true,
+      "purity_based": true,
+      "purity_decision": "HIGH_CONF",
+      "universal_extraction": true,
+      "document": "1748623175111_2502.19311v1.pdf",
+      "extraction_method": "universal_keybert",
+      "original_score": 0.9041,
+      "purity_score": 0.904,
+      "discovery_date": "2025-05-30T11:40:13.677669",
+      "domain_detected": "universal_extraction"
+    }
+  },
+  {
+    "name": "agent systems large",
+    "priority": 0.8521,
+    "category": "universal_extraction",
+    "aliases": [
+      "agent",
+      "systems",
+      "large"
+    ],
+    "boost_multiplier": 1.35,
+    "source": {
+      "auto_prefill": true,
+      "purity_based": true,
+      "purity_decision": "HIGH_CONF",
+      "universal_extraction": true,
+      "document": "1748629530703_2502.19311v1.pdf",
+      "extraction_method": "universal_keybert",
+      "original_score": 0.8521,
+      "purity_score": 0.852,
+      "discovery_date": "2025-05-30T13:26:08.782864",
+      "domain_detected": "universal_extraction"
+    }
   }
 ]

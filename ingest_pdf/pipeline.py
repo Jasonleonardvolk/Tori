@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import List, Dict, Any, Tuple, Optional
+from typing import List, Dict, Any, Tuple, Optional, Set
 import numpy as np
 import json
 import os
@@ -9,7 +9,7 @@ import logging
 from datetime import datetime
 
 # Import all enhanced modules (addresses all Issues #1-#4)
-from .extract_blocks import extract_concept_blocks
+from .extract_blocks import extract_concept_blocks, extract_chunks  # Enhanced with sections
 from .features import build_feature_matrix
 from .spectral import spectral_embed
 from .clustering import run_oscillator_clustering, cluster_cohesion
@@ -34,11 +34,22 @@ from .threshold_config import (
     get_threshold_for_media_type, get_adaptive_threshold, get_fallback_count
 )
 from .cognitive_interface import add_concept_diff  # 🔧 FIXED IMPORT
-from .extractConceptsFromDocument import extractConceptsFromDocument  # 🌍 Universal extraction
+from .extractConceptsFromDocument import (
+    extractConceptsFromDocument, 
+    reset_frequency_counter,
+    track_concept_frequency,
+    get_concept_frequency,
+    concept_frequency_counter
+)  # 🌍 Universal extraction with frequency tracking
 
 # Configure logging
 logger = logging.getLogger("pdf_ingestion")
 logger.setLevel(logging.INFO)
+
+# Feature flags for context extraction
+ENABLE_CONTEXT_EXTRACTION = True
+ENABLE_FREQUENCY_TRACKING = True
+ENABLE_SMART_FILTERING = True
 
 # 🌍 UNIVERSAL CONCEPT DATABASE - Load main database + universal seeds
 concept_db_path = Path(__file__).parent / "data" / "concept_database.json"
@@ -99,9 +110,186 @@ def load_universal_concept_database():
 # Load the universal database
 load_universal_concept_database()
 
-def analyze_concept_purity(all_concepts: List[Dict[str, Any]], doc_name: str = "") -> List[Dict[str, Any]]:
+def extract_title_abstract_safe(chunks: List[Any], pdf_path: str) -> Tuple[str, str]:
+    """Safely extract title and abstract from document"""
+    title_text = ""
+    abstract_text = ""
+    
+    try:
+        # Get first chunk text
+        if chunks and len(chunks) > 0:
+            first_chunk = chunks[0]
+            if isinstance(first_chunk, dict):
+                first_text = first_chunk.get("text", "")
+            else:
+                first_text = str(first_chunk)
+            
+            # Try to extract title (first non-empty line)
+            lines = [ln.strip() for ln in first_text.splitlines() if ln.strip()]
+            if lines:
+                candidate = lines[0]
+                # Validate it looks like a title
+                if 10 < len(candidate) < 150 and not candidate.endswith('.'):
+                    title_text = candidate
+            
+            # Extract abstract
+            lower_text = first_text.lower()
+            if "abstract" in lower_text:
+                idx = lower_text.index("abstract")
+                abstract_start = idx + len("abstract")
+                # Skip punctuation
+                while abstract_start < len(first_text) and first_text[abstract_start] in ": \n\r\t":
+                    abstract_start += 1
+                abstract_text = first_text[abstract_start:].strip()
+                
+                # Stop at Introduction if found
+                intro_pos = abstract_text.lower().find("introduction")
+                if intro_pos > 0:
+                    abstract_text = abstract_text[:intro_pos].strip()
+                
+                # Limit abstract length
+                abstract_text = abstract_text[:1000]  # Safety limit
+        
+        # Fallback: use filename
+        if not title_text:
+            filename = Path(pdf_path).stem
+            if len(filename) > 10 and not filename.replace('_', '').replace('-', '').isdigit():
+                title_text = filename.replace('_', ' ').replace('-', ' ')
+    
+    except Exception as e:
+        logger.debug(f"Could not extract title/abstract: {e}")
+    
+    return title_text, abstract_text
+
+def is_rogue_concept_contextual(name: str, concept: dict) -> tuple[bool, str]:
+    """Detect rogue concepts using all available context"""
+    name_lower = name.lower()
+    
+    # Get metadata with safe defaults
+    frequency = concept.get('metadata', {}).get('frequency', 1)
+    sections = concept.get('metadata', {}).get('sections', ['body'])
+    score = concept.get('score', 0)
+    
+    # Known peripheral patterns
+    PERIPHERAL_PATTERNS = {
+        'puzzle', 'example', 'case study', 'illustration', 'exercise', 
+        'problem set', 'quiz', 'test case', 'figure', 'table', 
+        'equation', 'listing', 'algorithm', 'lemma', 'theorem'
+    }
+    
+    # Generic terms to filter
+    GENERIC_TERMS = {
+        'document', 'paper', 'analysis', 'method', 'approach', 'study',
+        'research', 'results', 'data', 'figure', 'table', 'section',
+        'abstract', 'introduction', 'conclusion', 'pdf document', 
+        'academic paper', 'page', 'text', 'content', 'information',
+        'system', 'model', 'based', 'using', 'used', 'new', 'proposed',
+        'specific', 'general', 'various', 'different', 'particular',
+        'important', 'significant', 'relevant', 'related', 'similar',
+        'technical method', 'artificial intelligence', 'computer science',
+        'pdf', 'file', 'scholarsphere document'
+    }
+    
+    # Check if it's likely peripheral
+    for pattern in PERIPHERAL_PATTERNS:
+        if pattern in name_lower:
+            # Keep if high frequency or in important sections
+            if frequency >= 3:
+                return False, ""
+            if any(sec in ['abstract', 'introduction', 'conclusion'] for sec in sections):
+                return False, ""
+            # Keep if database boosted (suggests importance)
+            if concept.get('source', {}).get('database_matched'):
+                return False, ""
+            return True, "peripheral_pattern"
+    
+    # References-only concepts are suspect
+    if sections == ['references'] and frequency <= 2:
+        return True, "references_only"
+    
+    # Single occurrence in non-critical section
+    if frequency == 1 and not any(sec in ['abstract', 'introduction'] for sec in sections):
+        if score < 0.7:  # Low confidence single mention
+            return True, "single_peripheral_mention"
+    
+    # Very generic terms with low frequency
+    if name_lower in GENERIC_TERMS and frequency < 3:
+        return True, "generic_low_frequency"
+    
+    return False, ""
+
+def merge_near_duplicates_smart(concepts: List[Dict]) -> List[Dict]:
+    """Merge duplicates preferring high-frequency, multi-section concepts"""
+    merged = []
+    processed = set()
+    
+    for i, concept in enumerate(concepts):
+        if i in processed:
+            continue
+            
+        name = concept['name']
+        name_lower = name.lower()
+        name_words = set(name_lower.split())
+        
+        # Find all related concepts
+        related = [concept]
+        variants = []
+        
+        for j, other in enumerate(concepts[i+1:], i+1):
+            if j in processed:
+                continue
+                
+            other_name = other['name']
+            other_lower = other_name.lower()
+            other_words = set(other_lower.split())
+            
+            # Check relationships
+            if (name_words.issubset(other_words) or 
+                other_words.issubset(name_words) or
+                (len(name_words & other_words) / min(len(name_words), len(other_words)) > 0.6)):
+                related.append(other)
+                processed.add(j)
+                variants.append(other_name)
+        
+        # Choose best representative based on context
+        if len(related) > 1:
+            # Sort by: frequency desc, section diversity desc, length desc, score desc
+            related.sort(key=lambda x: (
+                -x.get('metadata', {}).get('frequency', 1),
+                -len(x.get('metadata', {}).get('sections', ['body'])),
+                -len(x['name'].split()),
+                -x['score']
+            ))
+            best = related[0]
+            
+            # Merge metadata
+            merged_frequency = sum(c.get('metadata', {}).get('frequency', 1) for c in related)
+            merged_sections = set()
+            for c in related:
+                merged_sections.update(c.get('metadata', {}).get('sections', ['body']))
+            
+            best['metadata']['merged_variants'] = variants
+            best['metadata']['merged_count'] = len(related)
+            best['metadata']['frequency'] = merged_frequency
+            best['metadata']['sections'] = list(merged_sections)
+            
+            # Boost score for strong consensus
+            best['score'] = min(0.99, best['score'] * (1 + 0.05 * len(related)))
+            best['purity_metrics']['decision'] = 'MERGED_CONSENSUS'
+            
+            logger.info(f"🔄 Smart merge: {best['name']} ← {variants} (freq: {merged_frequency})")
+        else:
+            best = concept
+            
+        merged.append(best)
+        processed.add(i)
+    
+    return merged
+
+def analyze_concept_purity(all_concepts: List[Dict[str, Any]], doc_name: str = "", title_text: str = "", abstract_text: str = "") -> List[Dict[str, Any]]:
     """
     🏆 CONCEPT PURITY ANALYSIS - Extract the "truth" based on quality, not quantity
+    Now with context awareness and smart filtering
     """
     logger.info(f"🔬 CONCEPT PURITY ANALYSIS for {doc_name}")
     logger.info(f"📊 Analyzing {len(all_concepts)} raw concepts")
@@ -191,21 +379,46 @@ def analyze_concept_purity(all_concepts: List[Dict[str, Any]], doc_name: str = "
         elif len(name_lower.replace(' ', '').replace('-', '')) < 4:
             rejection_reason = "insufficient_content"
         else:
-            # Acceptance criteria - quality-based hierarchy
-            if is_consensus and score >= 0.6:
-                decision = "CONSENSUS"
-                consensus_concepts.append(concept)
-            elif score >= 0.8:
-                decision = "HIGH_CONF"
-                high_confidence.append(concept)
-            elif is_boosted and score >= 0.7:
-                decision = "DB_BOOST"
-                database_boosted.append(concept)
-            elif score >= 0.5 and word_count <= 4 and word_count >= 1:
-                decision = "ACCEPTED"
-                single_method.append(concept)
-            else:
-                rejection_reason = "below_quality_threshold"
+            # Check for rogue concepts with context
+            if ENABLE_SMART_FILTERING:
+                is_rogue, rogue_reason = is_rogue_concept_contextual(name, concept)
+                if is_rogue:
+                    rejection_reason = rogue_reason
+                    decision = "REJECTED"
+            
+            if rejection_reason == "":  # Not rejected yet
+                # Get frequency and section data with safe fallbacks
+                frequency = concept.get('metadata', {}).get('frequency', 1)
+                sections = concept.get('metadata', {}).get('sections', ['body'])
+                in_title = concept.get('metadata', {}).get('in_title', False)
+                in_abstract = concept.get('metadata', {}).get('in_abstract', False)
+                
+                # Enhanced acceptance criteria with context awareness
+                method_count = method.count('+') + 1 if '+' in method else 1
+                
+                if method_count >= 3:  # Triple consensus - ALWAYS ACCEPT
+                    decision = "TRIPLE_CONSENSUS"
+                    consensus_concepts.append(concept)
+                elif method_count == 2 and score >= 0.5:  # Double consensus
+                    decision = "DOUBLE_CONSENSUS"
+                    consensus_concepts.append(concept)
+                elif is_boosted and score >= 0.75:  # Relaxed from 0.8
+                    decision = "DB_BOOST"
+                    database_boosted.append(concept)
+                elif (in_title or in_abstract) and score >= 0.7:  # Title/Abstract boost
+                    decision = "TITLE_ABSTRACT_BOOST"
+                    high_confidence.append(concept)
+                elif score >= 0.85 and word_count <= 3:  # Relaxed from 0.9
+                    decision = "HIGH_CONF"
+                    high_confidence.append(concept)
+                elif score >= 0.75 and word_count <= 2:  # Relaxed from 0.8
+                    decision = "ACCEPTED"
+                    single_method.append(concept)
+                elif frequency >= 3 and score >= 0.65:  # Frequency boost for borderline
+                    decision = "FREQUENCY_BOOST"
+                    single_method.append(concept)
+                else:
+                    rejection_reason = "below_relaxed_thresholds"
         
         # Enhanced concept with purity metrics
         concept['purity_metrics'] = {
@@ -303,6 +516,13 @@ def analyze_concept_purity(all_concepts: List[Dict[str, Any]], doc_name: str = "
     # Combine accepted concepts in quality order
     pure_concepts = consensus_concepts + high_confidence + database_boosted + single_method
     
+    # Apply smart duplicate merging
+    if ENABLE_SMART_FILTERING:
+        pre_merge_count = len(pure_concepts)
+        pure_concepts = merge_near_duplicates_smart(pure_concepts)
+        if len(pure_concepts) < pre_merge_count:
+            logger.info(f"\n🔄 Smart duplicate merging: {pre_merge_count} → {len(pure_concepts)} concepts")
+    
     # Remove duplicates while preserving quality order
     seen = set()
     unique_pure = []
@@ -330,6 +550,12 @@ def analyze_concept_purity(all_concepts: List[Dict[str, Any]], doc_name: str = "
     
     # Apply natural cutoff
     unique_pure = unique_pure[:natural_cutoff]
+    
+    # 🚨 Apply final user-friendly cap
+    MAX_USER_FRIENDLY_CONCEPTS = 50
+    if len(unique_pure) > MAX_USER_FRIENDLY_CONCEPTS:
+        logger.info(f"🎯 Final cap for usability: {len(unique_pure)} → {MAX_USER_FRIENDLY_CONCEPTS} concepts")
+        unique_pure = unique_pure[:MAX_USER_FRIENDLY_CONCEPTS]
     
     # Log final summary
     logger.info("\n" + "=" * 70)
@@ -386,7 +612,7 @@ def auto_prefill_concept_db(extracted_concepts: List[Dict[str, Any]], document_n
         
         # Higher standards for auto-prefill - only consensus and high-confidence
         decision = purity_metrics.get("decision", "")
-        if decision in ["CONSENSUS", "HIGH_CONF"] and concept_score >= prefill_threshold:
+        if decision in ["CONSENSUS", "HIGH_CONF", "TRIPLE_CONSENSUS", "DOUBLE_CONSENSUS", "TITLE_ABSTRACT_BOOST"] and concept_score >= prefill_threshold:
             
             # Determine category based on method and content
             category = "auto_discovered"
@@ -433,7 +659,7 @@ def auto_prefill_concept_db(extracted_concepts: List[Dict[str, Any]], document_n
                 boost_multiplier = 1.35
             if "ner" in concept_method.lower():
                 boost_multiplier = 1.4
-            if decision == "CONSENSUS":
+            if decision in ["CONSENSUS", "TRIPLE_CONSENSUS"]:
                 boost_multiplier = 1.5  # Highest for consensus
             
             new_concept = {
@@ -601,14 +827,14 @@ def boost_known_concepts(chunk: str) -> List[Dict[str, Any]]:
     
     return boosted
 
-def extract_and_boost_concepts(chunk: str, threshold: float = 0.0) -> List[Dict[str, Any]]:
-    """🌍 UNIVERSAL EXTRACT AND BOOST - Preparing for purity analysis"""
+def extract_and_boost_concepts(chunk: str, threshold: float = 0.0, chunk_index: int = 0, chunk_section: str = "body", title_text: str = "", abstract_text: str = "") -> List[Dict[str, Any]]:
+    """🌍 UNIVERSAL EXTRACT AND BOOST - Enhanced with context and frequency"""
     logger.info(f"🔧 🌍 UNIVERSAL EXTRACT AND BOOST: threshold: {threshold}")
-    logger.info(f"🔬 Chunk length: {len(chunk)} chars")
+    logger.info(f"🔬 Chunk length: {len(chunk)} chars, index: {chunk_index}, section: {chunk_section}")
     
-    # Extract concepts using universal method
+    # Extract concepts using universal method with chunk context
     logger.info("🔬 STEP 1: Calling universal extractConceptsFromDocument...")
-    semantic_hits = extractConceptsFromDocument(chunk, threshold=threshold)
+    semantic_hits = extractConceptsFromDocument(chunk, threshold=threshold, chunk_index=chunk_index, chunk_section=chunk_section)
     logger.info(f"📊 UNIVERSAL SEMANTIC EXTRACTION RESULT: {len(semantic_hits)} concepts")
     
     # Apply quality-focused universal database boosting
@@ -626,29 +852,33 @@ def extract_and_boost_concepts(chunk: str, threshold: float = 0.0) -> List[Dict[
         name_lower = concept["name"].lower()
         concept_name_counts[name_lower] = concept_name_counts.get(name_lower, 0) + 1
     
-    # Mark concepts with cross-reference potential
+    # Mark concepts with cross-reference potential and add context
     for concept in combined:
-        name_lower = concept["name"].lower()
+        name = concept['name']
+        name_lower = name.lower()
+        
+        # Cross-reference marking
         if concept_name_counts[name_lower] > 1:
             concept.setdefault("metadata", {})["cross_reference_boost"] = True
             concept.setdefault("metadata", {})["methods_found"] = concept_name_counts[name_lower]
+        
+        # Add frequency data from global counter
+        freq_data = get_concept_frequency(name)
+        concept.setdefault('metadata', {})['frequency'] = freq_data['count']
+        
+        # Add section data if not already present
+        if 'sections' not in concept.get('metadata', {}):
+            if 'chunk_sections' in concept.get('metadata', {}):
+                # Convert from extractConceptsFromDocument format
+                concept['metadata']['sections'] = list(concept['metadata']['chunk_sections'])
+            else:
+                concept['metadata']['sections'] = [chunk_section]
+        
+        # Add title/abstract flags
+        concept['metadata']['in_title'] = bool(title_text and name_lower in title_text.lower())
+        concept['metadata']['in_abstract'] = bool(abstract_text and name_lower in abstract_text.lower())
     
     return combined
-
-def extract_chunks(pdf_path: str) -> List[str]:
-    """Extract text chunks from PDF for processing with debugging"""
-    try:
-        chunks = extract_concept_blocks(pdf_path)
-        logger.info(f"📄 Extracted {len(chunks)} chunks from {Path(pdf_path).name}")
-        
-        # 🔬 DEBUG: Log chunk sizes and sample content
-        for i, chunk in enumerate(chunks[:3], 1):  # Show first 3 chunks
-            logger.info(f"🔬 Chunk {i}: {len(chunk)} chars, preview: {chunk[:100]}...")
-        
-        return chunks
-    except Exception as e:
-        logger.error(f"Failed to extract chunks from {pdf_path}: {e}")
-        return []
 
 def extract_pdf_metadata(pdf_path: str) -> Dict[str, Any]:
     """Extract comprehensive metadata from PDF file for source provenance tracking."""
@@ -656,7 +886,7 @@ def extract_pdf_metadata(pdf_path: str) -> Dict[str, Any]:
         "filename": Path(pdf_path).name,
         "file_path": pdf_path,
         "extraction_timestamp": datetime.now().isoformat(),
-        "extractor_version": "purity_based_pipeline_v1.0"
+        "extractor_version": "context_aware_purity_pipeline_v2.0"
     }
     
     try:
@@ -681,34 +911,56 @@ def extract_pdf_metadata(pdf_path: str) -> Dict[str, Any]:
     
     return metadata
 
+def get_dynamic_limits(file_size_mb: float) -> tuple:
+    """Dynamic limits based on file size to optimize performance"""
+    if file_size_mb < 1:  # Small files (<1MB) 
+        max_chunks = 3
+        max_concepts = 200
+        logger.info(f"📏 Small file ({file_size_mb:.1f}MB): {max_chunks} chunks, {max_concepts} max concepts")
+    elif file_size_mb < 5:  # Medium files (1-5MB)
+        max_chunks = 5
+        max_concepts = 500
+        logger.info(f"📏 Medium file ({file_size_mb:.1f}MB): {max_chunks} chunks, {max_concepts} max concepts")
+    else:  # Large files (>5MB)
+        max_chunks = 8
+        max_concepts = 800
+        logger.info(f"📏 Large file ({file_size_mb:.1f}MB): {max_chunks} chunks, {max_concepts} max concepts")
+    
+    return max_chunks, max_concepts
+
 def ingest_pdf_clean(pdf_path: str, doc_id: str = None, extraction_threshold: float = 0.0) -> Dict[str, Any]:
     """
-    🏆 PURITY-BASED UNIVERSAL PDF INGESTION PIPELINE - WITH CRITICAL PERFORMANCE LIMITS
+    🏆 CONTEXT-AWARE PURITY-BASED UNIVERSAL PDF INGESTION PIPELINE
     
-    Extracts the "truth" based on concept quality, not arbitrary quantity limits.
+    Now with section detection, frequency tracking, and smart filtering!
     """
     start_time = datetime.now()
     
     if doc_id is None:
         doc_id = Path(pdf_path).stem
     
-    # 🚨 CRITICAL PERFORMANCE LIMITS to prevent "Beautiful Overkill"
-    MAX_CHUNKS = 5  # Only process first 5 chunks!
-    MAX_TOTAL_CONCEPTS = 500  # Stop if we have enough raw concepts
+    # 🚨 DYNAMIC PERFORMANCE LIMITS based on file size
+    file_size_mb = os.path.getsize(pdf_path) / (1024 * 1024)
+    MAX_CHUNKS, MAX_TOTAL_CONCEPTS = get_dynamic_limits(file_size_mb)
     
-    logger.info(f"🏆 🌍 PURITY-BASED UNIVERSAL PDF INGESTION: {Path(pdf_path).name}")
+    logger.info(f"🏆 🌍 CONTEXT-AWARE PURITY-BASED UNIVERSAL PDF INGESTION: {Path(pdf_path).name}")
     logger.info(f"🔬 ZERO THRESHOLD MODE: {extraction_threshold} (maximum coverage)")
     logger.info("🌍 UNIVERSAL PIPELINE: Cross-domain concept extraction enabled")
+    logger.info("📍 CONTEXT EXTRACTION: Section detection and frequency tracking enabled")
     logger.info(f"📊 Database ready: {len(concept_database)} concepts across all domains")
     logger.info("🏆 PURITY-BASED: Quality over quantity - extracting the 'truth'")
-    logger.info(f"🚨 CRITICAL PERFORMANCE LIMITS: Max {MAX_CHUNKS} chunks, stop at {MAX_TOTAL_CONCEPTS} concepts")
+    logger.info(f"🚨 DYNAMIC PERFORMANCE LIMITS: Max {MAX_CHUNKS} chunks, stop at {MAX_TOTAL_CONCEPTS} concepts")
     
     try:
         # Extract metadata for provenance
         doc_metadata = extract_pdf_metadata(pdf_path)
         
-        # Extract chunks from PDF
-        chunks = extract_chunks(pdf_path)
+        # Reset frequency counter for this document
+        if ENABLE_FREQUENCY_TRACKING:
+            reset_frequency_counter()
+        
+        # Extract chunks from PDF with section context
+        chunks = extract_chunks(pdf_path)  # Now returns enhanced chunks
         if not chunks:
             logger.warning(f"⚠️ No chunks extracted from {pdf_path}")
             return {
@@ -717,6 +969,13 @@ def ingest_pdf_clean(pdf_path: str, doc_id: str = None, extraction_threshold: fl
                 "status": "empty",
                 "processing_time_seconds": (datetime.now() - start_time).total_seconds()
             }
+        
+        # Extract title and abstract safely
+        title_text, abstract_text = "", ""
+        if ENABLE_CONTEXT_EXTRACTION:
+            title_text, abstract_text = extract_title_abstract_safe(chunks, pdf_path)
+            logger.info(f"📄 Title: {title_text[:50]}..." if title_text else "📄 No title extracted")
+            logger.info(f"📄 Abstract: {len(abstract_text)} chars" if abstract_text else "📄 No abstract found")
         
         # 🚨 CRITICAL: Limit chunks to prevent overkill
         chunks_to_process = chunks[:MAX_CHUNKS]
@@ -729,13 +988,34 @@ def ingest_pdf_clean(pdf_path: str, doc_id: str = None, extraction_threshold: fl
         boosted_count = 0
         universal_methods = set()
         domain_distribution = {}
+        sections_encountered = set()
         
-        for i, chunk in enumerate(chunks_to_process):  # ✅ FIXED: Use limited chunks
-            logger.info(f"🔬 =============== UNIVERSAL CHUNK {i+1}/{len(chunks_to_process)} ===============")
-            logger.info(f"📊 Processing chunk {i+1}/{len(chunks_to_process)} ({len(chunk)} chars)")
+        for i, chunk_data in enumerate(chunks_to_process):
+            # Handle enhanced chunk format
+            if isinstance(chunk_data, dict):
+                chunk_text = chunk_data.get("text", "")
+                chunk_index = chunk_data.get("index", i)
+                chunk_section = chunk_data.get("section", "body")
+            else:
+                # Fallback for old format
+                chunk_text = chunk_data
+                chunk_index = i
+                chunk_section = "body"
             
-            # 🌍 Apply universal extraction + boosting (no limits - purity will filter)
-            enhanced_concepts = extract_and_boost_concepts(chunk, threshold=extraction_threshold)
+            sections_encountered.add(chunk_section)
+            
+            logger.info(f"🔬 =============== UNIVERSAL CHUNK {i+1}/{len(chunks_to_process)} ===============")
+            logger.info(f"📊 Processing chunk {i+1}/{len(chunks_to_process)} ({len(chunk_text)} chars) - Section: {chunk_section}")
+            
+            # 🌍 Apply universal extraction + boosting with context
+            enhanced_concepts = extract_and_boost_concepts(
+                chunk_text, 
+                threshold=extraction_threshold,
+                chunk_index=chunk_index,
+                chunk_section=chunk_section,
+                title_text=title_text,
+                abstract_text=abstract_text
+            )
             
             # Count extraction types and track domains
             chunk_semantic = 0
@@ -788,12 +1068,12 @@ def ingest_pdf_clean(pdf_path: str, doc_id: str = None, extraction_threshold: fl
                 "processing_time_seconds": (datetime.now() - start_time).total_seconds()
             }
         
-        # 🏆 APPLY PURITY ANALYSIS - This is where the magic happens!
+        # 🏆 APPLY CONTEXT-AWARE PURITY ANALYSIS
         logger.info(f"🔬 Raw extraction complete: {len(all_extracted_concepts)} concepts")
-        logger.info("🏆 APPLYING PURITY ANALYSIS - Extracting the 'truth'...")
+        logger.info("🏆 APPLYING CONTEXT-AWARE PURITY ANALYSIS - Extracting the 'truth'...")
         
         initial_concept_count = len(all_extracted_concepts)
-        pure_concepts = analyze_concept_purity(all_extracted_concepts, Path(pdf_path).name)
+        pure_concepts = analyze_concept_purity(all_extracted_concepts, Path(pdf_path).name, title_text, abstract_text)
         
         # Use pure concepts for the rest of the pipeline
         all_extracted_concepts = pure_concepts
@@ -806,6 +1086,8 @@ def ingest_pdf_clean(pdf_path: str, doc_id: str = None, extraction_threshold: fl
         pure_semantic_count = len([c for c in pure_concepts if "universal" in c.get("method", "")])
         pure_boosted_count = len([c for c in pure_concepts if "boost" in c.get("method", "")])
         cross_reference_boosted = len([c for c in pure_concepts if c.get("metadata", {}).get("cross_reference_boost", False)])
+        title_abstract_boosted = len([c for c in pure_concepts if c.get('purity_metrics', {}).get('decision') == 'TITLE_ABSTRACT_BOOST'])
+        frequency_boosted = len([c for c in pure_concepts if c.get('purity_metrics', {}).get('decision') == 'FREQUENCY_BOOST'])
         
         # 🌍 PURITY-BASED AUTO-PREFILL
         logger.info("📥 RUNNING PURITY-BASED AUTO-PREFILL ANALYSIS...")
@@ -818,9 +1100,9 @@ def ingest_pdf_clean(pdf_path: str, doc_id: str = None, extraction_threshold: fl
             "type": "document",
             "title": Path(pdf_path).name,
             "concepts": all_extracted_concepts,
-            "summary": f"Performance-limited purity-based extraction found {len(all_extracted_concepts)} pure concepts from {initial_concept_count} raw extractions",
+            "summary": f"Context-aware purity-based extraction found {len(all_extracted_concepts)} pure concepts from {initial_concept_count} raw extractions",
             "metadata": {
-                "source": "performance_limited_purity_based_universal_pdf_ingest",
+                "source": "context_aware_purity_based_universal_pdf_ingest",
                 "filename": Path(pdf_path).name,
                 "chunks_available": len(chunks),
                 "chunks_processed": len(chunks_to_process),
@@ -833,14 +1115,20 @@ def ingest_pdf_clean(pdf_path: str, doc_id: str = None, extraction_threshold: fl
                 "semantic_concepts": pure_semantic_count,
                 "boosted_concepts": pure_boosted_count,
                 "cross_reference_boosted": cross_reference_boosted,
+                "title_abstract_boosted": title_abstract_boosted,
+                "frequency_boosted": frequency_boosted,
                 "auto_prefilled_concepts": prefill_count,
                 "extraction_threshold": extraction_threshold,
                 "extraction_timestamp": datetime.now().isoformat(),
                 "processing_time_seconds": (datetime.now() - start_time).total_seconds(),
                 "universal_pipeline": True,
                 "purity_based": True,
+                "context_aware": True,
                 "universal_methods": list(universal_methods),
-                "domain_distribution": domain_distribution
+                "domain_distribution": domain_distribution,
+                "sections_identified": list(sections_encountered),
+                "title_extracted": bool(title_text),
+                "abstract_extracted": bool(abstract_text)
             }
         }
         
@@ -848,34 +1136,50 @@ def ingest_pdf_clean(pdf_path: str, doc_id: str = None, extraction_threshold: fl
         
         # Generate purity distribution for frontend
         purity_distribution = {
-            "consensus": len([c for c in all_extracted_concepts if c.get('purity_metrics', {}).get('decision') == 'CONSENSUS']),
+            "consensus": len([c for c in all_extracted_concepts if c.get('purity_metrics', {}).get('decision') in ['CONSENSUS', 'TRIPLE_CONSENSUS', 'DOUBLE_CONSENSUS']]),
             "high_confidence": len([c for c in all_extracted_concepts if c.get('purity_metrics', {}).get('decision') == 'HIGH_CONF']),
             "database_boosted": len([c for c in all_extracted_concepts if c.get('purity_metrics', {}).get('decision') == 'DB_BOOST']),
-            "single_method": len([c for c in all_extracted_concepts if c.get('purity_metrics', {}).get('decision') == 'ACCEPTED'])
+            "single_method": len([c for c in all_extracted_concepts if c.get('purity_metrics', {}).get('decision') == 'ACCEPTED']),
+            "title_abstract_boost": title_abstract_boosted,
+            "frequency_boost": frequency_boosted
         }
+        
+        # Calculate average frequency
+        avg_frequency = sum(c.get('metadata', {}).get('frequency', 1) for c in all_extracted_concepts) / len(all_extracted_concepts) if all_extracted_concepts else 0
+        
+        # Count filtering stats
+        rogue_filtered = len([r for r in pure_concepts if any(reason in str(r) for reason in ['peripheral', 'references_only'])])
+        duplicates_merged = len([c for c in all_extracted_concepts if c.get('metadata', {}).get('merged_count', 0) > 1])
         
         # Final summary
         processing_time = (datetime.now() - start_time).total_seconds()
         
-        logger.info(f"✅ 🏆 PERFORMANCE-LIMITED PURITY-BASED UNIVERSAL PDF INGESTION COMPLETE: {Path(pdf_path).name}")
+        logger.info(f"✅ 🏆 CONTEXT-AWARE PURITY-BASED UNIVERSAL PDF INGESTION COMPLETE: {Path(pdf_path).name}")
         logger.info(f"📊 FINAL RESULTS: {len(all_extracted_concepts)} pure concepts (from {initial_concept_count} raw)")
         logger.info(f"   🚨 Performance: {len(chunks_to_process)}/{len(chunks)} chunks processed in {processing_time:.1f}s")
+        logger.info(f"   📍 Sections identified: {list(sections_encountered)}")
         logger.info(f"   🤝 {purity_distribution['consensus']} consensus concepts (most true)")
         logger.info(f"   ⭐ {purity_distribution['high_confidence']} high confidence concepts")
         logger.info(f"   🚀 {purity_distribution['database_boosted']} database boosted concepts")
         logger.info(f"   ✅ {purity_distribution['single_method']} single method accepted")
+        logger.info(f"   📑 {title_abstract_boosted} title/abstract boosted")
+        logger.info(f"   📊 {frequency_boosted} frequency boosted")
         logger.info(f"   📥 {prefill_count} pure concepts auto-prefilled to database")
         logger.info(f"   🧬 Universal methods used: {list(universal_methods)}")
+        logger.info(f"   📊 Average concept frequency: {avg_frequency:.1f}")
         logger.info(f"⏱️ Total processing time: {processing_time:.2f}s (vs estimated {len(chunks) * 4:.0f}s without limits)")
         logger.info(f"📊 Database now contains: {len(concept_database)} total concepts")
         
-        return {
+        # Response data
+        response_data = {
             "filename": Path(pdf_path).name,
             "concept_count": len(all_extracted_concepts),
             "concept_names": [c["name"] for c in all_extracted_concepts],
             "semantic_concepts": pure_semantic_count,
             "boosted_concepts": pure_boosted_count,
             "cross_reference_boosted": cross_reference_boosted,
+            "title_abstract_boosted": title_abstract_boosted,
+            "frequency_boosted": frequency_boosted,
             "auto_prefilled_concepts": prefill_count,
             "universal_methods": list(universal_methods),
             "domain_distribution": domain_distribution,
@@ -887,11 +1191,24 @@ def ingest_pdf_clean(pdf_path: str, doc_id: str = None, extraction_threshold: fl
             "average_score": sum(c["score"] for c in all_extracted_concepts) / len(all_extracted_concepts) if all_extracted_concepts else 0,
             "high_confidence_concepts": sum(1 for c in all_extracted_concepts if c["score"] > 0.8),
             "concept_mesh_injected": True,
-            "extraction_method": "performance_limited_purity_based_universal_pipeline",
+            "extraction_method": "context_aware_purity_based_universal_pipeline",
             "universal_pipeline": True,
             "purity_based": True,
+            "context_aware": True,
             "database_size": len(concept_database),
             "status": "success",
+            "context_extraction": {
+                "title_extracted": bool(title_text),
+                "abstract_extracted": bool(abstract_text),
+                "sections_identified": list(sections_encountered),
+                "avg_concept_frequency": avg_frequency
+            },
+            "filtering_stats": {
+                "rogue_filtered": rogue_filtered,
+                "duplicates_merged": duplicates_merged,
+                "title_abstract_boosted": title_abstract_boosted,
+                "frequency_boosted": frequency_boosted
+            },
             "purity_analysis": {
                 "raw_concepts": initial_concept_count,
                 "pure_concepts": len(all_extracted_concepts),
@@ -910,15 +1227,19 @@ def ingest_pdf_clean(pdf_path: str, doc_id: str = None, extraction_threshold: fl
                         "score": c['score'],
                         "purity_score": c.get('purity_metrics', {}).get('purity_score', c['score']),
                         "decision": c.get('purity_metrics', {}).get('decision', 'unknown'),
-                        "reasons": c.get('purity_metrics', {}).get('purity_reasons', [])
+                        "reasons": c.get('purity_metrics', {}).get('purity_reasons', []),
+                        "frequency": c.get('metadata', {}).get('frequency', 1),
+                        "sections": c.get('metadata', {}).get('sections', ['body'])
                     }
                     for c in all_extracted_concepts[:10]
                 ]
             }
         }
         
+        return response_data
+        
     except Exception as e:
-        logger.exception(f"❌ Error during performance-limited purity-based universal PDF ingestion: {str(e)}")
+        logger.exception(f"❌ Error during context-aware purity-based universal PDF ingestion: {str(e)}")
         return {
             "filename": Path(pdf_path).name,
             "concept_count": 0,
@@ -929,7 +1250,7 @@ def ingest_pdf_clean(pdf_path: str, doc_id: str = None, extraction_threshold: fl
 
 def batch_ingest_pdfs_clean(pdf_directory: str, extraction_threshold: float = 0.0) -> List[Dict[str, Any]]:
     """
-    🏆 PURITY-BASED UNIVERSAL BATCH PROCESSING
+    🏆 CONTEXT-AWARE PURITY-BASED UNIVERSAL BATCH PROCESSING
     """
     pdf_dir = Path(pdf_directory)
     if not pdf_dir.exists():
@@ -941,9 +1262,10 @@ def batch_ingest_pdfs_clean(pdf_directory: str, extraction_threshold: float = 0.
         logger.warning(f"No PDF files found in {pdf_directory}")
         return []
     
-    logger.info(f"🏆 🌍 PURITY-BASED UNIVERSAL BATCH PROCESSING: {len(pdf_files)} PDFs")
+    logger.info(f"🏆 🌍 CONTEXT-AWARE PURITY-BASED UNIVERSAL BATCH PROCESSING: {len(pdf_files)} PDFs")
     logger.info(f"📊 Universal database: {len(concept_database)} concepts ready")
     logger.info("🏆 Purity-based processing: Quality over quantity")
+    logger.info("📍 Context extraction: Section detection and frequency tracking enabled")
     
     results = []
     total_concepts = 0
@@ -951,6 +1273,8 @@ def batch_ingest_pdfs_clean(pdf_directory: str, extraction_threshold: float = 0.
     total_consensus = 0
     total_high_conf = 0
     total_prefilled = 0
+    total_title_abstract_boosted = 0
+    total_frequency_boosted = 0
     all_domains = {}
     all_methods = set()
     
@@ -965,6 +1289,8 @@ def batch_ingest_pdfs_clean(pdf_directory: str, extraction_threshold: float = 0.
         if result.get("status") == "success":
             total_concepts += result.get("concept_count", 0)
             total_prefilled += result.get("auto_prefilled_concepts", 0)
+            total_title_abstract_boosted += result.get("title_abstract_boosted", 0)
+            total_frequency_boosted += result.get("frequency_boosted", 0)
             
             purity_analysis = result.get("purity_analysis", {})
             total_raw_concepts += purity_analysis.get("raw_concepts", 0)
@@ -998,13 +1324,15 @@ def batch_ingest_pdfs_clean(pdf_directory: str, extraction_threshold: float = 0.
     
     successful = [r for r in results if r.get('status') == 'success']
     
-    logger.info(f"🎯 🏆 PURITY-BASED UNIVERSAL BATCH COMPLETE:")
+    logger.info(f"🎯 🏆 CONTEXT-AWARE PURITY-BASED UNIVERSAL BATCH COMPLETE:")
     logger.info(f"   📊 {len(successful)}/{len(pdf_files)} PDFs processed successfully")
     logger.info(f"   🏆 {total_concepts} total pure concepts extracted")
     logger.info(f"   📊 {total_raw_concepts} total raw concepts analyzed")
     logger.info(f"   🔥 Overall purity efficiency: {(total_concepts/total_raw_concepts)*100:.1f}%" if total_raw_concepts > 0 else "   🔥 No raw concepts to analyze")
     logger.info(f"   🤝 {total_consensus} consensus concepts (most true)")
     logger.info(f"   ⭐ {total_high_conf} high confidence concepts")
+    logger.info(f"   📑 {total_title_abstract_boosted} title/abstract boosted")
+    logger.info(f"   📊 {total_frequency_boosted} frequency boosted")
     logger.info(f"   📥 {total_prefilled} pure concepts auto-prefilled to database")
     logger.info(f"   🌍 Universal methods used: {list(all_methods)}")
     logger.info(f"   🌍 Domain distribution: {dict(sorted(all_domains.items()))}")
@@ -1029,15 +1357,16 @@ def ingest_pdf_and_update_index(
     extraction_threshold: float = 0.0  # Universal: Zero threshold
 ) -> dict:
     """
-    Legacy function - forwards to purity-based universal pipeline implementation.
+    Legacy function - forwards to context-aware purity-based universal pipeline implementation.
     """
-    logger.info(f"🔄 🏆 Legacy function called - forwarding to PURITY-BASED UNIVERSAL PIPELINE")
+    logger.info(f"🔄 🏆 Legacy function called - forwarding to CONTEXT-AWARE PURITY-BASED UNIVERSAL PIPELINE")
     result = ingest_pdf_clean(pdf_path, extraction_threshold=extraction_threshold)
     
     # Add legacy-expected fields
-    result["extraction_method"] = "purity_based_universal_pipeline"
+    result["extraction_method"] = "context_aware_purity_based_universal_pipeline"
     result["universal_pipeline_applied"] = True
     result["purity_based_applied"] = True
+    result["context_aware_applied"] = True
     result["concept_database_updated"] = result.get("auto_prefilled_concepts", 0) > 0
     
     return result
@@ -1052,10 +1381,14 @@ __all__ = [
     'load_universal_concept_database',
     'extractConceptsFromDocument',
     'analyze_concept_purity',
-    'ingest_pdf_and_update_index'  # Legacy compatibility
+    'ingest_pdf_and_update_index',  # Legacy compatibility
+    'extract_title_abstract_safe',
+    'is_rogue_concept_contextual',
+    'merge_near_duplicates_smart'
 ]
 
-logger.info(f"🏆 🧬 PURITY-BASED UNIVERSAL PDF PIPELINE LOADED")
+logger.info(f"🏆 🧬 CONTEXT-AWARE PURITY-BASED UNIVERSAL PDF PIPELINE LOADED")
 logger.info(f"📥 Cross-domain auto-discovery enabled across all academic fields")
 logger.info(f"🏆 Purity-based analysis: Quality over quantity - extracting the 'truth'")
+logger.info(f"📍 Context extraction: Section detection, frequency tracking, and smart filtering")
 logger.info(f"🌍 {len(concept_database)} concepts ready: Science, Humanities, Arts, Philosophy, Mathematics, and more!")
