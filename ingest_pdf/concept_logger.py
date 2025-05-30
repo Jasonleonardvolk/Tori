@@ -7,6 +7,8 @@ in ALAN's concept ecosystem, including:
 2. Concept merges and lineage tracking
 3. Stability changes and phase coherence
 4. Activation patterns and resonance events
+5. Loop record tracking for ingestion segments
+6. Concept extraction summaries and warnings
 
 The logger creates a structured historical record that supports future
 reflection, debugging, and visualization of ALAN's cognitive processes,
@@ -21,8 +23,13 @@ from datetime import datetime
 from typing import List, Dict, Any, Optional, Set, Union, Tuple
 import threading
 
-from .models import ConceptTuple
-from .concept_metadata import ConceptMetadata
+try:
+    from .models import ConceptTuple
+    from .concept_metadata import ConceptMetadata
+except ImportError:
+    # Handle case where concept_metadata doesn't exist yet
+    ConceptTuple = None
+    ConceptMetadata = None
 
 # Configure base logger
 logger = logging.getLogger("concept_events")
@@ -52,6 +59,9 @@ class ConceptLogger:
     EVENT_ACTIVATION = "ACTIVATION"
     EVENT_PRUNE = "PRUNE"
     EVENT_ERROR = "ERROR"
+    EVENT_LOOP_RECORD = "LOOP_RECORD"  # New event type for segment processing
+    EVENT_SUMMARY = "SUMMARY"          # New event type for ingestion summaries
+    EVENT_WARNING = "WARNING"          # New event type for empty segments
     
     def __init__(
         self,
@@ -79,7 +89,10 @@ class ConceptLogger:
             self.EVENT_PHASE: 0,
             self.EVENT_ACTIVATION: 0,
             self.EVENT_PRUNE: 0,
-            self.EVENT_ERROR: 0
+            self.EVENT_ERROR: 0,
+            self.EVENT_LOOP_RECORD: 0,
+            self.EVENT_SUMMARY: 0,
+            self.EVENT_WARNING: 0
         }
         
         # Ensure log directory exists
@@ -159,6 +172,155 @@ class ConceptLogger:
                     formatted_msg += details_str
                 self.logger.log(level, formatted_msg)
     
+    def log_loop_record(self, segment_id: str, concepts: List[Dict[str, Any]]) -> None:
+        """
+        Log processing record for a segment/page (addresses Issue #1 - LoopRecord logging).
+        
+        Args:
+            segment_id: Identifier for the segment (e.g., "doc_001_page_3")
+            concepts: List of concepts extracted from this segment
+        """
+        count = len(concepts)
+        
+        if count == 0:
+            self._log_event(
+                self.EVENT_WARNING,
+                segment_id,
+                "No concepts extracted from segment",
+                level=logging.WARNING
+            )
+            return
+        
+        # Calculate confidence statistics
+        confidences = [c.get("confidence", 0.0) for c in concepts if isinstance(c, dict)]
+        if confidences:
+            min_conf = min(confidences)
+            max_conf = max(confidences)
+            avg_conf = sum(confidences) / len(confidences)
+        else:
+            min_conf = max_conf = avg_conf = 0.0
+        
+        # Extract methods used
+        methods = list(set(c.get("method", "unknown") for c in concepts if isinstance(c, dict)))
+        
+        details = {
+            "concept_count": count,
+            "confidence_min": f"{min_conf:.2f}",
+            "confidence_max": f"{max_conf:.2f}",
+            "confidence_avg": f"{avg_conf:.2f}",
+            "extraction_methods": methods
+        }
+        
+        self._log_event(
+            self.EVENT_LOOP_RECORD,
+            segment_id,
+            f"Processed segment: {count} concepts extracted [confidence: {min_conf:.2f}–{max_conf:.2f}]",
+            details
+        )
+    
+    def log_concept_summary(self, doc_id: str, concepts: List[Dict[str, Any]], output_path: Optional[str] = None) -> None:
+        """
+        Log final concept extraction summary for a document (addresses Issue #1 - final logging).
+        
+        Args:
+            doc_id: Document identifier
+            concepts: All concepts extracted from the document
+            output_path: Path where concepts were saved
+        """
+        count = len(concepts)
+        
+        if count == 0:
+            self._log_event(
+                self.EVENT_WARNING,
+                doc_id,
+                "Document ingestion completed with zero concepts",
+                {"output_path": output_path} if output_path else None,
+                level=logging.WARNING
+            )
+            return
+        
+        # Analyze concept distribution
+        methods = {}
+        sources = {}
+        confidence_buckets = {"high": 0, "medium": 0, "low": 0}
+        
+        for concept in concepts:
+            if not isinstance(concept, dict):
+                continue
+                
+            # Count by method
+            method = concept.get("method", "unknown")
+            methods[method] = methods.get(method, 0) + 1
+            
+            # Count by source
+            source = concept.get("source", {})
+            if isinstance(source, dict):
+                source_key = f"page_{source.get('page', '?')}" if "page" in source else str(source)
+            else:
+                source_key = str(source)
+            sources[source_key] = sources.get(source_key, 0) + 1
+            
+            # Confidence buckets
+            conf = concept.get("confidence", 0.0)
+            if conf >= 0.8:
+                confidence_buckets["high"] += 1
+            elif conf >= 0.6:
+                confidence_buckets["medium"] += 1
+            else:
+                confidence_buckets["low"] += 1
+        
+        # Sample concepts for the log
+        sample_concepts = []
+        for i, concept in enumerate(concepts[:5]):
+            if isinstance(concept, dict):
+                sample_concepts.append({
+                    "name": concept.get("name", f"Concept-{i}"),
+                    "confidence": concept.get("confidence", 0.0)
+                })
+        
+        details = {
+            "total_concepts": count,
+            "methods_used": methods,
+            "source_distribution": dict(list(sources.items())[:10]),  # Limit to top 10 sources
+            "confidence_distribution": confidence_buckets,
+            "sample_concepts": sample_concepts
+        }
+        
+        if output_path:
+            details["output_path"] = output_path
+        
+        self._log_event(
+            self.EVENT_SUMMARY,
+            doc_id,
+            f"Ingestion complete: {count} concepts extracted and saved",
+            details
+        )
+        
+        # Also log top concepts in a readable format
+        if sample_concepts:
+            logger.info(f"[SUMMARY] {doc_id} - Top concepts: " + 
+                       ", ".join(f"{c['name']} ({c['confidence']:.2f})" for c in sample_concepts))
+    
+    def warn_empty_segment(self, segment_id: str, context: Optional[str] = None) -> None:
+        """
+        Log warning for segments that yielded no concepts (addresses Issue #1 - empty result logging).
+        
+        Args:
+            segment_id: Identifier for the empty segment
+            context: Optional context about why the segment was empty
+        """
+        details = {}
+        if context:
+            details["context"] = context
+        
+        self._log_event(
+            self.EVENT_WARNING,
+            segment_id,
+            f"No concepts extracted from segment {segment_id}",
+            details,
+            level=logging.WARNING
+        )
+    
     def log_concept_birth(
         self,
         concept: Union[ConceptTuple, str],
@@ -173,8 +335,12 @@ class ConceptLogger:
             source: Source of the concept (e.g., file, process)
             details: Optional additional details
         """
-        concept_id = concept if isinstance(concept, str) else concept.eigenfunction_id
-        concept_name = concept if isinstance(concept, str) else concept.name
+        if ConceptTuple and isinstance(concept, ConceptTuple):
+            concept_id = concept.eigenfunction_id
+            concept_name = concept.name
+        else:
+            concept_id = str(concept)
+            concept_name = str(concept)
         
         log_details = {
             "source": source,
@@ -429,3 +595,16 @@ class ConceptLogger:
 
 # For convenience, create a singleton instance
 default_concept_logger = ConceptLogger()
+
+# Convenience functions for direct module-level usage (as referenced in pipeline code)
+def log_loop_record(segment_id: str, concepts: List[Dict[str, Any]]) -> None:
+    """Log processing record for a segment/page."""
+    default_concept_logger.log_loop_record(segment_id, concepts)
+
+def log_concept_summary(doc_id: str, concepts: List[Dict[str, Any]], output_path: Optional[str] = None) -> None:
+    """Log final concept extraction summary for a document."""
+    default_concept_logger.log_concept_summary(doc_id, concepts, output_path)
+
+def warn_empty_segment(segment_id: str, context: Optional[str] = None) -> None:
+    """Log warning for segments that yielded no concepts."""
+    default_concept_logger.warn_empty_segment(segment_id, context)

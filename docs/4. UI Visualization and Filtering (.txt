@@ -1,0 +1,33 @@
+4. UI Visualization and Filtering (Svelte)
+We now enhance the front-end with a ConceptInspector component in Svelte that allows users to explore the extracted concepts interactively. This component provides multiple ways to filter and view the concepts:
+Filter by Confidence/Score: A slider lets the user set a minimum score threshold. Concepts with composite score below this threshold will be hidden, so the user can focus on the most significant concepts.
+Filter by Document: A dropdown lists all source documents. Selecting one will show only concepts that originate from that document (i.e. appear in that doc’s originDocs).
+Filter by Cluster: Another control (dropdown or toggle) lists cluster IDs (or potentially cluster names) so the user can filter to a specific concept cluster. For example, if cluster #3 represents “AI”/“Artificial Intelligence”, selecting cluster 3 would show only that merged concept.
+Visualization Toggle: A button allows switching between a list view and a graphical view. In list view, concepts are listed in text form (with their scores and cluster info). In graph view, we intend to show a semantic network or tag cloud of concepts.
+Graphical Visualization: The component is set up to render either a semantic graph or a tag cloud:
+Semantic Graph: We would use a force-directed graph (with a library like D3) to show concepts as nodes and draw edges between related concepts. For example, an edge could connect concepts that frequently co-occur in the same document or cluster. This gives a visual sense of concept relationships and groupings. (Implementing the full interactive graph in code is complex, so in the snippet we provide a placeholder where one would integrate D3 or a similar library to draw the graph.)
+Tag Cloud: Especially useful when focusing on a single cluster – the synonyms in that cluster can be displayed as a tag cloud, where font size represents something like frequency or significance of each term. This helps users see at a glance the relative importance of terms within the cluster. In our example, when a cluster is selected, we gather its mergedFrom terms and display them with font sizes scaled by their frequency.
+The ConceptInspector.svelte component below demonstrates these features. It subscribes to a conceptList store (which would contain the array of ConceptTuple objects produced by the back-end) and reacts to user inputs for filtering. Key parts:
+We derive the list of unique document IDs and cluster IDs from the concepts for the filter dropdowns.
+filteredConcepts is a reactive array that applies the current filters (score threshold, selected doc, selected cluster).
+The UI shows the filtered concept list with each concept’s name, score, and cluster. If a document filter is active, only concepts from that doc are listed. If a cluster filter is active, only that cluster’s concept is shown.
+When a single cluster is selected, we additionally show a tag cloud of that cluster’s terms (currentClusterSynonyms). Each term is rendered in a span with a dynamic font size (in this simple example, proportional to its frequency). This visually emphasizes which terms were most frequent in that cluster.
+The “Show Graph / Show List” toggle switches the view. In Graph mode, we would initialize a network graph visualization (the code includes a placeholder message). In a full implementation, we would use the concept connections (perhaps via conceptNodes.connections or co-occurrence data) to draw nodes and links. For instance, we might connect two concepts if they appear in the same document or cluster, and use D3 to layout the network.
+
+
+"C:\Users\jason\Desktop\tori\kha\tori_ui_svelte\src\lib\cognitive\ConceptInspector.svelte"
+
+In this Svelte component:
+We import conceptList from a store (which would be populated, for example, after running refineConcepts on the back-end and sending the result to the front-end). The component uses Svelte’s auto-subscription ($: concepts = $conceptList) to reactively obtain the latest concept data.
+The filter controls are two dropdowns and a slider. The slider (confidenceThreshold) filters concepts by score. The document select limits to one document’s concepts, and the cluster select limits to a particular cluster.
+The list view (filteredConcepts) displays each concept’s name, score (to two decimal places), and cluster ID. It also indicates the documents in which it appears (listing the doc IDs from originDocs). This makes it easy to identify which concepts come from which sources.
+In cluster filter mode, we additionally show a tag cloud: the code goes through currentClusterSynonyms (the mergedFrom terms of the selected cluster’s concept) and renders each term with a dynamic font size. Here we use a simple heuristic: font-size = 1em + (frequency/10)em. For example, if a term had frequency 30, it would be shown as 1 + 30/10 = 4em. In a real UI, we might refine this scaling or use CSS classes.
+The graph view is toggled by the button. In a full implementation, when showGraph is true, we would create an SVG or canvas and use D3 to draw nodes for each concept in filteredConcepts and link them. Potential edges could connect concepts in the same cluster or concepts that co-occur in the same document (the data for which could be derived from originDocs). For brevity, we only show a placeholder message. The structure is in place to integrate such a visualization.
+With this component, users can dynamically explore the concepts:
+For example, they can slide the confidence filter up to only see top-scoring concepts.
+They can pick a specific document to see what concepts were extracted from it (and even see which other documents share those concepts, via the listing of doc IDs next to each concept).
+They can select a cluster to investigate a group of related terms; the tag cloud then reveals all synonyms/variants merged under that concept.
+Switching to “Graph” could show relationships – e.g. perhaps reveal if two clusters are often mentioned together in documents.
+This interactive view not only helps end-users make sense of the concepts, but also aids developers in verifying that clustering and scoring behaved as expected (one can spot if an irrelevant concept had a high score or if a cluster inadvertently merged unrelated terms, etc., and adjust accordingly).
+
+

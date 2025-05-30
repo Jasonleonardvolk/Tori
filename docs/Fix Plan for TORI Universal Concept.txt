@@ -1,0 +1,138 @@
+
+Install the latest PowerShell for new features and improvements! https://aka.ms/PSWindows
+
+PS C:\windows\system32> cd C:\Users\jason\Desktop\tori\kha
+>> python run_stable_server.py
+🚀 Starting TORI FastAPI Server (Stable Mode)
+📂 Working directory: C:\Users\jason\Desktop\tori\kha
+🌐 Server will be available at: http://localhost:8002
+🔧 File watching disabled for stability
+==================================================
+2025-05-30 07:08:29,668 - time_context - INFO - TimeContext 29b2bafe initialized at 2025-05-30T07:08:29.668417
+2025-05-30 07:08:29 | INFO | BIRTH | LOGGER | ConceptLogger initialized | log_file=concept_events.log | json_format=False
+2025-05-30 07:08:29,669 - concept_events - INFO - BIRTH | LOGGER | ConceptLogger initialized | log_file=concept_events.log | json_format=False
+2025-05-30 07:08:29,669 - cognitive_interface - INFO - Registered ConceptMesh callback: notify_ui_update
+2025-05-30 07:08:29,669 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 INITIALIZING UNIVERSAL CONCEPT EXTRACTION MODELS...
+2025-05-30 07:08:30,155 - ingest_pdf.extractConceptsFromDocument - INFO - ✅ YAKE extractor initialized
+2025-05-30 07:08:40,863 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-05-30 07:08:40,863 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: sentence-transformers/all-mpnet-base-v2
+2025-05-30 07:08:43,131 - ingest_pdf.extractConceptsFromDocument - INFO - ✅ KeyBERT with universal embeddings initialized
+2025-05-30 07:08:47,674 - ingest_pdf.extractConceptsFromDocument - INFO - ✅ spaCy universal NER initialized
+2025-05-30 07:08:47,674 - ingest_pdf.extractConceptsFromDocument - INFO - ℹ️ spacy-entity-linker not installed; proceeding without entity linking
+2025-05-30 07:08:47,676 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL CONCEPT EXTRACTION MODULE LOADED
+2025-05-30 07:08:47,676 - ingest_pdf.extractConceptsFromDocument - INFO - ✅ Ready for cross-domain concept extraction: Science, Humanities, Arts, Philosophy, Mathematics!
+2025-05-30 07:08:47,730 - pdf_ingestion - INFO - ✅ Main concept database loaded: 1567 concepts
+2025-05-30 07:08:47,738 - pdf_ingestion - INFO - 🌍 Universal seed concepts loaded: 48 concepts
+2025-05-30 07:08:47,742 - pdf_ingestion - INFO - 🌍 UNIVERSAL DATABASE READY: 1567 total concepts
+2025-05-30 07:08:47,743 - pdf_ingestion - INFO - 📊 Added 0 universal seed concepts
+2025-05-30 07:08:47,744 - pdf_ingestion - INFO - 📊 Domain coverage: {'Anthropology': 1, 'Art': 14, 'Biology': 183, 'Chemistry': 2, 'Computer Science': 95, 'Economics': 2, 'Environmental Science': 2, 'History': 2, 'Linguistics': 2, 'Literature': 4, 'Mathematics': 14, 'Music': 5, 'Philosophy': 5, 'Physics': 118, 'Political Science': 2, 'Psychology': 2, 'Sociology': 1, 'education': 1, 'environment': 2, 'finance': 1, 'medicine': 1, 'science': 2, 'technology': 7, 'transportation': 1, 'universal_extraction': 1098}
+2025-05-30 07:08:47,744 - pdf_ingestion - INFO - 🌍 🧬 UNIVERSAL PDF PIPELINE LOADED
+2025-05-30 07:08:47,746 - pdf_ingestion - INFO - 📥 Cross-domain auto-discovery enabled across all academic fields
+2025-05-30 07:08:47,746 - pdf_ingestion - INFO - 🌍 1567 concepts ready: Science, Humanities, Arts, Philosophy, Mathematics, and more!
+INFO:     Started server process [46836]
+INFO:     Waiting for application startup.
+2025-05-30 07:08:47,746 - ingest_pdf.main - INFO - 🚀 FastAPI PDF Ingestion Service Starting...
+2025-05-30 07:08:47,746 - ingest_pdf.main - INFO - 📂 Working directory: C:\Users\jason\Desktop\tori\kha
+2025-05-30 07:08:47,746 - ingest_pdf.main - INFO - 🐍 Python path: ['C:\\Users\\jason\\Desktop\\tori\\kha', 'C:\\ALANPY311\\python311.zip', 'C:\\ALANPY311\\DLLs', 'C:\\ALANPY311\\Lib', 'C:\\ALANPY311', 'C:\\ALANPY311\\Lib\\site-packages', 'C:\\Users\\jason\\Desktop\\tori\\kha']
+2025-05-30 07:08:47,746 - ingest_pdf.main - INFO - ✅ Pipeline module loaded successfully
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8002 (Press CTRL+C to quit)
+🔔 [FASTAPI] Health check requested at 2025-05-30 07:09:24.528867
+INFO:     127.0.0.1:62747 - "GET /health HTTP/1.1" 200 OK
+🔔 [FASTAPI] REQUEST RECEIVED at 2025-05-30 07:12:47.169820
+🔔 [FASTAPI] Request data: {'file_path': 'C:\\Users\\jason\\Desktop\\tori\\kha\\tori_ui_svelte\\data\\sphere\\admin\\1748607167097_2505.07186v2.pdf', 'filename': '2505.07186v2.pdf', 'content_type': 'application/pdf'}
+🔔 [FASTAPI] Content-Type received successfully
+🔔 [FASTAPI] File path: C:\Users\jason\Desktop\tori\kha\tori_ui_svelte\data\sphere\admin\1748607167097_2505.07186v2.pdf
+🔔 [FASTAPI] Filename: 2505.07186v2.pdf
+🔔 [FASTAPI] About to start processing...
+2025-05-30 07:12:47,169 - ingest_pdf.main - INFO - 📥 [FASTAPI] Processing file: 2505.07186v2.pdf
+2025-05-30 07:12:47,169 - ingest_pdf.main - INFO - 📂 [FASTAPI] File path: C:\Users\jason\Desktop\tori\kha\tori_ui_svelte\data\sphere\admin\1748607167097_2505.07186v2.pdf
+2025-05-30 07:12:47,178 - ingest_pdf.main - INFO - 📋 [FASTAPI] Content type: application/pdf
+🔔 [FASTAPI] Absolute path: C:\Users\jason\Desktop\tori\kha\tori_ui_svelte\data\sphere\admin\1748607167097_2505.07186v2.pdf
+🔔 [FASTAPI] File exists check: PASSED
+🔔 [FASTAPI] Is file check: PASSED
+2025-05-30 07:12:47,178 - ingest_pdf.main - INFO - 📏 [FASTAPI] File size: 1,103,720 bytes
+🔔 [FASTAPI] File size: 1,103,720 bytes
+🔔 [FASTAPI] File size check: PASSED
+2025-05-30 07:12:47,178 - ingest_pdf.main - INFO - 🚀 [FASTAPI] Starting pipeline processing...
+🔔 [FASTAPI] About to call ingest_pdf_clean()...
+2025-05-30 07:12:47,178 - pdf_ingestion - INFO - 🚀 🌍 UNIVERSAL PDF INGESTION: 1748607167097_2505.07186v2.pdf
+2025-05-30 07:12:47,178 - pdf_ingestion - INFO - 🔬 ZERO THRESHOLD MODE: 0.0 (maximum coverage)
+2025-05-30 07:12:47,178 - pdf_ingestion - INFO - 🌍 UNIVERSAL PIPELINE: Cross-domain concept extraction enabled
+2025-05-30 07:12:47,178 - pdf_ingestion - INFO - 📊 Database ready: 1567 concepts across all domains
+2025-05-30 07:12:50,220 - pdf_ingestion - INFO - 📄 Extracted 9 chunks from 1748607167097_2505.07186v2.pdf
+2025-05-30 07:12:50,220 - pdf_ingestion - INFO - 🔬 Chunk 1: 4662 chars, preview: Reflexive Composition of Elementary State Machines,
+with an Application to the Reversal of Cellular ...
+2025-05-30 07:12:50,220 - pdf_ingestion - INFO - 🔬 Chunk 2: 4156 chars, preview: Figure 1: Three steps of FSM with Q={S0,S1}andA=
+{0,1}. State-transition function δand output functi...
+2025-05-30 07:12:50,220 - pdf_ingestion - INFO - 🔬 Chunk 3: 4012 chars, preview: tice. Consider first a pair of states qs(t) (sender) and qr(t)
+(receiver) in Q; this will later be g...
+2025-05-30 07:12:50,220 - pdf_ingestion - INFO - 🔬 =============== UNIVERSAL CHUNK 1/9 ===============
+2025-05-30 07:12:50,220 - pdf_ingestion - INFO - 📊 Processing chunk 1/9 (4662 chars)
+2025-05-30 07:12:50,220 - pdf_ingestion - INFO - 🔧 🌍 UNIVERSAL EXTRACT AND BOOST: threshold: 0.0
+2025-05-30 07:12:50,220 - pdf_ingestion - INFO - 🔬 Chunk length: 4662 chars
+2025-05-30 07:12:50,220 - pdf_ingestion - INFO - 🔬 First 300 chars: Reflexive Composition of Elementary State Machines,
+with an Application to the Reversal of Cellular Automata Rule 90
+Chris Salzberg1,∗and Hiroki Sayama2
+1Shopify
+2Binghamton University, State University of New York
+Abstract
+We explore the dynamics of a one-dimensional lattice of state
+machines on tw
+2025-05-30 07:12:50,229 - pdf_ingestion - INFO - 🔬 STEP 1: Calling universal extractConceptsFromDocument...
+2025-05-30 07:12:50,229 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL CONCEPT EXTRACTION START
+2025-05-30 07:12:50,229 - ingest_pdf.extractConceptsFromDocument - INFO - 🔬 Text length: 4662 chars, Threshold: 0.0
+2025-05-30 07:12:50,229 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION: Processing 4662 chars
+2025-05-30 07:13:15,786 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION COMPLETE: 71 concepts extracted
+2025-05-30 07:13:15,786 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 TOP UNIVERSAL CONCEPTS:
+2025-05-30 07:13:15,786 - ingest_pdf.extractConceptsFromDocument - INFO -   1. Cellular Automata (score: 1.000, methods: KeyBERT+YAKE)
+2025-05-30 07:13:15,786 - ingest_pdf.extractConceptsFromDocument - INFO -   2. Cellular Automata Rule (score: 0.934, methods: KeyBERT+YAKE)
+2025-05-30 07:13:15,786 - ingest_pdf.extractConceptsFromDocument - INFO -   3. tary cellular automata (score: 0.812, methods: KeyBERT+NER)
+2025-05-30 07:13:15,786 - ingest_pdf.extractConceptsFromDocument - INFO -   4. elementary cellular automata (score: 0.591, methods: KeyBERT+YAKE)
+2025-05-30 07:13:15,786 - ingest_pdf.extractConceptsFromDocument - INFO -   5. cellular automata arises (score: 0.512, methods: KeyBERT)
+2025-05-30 07:13:15,786 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 EXTRACTION METHOD BREAKDOWN:
+2025-05-30 07:13:15,786 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT+YAKE: 4 concepts
+2025-05-30 07:13:15,786 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT+NER: 1 concepts
+2025-05-30 07:13:15,786 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT: 15 concepts
+2025-05-30 07:13:15,786 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER: 35 concepts
+2025-05-30 07:13:15,786 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 YAKE: 15 concepts
+2025-05-30 07:13:15,786 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER+YAKE: 1 concepts
+2025-05-30 07:13:15,801 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL EXTRACTION END: 71 concepts ready
+2025-05-30 07:13:15,804 - pdf_ingestion - INFO - 📊 UNIVERSAL SEMANTIC EXTRACTION RESULT: 71 concepts
+2025-05-30 07:13:15,804 - pdf_ingestion - INFO - 📊 RAW UNIVERSAL CONCEPTS (pre-boost):
+2025-05-30 07:13:15,804 - pdf_ingestion - INFO -    1. Cellular Automata (score: 1.000, method: universal_keybert+yake)
+2025-05-30 07:13:15,804 - pdf_ingestion - INFO -    2. Cellular Automata Rule (score: 0.934, method: universal_keybert+yake)
+2025-05-30 07:13:15,804 - pdf_ingestion - INFO -    3. tary cellular automata (score: 0.812, method: universal_keybert+ner)
+2025-05-30 07:13:15,804 - pdf_ingestion - INFO -    4. elementary cellular automata (score: 0.591, method: universal_keybert+yake)
+2025-05-30 07:13:15,804 - pdf_ingestion - INFO -    5. cellular automata arises (score: 0.512, method: universal_keybert)
+2025-05-30 07:13:15,819 - pdf_ingestion - INFO -    6. expressible cellular automata (score: 0.497, method: universal_keybert)
+2025-05-30 07:13:15,820 - pdf_ingestion - INFO -    7. reversal cellular automata (score: 0.494, method: universal_keybert)
+2025-05-30 07:13:15,820 - pdf_ingestion - INFO -    8. cellular automata particular (score: 0.492, method: universal_keybert)
+2025-05-30 07:13:15,820 - pdf_ingestion - INFO -    9. cellular automata eca (score: 0.477, method: universal_keybert)
+2025-05-30 07:13:15,820 - pdf_ingestion - INFO -   10. Automata (score: 0.471, method: universal_keybert+yake)
+2025-05-30 07:13:15,820 - pdf_ingestion - INFO -   ... and 61 more concepts
+2025-05-30 07:13:15,820 - pdf_ingestion - INFO - 🔬 STEP 2: Calling universal boost_known_concepts...
+2025-05-30 07:13:15,820 - pdf_ingestion - INFO - 🔍 UNIVERSAL BOOST: Checking chunk (4662 chars) against 1567 database concepts
+2025-05-30 07:13:15,820 - pdf_ingestion - INFO - 🔍 First 200 chars of chunk: Reflexive Composition of universal_extraction)
+
+
+I took a lot out for brevity
+
+2025-05-30 07:14:58,376 - pdf_ingestion - INFO -    📥 129 concepts auto-prefilled to database
+2025-05-30 07:14:58,381 - pdf_ingestion - INFO -    🧬 Universal methods used: ['NER', 'KeyBERT', 'YAKE']
+2025-05-30 07:14:58,381 - pdf_ingestion - INFO -    🌍 Domain distribution: {'unknown': 635, 'technology': 19, 'Biology': 594, 'Computer Science': 249, 'universal_extraction': 2557, 'Mathematics': 12, 'Art': 31, 'Physics': 229}
+2025-05-30 07:14:58,381 - pdf_ingestion - INFO - ⏱️ Processing time: 131.20s
+2025-05-30 07:14:58,381 - pdf_ingestion - INFO - 📊 Database now contains: 1696 total concepts
+🔔 [FASTAPI] ingest_pdf_clean() completed!
+🔔 [FASTAPI] Result type: <class 'dict'>
+🔔 [FASTAPI] Final result summary:
+🔔 [FASTAPI] - Concept count: 4326
+🔔 [FASTAPI] - Sample concepts: ['Cellular Automata', 'Cellular Automata Rule', 'tary cellular automata', 'elementary cellular automata', 'cellular automata arises']
+🔔 [FASTAPI] - Status: success
+2025-05-30 07:14:58,389 - ingest_pdf.main - INFO - ✅ [FASTAPI] Pipeline completed successfully
+2025-05-30 07:14:58,389 - ingest_pdf.main - INFO - 📊 [FASTAPI] Extracted 4326 concepts
+2025-05-30 07:14:58,389 - ingest_pdf.main - INFO - 🎯 [FASTAPI] Returning result to frontend
+🔔 [FASTAPI] About to return result to SvelteKit...
+INFO:     127.0.0.1:62873 - "POST /extract HTTP/1.1" 200 OK
+🔔 [FASTAPI] Health check requested at 2025-05-30 07:15:28.808491
+INFO:     127.0.0.1:63025 - "GET /health HTTP/1.1" 200 OK

@@ -1,0 +1,44 @@
+2. Composite Scoring and Ranking
+Next, we design a composite scoring model to rank concepts by importance. We integrate multiple factors into each concept’s score:
+Frequency/Salience: How often the concept appears in the text (or across texts). A concept mentioned frequently is more likely to be important.
+Narrative Centrality: How central the concept is to the document’s narrative. For example, if the concept appears in the title or summary, or across many sections, it has high central importance.
+Extraction Confidence: The model or ghost persona’s confidence in this concept. (If the extraction method provides a confidence score or if multiple methods agree on the concept, confidence is higher.)
+Domain Salience: The concept’s relevance across the domain or corpus. A concept appearing in many documents (or aligning with known domain terms) is given a boost, whereas one isolated to a single source might be less globally important.
+Each factor is computed from existing metadata or easily derivable from the text:
+Frequency: count occurrences of the concept in the document (or sum across documents for a global score).
+Centrality: check if the concept appears in key parts like the summary or in multiple distinct sections. (In our implementation, we use summary inclusion as a proxy: if a concept appears in a document’s summary, it’s likely central to the narrative of that document.)
+Confidence: if the extraction method (e.g. an LLM or classifier) provides a probability or rank, use that. In absence of an explicit confidence from the ghost persona, we assume a default high confidence for all extracted concepts (or we could assign heuristics – e.g. concepts found in summary or multiple sources could imply higher confidence).
+Domain Salience: measure how widespread the concept is in the corpus. For example, the fraction of documents in which this concept appears. A concept present in many documents (especially in a focused domain) is likely a core domain concept. (We avoid giving too much weight here to prevent generic terms from outranking document-specific but crucial concepts.)
+We then define a weighted formula to combine these normalized factors into one composite score. The weights can be tuned; for instance, we might emphasize frequency and centrality slightly more. In the code below, we use weights totaling 1.0 (e.g. 0.4 for frequency, 0.3 for centrality, 0.2 for confidence, 0.1 for domain) – meaning frequency contributes 40% of the score, etc. The composite score is thus in a 0–1 range, acting like an importance probability. The implementation is in conceptScoring.ts. It processes all documents’ concepts, computes the factors, and produces a ranked list of concepts with their composite scores. Key steps:
+Aggregate concept occurrences from all documents (building maps of concept frequencies per doc and overall).
+Compute embeddings for concept names (using a language model) to allow semantic clustering of synonyms – then cluster concepts (we use K-Means in the code for demonstration; this could be replaced by the chosen best algorithm like HDBSCAN).
+Merge synonyms: concepts in the same cluster are considered one underlying concept. We pick a representative name (e.g. the most frequent term) for the cluster. The mergedFrom list stores all original synonymous terms merged.
+Calculate scores for each merged concept cluster:
+Total frequency across docs, and number of docs (domain salience).
+Centrality: fraction of those docs where the concept appears in the summary.
+Confidence: (placeholder 1.0 for now, since our ghost persona doesn’t supply an explicit confidence).
+Normalize these and apply weights to get composite score.
+Produce ranked output: an array of ConceptTuple objects sorted by score, each containing the concept’s name, final score, factors, cluster ID, and lineage info.
+Notably, the ConceptTuple structure is extended to include lineage and traceability information:
+originDocs: an array detailing each document where the concept appears, with occurrence count and a text snippet from that context.
+mergedFrom: the list of original concept names that were merged into this cluster.
+clusterId and clusterTrace: identify the cluster grouping and algorithm used.
+scoreEvolution: (in debug mode) breakdown of how the score was built up from each factor, for transparency (e.g. score after frequency, after adding centrality, etc.).
+Below is the composite scoring module. It defines the ConceptTuple and calculates all the above. The function refineConcepts takes the parsed documents (with text, summary, and raw extracted concept list) and returns a ranked list of enriched ConceptTuple objects with scores and lineage. In debug mode, it also writes a JSON file with the full concept list and their lineage details for developers:
+
+  "C:\Users\jason\Desktop\tori\kha\tori_ui_svelte\src\lib\cognitive\conceptScoring.ts"
+
+In this code, refineConcepts handles clustering and scoring. It first counts concept frequencies per document. Then it generates dummy embeddings for each concept (in practice, you would replace embedConcept with a real embedding model call, e.g. using a transformer or Word2Vec to obtain vector representations of each concept name). Using these vectors, it clusters the concepts; here we use K-Means with an estimated number of clusters, but this is where you could plug in HDBSCAN or the chosen clustering method to automatically merge similar concepts. Each cluster represents a merged concept – the code picks the term with highest total frequency as the representative name for that cluster, and all original terms are listed in mergedFrom. For each concept cluster, we compute:
+frequency = total occurrences across all docs (clusterTotalFreq),
+domainSalience = clusterDocCount / totalDocs (fraction of documents containing it),
+centrality = fraction of those docs where the concept was in the summary,
+confidence = 1.0 (placeholder; this could be varied if we had model confidence per concept).
+These are normalized (frequency normalized by the max frequency of any concept for fairness; other factors already as fractions) and combined with weights w. The resulting score is the composite importance. We then build the ConceptTuple with all details. Notice the lineage fields:
+originDocs has one entry per document where the concept appears, including how many times (occurrences) and a text sample snippet from around the first occurrence for context.
+mergedFrom lists all original concept names in that cluster (synonyms or related terms merged).
+clusterTrace notes which algorithm and cluster ID were assigned.
+scoreEvolution (only if debug is true) shows the incremental score contributions: after frequency, after adding centrality, etc., up to the final composite. This helps developers trace how the score was formed.
+Finally, the concept list is sorted by score (descending) so the most important concepts appear first. In debug mode, we also save the entire enriched concept list to concept_lineage_debug.json (may need to create)– this JSON will contain each concept’s name, score, and the lineage info (documents and merged terms), which is valuable for offline analysis and verification.
+
+
+

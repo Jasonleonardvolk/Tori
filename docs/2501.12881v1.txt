@@ -1,0 +1,90 @@
+from pathlib import Path
+
+# Extracted and enriched plain text version with diagrams and LaTeX-style math placeholders
+enriched_text = """
+Title: Reinforcement Learning Based Automated Design of Differential Evolution Algorithm for Black-box Optimization
+Authors: Xu Yang, Rui Wang, Kaiwen Li, Ling Wang
+
+Abstract:
+Differential Evolution (DE) is a powerful derivative-free optimizer, but no single variant is superior across all black-box optimization problems (BBOPs). This paper proposes a reinforcement learning (RL) based framework called rlDE that learns to design DE algorithms using meta-learning. The RL agent is implemented with a Double Deep Q-Network (DDQN), and generates DE configurations based on problem characteristics extracted via Exploratory Landscape Analysis (ELA).
+
+---
+
+Section I: Introduction
+Discusses the No Free Lunch theorem and the challenge of adapting DE to diverse BBOPs. Prior RL-DE hybrids focused mainly on operator selection or parameter tuning, but rlDE aims to configure entire DE strategies before evolution begins.
+
+---
+
+Section II: Preliminary
+
+- DE variants:
+  - "DE/rand/1", "DE/best/1", etc.
+- RL basics: 
+  - Defined as a Markov Decision Process (MDP)
+  - Key formula:
+    $$ J(\\pi) = \\mathbb{E}\\left[\\sum_{k=0}^{\\infty} \\gamma^k R_{t+k+1} \\mid \\pi, s_t \\right] $$
+
+---
+
+Section III: Exploratory Landscape Analysis (ELA)
+
+Includes metrics like:
+- Skewness:
+  $$ \\text{Skewness} = \\sqrt{n} \\frac{\\sum_{i=1}^{n}(y_i - \\bar{y})^3}{(\\sum_{i=1}^{n}(y_i - \\bar{y})^2)^{3/2}} $$
+- Kurtosis:
+  $$ \\text{Kurtosis} = \\frac{\\sum_{i=1}^{n}(y_i - \\bar{y})^4}{n \\left(\\sum_{i=1}^{n}(y_i - \\bar{y})^2\\right)^2} - 3 $$
+
+Also includes levelset features (e.g., MMCE_LDA), meta-model fit (adjusted R²), dispersion and funnel structure features.
+
+---
+
+[Figure 1: rlDE Framework Diagram]
+Shows the full learning pipeline: 
+ELA → RL agent (Agent A) → DE config → Evaluate → Reward → Update agent
+
+---
+
+Section IV: Proposed Framework
+
+Key idea:
+- Train RL agent offline on many BBOPs with:
+  - Inputs: Problem characteristics (ELA state)
+  - Outputs: DE configuration (init + mutation + crossover + control parameters)
+
+Action space includes:
+- Initialization strategies: random, LHS, uniform, normal, tent mapping
+- Mutation strategies: DE/rand/1, DE/best/2, etc.
+- Crossover strategies: binomial, exponential
+- Parameters: NP ∈ {5D, 7D, ..., 13D}, F ∈ [0, 2], Cr ∈ [0, 1]
+
+---
+
+[Table II: Design Space for DE Strategies]
+
+---
+
+Section V: Experiments
+- Dataset: BBOB2009 benchmark (24 black-box functions)
+- Compared rlDE vs DEDDQN, DEDQN, LDE, RL-HPSDE, and traditional DEs (JDE21, NL-SHADE-LBC, etc.)
+- Evaluation metric: minimum objective value and AEI (Aggregated Evaluation Indicator)
+
+[Figure 3: Convergence Curves Across All Functions]
+[Figure 4: Per-function Performance Curves]
+[Figure 5: AEI Scores — rlDE ranks 1st with score 18.00]
+
+---
+
+Section VI: Conclusion
+rlDE successfully automates DE design using meta-learned mappings from BBOP features to DE configurations, outperforming other RL-based and traditional approaches. Future work will explore a broader design space and RL stability improvements.
+
+---
+
+References: [64 entries omitted for brevity]
+
+[Author Bios included at end]
+"""
+
+# Save to file
+output_path = Path("/mnt/data/rlDE_extracted.txt")
+output_path.write_text(enriched_text, encoding="utf-8")
+output_path

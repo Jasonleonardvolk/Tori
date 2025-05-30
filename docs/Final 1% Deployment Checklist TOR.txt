@@ -1,0 +1,68 @@
+✅ Final 1% Deployment Checklist: TORI Cognitive OS
+🧠 Phase-State Core (Cognitive Engine)
+ LoopRecord, ψTrajectory, Banksy Oscillator, ConceptMesh modules export cleanly (no import/export mismatch).
+
+ Memory Metrics (ρ_M, κ_I, S) are logging correctly in real-time.
+
+ cognitiveState.ts has stable scarRatio + gödelianCollapseRisk triggers tested.
+
+ Concept diff logs (ψ-arc diffs) append-only, traceable via time index.
+
+🧠 ScholarSphere & Upload Ingestion
+ PDF upload path: /src/routes/upload/+page.svelte hooks into ScholarSphere service.
+
+ ScholarMesh.ts correctly injects citations into the global mesh.
+
+ Metadata extractor triggers onUpload concept injection into ELFIN++.
+
+ Lossless pruning logic toggleable per user role.
+
+💬 TORI Chat + Cognitive UI
+ Phase Footer visualizer is hooked into useCognitivePhase.ts (ψ + τ render properly).
+
+ Chat dock supports:
+
+persona switching (Mentor, Scholar, Explorer, etc.)
+
+memory replay toggle (snapshot, continuous)
+
+sentiment-gradient display from emotional field (ε)
+
+🌐 Network & MCP
+ gateway.ts using production MCP_KEY=... (env set)
+
+ Local + WebSocket mode fallback confirmed
+
+ Route protection on +layout.server.ts and auth.ts for admin ops
+
+🗂️ File Hygiene & Codebase Prep
+ .svelte-kit/output, node_modules, and .env.* are excluded from prod build artifacts
+
+ Run:
+
+bash
+Copy
+Edit
+npm run check && npm run lint && npm run build
+and validate zero blocking issues
+
+ Add README_DEPLOY.md with:
+
+Install & start
+
+MCP key usage
+
+Local dev vs prod toggle
+
+Component overview
+
+🔐 Auth / RBAC
+ UserSession object tracks role, memory permissions, and Scholar access
+
+ Admin can toggle visibility of:
+
+Cognitive metrics
+
+Upload logs
+
+Memory health diagnostics

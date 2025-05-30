@@ -1,0 +1,420 @@
+📕
+2503.18895v2.pdf
+5/30/2025 06:14 AM • 1.61 MB
+
+🗑️
+PDF Document
+Technical Method
+Artificial Intelligence
++2
+5 concepts extracted
+⚡
+🧠
+Method: typescript_fallback
+Something is happening/not happening here:
+PS C:\Users\jason\Desktop\tori\kha> uvicorn ingest_pdf.main:app --port 8002 --host 0.0.0.0 --reload
+←[32mINFO←[0m:     Will watch for changes in these directories: ['C:\\Users\\jason\\Desktop\\tori\\kha']
+←[32mINFO←[0m:     Uvicorn running on ←[1mhttp://0.0.0.0:8002←[0m (Press CTRL+C to quit)
+←[32mINFO←[0m:     Started reloader process [←[36m←[1m61376←[0m] using ←[36m←[1mStatReload←[0m
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\ALANPY311\Scripts\uvicorn.exe\__main__.py", line 7, in <module>
+  File "C:\ALANPY311\Lib\site-packages\click\core.py", line 1161, in __call__
+    return self.main(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\ALANPY311\Lib\site-packages\click\core.py", line 1082, in main
+    rv = self.invoke(ctx)
+         ^^^^^^^^^^^^^^^^
+  File "C:\ALANPY311\Lib\site-packages\click\core.py", line 1443, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\ALANPY311\Lib\site-packages\click\core.py", line 788, in invoke
+    return __callback(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\ALANPY311\Lib\site-packages\uvicorn\main.py", line 413, in main
+    run(
+  File "C:\ALANPY311\Lib\site-packages\uvicorn\main.py", line 575, in run
+    ChangeReload(config, target=server.run, sockets=[sock]).run()
+  File "C:\ALANPY311\Lib\site-packages\uvicorn\supervisors\basereload.py", line 53, in run
+    for changes in self:
+  File "C:\ALANPY311\Lib\site-packages\uvicorn\supervisors\basereload.py", line 72, in __next__
+    return self.should_restart()
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\ALANPY311\Lib\site-packages\uvicorn\supervisors\statreload.py", line 32, in should_restart
+    for file in self.iter_py_files():
+  File "C:\ALANPY311\Lib\site-packages\uvicorn\supervisors\statreload.py", line 52, in iter_py_files
+    for path in list(reload_dir.rglob("*.py")):
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\ALANPY311\Lib\pathlib.py", line 968, in rglob
+    for p in selector.select_from(self):
+  File "C:\ALANPY311\Lib\pathlib.py", line 408, in _select_from
+    for p in successor_select(starting_point, is_dir, exists, scandir):
+  File "C:\ALANPY311\Lib\pathlib.py", line 355, in _select_from
+    with scandir(parent_path) as scandir_it:
+         ^^^^^^^^^^^^^^^^^^^^
+  File "C:\ALANPY311\Lib\pathlib.py", line 938, in _scandir
+    return os.scandir(self)
+           ^^^^^^^^^^^^^^^^
+FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\jason\\Desktop\\tori\\kha\\packages\\data-model\\node_modules\\typescript'
+2025-05-30 06:11:02,833 - time_context - INFO - TimeContext a9376fa4 initialized at 2025-05-30T06:11:02.833696
+2025-05-30 06:11:02 | INFO | BIRTH | LOGGER | ConceptLogger initialized | log_file=concept_events.log | json_format=False
+2025-05-30 06:11:02,839 - concept_events - INFO - BIRTH | LOGGER | ConceptLogger initialized | log_file=concept_events.log | json_format=False
+2025-05-30 06:11:02,839 - cognitive_interface - INFO - Registered ConceptMesh callback: notify_ui_update
+2025-05-30 06:11:02,839 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 INITIALIZING UNIVERSAL CONCEPT EXTRACTION MODELS...
+2025-05-30 06:11:03,463 - ingest_pdf.extractConceptsFromDocument - INFO - ✅ YAKE extractor initialized
+2025-05-30 06:11:47,711 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-05-30 06:11:47,711 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: sentence-transformers/all-mpnet-base-v2
+2025-05-30 06:11:49,985 - ingest_pdf.extractConceptsFromDocument - INFO - ✅ KeyBERT with universal embeddings initialized
+2025-05-30 06:11:57,491 - ingest_pdf.extractConceptsFromDocument - INFO - ✅ spaCy universal NER initialized
+2025-05-30 06:11:57,497 - ingest_pdf.extractConceptsFromDocument - INFO - ℹ️ spacy-entity-linker not installed; proceeding without entity linking
+2025-05-30 06:11:57,498 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL CONCEPT EXTRACTION MODULE LOADED
+2025-05-30 06:11:57,499 - ingest_pdf.extractConceptsFromDocument - INFO - ✅ Ready for cross-domain concept extraction: Science, Humanities, Arts, Philosophy, Mathematics!
+2025-05-30 06:11:57,530 - pdf_ingestion - INFO - ✅ Main concept database loaded: 1096 concepts
+2025-05-30 06:11:57,550 - pdf_ingestion - INFO - 🌍 Universal seed concepts loaded: 48 concepts
+2025-05-30 06:11:57,551 - pdf_ingestion - INFO - 🌍 UNIVERSAL DATABASE READY: 1096 total concepts
+2025-05-30 06:11:57,553 - pdf_ingestion - INFO - 📊 Added 0 universal seed concepts
+2025-05-30 06:11:57,554 - pdf_ingestion - INFO - 📊 Domain coverage: {'Anthropology': 1, 'Art': 10, 'Biology': 183, 'Chemistry': 2, 'Computer Science': 85, 'Economics': 2, 'Environmental Science': 2, 'History': 2, 'Linguistics': 2, 'Literature': 4, 'Mathematics': 14, 'Music': 4, 'Philosophy': 5, 'Physics': 18, 'Political Science': 2, 'Psychology': 2, 'Sociology': 1, 'education': 1, 'environment': 2, 'finance': 1, 'medicine': 1, 'science': 2, 'technology': 7, 'transportation': 1, 'universal_extraction': 742}
+2025-05-30 06:11:57,554 - pdf_ingestion - INFO - 🌍 🧬 UNIVERSAL PDF PIPELINE LOADED
+2025-05-30 06:11:57,555 - pdf_ingestion - INFO - 📥 Cross-domain auto-discovery enabled across all academic fields
+2025-05-30 06:11:57,555 - pdf_ingestion - INFO - 🌍 1096 concepts ready: Science, Humanities, Arts, Philosophy, Mathematics, and more!
+INFO:     Started server process [56284]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+📥 [FASTAPI] Processing file: 2503.18895v2.pdf
+📂 [FASTAPI] File path: C:\Users\jason\Desktop\tori\kha\tori_ui_svelte\data\sphere\admin\1748603634488_2503.18895v2.pdf
+📋 [FASTAPI] Content type: application/pdf
+📏 [FASTAPI] File size: 1688232 bytes
+🚀 [FASTAPI] Starting pipeline processing...
+2025-05-30 06:13:54,582 - pdf_ingestion - INFO - 🚀 🌍 UNIVERSAL PDF INGESTION: 1748603634488_2503.18895v2.pdf
+2025-05-30 06:13:54,582 - pdf_ingestion - INFO - 🔬 ZERO THRESHOLD MODE: 0.0 (maximum coverage)
+2025-05-30 06:13:54,582 - pdf_ingestion - INFO - 🌍 UNIVERSAL PIPELINE: Cross-domain concept extraction enabled
+2025-05-30 06:13:54,582 - pdf_ingestion - INFO - 📊 Database ready: 1096 concepts across all domains
+2025-05-30 06:13:58,154 - pdf_ingestion - INFO - 📄 Extracted 24 chunks from 1748603634488_2503.18895v2.pdf
+2025-05-30 06:13:58,162 - pdf_ingestion - INFO - 🔬 Chunk 1: 3679 chars, preview: Condensed Matter Physics, 2025, Vol. 28, No. 1, 13501: 1–20
+DOI: 10.5488/CMP.28.13501
+http://www.icm...
+2025-05-30 06:13:58,164 - pdf_ingestion - INFO - 🔬 Chunk 2: 3179 chars, preview: M. V. Ushcats et al.
+on only the second virial coefficient and phase-transition activity (fugacity):...
+2025-05-30 06:13:58,164 - pdf_ingestion - INFO - 🔬 Chunk 3: 2940 chars, preview: Advances of cluster approach for lattice models
+in powers of the “reciprocal activity”,
+𝜂=𝜌2
+0
+𝑧exp...
+2025-05-30 06:13:58,164 - pdf_ingestion - INFO - 🔬 =============== UNIVERSAL CHUNK 1/24 ===============
+2025-05-30 06:13:58,164 - pdf_ingestion - INFO - 📊 Processing chunk 1/24 (3679 chars)
+
+Looking at our pipeline code and the error, you're absolutely right - the issue is that uvicorn's file watcher is trying to scan the TypeScript node_modules directory that doesn't exist, causing the FastAPI server to crash before it can even start. This forces our pipeline into fallback mode. 
+The Problem
+The error shows:
+FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\jason\\Desktop\\tori\\kha\\packages\\data-model\\node_modules\\typescript'
+This happens because uvicorn's --reload flag scans all subdirectories looking for Python files, including problematic paths.
+Complete Solution
+1. Create a Proper Launch Script (run_ingest_server.py)
+pythonimport os
+import sys
+import subprocess
+from pathlib import Path
+import logging
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+def main():
+    """Launch the PDF ingestion server with proper exclusions"""
+    
+    # Get the directory containing this script
+    script_dir = Path(__file__).parent.absolute()
+    
+    # Change to the correct directory
+    os.chdir(script_dir)
+    
+    # Create required directories
+    dirs = ['temp', 'data', 'logs']
+    for dir_name in dirs:
+        Path(dir_name).mkdir(exist_ok=True)
+    
+    # Directories to exclude from watching
+    exclude_patterns = [
+        "packages",
+        "node_modules", 
+        "tori_ui_svelte",
+        ".git",
+        "__pycache__",
+        "*.pyc",
+        "*.pyo",
+        "*.pyd",
+        ".Python",
+        "env",
+        "venv",
+        ".venv",
+        "dist",
+        "build",
+        "*.egg-info",
+        ".mypy_cache",
+        ".pytest_cache",
+        ".tox",
+        "htmlcov",
+        ".coverage",
+        "*.log"
+    ]
+    
+    # Build uvicorn command with explicit exclusions
+    cmd = [
+        sys.executable, "-m", "uvicorn",
+        "ingest_pdf.main:app",  # Use module path
+        "--host", "0.0.0.0",
+        "--port", "8002",
+        "--reload",
+        "--reload-dir", "ingest_pdf"  # Only watch the ingest_pdf directory
+    ]
+    
+    # Add each exclusion pattern
+    for pattern in exclude_patterns:
+        cmd.extend(["--reload-exclude", pattern])
+    
+    logger.info(f"🚀 Starting FastAPI server...")
+    logger.info(f"📂 Working directory: {os.getcwd()}")
+    logger.info(f"🔍 Watching only: ingest_pdf/")
+    logger.info(f"🚫 Excluding: {', '.join(exclude_patterns[:5])}...")
+    
+    try:
+        # Set environment variable to help with path issues
+        env = os.environ.copy()
+        env['PYTHONPATH'] = str(script_dir)
+        
+        # Run the server
+        subprocess.run(cmd, env=env)
+        
+    except KeyboardInterrupt:
+        logger.info("👋 Server shutdown requested")
+    except Exception as e:
+        logger.error(f"❌ Server error: {e}")
+        return 1
+    
+    return 0
+
+if __name__ == "__main__":
+    sys.exit(main())
+2. Alternative: Disable Reload for Production (run_production.py)
+pythonimport os
+import sys
+import uvicorn
+from pathlib import Path
+
+# Add the current directory to Python path
+sys.path.insert(0, str(Path(__file__).parent))
+
+if __name__ == "__main__":
+    # Run without reload to avoid file watching issues
+    uvicorn.run(
+        "ingest_pdf.main:app",
+        host="0.0.0.0",
+        port=8002,
+        reload=False,  # No file watching
+        workers=1,
+        log_level="info"
+    )
+3. Update Your main.py with Better Error Handling
+pythonfrom fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
+from ingest_pdf.pipeline import ingest_pdf_clean
+import os
+import logging
+import traceback
+from pathlib import Path
+
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
+logger = logging.getLogger(__name__)
+
+app = FastAPI(title="TORI PDF Ingestion Service")
+
+# CORS: Allow frontend (Vite/SvelteKit) to connect
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+class ExtractionRequest(BaseModel):
+    file_path: str
+    filename: str
+    content_type: str
+
+@app.on_event("startup")
+async def startup_event():
+    """Log startup information"""
+    logger.info("🚀 FastAPI PDF Ingestion Service Starting...")
+    logger.info(f"📂 Working directory: {os.getcwd()}")
+    logger.info(f"🐍 Python path: {sys.path}")
+    
+    # Verify pipeline can be imported
+    try:
+        from ingest_pdf.pipeline import ingest_pdf_clean
+        logger.info("✅ Pipeline module loaded successfully")
+    except ImportError as e:
+        logger.error(f"❌ Failed to import pipeline: {e}")
+        raise
+
+@app.post("/extract")
+async def extract(request: ExtractionRequest):
+    """Extract concepts from PDF file"""
+    try:
+        logger.info(f"📥 [FASTAPI] Processing file: {request.filename}")
+        logger.info(f"📂 [FASTAPI] File path: {request.file_path}")
+        logger.info(f"📋 [FASTAPI] Content type: {request.content_type}")
+        
+        # Convert to absolute path
+        file_path = Path(request.file_path).absolute()
+        
+        # Verify file exists
+        if not file_path.exists():
+            error_msg = f"File not found: {file_path}"
+            logger.error(f"❌ [FASTAPI] {error_msg}")
+            raise HTTPException(status_code=404, detail=error_msg)
+        
+        # Verify it's a file (not a directory)
+        if not file_path.is_file():
+            error_msg = f"Path is not a file: {file_path}"
+            logger.error(f"❌ [FASTAPI] {error_msg}")
+            raise HTTPException(status_code=400, detail=error_msg)
+        
+        # Get file size for logging
+        file_size = file_path.stat().st_size
+        logger.info(f"📏 [FASTAPI] File size: {file_size:,} bytes")
+        
+        # Check file size limit (50MB)
+        max_size = 50 * 1024 * 1024
+        if file_size > max_size:
+            error_msg = f"File too large: {file_size:,} bytes (max {max_size:,} bytes)"
+            logger.error(f"❌ [FASTAPI] {error_msg}")
+            raise HTTPException(status_code=413, detail=error_msg)
+        
+        logger.info("🚀 [FASTAPI] Starting pipeline processing...")
+        
+        # Process the PDF
+        result = ingest_pdf_clean(str(file_path))
+        
+        # Ensure we have required fields
+        if not isinstance(result, dict):
+            logger.error(f"❌ [FASTAPI] Pipeline returned non-dict: {type(result)}")
+            result = {
+                "concept_names": [],
+                "concept_count": 0,
+                "extraction_method": "error",
+                "status": "error",
+                "error": "Invalid pipeline response"
+            }
+        
+        # Add success indicator
+        result["success"] = result.get("status") == "success"
+        
+        concept_count = result.get('concept_count', 0)
+        logger.info(f"✅ [FASTAPI] Pipeline completed successfully")
+        logger.info(f"📊 [FASTAPI] Extracted {concept_count} concepts")
+        logger.info(f"🎯 [FASTAPI] Returning result to frontend")
+        
+        return result
+
+    except HTTPException:
+        raise  # Re-raise HTTP exceptions as-is
+    except Exception as e:
+        logger.error(f"❌ [FASTAPI] ERROR during extraction: {type(e).__name__}: {e}")
+        logger.error(f"🔍 [FASTAPI] Full traceback:\n{traceback.format_exc()}")
+        
+        # Return error response instead of raising
+        return {
+            "success": False,
+            "error": str(e),
+            "error_type": type(e).__name__,
+            "concept_count": 0,
+            "concept_names": [],
+            "status": "error",
+            "extraction_method": "error",
+            "traceback": traceback.format_exc() if logger.level <= logging.DEBUG else None
+        }
+
+@app.get("/health")
+async def health():
+    """Health check endpoint"""
+    return {
+        "status": "healthy",
+        "message": "FastAPI extraction service is running",
+        "working_directory": os.getcwd(),
+        "python_version": sys.version
+    }
+
+@app.get("/")
+async def root():
+    """Root endpoint"""
+    return {
+        "message": "TORI FastAPI Extraction Service",
+        "status": "ready",
+        "endpoints": {
+            "extract": "/extract",
+            "health": "/health",
+            "docs": "/docs"
+        }
+    }
+4. Create a Batch File for Easy Startup (Windows) (start_server.bat)
+batch@echo off
+echo Starting TORI PDF Ingestion Server...
+echo.
+
+REM Change to the directory containing this script
+cd /d %~dp0
+
+REM Activate virtual environment if it exists
+if exist "venv\Scripts\activate.bat" (
+    echo Activating virtual environment...
+    call venv\Scripts\activate.bat
+) else if exist ".venv\Scripts\activate.bat" (
+    echo Activating virtual environment...
+    call .venv\Scripts\activate.bat
+) else if exist "C:\ALANPY311\Scripts\activate.bat" (
+    echo Activating ALANPY311 environment...
+    call C:\ALANPY311\Scripts\activate.bat
+)
+
+echo.
+echo Starting FastAPI server on port 8002...
+echo Press Ctrl+C to stop the server
+echo.
+
+REM Run the server with proper exclusions
+python run_ingest_server.py
+
+pause
+5. Quick Fix: Run Without Reload
+If you need to test immediately, run uvicorn without the reload flag:
+bashcd C:\Users\jason\Desktop\tori\kha
+uvicorn ingest_pdf.main:app --port 8002 --host 0.0.0.0
+6. Verify the Setup
+
+Test the server is running:
+bashcurl http://localhost:8002/health
+
+Check the logs in your SvelteKit server to ensure it's connecting to FastAPI properly.
+Monitor the FastAPI console for any errors during processing.
+
+Key Points
+
+The main issue is uvicorn's file watcher trying to scan non-Python directories
+The solution is to either:
+
+Use --reload-dir to limit watching to specific directories
+Use --reload-exclude to exclude problematic paths
+Run without --reload in production
+
+
+Your fallback mode is being triggered because the FastAPI server isn't running due to the startup crash
+
+Once you implement these fixes, your pipeline should work correctly without falling back to TypeScript extraction!
+

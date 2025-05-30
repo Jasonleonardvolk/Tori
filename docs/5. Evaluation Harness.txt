@@ -1,0 +1,36 @@
+5. Evaluation Harness
+To validate the enhanced system, we implement an evaluation harness that compares the extracted concepts against ground-truth annotations. Suppose we have human-annotated key concepts for each document (from a tool like doccano or Manu Annotator exported as JSON). Our evaluation will compute precision, recall, and how well the confidence scores are calibrated. Evaluation steps:
+Import Ground Truth: The harness reads a JSON file containing annotated concepts for each document. We support either a dictionary format ({ "doc1": [concepts...], ... }) or an array of objects (e.g. [{"docId": "...", "concepts": [ ... ]}, ...]).
+Import Predicted Concepts: Similarly, read the JSON output of our system. This could be the concept_lineage_debug.json from our pipeline (an array of ConceptTuple objects with originDocs etc.), or a simpler format (like a dict of doc->concept list). The code handles both. If it’s the full ConceptTuple list, we expand it to per-document predictions (using each concept’s originDocs to know which docs it appeared in).
+Match Predictions to Ground Truth: For each document, we compare the predicted concept set to the ground truth set.
+A True Positive (TP) is a concept that was predicted and is in the ground truth for that doc.
+A False Positive (FP) is a predicted concept that the ground truth did not list for that doc.
+A False Negative (FN) is a ground-truth concept that was not predicted.
+We treat each concept string literally (case-insensitive). However, if our prediction merged synonyms under one name, we use the mergedFrom list to give credit. For example, if ground truth had “AI” and we predicted “Artificial Intelligence” (with “AI” in mergedFrom), we count that as a match for “AI” (TP) – the code checks mergedFrom synonyms when direct string match fails.
+We ensure one predicted concept can only match one ground truth concept at most (once matched, we remove it from the set) to avoid double-counting.
+Compute Precision & Recall: We aggregate totals across all docs:
+Precision = Total TP / (TP + FP) – fraction of predicted concepts that were correct.
+Recall = Total TP / (TP + FN) – fraction of true concepts that were found by the system.
+F1 = harmonic mean of precision and recall.
+Calibration Analysis: Using the composite scores as confidence, we evaluate how well these scores correlate with actual correctness:
+We output a calibration curve: partition predictions into score bins (0–0.1, 0.1–0.2, ..., 0.9–1.0) and compute the accuracy (percent of predictions that were correct) in each bin. Ideally, if scores are well-calibrated, a bin of scores around 0.8 should have ~80% of those predictions correct.
+We also vary the score threshold and compute precision, recall, F1 at each threshold. This produces an F1 vs score threshold curve (and similarly precision vs threshold). It helps determine if there’s an optimal confidence cutoff to maximize F1, or to observe how precision improves as we require higher confidence. For example, we might find that by setting a threshold of 0.5, we drop many false positives with only a small loss in recall, yielding a better F1.
+The evaluation results are saved as CSV files for easy review or plotting (e.g. in a Jupyter notebook or spreadsheet). Specifically, calibration_curve.csv will have columns for score range, count of predictions in that range, and accuracy; threshold_metrics.csv will list threshold, precision, recall, F1 for each step (0.0, 0.1, ..., 1.0). Below is the code for the evaluation module conceptEvaluator.ts. It defines a function evaluateExtraction which takes file paths for the ground truth and predicted JSON, and prints/logs the results:
+
+
+"C:\Users\jason\Desktop\tori\kha\tori_ui_svelte\src\lib\cognitive\conceptEvaluator.ts"
+
+
+
+Let’s interpret what this does:
+It reads the ground truth and predicted data. The code is flexible to different JSON structures, converting them into a consistent internal map (groundTruthMap and predictedMap keyed by doc ID).
+For each document, it computes TP, FP, FN as described. Notice how it uses conceptObj.mergedFrom to match alternate names: if a predicted concept’s name wasn’t directly in the ground truth set, we loop through its mergedFrom synonyms to see if any of those were listed by the human annotator. If yes, we count it as a correct match (and remove it from the ground truth set to avoid double matching).
+After looping through documents, it prints overall Precision, Recall, F1 to the console for a quick summary.
+If the predictions had scores (our ConceptTuple do), it then gathers all per-document prediction outcomes in predictionResults (each with the predicted score and whether it was correct).
+It calculates the calibration bins. For instance, if bin 8 (0.8–0.9) has 15 predictions and 12 of them were correct, that bin’s accuracy is 0.800. Ideally, if our scores are perfect, the accuracy in bin 8 would be ~0.85, bin 9 ~0.95, etc. We output these in calibration_curve.csv. You can plot this as a line graph of accuracy (y) vs score (x midpoint of bin) to see the calibration curve. A perfectly calibrated system would align close to the diagonal line.
+It then calculates metrics at thresholds 0.0, 0.1, ..., 1.0. At threshold 0.0 (keeping all predictions), precision = overall precision, recall = overall recall. At threshold 1.0 (keeping only predictions with score == maxScore), precision might be high (if only the top predictions remain) but recall will be very low. The CSV includes precision, recall, and F1 for each threshold. This helps to choose a threshold that maximizes F1 or meets a desired precision. For example, if we see that at threshold 0.5 our precision jumps to 0.90 with only a slight drop in recall, we might decide to use 0.5 as a confidence cutoff in deployment.
+This evaluation harness ensures that we quantitatively assess the improvements:
+We can run it on a validation set to see if clustering and composite scoring improved precision/recall (e.g. eliminating spurious concepts and retaining key ones).
+We can check if the composite scores are meaningful as confidences – if not, we might adjust the weighting scheme or normalization.
+By examining the calibration curve, we ensure the scores correlate well with actual correctness, which is important if we want to threshold or communicate uncertainty to users.
+Together, these enhancements – improved clustering, rich scoring, full lineage, an interactive UI, and an evaluation toolkit – make the TORI system more robust, transparent, and user-friendly. Each module is placed appropriately in the project structure (ingestion logic in ingest_pdf/, cognitive processing in src/lib/cognitive/, UI components in src/lib/components/), keeping the architecture modular and maintainable. The combination of these upgrades will allow TORI to extract concepts more accurately, explain its reasoning, and present the information in an insightful manner to end users, while also providing developers the tools to iterate and verify the system’s performance.

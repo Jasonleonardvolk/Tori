@@ -30,6 +30,9 @@ from .alan_psi_sync_bridge import (
     get_alan_psi_bridge
 )
 
+# 🔧 CRITICAL FIX: Import oscillator functions from banksy_spin
+from .banksy_spin import step, oscillator_update
+
 __all__ = [
     # Core monitor
     'PsiSyncMonitor',
@@ -46,5 +49,9 @@ __all__ = [
     # ALAN bridge
     'AlanPsiSyncBridge',
     'AlanPsiState',
-    'get_alan_psi_bridge'
+    'get_alan_psi_bridge',
+    
+    # 🔧 CRITICAL FIX: Export oscillator functions
+    'step',
+    'oscillator_update'
 ]

@@ -1,0 +1,1211 @@
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Install the latest PowerShell for new features and improvements! https://aka.ms/PSWindows
+
+PS C:\windows\system32> cd C:\Users\jason\Desktop\tori\kha
+>> pip install websockets
+Requirement already satisfied: websockets in c:\alanpy311\lib\site-packages (15.0.1)
+PS C:\Users\jason\Desktop\tori\kha> python run_stable_server.py
+🚀 Starting TORI FastAPI Server (Stable Mode)
+📂 Working directory: C:\Users\jason\Desktop\tori\kha
+🌐 Server will be available at: http://localhost:8002
+🔧 File watching disabled for stability
+==================================================
+2025-05-30 08:23:16,268 - time_context - INFO - TimeContext f6616bcb initialized at 2025-05-30T08:23:16.268294
+2025-05-30 08:23:16 | INFO | BIRTH | LOGGER | ConceptLogger initialized | log_file=concept_events.log | json_format=False
+2025-05-30 08:23:16,270 - concept_events - INFO - BIRTH | LOGGER | ConceptLogger initialized | log_file=concept_events.log | json_format=False
+2025-05-30 08:23:16,271 - cognitive_interface - INFO - Registered ConceptMesh callback: notify_ui_update
+2025-05-30 08:23:16,271 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 INITIALIZING UNIVERSAL CONCEPT EXTRACTION MODELS...
+2025-05-30 08:23:16,510 - ingest_pdf.extractConceptsFromDocument - INFO - ✅ YAKE extractor initialized
+2025-05-30 08:23:22,387 - sentence_transformers.SentenceTransformer - INFO - Use pytorch device_name: cpu
+2025-05-30 08:23:22,387 - sentence_transformers.SentenceTransformer - INFO - Load pretrained SentenceTransformer: sentence-transformers/all-mpnet-base-v2
+2025-05-30 08:23:23,853 - ingest_pdf.extractConceptsFromDocument - INFO - ✅ KeyBERT with universal embeddings initialized
+2025-05-30 08:23:25,495 - ingest_pdf.extractConceptsFromDocument - INFO - ✅ spaCy universal NER initialized
+2025-05-30 08:23:25,496 - ingest_pdf.extractConceptsFromDocument - INFO - ℹ️ spacy-entity-linker not installed; proceeding without entity linking
+2025-05-30 08:23:25,496 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL CONCEPT EXTRACTION MODULE LOADED
+2025-05-30 08:23:25,496 - ingest_pdf.extractConceptsFromDocument - INFO - ✅ Ready for cross-domain concept extraction: Science, Humanities, Arts, Philosophy, Mathematics!
+2025-05-30 08:23:25,529 - pdf_ingestion - INFO - ✅ Main concept database loaded: 2051 concepts
+2025-05-30 08:23:25,530 - pdf_ingestion - INFO - 🌍 Universal seed concepts loaded: 48 concepts
+2025-05-30 08:23:25,532 - pdf_ingestion - INFO - 🌍 UNIVERSAL DATABASE READY: 2051 total concepts
+2025-05-30 08:23:25,532 - pdf_ingestion - INFO - 📊 Added 0 universal seed concepts
+2025-05-30 08:23:25,532 - pdf_ingestion - INFO - 📊 Domain coverage: {'Anthropology': 1, 'Art': 19, 'Biology': 231, 'Chemistry': 2, 'Computer Science': 125, 'Economics': 2, 'Environmental Science': 2, 'History': 2, 'Linguistics': 2, 'Literature': 4, 'Mathematics': 16, 'Music': 8, 'Philosophy': 5, 'Physics': 137, 'Political Science': 2, 'Psychology': 2, 'Sociology': 1, 'education': 1, 'environment': 2, 'finance': 1, 'medicine': 1, 'science': 2, 'technology': 7, 'transportation': 1, 'universal_extraction': 1475}
+2025-05-30 08:23:25,532 - pdf_ingestion - INFO - 🏆 🧬 PURITY-BASED UNIVERSAL PDF PIPELINE LOADED
+2025-05-30 08:23:25,533 - pdf_ingestion - INFO - 📥 Cross-domain auto-discovery enabled across all academic fields
+2025-05-30 08:23:25,533 - pdf_ingestion - INFO - 🏆 Purity-based analysis: Quality over quantity - extracting the 'truth'
+2025-05-30 08:23:25,533 - pdf_ingestion - INFO - 🌍 2051 concepts ready: Science, Humanities, Arts, Philosophy, Mathematics, and more!
+INFO:     Started server process [31724]
+INFO:     Waiting for application startup.
+2025-05-30 08:23:25,537 - ingest_pdf.main - INFO - 🚀 FastAPI PDF Ingestion Service Starting...
+2025-05-30 08:23:25,537 - ingest_pdf.main - INFO - 📂 Working directory: C:\Users\jason\Desktop\tori\kha
+2025-05-30 08:23:25,537 - ingest_pdf.main - INFO - 🐍 Python path: ['C:\\Users\\jason\\Desktop\\tori\\kha', 'C:\\ALANPY311\\python311.zip', 'C:\\ALANPY311\\DLLs', 'C:\\ALANPY311\\Lib', 'C:\\ALANPY311', 'C:\\ALANPY311\\Lib\\site-packages', 'C:\\Users\\jason\\Desktop\\tori\\kha']
+2025-05-30 08:23:25,537 - ingest_pdf.main - INFO - ✅ Pipeline module loaded successfully
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8002 (Press CTRL+C to quit)
+🔔 [FASTAPI] REQUEST RECEIVED at 2025-05-30 08:24:09.046065
+🔔 [FASTAPI] Request data: {'file_path': 'C:\\Users\\jason\\Desktop\\tori\\kha\\tori_ui_svelte\\data\\sphere\\admin\\1748611448967_2503.15353v1.pdf', 'filename': '2503.15353v1.pdf', 'content_type': 'application/pdf', 'progress_id': None}
+🔔 [FASTAPI] Progress ID: no-progress
+2025-05-30 08:24:09,054 - ingest_pdf.main - INFO - 📊 Progress: starting 5% - Starting extraction for 2503.15353v1.pdf
+2025-05-30 08:24:09,054 - ingest_pdf.main - INFO - 📊 Progress: validating 10% - Validating file path and permissions
+🔔 [FASTAPI] Absolute path: C:\Users\jason\Desktop\tori\kha\tori_ui_svelte\data\sphere\admin\1748611448967_2503.15353v1.pdf
+🔔 [FASTAPI] File exists check: PASSED
+🔔 [FASTAPI] Is file check: PASSED
+2025-05-30 08:24:09,054 - ingest_pdf.main - INFO - 📏 [FASTAPI] File size: 2,850,837 bytes
+🔔 [FASTAPI] File size: 2,850,837 bytes
+2025-05-30 08:24:09,054 - ingest_pdf.main - INFO - 📊 Progress: size_check 15% - File size validated: 2,850,837 bytes
+🔔 [FASTAPI] File size check: PASSED
+2025-05-30 08:24:09,054 - ingest_pdf.main - INFO - 📊 Progress: loading_pipeline 20% - Loading extraction pipeline and models
+2025-05-30 08:24:09,054 - ingest_pdf.main - INFO - 🚀 [FASTAPI] Starting pipeline processing...
+🔔 [FASTAPI] About to call ingest_pdf_clean()...
+2025-05-30 08:24:09,054 - ingest_pdf.main - INFO - 📊 Progress: extracting 25% - Starting concept extraction from PDF
+2025-05-30 08:24:09,054 - ingest_pdf.main - INFO - 📊 Progress: reading_pdf 30% - Reading PDF and extracting text chunks
+2025-05-30 08:24:09,054 - ingest_pdf.main - INFO - 📊 Progress: processing 35% - Processing chunk 1/9 - Extracting concepts
+2025-05-30 08:24:09,054 - pdf_ingestion - INFO - 🏆 🌍 PURITY-BASED UNIVERSAL PDF INGESTION: 1748611448967_2503.15353v1.pdf
+2025-05-30 08:24:09,054 - pdf_ingestion - INFO - 🔬 ZERO THRESHOLD MODE: 0.0 (maximum coverage)
+2025-05-30 08:24:09,061 - pdf_ingestion - INFO - 🌍 UNIVERSAL PIPELINE: Cross-domain concept extraction enabled
+2025-05-30 08:24:09,061 - pdf_ingestion - INFO - 📊 Database ready: 2051 concepts across all domains
+2025-05-30 08:24:09,061 - pdf_ingestion - INFO - 🏆 PURITY-BASED: Quality over quantity - extracting the 'truth'
+2025-05-30 08:24:10,581 - ingest_pdf.main - INFO - 📊 Progress: processing 45% - Processing chunk 2/9 - Universal analysis
+2025-05-30 08:24:12,100 - ingest_pdf.main - INFO - 📊 Progress: processing 50% - Processing chunk 3/9 - Cross-referencing database
+2025-05-30 08:24:13,633 - ingest_pdf.main - INFO - 📊 Progress: processing 55% - Processing chunk 4/9 - Semantic analysis
+2025-05-30 08:24:15,150 - ingest_pdf.main - INFO - 📊 Progress: processing 60% - Processing chunk 5/9 - Named entity recognition
+2025-05-30 08:24:16,682 - ingest_pdf.main - INFO - 📊 Progress: processing 65% - Processing chunk 6/9 - Quality scoring
+2025-05-30 08:24:17,862 - pdf_ingestion - INFO - 📄 Extracted 46 chunks from 1748611448967_2503.15353v1.pdf
+2025-05-30 08:24:17,862 - pdf_ingestion - INFO - 🔬 Chunk 1: 1685 chars, preview: The importance of being empty: a spectral approach
+to Hopfield neural networks with diluted examples...
+2025-05-30 08:24:17,862 - pdf_ingestion - INFO - 🔬 Chunk 2: 1065 chars, preview: Contents
+1 Introduction 2
+2 Setting and definitions 3
+2.1 Attractor neural networks 3
+2.2 Introducin...
+2025-05-30 08:24:17,862 - pdf_ingestion - INFO - 🔬 Chunk 3: 4381 chars, preview: 1 Introduction
+In the last decades, science and technology have been revolutionized by the advent of...
+2025-05-30 08:24:17,862 - pdf_ingestion - INFO - 🔬 =============== UNIVERSAL CHUNK 1/46 ===============
+2025-05-30 08:24:17,862 - pdf_ingestion - INFO - 📊 Processing chunk 1/46 (1685 chars)
+2025-05-30 08:24:17,865 - pdf_ingestion - INFO - 🔧 🌍 UNIVERSAL EXTRACT AND BOOST: threshold: 0.0
+2025-05-30 08:24:17,865 - pdf_ingestion - INFO - 🔬 Chunk length: 1685 chars
+2025-05-30 08:24:17,865 - pdf_ingestion - INFO - 🔬 STEP 1: Calling universal extractConceptsFromDocument...
+2025-05-30 08:24:17,865 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL CONCEPT EXTRACTION START
+2025-05-30 08:24:17,865 - ingest_pdf.extractConceptsFromDocument - INFO - 🔬 Text length: 1685 chars, Threshold: 0.0
+2025-05-30 08:24:17,865 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION: Processing 1685 chars
+2025-05-30 08:24:18,197 - ingest_pdf.main - INFO - 📊 Progress: processing 70% - Processing chunk 7/9 - Domain classification
+2025-05-30 08:24:19,698 - ingest_pdf.main - INFO - 📊 Progress: processing 75% - Processing chunk 8/9 - Final extraction
+2025-05-30 08:24:21,194 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION COMPLETE: 49 concepts extracted
+2025-05-30 08:24:21,686 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 TOP UNIVERSAL CONCEPTS:
+2025-05-30 08:24:21,686 - ingest_pdf.extractConceptsFromDocument - INFO -   1. Hopfield neural networks (score: 1.000, methods: KeyBERT+YAKE)
+2025-05-30 08:24:21,686 - ingest_pdf.extractConceptsFromDocument - INFO -   2. Hopfield neural (score: 0.816, methods: KeyBERT+YAKE)
+2025-05-30 08:24:21,686 - ingest_pdf.extractConceptsFromDocument - INFO -   3. Italy (score: 0.658, methods: NER+YAKE)
+2025-05-30 08:24:21,687 - ingest_pdf.extractConceptsFromDocument - INFO -   4. hopfield networks (score: 0.515, methods: KeyBERT)
+2025-05-30 08:24:21,687 - ingest_pdf.extractConceptsFromDocument - INFO -   5. hopfield networks neurons (score: 0.505, methods: KeyBERT)
+2025-05-30 08:24:21,688 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 EXTRACTION METHOD BREAKDOWN:
+2025-05-30 08:24:21,688 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT+YAKE: 3 concepts
+2025-05-30 08:24:21,688 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER+YAKE: 1 concepts
+2025-05-30 08:24:21,688 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT: 17 concepts
+2025-05-30 08:24:21,688 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 YAKE: 16 concepts
+2025-05-30 08:24:21,689 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER: 12 concepts
+2025-05-30 08:24:21,689 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL EXTRACTION END: 49 concepts ready
+2025-05-30 08:24:21,689 - pdf_ingestion - INFO - 📊 UNIVERSAL SEMANTIC EXTRACTION RESULT: 49 concepts
+2025-05-30 08:24:21,689 - pdf_ingestion - INFO - 🔬 STEP 2: Calling quality-focused boost_known_concepts...
+2025-05-30 08:24:21,689 - pdf_ingestion - INFO - 🚀 QUALITY BOOST: Checking top 300 priority concepts (max 25 quality matches)
+2025-05-30 08:24:21,694 - pdf_ingestion - INFO - 🌍 Quality boost domain matches: {'Physics': 4, 'universal_extraction': 12, 'Biology': 1, 'Computer Science': 4, 'technology': 1}
+2025-05-30 08:24:21,694 - pdf_ingestion - INFO - 🚀 Quality-focused boost complete: 22 high-priority concepts found
+2025-05-30 08:24:21,694 - pdf_ingestion - INFO - 🚀 QUALITY-FOCUSED DATABASE BOOST RESULT: 22 concepts
+2025-05-30 08:24:21,694 - pdf_ingestion - INFO - 🔧 UNIVERSAL COMBINED RESULT: 71 total concepts (before purity analysis)
+2025-05-30 08:24:21,694 - pdf_ingestion - INFO - 🔬 CHUNK 1 RAW RESULTS: 71 concepts
+2025-05-30 08:24:21,694 - pdf_ingestion - INFO -    🌍 49 universal extraction, 🚀 22 database boosted
+2025-05-30 08:24:21,695 - pdf_ingestion - INFO - 🔬 =============== END CHUNK 1 ===============
+2025-05-30 08:24:21,695 - pdf_ingestion - INFO - 🔬 =============== UNIVERSAL CHUNK 2/46 ===============
+2025-05-30 08:24:21,695 - pdf_ingestion - INFO - 📊 Processing chunk 2/46 (1065 chars)
+2025-05-30 08:24:21,695 - pdf_ingestion - INFO - 🔧 🌍 UNIVERSAL EXTRACT AND BOOST: threshold: 0.0
+2025-05-30 08:24:21,695 - pdf_ingestion - INFO - 🔬 Chunk length: 1065 chars
+2025-05-30 08:24:21,695 - pdf_ingestion - INFO - 🔬 STEP 1: Calling universal extractConceptsFromDocument...
+2025-05-30 08:24:21,695 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL CONCEPT EXTRACTION START
+2025-05-30 08:24:21,696 - ingest_pdf.extractConceptsFromDocument - INFO - 🔬 Text length: 1065 chars, Threshold: 0.0
+2025-05-30 08:24:21,696 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION: Processing 1065 chars
+2025-05-30 08:24:23,177 - ingest_pdf.main - INFO - 📊 Progress: processing 80% - Processing chunk 9/9 - Completing analysis
+2025-05-30 08:24:23,544 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION COMPLETE: 71 concepts extracted
+2025-05-30 08:24:23,545 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 TOP UNIVERSAL CONCEPTS:
+2025-05-30 08:24:23,546 - ingest_pdf.extractConceptsFromDocument - INFO -   1. Attractor neural networks (score: 1.000, methods: KeyBERT+YAKE)
+2025-05-30 08:24:23,546 - ingest_pdf.extractConceptsFromDocument - INFO -   2. Attractor neural (score: 0.866, methods: KeyBERT+YAKE)
+2025-05-30 08:24:23,546 - ingest_pdf.extractConceptsFromDocument - INFO -   3. Machine Learning (score: 0.718, methods: KeyBERT+NER+YAKE)
+2025-05-30 08:24:23,546 - ingest_pdf.extractConceptsFromDocument - INFO -   4. neural networks (score: 0.576, methods: KeyBERT+YAKE)
+2025-05-30 08:24:23,546 - ingest_pdf.extractConceptsFromDocument - INFO -   5. Machine Learning perspective (score: 0.526, methods: KeyBERT+YAKE)
+2025-05-30 08:24:23,547 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 EXTRACTION METHOD BREAKDOWN:
+2025-05-30 08:24:23,547 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT+YAKE: 6 concepts
+2025-05-30 08:24:23,547 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT+NER+YAKE: 1 concepts
+2025-05-30 08:24:23,548 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT: 13 concepts
+2025-05-30 08:24:23,548 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER: 38 concepts
+2025-05-30 08:24:23,549 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 YAKE: 13 concepts
+2025-05-30 08:24:23,549 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL EXTRACTION END: 71 concepts ready
+2025-05-30 08:24:23,549 - pdf_ingestion - INFO - 📊 UNIVERSAL SEMANTIC EXTRACTION RESULT: 71 concepts
+2025-05-30 08:24:23,549 - pdf_ingestion - INFO - 🔬 STEP 2: Calling quality-focused boost_known_concepts...
+2025-05-30 08:24:23,549 - pdf_ingestion - INFO - 🚀 QUALITY BOOST: Checking top 300 priority concepts (max 25 quality matches)
+2025-05-30 08:24:23,549 - pdf_ingestion - INFO - 🛑 Quality boost limit reached (25 concepts)
+2025-05-30 08:24:23,549 - pdf_ingestion - INFO - 🌍 Quality boost domain matches: {'Physics': 2, 'universal_extraction': 19, 'Computer Science': 2, 'Mathematics': 1, 'technology': 1}
+2025-05-30 08:24:23,549 - pdf_ingestion - INFO - 🚀 Quality-focused boost complete: 25 high-priority concepts found
+2025-05-30 08:24:23,549 - pdf_ingestion - INFO - 🚀 QUALITY-FOCUSED DATABASE BOOST RESULT: 25 concepts
+2025-05-30 08:24:23,549 - pdf_ingestion - INFO - 🔧 UNIVERSAL COMBINED RESULT: 96 total concepts (before purity analysis)
+2025-05-30 08:24:23,549 - pdf_ingestion - INFO - 🔬 CHUNK 2 RAW RESULTS: 96 concepts
+2025-05-30 08:24:23,549 - pdf_ingestion - INFO -    🌍 71 universal extraction, 🚀 25 database boosted
+2025-05-30 08:24:23,549 - pdf_ingestion - INFO - 🔬 =============== END CHUNK 2 ===============
+2025-05-30 08:24:23,549 - pdf_ingestion - INFO - 🔬 =============== UNIVERSAL CHUNK 3/46 ===============
+2025-05-30 08:24:23,549 - pdf_ingestion - INFO - 📊 Processing chunk 3/46 (4381 chars)
+2025-05-30 08:24:23,549 - pdf_ingestion - INFO - 🔧 🌍 UNIVERSAL EXTRACT AND BOOST: threshold: 0.0
+2025-05-30 08:24:23,549 - pdf_ingestion - INFO - 🔬 Chunk length: 4381 chars
+2025-05-30 08:24:23,549 - pdf_ingestion - INFO - 🔬 STEP 1: Calling universal extractConceptsFromDocument...
+2025-05-30 08:24:23,549 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL CONCEPT EXTRACTION START
+2025-05-30 08:24:23,549 - ingest_pdf.extractConceptsFromDocument - INFO - 🔬 Text length: 4381 chars, Threshold: 0.0
+2025-05-30 08:24:23,549 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION: Processing 4381 chars
+2025-05-30 08:24:24,673 - ingest_pdf.main - INFO - 📊 Progress: purity_analysis 85% - Applying purity analysis - extracting the 'truth'
+2025-05-30 08:24:29,422 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION COMPLETE: 62 concepts extracted
+2025-05-30 08:24:29,423 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 TOP UNIVERSAL CONCEPTS:
+2025-05-30 08:24:29,424 - ingest_pdf.extractConceptsFromDocument - INFO -   1. neural networks (score: 1.000, methods: KeyBERT+YAKE)
+2025-05-30 08:24:29,424 - ingest_pdf.extractConceptsFromDocument - INFO -   2. complexity neural networks (score: 0.855, methods: KeyBERT+YAKE)
+2025-05-30 08:24:29,424 - ingest_pdf.extractConceptsFromDocument - INFO -   3. Hebbian (score: 0.700, methods: NER+YAKE)
+2025-05-30 08:24:29,424 - ingest_pdf.extractConceptsFromDocument - INFO -   4. energy based neural (score: 0.697, methods: KeyBERT)
+2025-05-30 08:24:29,424 - ingest_pdf.extractConceptsFromDocument - INFO -   5. hopfield like neural (score: 0.696, methods: KeyBERT)
+2025-05-30 08:24:29,424 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 EXTRACTION METHOD BREAKDOWN:
+2025-05-30 08:24:29,424 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT+YAKE: 4 concepts
+2025-05-30 08:24:29,424 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER+YAKE: 2 concepts
+2025-05-30 08:24:29,424 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT: 16 concepts
+2025-05-30 08:24:29,424 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 YAKE: 14 concepts
+2025-05-30 08:24:29,424 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER: 26 concepts
+2025-05-30 08:24:29,424 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL EXTRACTION END: 62 concepts ready
+2025-05-30 08:24:29,424 - pdf_ingestion - INFO - 📊 UNIVERSAL SEMANTIC EXTRACTION RESULT: 62 concepts
+2025-05-30 08:24:29,424 - pdf_ingestion - INFO - 🔬 STEP 2: Calling quality-focused boost_known_concepts...
+2025-05-30 08:24:29,424 - pdf_ingestion - INFO - 🚀 QUALITY BOOST: Checking top 300 priority concepts (max 25 quality matches)
+2025-05-30 08:24:29,424 - pdf_ingestion - INFO - 🛑 Quality boost limit reached (25 concepts)
+2025-05-30 08:24:29,424 - pdf_ingestion - INFO - 🌍 Quality boost domain matches: {'Physics': 4, 'universal_extraction': 20, 'Computer Science': 1}
+2025-05-30 08:24:29,424 - pdf_ingestion - INFO - 🚀 Quality-focused boost complete: 25 high-priority concepts found
+2025-05-30 08:24:29,424 - pdf_ingestion - INFO - 🚀 QUALITY-FOCUSED DATABASE BOOST RESULT: 25 concepts
+2025-05-30 08:24:29,424 - pdf_ingestion - INFO - 🔧 UNIVERSAL COMBINED RESULT: 87 total concepts (before purity analysis)
+2025-05-30 08:24:29,440 - pdf_ingestion - INFO - 🔬 CHUNK 3 RAW RESULTS: 87 concepts
+2025-05-30 08:24:29,440 - pdf_ingestion - INFO -    🌍 62 universal extraction, 🚀 25 database boosted
+2025-05-30 08:24:29,440 - pdf_ingestion - INFO - 🔬 =============== END CHUNK 3 ===============
+2025-05-30 08:24:29,440 - pdf_ingestion - INFO - 🔬 =============== UNIVERSAL CHUNK 4/46 ===============
+2025-05-30 08:24:29,440 - pdf_ingestion - INFO - 📊 Processing chunk 4/46 (3836 chars)
+2025-05-30 08:24:29,440 - pdf_ingestion - INFO - 🔧 🌍 UNIVERSAL EXTRACT AND BOOST: threshold: 0.0
+2025-05-30 08:24:29,440 - pdf_ingestion - INFO - 🔬 Chunk length: 3836 chars
+2025-05-30 08:24:29,440 - pdf_ingestion - INFO - 🔬 STEP 1: Calling universal extractConceptsFromDocument...
+2025-05-30 08:24:29,440 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL CONCEPT EXTRACTION START
+2025-05-30 08:24:29,440 - ingest_pdf.extractConceptsFromDocument - INFO - 🔬 Text length: 3836 chars, Threshold: 0.0
+2025-05-30 08:24:29,440 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION: Processing 3836 chars
+2025-05-30 08:24:34,846 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION COMPLETE: 69 concepts extracted
+2025-05-30 08:24:34,857 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 TOP UNIVERSAL CONCEPTS:
+2025-05-30 08:24:34,858 - ingest_pdf.extractConceptsFromDocument - INFO -   1. attractor neural networks (score: 1.000, methods: KeyBERT+YAKE)
+2025-05-30 08:24:34,858 - ingest_pdf.extractConceptsFromDocument - INFO -   2. Sec (score: 0.834, methods: NER+YAKE)
+2025-05-30 08:24:34,858 - ingest_pdf.extractConceptsFromDocument - INFO -   3. attractor neural (score: 0.689, methods: KeyBERT+YAKE)
+2025-05-30 08:24:34,858 - ingest_pdf.extractConceptsFromDocument - INFO -   4. neural networks (score: 0.631, methods: KeyBERT+YAKE)
+2025-05-30 08:24:34,858 - ingest_pdf.extractConceptsFromDocument - INFO -   5. neural networks coupling (score: 0.545, methods: KeyBERT)
+2025-05-30 08:24:34,858 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 EXTRACTION METHOD BREAKDOWN:
+2025-05-30 08:24:34,858 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT+YAKE: 3 concepts
+2025-05-30 08:24:34,858 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER+YAKE: 1 concepts
+2025-05-30 08:24:34,858 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT: 17 concepts
+2025-05-30 08:24:34,858 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 YAKE: 16 concepts
+2025-05-30 08:24:34,858 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER: 32 concepts
+2025-05-30 08:24:34,858 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL EXTRACTION END: 69 concepts ready
+2025-05-30 08:24:34,858 - pdf_ingestion - INFO - 📊 UNIVERSAL SEMANTIC EXTRACTION RESULT: 69 concepts
+2025-05-30 08:24:34,858 - pdf_ingestion - INFO - 🔬 STEP 2: Calling quality-focused boost_known_concepts...
+2025-05-30 08:24:34,858 - pdf_ingestion - INFO - 🚀 QUALITY BOOST: Checking top 300 priority concepts (max 25 quality matches)
+2025-05-30 08:24:34,858 - pdf_ingestion - INFO - 🛑 Quality boost limit reached (25 concepts)
+2025-05-30 08:24:34,858 - pdf_ingestion - INFO - 🌍 Quality boost domain matches: {'Physics': 5, 'universal_extraction': 18, 'Computer Science': 1, 'Mathematics': 1}
+2025-05-30 08:24:34,858 - pdf_ingestion - INFO - 🚀 Quality-focused boost complete: 25 high-priority concepts found
+2025-05-30 08:24:34,858 - pdf_ingestion - INFO - 🚀 QUALITY-FOCUSED DATABASE BOOST RESULT: 25 concepts
+2025-05-30 08:24:34,858 - pdf_ingestion - INFO - 🔧 UNIVERSAL COMBINED RESULT: 94 total concepts (before purity analysis)
+2025-05-30 08:24:34,858 - pdf_ingestion - INFO - 🔬 CHUNK 4 RAW RESULTS: 94 concepts
+2025-05-30 08:24:34,858 - pdf_ingestion - INFO -    🌍 69 universal extraction, 🚀 25 database boosted
+2025-05-30 08:24:34,858 - pdf_ingestion - INFO - 🔬 =============== END CHUNK 4 ===============
+2025-05-30 08:24:34,858 - pdf_ingestion - INFO - 🔬 =============== UNIVERSAL CHUNK 5/46 ===============
+2025-05-30 08:24:34,858 - pdf_ingestion - INFO - 📊 Processing chunk 5/46 (1967 chars)
+2025-05-30 08:24:34,858 - pdf_ingestion - INFO - 🔧 🌍 UNIVERSAL EXTRACT AND BOOST: threshold: 0.0
+2025-05-30 08:24:34,858 - pdf_ingestion - INFO - 🔬 Chunk length: 1967 chars
+2025-05-30 08:24:34,858 - pdf_ingestion - INFO - 🔬 STEP 1: Calling universal extractConceptsFromDocument...
+2025-05-30 08:24:34,858 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL CONCEPT EXTRACTION START
+2025-05-30 08:24:34,858 - ingest_pdf.extractConceptsFromDocument - INFO - 🔬 Text length: 1967 chars, Threshold: 0.0
+2025-05-30 08:24:34,858 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION: Processing 1967 chars
+2025-05-30 08:24:37,928 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION COMPLETE: 48 concepts extracted
+2025-05-30 08:24:37,928 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 TOP UNIVERSAL CONCEPTS:
+2025-05-30 08:24:37,940 - ingest_pdf.extractConceptsFromDocument - INFO -   1. associative neural network (score: 1.000, methods: KeyBERT+YAKE)
+2025-05-30 08:24:37,941 - ingest_pdf.extractConceptsFromDocument - INFO -   2. associative neural (score: 0.959, methods: KeyBERT+YAKE)
+2025-05-30 08:24:37,941 - ingest_pdf.extractConceptsFromDocument - INFO -   3. multilayer neural (score: 0.898, methods: KeyBERT+YAKE)
+2025-05-30 08:24:37,941 - ingest_pdf.extractConceptsFromDocument - INFO -   4. multilayer neural network (score: 0.884, methods: KeyBERT+YAKE)
+2025-05-30 08:24:37,941 - ingest_pdf.extractConceptsFromDocument - INFO -   5. neural network (score: 0.852, methods: KeyBERT+YAKE)
+2025-05-30 08:24:37,941 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 EXTRACTION METHOD BREAKDOWN:
+2025-05-30 08:24:37,941 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT+YAKE: 6 concepts
+2025-05-30 08:24:37,941 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT: 14 concepts
+2025-05-30 08:24:37,941 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER: 14 concepts
+2025-05-30 08:24:37,941 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 YAKE: 14 concepts
+2025-05-30 08:24:37,941 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL EXTRACTION END: 48 concepts ready
+2025-05-30 08:24:37,941 - pdf_ingestion - INFO - 📊 UNIVERSAL SEMANTIC EXTRACTION RESULT: 48 concepts
+2025-05-30 08:24:37,941 - pdf_ingestion - INFO - 🔬 STEP 2: Calling quality-focused boost_known_concepts...
+2025-05-30 08:24:37,941 - pdf_ingestion - INFO - 🚀 QUALITY BOOST: Checking top 300 priority concepts (max 25 quality matches)
+2025-05-30 08:24:37,946 - pdf_ingestion - INFO - 🛑 Quality boost limit reached (25 concepts)
+2025-05-30 08:24:37,946 - pdf_ingestion - INFO - 🌍 Quality boost domain matches: {'Physics': 4, 'universal_extraction': 17, 'Computer Science': 3, 'Music': 1}
+2025-05-30 08:24:37,946 - pdf_ingestion - INFO - 🚀 Quality-focused boost complete: 25 high-priority concepts found
+2025-05-30 08:24:37,946 - pdf_ingestion - INFO - 🚀 QUALITY-FOCUSED DATABASE BOOST RESULT: 25 concepts
+2025-05-30 08:24:37,946 - pdf_ingestion - INFO - 🔧 UNIVERSAL COMBINED RESULT: 73 total concepts (before purity analysis)
+2025-05-30 08:24:37,946 - pdf_ingestion - INFO - 🔬 CHUNK 5 RAW RESULTS: 73 concepts
+2025-05-30 08:24:37,946 - pdf_ingestion - INFO -    🌍 48 universal extraction, 🚀 25 database boosted
+2025-05-30 08:24:37,946 - pdf_ingestion - INFO - 🔬 =============== END CHUNK 5 ===============
+2025-05-30 08:24:37,946 - pdf_ingestion - INFO - 🔬 =============== UNIVERSAL CHUNK 6/46 ===============
+2025-05-30 08:24:37,946 - pdf_ingestion - INFO - 📊 Processing chunk 6/46 (2932 chars)
+2025-05-30 08:24:37,946 - pdf_ingestion - INFO - 🔧 🌍 UNIVERSAL EXTRACT AND BOOST: threshold: 0.0
+2025-05-30 08:24:37,946 - pdf_ingestion - INFO - 🔬 Chunk length: 2932 chars
+2025-05-30 08:24:37,946 - pdf_ingestion - INFO - 🔬 STEP 1: Calling universal extractConceptsFromDocument...
+2025-05-30 08:24:37,946 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL CONCEPT EXTRACTION START
+2025-05-30 08:24:37,946 - ingest_pdf.extractConceptsFromDocument - INFO - 🔬 Text length: 2932 chars, Threshold: 0.0
+2025-05-30 08:24:37,946 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION: Processing 2932 chars
+2025-05-30 08:24:43,745 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION COMPLETE: 79 concepts extracted
+2025-05-30 08:24:43,745 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 TOP UNIVERSAL CONCEPTS:
+2025-05-30 08:24:43,745 - ingest_pdf.extractConceptsFromDocument - INFO -   1. noisy realizations archetypes (score: 1.000, methods: KeyBERT)
+2025-05-30 08:24:43,745 - ingest_pdf.extractConceptsFromDocument - INFO -   2. ensures retrieval load (score: 0.999, methods: KeyBERT)
+2025-05-30 08:24:43,745 - ingest_pdf.extractConceptsFromDocument - INFO -   3. ensures retrieval (score: 0.976, methods: KeyBERT)
+2025-05-30 08:24:43,745 - ingest_pdf.extractConceptsFromDocument - INFO -   4. retrieval load (score: 0.915, methods: KeyBERT)
+2025-05-30 08:24:43,757 - ingest_pdf.extractConceptsFromDocument - INFO -   5. information determine (score: 0.909, methods: KeyBERT)
+2025-05-30 08:24:43,757 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 EXTRACTION METHOD BREAKDOWN:
+2025-05-30 08:24:43,757 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT: 20 concepts
+2025-05-30 08:24:43,757 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 YAKE: 20 concepts
+2025-05-30 08:24:43,757 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER: 39 concepts
+2025-05-30 08:24:43,757 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL EXTRACTION END: 79 concepts ready
+2025-05-30 08:24:43,757 - pdf_ingestion - INFO - 📊 UNIVERSAL SEMANTIC EXTRACTION RESULT: 79 concepts
+2025-05-30 08:24:43,757 - pdf_ingestion - INFO - 🔬 STEP 2: Calling quality-focused boost_known_concepts...
+2025-05-30 08:24:43,757 - pdf_ingestion - INFO - 🚀 QUALITY BOOST: Checking top 300 priority concepts (max 25 quality matches)
+2025-05-30 08:24:43,757 - pdf_ingestion - INFO - 🌍 Quality boost domain matches: {'universal_extraction': 10, 'Physics': 1, 'Mathematics': 1}
+2025-05-30 08:24:43,757 - pdf_ingestion - INFO - 🚀 Quality-focused boost complete: 12 high-priority concepts found
+2025-05-30 08:24:43,757 - pdf_ingestion - INFO - 🚀 QUALITY-FOCUSED DATABASE BOOST RESULT: 12 concepts
+2025-05-30 08:24:43,757 - pdf_ingestion - INFO - 🔧 UNIVERSAL COMBINED RESULT: 91 total concepts (before purity analysis)
+2025-05-30 08:24:43,757 - pdf_ingestion - INFO - 🔬 CHUNK 6 RAW RESULTS: 91 concepts
+2025-05-30 08:24:43,757 - pdf_ingestion - INFO -    🌍 79 universal extraction, 🚀 12 database boosted
+2025-05-30 08:24:43,757 - pdf_ingestion - INFO - 🔬 =============== END CHUNK 6 ===============
+2025-05-30 08:24:43,757 - pdf_ingestion - INFO - 🔬 =============== UNIVERSAL CHUNK 7/46 ===============
+2025-05-30 08:24:43,757 - pdf_ingestion - INFO - 📊 Processing chunk 7/46 (2751 chars)
+2025-05-30 08:24:43,757 - pdf_ingestion - INFO - 🔧 🌍 UNIVERSAL EXTRACT AND BOOST: threshold: 0.0
+2025-05-30 08:24:43,757 - pdf_ingestion - INFO - 🔬 Chunk length: 2751 chars
+2025-05-30 08:24:43,757 - pdf_ingestion - INFO - 🔬 STEP 1: Calling universal extractConceptsFromDocument...
+2025-05-30 08:24:43,757 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL CONCEPT EXTRACTION START
+2025-05-30 08:24:43,757 - ingest_pdf.extractConceptsFromDocument - INFO - 🔬 Text length: 2751 chars, Threshold: 0.0
+2025-05-30 08:24:43,757 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION: Processing 2751 chars
+2025-05-30 08:24:49,692 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION COMPLETE: 61 concepts extracted
+2025-05-30 08:24:49,692 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 TOP UNIVERSAL CONCEPTS:
+2025-05-30 08:24:49,692 - ingest_pdf.extractConceptsFromDocument - INFO -   1. unsupervised Hebbian matrix (score: 1.000, methods: KeyBERT+YAKE)
+2025-05-30 08:24:49,692 - ingest_pdf.extractConceptsFromDocument - INFO -   2. Hebbian (score: 0.852, methods: NER+YAKE)
+2025-05-30 08:24:49,692 - ingest_pdf.extractConceptsFromDocument - INFO -   3. empirical representations (score: 0.811, methods: KeyBERT+YAKE)
+2025-05-30 08:24:49,692 - ingest_pdf.extractConceptsFromDocument - INFO -   4. unsupervised Hebbian (score: 0.711, methods: KeyBERT+YAKE)
+2025-05-30 08:24:49,692 - ingest_pdf.extractConceptsFromDocument - INFO -   5. supervised hebbian matrix (score: 0.641, methods: KeyBERT)
+2025-05-30 08:24:49,692 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 EXTRACTION METHOD BREAKDOWN:
+2025-05-30 08:24:49,692 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT+YAKE: 4 concepts
+2025-05-30 08:24:49,692 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER+YAKE: 1 concepts
+2025-05-30 08:24:49,692 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT: 16 concepts
+2025-05-30 08:24:49,692 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 YAKE: 15 concepts
+2025-05-30 08:24:49,692 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER: 25 concepts
+2025-05-30 08:24:49,692 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL EXTRACTION END: 61 concepts ready
+2025-05-30 08:24:49,692 - pdf_ingestion - INFO - 📊 UNIVERSAL SEMANTIC EXTRACTION RESULT: 61 concepts
+2025-05-30 08:24:49,692 - pdf_ingestion - INFO - 🔬 STEP 2: Calling quality-focused boost_known_concepts...
+2025-05-30 08:24:49,692 - pdf_ingestion - INFO - 🚀 QUALITY BOOST: Checking top 300 priority concepts (max 25 quality matches)
+2025-05-30 08:24:49,692 - pdf_ingestion - INFO - 🛑 Quality boost limit reached (25 concepts)
+2025-05-30 08:24:49,692 - pdf_ingestion - INFO - 🌍 Quality boost domain matches: {'universal_extraction': 14, 'Computer Science': 4, 'Physics': 7}
+2025-05-30 08:24:49,692 - pdf_ingestion - INFO - 🚀 Quality-focused boost complete: 25 high-priority concepts found
+2025-05-30 08:24:49,692 - pdf_ingestion - INFO - 🚀 QUALITY-FOCUSED DATABASE BOOST RESULT: 25 concepts
+2025-05-30 08:24:49,692 - pdf_ingestion - INFO - 🔧 UNIVERSAL COMBINED RESULT: 86 total concepts (before purity analysis)
+2025-05-30 08:24:49,692 - pdf_ingestion - INFO - 🔬 CHUNK 7 RAW RESULTS: 86 concepts
+2025-05-30 08:24:49,692 - pdf_ingestion - INFO -    🌍 61 universal extraction, 🚀 25 database boosted
+2025-05-30 08:24:49,707 - pdf_ingestion - INFO - 🔬 =============== END CHUNK 7 ===============
+2025-05-30 08:24:49,707 - pdf_ingestion - INFO - 🔬 =============== UNIVERSAL CHUNK 8/46 ===============
+2025-05-30 08:24:49,707 - pdf_ingestion - INFO - 📊 Processing chunk 8/46 (2487 chars)
+2025-05-30 08:24:49,707 - pdf_ingestion - INFO - 🔧 🌍 UNIVERSAL EXTRACT AND BOOST: threshold: 0.0
+2025-05-30 08:24:49,707 - pdf_ingestion - INFO - 🔬 Chunk length: 2487 chars
+2025-05-30 08:24:49,707 - pdf_ingestion - INFO - 🔬 STEP 1: Calling universal extractConceptsFromDocument...
+2025-05-30 08:24:49,707 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL CONCEPT EXTRACTION START
+2025-05-30 08:24:49,707 - ingest_pdf.extractConceptsFromDocument - INFO - 🔬 Text length: 2487 chars, Threshold: 0.0
+2025-05-30 08:24:49,707 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION: Processing 2487 chars
+2025-05-30 08:24:53,524 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION COMPLETE: 71 concepts extracted
+2025-05-30 08:24:53,524 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 TOP UNIVERSAL CONCEPTS:
+2025-05-30 08:24:53,524 - ingest_pdf.extractConceptsFromDocument - INFO -   1. spectral distribution (score: 1.000, methods: KeyBERT+YAKE)
+2025-05-30 08:24:53,524 - ingest_pdf.extractConceptsFromDocument - INFO -   2. empirical distribution eigenvalues (score: 0.940, methods: KeyBERT)
+2025-05-30 08:24:53,524 - ingest_pdf.extractConceptsFromDocument - INFO -   3. Prop (score: 0.859, methods: NER+YAKE)
+2025-05-30 08:24:53,524 - ingest_pdf.extractConceptsFromDocument - INFO -   4. hebbian matrix supervised (score: 0.848, methods: KeyBERT)
+2025-05-30 08:24:53,524 - ingest_pdf.extractConceptsFromDocument - INFO -   5. Hebbian matrix (score: 0.846, methods: KeyBERT+YAKE)
+2025-05-30 08:24:53,524 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 EXTRACTION METHOD BREAKDOWN:
+2025-05-30 08:24:53,524 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT+YAKE: 2 concepts
+2025-05-30 08:24:53,524 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT: 18 concepts
+2025-05-30 08:24:53,524 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER+YAKE: 2 concepts
+2025-05-30 08:24:53,524 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 YAKE: 16 concepts
+2025-05-30 08:24:53,524 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER: 33 concepts
+2025-05-30 08:24:53,524 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL EXTRACTION END: 71 concepts ready
+2025-05-30 08:24:53,524 - pdf_ingestion - INFO - 📊 UNIVERSAL SEMANTIC EXTRACTION RESULT: 71 concepts
+2025-05-30 08:24:53,524 - pdf_ingestion - INFO - 🔬 STEP 2: Calling quality-focused boost_known_concepts...
+2025-05-30 08:24:53,524 - pdf_ingestion - INFO - 🚀 QUALITY BOOST: Checking top 300 priority concepts (max 25 quality matches)
+2025-05-30 08:24:53,524 - pdf_ingestion - INFO - 🌍 Quality boost domain matches: {'universal_extraction': 14, 'Mathematics': 1, 'Physics': 2, 'Computer Science': 3, 'Music': 1}
+2025-05-30 08:24:53,524 - pdf_ingestion - INFO - 🚀 Quality-focused boost complete: 21 high-priority concepts found
+2025-05-30 08:24:53,524 - pdf_ingestion - INFO - 🚀 QUALITY-FOCUSED DATABASE BOOST RESULT: 21 concepts
+2025-05-30 08:24:53,524 - pdf_ingestion - INFO - 🔧 UNIVERSAL COMBINED RESULT: 92 total concepts (before purity analysis)
+2025-05-30 08:24:53,524 - pdf_ingestion - INFO - 🔬 CHUNK 8 RAW RESULTS: 92 concepts
+2025-05-30 08:24:53,524 - pdf_ingestion - INFO -    🌍 71 universal extraction, 🚀 21 database boosted
+2025-05-30 08:24:53,524 - pdf_ingestion - INFO - 🔬 =============== END CHUNK 8 ===============
+2025-05-30 08:24:53,524 - pdf_ingestion - INFO - 🔬 =============== UNIVERSAL CHUNK 9/46 ===============
+2025-05-30 08:24:53,524 - pdf_ingestion - INFO - 📊 Processing chunk 9/46 (2480 chars)
+2025-05-30 08:24:53,539 - pdf_ingestion - INFO - 🔧 🌍 UNIVERSAL EXTRACT AND BOOST: threshold: 0.0
+2025-05-30 08:24:53,540 - pdf_ingestion - INFO - 🔬 Chunk length: 2480 chars
+2025-05-30 08:24:53,540 - pdf_ingestion - INFO - 🔬 STEP 1: Calling universal extractConceptsFromDocument...
+2025-05-30 08:24:53,540 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL CONCEPT EXTRACTION START
+2025-05-30 08:24:53,540 - ingest_pdf.extractConceptsFromDocument - INFO - 🔬 Text length: 2480 chars, Threshold: 0.0
+2025-05-30 08:24:53,540 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION: Processing 2480 chars
+2025-05-30 08:24:57,257 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION COMPLETE: 65 concepts extracted
+2025-05-30 08:24:57,257 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 TOP UNIVERSAL CONCEPTS:
+2025-05-30 08:24:57,257 - ingest_pdf.extractConceptsFromDocument - INFO -   1. empirical distribution eigenvalues (score: 1.000, methods: KeyBERT)
+2025-05-30 08:24:57,257 - ingest_pdf.extractConceptsFromDocument - INFO -   2. marchenko pastur distribution (score: 0.981, methods: KeyBERT)
+2025-05-30 08:24:57,257 - ingest_pdf.extractConceptsFromDocument - INFO -   3. distribution eigenvalues suggests (score: 0.853, methods: KeyBERT)
+2025-05-30 08:24:57,257 - ingest_pdf.extractConceptsFromDocument - INFO -   4. andµγuthe empirical distribution (score: 0.842, methods: KeyBERT)
+2025-05-30 08:24:57,257 - ingest_pdf.extractConceptsFromDocument - INFO -   5. distribution eigenvalues (score: 0.805, methods: KeyBERT)
+2025-05-30 08:24:57,257 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 EXTRACTION METHOD BREAKDOWN:
+2025-05-30 08:24:57,262 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT: 19 concepts
+2025-05-30 08:24:57,262 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT+YAKE: 1 concepts
+2025-05-30 08:24:57,262 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 YAKE: 18 concepts
+2025-05-30 08:24:57,262 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER: 26 concepts
+2025-05-30 08:24:57,262 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER+YAKE: 1 concepts
+2025-05-30 08:24:57,262 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL EXTRACTION END: 65 concepts ready
+2025-05-30 08:24:57,262 - pdf_ingestion - INFO - 📊 UNIVERSAL SEMANTIC EXTRACTION RESULT: 65 concepts
+2025-05-30 08:24:57,262 - pdf_ingestion - INFO - 🔬 STEP 2: Calling quality-focused boost_known_concepts...
+2025-05-30 08:24:57,262 - pdf_ingestion - INFO - 🚀 QUALITY BOOST: Checking top 300 priority concepts (max 25 quality matches)
+2025-05-30 08:24:57,267 - pdf_ingestion - INFO - 🛑 Quality boost limit reached (25 concepts)
+2025-05-30 08:24:57,267 - pdf_ingestion - INFO - 🌍 Quality boost domain matches: {'Physics': 4, 'universal_extraction': 20, 'Computer Science': 1}
+2025-05-30 08:24:57,267 - pdf_ingestion - INFO - 🚀 Quality-focused boost complete: 25 high-priority concepts found
+2025-05-30 08:24:57,267 - pdf_ingestion - INFO - 🚀 QUALITY-FOCUSED DATABASE BOOST RESULT: 25 concepts
+2025-05-30 08:24:57,267 - pdf_ingestion - INFO - 🔧 UNIVERSAL COMBINED RESULT: 90 total concepts (before purity analysis)
+2025-05-30 08:24:57,268 - pdf_ingestion - INFO - 🔬 CHUNK 9 RAW RESULTS: 90 concepts
+2025-05-30 08:24:57,268 - pdf_ingestion - INFO -    🌍 65 universal extraction, 🚀 25 database boosted
+2025-05-30 08:24:57,268 - pdf_ingestion - INFO - 🔬 =============== END CHUNK 9 ===============
+2025-05-30 08:24:57,268 - pdf_ingestion - INFO - 🔬 =============== UNIVERSAL CHUNK 10/46 ===============
+2025-05-30 08:24:57,268 - pdf_ingestion - INFO - 📊 Processing chunk 10/46 (2751 chars)
+2025-05-30 08:24:57,268 - pdf_ingestion - INFO - 🔧 🌍 UNIVERSAL EXTRACT AND BOOST: threshold: 0.0
+2025-05-30 08:24:57,268 - pdf_ingestion - INFO - 🔬 Chunk length: 2751 chars
+2025-05-30 08:24:57,268 - pdf_ingestion - INFO - 🔬 STEP 1: Calling universal extractConceptsFromDocument...
+2025-05-30 08:24:57,268 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL CONCEPT EXTRACTION START
+2025-05-30 08:24:57,268 - ingest_pdf.extractConceptsFromDocument - INFO - 🔬 Text length: 2751 chars, Threshold: 0.0
+2025-05-30 08:24:57,270 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION: Processing 2751 chars
+2025-05-30 08:25:01,474 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION COMPLETE: 80 concepts extracted
+2025-05-30 08:25:01,474 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 TOP UNIVERSAL CONCEPTS:
+2025-05-30 08:25:01,474 - ingest_pdf.extractConceptsFromDocument - INFO -   1. real random matrices (score: 1.000, methods: KeyBERT+YAKE)
+2025-05-30 08:25:01,474 - ingest_pdf.extractConceptsFromDocument - INFO -   2. random matrices (score: 0.761, methods: KeyBERT+YAKE)
+2025-05-30 08:25:01,474 - ingest_pdf.extractConceptsFromDocument - INFO -   3. random matrices squared (score: 0.582, methods: KeyBERT)
+2025-05-30 08:25:01,474 - ingest_pdf.extractConceptsFromDocument - INFO -   4. empirical spectral distribution (score: 0.564, methods: KeyBERT)
+2025-05-30 08:25:01,474 - ingest_pdf.extractConceptsFromDocument - INFO -   5. matrices squared error (score: 0.539, methods: KeyBERT)
+2025-05-30 08:25:01,474 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 EXTRACTION METHOD BREAKDOWN:
+2025-05-30 08:25:01,474 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT+YAKE: 2 concepts
+2025-05-30 08:25:01,474 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT: 18 concepts
+2025-05-30 08:25:01,474 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 YAKE: 18 concepts
+2025-05-30 08:25:01,474 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER: 42 concepts
+2025-05-30 08:25:01,474 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL EXTRACTION END: 80 concepts ready
+2025-05-30 08:25:01,474 - pdf_ingestion - INFO - 📊 UNIVERSAL SEMANTIC EXTRACTION RESULT: 80 concepts
+2025-05-30 08:25:01,474 - pdf_ingestion - INFO - 🔬 STEP 2: Calling quality-focused boost_known_concepts...
+2025-05-30 08:25:01,474 - pdf_ingestion - INFO - 🚀 QUALITY BOOST: Checking top 300 priority concepts (max 25 quality matches)
+2025-05-30 08:25:01,474 - pdf_ingestion - INFO - 🛑 Quality boost limit reached (25 concepts)
+2025-05-30 08:25:01,474 - pdf_ingestion - INFO - 🌍 Quality boost domain matches: {'Physics': 5, 'universal_extraction': 16, 'Computer Science': 3, 'Music': 1}
+2025-05-30 08:25:01,474 - pdf_ingestion - INFO - 🚀 Quality-focused boost complete: 25 high-priority concepts found
+2025-05-30 08:25:01,474 - pdf_ingestion - INFO - 🚀 QUALITY-FOCUSED DATABASE BOOST RESULT: 25 concepts
+2025-05-30 08:25:01,474 - pdf_ingestion - INFO - 🔧 UNIVERSAL COMBINED RESULT: 105 total concepts (before purity analysis)
+2025-05-30 08:25:01,474 - pdf_ingestion - INFO - 🔬 CHUNK 10 RAW RESULTS: 105 concepts
+2025-05-30 08:25:01,474 - pdf_ingestion - INFO -    🌍 80 universal extraction, 🚀 25 database boosted
+2025-05-30 08:25:01,474 - pdf_ingestion - INFO - 🔬 =============== END CHUNK 10 ===============
+2025-05-30 08:25:01,474 - pdf_ingestion - INFO - 🔬 =============== UNIVERSAL CHUNK 11/46 ===============
+2025-05-30 08:25:01,474 - pdf_ingestion - INFO - 📊 Processing chunk 11/46 (1977 chars)
+2025-05-30 08:25:01,474 - pdf_ingestion - INFO - 🔧 🌍 UNIVERSAL EXTRACT AND BOOST: threshold: 0.0
+2025-05-30 08:25:01,474 - pdf_ingestion - INFO - 🔬 Chunk length: 1977 chars
+2025-05-30 08:25:01,474 - pdf_ingestion - INFO - 🔬 STEP 1: Calling universal extractConceptsFromDocument...
+2025-05-30 08:25:01,474 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL CONCEPT EXTRACTION START
+2025-05-30 08:25:01,474 - ingest_pdf.extractConceptsFromDocument - INFO - 🔬 Text length: 1977 chars, Threshold: 0.0
+2025-05-30 08:25:01,474 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION: Processing 1977 chars
+2025-05-30 08:25:03,979 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION COMPLETE: 63 concepts extracted
+2025-05-30 08:25:03,979 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 TOP UNIVERSAL CONCEPTS:
+2025-05-30 08:25:03,979 - ingest_pdf.extractConceptsFromDocument - INFO -   1. squared error (score: 1.000, methods: KeyBERT+YAKE)
+2025-05-30 08:25:03,979 - ingest_pdf.extractConceptsFromDocument - INFO -   2. supervised upper panels (score: 0.673, methods: KeyBERT)
+2025-05-30 08:25:03,979 - ingest_pdf.extractConceptsFromDocument - INFO -   3. panels unsupervised (score: 0.644, methods: KeyBERT)
+2025-05-30 08:25:03,979 - ingest_pdf.extractConceptsFromDocument - INFO -   4. panels unsupervised lower (score: 0.635, methods: KeyBERT)
+2025-05-30 08:25:03,979 - ingest_pdf.extractConceptsFromDocument - INFO -   5. error bars (score: 0.601, methods: KeyBERT)
+2025-05-30 08:25:03,979 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 EXTRACTION METHOD BREAKDOWN:
+2025-05-30 08:25:03,979 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT+YAKE: 1 concepts
+2025-05-30 08:25:03,979 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT: 19 concepts
+2025-05-30 08:25:03,979 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 YAKE: 19 concepts
+2025-05-30 08:25:03,979 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER: 24 concepts
+2025-05-30 08:25:03,979 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL EXTRACTION END: 63 concepts ready
+2025-05-30 08:25:03,979 - pdf_ingestion - INFO - 📊 UNIVERSAL SEMANTIC EXTRACTION RESULT: 63 concepts
+2025-05-30 08:25:03,979 - pdf_ingestion - INFO - 🔬 STEP 2: Calling quality-focused boost_known_concepts...
+2025-05-30 08:25:03,979 - pdf_ingestion - INFO - 🚀 QUALITY BOOST: Checking top 300 priority concepts (max 25 quality matches)
+2025-05-30 08:25:03,991 - pdf_ingestion - INFO - 🛑 Quality boost limit reached (25 concepts)
+2025-05-30 08:25:03,991 - pdf_ingestion - INFO - 🌍 Quality boost domain matches: {'Biology': 23, 'Physics': 2}
+2025-05-30 08:25:03,991 - pdf_ingestion - INFO - 🚀 Quality-focused boost complete: 25 high-priority concepts found
+2025-05-30 08:25:03,991 - pdf_ingestion - INFO - 🚀 QUALITY-FOCUSED DATABASE BOOST RESULT: 25 concepts
+2025-05-30 08:25:03,991 - pdf_ingestion - INFO - 🔧 UNIVERSAL COMBINED RESULT: 88 total concepts (before purity analysis)
+2025-05-30 08:25:03,991 - pdf_ingestion - INFO - 🔬 CHUNK 11 RAW RESULTS: 88 concepts
+2025-05-30 08:25:03,991 - pdf_ingestion - INFO -    🌍 63 universal extraction, 🚀 25 database boosted
+2025-05-30 08:25:03,991 - pdf_ingestion - INFO - 🔬 =============== END CHUNK 11 ===============
+2025-05-30 08:25:03,991 - pdf_ingestion - INFO - 🔬 =============== UNIVERSAL CHUNK 12/46 ===============
+2025-05-30 08:25:03,991 - pdf_ingestion - INFO - 📊 Processing chunk 12/46 (2540 chars)
+2025-05-30 08:25:03,991 - pdf_ingestion - INFO - 🔧 🌍 UNIVERSAL EXTRACT AND BOOST: threshold: 0.0
+2025-05-30 08:25:03,991 - pdf_ingestion - INFO - 🔬 Chunk length: 2540 chars
+2025-05-30 08:25:03,991 - pdf_ingestion - INFO - 🔬 STEP 1: Calling universal extractConceptsFromDocument...
+2025-05-30 08:25:03,991 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL CONCEPT EXTRACTION START
+2025-05-30 08:25:03,991 - ingest_pdf.extractConceptsFromDocument - INFO - 🔬 Text length: 2540 chars, Threshold: 0.0
+2025-05-30 08:25:03,991 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION: Processing 2540 chars
+2025-05-30 08:25:07,640 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION COMPLETE: 68 concepts extracted
+2025-05-30 08:25:07,640 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 TOP UNIVERSAL CONCEPTS:
+2025-05-30 08:25:07,640 - ingest_pdf.extractConceptsFromDocument - INFO -   1. step mattis magnetization (score: 1.000, methods: KeyBERT)
+2025-05-30 08:25:07,656 - ingest_pdf.extractConceptsFromDocument - INFO -   2. mattis magnetization (score: 0.947, methods: KeyBERT)
+2025-05-30 08:25:07,657 - ingest_pdf.extractConceptsFromDocument - INFO -   3. mattis magnetizations related (score: 0.919, methods: KeyBERT)
+2025-05-30 08:25:07,657 - ingest_pdf.extractConceptsFromDocument - INFO -   4. Gaussian (score: 0.913, methods: NER+YAKE)
+2025-05-30 08:25:07,657 - ingest_pdf.extractConceptsFromDocument - INFO -   5. mattis magnetizations (score: 0.909, methods: KeyBERT)
+2025-05-30 08:25:07,657 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 EXTRACTION METHOD BREAKDOWN:
+2025-05-30 08:25:07,657 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT: 20 concepts
+2025-05-30 08:25:07,657 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER+YAKE: 1 concepts
+2025-05-30 08:25:07,657 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 YAKE: 19 concepts
+2025-05-30 08:25:07,657 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER: 28 concepts
+2025-05-30 08:25:07,657 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL EXTRACTION END: 68 concepts ready
+2025-05-30 08:25:07,657 - pdf_ingestion - INFO - 📊 UNIVERSAL SEMANTIC EXTRACTION RESULT: 68 concepts
+2025-05-30 08:25:07,657 - pdf_ingestion - INFO - 🔬 STEP 2: Calling quality-focused boost_known_concepts...
+2025-05-30 08:25:07,657 - pdf_ingestion - INFO - 🚀 QUALITY BOOST: Checking top 300 priority concepts (max 25 quality matches)
+2025-05-30 08:25:07,657 - pdf_ingestion - INFO - 🌍 Quality boost domain matches: {'universal_extraction': 15, 'Physics': 1, 'Computer Science': 1}
+2025-05-30 08:25:07,657 - pdf_ingestion - INFO - 🚀 Quality-focused boost complete: 17 high-priority concepts found
+2025-05-30 08:25:07,657 - pdf_ingestion - INFO - 🚀 QUALITY-FOCUSED DATABASE BOOST RESULT: 17 concepts
+2025-05-30 08:25:07,657 - pdf_ingestion - INFO - 🔧 UNIVERSAL COMBINED RESULT: 85 total concepts (before purity analysis)
+2025-05-30 08:25:07,657 - pdf_ingestion - INFO - 🔬 CHUNK 12 RAW RESULTS: 85 concepts
+2025-05-30 08:25:07,657 - pdf_ingestion - INFO -    🌍 68 universal extraction, 🚀 17 database boosted
+2025-05-30 08:25:07,657 - pdf_ingestion - INFO - 🔬 =============== END CHUNK 12 ===============
+2025-05-30 08:25:07,657 - pdf_ingestion - INFO - 🔬 =============== UNIVERSAL CHUNK 13/46 ===============
+2025-05-30 08:25:07,657 - pdf_ingestion - INFO - 📊 Processing chunk 13/46 (2658 chars)
+2025-05-30 08:25:07,657 - pdf_ingestion - INFO - 🔧 🌍 UNIVERSAL EXTRACT AND BOOST: threshold: 0.0
+2025-05-30 08:25:07,657 - pdf_ingestion - INFO - 🔬 Chunk length: 2658 chars
+2025-05-30 08:25:07,657 - pdf_ingestion - INFO - 🔬 STEP 1: Calling universal extractConceptsFromDocument...
+2025-05-30 08:25:07,657 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL CONCEPT EXTRACTION START
+2025-05-30 08:25:07,657 - ingest_pdf.extractConceptsFromDocument - INFO - 🔬 Text length: 2658 chars, Threshold: 0.0
+2025-05-30 08:25:07,657 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION: Processing 2658 chars
+2025-05-30 08:25:10,907 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION COMPLETE: 65 concepts extracted
+2025-05-30 08:25:10,907 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 TOP UNIVERSAL CONCEPTS:
+2025-05-30 08:25:10,907 - ingest_pdf.extractConceptsFromDocument - INFO -   1. supervised setting (score: 1.000, methods: KeyBERT+YAKE)
+2025-05-30 08:25:10,907 - ingest_pdf.extractConceptsFromDocument - INFO -   2. archetypes (score: 0.760, methods: KeyBERT+YAKE)
+2025-05-30 08:25:10,907 - ingest_pdf.extractConceptsFromDocument - INFO -   3. archetypes supervised setting (score: 0.750, methods: KeyBERT)
+2025-05-30 08:25:10,907 - ingest_pdf.extractConceptsFromDocument - INFO -   4. archetypes supervised (score: 0.733, methods: KeyBERT)
+2025-05-30 08:25:10,907 - ingest_pdf.extractConceptsFromDocument - INFO -   5. attractiveness archetypes supervised (score: 0.630, methods: KeyBERT)
+2025-05-30 08:25:10,907 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 EXTRACTION METHOD BREAKDOWN:
+2025-05-30 08:25:10,907 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT+YAKE: 2 concepts
+2025-05-30 08:25:10,907 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT: 18 concepts
+2025-05-30 08:25:10,907 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 YAKE: 18 concepts
+2025-05-30 08:25:10,907 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER: 27 concepts
+2025-05-30 08:25:10,907 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL EXTRACTION END: 65 concepts ready
+2025-05-30 08:25:10,907 - pdf_ingestion - INFO - 📊 UNIVERSAL SEMANTIC EXTRACTION RESULT: 65 concepts
+2025-05-30 08:25:10,907 - pdf_ingestion - INFO - 🔬 STEP 2: Calling quality-focused boost_known_concepts...
+2025-05-30 08:25:10,907 - pdf_ingestion - INFO - 🚀 QUALITY BOOST: Checking top 300 priority concepts (max 25 quality matches)
+2025-05-30 08:25:10,907 - pdf_ingestion - INFO - 🌍 Quality boost domain matches: {'Physics': 4, 'universal_extraction': 6, 'Biology': 1, 'Computer Science': 1}
+2025-05-30 08:25:10,907 - pdf_ingestion - INFO - 🚀 Quality-focused boost complete: 12 high-priority concepts found
+2025-05-30 08:25:10,907 - pdf_ingestion - INFO - 🚀 QUALITY-FOCUSED DATABASE BOOST RESULT: 12 concepts
+2025-05-30 08:25:10,907 - pdf_ingestion - INFO - 🔧 UNIVERSAL COMBINED RESULT: 77 total concepts (before purity analysis)
+2025-05-30 08:25:10,907 - pdf_ingestion - INFO - 🔬 CHUNK 13 RAW RESULTS: 77 concepts
+2025-05-30 08:25:10,907 - pdf_ingestion - INFO -    🌍 65 universal extraction, 🚀 12 database boosted
+2025-05-30 08:25:10,907 - pdf_ingestion - INFO - 🔬 =============== END CHUNK 13 ===============
+2025-05-30 08:25:10,923 - pdf_ingestion - INFO - 🔬 =============== UNIVERSAL CHUNK 14/46 ===============
+2025-05-30 08:25:10,924 - pdf_ingestion - INFO - 📊 Processing chunk 14/46 (2640 chars)
+2025-05-30 08:25:10,924 - pdf_ingestion - INFO - 🔧 🌍 UNIVERSAL EXTRACT AND BOOST: threshold: 0.0
+2025-05-30 08:25:10,924 - pdf_ingestion - INFO - 🔬 Chunk length: 2640 chars
+2025-05-30 08:25:10,924 - pdf_ingestion - INFO - 🔬 STEP 1: Calling universal extractConceptsFromDocument...
+2025-05-30 08:25:10,924 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL CONCEPT EXTRACTION START
+2025-05-30 08:25:10,924 - ingest_pdf.extractConceptsFromDocument - INFO - 🔬 Text length: 2640 chars, Threshold: 0.0
+2025-05-30 08:25:10,924 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION: Processing 2640 chars
+2025-05-30 08:25:14,224 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION COMPLETE: 62 concepts extracted
+2025-05-30 08:25:14,224 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 TOP UNIVERSAL CONCEPTS:
+2025-05-30 08:25:14,224 - ingest_pdf.extractConceptsFromDocument - INFO -   1. dilution level dfor (score: 1.000, methods: KeyBERT+YAKE)
+2025-05-30 08:25:14,224 - ingest_pdf.extractConceptsFromDocument - INFO -   2. dilution (score: 0.990, methods: KeyBERT+YAKE)
+2025-05-30 08:25:14,224 - ingest_pdf.extractConceptsFromDocument - INFO -   3. underestimation effects dilution (score: 0.765, methods: KeyBERT)
+2025-05-30 08:25:14,224 - ingest_pdf.extractConceptsFromDocument - INFO -   4. fitting value dilution (score: 0.749, methods: KeyBERT)
+2025-05-30 08:25:14,224 - ingest_pdf.extractConceptsFromDocument - INFO -   5. dilution level (score: 0.743, methods: KeyBERT+YAKE)
+2025-05-30 08:25:14,224 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 EXTRACTION METHOD BREAKDOWN:
+2025-05-30 08:25:14,224 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT+YAKE: 3 concepts
+2025-05-30 08:25:14,224 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT: 17 concepts
+2025-05-30 08:25:14,224 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER+YAKE: 1 concepts
+2025-05-30 08:25:14,224 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 YAKE: 16 concepts
+2025-05-30 08:25:14,224 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER: 25 concepts
+2025-05-30 08:25:14,224 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL EXTRACTION END: 62 concepts ready
+2025-05-30 08:25:14,224 - pdf_ingestion - INFO - 📊 UNIVERSAL SEMANTIC EXTRACTION RESULT: 62 concepts
+2025-05-30 08:25:14,224 - pdf_ingestion - INFO - 🔬 STEP 2: Calling quality-focused boost_known_concepts...
+2025-05-30 08:25:14,224 - pdf_ingestion - INFO - 🚀 QUALITY BOOST: Checking top 300 priority concepts (max 25 quality matches)
+2025-05-30 08:25:14,224 - pdf_ingestion - INFO - 🛑 Quality boost limit reached (25 concepts)
+2025-05-30 08:25:14,224 - pdf_ingestion - INFO - 🌍 Quality boost domain matches: {'Physics': 4, 'universal_extraction': 4, 'Biology': 16, 'Computer Science': 1}
+2025-05-30 08:25:14,224 - pdf_ingestion - INFO - 🚀 Quality-focused boost complete: 25 high-priority concepts found
+2025-05-30 08:25:14,224 - pdf_ingestion - INFO - 🚀 QUALITY-FOCUSED DATABASE BOOST RESULT: 25 concepts
+2025-05-30 08:25:14,224 - pdf_ingestion - INFO - 🔧 UNIVERSAL COMBINED RESULT: 87 total concepts (before purity analysis)
+2025-05-30 08:25:14,224 - pdf_ingestion - INFO - 🔬 CHUNK 14 RAW RESULTS: 87 concepts
+2025-05-30 08:25:14,224 - pdf_ingestion - INFO -    🌍 62 universal extraction, 🚀 25 database boosted
+2025-05-30 08:25:14,224 - pdf_ingestion - INFO - 🔬 =============== END CHUNK 14 ===============
+2025-05-30 08:25:14,224 - pdf_ingestion - INFO - 🔬 =============== UNIVERSAL CHUNK 15/46 ===============
+2025-05-30 08:25:14,224 - pdf_ingestion - INFO - 📊 Processing chunk 15/46 (2949 chars)
+2025-05-30 08:25:14,224 - pdf_ingestion - INFO - 🔧 🌍 UNIVERSAL EXTRACT AND BOOST: threshold: 0.0
+2025-05-30 08:25:14,224 - pdf_ingestion - INFO - 🔬 Chunk length: 2949 chars
+2025-05-30 08:25:14,224 - pdf_ingestion - INFO - 🔬 STEP 1: Calling universal extractConceptsFromDocument...
+2025-05-30 08:25:14,224 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL CONCEPT EXTRACTION START
+2025-05-30 08:25:14,224 - ingest_pdf.extractConceptsFromDocument - INFO - 🔬 Text length: 2949 chars, Threshold: 0.0
+2025-05-30 08:25:14,224 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION: Processing 2949 chars
+2025-05-30 08:25:17,207 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION COMPLETE: 60 concepts extracted
+2025-05-30 08:25:17,207 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 TOP UNIVERSAL CONCEPTS:
+2025-05-30 08:25:17,207 - ingest_pdf.extractConceptsFromDocument - INFO -   1. obtained comparing predictions (score: 1.000, methods: KeyBERT)
+2025-05-30 08:25:17,207 - ingest_pdf.extractConceptsFromDocument - INFO -   2. predictions solid curves (score: 0.954, methods: KeyBERT)
+2025-05-30 08:25:17,207 - ingest_pdf.extractConceptsFromDocument - INFO -   3. supervised setting numerical (score: 0.949, methods: KeyBERT)
+2025-05-30 08:25:17,207 - ingest_pdf.extractConceptsFromDocument - INFO -   4. supervised setting plots (score: 0.885, methods: KeyBERT)
+2025-05-30 08:25:17,207 - ingest_pdf.extractConceptsFromDocument - INFO -   5. comparison theoretical predictions (score: 0.879, methods: KeyBERT)
+2025-05-30 08:25:17,207 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 EXTRACTION METHOD BREAKDOWN:
+2025-05-30 08:25:17,207 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT: 20 concepts
+2025-05-30 08:25:17,207 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 YAKE: 19 concepts
+2025-05-30 08:25:17,207 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER: 20 concepts
+2025-05-30 08:25:17,207 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER+YAKE: 1 concepts
+2025-05-30 08:25:17,207 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL EXTRACTION END: 60 concepts ready
+2025-05-30 08:25:17,223 - pdf_ingestion - INFO - 📊 UNIVERSAL SEMANTIC EXTRACTION RESULT: 60 concepts
+2025-05-30 08:25:17,224 - pdf_ingestion - INFO - 🔬 STEP 2: Calling quality-focused boost_known_concepts...
+2025-05-30 08:25:17,224 - pdf_ingestion - INFO - 🚀 QUALITY BOOST: Checking top 300 priority concepts (max 25 quality matches)
+2025-05-30 08:25:17,224 - pdf_ingestion - INFO - 🌍 Quality boost domain matches: {'Physics': 14, 'universal_extraction': 2, 'Biology': 1}
+2025-05-30 08:25:17,224 - pdf_ingestion - INFO - 🚀 Quality-focused boost complete: 17 high-priority concepts found
+2025-05-30 08:25:17,224 - pdf_ingestion - INFO - 🚀 QUALITY-FOCUSED DATABASE BOOST RESULT: 17 concepts
+2025-05-30 08:25:17,224 - pdf_ingestion - INFO - 🔧 UNIVERSAL COMBINED RESULT: 77 total concepts (before purity analysis)
+2025-05-30 08:25:17,224 - pdf_ingestion - INFO - 🔬 CHUNK 15 RAW RESULTS: 77 concepts
+2025-05-30 08:25:17,224 - pdf_ingestion - INFO -    🌍 60 universal extraction, 🚀 17 database boosted
+2025-05-30 08:25:17,224 - pdf_ingestion - INFO - 🔬 =============== END CHUNK 15 ===============
+2025-05-30 08:25:17,224 - pdf_ingestion - INFO - 🔬 =============== UNIVERSAL CHUNK 16/46 ===============
+2025-05-30 08:25:17,224 - pdf_ingestion - INFO - 📊 Processing chunk 16/46 (1874 chars)
+2025-05-30 08:25:17,224 - pdf_ingestion - INFO - 🔧 🌍 UNIVERSAL EXTRACT AND BOOST: threshold: 0.0
+2025-05-30 08:25:17,224 - pdf_ingestion - INFO - 🔬 Chunk length: 1874 chars
+2025-05-30 08:25:17,224 - pdf_ingestion - INFO - 🔬 STEP 1: Calling universal extractConceptsFromDocument...
+2025-05-30 08:25:17,224 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL CONCEPT EXTRACTION START
+2025-05-30 08:25:17,224 - ingest_pdf.extractConceptsFromDocument - INFO - 🔬 Text length: 1874 chars, Threshold: 0.0
+2025-05-30 08:25:17,224 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION: Processing 1874 chars
+2025-05-30 08:25:19,723 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION COMPLETE: 57 concepts extracted
+2025-05-30 08:25:19,723 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 TOP UNIVERSAL CONCEPTS:
+2025-05-30 08:25:19,723 - ingest_pdf.extractConceptsFromDocument - INFO -   1. magnetization (score: 1.000, methods: KeyBERT+YAKE)
+2025-05-30 08:25:19,723 - ingest_pdf.extractConceptsFromDocument - INFO -   2. Mattis magnetization (score: 0.997, methods: KeyBERT+YAKE)
+2025-05-30 08:25:19,723 - ingest_pdf.extractConceptsFromDocument - INFO -   3. magnetization function plots (score: 0.629, methods: KeyBERT)
+2025-05-30 08:25:19,723 - ingest_pdf.extractConceptsFromDocument - INFO -   4. mattis magnetization function (score: 0.625, methods: KeyBERT)
+2025-05-30 08:25:19,723 - ingest_pdf.extractConceptsFromDocument - INFO -   5. quality step magnetization (score: 0.622, methods: KeyBERT)
+2025-05-30 08:25:19,723 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 EXTRACTION METHOD BREAKDOWN:
+2025-05-30 08:25:19,723 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT+YAKE: 2 concepts
+2025-05-30 08:25:19,723 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT: 18 concepts
+2025-05-30 08:25:19,723 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 YAKE: 18 concepts
+2025-05-30 08:25:19,723 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER: 19 concepts
+2025-05-30 08:25:19,723 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL EXTRACTION END: 57 concepts ready
+2025-05-30 08:25:19,723 - pdf_ingestion - INFO - 📊 UNIVERSAL SEMANTIC EXTRACTION RESULT: 57 concepts
+2025-05-30 08:25:19,723 - pdf_ingestion - INFO - 🔬 STEP 2: Calling quality-focused boost_known_concepts...
+2025-05-30 08:25:19,723 - pdf_ingestion - INFO - 🚀 QUALITY BOOST: Checking top 300 priority concepts (max 25 quality matches)
+2025-05-30 08:25:19,723 - pdf_ingestion - INFO - 🌍 Quality boost domain matches: {'universal_extraction': 13, 'Physics': 1, 'Computer Science': 1, 'Biology': 1}
+2025-05-30 08:25:19,723 - pdf_ingestion - INFO - 🚀 Quality-focused boost complete: 16 high-priority concepts found
+2025-05-30 08:25:19,723 - pdf_ingestion - INFO - 🚀 QUALITY-FOCUSED DATABASE BOOST RESULT: 16 concepts
+2025-05-30 08:25:19,723 - pdf_ingestion - INFO - 🔧 UNIVERSAL COMBINED RESULT: 73 total concepts (before purity analysis)
+2025-05-30 08:25:19,723 - pdf_ingestion - INFO - 🔬 CHUNK 16 RAW RESULTS: 73 concepts
+2025-05-30 08:25:19,723 - pdf_ingestion - INFO -    🌍 57 universal extraction, 🚀 16 database boosted
+2025-05-30 08:25:19,723 - pdf_ingestion - INFO - 🔬 =============== END CHUNK 16 ===============
+2025-05-30 08:25:19,723 - pdf_ingestion - INFO - 🔬 =============== UNIVERSAL CHUNK 17/46 ===============
+2025-05-30 08:25:19,723 - pdf_ingestion - INFO - 📊 Processing chunk 17/46 (3915 chars)
+2025-05-30 08:25:19,723 - pdf_ingestion - INFO - 🔧 🌍 UNIVERSAL EXTRACT AND BOOST: threshold: 0.0
+2025-05-30 08:25:19,723 - pdf_ingestion - INFO - 🔬 Chunk length: 3915 chars
+2025-05-30 08:25:19,723 - pdf_ingestion - INFO - 🔬 STEP 1: Calling universal extractConceptsFromDocument...
+2025-05-30 08:25:19,723 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL CONCEPT EXTRACTION START
+2025-05-30 08:25:19,723 - ingest_pdf.extractConceptsFromDocument - INFO - 🔬 Text length: 3915 chars, Threshold: 0.0
+2025-05-30 08:25:19,723 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION: Processing 3915 chars
+2025-05-30 08:25:24,932 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION COMPLETE: 65 concepts extracted
+2025-05-30 08:25:24,932 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 TOP UNIVERSAL CONCEPTS:
+2025-05-30 08:25:24,932 - ingest_pdf.extractConceptsFromDocument - INFO -   1. dataset dilution strategies (score: 1.000, methods: KeyBERT+YAKE)
+2025-05-30 08:25:24,932 - ingest_pdf.extractConceptsFromDocument - INFO -   2. dataset dilution (score: 0.902, methods: KeyBERT+YAKE)
+2025-05-30 08:25:24,932 - ingest_pdf.extractConceptsFromDocument - INFO -   3. spectraldistributionbymeansoftheafm ii estimatedanalyticallythegeneralizationcapabilities (score: 0.823, methods: KeyBERT)
+2025-05-30 08:25:24,932 - ingest_pdf.extractConceptsFromDocument - INFO -   4. spectraldistributionbymeansoftheafm ii (score: 0.769, methods: KeyBERT)
+2025-05-30 08:25:24,932 - ingest_pdf.extractConceptsFromDocument - INFO -   5. derived spectraldistributionbymeansoftheafm ii (score: 0.768, methods: KeyBERT)
+2025-05-30 08:25:24,932 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 EXTRACTION METHOD BREAKDOWN:
+2025-05-30 08:25:24,932 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT+YAKE: 2 concepts
+2025-05-30 08:25:24,932 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT: 18 concepts
+2025-05-30 08:25:24,932 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 YAKE: 18 concepts
+2025-05-30 08:25:24,932 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER: 27 concepts
+2025-05-30 08:25:24,932 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL EXTRACTION END: 65 concepts ready
+2025-05-30 08:25:24,932 - pdf_ingestion - INFO - 📊 UNIVERSAL SEMANTIC EXTRACTION RESULT: 65 concepts
+2025-05-30 08:25:24,932 - pdf_ingestion - INFO - 🔬 STEP 2: Calling quality-focused boost_known_concepts...
+2025-05-30 08:25:24,932 - pdf_ingestion - INFO - 🚀 QUALITY BOOST: Checking top 300 priority concepts (max 25 quality matches)
+2025-05-30 08:25:24,932 - pdf_ingestion - INFO - 🛑 Quality boost limit reached (25 concepts)
+2025-05-30 08:25:24,932 - pdf_ingestion - INFO - 🌍 Quality boost domain matches: {'universal_extraction': 18, 'Computer Science': 4, 'Physics': 3}
+2025-05-30 08:25:24,932 - pdf_ingestion - INFO - 🚀 Quality-focused boost complete: 25 high-priority concepts found
+2025-05-30 08:25:24,932 - pdf_ingestion - INFO - 🚀 QUALITY-FOCUSED DATABASE BOOST RESULT: 25 concepts
+2025-05-30 08:25:24,932 - pdf_ingestion - INFO - 🔧 UNIVERSAL COMBINED RESULT: 90 total concepts (before purity analysis)
+2025-05-30 08:25:24,932 - pdf_ingestion - INFO - 🔬 CHUNK 17 RAW RESULTS: 90 concepts
+2025-05-30 08:25:24,932 - pdf_ingestion - INFO -    🌍 65 universal extraction, 🚀 25 database boosted
+2025-05-30 08:25:24,932 - pdf_ingestion - INFO - 🔬 =============== END CHUNK 17 ===============
+2025-05-30 08:25:24,949 - pdf_ingestion - INFO - 🔬 =============== UNIVERSAL CHUNK 18/46 ===============
+2025-05-30 08:25:24,949 - pdf_ingestion - INFO - 📊 Processing chunk 18/46 (4215 chars)
+2025-05-30 08:25:24,949 - pdf_ingestion - INFO - 🔧 🌍 UNIVERSAL EXTRACT AND BOOST: threshold: 0.0
+2025-05-30 08:25:24,949 - pdf_ingestion - INFO - 🔬 Chunk length: 4215 chars
+2025-05-30 08:25:24,949 - pdf_ingestion - INFO - 🔬 STEP 1: Calling universal extractConceptsFromDocument...
+2025-05-30 08:25:24,949 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL CONCEPT EXTRACTION START
+2025-05-30 08:25:24,949 - ingest_pdf.extractConceptsFromDocument - INFO - 🔬 Text length: 4215 chars, Threshold: 0.0
+2025-05-30 08:25:24,949 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION: Processing 4215 chars
+2025-05-30 08:25:30,481 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION COMPLETE: 64 concepts extracted
+2025-05-30 08:25:42,299 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 TOP UNIVERSAL CONCEPTS:
+2025-05-30 08:25:42,314 - ingest_pdf.extractConceptsFromDocument - INFO -   1. Hopfield (score: 1.000, methods: NER+YAKE)
+2025-05-30 08:25:42,314 - ingest_pdf.extractConceptsFromDocument - INFO -   2. final magnetization (score: 0.883, methods: KeyBERT+YAKE)
+2025-05-30 08:25:42,314 - ingest_pdf.extractConceptsFromDocument - INFO -   3. diluted model performs (score: 0.707, methods: KeyBERT)
+2025-05-30 08:25:42,314 - ingest_pdf.extractConceptsFromDocument - INFO -   4. magnetization mfdepends (score: 0.690, methods: KeyBERT)
+2025-05-30 08:25:42,314 - ingest_pdf.extractConceptsFromDocument - INFO -   5. fact magnetization mfdepends (score: 0.688, methods: KeyBERT)
+2025-05-30 08:25:42,314 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 EXTRACTION METHOD BREAKDOWN:
+2025-05-30 08:25:42,314 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER+YAKE: 1 concepts
+2025-05-30 08:25:42,314 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT+YAKE: 2 concepts
+2025-05-30 08:25:42,314 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT: 18 concepts
+2025-05-30 08:25:42,314 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 YAKE: 17 concepts
+2025-05-30 08:25:42,314 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER: 26 concepts
+2025-05-30 08:25:42,314 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL EXTRACTION END: 64 concepts ready
+2025-05-30 08:25:42,314 - pdf_ingestion - INFO - 📊 UNIVERSAL SEMANTIC EXTRACTION RESULT: 64 concepts
+2025-05-30 08:25:42,314 - pdf_ingestion - INFO - 🔬 STEP 2: Calling quality-focused boost_known_concepts...
+2025-05-30 08:25:42,314 - pdf_ingestion - INFO - 🚀 QUALITY BOOST: Checking top 300 priority concepts (max 25 quality matches)
+2025-05-30 08:25:42,314 - pdf_ingestion - INFO - 🛑 Quality boost limit reached (25 concepts)
+2025-05-30 08:25:42,314 - pdf_ingestion - INFO - 🌍 Quality boost domain matches: {'Physics': 6, 'universal_extraction': 18, 'Computer Science': 1}
+2025-05-30 08:25:42,314 - pdf_ingestion - INFO - 🚀 Quality-focused boost complete: 25 high-priority concepts found
+2025-05-30 08:25:42,314 - pdf_ingestion - INFO - 🚀 QUALITY-FOCUSED DATABASE BOOST RESULT: 25 concepts
+2025-05-30 08:25:42,314 - pdf_ingestion - INFO - 🔧 UNIVERSAL COMBINED RESULT: 89 total concepts (before purity analysis)
+2025-05-30 08:25:42,314 - pdf_ingestion - INFO - 🔬 CHUNK 18 RAW RESULTS: 89 concepts
+2025-05-30 08:25:42,314 - pdf_ingestion - INFO -    🌍 64 universal extraction, 🚀 25 database boosted
+2025-05-30 08:25:42,314 - pdf_ingestion - INFO - 🔬 =============== END CHUNK 18 ===============
+2025-05-30 08:25:42,314 - pdf_ingestion - INFO - 🔬 =============== UNIVERSAL CHUNK 19/46 ===============
+2025-05-30 08:25:42,314 - pdf_ingestion - INFO - 📊 Processing chunk 19/46 (2513 chars)
+2025-05-30 08:25:42,314 - pdf_ingestion - INFO - 🔧 🌍 UNIVERSAL EXTRACT AND BOOST: threshold: 0.0
+2025-05-30 08:25:42,314 - pdf_ingestion - INFO - 🔬 Chunk length: 2513 chars
+2025-05-30 08:25:42,314 - pdf_ingestion - INFO - 🔬 STEP 1: Calling universal extractConceptsFromDocument...
+2025-05-30 08:25:42,314 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL CONCEPT EXTRACTION START
+2025-05-30 08:25:42,314 - ingest_pdf.extractConceptsFromDocument - INFO - 🔬 Text length: 2513 chars, Threshold: 0.0
+2025-05-30 08:25:42,314 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION: Processing 2513 chars
+2025-05-30 08:25:45,394 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION COMPLETE: 63 concepts extracted
+2025-05-30 08:25:45,394 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 TOP UNIVERSAL CONCEPTS:
+2025-05-30 08:25:45,397 - ingest_pdf.extractConceptsFromDocument - INFO -   1. 00 (score: 1.000, methods: KeyBERT)
+2025-05-30 08:25:45,397 - ingest_pdf.extractConceptsFromDocument - INFO -   2. 00figure (score: 0.894, methods: KeyBERT)
+2025-05-30 08:25:45,397 - ingest_pdf.extractConceptsFromDocument - INFO -   3. 00 20 (score: 0.838, methods: KeyBERT)
+2025-05-30 08:25:45,397 - ingest_pdf.extractConceptsFromDocument - INFO -   4. blue square dots (score: 0.830, methods: KeyBERT)
+2025-05-30 08:25:45,398 - ingest_pdf.extractConceptsFromDocument - INFO -   5. 981 00figure pattern (score: 0.823, methods: KeyBERT)
+2025-05-30 08:25:45,398 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 EXTRACTION METHOD BREAKDOWN:
+2025-05-30 08:25:45,398 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT: 20 concepts
+2025-05-30 08:25:45,398 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 YAKE: 20 concepts
+2025-05-30 08:25:45,398 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER: 23 concepts
+2025-05-30 08:25:45,398 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL EXTRACTION END: 63 concepts ready
+2025-05-30 08:25:45,398 - pdf_ingestion - INFO - 📊 UNIVERSAL SEMANTIC EXTRACTION RESULT: 63 concepts
+2025-05-30 08:25:45,398 - pdf_ingestion - INFO - 🔬 STEP 2: Calling quality-focused boost_known_concepts...
+2025-05-30 08:25:45,398 - pdf_ingestion - INFO - 🚀 QUALITY BOOST: Checking top 300 priority concepts (max 25 quality matches)
+2025-05-30 08:25:45,402 - pdf_ingestion - INFO - 🛑 Quality boost limit reached (25 concepts)
+2025-05-30 08:25:45,402 - pdf_ingestion - INFO - 🌍 Quality boost domain matches: {'Physics': 5, 'universal_extraction': 19, 'Computer Science': 1}
+2025-05-30 08:25:45,402 - pdf_ingestion - INFO - 🚀 Quality-focused boost complete: 25 high-priority concepts found
+2025-05-30 08:25:45,402 - pdf_ingestion - INFO - 🚀 QUALITY-FOCUSED DATABASE BOOST RESULT: 25 concepts
+2025-05-30 08:25:45,402 - pdf_ingestion - INFO - 🔧 UNIVERSAL COMBINED RESULT: 88 total concepts (before purity analysis)
+2025-05-30 08:25:45,402 - pdf_ingestion - INFO - 🔬 CHUNK 19 RAW RESULTS: 88 concepts
+2025-05-30 08:25:45,402 - pdf_ingestion - INFO -    🌍 63 universal extraction, 🚀 25 database boosted
+2025-05-30 08:25:45,402 - pdf_ingestion - INFO - 🔬 =============== END CHUNK 19 ===============
+2025-05-30 08:25:45,402 - pdf_ingestion - INFO - 🔬 =============== UNIVERSAL CHUNK 20/46 ===============
+2025-05-30 08:25:45,402 - pdf_ingestion - INFO - 📊 Processing chunk 20/46 (2366 chars)
+2025-05-30 08:25:45,402 - pdf_ingestion - INFO - 🔧 🌍 UNIVERSAL EXTRACT AND BOOST: threshold: 0.0
+2025-05-30 08:25:45,402 - pdf_ingestion - INFO - 🔬 Chunk length: 2366 chars
+2025-05-30 08:25:45,402 - pdf_ingestion - INFO - 🔬 STEP 1: Calling universal extractConceptsFromDocument...
+2025-05-30 08:25:45,402 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL CONCEPT EXTRACTION START
+2025-05-30 08:25:45,402 - ingest_pdf.extractConceptsFromDocument - INFO - 🔬 Text length: 2366 chars, Threshold: 0.0
+2025-05-30 08:25:45,402 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION: Processing 2366 chars
+2025-05-30 08:25:48,231 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION COMPLETE: 62 concepts extracted
+2025-05-30 08:25:48,231 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 TOP UNIVERSAL CONCEPTS:
+2025-05-30 08:25:48,231 - ingest_pdf.extractConceptsFromDocument - INFO -   1. various values 50 (score: 1.000, methods: KeyBERT)
+2025-05-30 08:25:48,231 - ingest_pdf.extractConceptsFromDocument - INFO -   2. 00 50 (score: 0.914, methods: KeyBERT)
+2025-05-30 08:25:48,231 - ingest_pdf.extractConceptsFromDocument - INFO -   3. point dlead mfvsm0curves (score: 0.899, methods: KeyBERT)
+2025-05-30 08:25:48,231 - ingest_pdf.extractConceptsFromDocument - INFO -   4. various values (score: 0.886, methods: KeyBERT)
+2025-05-30 08:25:48,231 - ingest_pdf.extractConceptsFromDocument - INFO -   5. 00 (score: 0.885, methods: KeyBERT)
+2025-05-30 08:25:48,231 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 EXTRACTION METHOD BREAKDOWN:
+2025-05-30 08:25:48,231 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT: 20 concepts
+2025-05-30 08:25:48,231 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 YAKE: 20 concepts
+2025-05-30 08:25:48,231 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER: 22 concepts
+2025-05-30 08:25:48,247 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL EXTRACTION END: 62 concepts ready
+2025-05-30 08:25:48,247 - pdf_ingestion - INFO - 📊 UNIVERSAL SEMANTIC EXTRACTION RESULT: 62 concepts
+2025-05-30 08:25:48,247 - pdf_ingestion - INFO - 🔬 STEP 2: Calling quality-focused boost_known_concepts...
+2025-05-30 08:25:48,247 - pdf_ingestion - INFO - 🚀 QUALITY BOOST: Checking top 300 priority concepts (max 25 quality matches)
+2025-05-30 08:25:48,249 - pdf_ingestion - INFO - 🛑 Quality boost limit reached (25 concepts)
+2025-05-30 08:25:48,249 - pdf_ingestion - INFO - 🌍 Quality boost domain matches: {'Physics': 5, 'universal_extraction': 20}
+2025-05-30 08:25:48,249 - pdf_ingestion - INFO - 🚀 Quality-focused boost complete: 25 high-priority concepts found
+2025-05-30 08:25:48,249 - pdf_ingestion - INFO - 🚀 QUALITY-FOCUSED DATABASE BOOST RESULT: 25 concepts
+2025-05-30 08:25:48,249 - pdf_ingestion - INFO - 🔧 UNIVERSAL COMBINED RESULT: 87 total concepts (before purity analysis)
+2025-05-30 08:25:48,249 - pdf_ingestion - INFO - 🔬 CHUNK 20 RAW RESULTS: 87 concepts
+2025-05-30 08:25:48,249 - pdf_ingestion - INFO -    🌍 62 universal extraction, 🚀 25 database boosted
+2025-05-30 08:25:48,249 - pdf_ingestion - INFO - 🔬 =============== END CHUNK 20 ===============
+2025-05-30 08:25:48,249 - pdf_ingestion - INFO - 🔬 =============== UNIVERSAL CHUNK 21/46 ===============
+2025-05-30 08:25:48,249 - pdf_ingestion - INFO - 📊 Processing chunk 21/46 (2426 chars)
+2025-05-30 08:25:48,249 - pdf_ingestion - INFO - 🔧 🌍 UNIVERSAL EXTRACT AND BOOST: threshold: 0.0
+2025-05-30 08:25:48,249 - pdf_ingestion - INFO - 🔬 Chunk length: 2426 chars
+2025-05-30 08:25:48,249 - pdf_ingestion - INFO - 🔬 STEP 1: Calling universal extractConceptsFromDocument...
+2025-05-30 08:25:48,249 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL CONCEPT EXTRACTION START
+2025-05-30 08:25:48,249 - ingest_pdf.extractConceptsFromDocument - INFO - 🔬 Text length: 2426 chars, Threshold: 0.0
+2025-05-30 08:25:48,249 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION: Processing 2426 chars
+2025-05-30 08:25:50,831 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION COMPLETE: 61 concepts extracted
+2025-05-30 08:25:50,831 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 TOP UNIVERSAL CONCEPTS:
+2025-05-30 08:25:50,831 - ingest_pdf.extractConceptsFromDocument - INFO -   1. zero (score: 1.000, methods: KeyBERT+NER)
+2025-05-30 08:25:50,831 - ingest_pdf.extractConceptsFromDocument - INFO -   2. 10 (score: 0.922, methods: KeyBERT+NER)
+2025-05-30 08:25:50,831 - ingest_pdf.extractConceptsFromDocument - INFO -   3. various values 50 (score: 0.637, methods: KeyBERT)
+2025-05-30 08:25:50,831 - ingest_pdf.extractConceptsFromDocument - INFO -   4. 00 (score: 0.626, methods: KeyBERT)
+2025-05-30 08:25:50,831 - ingest_pdf.extractConceptsFromDocument - INFO -   5. 00 50 (score: 0.615, methods: KeyBERT)
+2025-05-30 08:25:50,831 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 EXTRACTION METHOD BREAKDOWN:
+2025-05-30 08:25:50,831 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT+NER: 2 concepts
+2025-05-30 08:25:50,831 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT: 18 concepts
+2025-05-30 08:25:50,847 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 YAKE: 20 concepts
+2025-05-30 08:25:50,848 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER: 21 concepts
+2025-05-30 08:25:50,848 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL EXTRACTION END: 61 concepts ready
+2025-05-30 08:25:50,848 - pdf_ingestion - INFO - 📊 UNIVERSAL SEMANTIC EXTRACTION RESULT: 61 concepts
+2025-05-30 08:25:50,848 - pdf_ingestion - INFO - 🔬 STEP 2: Calling quality-focused boost_known_concepts...
+2025-05-30 08:25:50,848 - pdf_ingestion - INFO - 🚀 QUALITY BOOST: Checking top 300 priority concepts (max 25 quality matches)
+2025-05-30 08:25:50,848 - pdf_ingestion - INFO - 🌍 Quality boost domain matches: {'Physics': 6, 'universal_extraction': 17, 'Computer Science': 1}
+2025-05-30 08:25:50,848 - pdf_ingestion - INFO - 🚀 Quality-focused boost complete: 24 high-priority concepts found
+2025-05-30 08:25:50,848 - pdf_ingestion - INFO - 🚀 QUALITY-FOCUSED DATABASE BOOST RESULT: 24 concepts
+2025-05-30 08:25:50,848 - pdf_ingestion - INFO - 🔧 UNIVERSAL COMBINED RESULT: 85 total concepts (before purity analysis)
+2025-05-30 08:25:50,848 - pdf_ingestion - INFO - 🔬 CHUNK 21 RAW RESULTS: 85 concepts
+2025-05-30 08:25:50,848 - pdf_ingestion - INFO -    🌍 61 universal extraction, 🚀 24 database boosted
+2025-05-30 08:25:50,848 - pdf_ingestion - INFO - 🔬 =============== END CHUNK 21 ===============
+2025-05-30 08:25:50,848 - pdf_ingestion - INFO - 🔬 =============== UNIVERSAL CHUNK 22/46 ===============
+2025-05-30 08:25:50,848 - pdf_ingestion - INFO - 📊 Processing chunk 22/46 (1788 chars)
+2025-05-30 08:25:50,848 - pdf_ingestion - INFO - 🔧 🌍 UNIVERSAL EXTRACT AND BOOST: threshold: 0.0
+2025-05-30 08:25:50,848 - pdf_ingestion - INFO - 🔬 Chunk length: 1788 chars
+2025-05-30 08:25:50,848 - pdf_ingestion - INFO - 🔬 STEP 1: Calling universal extractConceptsFromDocument...
+2025-05-30 08:25:50,848 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL CONCEPT EXTRACTION START
+2025-05-30 08:25:50,848 - ingest_pdf.extractConceptsFromDocument - INFO - 🔬 Text length: 1788 chars, Threshold: 0.0
+2025-05-30 08:25:50,848 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION: Processing 1788 chars
+2025-05-30 08:25:53,698 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION COMPLETE: 56 concepts extracted
+2025-05-30 08:25:53,698 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 TOP UNIVERSAL CONCEPTS:
+2025-05-30 08:25:53,715 - ingest_pdf.extractConceptsFromDocument - INFO -   1. unsupervised Hopfield setting (score: 1.000, methods: KeyBERT+YAKE)
+2025-05-30 08:25:53,715 - ingest_pdf.extractConceptsFromDocument - INFO -   2. 11 generalization unsupervised (score: 0.718, methods: KeyBERT)
+2025-05-30 08:25:53,715 - ingest_pdf.extractConceptsFromDocument - INFO -   3. unsupervised hopfield (score: 0.696, methods: KeyBERT)
+2025-05-30 08:25:53,715 - ingest_pdf.extractConceptsFromDocument - INFO -   4. neural dynamics (score: 0.681, methods: KeyBERT)
+2025-05-30 08:25:53,715 - ingest_pdf.extractConceptsFromDocument - INFO -   5. generalization unsupervised (score: 0.681, methods: KeyBERT)
+2025-05-30 08:25:53,715 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 EXTRACTION METHOD BREAKDOWN:
+2025-05-30 08:25:53,715 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT+YAKE: 1 concepts
+2025-05-30 08:25:53,715 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT: 19 concepts
+2025-05-30 08:25:53,715 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 YAKE: 19 concepts
+2025-05-30 08:25:53,715 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER: 17 concepts
+2025-05-30 08:25:53,715 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL EXTRACTION END: 56 concepts ready
+2025-05-30 08:25:53,715 - pdf_ingestion - INFO - 📊 UNIVERSAL SEMANTIC EXTRACTION RESULT: 56 concepts
+2025-05-30 08:25:53,715 - pdf_ingestion - INFO - 🔬 STEP 2: Calling quality-focused boost_known_concepts...
+2025-05-30 08:25:53,715 - pdf_ingestion - INFO - 🚀 QUALITY BOOST: Checking top 300 priority concepts (max 25 quality matches)
+2025-05-30 08:25:53,715 - pdf_ingestion - INFO - 🛑 Quality boost limit reached (25 concepts)
+2025-05-30 08:25:53,715 - pdf_ingestion - INFO - 🌍 Quality boost domain matches: {'Physics': 6, 'universal_extraction': 15, 'Computer Science': 4}
+2025-05-30 08:25:53,715 - pdf_ingestion - INFO - 🚀 Quality-focused boost complete: 25 high-priority concepts found
+2025-05-30 08:25:53,715 - pdf_ingestion - INFO - 🚀 QUALITY-FOCUSED DATABASE BOOST RESULT: 25 concepts
+2025-05-30 08:25:53,715 - pdf_ingestion - INFO - 🔧 UNIVERSAL COMBINED RESULT: 81 total concepts (before purity analysis)
+2025-05-30 08:25:53,715 - pdf_ingestion - INFO - 🔬 CHUNK 22 RAW RESULTS: 81 concepts
+2025-05-30 08:25:53,715 - pdf_ingestion - INFO -    🌍 56 universal extraction, 🚀 25 database boosted
+2025-05-30 08:25:53,715 - pdf_ingestion - INFO - 🔬 =============== END CHUNK 22 ===============
+2025-05-30 08:25:53,715 - pdf_ingestion - INFO - 🔬 =============== UNIVERSAL CHUNK 23/46 ===============
+2025-05-30 08:25:53,715 - pdf_ingestion - INFO - 📊 Processing chunk 23/46 (1571 chars)
+2025-05-30 08:25:53,715 - pdf_ingestion - INFO - 🔧 🌍 UNIVERSAL EXTRACT AND BOOST: threshold: 0.0
+2025-05-30 08:25:53,715 - pdf_ingestion - INFO - 🔬 Chunk length: 1571 chars
+2025-05-30 08:25:53,715 - pdf_ingestion - INFO - 🔬 STEP 1: Calling universal extractConceptsFromDocument...
+2025-05-30 08:25:53,715 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL CONCEPT EXTRACTION START
+2025-05-30 08:25:53,715 - ingest_pdf.extractConceptsFromDocument - INFO - 🔬 Text length: 1571 chars, Threshold: 0.0
+2025-05-30 08:25:53,715 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION: Processing 1571 chars
+2025-05-30 08:25:56,473 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION COMPLETE: 53 concepts extracted
+2025-05-30 08:25:56,473 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 TOP UNIVERSAL CONCEPTS:
+2025-05-30 08:25:56,473 - ingest_pdf.extractConceptsFromDocument - INFO -   1. magnetization (score: 1.000, methods: KeyBERT+YAKE)
+2025-05-30 08:25:56,473 - ingest_pdf.extractConceptsFromDocument - INFO -   2. neural dynamics (score: 0.959, methods: KeyBERT)
+2025-05-30 08:25:56,473 - ingest_pdf.extractConceptsFromDocument - INFO -   3. fixed point neural (score: 0.849, methods: KeyBERT)
+2025-05-30 08:25:56,473 - ingest_pdf.extractConceptsFromDocument - INFO -   4. neural (score: 0.837, methods: KeyBERT)
+2025-05-30 08:25:56,473 - ingest_pdf.extractConceptsFromDocument - INFO -   5. point neural dynamics (score: 0.827, methods: KeyBERT)
+2025-05-30 08:25:56,473 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 EXTRACTION METHOD BREAKDOWN:
+2025-05-30 08:25:56,473 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT+YAKE: 3 concepts
+2025-05-30 08:25:56,473 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT: 17 concepts
+2025-05-30 08:25:56,473 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 YAKE: 17 concepts
+2025-05-30 08:25:56,473 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER: 16 concepts
+2025-05-30 08:25:56,473 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL EXTRACTION END: 53 concepts ready
+2025-05-30 08:25:56,473 - pdf_ingestion - INFO - 📊 UNIVERSAL SEMANTIC EXTRACTION RESULT: 53 concepts
+2025-05-30 08:25:56,473 - pdf_ingestion - INFO - 🔬 STEP 2: Calling quality-focused boost_known_concepts...
+2025-05-30 08:25:56,473 - pdf_ingestion - INFO - 🚀 QUALITY BOOST: Checking top 300 priority concepts (max 25 quality matches)
+2025-05-30 08:25:56,473 - pdf_ingestion - INFO - 🛑 Quality boost limit reached (25 concepts)
+2025-05-30 08:25:56,473 - pdf_ingestion - INFO - 🌍 Quality boost domain matches: {'Physics': 3, 'universal_extraction': 17, 'Computer Science': 4, 'Biology': 1}
+2025-05-30 08:25:56,473 - pdf_ingestion - INFO - 🚀 Quality-focused boost complete: 25 high-priority concepts found
+2025-05-30 08:25:56,473 - pdf_ingestion - INFO - 🚀 QUALITY-FOCUSED DATABASE BOOST RESULT: 25 concepts
+2025-05-30 08:25:56,473 - pdf_ingestion - INFO - 🔧 UNIVERSAL COMBINED RESULT: 78 total concepts (before purity analysis)
+2025-05-30 08:25:56,473 - pdf_ingestion - INFO - 🔬 CHUNK 23 RAW RESULTS: 78 concepts
+2025-05-30 08:25:56,473 - pdf_ingestion - INFO -    🌍 53 universal extraction, 🚀 25 database boosted
+2025-05-30 08:25:56,473 - pdf_ingestion - INFO - 🔬 =============== END CHUNK 23 ===============
+2025-05-30 08:25:56,473 - pdf_ingestion - INFO - 🔬 =============== UNIVERSAL CHUNK 24/46 ===============
+2025-05-30 08:25:56,473 - pdf_ingestion - INFO - 📊 Processing chunk 24/46 (4043 chars)
+2025-05-30 08:25:56,473 - pdf_ingestion - INFO - 🔧 🌍 UNIVERSAL EXTRACT AND BOOST: threshold: 0.0
+2025-05-30 08:25:56,473 - pdf_ingestion - INFO - 🔬 Chunk length: 4043 chars
+2025-05-30 08:25:56,473 - pdf_ingestion - INFO - 🔬 STEP 1: Calling universal extractConceptsFromDocument...
+2025-05-30 08:25:56,473 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL CONCEPT EXTRACTION START
+2025-05-30 08:25:56,473 - ingest_pdf.extractConceptsFromDocument - INFO - 🔬 Text length: 4043 chars, Threshold: 0.0
+2025-05-30 08:25:56,473 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION: Processing 4043 chars
+2025-05-30 08:26:02,906 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION COMPLETE: 49 concepts extracted
+2025-05-30 08:26:02,906 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 TOP UNIVERSAL CONCEPTS:
+2025-05-30 08:26:02,906 - ingest_pdf.extractConceptsFromDocument - INFO -   1. Hopfield networks (score: 1.000, methods: KeyBERT+YAKE)
+2025-05-30 08:26:02,906 - ingest_pdf.extractConceptsFromDocument - INFO -   2. unsupervised Hopfield networks (score: 0.906, methods: KeyBERT+YAKE)
+2025-05-30 08:26:02,906 - ingest_pdf.extractConceptsFromDocument - INFO -   3. Hebbian networks built (score: 0.850, methods: KeyBERT+YAKE)
+2025-05-30 08:26:02,906 - ingest_pdf.extractConceptsFromDocument - INFO -   4. Hopfield neural networks (score: 0.792, methods: KeyBERT+YAKE)
+2025-05-30 08:26:02,906 - ingest_pdf.extractConceptsFromDocument - INFO -   5. magnetization network (score: 0.646, methods: KeyBERT)
+2025-05-30 08:26:02,906 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 EXTRACTION METHOD BREAKDOWN:
+2025-05-30 08:26:02,906 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT+YAKE: 4 concepts
+2025-05-30 08:26:02,906 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT: 16 concepts
+2025-05-30 08:26:02,906 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER+YAKE: 1 concepts
+2025-05-30 08:26:02,906 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 YAKE: 15 concepts
+2025-05-30 08:26:02,906 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER: 13 concepts
+2025-05-30 08:26:02,906 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL EXTRACTION END: 49 concepts ready
+2025-05-30 08:26:02,906 - pdf_ingestion - INFO - 📊 UNIVERSAL SEMANTIC EXTRACTION RESULT: 49 concepts
+2025-05-30 08:26:02,906 - pdf_ingestion - INFO - 🔬 STEP 2: Calling quality-focused boost_known_concepts...
+2025-05-30 08:26:02,906 - pdf_ingestion - INFO - 🚀 QUALITY BOOST: Checking top 300 priority concepts (max 25 quality matches)
+2025-05-30 08:26:02,906 - pdf_ingestion - INFO - 🛑 Quality boost limit reached (25 concepts)
+2025-05-30 08:26:02,906 - pdf_ingestion - INFO - 🌍 Quality boost domain matches: {'Physics': 4, 'universal_extraction': 7, 'Biology': 12, 'Computer Science': 1, 'Mathematics': 1}
+2025-05-30 08:26:02,906 - pdf_ingestion - INFO - 🚀 Quality-focused boost complete: 25 high-priority concepts found
+2025-05-30 08:26:02,906 - pdf_ingestion - INFO - 🚀 QUALITY-FOCUSED DATABASE BOOST RESULT: 25 concepts
+2025-05-30 08:26:02,906 - pdf_ingestion - INFO - 🔧 UNIVERSAL COMBINED RESULT: 74 total concepts (before purity analysis)
+2025-05-30 08:26:02,906 - pdf_ingestion - INFO - 🔬 CHUNK 24 RAW RESULTS: 74 concepts
+2025-05-30 08:26:02,906 - pdf_ingestion - INFO -    🌍 49 universal extraction, 🚀 25 database boosted
+2025-05-30 08:26:02,906 - pdf_ingestion - INFO - 🔬 =============== END CHUNK 24 ===============
+2025-05-30 08:26:02,906 - pdf_ingestion - INFO - 🔬 =============== UNIVERSAL CHUNK 25/46 ===============
+2025-05-30 08:26:02,906 - pdf_ingestion - INFO - 📊 Processing chunk 25/46 (2813 chars)
+2025-05-30 08:26:02,922 - pdf_ingestion - INFO - 🔧 🌍 UNIVERSAL EXTRACT AND BOOST: threshold: 0.0
+2025-05-30 08:26:02,922 - pdf_ingestion - INFO - 🔬 Chunk length: 2813 chars
+2025-05-30 08:26:02,923 - pdf_ingestion - INFO - 🔬 STEP 1: Calling universal extractConceptsFromDocument...
+2025-05-30 08:26:02,923 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL CONCEPT EXTRACTION START
+2025-05-30 08:26:02,923 - ingest_pdf.extractConceptsFromDocument - INFO - 🔬 Text length: 2813 chars, Threshold: 0.0
+2025-05-30 08:26:02,923 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION: Processing 2813 chars
+2025-05-30 08:26:09,706 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION COMPLETE: 63 concepts extracted
+2025-05-30 08:26:09,706 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 TOP UNIVERSAL CONCEPTS:
+2025-05-30 08:26:09,706 - ingest_pdf.extractConceptsFromDocument - INFO -   1. Machine Learning (score: 1.000, methods: NER+YAKE)
+2025-05-30 08:26:09,706 - ingest_pdf.extractConceptsFromDocument - INFO -   2. spincorrelationevaluatedon thetrainingset (score: 0.822, methods: KeyBERT)
+2025-05-30 08:26:09,706 - ingest_pdf.extractConceptsFromDocument - INFO -   3. Hebbian (score: 0.753, methods: NER+YAKE)
+2025-05-30 08:26:09,706 - ingest_pdf.extractConceptsFromDocument - INFO -   4. spincorrelationevaluatedon thetrainingset whilethesecondtermplaystheroleofaregularizationterm (score: 0.689, methods: KeyBERT)
+2025-05-30 08:26:09,706 - ingest_pdf.extractConceptsFromDocument - INFO -   5. empirical setting loss (score: 0.682, methods: KeyBERT)
+2025-05-30 08:26:09,706 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 EXTRACTION METHOD BREAKDOWN:
+2025-05-30 08:26:09,706 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER+YAKE: 2 concepts
+2025-05-30 08:26:09,706 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT: 20 concepts
+2025-05-30 08:26:09,706 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 YAKE: 18 concepts
+2025-05-30 08:26:09,706 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER: 23 concepts
+2025-05-30 08:26:09,706 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL EXTRACTION END: 63 concepts ready
+2025-05-30 08:26:09,706 - pdf_ingestion - INFO - 📊 UNIVERSAL SEMANTIC EXTRACTION RESULT: 63 concepts
+2025-05-30 08:26:09,706 - pdf_ingestion - INFO - 🔬 STEP 2: Calling quality-focused boost_known_concepts...
+2025-05-30 08:26:09,706 - pdf_ingestion - INFO - 🚀 QUALITY BOOST: Checking top 300 priority concepts (max 25 quality matches)
+2025-05-30 08:26:09,706 - pdf_ingestion - INFO - 🛑 Quality boost limit reached (25 concepts)
+2025-05-30 08:26:09,706 - pdf_ingestion - INFO - 🌍 Quality boost domain matches: {'Physics': 6, 'universal_extraction': 14, 'Computer Science': 5}
+2025-05-30 08:26:09,706 - pdf_ingestion - INFO - 🚀 Quality-focused boost complete: 25 high-priority concepts found
+2025-05-30 08:26:09,706 - pdf_ingestion - INFO - 🚀 QUALITY-FOCUSED DATABASE BOOST RESULT: 25 concepts
+2025-05-30 08:26:09,706 - pdf_ingestion - INFO - 🔧 UNIVERSAL COMBINED RESULT: 88 total concepts (before purity analysis)
+2025-05-30 08:26:09,706 - pdf_ingestion - INFO - 🔬 CHUNK 25 RAW RESULTS: 88 concepts
+2025-05-30 08:26:09,706 - pdf_ingestion - INFO -    🌍 63 universal extraction, 🚀 25 database boosted
+2025-05-30 08:26:09,706 - pdf_ingestion - INFO - 🔬 =============== END CHUNK 25 ===============
+2025-05-30 08:26:09,706 - pdf_ingestion - INFO - 🔬 =============== UNIVERSAL CHUNK 26/46 ===============
+2025-05-30 08:26:09,706 - pdf_ingestion - INFO - 📊 Processing chunk 26/46 (3170 chars)
+2025-05-30 08:26:09,706 - pdf_ingestion - INFO - 🔧 🌍 UNIVERSAL EXTRACT AND BOOST: threshold: 0.0
+2025-05-30 08:26:09,706 - pdf_ingestion - INFO - 🔬 Chunk length: 3170 chars
+2025-05-30 08:26:09,706 - pdf_ingestion - INFO - 🔬 STEP 1: Calling universal extractConceptsFromDocument...
+2025-05-30 08:26:09,706 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL CONCEPT EXTRACTION START
+2025-05-30 08:26:09,706 - ingest_pdf.extractConceptsFromDocument - INFO - 🔬 Text length: 3170 chars, Threshold: 0.0
+2025-05-30 08:26:09,706 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION: Processing 3170 chars
+2025-05-30 08:26:16,655 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION COMPLETE: 68 concepts extracted
+2025-05-30 08:26:16,655 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 TOP UNIVERSAL CONCEPTS:
+2025-05-30 08:26:16,655 - ingest_pdf.extractConceptsFromDocument - INFO -   1. gradient descent (score: 1.000, methods: KeyBERT+YAKE)
+2025-05-30 08:26:16,655 - ingest_pdf.extractConceptsFromDocument - INFO -   2. coupling matrix (score: 0.968, methods: KeyBERT+YAKE)
+2025-05-30 08:26:16,655 - ingest_pdf.extractConceptsFromDocument - INFO -   3. Hebbian coupling matrix (score: 0.887, methods: KeyBERT+YAKE)
+2025-05-30 08:26:16,655 - ingest_pdf.extractConceptsFromDocument - INFO -   4. gradient descent algorithm (score: 0.695, methods: KeyBERT+YAKE)
+2025-05-30 08:26:16,655 - ingest_pdf.extractConceptsFromDocument - INFO -   5. batch gradient descent (score: 0.567, methods: KeyBERT)
+2025-05-30 08:26:16,655 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 EXTRACTION METHOD BREAKDOWN:
+2025-05-30 08:26:16,655 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT+YAKE: 4 concepts
+2025-05-30 08:26:16,655 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT: 16 concepts
+2025-05-30 08:26:16,655 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 YAKE: 16 concepts
+2025-05-30 08:26:16,655 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER: 32 concepts
+2025-05-30 08:26:16,655 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL EXTRACTION END: 68 concepts ready
+2025-05-30 08:26:16,655 - pdf_ingestion - INFO - 📊 UNIVERSAL SEMANTIC EXTRACTION RESULT: 68 concepts
+2025-05-30 08:26:16,655 - pdf_ingestion - INFO - 🔬 STEP 2: Calling quality-focused boost_known_concepts...
+2025-05-30 08:26:16,655 - pdf_ingestion - INFO - 🚀 QUALITY BOOST: Checking top 300 priority concepts (max 25 quality matches)
+2025-05-30 08:26:16,671 - pdf_ingestion - INFO - 🛑 Quality boost limit reached (25 concepts)
+2025-05-30 08:26:16,671 - pdf_ingestion - INFO - 🌍 Quality boost domain matches: {'Physics': 6, 'universal_extraction': 10, 'Computer Science': 7, 'Biology': 2}
+2025-05-30 08:26:16,672 - pdf_ingestion - INFO - 🚀 Quality-focused boost complete: 25 high-priority concepts found
+2025-05-30 08:26:16,672 - pdf_ingestion - INFO - 🚀 QUALITY-FOCUSED DATABASE BOOST RESULT: 25 concepts
+2025-05-30 08:26:16,672 - pdf_ingestion - INFO - 🔧 UNIVERSAL COMBINED RESULT: 93 total concepts (before purity analysis)
+2025-05-30 08:26:16,672 - pdf_ingestion - INFO - 🔬 CHUNK 26 RAW RESULTS: 93 concepts
+2025-05-30 08:26:16,672 - pdf_ingestion - INFO -    🌍 68 universal extraction, 🚀 25 database boosted
+2025-05-30 08:26:16,672 - pdf_ingestion - INFO - 🔬 =============== END CHUNK 26 ===============
+2025-05-30 08:26:16,672 - pdf_ingestion - INFO - 🔬 =============== UNIVERSAL CHUNK 27/46 ===============
+2025-05-30 08:26:16,672 - pdf_ingestion - INFO - 📊 Processing chunk 27/46 (2249 chars)
+2025-05-30 08:26:16,672 - pdf_ingestion - INFO - 🔧 🌍 UNIVERSAL EXTRACT AND BOOST: threshold: 0.0
+2025-05-30 08:26:16,672 - pdf_ingestion - INFO - 🔬 Chunk length: 2249 chars
+2025-05-30 08:26:16,672 - pdf_ingestion - INFO - 🔬 STEP 1: Calling universal extractConceptsFromDocument...
+2025-05-30 08:26:16,672 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL CONCEPT EXTRACTION START
+2025-05-30 08:26:16,672 - ingest_pdf.extractConceptsFromDocument - INFO - 🔬 Text length: 2249 chars, Threshold: 0.0
+2025-05-30 08:26:16,672 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION: Processing 2249 chars
+2025-05-30 08:26:22,089 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION COMPLETE: 59 concepts extracted
+2025-05-30 08:26:22,089 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 TOP UNIVERSAL CONCEPTS:
+2025-05-30 08:26:22,089 - ingest_pdf.extractConceptsFromDocument - INFO -   1. empirical spectral distributions (score: 1.000, methods: KeyBERT+YAKE)
+2025-05-30 08:26:22,089 - ingest_pdf.extractConceptsFromDocument - INFO -   2. Marchenko-Pastur (score: 0.809, methods: NER+YAKE)
+2025-05-30 08:26:22,089 - ingest_pdf.extractConceptsFromDocument - INFO -   3. Prop (score: 0.787, methods: NER+YAKE)
+2025-05-30 08:26:22,089 - ingest_pdf.extractConceptsFromDocument - INFO -   4. marchenko pastur theorem (score: 0.709, methods: KeyBERT)
+2025-05-30 08:26:22,089 - ingest_pdf.extractConceptsFromDocument - INFO -   5. theorem marchenko pastur (score: 0.688, methods: KeyBERT)
+2025-05-30 08:26:22,089 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 EXTRACTION METHOD BREAKDOWN:
+2025-05-30 08:26:22,089 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT+YAKE: 1 concepts
+2025-05-30 08:26:22,089 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER+YAKE: 2 concepts
+2025-05-30 08:26:22,089 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT: 19 concepts
+2025-05-30 08:26:22,089 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 YAKE: 17 concepts
+2025-05-30 08:26:22,089 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER: 20 concepts
+2025-05-30 08:26:22,089 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL EXTRACTION END: 59 concepts ready
+2025-05-30 08:26:22,089 - pdf_ingestion - INFO - 📊 UNIVERSAL SEMANTIC EXTRACTION RESULT: 59 concepts
+2025-05-30 08:26:22,089 - pdf_ingestion - INFO - 🔬 STEP 2: Calling quality-focused boost_known_concepts...
+2025-05-30 08:26:22,089 - pdf_ingestion - INFO - 🚀 QUALITY BOOST: Checking top 300 priority concepts (max 25 quality matches)
+2025-05-30 08:26:22,089 - pdf_ingestion - INFO - 🌍 Quality boost domain matches: {'Physics': 2, 'universal_extraction': 8, 'Mathematics': 1}
+2025-05-30 08:26:22,089 - pdf_ingestion - INFO - 🚀 Quality-focused boost complete: 11 high-priority concepts found
+2025-05-30 08:26:22,105 - pdf_ingestion - INFO - 🚀 QUALITY-FOCUSED DATABASE BOOST RESULT: 11 concepts
+2025-05-30 08:26:22,106 - pdf_ingestion - INFO - 🔧 UNIVERSAL COMBINED RESULT: 70 total concepts (before purity analysis)
+2025-05-30 08:26:22,106 - pdf_ingestion - INFO - 🔬 CHUNK 27 RAW RESULTS: 70 concepts
+2025-05-30 08:26:22,106 - pdf_ingestion - INFO -    🌍 59 universal extraction, 🚀 11 database boosted
+2025-05-30 08:26:22,106 - pdf_ingestion - INFO - 🔬 =============== END CHUNK 27 ===============
+2025-05-30 08:26:22,106 - pdf_ingestion - INFO - 🔬 =============== UNIVERSAL CHUNK 28/46 ===============
+2025-05-30 08:26:22,106 - pdf_ingestion - INFO - 📊 Processing chunk 28/46 (1241 chars)
+2025-05-30 08:26:22,106 - pdf_ingestion - INFO - 🔧 🌍 UNIVERSAL EXTRACT AND BOOST: threshold: 0.0
+2025-05-30 08:26:22,106 - pdf_ingestion - INFO - 🔬 Chunk length: 1241 chars
+2025-05-30 08:26:22,106 - pdf_ingestion - INFO - 🔬 STEP 1: Calling universal extractConceptsFromDocument...
+2025-05-30 08:26:22,106 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL CONCEPT EXTRACTION START
+2025-05-30 08:26:22,106 - ingest_pdf.extractConceptsFromDocument - INFO - 🔬 Text length: 1241 chars, Threshold: 0.0
+2025-05-30 08:26:22,106 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION: Processing 1241 chars
+2025-05-30 08:26:24,856 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION COMPLETE: 56 concepts extracted
+2025-05-30 08:26:24,856 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 TOP UNIVERSAL CONCEPTS:
+2025-05-30 08:26:24,856 - ingest_pdf.extractConceptsFromDocument - INFO -   1. spectral distribution (score: 1.000, methods: KeyBERT+YAKE)
+2025-05-30 08:26:24,856 - ingest_pdf.extractConceptsFromDocument - INFO -   2. Hebbian matrices (score: 0.912, methods: KeyBERT+YAKE)
+2025-05-30 08:26:24,856 - ingest_pdf.extractConceptsFromDocument - INFO -   3. empirical distribution (score: 0.825, methods: KeyBERT+YAKE)
+2025-05-30 08:26:24,856 - ingest_pdf.extractConceptsFromDocument - INFO -   4. spectral distribution γswhen (score: 0.637, methods: KeyBERT)
+2025-05-30 08:26:24,856 - ingest_pdf.extractConceptsFromDocument - INFO -   5. Hebbian (score: 0.633, methods: NER+YAKE)
+2025-05-30 08:26:24,856 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 EXTRACTION METHOD BREAKDOWN:
+2025-05-30 08:26:24,856 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT+YAKE: 3 concepts
+2025-05-30 08:26:24,856 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT: 17 concepts
+2025-05-30 08:26:24,856 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER+YAKE: 1 concepts
+2025-05-30 08:26:24,872 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 YAKE: 16 concepts
+2025-05-30 08:26:24,872 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER: 19 concepts
+2025-05-30 08:26:24,873 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL EXTRACTION END: 56 concepts ready
+2025-05-30 08:26:24,873 - pdf_ingestion - INFO - 📊 UNIVERSAL SEMANTIC EXTRACTION RESULT: 56 concepts
+2025-05-30 08:26:24,873 - pdf_ingestion - INFO - 🔬 STEP 2: Calling quality-focused boost_known_concepts...
+2025-05-30 08:26:24,873 - pdf_ingestion - INFO - 🚀 QUALITY BOOST: Checking top 300 priority concepts (max 25 quality matches)
+2025-05-30 08:26:24,873 - pdf_ingestion - INFO - 🌍 Quality boost domain matches: {'universal_extraction': 1}
+2025-05-30 08:26:24,873 - pdf_ingestion - INFO - 🚀 Quality-focused boost complete: 1 high-priority concepts found
+2025-05-30 08:26:24,873 - pdf_ingestion - INFO - 🚀 QUALITY-FOCUSED DATABASE BOOST RESULT: 1 concepts
+2025-05-30 08:26:24,873 - pdf_ingestion - INFO - 🔧 UNIVERSAL COMBINED RESULT: 57 total concepts (before purity analysis)
+2025-05-30 08:26:24,873 - pdf_ingestion - INFO - 🔬 CHUNK 28 RAW RESULTS: 57 concepts
+2025-05-30 08:26:24,873 - pdf_ingestion - INFO -    🌍 56 universal extraction, 🚀 1 database boosted
+2025-05-30 08:26:24,873 - pdf_ingestion - INFO - 🔬 =============== END CHUNK 28 ===============
+2025-05-30 08:26:24,873 - pdf_ingestion - INFO - 🔬 =============== UNIVERSAL CHUNK 29/46 ===============
+2025-05-30 08:26:24,873 - pdf_ingestion - INFO - 📊 Processing chunk 29/46 (2520 chars)
+2025-05-30 08:26:24,873 - pdf_ingestion - INFO - 🔧 🌍 UNIVERSAL EXTRACT AND BOOST: threshold: 0.0
+2025-05-30 08:26:24,873 - pdf_ingestion - INFO - 🔬 Chunk length: 2520 chars
+2025-05-30 08:26:24,873 - pdf_ingestion - INFO - 🔬 STEP 1: Calling universal extractConceptsFromDocument...
+2025-05-30 08:26:24,873 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL CONCEPT EXTRACTION START
+2025-05-30 08:26:24,873 - ingest_pdf.extractConceptsFromDocument - INFO - 🔬 Text length: 2520 chars, Threshold: 0.0
+2025-05-30 08:26:24,873 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION: Processing 2520 chars
+2025-05-30 08:26:30,834 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION COMPLETE: 57 concepts extracted
+2025-05-30 08:26:30,834 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 TOP UNIVERSAL CONCEPTS:
+2025-05-30 08:26:30,834 - ingest_pdf.extractConceptsFromDocument - INFO -   1. limiting spectral distribution (score: 1.000, methods: KeyBERT+YAKE)
+2025-05-30 08:26:30,834 - ingest_pdf.extractConceptsFromDocument - INFO -   2. spectral distribution (score: 0.943, methods: KeyBERT+YAKE)
+2025-05-30 08:26:30,838 - ingest_pdf.extractConceptsFromDocument - INFO -   3. AFM (score: 0.823, methods: NER+YAKE)
+2025-05-30 08:26:30,839 - ingest_pdf.extractConceptsFromDocument - INFO -   4. empirical spectral distributions (score: 0.718, methods: KeyBERT+YAKE)
+2025-05-30 08:26:30,839 - ingest_pdf.extractConceptsFromDocument - INFO -   5. Wishart Matrix (score: 0.686, methods: NER+YAKE)
+2025-05-30 08:26:30,839 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 EXTRACTION METHOD BREAKDOWN:
+2025-05-30 08:26:30,839 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT+YAKE: 6 concepts
+2025-05-30 08:26:30,839 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER+YAKE: 3 concepts
+2025-05-30 08:26:30,839 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT: 14 concepts
+2025-05-30 08:26:30,839 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER: 23 concepts
+2025-05-30 08:26:30,839 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 YAKE: 11 concepts
+2025-05-30 08:26:30,839 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL EXTRACTION END: 57 concepts ready
+2025-05-30 08:26:30,839 - pdf_ingestion - INFO - 📊 UNIVERSAL SEMANTIC EXTRACTION RESULT: 57 concepts
+2025-05-30 08:26:30,839 - pdf_ingestion - INFO - 🔬 STEP 2: Calling quality-focused boost_known_concepts...
+2025-05-30 08:26:30,839 - pdf_ingestion - INFO - 🚀 QUALITY BOOST: Checking top 300 priority concepts (max 25 quality matches)
+2025-05-30 08:26:30,845 - pdf_ingestion - INFO - 🌍 Quality boost domain matches: {'Physics': 6, 'universal_extraction': 8, 'Computer Science': 1, 'Mathematics': 1}
+2025-05-30 08:26:30,845 - pdf_ingestion - INFO - 🚀 Quality-focused boost complete: 16 high-priority concepts found
+2025-05-30 08:26:30,845 - pdf_ingestion - INFO - 🚀 QUALITY-FOCUSED DATABASE BOOST RESULT: 16 concepts
+2025-05-30 08:26:30,845 - pdf_ingestion - INFO - 🔧 UNIVERSAL COMBINED RESULT: 73 total concepts (before purity analysis)
+2025-05-30 08:26:30,845 - pdf_ingestion - INFO - 🔬 CHUNK 29 RAW RESULTS: 73 concepts
+2025-05-30 08:26:30,845 - pdf_ingestion - INFO -    🌍 57 universal extraction, 🚀 16 database boosted
+2025-05-30 08:26:30,845 - pdf_ingestion - INFO - 🔬 =============== END CHUNK 29 ===============
+2025-05-30 08:26:30,845 - pdf_ingestion - INFO - 🔬 =============== UNIVERSAL CHUNK 30/46 ===============
+2025-05-30 08:26:30,845 - pdf_ingestion - INFO - 📊 Processing chunk 30/46 (1393 chars)
+2025-05-30 08:26:30,845 - pdf_ingestion - INFO - 🔧 🌍 UNIVERSAL EXTRACT AND BOOST: threshold: 0.0
+2025-05-30 08:26:30,845 - pdf_ingestion - INFO - 🔬 Chunk length: 1393 chars
+2025-05-30 08:26:30,845 - pdf_ingestion - INFO - 🔬 STEP 1: Calling universal extractConceptsFromDocument...
+2025-05-30 08:26:30,845 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL CONCEPT EXTRACTION START
+2025-05-30 08:26:30,845 - ingest_pdf.extractConceptsFromDocument - INFO - 🔬 Text length: 1393 chars, Threshold: 0.0
+2025-05-30 08:26:30,845 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION: Processing 1393 chars
+2025-05-30 08:26:34,639 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION COMPLETE: 51 concepts extracted
+2025-05-30 08:26:34,639 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 TOP UNIVERSAL CONCEPTS:
+2025-05-30 08:26:34,639 - ingest_pdf.extractConceptsFromDocument - INFO -   1. spectral distribution (score: 1.000, methods: KeyBERT+YAKE)
+2025-05-30 08:26:34,639 - ingest_pdf.extractConceptsFromDocument - INFO -   2. Hebbian matrices (score: 0.818, methods: KeyBERT+YAKE)
+2025-05-30 08:26:34,639 - ingest_pdf.extractConceptsFromDocument - INFO -   3. Hebbian (score: 0.653, methods: NER+YAKE)
+2025-05-30 08:26:34,639 - ingest_pdf.extractConceptsFromDocument - INFO -   4. spectral distribution γuwhen (score: 0.612, methods: KeyBERT)
+2025-05-30 08:26:34,639 - ingest_pdf.extractConceptsFromDocument - INFO -   5. AFM (score: 0.504, methods: NER+YAKE)
+2025-05-30 08:26:34,639 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 EXTRACTION METHOD BREAKDOWN:
+2025-05-30 08:26:34,639 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT+YAKE: 2 concepts
+2025-05-30 08:26:34,639 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER+YAKE: 2 concepts
+2025-05-30 08:26:34,639 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT: 18 concepts
+2025-05-30 08:26:34,639 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER: 13 concepts
+2025-05-30 08:26:34,639 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 YAKE: 16 concepts
+2025-05-30 08:26:34,639 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL EXTRACTION END: 51 concepts ready
+2025-05-30 08:26:34,639 - pdf_ingestion - INFO - 📊 UNIVERSAL SEMANTIC EXTRACTION RESULT: 51 concepts
+2025-05-30 08:26:34,639 - pdf_ingestion - INFO - 🔬 STEP 2: Calling quality-focused boost_known_concepts...
+2025-05-30 08:26:34,639 - pdf_ingestion - INFO - 🚀 QUALITY BOOST: Checking top 300 priority concepts (max 25 quality matches)
+2025-05-30 08:26:34,656 - pdf_ingestion - INFO - 🌍 Quality boost domain matches: {'universal_extraction': 1}
+2025-05-30 08:26:34,656 - pdf_ingestion - INFO - 🚀 Quality-focused boost complete: 1 high-priority concepts found
+2025-05-30 08:26:34,656 - pdf_ingestion - INFO - 🚀 QUALITY-FOCUSED DATABASE BOOST RESULT: 1 concepts
+2025-05-30 08:26:34,656 - pdf_ingestion - INFO - 🔧 UNIVERSAL COMBINED RESULT: 52 total concepts (before purity analysis)
+2025-05-30 08:26:34,656 - pdf_ingestion - INFO - 🔬 CHUNK 30 RAW RESULTS: 52 concepts
+2025-05-30 08:26:34,656 - pdf_ingestion - INFO -    🌍 51 universal extraction, 🚀 1 database boosted
+2025-05-30 08:26:34,656 - pdf_ingestion - INFO - 🔬 =============== END CHUNK 30 ===============
+2025-05-30 08:26:34,656 - pdf_ingestion - INFO - 🔬 =============== UNIVERSAL CHUNK 31/46 ===============
+2025-05-30 08:26:34,656 - pdf_ingestion - INFO - 📊 Processing chunk 31/46 (2199 chars)
+2025-05-30 08:26:34,656 - pdf_ingestion - INFO - 🔧 🌍 UNIVERSAL EXTRACT AND BOOST: threshold: 0.0
+2025-05-30 08:26:34,656 - pdf_ingestion - INFO - 🔬 Chunk length: 2199 chars
+2025-05-30 08:26:34,656 - pdf_ingestion - INFO - 🔬 STEP 1: Calling universal extractConceptsFromDocument...
+2025-05-30 08:26:34,656 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL CONCEPT EXTRACTION START
+2025-05-30 08:26:34,656 - ingest_pdf.extractConceptsFromDocument - INFO - 🔬 Text length: 2199 chars, Threshold: 0.0
+2025-05-30 08:26:34,656 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION: Processing 2199 chars
+2025-05-30 08:26:37,981 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION COMPLETE: 65 concepts extracted
+2025-05-30 08:26:37,982 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 TOP UNIVERSAL CONCEPTS:
+2025-05-30 08:26:37,983 - ingest_pdf.extractConceptsFromDocument - INFO -   1. unsupervised Hebbian setting (score: 1.000, methods: KeyBERT+YAKE)
+2025-05-30 08:26:37,984 - ingest_pdf.extractConceptsFromDocument - INFO -   2. hebbian kernel supervised (score: 0.848, methods: KeyBERT)
+2025-05-30 08:26:37,984 - ingest_pdf.extractConceptsFromDocument - INFO -   3. Sec (score: 0.822, methods: NER+YAKE)
+2025-05-30 08:26:37,985 - ingest_pdf.extractConceptsFromDocument - INFO -   4. empirical models (score: 0.801, methods: KeyBERT)
+2025-05-30 08:26:37,985 - ingest_pdf.extractConceptsFromDocument - INFO -   5. unsupervised hebbian (score: 0.795, methods: KeyBERT)
+2025-05-30 08:26:37,985 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 EXTRACTION METHOD BREAKDOWN:
+2025-05-30 08:26:37,985 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT+YAKE: 1 concepts
+2025-05-30 08:26:37,985 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT: 19 concepts
+2025-05-30 08:26:37,986 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER+YAKE: 3 concepts
+2025-05-30 08:26:37,986 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 YAKE: 16 concepts
+2025-05-30 08:26:37,986 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER: 26 concepts
+2025-05-30 08:26:37,986 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL EXTRACTION END: 65 concepts ready
+2025-05-30 08:26:37,986 - pdf_ingestion - INFO - 📊 UNIVERSAL SEMANTIC EXTRACTION RESULT: 65 concepts
+2025-05-30 08:26:37,986 - pdf_ingestion - INFO - 🔬 STEP 2: Calling quality-focused boost_known_concepts...
+2025-05-30 08:26:37,987 - pdf_ingestion - INFO - 🚀 QUALITY BOOST: Checking top 300 priority concepts (max 25 quality matches)
+2025-05-30 08:26:37,990 - pdf_ingestion - INFO - 🌍 Quality boost domain matches: {'universal_extraction': 7, 'Physics': 1}
+2025-05-30 08:26:37,990 - pdf_ingestion - INFO - 🚀 Quality-focused boost complete: 8 high-priority concepts found
+2025-05-30 08:26:37,991 - pdf_ingestion - INFO - 🚀 QUALITY-FOCUSED DATABASE BOOST RESULT: 8 concepts
+2025-05-30 08:26:37,991 - pdf_ingestion - INFO - 🔧 UNIVERSAL COMBINED RESULT: 73 total concepts (before purity analysis)
+2025-05-30 08:26:37,991 - pdf_ingestion - INFO - 🔬 CHUNK 31 RAW RESULTS: 73 concepts
+2025-05-30 08:26:37,991 - pdf_ingestion - INFO -    🌍 65 universal extraction, 🚀 8 database boosted
+2025-05-30 08:26:37,991 - pdf_ingestion - INFO - 🔬 =============== END CHUNK 31 ===============
+2025-05-30 08:26:37,991 - pdf_ingestion - INFO - 🔬 =============== UNIVERSAL CHUNK 32/46 ===============
+2025-05-30 08:26:37,991 - pdf_ingestion - INFO - 📊 Processing chunk 32/46 (2220 chars)
+2025-05-30 08:26:37,992 - pdf_ingestion - INFO - 🔧 🌍 UNIVERSAL EXTRACT AND BOOST: threshold: 0.0
+2025-05-30 08:26:37,992 - pdf_ingestion - INFO - 🔬 Chunk length: 2220 chars
+2025-05-30 08:26:37,992 - pdf_ingestion - INFO - 🔬 STEP 1: Calling universal extractConceptsFromDocument...
+2025-05-30 08:26:37,992 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL CONCEPT EXTRACTION START
+2025-05-30 08:26:37,992 - ingest_pdf.extractConceptsFromDocument - INFO - 🔬 Text length: 2220 chars, Threshold: 0.0
+2025-05-30 08:26:37,992 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION: Processing 2220 chars
+2025-05-30 08:26:41,637 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION COMPLETE: 65 concepts extracted
+2025-05-30 08:26:41,637 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 TOP UNIVERSAL CONCEPTS:
+2025-05-30 08:26:41,639 - ingest_pdf.extractConceptsFromDocument - INFO -   1. Wishart matrix (score: 1.000, methods: KeyBERT+YAKE)
+2025-05-30 08:26:41,639 - ingest_pdf.extractConceptsFromDocument - INFO -   2. KKX (score: 0.932, methods: NER+YAKE)
+2025-05-30 08:26:41,639 - ingest_pdf.extractConceptsFromDocument - INFO -   3. Mcolumns (score: 0.872, methods: NER+YAKE)
+2025-05-30 08:26:41,639 - ingest_pdf.extractConceptsFromDocument - INFO -   4. ensemble random matrices11 (score: 0.839, methods: KeyBERT)
+2025-05-30 08:26:41,639 - ingest_pdf.extractConceptsFromDocument - INFO -   5. random matrices11 pxxt (score: 0.735, methods: KeyBERT)
+2025-05-30 08:26:41,639 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 EXTRACTION METHOD BREAKDOWN:
+2025-05-30 08:26:41,639 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT+YAKE: 1 concepts
+2025-05-30 08:26:41,639 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER+YAKE: 2 concepts
+2025-05-30 08:26:41,639 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT: 19 concepts
+2025-05-30 08:26:41,639 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 YAKE: 17 concepts
+2025-05-30 08:26:41,639 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER: 26 concepts
+2025-05-30 08:26:41,639 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL EXTRACTION END: 65 concepts ready
+2025-05-30 08:26:41,639 - pdf_ingestion - INFO - 📊 UNIVERSAL SEMANTIC EXTRACTION RESULT: 65 concepts
+2025-05-30 08:26:41,639 - pdf_ingestion - INFO - 🔬 STEP 2: Calling quality-focused boost_known_concepts...
+2025-05-30 08:26:41,639 - pdf_ingestion - INFO - 🚀 QUALITY BOOST: Checking top 300 priority concepts (max 25 quality matches)
+2025-05-30 08:26:41,639 - pdf_ingestion - INFO - 🌍 Quality boost domain matches: {'universal_extraction': 7, 'Mathematics': 1}
+2025-05-30 08:26:41,639 - pdf_ingestion - INFO - 🚀 Quality-focused boost complete: 8 high-priority concepts found
+2025-05-30 08:26:41,639 - pdf_ingestion - INFO - 🚀 QUALITY-FOCUSED DATABASE BOOST RESULT: 8 concepts
+2025-05-30 08:26:41,639 - pdf_ingestion - INFO - 🔧 UNIVERSAL COMBINED RESULT: 73 total concepts (before purity analysis)
+2025-05-30 08:26:41,639 - pdf_ingestion - INFO - 🔬 CHUNK 32 RAW RESULTS: 73 concepts
+2025-05-30 08:26:41,639 - pdf_ingestion - INFO -    🌍 65 universal extraction, 🚀 8 database boosted
+2025-05-30 08:26:41,639 - pdf_ingestion - INFO - 🔬 =============== END CHUNK 32 ===============
+2025-05-30 08:26:41,639 - pdf_ingestion - INFO - 🔬 =============== UNIVERSAL CHUNK 33/46 ===============
+2025-05-30 08:26:41,639 - pdf_ingestion - INFO - 📊 Processing chunk 33/46 (2398 chars)
+2025-05-30 08:26:41,639 - pdf_ingestion - INFO - 🔧 🌍 UNIVERSAL EXTRACT AND BOOST: threshold: 0.0
+2025-05-30 08:26:41,639 - pdf_ingestion - INFO - 🔬 Chunk length: 2398 chars
+2025-05-30 08:26:41,639 - pdf_ingestion - INFO - 🔬 STEP 1: Calling universal extractConceptsFromDocument...
+2025-05-30 08:26:41,639 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL CONCEPT EXTRACTION START
+2025-05-30 08:26:41,639 - ingest_pdf.extractConceptsFromDocument - INFO - 🔬 Text length: 2398 chars, Threshold: 0.0
+2025-05-30 08:26:41,639 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION: Processing 2398 chars
+2025-05-30 08:26:45,446 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION COMPLETE: 51 concepts extracted
+2025-05-30 08:26:45,446 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 TOP UNIVERSAL CONCEPTS:
+2025-05-30 08:26:45,446 - ingest_pdf.extractConceptsFromDocument - INFO -   1. Approximate Factorization Method (score: 1.000, methods: KeyBERT+YAKE)
+2025-05-30 08:26:45,446 - ingest_pdf.extractConceptsFromDocument - INFO -   2. Approximate Factorization (score: 0.878, methods: KeyBERT+YAKE)
+2025-05-30 08:26:45,446 - ingest_pdf.extractConceptsFromDocument - INFO -   3. Factorization Method (score: 0.746, methods: KeyBERT+YAKE)
+2025-05-30 08:26:45,446 - ingest_pdf.extractConceptsFromDocument - INFO -   4. Wishart random matrix (score: 0.547, methods: KeyBERT+YAKE)
+2025-05-30 08:26:45,446 - ingest_pdf.extractConceptsFromDocument - INFO -   5. large approximate factorization (score: 0.546, methods: KeyBERT)
+2025-05-30 08:26:45,446 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 EXTRACTION METHOD BREAKDOWN:
+2025-05-30 08:26:45,446 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT+YAKE: 5 concepts
+2025-05-30 08:26:45,446 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT: 15 concepts
+2025-05-30 08:26:45,446 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER+YAKE: 1 concepts
+2025-05-30 08:26:45,455 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER: 16 concepts
+2025-05-30 08:26:45,456 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 YAKE: 14 concepts
+2025-05-30 08:26:45,456 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL EXTRACTION END: 51 concepts ready
+2025-05-30 08:26:45,456 - pdf_ingestion - INFO - 📊 UNIVERSAL SEMANTIC EXTRACTION RESULT: 51 concepts
+2025-05-30 08:26:45,456 - pdf_ingestion - INFO - 🔬 STEP 2: Calling quality-focused boost_known_concepts...
+2025-05-30 08:26:45,459 - pdf_ingestion - INFO - 🚀 QUALITY BOOST: Checking top 300 priority concepts (max 25 quality matches)
+2025-05-30 08:26:45,465 - pdf_ingestion - INFO - 🌍 Quality boost domain matches: {'Physics': 3, 'Computer Science': 6, 'Mathematics': 1, 'universal_extraction': 4}
+2025-05-30 08:26:45,465 - pdf_ingestion - INFO - 🚀 Quality-focused boost complete: 14 high-priority concepts found
+2025-05-30 08:26:45,465 - pdf_ingestion - INFO - 🚀 QUALITY-FOCUSED DATABASE BOOST RESULT: 14 concepts
+2025-05-30 08:26:45,467 - pdf_ingestion - INFO - 🔧 UNIVERSAL COMBINED RESULT: 65 total concepts (before purity analysis)
+2025-05-30 08:26:45,467 - pdf_ingestion - INFO - 🔬 CHUNK 33 RAW RESULTS: 65 concepts
+2025-05-30 08:26:45,467 - pdf_ingestion - INFO -    🌍 51 universal extraction, 🚀 14 database boosted
+2025-05-30 08:26:45,467 - pdf_ingestion - INFO - 🔬 =============== END CHUNK 33 ===============
+2025-05-30 08:26:45,467 - pdf_ingestion - INFO - 🔬 =============== UNIVERSAL CHUNK 34/46 ===============
+2025-05-30 08:26:45,467 - pdf_ingestion - INFO - 📊 Processing chunk 34/46 (2212 chars)
+2025-05-30 08:26:45,467 - pdf_ingestion - INFO - 🔧 🌍 UNIVERSAL EXTRACT AND BOOST: threshold: 0.0
+2025-05-30 08:26:45,467 - pdf_ingestion - INFO - 🔬 Chunk length: 2212 chars
+2025-05-30 08:26:45,467 - pdf_ingestion - INFO - 🔬 STEP 1: Calling universal extractConceptsFromDocument...
+2025-05-30 08:26:45,467 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL CONCEPT EXTRACTION START
+2025-05-30 08:26:45,471 - ingest_pdf.extractConceptsFromDocument - INFO - 🔬 Text length: 2212 chars, Threshold: 0.0
+2025-05-30 08:26:45,482 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION: Processing 2212 chars
+2025-05-30 08:26:48,539 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION COMPLETE: 66 concepts extracted
+2025-05-30 08:26:48,539 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 TOP UNIVERSAL CONCEPTS:
+2025-05-30 08:26:48,539 - ingest_pdf.extractConceptsFromDocument - INFO -   1. random variables YandZ (score: 1.000, methods: KeyBERT+YAKE)
+2025-05-30 08:26:48,539 - ingest_pdf.extractConceptsFromDocument - INFO -   2. Bernoulli random variables (score: 0.976, methods: KeyBERT+YAKE)
+2025-05-30 08:26:48,539 - ingest_pdf.extractConceptsFromDocument - INFO -   3. marchenko pastur distribution (score: 0.968, methods: KeyBERT)
+2025-05-30 08:26:48,539 - ingest_pdf.extractConceptsFromDocument - INFO -   4. thespectraldistributionof sconvergesasymptotically marchenko (score: 0.931, methods: KeyBERT)
+2025-05-30 08:26:48,539 - ingest_pdf.extractConceptsFromDocument - INFO -   5. sconvergesasymptotically marchenko (score: 0.753, methods: KeyBERT)
+2025-05-30 08:26:48,539 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 EXTRACTION METHOD BREAKDOWN:
+2025-05-30 08:26:48,539 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT+YAKE: 2 concepts
+2025-05-30 08:26:48,539 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT: 18 concepts
+2025-05-30 08:26:48,539 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 YAKE: 17 concepts
+2025-05-30 08:26:48,539 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER: 28 concepts
+2025-05-30 08:26:48,539 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER+YAKE: 1 concepts
+2025-05-30 08:26:48,539 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL EXTRACTION END: 66 concepts ready
+2025-05-30 08:26:48,539 - pdf_ingestion - INFO - 📊 UNIVERSAL SEMANTIC EXTRACTION RESULT: 66 concepts
+2025-05-30 08:26:48,539 - pdf_ingestion - INFO - 🔬 STEP 2: Calling quality-focused boost_known_concepts...
+2025-05-30 08:26:48,539 - pdf_ingestion - INFO - 🚀 QUALITY BOOST: Checking top 300 priority concepts (max 25 quality matches)
+2025-05-30 08:26:48,550 - pdf_ingestion - INFO - 🌍 Quality boost domain matches: {'universal_extraction': 3, 'Mathematics': 1, 'Computer Science': 1, 'Physics': 1}
+2025-05-30 08:26:48,550 - pdf_ingestion - INFO - 🚀 Quality-focused boost complete: 6 high-priority concepts found
+2025-05-30 08:26:48,550 - pdf_ingestion - INFO - 🚀 QUALITY-FOCUSED DATABASE BOOST RESULT: 6 concepts
+2025-05-30 08:26:48,550 - pdf_ingestion - INFO - 🔧 UNIVERSAL COMBINED RESULT: 72 total concepts (before purity analysis)
+2025-05-30 08:26:48,550 - pdf_ingestion - INFO - 🔬 CHUNK 34 RAW RESULTS: 72 concepts
+2025-05-30 08:26:48,550 - pdf_ingestion - INFO -    🌍 66 universal extraction, 🚀 6 database boosted
+2025-05-30 08:26:48,552 - pdf_ingestion - INFO - 🔬 =============== END CHUNK 34 ===============
+2025-05-30 08:26:48,552 - pdf_ingestion - INFO - 🔬 =============== UNIVERSAL CHUNK 35/46 ===============
+2025-05-30 08:26:48,552 - pdf_ingestion - INFO - 📊 Processing chunk 35/46 (3074 chars)
+2025-05-30 08:26:48,552 - pdf_ingestion - INFO - 🔧 🌍 UNIVERSAL EXTRACT AND BOOST: threshold: 0.0
+2025-05-30 08:26:48,552 - pdf_ingestion - INFO - 🔬 Chunk length: 3074 chars
+2025-05-30 08:26:48,552 - pdf_ingestion - INFO - 🔬 STEP 1: Calling universal extractConceptsFromDocument...
+2025-05-30 08:26:48,552 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL CONCEPT EXTRACTION START
+2025-05-30 08:26:48,552 - ingest_pdf.extractConceptsFromDocument - INFO - 🔬 Text length: 3074 chars, Threshold: 0.0
+2025-05-30 08:26:48,552 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION: Processing 3074 chars
+2025-05-30 08:26:55,203 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION COMPLETE: 69 concepts extracted
+2025-05-30 08:26:55,203 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 TOP UNIVERSAL CONCEPTS:
+2025-05-30 08:26:55,207 - ingest_pdf.extractConceptsFromDocument - INFO -   1. AFM (score: 1.000, methods: NER+YAKE)
+2025-05-30 08:26:55,207 - ingest_pdf.extractConceptsFromDocument - INFO -   2. random vectors (score: 0.700, methods: KeyBERT)
+2025-05-30 08:26:55,207 - ingest_pdf.extractConceptsFromDocument - INFO -   3. random vectors coefficients (score: 0.687, methods: KeyBERT)
+2025-05-30 08:26:55,207 - ingest_pdf.extractConceptsFromDocument - INFO -   4. independent random vectors (score: 0.655, methods: KeyBERT)
+2025-05-30 08:26:55,207 - ingest_pdf.extractConceptsFromDocument - INFO -   5. independent χµ vectors (score: 0.652, methods: KeyBERT)
+2025-05-30 08:26:55,207 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 EXTRACTION METHOD BREAKDOWN:
+2025-05-30 08:26:55,207 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER+YAKE: 2 concepts
+2025-05-30 08:26:55,207 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT: 20 concepts
+2025-05-30 08:26:55,207 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 YAKE: 18 concepts
+2025-05-30 08:26:55,207 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER: 29 concepts
+2025-05-30 08:26:55,207 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL EXTRACTION END: 69 concepts ready
+2025-05-30 08:26:55,207 - pdf_ingestion - INFO - 📊 UNIVERSAL SEMANTIC EXTRACTION RESULT: 69 concepts
+2025-05-30 08:26:55,207 - pdf_ingestion - INFO - 🔬 STEP 2: Calling quality-focused boost_known_concepts...
+2025-05-30 08:26:55,207 - pdf_ingestion - INFO - 🚀 QUALITY BOOST: Checking top 300 priority concepts (max 25 quality matches)
+2025-05-30 08:26:55,214 - pdf_ingestion - INFO - 🌍 Quality boost domain matches: {'universal_extraction': 11}
+2025-05-30 08:26:55,214 - pdf_ingestion - INFO - 🚀 Quality-focused boost complete: 11 high-priority concepts found
+2025-05-30 08:26:55,214 - pdf_ingestion - INFO - 🚀 QUALITY-FOCUSED DATABASE BOOST RESULT: 11 concepts
+2025-05-30 08:26:55,214 - pdf_ingestion - INFO - 🔧 UNIVERSAL COMBINED RESULT: 80 total concepts (before purity analysis)
+2025-05-30 08:26:55,214 - pdf_ingestion - INFO - 🔬 CHUNK 35 RAW RESULTS: 80 concepts
+2025-05-30 08:26:55,214 - pdf_ingestion - INFO -    🌍 69 universal extraction, 🚀 11 database boosted
+2025-05-30 08:26:55,214 - pdf_ingestion - INFO - 🔬 =============== END CHUNK 35 ===============
+2025-05-30 08:26:55,214 - pdf_ingestion - INFO - 🔬 =============== UNIVERSAL CHUNK 36/46 ===============
+2025-05-30 08:26:55,214 - pdf_ingestion - INFO - 📊 Processing chunk 36/46 (2788 chars)
+2025-05-30 08:26:55,214 - pdf_ingestion - INFO - 🔧 🌍 UNIVERSAL EXTRACT AND BOOST: threshold: 0.0
+2025-05-30 08:26:55,214 - pdf_ingestion - INFO - 🔬 Chunk length: 2788 chars
+2025-05-30 08:26:55,214 - pdf_ingestion - INFO - 🔬 STEP 1: Calling universal extractConceptsFromDocument...
+2025-05-30 08:26:55,214 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL CONCEPT EXTRACTION START
+2025-05-30 08:26:55,214 - ingest_pdf.extractConceptsFromDocument - INFO - 🔬 Text length: 2788 chars, Threshold: 0.0
+2025-05-30 08:26:55,214 - ingest_pdf.extractConceptsF

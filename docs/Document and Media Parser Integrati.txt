@@ -1,0 +1,571 @@
+Document and Media Parser Integration for TORI with Concept and ψMesh Injection
+
+TORI Document Ingestion Pipeline Integration Plan
+Phase 1: System Architecture Overview
+The document ingestion pipeline is designed as a sequence of modular components, each responsible for a stage of processing. The architecture ensures that PDFs, Word documents, Markdown files, JSON/CSV data, and audio/video files are all handled in a uniform, scalable way. The pipeline will parse documents, extract rich semantic content, and integrate the results into multiple knowledge and memory systems for both real-time use and archival. Key modules include:
+File Ingestion & Preprocessing Module: Handles input files (upload or streaming), determines file type, and prepares raw content (including transcription for audio/video). It also computes a file hash for tracking duplicates and versions.
+Parsing & Metadata Extraction Module: Parses the file into text and structured data, extracting metadata (title, author, creation date, etc.) and preserving document structure (sections, headings, tables).
+Segmentation Module: Breaks the content into meaningful sections or chunks (e.g. by heading, paragraph, or time stamp) for easier processing. Ensures each segment is a cohesive unit (e.g. a section of text or a logical transcript segment).
+Semantic Extraction Module: Analyzes each segment to extract deep semantic concepts (key ideas, entities, topics) rather than just keywords. This may involve NLP techniques (NER, noun phrase extraction, embeddings, possibly LLMs) to identify important concepts and their context.
+Integrity Verification Module: Cross-validates the extracted concepts against the original content to ensure accuracy. It checks that each concept is grounded in the document (no hallucinated or spurious concepts) and flags or removes any that don’t match the source.
+Integration Module: Injects the processed results into various systems:
+ConceptMesh: a knowledge graph of concepts and their relationships.
+ψMesh: the assistant’s semantic association mesh (conceptual network for reasoning).
+BraidMemory: a memory store for content segments (e.g. vector database for retrieval).
+ScholarSphere: an archival repository for long-term storage and reference.
+Routing & Orchestration: Coordinates real-time vs archival processing. For real-time use (e.g. to answer user queries immediately), the pipeline forwards data to the assistant’s memory (Memory Upload path). In parallel, it archives the document and its metadata for long-term storage (Archival path).
+Assistant Interaction Interfaces: Allow the assistant to reflect on ingested knowledge, query the stored information, or trigger re-ingestion if the content is updated or needs revision.
+Auxiliary Components: Include a file hash database for duplicate detection, a logging system (loopRecord) to record processing steps and outcomes, and an optional verification UI for human review of extracted information.
+This modular design allows each component to be developed, tested, and scaled independently. Next, we break down each phase of the pipeline in detail, including module interfaces and example implementations.
+Phase 2: File Ingestion and Preprocessing
+In this phase, the pipeline accepts the input file and prepares it for parsing. The system determines the file type (e.g. by extension or MIME type) and normalizes the content into a form suitable for text extraction:
+Input Handling: The file can be uploaded via a web interface, provided via an API call, or fetched from a storage location. Immediately upon receiving the file, the system calculates a hash (e.g. SHA-256) of the file bytes to use as a unique identifier. This hash will be recorded for tracking and to prevent duplicate ingestion of the same content. For example:
+python
+Copy
+Edit
+import hashlib
+
+file_bytes = uploaded_file.read()
+file_hash = hashlib.sha256(file_bytes).hexdigest()
+if hash_db.exists(file_hash):
+    raise DuplicateFileError("This file has already been ingested.")
+hash_db.record(file_hash, file_metadata={...})
+The hash_db (hash database) maps file hashes to ingestion records (including timestamps, version info, etc.). If the same file or content is uploaded again, the system can detect it and decide to skip processing or mark it as an updated version (if the hash differs, indicating file content changes).
+Type Detection: Based on the file name or file header, route the file to the appropriate parser:
+PDF (.pdf)
+Word document (.docx or .doc)
+Markdown (.md)
+JSON (.json)
+CSV (.csv)
+Audio/Video (.mp3, .wav, .mp4, etc. – to be transcribed)
+Other text formats can be added as needed.
+Optional Pre-processing: If the file is an audio or video, a transcription step is invoked here using a speech-to-text service (such as OpenAI Whisper or Deepgram). For example, a WAV audio file will be passed to the Whisper model to obtain a text transcript and timestamps:
+python
+Copy
+Edit
+from whisper import load_model
+model = load_model("base")
+result = model.transcribe(audio_bytes)
+transcript_text = result["text"]
+Similarly, a video file could have its audio track extracted and transcribed. The output transcript (as text with timestamps and possibly speaker labels) is then treated like any other text content for parsing.
+Metadata Gathering: Collect basic metadata at ingestion time. For example, file name, size, upload timestamp, and user-provided metadata (like tags or a title, if any). Some file types contain internal metadata: PDF metadata (author, title, creation date), DOCX core properties, etc. The pipeline will use libraries (e.g. PyMuPDF for PDF, python-docx for Word) to extract this information. This metadata is stored and will later be included in the archival record and possibly used in the concept extraction (for context).
+Staging the Content: The raw file (or its transcript for media) is stored in a temporary location or in memory, and passed along with the metadata to the next phase for detailed parsing. At this point, the system has identified what kind of parser to use and has a unique ID (the file hash or a generated UUID) to track the document through the pipeline.
+Phase 3: Parsing and Structured Content Extraction
+In Phase 3, the pipeline parses the file into text (and structured data when applicable) while preserving as much structural information as possible. Different file types use specialized parsers:
+PDF Parsing: PDFs are parsed using a robust library (e.g. PyMuPDF aka fitz, or PDFPlumber). The parser extracts all text from the PDF, often page by page, and also captures structural cues (headings, bold/italic text, bullet lists, etc.) if possible. It will also extract any available metadata and bookmarks (table of contents). For example:
+python
+Copy
+Edit
+import fitz  # PyMuPDF
+doc = fitz.open(stream=file_bytes, filetype="pdf")
+text_content = ""
+for page in doc:
+    text_content += page.get_text()  # extract text from each page
+pdf_meta = doc.metadata
+If the PDF contains images or scanned pages with no embedded text, the system can fall back to OCR (using an OCR engine like Tesseract) to extract text from those images. The output is a raw text version of the PDF content. Additionally, the parser can detect visual separators like page breaks and section titles by font size or style to help with later segmentation.
+Word Documents (DOCX): Use a library such as python-docx to read the document. This provides access to paragraphs, headings, lists, tables, etc. The parser will iterate through the document elements:
+Concatenate text, while marking headings (e.g. using the heading level as part of the content structure).
+Extract images or tables: For tables, it might convert them into a CSV or structured representation embedded in the text (or store separately as structured data).
+Gather document metadata from the file if available (author, subject, etc.).
+For example:
+python
+Copy
+Edit
+from docx import Document
+doc = Document(uploaded_file)  # loaded from bytes or file path
+text_content = ""
+structure = []  # to record sections
+for para in doc.paragraphs:
+    style = para.style.name
+    text = para.text
+    if style.startswith("Heading"):
+        level = int(style.split()[-1])
+        structure.append({"heading": text, "level": level})
+    text_content += text + "\n"
+doc_meta = doc.core_properties  # metadata like title, author
+This way, we preserve a list of headings with their hierarchy, which will inform the segmentation phase.
+Markdown Files: Markdown content is already text, so it’s read directly. We can use a Markdown parser (like Python’s markdown library) if needed to handle any front-matter or to convert it to HTML for structure. But in many cases, we can treat the raw markdown text as the content. We will split lines and identify headings (lines starting with #), lists (lines starting with - or *), code blocks, etc. For example:
+python
+Copy
+Edit
+text_content = file_bytes.decode('utf-8')
+lines = text_content.splitlines()
+structure = []
+for line in lines:
+    if line.strip().startswith("#"):
+        level = line.count("#")
+        heading_text = line.strip("# ").strip()
+        structure.append({"heading": heading_text, "level": level})
+Metadata might come from a YAML front-matter (if present) which we can parse for title, author, etc.
+JSON Files: JSON is structured data. Instead of free-form text, the parser will load the JSON (using Python’s json module) into a dictionary. We then traverse the JSON structure to pull out textual content or key fields. The goal is to represent the JSON in a form that can be semantically analyzed:
+We might convert the JSON to a pseudo-markdown or outline (keys and values).
+For example, a JSON document could be turned into lines of "Key: Value". Keys become a form of heading or concept, and values (if textual or numeric) become content.
+If the JSON is an array of records (like a list of items), we might treat each item as a sub-document for extraction purposes.
+Example approach:
+python
+Copy
+Edit
+import json
+data = json.loads(file_bytes)
+text_content = json.dumps(data, indent=2)  # raw text representation
+# Optionally, traverse to collect specific fields as text...
+The text_content derived from JSON will be fed into the segmentation and concept extraction. Additionally, the JSON structure itself can be preserved for direct insertion into a knowledge base (for example, storing each key–value as a fact in ConceptMesh).
+CSV Files: CSV is tabular data. The parser will read the CSV (using Python’s csv module or pandas):
+The header row provides field names (which can be considered concepts or attributes).
+Each subsequent row is a record. We might convert the table into a set of statements like "Field: value" for each cell, or treat each row as a small document describing an entity (if the CSV has rows of entities).
+For semantic extraction, if the CSV has textual content, we can treat it similarly to JSON. If it's purely numeric, we’ll focus on capturing the structure and headers as concepts.
+Example using pandas for convenience:
+python
+Copy
+Edit
+import pandas as pd
+df = pd.read_csv(uploaded_file)
+text_content = df.to_markdown(index=False)  # represent table as markdown text
+This gives a textual table that can be parsed for headers and content. We also keep the DataFrame for any direct analysis or insertion into a structured store.
+Audio/Video (Transcription): If Phase 2 produced a transcript (as transcript_text), that text is now our content to process. We treat it like a plain text document. We also keep any structure from the transcription (e.g., speaker segments or timestamped segments can serve as “paragraphs” or sections).
+After parsing, the output is a Document Object containing:
+The full text content (or structured data representation).
+Extracted metadata (file metadata and structural info like headings or table schema).
+Possibly a tree or list structure of the document’s sections (if easily obtainable at this stage).
+A unique document ID or reference (like the hash or a generated ID).
+This Document Object will be used in subsequent phases. Parsing is crucial to preserve context (like knowing a paragraph is under a certain heading or which page it came from) so that later we can reference where a concept came from. With the content and structure in hand, we move to segmenting the document.
+Phase 4: Document Segmentation
+Once we have the raw text and structural markers, we segment the document into meaningful sections or chunks. The goal is to break the content into pieces that are coherent and semantically meaningful (e.g. a section under a heading, a paragraph, a dialogue turn, etc.). Segmentation improves downstream processing by focusing on one topic at a time and is essential for large documents to avoid exceeding memory or context limits in analysis. Segmentation strategy by content type:
+Using Existing Structure: If the document has an inherent structure (headings, chapters, sections, etc.), we leverage that. For example, each top-level heading and its content might form a segment. For a DOCX, we might use Heading 1 as a major section, Heading 2 as subsections, etc., grouping paragraphs accordingly. For Markdown, headings already delineate sections. We maintain the hierarchy in the segment metadata (e.g., Segment X is under Heading Y).
+By Paragraph or Logical Unit: In narrative text (like a PDF with no clear headings), we can segment by paragraphs or pages. Each paragraph can be a segment, or multiple paragraphs if they form a coherent topic block. We detect paragraph breaks (from newline patterns or indentation from the parser).
+By Length (Chunking): We implement a fallback to handle very large sections: if a section of text is extremely long (beyond a certain token length, say 1000 tokens), we further split it into smaller chunks for manageability. We do this at sentence boundaries to keep chunks coherent. For example, using an NLP sentence tokenizer to ensure we don't cut a sentence in half, then accumulating sentences until a chunk size limit is reached (with some overlap between chunks to preserve context). A utility like LangChain’s RecursiveCharacterTextSplitter or a custom chunker can be used:
+python
+Copy
+Edit
+def chunk_text(text, max_len=1000, overlap=100):
+    sentences = nltk.sent_tokenize(text)
+    chunks = []
+    current_chunk = []
+    current_len = 0
+    for sent in sentences:
+        sent_len = len(sent)
+        if current_len + sent_len > max_len:
+            # finalize current chunk
+            chunks.append(" ".join(current_chunk))
+            # start new chunk with overlap from end of last chunk
+            current_chunk = current_chunk[-(overlap//len(sent) or 1):]  # take last few sentences for overlap
+            current_len = sum(len(s) for s in current_chunk)
+        current_chunk.append(sent)
+        current_len += sent_len
+    if current_chunk:
+        chunks.append(" ".join(current_chunk))
+    return chunks
+(Here we used an nltk sentence tokenizer to split sentences. In practice, we would ensure nltk is downloaded or use another method if nltk isn't available. The concept is to chunk without breaking structure.)
+Transcripts: For transcribed audio, segments might be by speaker or time interval. For example, every speaker turn could be one segment (if the transcript provides speaker labels). Or we segment every N minutes of speech. This ensures each segment corresponds to a coherent piece of the conversation or monologue.
+JSON/CSV: For structured data, segmentation might not be textual, but we can consider each top-level element or each row as a segment. For instance, each item in a JSON array is one segment, or each CSV row is one segment (with the header as context). Alternatively, we might not segment at all in a simple JSON if it’s a single record; instead, treat each key-value as separate facts.
+Each segment is represented by a Segment Object containing:
+Segment content (the text for that section or chunk).
+Context metadata (e.g., "Section 2.3", or "Paragraph 5 of Introduction", or "Speaker A, 0:00-0:30").
+Relationship to the document (e.g., document ID and maybe parent section or page number).
+The segmentation module may produce a list of segments. For example, if a document had chapters and sections, each could be a segment. If it’s just a long text, it might produce segments of ~500-1000 words each. This prepares the content for semantic analysis.
+Phase 5: Deep Semantic Concept Extraction
+With the document broken into segments, the pipeline now performs semantic extraction to identify the key concepts and ideas in each segment. Unlike simple keyword extraction, this phase aims to capture meaningful concepts, topics, entities, and relationships that represent the deep content of the text. We use a combination of NLP techniques and possibly language models to achieve this:
+Coreference Resolution (Optional Pre-step): To improve accuracy, we can first resolve pronouns and references within each segment (or across the document) so that concepts are explicit. For example, replace "he" or "this project" with the actual name it refers to
+neo4j.com
+. This can be done with an NLP model (like AllenNLP or spaCy's coreference tools). Coreference resolution ensures that when we extract concepts, we don't miss that "John" and "he" are the same concept.
+Named Entity Recognition (NER): Run NER on each segment using a model (e.g. spaCy or HuggingFace transformer models) to find entities such as people, organizations, locations, dates, etc.
+neo4j.com
+. These are often important concepts. For instance, in a scientific paper, named entities might include chemical names, species, etc., depending on the model or a custom NER for the domain. All identified entities are collected as candidate concepts.
+Noun Phrase Extraction: Not all important concepts are proper names. We extract noun phrases and domain-specific terms that represent key ideas. Using spaCy, we can get noun chunks (continuous noun phrases) or use a POS tag filter. We focus on multi-word terms that carry specific meaning (e.g. “deep semantic extraction”, “document ingestion pipeline”) rather than generic single words. For example:
+python
+Copy
+Edit
+import spacy
+nlp = spacy.load("en_core_web_sm")
+doc = nlp(segment_text)
+concepts = set()
+# Add named entities
+for ent in doc.ents:
+    concepts.add(ent.text)
+# Add noun chunks (phrases)
+for chunk in doc.noun_chunks:
+    # filter out trivial single-word chunks or pronouns
+    if len(chunk.text.split()) > 1 and not chunk.text.istitle():
+        concepts.add(chunk.text)
+This will yield a set of raw concept strings from the segment. (In a real implementation, we might use a larger spaCy model or a domain-specific model for better results, and refine filtering to remove very common phrases.)
+Key Phrase and Topic Modeling: We can supplement the above with statistical or embedding-based keyphrase extraction:
+Use algorithms like RAKE or KeyBERT to get key phrases that might not be caught by simple noun chunking. KeyBERT, for example, uses BERT embeddings to find phrases that best represent the text.
+Use a topic model or clustering of embeddings: For each segment, get an embedding (using a model like Sentence-BERT). If a segment covers multiple subtopics, cluster sentence embeddings to detect distinct concepts.
+We could also prompt an LLM with the segment text: "Extract the key concepts or ideas from this text." This can yield high-level concepts, including implicit ones. However, this is optional and should be cross-checked (to avoid hallucinations).
+Semantic Relationships (Optional): If the use case requires, identify relationships between concepts:
+For example, if a sentence says "Apple acquired Beats", the concepts are "Apple" and "Beats" with relationship "acquired" (type: acquisition). Relationship extraction can be done with dependency parsing or dedicated models (like OpenIE or training a relation classifier).
+Another example: in a knowledge-heavy document, identify if one concept is a category of another (e.g., “COPD is a type of lung disease” implies a relationship).
+These relationships would later be stored in ConceptMesh as edges. This step is complex and domain-dependent, so in a general pipeline it's optional or basic (like co-occurrence or simple subject-verb-object triples extraction).
+Deduplication and Canonicalization: Across segments, the same concept might appear multiple times (e.g. a person's full name vs. last name, or an acronym vs. full form). We normalize and canonicalize concepts:
+Use string matching and known variations (e.g., "UN" -> "United Nations") to unify concepts.
+Use embeddings to cluster similar concepts (if two phrases are very close in meaning, consider them one). For example, "AI" and "Artificial Intelligence" should be treated as the same concept.
+Assign a canonical name or ID to each unique concept for consistent referencing. This could involve linking to external knowledge bases (if "United Nations" appears, map it to a Wikidata or ConceptNet ID, for instance) – another optional enhancement for deep semantics.
+Output of Extraction: For each segment, we now have:
+A list (or set) of concepts (with possible annotations like type if from NER, or importance score).
+(Optional) a list of relationships between concepts in that segment.
+Possibly an embedding vector for the segment or each concept context, which will be useful for similarity (this can be computed now or in the integration phase).
+Each concept is associated with the segment and document it came from.
+We ensure these concepts truly reflect semantic content. For example, rather than just single words like “pipeline” or “system” (which are generic), we aim for more informative phrases like “document ingestion pipeline” or “RAG system architecture” if they appear in text. The combination of NER, noun chunks, and keyphrase extraction helps capture both named entities and abstract concepts. To illustrate, suppose a PDF about climate change is ingested:
+NER might find entities: “United Nations”, “Paris Agreement, 2015”.
+Noun chunks/keyphrases might find: “greenhouse gas emissions”, “global temperature rise”, “climate policy framework”.
+These are the deep concepts we want to capture (instead of just the words "climate" or "temperature").
+All extracted concepts then proceed to the next phase for verification and injection. We store them in a data structure, e.g., a dictionary where keys are concept identifiers (or the string itself initially) and values include details like which segment/page it came from, context sentence, and any relationships.
+Phase 6: Extraction Integrity Verification (Cross-Validation)
+After extracting candidate concepts and relationships, the pipeline performs an integrity check to ensure these concepts are truly supported by the original document content. This cross-validation step prevents errors such as hallucinated concepts (which might occur if an LLM was used or if the extraction misinterpreted something) and confirms that important details weren’t lost. Key steps in verification:
+Reference Check in Text: For each concept, verify it appears in the source text (exactly or in a synonymous form). Since most of our extraction methods work on the text directly, typically each concept should be a substring of the document or a combination of words from it. We perform a case-insensitive search of the concept phrase in the document (or specifically in the segment it came from). If it’s not found exactly:
+We might check for sub-components (e.g., if concept is “global warming effects”, maybe the text had “effects of global warming” – a reordering).
+If an LLM provided a concept that is paraphrased, we attempt to see if the meaning is present. For instance, if the LLM returned "climate crisis" but text says "climate change emergency", a simple exact match fails. This can be handled by either avoiding heavy paraphrasing in extraction or using a semantic similarity check (embedding-based) to match concept to text segment meaning.
+For production reliability, we lean on exact or very close matches. Any concept that doesn’t clearly map to the original text is flagged. For example:
+python
+Copy
+Edit
+verified_concepts = []
+for concept in concepts:
+    if concept.lower() in segment_text.lower():
+        verified_concepts.append(concept)
+    else:
+        log.warning(f"Concept '{concept}' not found verbatim in text; it may be invalid.")
+In practice, we may allow minor variations (plural vs singular, stemming differences), but the idea is to catch things that have no basis in the text.
+Context Consistency: Ensure that the concept means what we think it means in context. If we extracted a concept "Apple" from a segment about fruit, we need to ensure we don't interpret it as the company Apple Inc. (This is where having NER types or context sentences helps). We might attach a snippet of the source sentence to each concept. During verification, we might review these snippets:
+If a concept was extracted incorrectly (e.g., part of a sentence was picked up as a concept but it's actually a clause, not a noun phrase), we may drop it.
+For instance, imagine a sentence: "The theory of relativity is hard to grasp." We extract "theory of relativity" as a concept, which is correct. If we mistakenly also extracted "hard to grasp" as a concept (thinking it's a phrase of importance), the verification can catch that "hard to grasp" is not a noun concept and appears as a descriptive phrase, so it’s likely not a valid standalone concept.
+Cross-Method Validation: We compare concepts found by different methods:
+If a concept was identified by the LLM summarizer but not by NER or keyphrase, double-check its presence.
+If an entity was found by NER but got filtered out by another process, ensure we didn’t lose it.
+Consensus increases confidence. Concepts that only one method found and are low-frequency might be less important or possibly erroneous.
+Manual Spot Check (Optional/If Verification UI is used): If the verification UI is enabled (discussed in Phase 10), a human reviewer can see the list of concepts highlighted in the text to quickly validate correctness. This is optional for production, but extremely useful during development or for critical documents. The pipeline can pause for verification before final integration if required.
+Finalize Concept List: After verification, we have a pruned list of verified concepts (and relationships, if extracted). Each concept entry now has:
+The canonical name of the concept.
+References to the original text location (document ID, segment ID, maybe character index or sentence).
+Any meta-data (type, frequency count in doc, confidence score).
+Perhaps an associated embedding vector (we might generate or finalize this now for each concept using the context in which it appears, if not already done).
+For example, if the draft concept list for a segment was { "global warming", "fossil fuels", "economic impact", "climate crisis" } and we find "climate crisis" wasn’t literally in the text (just an LLM paraphrase), we drop or mark it. The final list might be { "global warming", "fossil fuels", "economic impact" } all confirmed in the text. This integrity check gives us confidence moving forward that what we inject into our knowledge stores is faithful to the source. Now we proceed to inject the verified content into TORI’s various memory and knowledge integration points.
+Phase 7: Memory and Knowledge Base Integration
+In Phase 7, the pipeline takes the parsed and verified information – including segmented content, extracted concepts, and metadata – and injects it into the target systems: ConceptMesh, ψMesh, BraidMemory, and ScholarSphere. Each of these systems serves a different purpose in TORI’s architecture, and we will handle each separately. The integration module will use the APIs or client libraries of these systems to create or update entries.
+7.1 Integrating Concepts into ConceptMesh
+ConceptMesh is a knowledge graph that stores concepts as nodes and their relationships as edges, creating a network (mesh) of interrelated concepts. The ingestion pipeline will populate this graph with new concepts from the document and link them appropriately:
+Node Creation/Update: For each verified concept, we either create a new node in the ConceptMesh or update an existing node if that concept (or an equivalent) is already present. The concept’s canonical name or ID will be used to check for existence. If a concept already exists, we might merge the new occurrence into it, updating its metadata (like increasing a frequency count or adding a new reference source). If it's new, we create a node with properties:
+name: the concept name (e.g. "greenhouse gas emissions").
+origin: the source document ID and segment ID where it came from (so we know where this concept was mentioned).
+type: if available (e.g., Person, Location, Topic, etc. from NER).
+description: possibly a brief description or definition if we have one (we might generate one or leave blank for now).
+any other relevant attributes (timestamp of addition, etc.).
+Edge Creation (Relationships): If during semantic extraction we identified relationships or even just co-occurrence, we add edges in the graph:
+Explicit relationships: e.g., an edge of type "acquired" from node "Apple Inc." to "Beats Electronics" if the text said Apple acquired Beats. Or "is-a" relationship if we parsed a definition.
+Co-occurrence or contextual relationships: a simpler approach is to link concepts that appear in the same segment or sentence with a generic "related" or "co-occurs-with" edge. For example, if "X" and "Y" are both mentioned in one segment, connect X-- relates to --Y. The edge can store context like source_segment or even the sentence snippet as evidence.
+Hierarchical relationships: if the document structure suggests hierarchy (say a heading is a concept that encompasses sub-concepts), we could represent that as an edge ("part-of" or "subcategory") in the graph as well.
+ConceptMesh Interface: We assume an API or client library to interact with ConceptMesh. Pseudo-code might look like:
+python
+Copy
+Edit
+concept_mesh = ConceptMeshClient()
+
+for concept in verified_concepts:
+    node_id = concept_mesh.get_node_id(concept)
+    if node_id is None:
+        node_id = concept_mesh.create_node(concept, properties={
+            "type": concept.type, 
+            "source": document_id
+        })
+    else:
+        concept_mesh.add_source_reference(node_id, document_id)
+    # Link concept to document or segment nodes (if we represent documents as nodes too)
+    concept_mesh.create_edge(node_id, document_id, edge_type="mentioned_in")
+If ConceptMesh also contains nodes for documents or sections, we connect concept nodes to those as well (like the concept is mentioned in that document).
+Merging and Disambiguation: If a concept is ambiguous (for instance, "Mercury" could be a planet or an element), the pipeline may need to decide if it's the same node or different nodes. In production, this could be handled by context or an ontology (maybe the ConceptMesh has separate nodes Mercury(planet) vs Mercury(element)). Our pipeline can try to disambiguate using context and create distinct nodes if needed. This is an advanced feature – possibly integrate with a service or use context keywords (if the document is about space, "Mercury" likely the planet). For now, we ensure unique concepts are stored; ambiguous cases may require manual curation or a separate disambiguation process.
+By the end of this step, ConceptMesh is updated with all the concepts from the document, linked to each other (where relationships found) and to the source document. This enriches the knowledge graph, enabling queries like “what concepts were introduced by Document X” or “how is Concept A related to Concept B”.
+7.2 Integrating Semantic Data into ψMesh
+ψMesh (PsiMesh) is the assistant’s semantic association mesh – think of it as the cognitive layer of memory where conceptual associations and embeddings are stored. While ConceptMesh is an explicit graph of relationships, ψMesh can be seen as a latent semantic network that the assistant uses for reasoning, analogies, and memory recall. Integration with ψMesh involves updating this semantic layer with the new information:
+Embedding Concepts: For each concept (and possibly each segment), we generate a vector embedding that captures its semantic meaning in context. We can use a pre-trained language model (for example, a Sentence Transformer or OpenAI embedding) to get a high-dimensional representation. If we already computed embeddings in extraction, we reuse them. These embeddings are inserted into ψMesh’s vector store or semantic index.
+python
+Copy
+Edit
+vector = embedding_model.encode(concept_context_text)  # e.g. sentence or paragraph around the concept
+psi_mesh.store_vector(concept_id, vector)
+Here concept_context_text might be the sentence or paragraph where the concept appears, to embed the concept with context. Alternatively, we embed just the concept phrase itself and possibly augment it with context later.
+Associative Links: ψMesh can record associations between concepts based on similarity or contextual co-occurrence in a more fuzzy way:
+Compute similarity between the new concept’s embedding and existing concept embeddings in ψMesh. If any are above a certain similarity threshold, create an association link. For example, if "greenhouse gas emissions" is close in vector space to an existing concept "carbon emissions", we link them in ψMesh (this is different from ConceptMesh’s explicit link; ψMesh link indicates a semantic similarity).
+Additionally, if the document explicitly linked concepts (like in ConceptMesh we added an edge), we might also reflect that in ψMesh by slightly adjusting vector positions or linking them in an association list.
+The ψMesh might not be a graph per se, it could simply be a vector index where nearest-neighbors imply association. But we can conceptualize it as a graph where edge weights = semantic similarity scores.
+Contextual State Integration: If ψMesh also stores the assistant’s contextual state or recently used concepts, we integrate so that the assistant’s immediate cognitive context includes this new knowledge. For example, after ingestion, the assistant could have a “context boost” where if the user asks about something related, the assistant's internal prompt includes that it has knowledge of these new concepts.
+Interface Example: Pseudo-code for ψMesh might involve a client or directly using a vector DB:
+python
+Copy
+Edit
+psi_mesh = PsiMeshClient()
+for concept in verified_concepts:
+    vec = embedding_model.encode(concept)
+    psi_mesh.add_concept(concept_id=concept.id, vector=vec, metadata={"doc": document_id})
+# Link similar concepts in psiMesh
+for concept in verified_concepts:
+    similar = psi_mesh.find_similar(concept.id, top_k=5, similarity>0.8)
+    for other_id, score in similar:
+        psi_mesh.link(concept.id, other_id, weight=score)
+In practice, PsiMeshClient might wrap a vector search (like Faiss, Pinecone, etc.) and a lightweight graph of associations. The above stores each concept's vector and then finds similar ones to link.
+Psychological/Reflective Aspect: The name ψ (psi) suggests this layer might support the assistant’s reflection or more intuitive connections. By updating it, we allow the assistant to make connections between the new document’s ideas and existing knowledge that are not explicitly linked in ConceptMesh. For instance, if the assistant previously knew about "climate change" and now we added "greenhouse gas emissions", ψMesh might connect these strongly because of semantic relatedness, even if the ConceptMesh didn't explicitly link them (since maybe the doc never mentioned "climate change" by that exact phrase).
+After ψMesh integration, the assistant’s semantic memory is enriched: it can recall concepts in a contextual, similarity-based way which is crucial for understanding user queries that might not exactly match the wording of the document.
+7.3 Injecting Content into BraidMemory
+BraidMemory is the system’s long-term memory storage for content segments. It’s called "Braid" because it weaves together multiple threads of information (possibly multiple documents, or combining user interactions with knowledge). Essentially, this is where we store the actual text chunks (from segmentation) along with embeddings for retrieval, enabling the assistant to fetch relevant pieces of the source text when needed (for answering questions or for its own context building). Integration steps for BraidMemory:
+Storing Segments: Each segment from Phase 4 is inserted into BraidMemory. We save:
+The text of the segment (exact content, possibly trimmed for length if needed).
+Metadata: document ID, segment ID, section title (if any), sequence (e.g., Section 2.1 comes after 2.0, etc.), source (file name or source info).
+The list of concepts or keywords associated with this segment (the ones we extracted). This can help for meta-tag filtering during retrieval.
+An embedding vector for the segment (to be used in vector similarity search). We likely already computed this in extraction for concept similarity; if not, we generate an embedding for the whole segment text now.
+Optionally, a short summary of the segment (which could be useful for the assistant to know what the segment is about without reading full text—this could be generated by an LLM or a truncation of the first sentences).
+Example pseudo-code:
+python
+Copy
+Edit
+braid_mem = BraidMemoryClient()
+for segment in segments:
+    segment_vector = embedding_model.encode(segment.text)
+    braid_mem.add_entry({
+        "id": f"{document_id}:{segment.id}",
+        "text": segment.text,
+        "concepts": list(segment.concepts),
+        "metadata": {
+            "document": document_id,
+            "section": segment.heading or segment.index,
+            "source": source_name
+        },
+        "vector": segment_vector
+    })
+Here, each entry in BraidMemory can be thought of as a row in a vector database or a document in an index.
+Threading Information: If BraidMemory supports linking segments in a narrative thread (like a braided rope of information), we ensure to maintain linkage:
+Segments from the same document are inherently related sequentially. We can record that relationship (e.g., a pointer to the next/previous segment or a shared thread ID for all segments of the document).
+If the assistant later uses BraidMemory to reconstruct an answer, it might use multiple segments. The "braid" concept could allow it to fetch contiguous segments or related segments easily.
+Also, if multiple documents share concepts, BraidMemory can braid those by cross-referencing (this might be done by linking entries with the same concept tags).
+This is more on the retrieval side, but we ensure the data is stored in a way that can be navigated. For instance, we might store a field like related_segments: [IDs...] if we want to explicitly link them, or we rely on concept tags for implicit linking.
+Memory Index Refresh: If the BraidMemory has an indexing step (like building a FAISS index or updating an Elasticsearch index for text search), we trigger that after adding entries so that the data becomes searchable immediately. Some systems update incrementally; others might need a commit step.
+Verification in Memory: As a precaution, after storing, we could retrieve a couple of entries to ensure they were stored correctly and the embeddings are valid. This is mostly for debugging/assurance in production.
+The result of this step is that the document’s actual content is now in the assistant’s long-term memory store, sliced into retrievable pieces and annotated with concepts. When the assistant needs to answer a question about the document, it can vector-search this memory or filter by concept tags to find the relevant piece of text to quote or use for answering.
+7.4 Archival in ScholarSphere
+Finally, the pipeline archives the original document and its processed metadata into ScholarSphere (the archival storage). ScholarSphere serves as a permanent repository and system of record for ingested documents, ensuring that:
+The original file and its core metadata are preserved.
+There’s a reference that can be used to retrieve or share the document outside the immediate assistant memory (for example, a link or DOI).
+It supports compliance (keeping original content for audit) and allows re-processing if needed.
+Steps for archival integration:
+Package Metadata: We compile a metadata record for the document. This can include:
+Title, author, publication date (from file metadata or user input).
+File name and type.
+The computed file hash (as an identifier for the file version).
+The list of extracted concepts (as "keywords" or "tags" in the archival record).
+An optional summary or description of the document (we might generate a short summary using the extracted info).
+The time of ingestion and the identity of who/what ingested it (to trace back if needed).
+Store Original File: Using ScholarSphere’s API or a storage service, we upload the original file bytes and get back a permanent identifier or URL. For example:
+python
+Copy
+Edit
+scholar = ScholarSphereClient(api_key=SCHOLAR_API_KEY)
+archive_id = scholar.upload_file(file_bytes, file_name, metadata={
+    "title": doc_title,
+    "author": doc_author,
+    "hash": file_hash,
+    "ingested_by": "TORI-system",
+    "ingested_on": datetime.utcnow().isoformat()
+})
+The upload_file might return an archive_id or DOI which we store in our system for reference. If ScholarSphere has versioning, we might also pass a version tag (or if a file with the same name exists, it could create a new version record).
+Store Processed Data (Optional): In addition to the raw file, we can also store the processed outputs in the archive:
+For example, attach a JSON file to the record containing the extracted text or the concept list and segment outlines. This could be useful for external systems or for auditing what the AI extracted.
+Alternatively, store the concept graph entries or references. However, since ConceptMesh and others hold that, we might not need to duplicate it here, except for backup.
+Confirmation and Record: Once archived, the pipeline logs the archive reference. If needed, we update the ConceptMesh or BraidMemory with the archive ID (e.g., attach the archive link to the document node in ConceptMesh so that one can retrieve the original file later).
+Archival for Re-ingestion: Storing the original means if we ever need to re-ingest (like if we update our algorithms and want to process all files again), we have the source readily available in ScholarSphere. We could pull the file from there instead of requiring the user to upload it again.
+At this point, the document is safely stored and can be accessed or referenced in the future. The assistant or any other system component can retrieve the file or metadata from ScholarSphere if needed (for example, if a user asks to see the original document). Security and Access: We ensure that if the document is sensitive, the ScholarSphere (or equivalent archive) is secure and access-controlled. The integration includes passing any necessary access control metadata (like who is allowed to retrieve the file). In a production environment, this might involve generating a token or marking the record as private to the organization or user.
+With all these integrations done, the document’s information is now woven into TORI’s knowledge ecosystem: the concepts are interconnected in ConceptMesh and ψMesh, the detailed content is in BraidMemory for retrieval, and the source is archived. Next, we handle how this ingested knowledge is utilized and maintained.
+Phase 8: Real-Time Memory Upload vs. Archival Routing
+One of the system requirements is to route documents for both real-time use and archival storage. The pipeline we described actually covers both in one flow, but it's important to manage the two paths to meet different performance and usage needs.
+Real-Time Ingestion (Memory Upload): This path is optimized for immediacy. When a user or process ingests a document with the intention of querying it right away (e.g., a user asks the assistant a question about a PDF they just provided), the pipeline prioritizes injecting into BraidMemory and the assistant’s working knowledge (ConceptMesh/ψMesh) quickly. We might:
+Perform parsing and segmentation as fast as possible (possibly skipping very heavy NLP steps if they are too slow, or using faster models).
+Insert into memory so the assistant can start using the data even before the entire pipeline is finished. For example, we could stream segments into BraidMemory one by one as they are processed, allowing queries to fetch earlier segments while later ones are still being processed.
+Possibly defer or parallelize some tasks: e.g., send the file to archive in parallel, or do the heavy graph linking after the initial memory is loaded.
+Ensure that once the memory upload is done, the assistant is notified that new knowledge is available (if the assistant caches any context, it might need to refresh its memory index).
+Archival Ingestion: This path ensures completeness and durability, but not all of it needs to happen before the assistant can use the content. We might offload some archival tasks:
+The actual upload to ScholarSphere can happen asynchronously after the memory upload is confirmed. This avoids making the user wait for a possibly large file to transfer to remote storage if that is slow.
+Building complex relationships in ConceptMesh (if that’s time-consuming because of linking to a large graph) could also be done slightly delayed. Perhaps initially we just add concept nodes and basic links, and later a background job refines the graph (like adding links to related existing concepts).
+In a production setup, a message queue could separate these concerns: a real-time worker handles parsing → memory storage quickly, and a background worker takes the document data to do archiving and deep graph integration.
+Routing Logic: We implement logic to handle different scenarios:
+If a document is ingested in “quick mode” (real-time), do minimal necessary processing and memory injection, then schedule deeper processing for later. For example, use a flag priority="realtime" to adjust the pipeline.
+If ingested in “archive mode” (no immediate query expected), we can run the full pipeline at once since the user is not waiting. Possibly, we might not even inject into memory if it's purely for archive (depending on requirements). But the prompt says both real-time and archival, so typically we do both unless specified.
+Usually, we will do both by default: immediate memory load and archival. But having the flexibility to do one or the other is useful. For instance, an admin might batch-ingest a lot of documents for the knowledge base overnight (archive + memory) without immediate questions; whereas a user might drop a single PDF in a chat for immediate Q&A (memory focus, archive in background).
+Confirmation to User: If the ingestion was triggered by a user action, the system can confirm:
+For real-time: "Document XYZ has been ingested and is now available for querying."
+Possibly provide a reference or ID.
+If archival is slower, maybe later confirm: "Document XYZ has been archived for long-term storage."
+Consistency: The pipeline ensures the data in memory and in archive are consistent:
+The document ID or reference used in BraidMemory/ConceptMesh is linked to the archive ID from ScholarSphere. So if later someone retrieves info from memory and wants the original doc, the system can fetch it via that link.
+We also ensure that if any error occurs in archival after memory is loaded, we have a way to retry archiving, so the document isn’t lost from archive. The reverse (archive succeeded, memory failed) is also handled by retrying memory injection or at least logging the issue for resolution.
+In summary, Phase 8 is about orchestrating the pipeline to satisfy both immediate needs and long-term needs:
+Real-time route populates the assistant’s memory ASAP.
+Archival route secures the data for future re-use and builds up the broader knowledge base (ConceptMesh and repository).
+The system can do these in parallel or sequence, and can toggle components depending on context (fast ingest vs thorough ingest), making the solution flexible and production-friendly (avoiding bottlenecks when not necessary).
+Phase 9: Assistant Integration (Reflection, Query, and Re-Ingestion)
+Once the document’s information is integrated, the assistant (TORI) can utilize it. Phase 9 describes how the assistant interacts with this new knowledge and how the system supports ongoing learning and updates.
+Assistant Reflection: After ingestion, the assistant can perform a reflection on the new content to internalize it:
+In practice, this could be an automated process where the assistant summarizes the document to ensure it has grasped the main points. This summary might be stored or used to answer high-level questions.
+The assistant might also generate a few questions and answers to test its understanding of the material (a form of self-check). This could be facilitated by the pipeline: for example, after ingestion, trigger a prompt to the LLM like: "Summarize the key points of Document X and list any open questions." The results can be fed back into ConceptMesh or BraidMemory as additional notes.
+Reflection could update ψMesh by strengthening associations the assistant deems important. If the assistant realizes two concepts are related in the context of this document, it might ensure that link is noted.
+This phase is somewhat meta-cognitive: it's the assistant digesting the info. It's optional, but can improve the quality of responses later. We can design a Reflection Module that the assistant can call. It would retrieve the segments from BraidMemory and use an LLM to analyze them.
+For example:
+python
+Copy
+Edit
+summary = assistant.llm.summarize(document_id)
+concept_questions = assistant.llm.generate_questions(document_id)
+braid_mem.add_entry({"id": f"{document_id}:summary", "text": summary, "metadata": {"type": "summary"}})
+Now the summary is also stored and can be returned if user asks "What is this document about?" quickly.
+Querying the Knowledge: With the document in the system, the assistant can answer user queries about it or related topics:
+When a query comes in, the assistant’s Query Handler will first check if it’s relevant to any ingested documents. This could be done by seeing if any concept from the query matches nodes in ConceptMesh or by doing a vector search of the query in BraidMemory.
+If a user references the document (e.g., "In the PDF I uploaded, what did it say about X?"), the system can use the document ID context to limit the search to that document’s segments in BraidMemory.
+Generally, the retrieval process might be:
+Concept Search: Extract key terms from the query. Check ConceptMesh for those concepts; if found, pull related concepts or directly find the linked document/segment.
+Vector Search: Embed the query using the same embedding model as memory. Search BraidMemory for the top-k similar segments. This is language-agnostic and catches answers even if phrased differently.
+Hybrid: Possibly combine concept filters with vector search (for example, restrict vector search to segments from this document, if known).
+Return the text of the best matching segments (with citations like document name and section).
+The assistant then formulates an answer, likely quoting or summarizing the segment content. Because we have integrated citations (document IDs, section info), the assistant can say "According to the document (Section 2) ...".
+If the query touches multiple documents, the assistant can braid information from multiple sources (hence the BraidMemory name) by pulling segments from each and merging answers.
+Re-Ingestion (Updating Knowledge): The system supports re-ingestion and updates in several scenarios:
+Document Version Update: If the same document is uploaded again with modifications (or a new version comes out), the file hash will differ. The pipeline can recognize it's related (maybe by file name or an ID embedded in the file) and handle it:
+Either create a new entry in ConceptMesh for the new version’s concepts and mark the old as superseded, or update existing concept nodes with new info.
+In BraidMemory, we might expire or archive the old segments and replace with new ones, or keep both versions (with version tags) if historical data is needed.
+The archival system might support versioning inherently (like ScholarSphere might allow updating an existing record or creating a new record linked to the old).
+The pipeline could prompt: "This appears to be a new version of Document X. Replace the old version in memory?" – possibly automated or with user confirmation via UI.
+Knowledge Correction: If the assistant made an error or the user points out a mistake in the extracted info, we can adjust:
+The user or a developer might remove or edit a concept via the verification UI or an admin interface. The pipeline (or a maintenance script) can then propagate this change: e.g., remove that concept node from ConceptMesh or mark it deprecated, remove that segment from memory, etc.
+Alternatively, re-run the extraction with improved parameters (maybe the initial extraction missed something, so re-run with a different model or more thorough analysis).
+Continuous Learning: The assistant might ingest not just static documents but also conversational information or feedback. The ingestion pipeline could be reused to ingest logs or transcripts (which are just another form of document) into the memory systems. This way, the assistant’s own conversations can become part of its long-term memory after processing.
+Loop Recording: If loopRecord logs show an issue in a past ingestion, an admin could trigger re-ingestion of that file (perhaps after updating the pipeline code) to fix any extraction errors.
+Assistant Interface to Ingestion: We expose functions so the assistant (or any user-level command) can trigger the pipeline:
+e.g., assistant.ingest_document(file) which internally calls the pipeline (or the extractor endpoint described later). The assistant might use this if given a link to a document or if asked to analyze a webpage, etc.
+assistant.query_concepts(concept_name) to directly look up a concept in ConceptMesh and explain it. This could be part of reflection or answering user queries like "What do you know about X concept?".
+assistant.refresh_knowledge(document_id) to re-run or update the memory of a given document if needed.
+Through reflection and querying, the assistant becomes truly augmented by the ingested documents. The knowledge isn't just stored; it's actively used for reasoning and answering questions. Re-ingestion and updating capabilities ensure the system remains dynamic and up-to-date, preventing stale or incorrect data from lingering in the assistant’s mind.
+Phase 10: Additional Features and Considerations
+In building this pipeline, there are a few additional features and implementation details that ensure robustness and usability in a production-grade system:
+File Hash Tracking and Duplicate Management
+As mentioned in Phase 2, each file’s hash is central to tracking. We maintain a hash index to manage duplicates and versions:
+When a file is ingested, its hash is recorded along with the document ID and metadata.
+If a file with the same hash is ingested again, we can skip reprocessing to save resources (and simply link the new request to the existing data). This is especially useful if multiple users upload the same public document – we don’t need to ingest it multiple times; instead, we can just attach the user’s context to the existing entry.
+If a file has the same name but different hash, we treat it as a different version. We might want to flag to the user or admin that a similarly named file was ingested before, in case it's an updated version. Policies can be:
+Auto-update the existing record (if the pipeline is confident this is a newer version).
+Keep both versions but mark the newer one as latest.
+Ask for confirmation via the UI.
+The hash index can be implemented as a simple database table with columns: file_hash, document_id, file_name, upload_date, user. This allows queries like “find document by hash” quickly.
+We also consider document ID generation: We may use the hash itself as an ID (if collisions are negligible) or generate a separate UUID. But storing the hash regardless is useful for integrity checks (e.g., if someone tries to tamper with a file, its hash would change).
+Additionally, the hash allows verifying that memory and archive content hasn’t been corrupted: we could occasionally re-hash archived files and compare with stored hash.
+Logging and loopRecord Integration
+loopRecord integration means we create a detailed log of each pipeline run, which can be reviewed or replayed:
+Every stage of the pipeline logs an event: start time, end time, success/failure, key results (like “50 concepts extracted”, “text parsed with 10 sections”, etc.).
+These logs can be aggregated into a pipeline report for the ingestion. Storing this in a structured way (JSON or database) allows debugging and auditing.
+If loopRecord refers to a system that can replay the steps, we ensure our logs are granular enough to do so. For example, record intermediate data like the raw text length, sample text from each segment, concept lists before and after validation, etc. While we may not store full text in logs for large docs, we could store checksums or counts to validate processing.
+If an error occurs, the log captures it and the pipeline can either retry that step or abort gracefully. For instance, if concept extraction fails due to a model error, log it, maybe fall back to a simpler extractor as a contingency, and continue so that at least something is injected (robustness principle).
+The loopRecord could be visualized in the verification UI or an admin dashboard to show how the document was processed. For example, an admin could see that parsing took 2 seconds, segmentation created 5 segments, concept extraction found 20 concepts, etc.
+Integration with Assistant’s reasoning: Optionally, the assistant can reference the loopRecord to explain answers. If a user asks “How do you know that?”, the assistant can trace it to "Document X, Section Y (ingested on DATE, verified by loopRecord ID Z)".
+Performance metrics: Over time, the logs help identify bottlenecks (e.g., if Whisper transcription is the slowest part, or if concept extraction accuracy is an issue) so we can improve the pipeline.
+Verification Dashboard/UI (Optional Human-in-the-Loop)
+For critical use cases, an optional verification user interface can be employed to involve a human in the loop for quality assurance:
+The UI would present the original document content alongside the extracted segments and concepts. For example, a split-screen: left side shows the document (maybe rendered PDF or text), right side shows a list of extracted concepts or a summary.
+Highlighting: When the user clicks on a concept on the right, the UI could highlight where that concept appears in the text on the left. This uses the references we stored (segment ID and text offsets).
+Editing/Feedback: The user could mark a concept as incorrect or irrelevant, add missing concepts, or correct a name (e.g., if the system extracted "Barack" and "Obama" separately, the user might merge them to "Barack Obama"). They could also adjust segmentation if something was split incorrectly.
+Approval Workflow: If the UI is used, the pipeline might wait for a “approve” action before finalizing integration. Alternatively, it might already integrate but flag the data as "unverified" until someone reviews. In a production deployment, this could depend on the document type; e.g., ingest scientific papers with no human review (trust the pipeline), but ingest legal documents with a human check due to higher accuracy requirements.
+Post-Verification Update: If changes are made in the UI, those need to propagate:
+Removing a concept should trigger removal from ConceptMesh/ψMesh and memory (or marking it deprecated).
+Adding a concept leads to adding it to the systems just as if the pipeline had extracted it.
+This implies the integration module might have to support both initial create and subsequent update operations. We’d provide functions like add_concept_to_graph(concept) and remove_concept_from_graph(concept_id) that the UI can call upon user actions.
+UI Implementation: Likely a web app (possibly integrated into an admin panel). It calls backend endpoints (maybe the same extractor service can serve a “get extraction results” and “post corrections” API).
+While optional, this UI greatly helps maintain high quality knowledge and can be used to train or improve the automatic pipeline by collecting where it went wrong.
+Security and Privacy Considerations
+Since we are dealing with potentially sensitive documents:
+Ensure that data at rest (in BraidMemory, ConceptMesh DB, ScholarSphere, logs) is encrypted or access-controlled according to user permissions.
+The pipeline should sanitize content if needed (e.g., if certain PII should not be extracted as concepts, we might filter those out or mark them as sensitive).
+The verification UI and extractor endpoint should require authentication and authorization, to prevent unauthorized document ingestion or snooping of extracted data.
+If using external APIs (like Deepgram or an embedding service), ensure compliance with data handling (perhaps use self-hosted models like Whisper or local transformers when possible to keep data in-house).
+These additional considerations solidify the pipeline as production-grade, meaning it’s not just accurate, but also robust, secure, and maintainable.
+Phase 11: Optional Extractor Service Endpoint (Scope-Configurable API)
+To allow flexible use of the ingestion pipeline, we provide an Extractor Service API. This is a microservice (e.g., a FastAPI or Flask application) that exposes endpoints for document ingestion tasks. Clients (which could be other internal services, external applications, or even the assistant itself) can use this API to invoke the pipeline on demand. Key features of the Extractor API:
+Endpoint Definition: We define an endpoint, for example POST /ingest, that accepts a file and parameters. The file can be sent as form-data (binary upload) or as a URL to fetch. The parameters allow scope configuration – i.e., the caller can specify which parts of the pipeline to execute and which integrations to perform. For instance:
+?archive=true/false – whether to perform archival in ScholarSphere.
+?memory=true/false – whether to inject into BraidMemory (and ConceptMesh/ψMesh).
+?extractOnly=true – if true, the service will just return extracted text and concepts, without integrating into any memory (useful for a dry run or using the pipeline for analysis only).
+scopes parameter could be a list like ["PARSE", "SEGMENT", "CONCEPTS", "INTEGRATE_MEMORY", "ARCHIVE"] for fine control (default would be all).
+You could also specify options like verify=false to skip the integrity check if speed is more important than accuracy in a particular call.
+Example API Usage: A client can call:
+bash
+Copy
+Edit
+POST /ingest?archive=true&memory=false&extractOnly=true
+Headers: Authorization: Bearer <token>
+Body (form-data): file=<the file>, metadata={"title": "...", "author": "..."}
+This would ingest the file, return the extracted content and concepts in the response, archive the file, but not put anything into the assistant's active memory (maybe the user just wanted a quick analysis and storage).
+Response: The service returns a JSON response containing results as per the requested scope:
+If extractOnly, it might return the text content, a list of segments, and the extracted concept list (possibly with their context sentences and any relationships).
+If memory integration was performed, it can return the IDs/keys of the entries created (e.g., concept node IDs, memory segment IDs).
+If archived, it returns the archive ID or link.
+It can also return status of each phase, or the loopRecord log for that ingestion if requested (for transparency).
+Internal Implementation: The API will internally call the pipeline functions we outlined:
+python
+Copy
+Edit
+@app.post("/ingest")
+async def ingest_document(file: UploadFile, archive: bool = True, memory: bool = True, verify: bool = True):
+    # 1. Read file and compute hash
+    file_bytes = await file.read()
+    file_hash = hashlib.sha256(file_bytes).hexdigest()
+    # (check duplicate, etc.)
+    doc = parse_file(file_bytes, file.filename)
+    segments = segment_document(doc)
+    concepts = extract_concepts(segments)
+    if verify:
+        concepts = cross_validate(concepts, doc)
+    result = {"document_id": doc.id, "num_segments": len(segments), "num_concepts": len(concepts)}
+    if memory:
+        integrate_into_memory_systems(doc, segments, concepts)
+        result["memory_status"] = "success"
+    if archive:
+        archive_id = archive_to_scholarsphere(doc, file_bytes)
+        result["archive_id"] = archive_id
+    # Optionally include extracted data in response if extractOnly or for confirmation
+    if not memory:  # if not stored, return the concepts directly
+        result["concepts_extracted"] = [c.name for c in concepts]
+    return result
+This pseudo-code illustrates the flow. The actual implementation would need to handle exceptions and possibly perform some steps asynchronously (e.g., transcription might take time, archiving might be I/O heavy – we could spawn a background task for it and immediately return a receipt).
+Scope Configuration: We could have more fine-grained control:
+If a caller only wants the text and metadata (e.g., to display the text in a UI), they could specify scopes=["PARSE"] which would only run parsing and return the text/metadata.
+If they want concepts but not store them: scopes=["PARSE","SEGMENT","EXTRACT_CONCEPTS"].
+This can be achieved by our parameters or an explicit scope field in a JSON body.
+The service will map these to whether to call certain functions. (In code, we could break the pipeline into re-usable functions: parse_file, segment_document, extract_concepts, cross_validate, integrate_into_memory_systems, archive_to_scholarsphere, etc., which the API can orchestrate based on scope flags.)
+Authentication & Rate Limiting: Because this is a powerful endpoint (it can consume resources and store data), we secure it:
+Only authenticated services or users can call it. For instance, the assistant service might call it with an internal token. Or if exposed to users, each user must have an API key with permissions on which storage they can use.
+Rate limiting or job queueing to handle large ingestion loads. If someone tries to ingest 1000 documents at once, we might queue them and process sequentially or in parallel with limits.
+Possibly a status endpoint to check on an ingestion job if we choose to make it asynchronous (e.g., POST /ingest returns a job ID immediately, and then you poll a GET /ingest/{job_id} to get results when done).
+Use Cases for the API:
+Integrating with other systems: e.g., a continuous integration pipeline could send any new PDF manual to this service to update the knowledge base.
+The assistant’s UI could use it when a user drags-and-drops a file.
+Other applications within the organization could use it to leverage TORI’s extraction for their own needs (for instance, an app that needs to convert a document to structured concepts could call this API with extractOnly=true and get back JSON of the structure).
+Overall, the extractor endpoint makes our pipeline accessible and flexible, turning it into a service that can be reused beyond the initial scope. It encourages separation of concerns: the extraction logic is all in one place, and clients just invoke it with the desired scope.
+In conclusion, this integration plan provides a comprehensive blueprint for building a document ingestion pipeline for TORI that is robust, extensible, and deeply integrated with semantic memory systems. By breaking the problem into phases and modules – from ingestion and parsing to semantic understanding and knowledge base integration – we ensure that each part can be developed and tested independently, and the whole system can scale to handle diverse content types. The plan emphasizes not only extracting information but also confirming its accuracy and making it immediately useful to the assistant and other systems (through ConceptMesh, ψMesh, BraidMemory), while preserving the source for future reference (ScholarSphere archive). With the optional human-in-the-loop verification and a flexible API, the solution is production-grade, balancing automation with oversight and providing the necessary interfaces for maintenance and integration. By following this plan, TORI will be able to ingest documents in various formats, understand them at a semantic level, and seamlessly incorporate that knowledge into its reasoning and dialogues, all while keeping a secure and auditable record of the content. The next steps would involve implementing each module, starting with file parsing libraries and moving up to concept extraction (potentially choosing specific NLP models or services) and setting up the databases/graph structures for memory integration. Each phase can be developed in parallel by different teams (e.g., one team focusing on the ingestion API and parsing, another on the knowledge graph integration) given the clear interfaces defined above.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Manually queried, or
+
+Clicked/opened by user, or
+
+Synced by ghostCollective.queryScholarSphere().

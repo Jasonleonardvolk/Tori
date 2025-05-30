@@ -1,0 +1,108 @@
+1. Could you confirm that the fallback 'typescript_fallback' method in the UI is only used when no successful Python result is returned (i.e., FastAPI extraction fails or times out)?
+2. Are there any cases where both the FastAPI server and the fallback might run in parallel or trigger race conditions?
+3. Can you confirm whether the UI now receives and correctly parses the new JSON structure returned by the updated /extract endpoint?
+
+Excellent questions! Let me analyze your pipeline code thoroughly to confirm these critical points.
+1. TypeScript Fallback Trigger Conditions
+Looking at your +server.ts, the TypeScript fallback is triggered only when:
+typescript// Line 95-96 in +server.ts
+if (!apiUsed || conceptNames.length === 0) {
+    console.log('🔄 [UPLOAD] STEP 2: Using TypeScript fallback extraction...');
+This happens when:
+
+apiUsed = false (FastAPI call failed or timed out)
+OR conceptNames.length === 0 (FastAPI returned success but with no concepts)
+
+The apiUsed flag is only set to true when:
+typescriptif (res.ok) {
+    pythonResult = await res.json();
+    conceptNames = pythonResult.concept_names || [];
+    method = pythonResult.extraction_method || 'universal_pipeline';
+    apiUsed = true;  // Only set here
+}
+Confirmed: TypeScript fallback only runs when FastAPI fails, times out, or returns empty results.
+2. Race Conditions and Parallel Execution
+Looking at the flow, there are NO race conditions because:
+typescripttry {
+    // Step 1: Try FastAPI (with 60-second timeout)
+    const res = await fetch('http://localhost:8002/extract', {
+        signal: AbortSignal.timeout(60000)
+    });
+    
+    // Process response...
+} catch (err) {
+    // Only after failure/timeout
+}
+
+// Step 2: Only runs AFTER Step 1 completes/fails
+if (!apiUsed || conceptNames.length === 0) {
+    // TypeScript fallback
+}
+The execution is strictly sequential:
+
+FastAPI attempt (waits up to 60 seconds)
+Only if that fails → TypeScript fallback
+No parallel execution occurs
+
+Confirmed: No race conditions. The pipeline is sequential with clear fallback logic.
+3. JSON Structure Compatibility
+Let's verify the JSON structures match:
+FastAPI Returns (main.py):
+pythonreturn {
+    "success": True/False,
+    "concept_names": [...],
+    "concept_count": 12,
+    "extraction_method": "universal_pipeline",
+    "status": "success",
+    # ... other fields from pipeline.py
+}
+UI Expects (+server.ts):
+typescriptpythonResult = await res.json();
+conceptNames = pythonResult.concept_names || [];  // ✅ Matches
+method = pythonResult.extraction_method || 'universal_pipeline';  // ✅ Matches
+UI Builds Final Response:
+typescriptreturn json({
+    success: true,
+    concepts: concepts,  // Full concept objects
+    conceptCount: concepts.length,
+    extractionMethod: method,
+    pythonResult: pythonResult,  // Raw Python result included
+    // ...
+});
+Key compatibility points:
+
+✅ concept_names array is correctly parsed
+✅ extraction_method is correctly used
+✅ The UI transforms concept_names into full concept objects with scores
+✅ Raw pythonResult is preserved for debugging
+
+Additional Observations
+Error Handling Enhancement Needed
+Your current main.py error handling returns a dict on error, which is good:
+pythonexcept Exception as e:
+    return {
+        "success": False,
+        "error": str(e),
+        "concept_count": 0,
+        "concept_names": [],
+        "status": "error",
+        "extraction_method": "error"
+    }
+This ensures the UI always gets a parseable response even on errors.
+Timeout Handling
+The 60-second timeout is appropriate for large PDFs:
+typescriptsignal: AbortSignal.timeout(60000) // 60 seconds
+Concept Score Generation
+The UI correctly generates descending scores for concepts:
+typescriptconst concepts = conceptNames.map((name, index) => ({
+    name,
+    score: Math.max(0.4, 0.95 - index * 0.03), // 0.95 → 0.4
+    // ...
+}));
+Summary
+
+TypeScript fallback: ✅ Only triggers when FastAPI fails or returns empty results
+Race conditions: ✅ None - execution is strictly sequential
+JSON compatibility: ✅ Structures match correctly
+
+Your pipeline is well-designed with proper fallback logic. The only issue is the uvicorn file watcher crash, which my previous solution addresses. Once you fix that startup issue, your pipeline should work flawlessly!

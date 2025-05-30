@@ -142,3 +142,7 @@ def step(
                 metrics["pcc_broadcast_error"] = str(e)
     
     return new_theta, new_sigma
+
+# 🔧 CRITICAL FIX: Create oscillator_update alias for backward compatibility
+# This resolves the ImportError in clustering.py
+oscillator_update = step

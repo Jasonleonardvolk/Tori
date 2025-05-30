@@ -1,0 +1,332 @@
+Universal Concept Extraction Module and Seed Concept Database
+
+Universal Scientific Concept Extraction Module
+Overview
+This module provides a universal concept extraction function that identifies key scientific and scholarly concepts from text, agnostic of domain. It combines multiple techniques – YAKE for statistical keyphrase extraction, KeyBERT (with a universal transformer model) for semantic keyphrase extraction, and spaCy's large English model with optional Wikidata entity linking for named entity recognition – to capture a broad range of concepts. The results from these methods are fused and normalized into a single ranked list of concepts, with higher scores for concepts identified by multiple techniques. This approach is designed to work across diverse domains (science, mathematics, philosophy, arts, literature, etc.) and produce a consolidated list of important concepts mentioned in a text. It also supports future enhancements like logging, seeding with known concepts, and auto-prefill from knowledge bases.
+Installation and Setup
+To set up the environment, install the required libraries and models:
+YAKE: pip install yake
+KeyBERT: pip install keybert sentence-transformers
+spaCy: pip install spacy (and download the large English model with python -m spacy download en_core_web_lg)
+Wikidata Entity Linking (optional): For linking entities to Wikidata, install the spaCy entity linker extension: pip install spacy-entity-linker. After installation, download the Wikidata knowledge base (~1.3GB) by running python -m spacy_entity_linker "download_knowledge_base"
+github.com
+. This step is optional and only needed if you require linking NER results to Wikidata IDs.
+Library Versions (recommended): Ensure compatibility (for example, spaCy 3.x, keybert 0.7+, YAKE 0.4+). These libraries are actively maintained and should be fairly stable.
+Architecture and Approach
+The concept extraction uses three parallel methods on each text chunk, followed by a fusion step:
+YAKE Keyphrase Extraction: YAKE (Yet Another Keyword Extractor) is a fast unsupervised method that scores candidate keywords based on term frequency, contextual features, and positional heuristics
+nlmatics.github.io
+. Note: YAKE produces lower scores for more relevant keyphrases (i.e., low score = high relevance
+nlmatics.github.io
+), so we will invert/normalize its scores for consistency.
+KeyBERT with Transformer Embeddings: KeyBERT uses BERT-based embeddings to find phrases in the text that are semantically closest to the document as a whole. We will use the "sentence-transformers/all-mpnet-base-v2" model for high-quality, general-purpose embeddings
+sbert.net
+. This model is larger but provides state-of-the-art semantic representation for a wide variety of topics. KeyBERT will yield a list of keywords/keyphrases with similarity scores (typically in [0,1]).
+spaCy NER + Wikidata Linking: Using spaCy's en_core_web_lg model, we identify named entities (people, places, organizations, etc.) and other proper nouns in the text. Optionally, we augment this by linking entities to Wikidata via the spacy-entity-linker extension (which provides identifiers and descriptions for entities
+github.com
+github.com
+). Even without linking, the raw entities themselves are considered as potential "concepts" in a broad sense. Each detected entity can be given a base score (we'll use frequency of occurrence as a proxy for importance).
+Fusion and Normalization: After extracting candidates from each method, the module merges them. We use a weighted score fusion: 0.3 for YAKE, 0.4 for KeyBERT, 0.3 for NER. The raw scores from each method are normalized to [0,1] (with special handling for YAKE's inverse scoring). If a concept is found by multiple methods, it gains a consensus boost – we slightly increase its final score to prioritize multi-faceted relevance. Finally, all scores are re-normalized between 0 and 1 and the concepts are sorted by score. The output of the extractConceptsUniversal function is a list of dictionaries, each containing:
+name: the concept name (as a string found in text)
+score: the final normalized score (float between 0 and 1)
+method: which extraction method(s) identified it (e.g. "YAKE", "KeyBERT", "NER" or combinations like "YAKE+KeyBERT")
+metadata (optional): any additional info, such as Wikidata QID or entity type, if available.
+This design ensures that concepts highlighted by multiple techniques (statistical, semantic, and NER) are ranked higher, and domain-specific terms can be captured even if they are rare or proper nouns.
+Code Implementation
+Below is the production-ready code for the concept extraction module. It includes initialization of models, the extraction function, and the fusion logic. This code can be placed into the extractConceptsFromDocument.py (or as a standalone module) and used directly.
+python
+Copy
+Edit
+import logging
+import json
+
+# Install instructions (if needed):
+# pip install yake spacy keybert sentence-transformers spacy-entity-linker
+
+# Initialize logging
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)  # adjust to DEBUG for more detailed logs
+
+# Load YAKE extractor (configure for multi-word keyphrases)
+import yake
+# Use up to 3-word phrases, adjust max_ngram_size as needed
+_yake_extractor = yake.KeywordExtractor(lan="en", n=3, dedupLim=0.9, top=20)
+
+# Load KeyBERT with the all-mpnet-base-v2 model for high-quality embeddings
+from keybert import KeyBERT
+# Note: The model download (all-mpnet-base-v2) will happen on first use and may be large.
+_kb_model = KeyBERT(model='sentence-transformers/all-mpnet-base-v2')
+
+# Load spaCy model for NER (large model for better accuracy)
+import spacy
+try:
+    _nlp = spacy.load("en_core_web_lg")
+except Exception as e:
+    # If not downloaded, prompt the user (or attempt download in code if appropriate)
+    logger.error("spaCy model 'en_core_web_lg' not found. Please run 'python -m spacy download en_core_web_lg'.")
+    raise
+
+# Add Wikidata entity linking if available
+try:
+    import spacy_entity_linker
+    _nlp.add_pipe("entityLinker", last=True)
+    _entity_linking = True
+    logger.info("Wikidata entity linker activated in spaCy pipeline.")
+except ImportError:
+    _entity_linking = False
+    logger.info("spaCy-entity-linker not installed; proceeding without entity linking.")
+
+def extractConceptsUniversal(chunk: str):
+    """
+    Extract key concepts from a text chunk using YAKE, KeyBERT, and spaCy NER.
+    Returns a list of dicts: { "name": ..., "score": ..., "method": ..., "metadata": {...} }.
+    """
+    if not chunk or not isinstance(chunk, str):
+        return []
+
+    text = chunk.strip()
+    if text == "":
+        return []
+
+    logger.info("Extracting concepts from text chunk of length %d...", len(text))
+
+    concepts = {}  # dict to accumulate concept data: name -> {'score': ..., 'methods': set(), 'metadata': {...}}
+
+    # --- YAKE Extraction ---
+    try:
+        yake_keywords = _yake_extractor.extract_keywords(text)
+    except Exception as e:
+        # YAKE can sometimes error on strange inputs (like very short text), handle gracefully
+        yake_keywords = []
+    # YAKE returns list of (keyword, score) with lower score = more relevant
+    if yake_keywords:
+        # Normalize YAKE scores: invert and scale to 0-1
+        # We'll take the highest relevance (lowest score) as 1.0, and lowest relevance (highest score) as 0.0
+        yake_scores = [score for _, score in yake_keywords]
+        min_score = min(yake_scores) if yake_scores else 0
+        max_score = max(yake_scores) if yake_scores else 0
+        # Avoid divide-by-zero
+        range_score = (max_score - min_score) if (max_score - min_score) != 0 else 1e-6
+
+        for keyword, score in yake_keywords:
+            norm_score = 1.0  # default if only one candidate
+            if max_score > min_score:
+                # invert score: lower = more relevant, so invert by linear scaling
+                norm_score = 1.0 - ((score - min_score) / range_score)
+            # Weight it
+            weighted = 0.3 * norm_score
+            name = keyword.strip()
+            if not name:
+                continue
+            # Convert to lowercase for matching duplicates across methods (keep original for output)
+            name_key = name.lower()
+            if name_key not in concepts:
+                concepts[name_key] = {"name": name, "score": 0.0, "methods": set(), "metadata": {}}
+            concepts[name_key]["score"] += weighted
+            concepts[name_key]["methods"].add("YAKE")
+    logger.debug("YAKE found %d candidates.", len(yake_keywords))
+
+    # --- KeyBERT Extraction ---
+    # We use KeyBERT to get top keywords. We'll allow phrases up to 3 words to capture multi-word concepts.
+    try:
+        kb_keywords = _kb_model.extract_keywords(text, keyphrase_ngram_range=(1, 3), stop_words="english", top_n=20)
+    except Exception as e:
+        kb_keywords = []
+    # KeyBERT returns list of (keyword, score) with higher score = more relevant (score is similarity).
+    if kb_keywords:
+        # Normalize KeyBERT scores to [0,1] (they are often already in 0-1 range, but scale relative to top result)
+        kb_scores = [score for _, score in kb_keywords]
+        max_kb = max(kb_scores) if kb_scores else 1
+        for keyword, score in kb_keywords:
+            norm_score = score / max_kb if max_kb > 0 else 0
+            weighted = 0.4 * norm_score
+            name = keyword.strip()
+            if not name:
+                continue
+            name_key = name.lower()
+            if name_key not in concepts:
+                concepts[name_key] = {"name": name, "score": 0.0, "methods": set(), "metadata": {}}
+            concepts[name_key]["score"] += weighted
+            concepts[name_key]["methods"].add("KeyBERT")
+    logger.debug("KeyBERT found %d candidates.", len(kb_keywords))
+
+    # --- spaCy NER Extraction ---
+    doc = _nlp(text)
+    # Use a dictionary to count frequency of each entity (by text)
+    ent_counts = {}
+    for ent in doc.ents:
+        # Filter out overly generic entities if needed (optional)
+        if ent.text.strip() == "":
+            continue
+        ent_text = ent.text.strip()
+        ent_key = ent_text.lower()
+        ent_counts[ent_key] = ent_counts.get(ent_key, {"text": ent_text, "count": 0, "label": ent.label_})
+        ent_counts[ent_key]["count"] += 1
+
+    # Now incorporate NER entities
+    if ent_counts:
+        # Determine max frequency for normalization
+        max_freq = max(val["count"] for val in ent_counts.values())
+        for ent_key, val in ent_counts.items():
+            ent_text = val["text"]
+            count = val["count"]
+            # Raw score proportional to frequency (between 0.5 and 1.0 for at least one occurrence, boosting repeated mentions)
+            raw_score = 0.5 + 0.5 * (count / max_freq)  # at least 0.5 if appears once, 1.0 if it is the most frequent entity
+            norm_score = raw_score  # already in [0.5, 1.0]
+            weighted = 0.3 * norm_score
+            if ent_key not in concepts:
+                concepts[ent_key] = {"name": ent_text, "score": 0.0, "methods": set(), "metadata": {}}
+            concepts[ent_key]["score"] += weighted
+            concepts[ent_key]["methods"].add("NER")
+            # Optional: if entity linking is enabled and linker found a match, add Wikidata ID/URL
+            if _entity_linking:
+                # linkedEntities returns a collection of entities for the whole doc
+                # Find the linked entity that matches this span
+                for linked_ent in doc._.linkedEntities:
+                    if linked_ent.get_span().text == ent_text:
+                        # Add Wikidata QID and description as metadata
+                        concepts[ent_key]["metadata"]["wikidata_id"] = linked_ent.get_id()
+                        # You could also add description or URL if needed:
+                        # concepts[ent_key]["metadata"]["description"] = linked_ent.get_description()
+                        # concepts[ent_key]["metadata"]["url"] = linked_ent.get_url()
+                        break
+    logger.debug("spaCy NER found %d unique entities.", len(ent_counts))
+
+    # --- Consensus Boost and Final Normalization ---
+    # Give a small bonus for concepts found by multiple methods
+    for key, data in concepts.items():
+        method_count = len(data["methods"])
+        if method_count > 1:
+            # e.g., +10% for each additional method that found the concept
+            bonus_factor = 1.0 + 0.1 * (method_count - 1)
+            data["score"] *= bonus_factor
+
+    # Normalize final scores to [0,1]
+    if concepts:
+        max_score = max(data["score"] for data in concepts.values())
+        if max_score > 0:
+            for data in concepts.values():
+                data["score"] = round(data["score"] / max_score, 4)  # round to 4 decimal places
+        # Sort concepts by score (descending)
+        sorted_concepts = sorted(concepts.values(), key=lambda x: x["score"], reverse=True)
+    else:
+        sorted_concepts = []
+
+    # Prepare output: convert methods set to a sorted string for consistency
+    for concept in sorted_concepts:
+        if "methods" in concept:
+            methods_list = sorted(list(concept["methods"]))
+            concept["method"] = "+".join(methods_list)
+            del concept["methods"]  # remove the set as it's not JSON-serializable
+        # Remove metadata if empty
+        if "metadata" in concept and not concept["metadata"]:
+            del concept["metadata"]
+
+    logger.info("Extracted %d concepts.", len(sorted_concepts))
+    return sorted_concepts
+In the code above:
+We initialize the necessary components globally: YAKE extractor (_yake_extractor), KeyBERT model (_kb_model), and spaCy pipeline (_nlp with optional entity linker). Loading these once at module import time ensures we don't reload models on every function call, which is important for performance in a production setting.
+YAKE extraction: We configure YAKE to consider up to 3-word phrases. We then invert and normalize YAKE's scores because YAKE's relevance score works inversely (lower is more relevant)
+nlmatics.github.io
+. Each YAKE keyword gets weight 0.3 of its normalized score.
+KeyBERT extraction: We allow KeyBERT to extract up to 3-word phrases and use English stopwords to filter out common words. KeyBERT returns each keyword with a similarity score (higher means more relevant). We normalize these scores by the top result and apply a weight of 0.4.
+spaCy NER extraction: We run spaCy NER on the text to get entities. We count occurrences of each unique entity and assign a base score scaled from 0.5 (for single occurrences) up to 1.0 (for the most frequent entity). This ensures even a single occurrence of a proper noun gets a base weight but repeated mentions increase its weight. We apply a 0.3 weight to these scores. If the Wikidata linker is enabled and finds a corresponding QID for an entity, we attach it in metadata["wikidata_id"].
+Consensus boost: If a concept appears via multiple methods, we multiply its score by a small factor (e.g. 1.1 for two methods, 1.2 for all three). This "boost for consensus" highlights concepts that are consistently identified.
+Normalization and output formatting: We then normalize all final scores so that the highest score becomes 1.0. We sort the concepts by score descending. We also convert the internal methods set to a string (e.g. "YAKE+KeyBERT") for output, and remove empty metadata for cleanliness.
+The function returns the list of concept dicts, ready for JSON serialization or further use. Each concept’s score is a relative measure of importance within the given text chunk, and method indicates which method(s) detected it (useful for debugging or further weighting).
+Concept Seeding and Knowledge Integration
+In addition to on-the-fly extraction, you may have a curated concept database to integrate. We provide a concept_seed_universal.json file (to be created) which contains a broad list of domain-specific concept seeds spanning multiple fields. This seed file can be used to augment the concept extraction – for example, to ensure certain known concepts are recognized or to boost their scores if they appear. An example structure for concept_seed_universal.json could be a list of concept entries with domains, e.g.:
+json
+Copy
+Edit
+[
+    {"name": "Riemannian manifold", "domain": "Mathematics"},
+    {"name": "Category theory", "domain": "Mathematics"},
+    {"name": "Phenomenology", "domain": "Philosophy"},
+    {"name": "Dialectical materialism", "domain": "Philosophy"},
+    {"name": "Stream of consciousness", "domain": "Literature"},
+    {"name": "Magical realism", "domain": "Literature"},
+    {"name": "Chiaroscuro", "domain": "Art"},
+    {"name": "Cubism", "domain": "Art"},
+    {"name": "Counterpoint", "domain": "Music"},
+    {"name": "Sonata form", "domain": "Music"}
+]
+This is just a sample; the actual file should include many more concepts across physics, biology, chemistry, etc., as needed. Merging with the main database: If you have an existing concept_database.json (a main knowledge base of concepts), you can merge the seed concepts at runtime. For example:
+python
+Copy
+Edit
+# Pseudocode for merging seed concepts with main concept database
+with open("concept_database.json", "r") as f:
+    main_db = json.load(f)
+with open("concept_seed_universal.json", "r") as f:
+    seed_concepts = json.load(f)
+
+# Merge seeds into main_db (ensure no duplicates by name)
+existing_names = {c["name"].lower() for c in main_db}
+for seed in seed_concepts:
+    if seed["name"].lower() not in existing_names:
+        main_db.append(seed)
+# main_db now contains the union of both sets of concepts.
+This can be done at application startup. Alternatively, the extractConceptsUniversal function could use the seed list to boost recognition of those concepts if they appear in the text (for instance, by checking if any exact seed names are substrings in the chunk and automatically adding them with a high score or adjusting the YAKE/KeyBERT results). By merging the seed concepts, you ensure that the concept database covers a wide array of fields. The seeds can also act as a whitelist of important concepts to look for, and with auto-prefill logic, you might pre-populate documents with these concepts if the document metadata suggests they’re relevant. For example, if a document is tagged as philosophy, the system could prefill some core philosophical concepts from the seed list (this would be an extension beyond the current function, implemented at a higher application level).
+Logging and Scalability
+The module uses Python's logging to record key events (initialization, number of concepts found, etc.). You can adjust the logging level to DEBUG to get more detailed step-by-step information, which is useful during development or troubleshooting. In a production scenario, keep it at INFO or WARNING to avoid verbose logs. The code is written to handle errors gracefully (e.g., catching exceptions in YAKE or KeyBERT extraction) so that a failure in one method won’t break the entire extraction process. Scalability considerations:
+Batch Processing: For large documents, it’s common to split text into smaller chunks (paragraphs or sections) and run extractConceptsUniversal on each chunk. This function is designed to handle a chunk at a time. You can then merge or aggregate the concept lists from all chunks (perhaps boosting those that appear in multiple chunks).
+Model Loading: The heavy models (spaCy, transformer for KeyBERT) are loaded once. This approach is suitable for a long-running service or pipeline. If using a serverless environment, ensure the cold start time with these models is acceptable, or load models in advance.
+Threading: The function is CPU-bound (and uses some BLAS for embeddings). You could process chunks in parallel using threads or multiprocessing, but be mindful that spaCy and transformers can be memory intensive. spaCy’s pipeline is thread-safe for inference, but the transformer model from sentence-transformers might benefit from using multiple processes if you need parallelism.
+Auto-Prefill (Future): Looking ahead, you could integrate a step where known concepts (from a knowledge graph or taxonomy) relevant to the document are automatically added. For instance, if the document has metadata or context indicating specific categories, the system could inject those related concepts with an initial score. This kind of auto-prefill can complement the extraction by ensuring certain expected concepts are not missed. The current design with a concept_seed_universal list is a step in that direction, enabling the system to be aware of cross-domain important concepts.
+Usage Example
+Let's test the module on a sample humanities-style paragraph that touches multiple domains (literature, art, philosophy):
+python
+Copy
+Edit
+text = ("In a novel, the stream of consciousness narrative pioneered by writers like Virginia Woolf "
+        "exemplifies the literary technique of modernist introspection. Similarly, art history shows how "
+        "chiaroscuro in Baroque painting creates dramatic contrast between light and dark, a principle which "
+        "philosophical movements such as dialectical materialism metaphorically echo in their synthesis of ideas.")
+concepts = extractConceptsUniversal(text)
+print(json.dumps(concepts, indent=2))
+Assuming the libraries and models are properly installed, the output might look like:
+json
+Copy
+Edit
+[
+  {
+    "name": "stream of consciousness",
+    "score": 1.0,
+    "method": "KeyBERT+YAKE"
+  },
+  {
+    "name": "dialectical materialism",
+    "score": 0.98,
+    "method": "KeyBERT"
+  },
+  {
+    "name": "Virginia Woolf",
+    "score": 0.96,
+    "method": "NER+YAKE",
+    "metadata": {
+      "wikidata_id": "Q40909"
+    }
+  },
+  {
+    "name": "chiaroscuro",
+    "score": 0.85,
+    "method": "KeyBERT+YAKE"
+  },
+  {
+    "name": "Baroque painting",
+    "score": 0.80,
+    "method": "YAKE"
+  }
+]
+In this example output, "stream of consciousness" was identified by both YAKE and KeyBERT, giving it the top score. "Dialectical materialism" came primarily from KeyBERT (a strong semantic match to the text’s philosophical content). "Virginia Woolf" was found by NER (and YAKE as a keyword), and it includes a Wikidata ID in metadata (thanks to the entity linker). The list is sorted by score, and each concept shows which methods contributed to its detection. This comprehensive approach ensures that both explicit domain terms (like named entities or well-known concepts) and implicit key phrases are captured. By adjusting weights or adding new extraction methods, you can tune the system for different domains or preferences. The module is ready to be integrated into your pipeline, providing a robust foundation for concept extraction across a wide range of documents and fields. Sources:
+NLMatics blog – Keyphrase Extraction & Visualization: explains YAKE scoring (low score = high relevance)
+nlmatics.github.io
+.
+Sentence-Transformers documentation: notes that all-mpnet-base-v2 provides state-of-the-art embedding quality
+sbert.net
+.
+spaCy Entity Linker docs: usage and installation for Wikidata linking
+github.com
+github.com
+.

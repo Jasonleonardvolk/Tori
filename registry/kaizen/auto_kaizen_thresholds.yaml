@@ -1,0 +1,48 @@
+# 🎯 TORI Auto-Kaizen Performance Thresholds
+# These thresholds trigger automatic self-improvement tickets
+
+concept_extraction:
+  processing_time:
+    small_file_max_seconds: 30      # <1MB files should process in <30s
+    medium_file_max_seconds: 60     # 1-5MB files should process in <60s  
+    large_file_max_seconds: 120     # >5MB files should process in <2min
+    
+  concept_counts:
+    min_concepts: 10                # Fewer suggests extraction failure
+    max_concepts: 50                # More overwhelms users
+    ideal_range: [20, 40]           # Sweet spot for most documents
+    
+  quality_metrics:
+    min_purity_efficiency: 0.15     # At least 15% should pass purity
+    min_consensus_ratio: 0.20       # 20%+ should be multi-method
+    max_rejection_ratio: 0.85       # No more than 85% rejected
+    min_diversity_score: 0.60       # Concepts should be diverse
+    
+  user_experience:
+    max_40_percent_stuck_duration: 30    # Progress bar issue threshold
+    min_smooth_progress_updates: 10      # Expected progress updates
+    max_user_wait_time: 90              # Total wait time limit
+
+database_learning:
+  min_boost_ratio_for_known_domain: 0.10   # Should boost 10%+ in known domains
+  max_new_concepts_per_doc: 30             # Learning rate limiter
+  domain_coverage_growth_target: 0.10      # 10% weekly growth target
+  min_cross_domain_connections: 5          # Concepts should connect domains
+
+system_health:
+  max_memory_mb: 500                # Memory usage limit
+  max_cpu_percent: 80               # CPU usage limit
+  max_error_rate: 0.05              # 5% error rate threshold
+  min_success_rate: 0.95            # 95% success target
+
+# Special triggers for critical issues
+critical_triggers:
+  consecutive_failures: 3           # Create ticket after 3 failures
+  user_complaints_threshold: 2      # Create ticket after 2 complaints
+  performance_degradation: 0.20     # 20% performance drop triggers ticket
+
+# Self-improvement targets
+improvement_goals:
+  target_processing_speed_improvement: 0.10    # 10% faster each month
+  target_quality_improvement: 0.05             # 5% better quality each month
+  target_user_satisfaction: 4.5                # 4.5/5 star rating

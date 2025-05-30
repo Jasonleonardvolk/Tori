@@ -1,0 +1,530 @@
+[
+  {
+    "name": "Riemannian manifold",
+    "priority": 0.85,
+    "category": "Mathematics",
+    "aliases": ["riemannian geometry", "curved manifold", "metric manifold"],
+    "boost_multiplier": 1.3,
+    "source": {
+      "universal_seed": true,
+      "domain": "Mathematics"
+    }
+  },
+  {
+    "name": "Category theory",
+    "priority": 0.82,
+    "category": "Mathematics",
+    "aliases": ["categorical", "functors", "natural transformations"],
+    "boost_multiplier": 1.25,
+    "source": {
+      "universal_seed": true,
+      "domain": "Mathematics"
+    }
+  },
+  {
+    "name": "Galois theory",
+    "priority": 0.80,
+    "category": "Mathematics",
+    "aliases": ["galois group", "field extension", "galois correspondence"],
+    "boost_multiplier": 1.25,
+    "source": {
+      "universal_seed": true,
+      "domain": "Mathematics"
+    }
+  },
+  {
+    "name": "Topological space",
+    "priority": 0.78,
+    "category": "Mathematics",
+    "aliases": ["topology", "topological", "open sets", "continuous maps"],
+    "boost_multiplier": 1.2,
+    "source": {
+      "universal_seed": true,
+      "domain": "Mathematics"
+    }
+  },
+  {
+    "name": "Phenomenology",
+    "priority": 0.88,
+    "category": "Philosophy",
+    "aliases": ["phenomenological", "husserl", "lived experience", "intentionality"],
+    "boost_multiplier": 1.35,
+    "source": {
+      "universal_seed": true,
+      "domain": "Philosophy"
+    }
+  },
+  {
+    "name": "Dialectical materialism",
+    "priority": 0.85,
+    "category": "Philosophy",
+    "aliases": ["dialectical", "materialist dialectics", "marxist philosophy"],
+    "boost_multiplier": 1.3,
+    "source": {
+      "universal_seed": true,
+      "domain": "Philosophy"
+    }
+  },
+  {
+    "name": "Epistemology",
+    "priority": 0.83,
+    "category": "Philosophy",
+    "aliases": ["theory of knowledge", "epistemological", "justified belief"],
+    "boost_multiplier": 1.25,
+    "source": {
+      "universal_seed": true,
+      "domain": "Philosophy"
+    }
+  },
+  {
+    "name": "Hermeneutics",
+    "priority": 0.81,
+    "category": "Philosophy",
+    "aliases": ["hermeneutical", "interpretation theory", "understanding"],
+    "boost_multiplier": 1.25,
+    "source": {
+      "universal_seed": true,
+      "domain": "Philosophy"
+    }
+  },
+  {
+    "name": "Ontological argument",
+    "priority": 0.79,
+    "category": "Philosophy",
+    "aliases": ["ontological proof", "existence of god", "anselm", "modal logic"],
+    "boost_multiplier": 1.2,
+    "source": {
+      "universal_seed": true,
+      "domain": "Philosophy"
+    }
+  },
+  {
+    "name": "Stream of consciousness",
+    "priority": 0.87,
+    "category": "Literature",
+    "aliases": ["interior monologue", "psychological realism", "modernist technique"],
+    "boost_multiplier": 1.3,
+    "source": {
+      "universal_seed": true,
+      "domain": "Literature"
+    }
+  },
+  {
+    "name": "Magical realism",
+    "priority": 0.84,
+    "category": "Literature",
+    "aliases": ["magic realism", "fantastical realism", "marquez"],
+    "boost_multiplier": 1.25,
+    "source": {
+      "universal_seed": true,
+      "domain": "Literature"
+    }
+  },
+  {
+    "name": "Postmodernism",
+    "priority": 0.86,
+    "category": "Literature",
+    "aliases": ["postmodern", "metafiction", "deconstruction", "pastiche"],
+    "boost_multiplier": 1.3,
+    "source": {
+      "universal_seed": true,
+      "domain": "Literature"
+    }
+  },
+  {
+    "name": "Bildungsroman",
+    "priority": 0.82,
+    "category": "Literature",
+    "aliases": ["coming of age", "education novel", "development novel"],
+    "boost_multiplier": 1.25,
+    "source": {
+      "universal_seed": true,
+      "domain": "Literature"
+    }
+  },
+  {
+    "name": "Chiaroscuro",
+    "priority": 0.82,
+    "category": "Art",
+    "aliases": ["light and shadow", "tenebrism", "baroque painting"],
+    "boost_multiplier": 1.25,
+    "source": {
+      "universal_seed": true,
+      "domain": "Art"
+    }
+  },
+  {
+    "name": "Abstract expressionism",
+    "priority": 0.85,
+    "category": "Art",
+    "aliases": ["abstract expressionist", "action painting", "color field"],
+    "boost_multiplier": 1.3,
+    "source": {
+      "universal_seed": true,
+      "domain": "Art"
+    }
+  },
+  {
+    "name": "Sfumato",
+    "priority": 0.80,
+    "category": "Art",
+    "aliases": ["leonardo technique", "atmospheric perspective", "soft transitions"],
+    "boost_multiplier": 1.2,
+    "source": {
+      "universal_seed": true,
+      "domain": "Art"
+    }
+  },
+  {
+    "name": "Cubism",
+    "priority": 0.83,
+    "category": "Art",
+    "aliases": ["cubist", "picasso", "braque", "geometric abstraction"],
+    "boost_multiplier": 1.25,
+    "source": {
+      "universal_seed": true,
+      "domain": "Art"
+    }
+  },
+  {
+    "name": "Baroque architecture",
+    "priority": 0.80,
+    "category": "Art",
+    "aliases": ["baroque style", "ornate architecture", "counter-reformation"],
+    "boost_multiplier": 1.2,
+    "source": {
+      "universal_seed": true,
+      "domain": "Art"
+    }
+  },
+  {
+    "name": "Counterpoint",
+    "priority": 0.81,
+    "category": "Music",
+    "aliases": ["contrapuntal", "polyphonic", "bach counterpoint"],
+    "boost_multiplier": 1.25,
+    "source": {
+      "universal_seed": true,
+      "domain": "Music"
+    }
+  },
+  {
+    "name": "Sonata form",
+    "priority": 0.79,
+    "category": "Music",
+    "aliases": ["sonata allegro", "exposition development recapitulation"],
+    "boost_multiplier": 1.2,
+    "source": {
+      "universal_seed": true,
+      "domain": "Music"
+    }
+  },
+  {
+    "name": "Twelve-tone technique",
+    "priority": 0.83,
+    "category": "Music",
+    "aliases": ["dodecaphony", "serialism", "schoenberg", "atonal"],
+    "boost_multiplier": 1.25,
+    "source": {
+      "universal_seed": true,
+      "domain": "Music"
+    }
+  },
+  {
+    "name": "Harmonic progression",
+    "priority": 0.77,
+    "category": "Music",
+    "aliases": ["chord progression", "functional harmony", "tonal harmony"],
+    "boost_multiplier": 1.15,
+    "source": {
+      "universal_seed": true,
+      "domain": "Music"
+    }
+  },
+  {
+    "name": "Quantum entanglement",
+    "priority": 0.90,
+    "category": "Physics",
+    "aliases": ["entangled states", "quantum correlation", "EPR paradox", "bell states"],
+    "boost_multiplier": 1.35,
+    "source": {
+      "universal_seed": true,
+      "domain": "Physics"
+    }
+  },
+  {
+    "name": "General relativity",
+    "priority": 0.88,
+    "category": "Physics",
+    "aliases": ["einstein relativity", "spacetime curvature", "gravitational field"],
+    "boost_multiplier": 1.3,
+    "source": {
+      "universal_seed": true,
+      "domain": "Physics"
+    }
+  },
+  {
+    "name": "Quantum field theory",
+    "priority": 0.87,
+    "category": "Physics",
+    "aliases": ["QFT", "quantum fields", "field quantization"],
+    "boost_multiplier": 1.3,
+    "source": {
+      "universal_seed": true,
+      "domain": "Physics"
+    }
+  },
+  {
+    "name": "String theory",
+    "priority": 0.85,
+    "category": "Physics",
+    "aliases": ["superstring theory", "M-theory", "extra dimensions"],
+    "boost_multiplier": 1.25,
+    "source": {
+      "universal_seed": true,
+      "domain": "Physics"
+    }
+  },
+  {
+    "name": "CRISPR gene editing",
+    "priority": 0.88,
+    "category": "Biology",
+    "aliases": ["CRISPR-Cas9", "genome editing", "genetic engineering"],
+    "boost_multiplier": 1.3,
+    "source": {
+      "universal_seed": true,
+      "domain": "Biology"
+    }
+  },
+  {
+    "name": "Natural selection",
+    "priority": 0.86,
+    "category": "Biology",
+    "aliases": ["darwinian selection", "evolutionary pressure", "survival of fittest"],
+    "boost_multiplier": 1.25,
+    "source": {
+      "universal_seed": true,
+      "domain": "Biology"
+    }
+  },
+  {
+    "name": "DNA replication",
+    "priority": 0.84,
+    "category": "Biology",
+    "aliases": ["dna synthesis", "replication fork", "semiconservative replication"],
+    "boost_multiplier": 1.2,
+    "source": {
+      "universal_seed": true,
+      "domain": "Biology"
+    }
+  },
+  {
+    "name": "Machine learning",
+    "priority": 0.87,
+    "category": "Computer Science",
+    "aliases": ["ML", "artificial intelligence", "statistical learning"],
+    "boost_multiplier": 1.3,
+    "source": {
+      "universal_seed": true,
+      "domain": "Computer Science"
+    }
+  },
+  {
+    "name": "Neural networks",
+    "priority": 0.85,
+    "category": "Computer Science",
+    "aliases": ["artificial neural networks", "deep learning", "multilayer perceptron"],
+    "boost_multiplier": 1.25,
+    "source": {
+      "universal_seed": true,
+      "domain": "Computer Science"
+    }
+  },
+  {
+    "name": "Algorithm complexity",
+    "priority": 0.82,
+    "category": "Computer Science",
+    "aliases": ["computational complexity", "big O notation", "time complexity"],
+    "boost_multiplier": 1.2,
+    "source": {
+      "universal_seed": true,
+      "domain": "Computer Science"
+    }
+  },
+  {
+    "name": "Social constructivism",
+    "priority": 0.81,
+    "category": "Sociology",
+    "aliases": ["social construction", "berger luckmann", "constructivist sociology"],
+    "boost_multiplier": 1.2,
+    "source": {
+      "universal_seed": true,
+      "domain": "Sociology"
+    }
+  },
+  {
+    "name": "Cultural anthropology",
+    "priority": 0.80,
+    "category": "Anthropology",
+    "aliases": ["ethnography", "cultural studies", "participant observation"],
+    "boost_multiplier": 1.2,
+    "source": {
+      "universal_seed": true,
+      "domain": "Anthropology"
+    }
+  },
+  {
+    "name": "Cognitive dissonance",
+    "priority": 0.83,
+    "category": "Psychology",
+    "aliases": ["festinger theory", "attitude change", "psychological consistency"],
+    "boost_multiplier": 1.25,
+    "source": {
+      "universal_seed": true,
+      "domain": "Psychology"
+    }
+  },
+  {
+    "name": "Behaviorism",
+    "priority": 0.81,
+    "category": "Psychology",
+    "aliases": ["behavioral psychology", "operant conditioning", "skinner watson"],
+    "boost_multiplier": 1.2,
+    "source": {
+      "universal_seed": true,
+      "domain": "Psychology"
+    }
+  },
+  {
+    "name": "Market efficiency",
+    "priority": 0.79,
+    "category": "Economics",
+    "aliases": ["efficient market hypothesis", "EMH", "financial markets"],
+    "boost_multiplier": 1.15,
+    "source": {
+      "universal_seed": true,
+      "domain": "Economics"
+    }
+  },
+  {
+    "name": "Game theory",
+    "priority": 0.82,
+    "category": "Economics",
+    "aliases": ["strategic interaction", "nash equilibrium", "prisoner dilemma"],
+    "boost_multiplier": 1.2,
+    "source": {
+      "universal_seed": true,
+      "domain": "Economics"
+    }
+  },
+  {
+    "name": "Democratic peace theory",
+    "priority": 0.78,
+    "category": "Political Science",
+    "aliases": ["democratic peace", "liberal peace", "kantian peace"],
+    "boost_multiplier": 1.15,
+    "source": {
+      "universal_seed": true,
+      "domain": "Political Science"
+    }
+  },
+  {
+    "name": "Social contract",
+    "priority": 0.80,
+    "category": "Political Science",
+    "aliases": ["contractualism", "hobbes locke rousseau", "state of nature"],
+    "boost_multiplier": 1.2,
+    "source": {
+      "universal_seed": true,
+      "domain": "Political Science"
+    }
+  },
+  {
+    "name": "Archaeological stratigraphy",
+    "priority": 0.76,
+    "category": "History",
+    "aliases": ["stratigraphic analysis", "archaeological layers", "chronological sequence"],
+    "boost_multiplier": 1.1,
+    "source": {
+      "universal_seed": true,
+      "domain": "History"
+    }
+  },
+  {
+    "name": "Historical materialism",
+    "priority": 0.79,
+    "category": "History",
+    "aliases": ["materialist history", "marx historical theory", "class struggle"],
+    "boost_multiplier": 1.15,
+    "source": {
+      "universal_seed": true,
+      "domain": "History"
+    }
+  },
+  {
+    "name": "Morphological analysis",
+    "priority": 0.77,
+    "category": "Linguistics",
+    "aliases": ["morphology", "word structure", "morphemes"],
+    "boost_multiplier": 1.1,
+    "source": {
+      "universal_seed": true,
+      "domain": "Linguistics"
+    }
+  },
+  {
+    "name": "Generative grammar",
+    "priority": 0.80,
+    "category": "Linguistics",
+    "aliases": ["chomsky grammar", "transformational grammar", "universal grammar"],
+    "boost_multiplier": 1.2,
+    "source": {
+      "universal_seed": true,
+      "domain": "Linguistics"
+    }
+  },
+  {
+    "name": "Climate feedback loops",
+    "priority": 0.84,
+    "category": "Environmental Science",
+    "aliases": ["positive feedback", "negative feedback", "climate system"],
+    "boost_multiplier": 1.25,
+    "source": {
+      "universal_seed": true,
+      "domain": "Environmental Science"
+    }
+  },
+  {
+    "name": "Ecosystem services",
+    "priority": 0.82,
+    "category": "Environmental Science",
+    "aliases": ["natural capital", "environmental benefits", "biodiversity value"],
+    "boost_multiplier": 1.2,
+    "source": {
+      "universal_seed": true,
+      "domain": "Environmental Science"
+    }
+  },
+  {
+    "name": "Thermodynamic equilibrium",
+    "priority": 0.81,
+    "category": "Chemistry",
+    "aliases": ["chemical equilibrium", "equilibrium constant", "le chatelier"],
+    "boost_multiplier": 1.2,
+    "source": {
+      "universal_seed": true,
+      "domain": "Chemistry"
+    }
+  },
+  {
+    "name": "Molecular orbital theory",
+    "priority": 0.83,
+    "category": "Chemistry",
+    "aliases": ["MO theory", "bonding orbitals", "antibonding orbitals"],
+    "boost_multiplier": 1.25,
+    "source": {
+      "universal_seed": true,
+      "domain": "Chemistry"
+    }
+  }
+]

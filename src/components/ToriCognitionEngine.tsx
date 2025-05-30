@@ -1,6 +1,6 @@
 /**
  * ToriCognitionEngine.tsx - Master integration component for Phase 10
- * Orchestrates holographic projection, ghost personas, agents, and memory vault
+ * Orchestrates holographic projection, ghost personas, agents, memory vault, and Banksy oscillators
  */
 
 import React, { useState, useEffect, useRef } from 'react';
@@ -10,11 +10,13 @@ import ConceptDiffVisualizer from '../ui/ConceptDiffVisualizer';
 import AgentFieldProjector from '../ui/AgentFieldProjector';
 import GhostChronicle from '../ghost/GhostChronicle';
 import GhostLetterGenerator from '../ghost/GhostLetterGenerator';
+import { BanksyOscillatorPanel } from './banksy';
 import { ghostSolitonIntegration } from '../../services/GhostSolitonIntegration';
 import { ghostMemoryVault } from '../../services/GhostMemoryVault';
 import type { SpectralMetadata, GhostOverlay } from '../ui/HologramCanvas';
 import type { AgentState } from '../ui/AgentFieldProjector';
 import type { GhostEvent } from '../ghost/GhostChronicle';
+import type { BanksyState } from './banksy';
 
 interface ToriCognitionEngineProps {
   sessionId: string;
@@ -55,6 +57,10 @@ interface CognitionState {
   // Memory and continuity
   sessionMemories: any[];
   moodCurve: any[];
+  
+  // Banksy oscillator system
+  banksyState: BanksyState | null;
+  oscillatorSynchronization: number;
 }
 
 const ToriCognitionEngine: React.FC<ToriCognitionEngineProps> = ({
@@ -77,14 +83,17 @@ const ToriCognitionEngine: React.FC<ToriCognitionEngineProps> = ({
     spectralMetadata: {},
     conceptActivity: [],
     sessionMemories: [],
-    moodCurve: []
+    moodCurve: [],
+    banksyState: null,
+    oscillatorSynchronization: 0.0
   });
 
   const [isInitialized, setIsInitialized] = useState(false);
   const [performanceMetrics, setPerformanceMetrics] = useState({
     frameRate: 0,
     memoryUsage: 0,
-    activeComponents: 0
+    activeComponents: 0,
+    banksyConnected: false
   });
 
   const hologramCanvasRef = useRef<any>(null);
@@ -115,7 +124,7 @@ const ToriCognitionEngine: React.FC<ToriCognitionEngineProps> = ({
   }, [isEnabled]);
 
   const initializeCognitionEngine = () => {
-    console.log('🧠 TORI Cognition Engine: Initializing Phase 10 systems...');
+    console.log('🧠 TORI Cognition Engine: Initializing Phase 10 systems with Banksy oscillators...');
 
     // Setup event listeners for all subsystems
     setupGhostEventListeners();
@@ -123,6 +132,7 @@ const ToriCognitionEngine: React.FC<ToriCognitionEngineProps> = ({
     setupPhaseEventListeners();
     setupMemoryEventListeners();
     setupConceptEventListeners();
+    setupBanksyEventListeners();
 
     // Initialize ghost-soliton integration
     ghostSolitonIntegration.getCurrentPhaseState();
@@ -130,7 +140,41 @@ const ToriCognitionEngine: React.FC<ToriCognitionEngineProps> = ({
     // Load session data
     loadSessionData();
 
-    console.log('✅ TORI Cognition Engine: All systems operational');
+    console.log('✅ TORI Cognition Engine: All systems operational including Banksy oscillators');
+  };
+
+  const setupBanksyEventListeners = () => {
+    // Banksy state updates from oscillator panel
+    const handleBanksyStateUpdate = (state: BanksyState) => {
+      setCognitionState(prev => ({
+        ...prev,
+        banksyState: state,
+        oscillatorSynchronization: state.order_parameter,
+        // Sync oscillator state with other cognition systems
+        phaseCoherence: Math.max(prev.phaseCoherence, state.order_parameter * 0.3),
+        fieldHarmony: (prev.fieldHarmony + state.order_parameter) / 2
+      }));
+
+      // Trigger holographic effects based on synchronization
+      if (state.order_parameter > 0.8 && hologramCanvasRef.current) {
+        hologramCanvasRef.current.triggerConceptDiffPulse(
+          window.innerWidth / 2,
+          window.innerHeight / 2,
+          state.order_parameter,
+          'synchronization'
+        );
+      }
+
+      // Update performance metrics
+      setPerformanceMetrics(prev => ({
+        ...prev,
+        banksyConnected: true
+      }));
+
+      console.log(`🌀 Banksy Oscillator State: Order=${state.order_parameter.toFixed(3)}, Step=${state.step}`);
+    };
+
+    return { handleBanksyStateUpdate };
   };
 
   const setupGhostEventListeners = () => {
@@ -379,6 +423,7 @@ const ToriCognitionEngine: React.FC<ToriCognitionEngineProps> = ({
     if (cognitionState.activeGhost) count++;
     if (cognitionState.conceptActivity.length > 0) count++;
     if (cognitionState.agents.some(a => a.isActive)) count++;
+    if (cognitionState.banksyState) count++;
     return count;
   };
 
@@ -443,9 +488,23 @@ const ToriCognitionEngine: React.FC<ToriCognitionEngineProps> = ({
   }
 
   const conceptEventHandlers = setupConceptEventListeners();
+  const banksyEventHandlers = setupBanksyEventListeners();
 
   return (
     <div className={`tori-cognition-engine relative w-full h-full ${className}`}>
+      {/* Banksy Oscillator Control Panel - TOP PRIORITY FOR LAUNCH */}
+      <motion.div
+        className="absolute top-20 left-4 w-96 z-20"
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        <BanksyOscillatorPanel 
+          className="mb-4 shadow-2xl" 
+          onStateChange={banksyEventHandlers.handleBanksyStateUpdate}
+        />
+      </motion.div>
+
       {/* Holographic Projection Layer */}
       <HologramCanvas
         ref={hologramCanvasRef}
@@ -510,7 +569,7 @@ const ToriCognitionEngine: React.FC<ToriCognitionEngineProps> = ({
         onClose={handleGhostLetterClose}
       />
 
-      {/* Debug Panel */}
+      {/* Enhanced Debug Panel with Banksy Info */}
       {showDebugPanel && (
         <div className="absolute bottom-4 right-4 bg-black/80 text-white p-4 rounded-lg font-mono text-xs max-w-xs">
           <div className="mb-2 font-bold">TORI Cognition Debug</div>
@@ -520,6 +579,13 @@ const ToriCognitionEngine: React.FC<ToriCognitionEngineProps> = ({
           <div>Active Ghost: {cognitionState.activeGhost?.persona || 'None'}</div>
           <div>Field Harmony: {cognitionState.fieldHarmony.toFixed(2)}</div>
           <div>Concept Activity: {cognitionState.conceptActivity.length}</div>
+          <div className="border-t border-slate-600 mt-2 pt-2">
+            <div className="font-bold text-yellow-400">🌀 BANKSY STATUS</div>
+            <div>Oscillator Sync: {cognitionState.oscillatorSynchronization.toFixed(3)}</div>
+            <div>Step: {cognitionState.banksyState?.step || 0}</div>
+            <div>N_eff: {cognitionState.banksyState?.n_effective || 0}</div>
+            <div>Connected: {performanceMetrics.banksyConnected ? '✅' : '❌'}</div>
+          </div>
           <div className="mt-2 pt-2 border-t border-slate-600">
             <div>FPS: {performanceMetrics.frameRate}</div>
             <div>Active Components: {performanceMetrics.activeComponents}</div>
@@ -527,12 +593,22 @@ const ToriCognitionEngine: React.FC<ToriCognitionEngineProps> = ({
         </div>
       )}
 
-      {/* Status Indicator */}
-      <div className="absolute top-4 left-4 flex items-center space-x-2">
-        <div className={`w-3 h-3 rounded-full ${isInitialized ? 'bg-green-500' : 'bg-red-500'}`} />
-        <span className="text-sm text-slate-600 dark:text-slate-400">
-          {isInitialized ? 'Cognition Active' : 'Initializing...'}
-        </span>
+      {/* Enhanced Status Indicator with Banksy */}
+      <div className="absolute top-4 left-4 flex items-center space-x-4">
+        <div className="flex items-center space-x-2">
+          <div className={`w-3 h-3 rounded-full ${isInitialized ? 'bg-green-500' : 'bg-red-500'}`} />
+          <span className="text-sm text-slate-600 dark:text-slate-400">
+            {isInitialized ? 'Cognition Active' : 'Initializing...'}
+          </span>
+        </div>
+        
+        {/* Banksy Status */}
+        <div className="flex items-center space-x-2">
+          <div className={`w-3 h-3 rounded-full ${performanceMetrics.banksyConnected ? 'bg-blue-500' : 'bg-yellow-500'}`} />
+          <span className="text-sm text-slate-600 dark:text-slate-400">
+            🌀 Banksy {performanceMetrics.banksyConnected ? 'Online' : 'Connecting...'}
+          </span>
+        </div>
       </div>
     </div>
   );

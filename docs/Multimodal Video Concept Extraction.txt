@@ -1,0 +1,471 @@
+Multimodal Video Concept Extraction Using Open-Source Tools
+
+Multimodal Academic Concept Extraction Pipeline from Video
+Overview and Goals
+Academic videos (lectures, webinars, presentations, film analyses, etc.) contain rich multimodal information – spoken words, on-screen visuals (slides, diagrams, scenes), and often captions or transcripts. The goal is to extract academic, cultural, and scientific concepts from such videos by analyzing audio (speech), visual frames, and textual data. We outline a comprehensive open-source pipeline that transcribes speech, analyzes visual content, and fuses these modalities to identify key concepts. The focus is on using high-performance open-source tools (e.g. OpenAI Whisper, CLIP, Detectron2, BLIP) and integrating them into a unified Python pipeline. This ensures the solution remains free, extensible, and applicable across domains (sciences, arts, philosophy, math, etc.). Short, domain-relevant phrases (the “concepts”) will be extracted, deduplicated, and tracked over time. Pipeline Blueprint: The system is composed of multiple stages, each handling a modality or processing step. Below is a high-level architecture of the concept extraction pipeline:
+Audio Extraction & Speech-to-Text: Convert spoken content to text using an Automatic Speech Recognition (ASR) model. This provides a transcript of the video’s narration.
+Visual Frame Analysis: Sample video frames (or shots) and analyze visual content:
+Identify objects, scenes, and actions in frames (e.g. diagrams, equipment, people) using image recognition.
+Extract any text appearing in slides or visuals via OCR (Optical Character Recognition).
+Generate descriptive captions for frames using a vision-language model.
+Caption/Subtitle Ingestion: If the video has existing subtitles or closed captions, retrieve and incorporate them (they often contain exact spoken text and timing).
+Concept Extraction from Text: Process the transcript and any text from visuals to extract important academic concepts (key terms, domain-specific phrases, proper nouns, theories, etc.).
+Concept Extraction from Visuals: From image analysis (objects detected, image captions, OCR text), derive additional concept candidates (e.g. “microscope”, “World War II footage”, “DNA double helix diagram”).
+Multimodal Alignment & Fusion: Align concepts across modalities by timestamp – e.g. link concepts mentioned in speech with relevant visuals showing at the same time
+kx.com
+. Fuse duplicate concepts and merge information (ensuring each concept is identified uniquely even if found via audio and video).
+Scoring and Filtering: Score or rank concepts by importance (e.g. frequency of mention, emphasis, multiple modality support) and filter out noise or irrelevant terms. This yields a refined list of key concepts.
+Temporal Context Tracking: Track when and how each concept appears in the video. This could be timestamps or segments indicating where the concept is discussed or shown, useful for navigation or context.
+Integration into Pipeline (TORI): Each component is implemented in Python and integrated into the existing pipeline (presumably “TORI”) with modular functions. The final output could be a structured list (or JSON) of concepts with metadata (frequency, confidence, timestamps, source modality, etc.).
+Below, we detail each component of the pipeline with recommended open-source tools, reasoning for their selection, and example Python integration code. The tools are ranked by performance and suitability for this task, with an emphasis on accuracy for academic content and ease of integration. Citations are provided to justify tool capabilities and decisions.
+1. Speech-to-Text Transcription (Audio Modalities)
+Converting the video’s audio into text is the first crucial step. High accuracy in transcribing technical and academic terms is essential. Two top open-source ASR options are OpenAI Whisper and Vosk, each with different strengths:
+OpenAI Whisper: Whisper is a state-of-the-art ASR model released by OpenAI (2022) known for its high accuracy and robustness, especially on diverse and technical speech
+openai.com
+openai.com
+. Trained on 680k hours of multilingual data, it approaches human-level accuracy on English speech
+openai.com
+ and handles accents, background noise, and jargon well
+openai.com
+. Whisper supports multiple languages and even translation tasks. The downside is that the largest models are heavy (several hundred MBs to >1GB) and require a GPU for real-time processing, but for offline processing of academic videos, the accuracy payoff is huge. It’s the top recommendation for speech-to-text due to its accuracy on technical content (it was trained on web data that likely includes lectures and scientific content). OpenAI has open-sourced Whisper’s code and models
+openai.com
+, making it free to integrate.
+Vosk: Vosk is an offline speech recognition toolkit that is lightweight and efficient
+alphacephei.com
+alphacephei.com
+. It supports 20+ languages and can even run on mobile or Raspberry Pi devices
+alphacephei.com
+. Model sizes are modest (~50 MB per language for smaller models)
+alphacephei.com
+. Vosk provides real-time transcription and even speaker identification
+alphacephei.com
+. The trade-off is that Vosk’s accuracy, while “fairly good”, is generally lower than Whisper’s on complex or noisy data
+medium.com
+. It may mis-recognize technical terms more often than Whisper. However, if computational resources are limited or real-time processing is required on CPU, Vosk is a great choice. It’s easy to install (pip install vosk) and use, with bindings in Python and other languages
+alphacephei.com
+.
+Other open-source ASR alternatives include Mozilla’s DeepSpeech (older, less accurate on varied accents), Wav2Vec2 models from Facebook/Meta (available via HuggingFace, some models approach Whisper’s quality on specific benchmarks), and NVIDIA NeMo ASR models. For an academic concept pipeline, Whisper (large model) will typically yield the best transcription quality, especially for jargon and names, whereas Vosk is a viable fallback for low-resource settings. Integration (Speech-to-Text): In Python, integrating Whisper or Vosk is straightforward. Whisper can be used via OpenAI’s whisper library or Hugging Face transformers pipeline. Vosk has a Python API for streaming or batch transcription. Below are example code snippets for each:
+Using OpenAI Whisper: (ensure you have openai-whisper or whisper installed)
+python
+Copy
+Edit
+import whisper
+
+# Load the large Whisper model (or use "base","medium" for faster but less accurate)
+model = whisper.load_model("large")
+# Transcribe the video audio (Whisper can directly load video files, or provide path to an audio track)
+result = model.transcribe("lecture_video.mp4")
+transcript_text = result["text"]
+for segment in result["segments"]:
+    start = segment["start"]
+    end = segment["end"]
+    text = segment["text"]
+    # Each segment has a start/end timestamp and the transcribed text
+    print(f"[{start:.2f}s - {end:.2f}s]: {text}")
+Whisper returns the full text and also segmented timestamps. This output will be used for concept extraction. Whisper’s accuracy means even complex terms (e.g. “neuroscience,” “postcolonial theory”) are likely to be transcribed correctly
+openai.com
+.
+Using Vosk: (after pip install vosk, and downloading a model)
+python
+Copy
+Edit
+import vosk, sys, json
+from vosk import Model, KaldiRecognizer
+import subprocess
+
+# Load Vosk model (download a model like "vosk-model-en-us-0.22" beforehand)
+model = Model("models/vosk-model-en-us-0.22")
+rec = KaldiRecognizer(model, 16000)  # 16kHz audio expected
+
+# Extract audio from video (e.g., using ffmpeg to get PCM audio on stdin)
+process = subprocess.Popen(
+    ["ffmpeg", "-i", "lecture_video.mp4", "-ar", "16000", "-ac", "1", "-f", "s16le", "-"],
+    stdout=subprocess.PIPE
+)
+transcript_text = ""
+while True:
+    data = process.stdout.read(4000)
+    if len(data) == 0:
+        break
+    if rec.AcceptWaveform(data):
+        result = rec.Result()        # partial result
+        transcript_text += json.loads(result).get("text", "") + " "
+# Get final bits
+final_result = json.loads(rec.FinalResult()).get("text", "")
+transcript_text += final_result
+This code streams audio to Vosk and accumulates the recognized text. Vosk will produce lower fidelity transcripts than Whisper but can run offline on CPU in real-time
+alphacephei.com
+. Ensure to adjust model and audio parameters as needed. Note: If the video already provides an official transcript or subtitles (e.g. YouTube captions or a VTT file), those can be used instead or to augment ASR. Official captions may have fewer errors. We discuss subtitle extraction next.
+2. Subtitle and Caption Extraction (Text Modalities)
+Many academic videos (especially on YouTube or conference platforms) have subtitle tracks or closed captions. These are valuable because they often contain accurate text and timestamps for the speech. Incorporating them can save transcription time or serve as a validation for the ASR output. Two approaches to get captions:
+YouTube API or Pytube: If the video is on YouTube, the YouTube Data API or third-party libraries like pytube can fetch caption tracks. Pytube is a lightweight Python library for downloading YouTube content and metadata
+geeksforgeeks.org
+. It can list available caption languages and download them as text (XML or SRT)
+geeksforgeeks.org
+. For example, using pytube:
+python
+Copy
+Edit
+from pytube import YouTube
+yt = YouTube("https://www.youtube.com/watch?v=VIDEO_ID")
+captions = yt.captions
+print("Available caption tracks:", captions.all())
+en_caption = yt.captions.get_by_language_code('en')
+caption_srt = en_caption.generate_srt_captions()
+print(caption_srt[:500])  # print first 500 chars of SRT captions
+This will retrieve English captions as an SRT string
+geeksforgeeks.org
+. You can parse SRT to get text with timestamps. Using official captions ensures high accuracy and sync. (If the video has auto-generated captions, Whisper might still be more accurate, so one could compare or combine them.)
+Local Video Subtitles: If dealing with local video files that have subtitle tracks (e.g. an .mkv or .mp4 with embedded subtitles), you can extract them using ffmpeg (e.g. ffmpeg -i video.mp4 -map 0:s:0 subs.srt to get the first subtitle stream) or libraries like pysrt to parse subtitle files.
+In our pipeline, if captions are available, we will use them to either replace or augment the Whisper transcript. For example, we might prefer official captions as the transcript, but still run Whisper to catch any missing pieces or to get an alternative transcription for comparison. At the very least, captions provide time-aligned text which is useful for linking concepts to video time. Quality Note: Official subtitles often contain fewer errors in technical terms (since the speaker or an editor provided them). When both captions and ASR exist, one strategy is to perform a merge: use captions as base and fill any gaps with ASR output, or use ASR to identify terminology that might be misspelled in auto-captions.
+3. Visual Content Analysis (Video Frames)
+Academic videos often have significant visual information: slides with text, diagrams, demonstrations of experiments, or scenes from historical footage, etc. The pipeline must extract visual concepts from the video frames. This involves multiple computer vision tasks: extracting frames, detecting objects, reading any text on screen, and generating captions or descriptors. We recommend the following open-source tools for visual analysis, each covering a different aspect:
+Frame Extraction: First, sample frames from the video. A common approach is to extract 1 frame per second or 1 frame per scene/shot. Tools like OpenCV or FFmpeg can do this efficiently. For example, using OpenCV in Python:
+python
+Copy
+Edit
+import cv2
+vidcap = cv2.VideoCapture("lecture_video.mp4")
+fps = vidcap.get(cv2.CAP_PROP_FPS)
+frames = []
+frame_interval = int(fps * 2)  # e.g., grab a frame every 2 seconds
+count = 0
+success, image = vidcap.read()
+while success:
+    if count % frame_interval == 0:
+        frames.append(image)
+    success, image = vidcap.read()
+    count += 1
+print(f"Extracted {len(frames)} frames for analysis.")
+In long videos, using a shot detection algorithm (like PySceneDetect) to grab one frame per scene change is even more efficient
+research.momentslab.com
+ – ensuring each distinct visual context is analyzed without redundancy.
+Object Detection (Detectron2): To identify generic objects or scenes in frames, Detectron2 is a powerful choice. Detectron2 is Facebook AI Research’s object detection and segmentation library that provides state-of-the-art models (Mask R-CNN, Faster R-CNN, etc.) in a unified framework
+medium.com
+. It comes with a model zoo of pre-trained models (e.g., on MS COCO) for common objects. Using Detectron2, we can detect items like “person, whiteboard, microscope, car, tree” in frames. While generic, these can hint at concepts (e.g. a “microscope” object detection is relevant in a biology lecture). Detectron2’s advantage is ease of use and high-quality implementations of SOTA vision models
+medium.com
+. For integration:
+python
+Copy
+Edit
+import torch
+from detectron2.engine import DefaultPredictor
+from detectron2.config import get_cfg
+from detectron2 import model_zoo
+
+cfg = get_cfg()
+cfg.merge_from_file(model_zoo.get_config_file("COCO-Detection/faster_rcnn_R_50_FPN_3x.yaml"))
+cfg.MODEL.WEIGHTS = model_zoo.get_checkpoint_url("COCO-Detection/faster_rcnn_R_50_FPN_3x.yaml")
+cfg.MODEL.DEVICE = "cuda"  # or "cpu"
+predictor = DefaultPredictor(cfg)
+obj_concepts = []
+for frame in frames:
+    outputs = predictor(frame)
+    classes = outputs["instances"].pred_classes.tolist()
+    labels = [predictor.metadata.get("thing_classes")[i] for i in classes]
+    obj_concepts.append(set(labels))
+This yields a set of object labels per frame (obj_concepts). We can collect all such labels as candidate concepts. Detectron2 will find common objects, but note it may not directly detect domain-specific items if they’re not in its trained classes (e.g. it won’t label “oscilloscope” if not in COCO; it might just detect it as “electronic device” or not at all). Still, it’s valuable for context and often academic scenes also contain common classes (people, screens, books, etc.). Detectron2 is highly valued for its ease and performance
+medium.com
+, and can be fine-tuned if needed for specialized objects.
+Image Captioning (BLIP): To get a more descriptive natural language caption of what a frame depicts, we use BLIP (Bootstrapping Language-Image Pretraining) – an open-source vision-language model by Salesforce. BLIP excels at generating captions and has achieved state-of-the-art results on image captioning benchmarks
+analyticsvidhya.com
+. It can describe an image in a sentence, potentially capturing relationships or context that object detectors miss (e.g. “a slide with a diagram of the solar system” or “an instructor pointing at a graph on the board”). This is extremely useful for academic content, as BLIP might summarize a chart (“a graph showing increasing temperature over time”) or a scene (“two characters in a 19th century period film”). BLIP’s captions, being text, can be mined for concepts (nouns and noun phrases within the caption). The model is open-source and available via Hugging Face Transformers. For example:
+python
+Copy
+Edit
+from transformers import pipeline
+captioner = pipeline("image-to-text", model="Salesforce/blip-image-captioning-base")
+for frame in frames[:3]:
+    result = captioner(frame)
+    print(result[0]['generated_text'])
+This uses the HuggingFace image-to-text pipeline with BLIP
+huggingface.co
+, outputting a caption like “a professor stands in front of a whiteboard with equations.” BLIP’s ability to “generate captions from images with high accuracy”
+analyticsvidhya.com
+ means we can trust it to capture salient elements of academic images. It’s especially helpful for frames where Detectron2’s fixed labels might be insufficient. (Note: BLIP can also answer questions about an image or do image-text retrieval, but captioning is our main use.)
+OCR for Slide Text: Slides or screenshots in the video often contain written text – titles, bullet points, code, formulas, names – which are direct clues to concepts. We integrate an OCR step to extract any textual content from frames:
+Tesseract OCR: Google’s Tesseract is a widely-used open-source OCR engine. It can handle clear slide text (especially if the video resolution is decent). Using pytesseract in Python:
+python
+Copy
+Edit
+import pytesseract
+import cv2
+text_concepts = []
+for frame in frames:
+    # Preprocess frame for better OCR: e.g., convert to grayscale, maybe threshold
+    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    ocr_text = pytesseract.image_to_string(gray)
+    text_concepts.append(ocr_text)
+We can apply filtering to the OCR output (removing newlines, symbols). Tesseract is free and supports many languages. However, it might struggle with low-quality video text or fancy fonts.
+Advanced OCR (TrOCR or EasyOCR): Alternatively, transformers-based OCR like Microsoft’s TrOCR (also available via HuggingFace) can give better results on printed text. For instance, using TrOCR for a frame:
+python
+Copy
+Edit
+from transformers import TrOCRProcessor, VisionEncoderDecoderModel
+processor = TrOCRProcessor.from_pretrained('microsoft/trocr-base-handwritten')
+model = VisionEncoderDecoderModel.from_pretrained('microsoft/trocr-base-handwritten')
+pixel_values = processor(images=frame, return_tensors="pt").pixel_values
+generated_ids = model.generate(pixel_values)
+extracted_text = processor.batch_decode(generated_ids, skip_special_tokens=True)[0]
+This is more computationally heavy but may extract text more accurately in some cases
+huggingface.co
+. For our pipeline, Tesseract is often sufficient and much faster.
+The outputs of the visual analysis stage will be:
+A list of objects detected per frame (obj_concepts).
+A list of captions for key frames (caption_texts).
+A list of OCR-extracted text strings from frames (text_concepts).
+These contain overlapping information. For example, BLIP’s caption might say “a slide titled ‘Introduction to Quantum Mechanics’ with a diagram” – the caption text itself includes a concept (“Quantum Mechanics”) that OCR would also pick up from the slide title. The object detector might just detect “person” and “projector” in that frame. By combining these, we cover both the concrete and abstract elements visible. Efficiency Consideration: We don’t need to run all vision models on every single frame if the video is long. A recommended strategy is:
+Scene/slide change detection: Use a tool (like PySceneDetect) to split video into shots or detect slide transitions. Then pick one representative frame per scene or slide. This avoids redundant analysis of many similar frames
+research.momentslab.com
+.
+Parallel processing: Visual analyses (object detection, captioning, OCR) can be parallelized per frame if resources allow (e.g., using multiprocessing or running some on CPU vs GPU).
+Optionally, reduce image resolution for faster processing (though OCR might need high-res for small text).
+4. Concept Extraction from Textual Data
+With the speech transcribed (and/or subtitles obtained) and visual text/captions collected, we now have a large amount of textual data. The next step is to identify key concepts within this text. Concepts in academic content are usually nouns or noun phrases that represent important ideas, entities, or topics (e.g. “photosynthesis”, “World War II”, “supply and demand”, “Fourier transform”). We will perform concept extraction on two textual sources:
+The transcript text (spoken content).
+The visual text (OCR results and image captions).
+Natural Language Processing (NLP) for Key Phrases: We use NLP techniques to extract significant terms from the text. Some open-source tools/strategies:
+Keyword/Keyphrase Extraction Libraries: Libraries like YAKE, RAKE, or KeyBERT can automatically extract important phrases based on statistical and semantic scores. For example, KeyBERT uses BERT embeddings to find phrases most similar to the document’s overall content. A quick example with KeyBERT:
+python
+Copy
+Edit
+from keybert import KeyBERT
+kw_model = KeyBERT()
+# Combine transcript and caption text for extraction
+full_text = transcript_text + " " + " ".join(caption_texts)
+keywords = kw_model.extract_keywords(full_text, keyphrase_ngram_range=(1,3), stop_words='english', top_n=20)
+print("Top concepts:", [kw for kw, score in keywords])
+This will return a list of key phrases with scores, e.g. [('quantum mechanics', 0.65), ('wave function', 0.60), ...]. KeyBERT is general, so it might surface relevant academic terms if they are distinctive in the text.
+SpaCy or NLTK for Noun Phrase Extraction: A simpler approach is to use SpaCy to parse the text and pull out noun chunks and proper nouns, then filter them by importance (frequency, uniqueness):
+python
+Copy
+Edit
+import spacy
+nlp = spacy.load("en_core_web_sm")
+doc = nlp(full_text)
+candidates = [chunk.text for chunk in doc.noun_chunks]
+# Filter trivial words and short chunks
+stopwords = nlp.Defaults.stop_words
+concept_candidates = []
+for cand in candidates:
+    cand_clean = cand.strip().lower()
+    if len(cand_clean) < 3: 
+        continue  # too short
+    if all(word in stopwords for word in cand_clean.split()):
+        continue  # only stopwords
+    concept_candidates.append(cand_clean)
+# Count frequencies
+from collections import Counter
+freq = Counter(concept_candidates)
+common_concepts = [phrase for phrase, count in freq.most_common(50)]
+print("Candidate concepts:", common_concepts[:10])
+This produces a list of frequent noun phrases. Many will not be true “concepts” (some might be generic like “theory” or “example”). We can improve this by cross-referencing with domain knowledge (discussed below).
+Named Entity Recognition (NER): SpaCy or HuggingFace models can identify named entities (like person names, organizations, locations). For academic content, named entities might include researcher names, place names (if historically relevant), etc. Those can be considered concepts if relevant (e.g. “Einstein” in a physics lecture). We can tag those as well:
+python
+Copy
+Edit
+for ent in doc.ents:
+    if ent.label_ in ["PERSON","ORG","GPE","LOC"]:
+        common_concepts.append(ent.text.lower())
+Domain-Specific Parsing: In specialized domains, one might use domain-specific NLP: e.g. SciSpaCy for scientific terms (it can detect chemical names, biomedical terms, etc.), or custom dictionaries for art/philosophy terms. For instance, SciSpaCy has models that link text to biomedical ontologies – if the lecture is medical, it can identify that “BRCA1” is a gene, etc. Depending on the domain, we could integrate such tools to catch concepts that generic models might miss.
+At this stage, we will have a set of candidate concepts from text (transcript and captions). We should clean and normalize them:
+Normalize case (e.g., "Quantum Mechanics" vs "quantum mechanics" – choose one casing).
+Singularize or standardize (e.g., "neural networks" -> "neural network" as a concept, unless plural is distinct).
+Remove very generic words (using a stopword list or manually removing terms like “introduction”, “lecture”, “video” that might appear in captions but are not meaningful concepts).
+We also gather concepts from the visual analysis outputs:
+From object detection: likely single-word objects, which we’ll keep if they seem relevant (e.g., “microscope”, “piano”, “equation” – note: object detectors don’t output “equation” typically, but if a formula is drawn, it might not detect it at all. For such cases, OCR is the tool that captured the formula text).
+From image captions: we can parse each caption sentence. A quick heuristic is to take nouns from the caption as potential concepts. E.g., caption “a professor discussing the Krebs cycle on stage” – nouns: “professor”, “Krebs cycle”, “stage”. We know “Krebs cycle” is the key concept here.
+From OCR text: the text from slides might be full sentences or lists. We can apply similar keyphrase extraction or just take significant terms from it. Often slide titles or bold terms in slides are exactly the concepts (if slide title is “Definition of Entropy”, the concept is “Entropy”).
+By the end of this extraction phase, we have multiple lists of concepts from various sources:
+concepts_from_transcript
+concepts_from_captions (and OCR)
+concepts_from_objects
+These lists will have overlaps. Next, we merge and align them.
+5. Aligning and Fusing Concepts Across Modalities
+This step combines the outputs of the audio/text analysis and visual analysis to produce a unified set of concepts, with attention to when and how they appear in the video. Key tasks here are alignment by time, deduplication, and fusion of information. Temporal Alignment: Because our analysis components retained timing information (Whisper segments have timestamps, subtitles have timestamps, frames correspond to certain times), we can align concepts by the time they occur:
+For each concept found in the transcript, note the timestamp (or time range) when it was mentioned. Whisper provides segment timings, so if a concept word appears in a segment, we can use that time. A finer approach: do forced alignment or word-level alignment (Whisper can output word timestamps in later versions). For simplicity, record segment midpoint or start time for the concept mention.
+For each visual concept (from a frame via objects/caption/OCR), we know the frame’s timestamp (e.g., frame at 1:00 minute). We assign that time to those visual concepts.
+Now, if an audio concept and a visual concept occur around the same time and are textually the same (or very similar), we consider it the same concept instance. For example, if the transcript at 120s mentions "photosynthesis" and at 122s a slide OCR text also contains "Photosynthesis", that’s a single concept being reinforced. We would fuse these and perhaps mark that “photosynthesis” is confirmed by both speech and slide at ~2:00 min.
+If a concept appears multiple times (say the lecturer says “photosynthesis” at 2:00 and again at 5:30, and it’s on slides at both times), we track all those occurrences but it remains one unique concept.
+In practice, alignment can be done by grouping concept mentions into time windows or segments. We could define that if the same concept appears within, say, a 30-second window in audio and video, they are part of the same discussion instance. The exact method can be adjusted. Cross-modal Verification: Aligning also helps verify a concept. If a term is heard and also seen on a slide, we have high confidence it’s correctly identified (less chance of a transcription error or OCR error). This can be part of scoring (next section). To systematically align, one approach is:
+python
+Copy
+Edit
+from difflib import get_close_matches
+
+concept_timeline = {}  # e.g., {"concept": [(time, source), ...]}
+# Assume we have lists like audio_concepts = [(time, "concept")] and visual_concepts = [(time, "concept")]
+for time, concept in audio_concepts:
+    concept = concept.lower()
+    concept_timeline.setdefault(concept, []).append((time, "audio"))
+for time, concept in visual_concepts:
+    concept = concept.lower()
+    # merge if concept text is slightly different but essentially same (e.g. plural vs singular)
+    match = get_close_matches(concept, concept_timeline.keys(), cutoff=0.9)  # simple fuzzy match
+    if match:
+        key = match[0]
+    else:
+        key = concept
+    concept_timeline.setdefault(key, []).append((time, "visual"))
+This pseudocode merges identical or near-identical concepts. A more sophisticated merge might use stemming or lemmatization (to treat “networks” and “network” as same) or even knowledge-based normalization (to know “US” and “United States” are same concept). But for scholarly terms, straightforward text normalization is usually fine. Deduplication: After merging, we have unique concept keys. We should ensure no duplicates: e.g., if “machine learning” and “Machine Learning” came separately, they merge. We also unify variants: maybe the lecturer said “EU” and slide said “European Union” – we’d ideally merge those as one concept. Such cases might require a predefined dictionary or acronym expansion logic (domain knowledge could help here, or leveraging Wikipedia redirect links to see if one term is alias of another). Fusing Modal Info: For each concept, we can compile metadata:
+All timestamps where it appeared (from any modality).
+Which modality it appeared in (audio, visual, or both).
+Perhaps the context snippet (a short surrounding text from transcript or slide).
+This can be used if we want to output not just the concept list, but also when it appears and in what context.
+For example, concept “Photosynthesis” might get:
+vbnet
+Copy
+Edit
+Photosynthesis:
+  - Times: [02:10 (slide), 02:15 (audio), 05:00 (audio)]
+  - Modalities: speech + text-on-slide
+  - Context: "… process of **photosynthesis** in plants …" (from transcript)
+We might not output all that detail to end-user, but the pipeline can use it for scoring or to allow jumping to that part of the video. Multimodal Embedding (optional): A modern approach to align content is using joint embeddings. For instance, one could embed the transcript sentence and the video frame image into the same vector space (using a model like CLIP or a dedicated multimodal model) and measure similarity
+kx.com
+kx.com
+. This is advanced, but the idea is that a sentence “This formula shows...” and the frame containing that formula E=mc² can be recognized as related by a multimodal model
+kx.com
+. There are research models (e.g., VideoCLIP, or the mentioned Voyage multimodal model
+kx.com
+) that produce joint embeddings of image + text. However, many of the best are not fully open-source yet
+kx.com
+. For our open-source pipeline, we rely on explicit time alignment and text matching, which is simpler and still effective. Example Alignment: If a lecturer says “As you can see on this slide, the Krebs cycle has ...” while the slide image (via OCR or caption) contains the text “Krebs Cycle”, the pipeline will merge these so that “Krebs cycle” is one concept noted at that time. By aligning modalities, we capture the relationship between spoken words and visual content, a key advantage of multimodal analysis (embedding techniques aim for the same goal of capturing cross-modal relationships
+kx.com
+).
+6. Scoring, Ranking, and Temporal Context
+Not all extracted terms are equally important. This stage assigns an importance score or filter to highlight the major concepts:
+Frequency: Concepts mentioned often in the video are likely important. If “DNA” is said 20 times, it’s probably a core topic; whereas a term said once in passing might be less central. We can count occurrences (taking care that multiple close-together mentions might count as one extended discussion).
+Multimodal presence: If a concept appears in both speech and on a slide (visual), it’s likely very important (the presenter bothered to put it on a slide and talk about it). We can boost such concepts’ score.
+Position in video: Concepts introduced in the beginning or recurring throughout may be key themes. A concept only mentioned in a final aside might be less crucial. Some heuristics: give slight weight if mentioned in title slides or introduction sections.
+Domain knowledge weight: If we have an idea of the domain (say the video is tagged as Biology), and we have a list of fundamental biology terms, occurrences of those could be weighted. However, this may be unnecessary if frequency covers it. Another angle: use an external knowledge base to see if a term is a well-known academic concept (for example, check if it has a Wikipedia page or appears in an academic glossary). This could down-weight very obscure terms or trivial words.
+Salience in text: Keyphrase algorithms already give scores; we can incorporate those. For instance, KeyBERT might assign a higher score to “quantum entanglement” than to “experiment” if it judges the former more unique to the transcript.
+After scoring, we can rank the concepts to output in order of relevance. For example:
+scss
+Copy
+Edit
+1. Quantum Entanglement – (score 0.95) [mentioned in speech 5x, shown on 2 slides]
+2. Bell’s Theorem – (score 0.88) [speech 3x, slide 1x]
+3. Electron Spin – (score 0.80) [speech 2x]
+...
+The exact scoring formula can be a weighted sum of the above factors. We might not expose the numeric scores to end users, but use them internally to decide what to include (e.g., maybe only output the top N concepts or those above a threshold in importance). Temporal context tracking: For each concept, we keep track of when it occurs. This is useful for:
+Navigation/Chapters: A user might click on a concept and jump to its first mention in the video.
+Context disambiguation: If concept “Mercury” appears, the timeline might show it was in a segment about planets (not the element), helping interpret it.
+Visualization: One could even create a timeline graph showing concept occurrences over the video duration.
+Implementing this is as simple as storing the list of timestamps or time segments for each concept during the alignment step. We might also define a dominant segment for a concept – e.g., if “French Revolution” is mentioned throughout a history lecture, it might essentially span the whole video, but if “Napoleonic Wars” only come up later, that concept’s segment is later. Example Temporal Output: As a hypothetical output format, we could produce:
+json
+Copy
+Edit
+[
+  {
+    "concept": "Quantum Entanglement",
+    "mentions": [
+       {"time": "00:10:15", "type": "speech", "context": "Today we discuss quantum entanglement and its implications..."},
+       {"time": "00:45:00", "type": "speech", "context": "…result of the quantum entanglement experiment shown..."},
+       {"time": "00:44:50", "type": "visual", "context": "Slide title: 'Quantum Entanglement Experiment'"}
+    ]
+  },
+  ...
+]
+This shows the concept and when/how it appears. Such detailed output may or may not be needed, but the pipeline design supports assembling this information.
+7. Integration into a Python Pipeline (TORI)
+Finally, we integrate all components into the TORI pipeline (assuming TORI is the name of the existing system we are adding this to). The integration involves orchestrating the modules in sequence (or in parallel where possible) and ensuring data flows correctly between them. The pipeline can be structured as a set of functions or classes:
+python
+Copy
+Edit
+def transcribe_audio(video_path):
+    # Use Whisper or fallback to Vosk to get transcript text and timings
+    ...
+
+def extract_captions(video_path_or_url):
+    # Use pytube or ffmpeg to get subtitles if available
+    ...
+
+def extract_frames(video_path):
+    # Use OpenCV or PySceneDetect to get representative frames
+    ...
+
+def analyze_frame(frame):
+    # Run object detection, image captioning, and OCR on a single frame
+    ...
+
+def extract_concepts_from_text(transcript, ocr_texts, captions):
+    # Use NLP (keyphrase, spaCy, etc.) to extract candidate concepts from all text
+    ...
+
+def fuse_concepts(audio_concepts, visual_concepts):
+    # Align by time and merge duplicates, produce final concept list with metadata
+    ...
+
+# Main pipeline function
+def extract_concepts_from_video(video_path):
+    transcript = transcribe_audio(video_path)
+    captions = extract_captions(video_path)
+    if captions:
+        transcript_text = captions  # prefer official captions if present
+    else:
+        transcript_text = transcript["text"]
+    frames = extract_frames(video_path)
+    visual_data = [analyze_frame(f) for f in frames]  # contains objects, caption, ocr for each frame
+    # Gather visual concepts with timestamps (frame time)
+    visual_concepts = []
+    for f_time, (obj_labels, caption_text, ocr_text) in visual_data:
+        for concept in obj_labels:
+            visual_concepts.append((f_time, concept))
+        for concept in extract_concepts_from_text("", [ocr_text, caption_text], []):
+            visual_concepts.append((f_time, concept))
+    # Gather audio/text concepts with timestamps
+    audio_concepts = [] 
+    for segment in transcript.get("segments", []):
+        t = segment["start"]
+        segment_text = segment["text"]
+        for concept in extract_concepts_from_text(segment_text, [], []):
+            audio_concepts.append((t, concept))
+    # Fuse and return unique concepts with info
+    concepts = fuse_concepts(audio_concepts, visual_concepts)
+    return concepts
+The above pseudo-code outlines how pieces come together. In practice, you would refine each function, handle exceptions, and possibly use a pipeline framework. For instance, if TORI has an internal messaging or data format, each step would adapt to that. Parallelization: Note that some steps can run in parallel to speed up processing:
+Audio transcription can run while frames are being extracted.
+Frame analysis for each frame can run in parallel (on CPU threads or a GPU batch if models allow).
+If using large models like Whisper and BLIP, you might want to run them on GPU sequentially to avoid VRAM overflow, or run Whisper on GPU and do OCR on CPU concurrently.
+Resource Requirements: This pipeline can be heavy:
+Whisper large uses ~10GB of RAM on CPU or a few GB of GPU VRAM.
+BLIP captioning model is also a few hundred MB on GPU.
+Detectron2 with R50 model is another few hundred MB on GPU.
+To integrate smoothly, ensure the system has the capacity or choose model sizes appropriately (Whisper has smaller models like base or small if needed; BLIP has a base vs large version; detectron2 has lighter models or you can use YOLOv5 as a lighter alternative for object detection). The open-source nature means everything can run locally, but optimization might be needed for real-time use.
+Concept Fusion for Scholarly Domains: Depending on the domain of the video, a few integration customizations can improve results:
+Use domain-specific concept lists: If you have a database of concepts (perhaps the provided concept_database.json is such a list), you can compare extracted terms against it. This helps validate and also catch any concept that was missed but is expected. For example, if the video is a math lecture and you have a list of math concepts, you can ensure any mention of those gets flagged.
+Dynamic search in knowledge bases: One could query Wikipedia or a scholarly database with candidate terms to see if they are meaningful. E.g., if “delta” is extracted, that’s generic, but if combined with context (maybe “Delta algorithm” or something) you might confirm if it refers to a known concept.
+Filtering by context: In cultural or philosophical discussions, common words might be used in specific ways (e.g. “Being” in a philosophy lecture might be a concept if referring to Heidegger’s concept of Being). Contextual analysis (maybe using an language model) could help decide if a word is used as a concept or just a filler. This is advanced and not strictly necessary, but something to consider for high precision.
+Output Format: The final output can be a ranked list of concepts relevant to the video. For example:
+Concept: Quantum Entanglement – Discipline: Physics – Occurrences: 2 (discussed at 10:15 and 45:00)
+kx.com
+Concept: Bell’s Theorem – Discipline: Physics – Occurrences: 1 (introduced at 42:30)
+Concept: EPR Paradox – Discipline: Physics/Philosophy – Occurrences: 1 (seen on slide at 41:50)
+Concept: Photon Polarization – Discipline: Physics – Occurrences: 3 (throughout the experiment section)
+Each concept could be annotated with the domain or category (if we know it, else we might omit), and the number of mentions or a confidence score. By using modalities in concert, the pipeline ensures that if a concept is truly significant, it will likely appear either in the speech multiple times or on a slide (or both). Those will bubble up to the top. Less important details (like a one-off anecdote) might not make the cut after scoring.
+8. Conclusion and Further Guidance
+This multimodal pipeline leverages state-of-the-art open-source models in ASR and computer vision to extract meaningful concepts from academic videos. Tools like Whisper and BLIP provide high accuracy in their domains (speech and image captioning respectively), while libraries like Detectron2 and pytesseract fill in additional details. By aligning audio and visual cues, we capture a more complete picture – for instance, aligning “words with frames” helps ensure we correctly identify when a concept is present in both modalities
+kx.com
+. The design is flexible: you can swap components as better models become available (for example, if a new open-source multimodal transformer that jointly watches video and transcript comes out, it could replace parts of this pipeline). The pipeline can be tuned to specific scholarly domains by plugging in domain-specific extractors or knowledge bases (e.g., a chemistry video might use a molecule recognizer for visuals and a chemical named-entity extractor for text). Future improvements might include:
+Using Multimodal Embeddings directly to cluster video segments by topic.
+Incorporating an LLM (Large Language Model) to refine or validate the concepts (e.g., have an LLM read the transcript and list key topics, to cross-check the pipeline’s output).
+Interactive use: linking concepts to external resources (if concept “Photosynthesis” is found, link it to a Wikipedia page or scholarly definition for user reference).
+Nevertheless, even with the current open tools, this pipeline provides a robust foundation. It transforms raw video into a structured set of concepts, essentially making unstructured video content searchable, indexable, and easier to learn from. By applying multimodal analysis, we ensure no important concept slips through – whether it’s spoken, written on a slide, or depicted visually, it will be detected and logged. References and Sources Used: The recommendations and design above are backed by the documentation and performance of the mentioned tools. OpenAI’s Whisper is highlighted for its near human-level speech recognition accuracy
+openai.com
+, especially on technical content
+openai.com
+. Vosk’s documentation underlines its offline capability and multi-language support in a small footprint
+alphacephei.com
+. For visual analysis, OpenAI’s CLIP model was noted for learning visual concepts from text supervision
+openai.com
+ (useful for zero-shot image recognition), and Salesforce’s BLIP has demonstrated state-of-the-art image captioning results
+analyticsvidhya.com
+. Facebook’s Detectron2 is a proven framework providing cutting-edge object detection algorithms in an easy-to-use package
+medium.com
+. We also considered strategies from recent multimodal research, which emphasize combining visual frames with transcripts to capture their relationships
+kx.com
+, aligning a phrase like “this formula” with the actual formula shown on screen
+kx.com
+. This alignment of modalities underpins our fusion approach. By grounding all modalities into a common textual space (transcripts, captions, OCR text)
+developer.nvidia.com
+, the pipeline simplifies the concept retrieval problem while leveraging the strengths of each modality’s analysis.

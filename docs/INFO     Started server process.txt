@@ -1,0 +1,120 @@
+INFO:     Started server process [48460]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8002 (Press CTRL+C to quit)
+📥 Received file: 2501.12881v1.pdf (4851140 bytes)
+2025-05-29 12:59:54,491 - pdf_ingestion - INFO - 🚀 🌍 UNIVERSAL PDF INGESTION: tmpudr7jyk_.pdf
+2025-05-29 12:59:54,501 - pdf_ingestion - INFO - 🔬 ZERO THRESHOLD MODE: 0.0 (maximum coverage)
+2025-05-29 12:59:54,501 - pdf_ingestion - INFO - 🌍 UNIVERSAL PIPELINE: Cross-domain concept extraction enabled
+2025-05-29 12:59:54,507 - pdf_ingestion - INFO - 📊 Database ready: 320 concepts across all domains
+2025-05-29 12:59:55,309 - pdf_ingestion - INFO - 📄 Extracted 13 chunks from tmpudr7jyk_.pdf
+2025-05-29 12:59:55,311 - pdf_ingestion - INFO - 🔬 Chunk 1: 5694 chars, preview: IEEE, VOL. X, NO. X, X X 1
+Reinforcement learning Based Automated Design of Differential
+Evolution A...
+2025-05-29 12:59:55,315 - pdf_ingestion - INFO - 🔬 Chunk 2: 5002 chars, preview: IEEE, VOL. X, NO. X, X X 2
+Specifically, problem characteristics are identified via ex-
+ploratory la...
+2025-05-29 12:59:55,315 - pdf_ingestion - INFO - 🔬 Chunk 3: 4882 chars, preview: IEEE, VOL. X, NO. X, X X 3
+TABLE I: Main contributions of RL-assisted DE in the past decade
+Category...
+2025-05-29 12:59:55,319 - pdf_ingestion - INFO - 🔬 =============== UNIVERSAL CHUNK 1/13 ===============
+2025-05-29 12:59:55,319 - pdf_ingestion - INFO - 📊 Processing chunk 1/13 (5694 chars)
+2025-05-29 12:59:55,319 - pdf_ingestion - INFO - 🔧 🌍 UNIVERSAL EXTRACT AND BOOST: threshold: 0.0
+2025-05-29 12:59:55,319 - pdf_ingestion - INFO - 🔬 Chunk length: 5694 chars
+2025-05-29 12:59:55,323 - pdf_ingestion - INFO - 🔬 First 300 chars: IEEE, VOL. X, NO. X, X X 1
+Reinforcement learning Based Automated Design of Differential
+Evolution Algorithm for Black-box Optimization
+Xu Yang, Rui Wang, Kaiwen Li, and Ling Wang,
+Abstract —Differential evolution (DE) algorithm is
+recognized as one of the most effective evolution-
+ary algorithms, d
+2025-05-29 12:59:55,323 - pdf_ingestion - INFO - 🔬 STEP 1: Calling universal extractConceptsFromDocument...
+2025-05-29 12:59:55,323 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL CONCEPT EXTRACTION START
+2025-05-29 12:59:55,323 - ingest_pdf.extractConceptsFromDocument - INFO - 🔬 Text length: 5694 chars, Threshold: 0.0
+2025-05-29 12:59:55,323 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION: Processing 5694 chars
+2025-05-29 13:00:22,774 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION COMPLETE: 92 concepts extracted
+2025-05-29 13:00:22,774 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 TOP UNIVERSAL CONCEPTS:
+2025-05-29 13:00:22,779 - ingest_pdf.extractConceptsFromDocument - INFO -   1. Differential evolution (score: 1.000, methods: KeyBERT+NER+YAKE)
+2025-05-29 13:00:22,779 - ingest_pdf.extractConceptsFromDocument - INFO -   2. Rui Wang (score: 0.533, methods: NER+YAKE)
+2025-05-29 13:00:22,779 - ingest_pdf.extractConceptsFromDocument - INFO -   3. black box optimization (score: 0.452, methods: KeyBERT)
+2025-05-29 13:00:22,779 - ingest_pdf.extractConceptsFromDocument - INFO -   4. differential evolution algorithm (score: 0.447, methods: KeyBERT)
+2025-05-29 13:00:22,779 - ingest_pdf.extractConceptsFromDocument - INFO -   5. design differential evolution (score: 0.443, methods: KeyBERT)
+2025-05-29 13:00:22,779 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 EXTRACTION METHOD BREAKDOWN:
+2025-05-29 13:00:22,787 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT+NER+YAKE: 1 concepts
+2025-05-29 13:00:22,787 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER+YAKE: 3 concepts
+2025-05-29 13:00:22,787 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT: 19 concepts
+2025-05-29 13:00:22,787 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 YAKE: 16 concepts
+2025-05-29 13:00:22,787 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER: 53 concepts
+2025-05-29 13:00:22,792 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL EXTRACTION END: 92 concepts ready
+2025-05-29 13:00:22,792 - pdf_ingestion - INFO - 📊 UNIVERSAL SEMANTIC EXTRACTION RESULT: 92 concepts
+2025-05-29 13:00:22,795 - pdf_ingestion - INFO - 📊 RAW UNIVERSAL CONCEPTS (pre-boost):
+2025-05-29 13:00:22,795 - pdf_ingestion - INFO -    1. Differential evolution (score: 1.000, method: universal_keybert+ner+yake)
+2025-05-29 13:00:22,795 - pdf_ingestion - INFO -    2. Rui Wang (score: 0.533, method: universal_ner+yake)
+2025-05-29 13:00:22,796 - pdf_ingestion - INFO -    3. black box optimization (score: 0.452, method: universal_keybert)
+2025-05-29 13:00:22,809 - pdf_ingestion - INFO -    4. differential evolution algorithm (score: 0.447, method: universal_keybert)
+2025-05-29 13:00:22,809 - pdf_ingestion - INFO -    5. design differential evolution (score: 0.443, method: universal_keybert)
+2025-05-29 13:00:22,811 - pdf_ingestion - INFO -    6. objective differential evolution (score: 0.422, method: universal_keybert)
+2025-05-29 13:00:22,811 - pdf_ingestion - INFO -    7. driven evolutionary algorithms (score: 0.394, method: universal_keybert)
+2025-05-29 13:00:22,811 - pdf_ingestion - INFO -    8. differential evolution meta (score: 0.387, method: universal_keybert)
+2025-05-29 13:00:22,812 - pdf_ingestion - INFO -    9. optimizers driven evolutionary (score: 0.378, method: universal_keybert)
+2025-05-29 13:00:22,814 - pdf_ingestion - INFO -   10. meta optimizers driven (score: 0.376, method: universal_keybert)
+2025-05-29 13:00:22,814 - pdf_ingestion - INFO -   ... and 82 more concepts
+2025-05-29 13:00:22,816 - pdf_ingestion - INFO - 🔬 STEP 2: Calling universal boost_known_concepts...
+2025-05-29 13:00:22,816 - pdf_ingestion - INFO - 🔍 UNIVERSAL BOOST: Checking chunk (5694 chars) against 320 database concepts
+2025-05-29 13:00:22,818 - pdf_ingestion - INFO - 🔍 First 200 chars of chunk: IEEE, VOL. X, NO. X, X X 1
+Reinforcement learning Based Automated Design of Differential
+Evolution Algorithm for Black-box Optimization
+Xu Yang, Rui Wang, Kaiwen Li, and Ling Wang,
+Abstract —Different
+2025-05-29 13:00:22,818 - pdf_ingestion - INFO - 🚀 Universal boost: artificial intelligence (0.950 → 0.980, domain: technology)
+2025-05-29 13:00:22,818 - pdf_ingestion - INFO - 🚀 Universal boost: machine learning (0.900 → 0.980, domain: technology)
+2025-05-29 13:00:22,821 - pdf_ingestion - INFO - 🚀 Universal boost: virtual reality (0.760 → 0.836, domain: technology)
+2025-05-29 13:00:22,824 - pdf_ingestion - INFO - 🚀 Universal boost: Differential evolution (0.950 → 0.980, domain: Biology)
+2025-05-29 13:00:22,829 - pdf_ingestion - INFO - 🚀 Universal boost: Rui Wang (0.533 → 0.693, domain: universal_extraction)
+2025-05-29 13:00:22,829 - pdf_ingestion - INFO - 🚀 Universal boost: IEEE (0.950 → 0.980, domain: universal_extraction)
+2025-05-29 13:00:22,829 - pdf_ingestion - INFO - 🚀 Universal boost: black box optimization (0.950 → 0.980, domain: universal_extraction)
+2025-05-29 13:00:22,829 - pdf_ingestion - INFO - 🚀 Universal boost: algorithm differential evolution (0.780 → 0.976, domain: Biology)
+2025-05-29 13:00:22,837 - pdf_ingestion - INFO - 🚀 Universal boost: differential evolution (0.850 → 0.980, domain: Biology)
+2025-05-29 13:00:22,837 - pdf_ingestion - INFO - 🚀 Universal boost: evolution algorithm (0.588 → 0.735, domain: Biology)
+2025-05-29 13:00:22,837 - pdf_ingestion - INFO - 🚀 Universal boost: differential evolution algorithm (0.587 → 0.733, domain: Biology)
+2025-05-29 13:00:22,841 - pdf_ingestion - INFO - 🚀 Universal boost: optimization machine (0.720 → 0.900, domain: Computer Science)
+2025-05-29 13:00:22,841 - pdf_ingestion - INFO - 🚀 Universal boost: optimization machine learning (0.710 → 0.887, domain: Computer Science)
+2025-05-29 13:00:22,841 - pdf_ingestion - INFO - 🚀 Universal boost: learn value functions (0.708 → 0.885, domain: universal_extraction)
+2025-05-29 13:00:22,841 - pdf_ingestion - INFO - 🚀 Universal boost: based optimization (0.707 → 0.884, domain: universal_extraction)
+2025-05-29 13:00:22,846 - pdf_ingestion - INFO - 🚀 Universal boost: prior optimization (0.707 → 0.884, domain: universal_extraction)
+2025-05-29 13:00:22,861 - pdf_ingestion - INFO - 🚀 Universal boost: hyper heuristic methods (0.704 → 0.880, domain: universal_extraction)
+2025-05-29 13:00:22,862 - pdf_ingestion - INFO - 🚀 Universal boost: algorithm configuration evolution (0.696 → 0.870, domain: Biology)
+
+MAJORITY OF PDF INGESTION INFO PURPOSEFULLY REMOVED FOR BREVITY
+
+2025-05-29 13:04:06,357 - pdf_ingestion - INFO -   ... and 67 more concepts
+2025-05-29 13:04:06,357 - pdf_ingestion - INFO - 📊 Method distribution: {'universal_ner+yake': 3, 'universal_ner': 3, 'universal_keybert': 4, 'universal_yake': 5}
+2025-05-29 13:04:06,357 - pdf_ingestion - INFO - 🔬 CHUNK 13 RESULTS: 82 concepts
+2025-05-29 13:04:06,357 - pdf_ingestion - INFO -    🌍 82 universal extraction, 🚀 45 boosted, 🎯 28 cross-ref boosted
+2025-05-29 13:04:06,365 - pdf_ingestion - INFO - 🔬 =============== END CHUNK 13 ===============
+2025-05-29 13:04:06,373 - pdf_ingestion - INFO - 📥 RUNNING UNIVERSAL AUTO-PREFILL ANALYSIS...
+2025-05-29 13:04:06,373 - pdf_ingestion - INFO - 📥 UNIVERSAL AUTO-PREFILL: Analyzing 3102 concepts from tmpudr7jyk_.pdf
+2025-05-29 13:04:06,390 - pdf_ingestion - INFO - 📥 UNIVERSAL AUTO-PREFILL: No new concepts met prefill criteria (threshold: 0.5)
+2025-05-29 13:04:06,390 - pdf_ingestion - INFO - 🔬 INJECTING 3102 UNIVERSAL CONCEPTS INTO CONCEPTMESH
+2025-05-29 13:04:06,390 - pdf_ingestion - ERROR - ❌ Error during universal PDF ingestion: add_concept_diff() got an unexpected keyword argument 'metadata'
+Traceback (most recent call last):
+  File "C:\Users\jason\Desktop\tori\kha\ingest_pdf\pipeline.py", line 545, in ingest_pdf_clean
+    add_concept_diff(doc_id, all_extracted_concepts, metadata={
+TypeError: add_concept_diff() got an unexpected keyword argument 'metadata'
+✅ Extracted 0 concepts
+2025-05-29 13:04:06,400 - asyncio - ERROR - Exception in callback _ProactorBasePipeTransport._call_connection_lost(None)
+handle: <Handle _ProactorBasePipeTransport._call_connection_lost(None)>
+Traceback (most recent call last):
+  File "C:\ALANPY311\Lib\asyncio\events.py", line 84, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\ALANPY311\Lib\asyncio\proactor_events.py", line 165, in _call_connection_lost
+    self._sock.shutdown(socket.SHUT_RDWR)
+ConnectionResetError: [WinError 10054] An existing connection was forcibly closed by the remote host
+2025-05-29 13:04:06,406 - asyncio - ERROR - Exception in callback _ProactorBasePipeTransport._call_connection_lost(None)
+handle: <Handle _ProactorBasePipeTransport._call_connection_lost(None)>
+Traceback (most recent call last):
+  File "C:\ALANPY311\Lib\asyncio\events.py", line 84, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\ALANPY311\Lib\asyncio\proactor_events.py", line 165, in _call_connection_lost
+    self._sock.shutdown(socket.SHUT_RDWR)
+ConnectionResetError: [WinError 10054] An existing connection was forcibly closed by the remote host

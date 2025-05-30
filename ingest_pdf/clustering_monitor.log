@@ -1,0 +1,9 @@
+2025-05-28 13:23:03,333 - TORIClusteringMonitor - INFO - Clustering monitor initialized
+2025-05-28 13:23:03,333 - TORIPipelineIntegration - INFO - TORI Clustering Pipeline initialized
+2025-05-28 13:23:03,372 - TORIClusteringMonitor - WARNING - ALERT [quality_degradation]: Low cohesion: 0.187
+2025-05-28 13:23:03,375 - TORIClusteringMonitor - WARNING - ALERT [quality_degradation]: Low silhouette score: 0.000
+2025-05-28 13:23:03,375 - TORIClusteringMonitor - WARNING - ALERT [quality_degradation]: Low quality score: 0.312
+2025-05-28 13:23:03,375 - TORIClusteringMonitor - INFO - Recorded clustering metrics: kmeans - Quality: 0.312, Runtime: 0.037s
+2025-05-28 13:23:03,376 - TORIPipelineIntegration - INFO - Pipeline processed 10 concepts into 2 clusters using kmeans
+2025-05-28 13:23:05,640 - TORIClusteringMonitor - INFO - Loaded 1 historical metrics
+2025-05-28 13:23:05,644 - TORIClusteringMonitor - INFO - Clustering monitor initialized

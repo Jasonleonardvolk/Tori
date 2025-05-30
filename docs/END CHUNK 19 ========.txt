@@ -1,0 +1,540 @@
+============= END CHUNK 19 ===============
+2025-05-29 13:50:44,030 - pdf_ingestion - INFO - 🔬 =============== UNIVERSAL CHUNK 20/22 ===============
+2025-05-29 13:50:44,030 - pdf_ingestion - INFO - 📊 Processing chunk 20/22 (1276 chars)
+2025-05-29 13:50:44,030 - pdf_ingestion - INFO - 🔧 🌍 UNIVERSAL EXTRACT AND BOOST: threshold: 0.0
+2025-05-29 13:50:44,030 - pdf_ingestion - INFO - 🔬 Chunk length: 1276 chars
+2025-05-29 13:50:44,030 - pdf_ingestion - INFO - 🔬 First 300 chars: 20 Christoph Benzmüller
+A Preliminaries
+Figure 7 presents preliminaries that are uniform for all embeddings studied and
+which are imported by all Isabelle/HOL theory files presented in this paper.
+TwoHOLbasetypes wandSaredeclared(inlines4-5)todenotea(nonempty)
+set of possible worlds and a (nonempty)
+2025-05-29 13:50:44,030 - pdf_ingestion - INFO - 🔬 STEP 1: Calling universal extractConceptsFromDocument...
+2025-05-29 13:50:44,030 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL CONCEPT EXTRACTION START
+2025-05-29 13:50:44,030 - ingest_pdf.extractConceptsFromDocument - INFO - 🔬 Text length: 1276 chars, Threshold: 0.0
+2025-05-29 13:50:44,030 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION: Processing 1276 chars
+2025-05-29 13:50:50,504 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION COMPLETE: 46 concepts extracted
+2025-05-29 13:50:50,504 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 TOP UNIVERSAL CONCEPTS:
+2025-05-29 13:50:50,504 - ingest_pdf.extractConceptsFromDocument - INFO -   1. Christoph Benzmüller (score: 1.000, methods: NER+YAKE)
+2025-05-29 13:50:50,504 - ingest_pdf.extractConceptsFromDocument - INFO -   2. embedding (score: 0.825, methods: KeyBERT+YAKE)
+2025-05-29 13:50:50,504 - ingest_pdf.extractConceptsFromDocument - INFO -   3. embeddings discussed (score: 0.693, methods: KeyBERT)
+2025-05-29 13:50:50,504 - ingest_pdf.extractConceptsFromDocument - INFO -   4. common embeddings discussed (score: 0.690, methods: KeyBERT)
+2025-05-29 13:50:50,504 - ingest_pdf.extractConceptsFromDocument - INFO -   5. embeddings (score: 0.686, methods: KeyBERT+YAKE)
+2025-05-29 13:50:50,504 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 EXTRACTION METHOD BREAKDOWN:
+2025-05-29 13:50:50,504 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER+YAKE: 1 concepts
+2025-05-29 13:50:50,504 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT+YAKE: 2 concepts
+2025-05-29 13:50:50,504 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT: 18 concepts
+2025-05-29 13:50:50,504 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER: 8 concepts
+2025-05-29 13:50:50,504 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 YAKE: 17 concepts
+2025-05-29 13:50:50,504 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL EXTRACTION END: 46 concepts ready
+2025-05-29 13:50:50,504 - pdf_ingestion - INFO - 📊 UNIVERSAL SEMANTIC EXTRACTION RESULT: 46 concepts
+2025-05-29 13:50:50,504 - pdf_ingestion - INFO - 📊 RAW UNIVERSAL CONCEPTS (pre-boost):
+2025-05-29 13:50:50,504 - pdf_ingestion - INFO -    1. Christoph Benzmüller (score: 1.000, method: universal_ner+yake)
+2025-05-29 13:50:50,504 - pdf_ingestion - INFO -    2. embedding (score: 0.825, method: universal_keybert+yake)
+2025-05-29 13:50:50,504 - pdf_ingestion - INFO -    3. embeddings discussed (score: 0.693, method: universal_keybert)
+2025-05-29 13:50:50,504 - pdf_ingestion - INFO -    4. common embeddings discussed (score: 0.690, method: universal_keybert)
+2025-05-29 13:50:50,504 - pdf_ingestion - INFO -    5. embeddings (score: 0.686, method: universal_keybert+yake)
+2025-05-29 13:50:50,504 - pdf_ingestion - INFO -    6. embeddings studied (score: 0.681, method: universal_keybert)
+2025-05-29 13:50:50,519 - pdf_ingestion - INFO -    7. embeddings discussed paper (score: 0.632, method: universal_keybert)
+2025-05-29 13:50:50,520 - pdf_ingestion - INFO -    8. isabelle hol theory (score: 0.603, method: universal_keybert)
+2025-05-29 13:50:50,521 - pdf_ingestion - INFO -    9. signature common embeddings (score: 0.601, method: universal_keybert)
+2025-05-29 13:50:50,521 - pdf_ingestion - INFO -   10. relational properties introduced (score: 0.589, method: universal_keybert)
+2025-05-29 13:50:50,521 - pdf_ingestion - INFO -   ... and 36 more concepts
+2025-05-29 13:50:50,521 - pdf_ingestion - INFO - 🔬 STEP 2: Calling universal boost_known_concepts...
+2025-05-29 13:50:50,521 - pdf_ingestion - INFO - 🔍 UNIVERSAL BOOST: Checking chunk (1276 chars) against 474 database concepts
+2025-05-29 13:50:50,521 - pdf_ingestion - INFO - 🔍 First 200 chars of chunk: 20 Christoph Benzmüller
+A Preliminaries
+Figure 7 presents preliminaries that are uniform for all embeddings studied and
+which are imported by all Isabelle/HOL theory files presented in this paper.
+Two
+2025-05-29 13:50:50,521 - pdf_ingestion - INFO - 🚀 Universal boost: machine learning (0.900 → 0.980, domain: technology)
+2025-05-29 13:50:50,521 - pdf_ingestion - INFO - 🚀 Universal boost: blockchain (0.800 → 0.920, domain: technology)
+2025-05-29 13:50:50,521 - pdf_ingestion - INFO - 🚀 Universal boost: virtual reality (0.760 → 0.836, domain: technology)
+2025-05-29 13:50:50,521 - pdf_ingestion - INFO - 🚀 Universal boost: Differential evolution (0.950 → 0.980, domain: Biology)
+2025-05-29 13:50:50,521 - pdf_ingestion - INFO - 🚀 Universal boost: differential evolution (0.850 → 0.980, domain: Biology)
+2025-05-29 13:50:50,521 - pdf_ingestion - INFO - 🚀 Universal boost: evolution algorithm (0.588 → 0.735, domain: Biology)
+2025-05-29 13:50:50,521 - pdf_ingestion - INFO - 🚀 Universal boost: optimization machine (0.720 → 0.900, domain: Computer Science)
+2025-05-29 13:50:50,521 - pdf_ingestion - INFO - 🚀 Universal boost: learn value functions (0.708 → 0.885, domain: universal_extraction)
+2025-05-29 13:50:50,521 - pdf_ingestion - INFO - 🚀 Universal boost: based optimization (0.707 → 0.884, domain: universal_extraction)
+2025-05-29 13:50:50,521 - pdf_ingestion - INFO - 🚀 Universal boost: prior optimization (0.707 → 0.884, domain: universal_extraction)
+2025-05-29 13:50:50,521 - pdf_ingestion - INFO - 🚀 Universal boost: evolutionary algorithms (0.584 → 0.730, domain: Biology)
+2025-05-29 13:50:50,521 - pdf_ingestion - INFO - 🚀 Universal boost: agent learn (0.641 → 0.801, domain: universal_extraction)
+2025-05-29 13:50:50,521 - pdf_ingestion - INFO - 🚀 Universal boost: mutation strategy (0.950 → 0.980, domain: universal_extraction)
+2025-05-29 13:50:50,521 - pdf_ingestion - INFO - 🚀 Universal boost: rl optimization (0.719 → 0.899, domain: universal_extraction)
+2025-05-29 13:50:50,521 - pdf_ingestion - INFO - 🚀 Universal boost: mutation strategies (0.683 → 0.854, domain: universal_extraction)
+2025-05-29 13:50:50,535 - pdf_ingestion - INFO - 🚀 Universal boost: rl adaptive (0.647 → 0.809, domain: universal_extraction)
+2025-05-29 13:50:50,551 - pdf_ingestion - INFO - 🚀 Universal boost: MMCE LDA (0.562 → 0.731, domain: universal_extraction)
+2025-05-29 13:50:50,553 - pdf_ingestion - INFO - 🚀 Universal boost: correlation fitness value (0.950 → 0.980, domain: universal_extraction)
+2025-05-29 13:50:50,554 - pdf_ingestion - INFO - 🚀 Universal boost: classification test (0.775 → 0.969, domain: universal_extraction)
+2025-05-29 13:50:50,554 - pdf_ingestion - INFO - 🚀 Universal boost: MMCE LDA (0.562 → 0.731, domain: universal_extraction)
+2025-05-29 13:50:50,554 - pdf_ingestion - INFO - 🚀 Universal boost: bbop learning (0.926 → 0.980, domain: universal_extraction)
+2025-05-29 13:50:50,554 - pdf_ingestion - INFO - 🚀 Universal boost: based defined design (0.755 → 0.944, domain: universal_extraction)
+2025-05-29 13:50:50,554 - pdf_ingestion - INFO - 🚀 Universal boost: design space (0.684 → 0.821, domain: universal_extraction)
+2025-05-29 13:50:50,554 - pdf_ingestion - INFO - 🚀 Universal boost: learning episode (0.541 → 0.649, domain: universal_extraction)
+2025-05-29 13:50:50,554 - pdf_ingestion - INFO - 🚀 Universal boost: Options Detail (0.799 → 0.980, domain: Computer Science)
+2025-05-29 13:50:50,554 - pdf_ingestion - INFO - 🚀 Universal boost: rlde design (0.797 → 0.980, domain: universal_extraction)
+2025-05-29 13:50:50,554 - pdf_ingestion - INFO - 🚀 Universal boost: framework rlde (0.578 → 0.722, domain: universal_extraction)
+2025-05-29 13:50:50,554 - pdf_ingestion - INFO - 🚀 Universal boost: rlde encompassing (0.523 → 0.654, domain: universal_extraction)
+2025-05-29 13:50:50,554 - pdf_ingestion - INFO - 🚀 Universal boost: agent learn (0.641 → 0.801, domain: universal_extraction)
+2025-05-29 13:50:50,554 - pdf_ingestion - INFO - 🚀 Universal boost: learn optimal (0.640 → 0.800, domain: universal_extraction)
+2025-05-29 13:50:50,554 - pdf_ingestion - INFO - 🚀 Universal boost: random strategy (0.557 → 0.696, domain: universal_extraction)
+2025-05-29 13:50:50,567 - pdf_ingestion - INFO - 🚀 Universal boost: algorithm training (0.942 → 0.980, domain: Computer Science)
+2025-05-29 13:50:50,567 - pdf_ingestion - INFO - 🚀 Universal boost: dqn rl (0.950 → 0.980, domain: universal_extraction)
+2025-05-29 13:50:50,583 - pdf_ingestion - INFO - 🚀 Universal boost: condition training (0.950 → 0.980, domain: Computer Science)
+2025-05-29 13:50:50,583 - pdf_ingestion - INFO - 🚀 Universal boost: algorithm training (0.942 → 0.980, domain: Computer Science)
+2025-05-29 13:50:50,583 - pdf_ingestion - INFO - 🚀 Universal boost: training functions (0.909 → 0.980, domain: Computer Science)
+2025-05-29 13:50:50,583 - pdf_ingestion - INFO - 🚀 Universal boost: learning steps (0.892 → 0.980, domain: universal_extraction)
+2025-05-29 13:50:50,583 - pdf_ingestion - INFO - 🚀 Universal boost: NL SHADE (0.525 → 0.683, domain: universal_extraction)
+2025-05-29 13:50:50,583 - pdf_ingestion - INFO - 🚀 Universal boost: evolving algorithms (0.611 → 0.763, domain: Computer Science)
+2025-05-29 13:50:50,583 - pdf_ingestion - INFO - 🚀 Universal boost: instance optimization results (0.538 → 0.672, domain: universal_extraction)
+2025-05-29 13:50:50,583 - pdf_ingestion - INFO - 🚀 Universal boost: comparing algorithm (0.524 → 0.655, domain: Computer Science)
+2025-05-29 13:50:50,583 - pdf_ingestion - INFO - 🚀 Universal boost: differential evolution (0.850 → 0.980, domain: Biology)
+2025-05-29 13:50:50,583 - pdf_ingestion - INFO - 🚀 Universal boost: evolutionary algorithms (0.584 → 0.788, domain: Biology)
+2025-05-29 13:50:50,583 - pdf_ingestion - INFO - 🚀 Universal boost: evolutionary computation (0.828 → 0.980, domain: Biology)
+2025-05-29 13:50:50,583 - pdf_ingestion - INFO - 🚀 Universal boost: evolutionary algorithm (0.950 → 0.980, domain: Biology)
+2025-05-29 13:50:50,583 - pdf_ingestion - INFO - 🚀 Universal boost: algorithms tailored (0.735 → 0.918, domain: Computer Science)
+2025-05-29 13:50:50,583 - pdf_ingestion - INFO - 🚀 Universal boost: optimization training (0.726 → 0.907, domain: Computer Science)
+2025-05-29 13:50:50,583 - pdf_ingestion - INFO - 🚀 Universal boost: evolutionary algorithm (0.950 → 0.980, domain: Biology)
+2025-05-29 13:50:50,583 - pdf_ingestion - INFO - 🚀 Universal boost: evolution algorithm (0.588 → 0.735, domain: Biology)
+2025-05-29 13:50:50,583 - pdf_ingestion - INFO - 🚀 Universal boost: evolutionary algorithms (0.584 → 0.730, domain: Biology)
+2025-05-29 13:50:50,583 - pdf_ingestion - INFO - 🚀 Universal boost: Evolutionary Computation (0.950 → 0.980, domain: Biology)
+2025-05-29 13:50:50,583 - pdf_ingestion - INFO - 🚀 Universal boost: automation tsinghua universitywhere (0.732 → 0.915, domain: universal_extraction)
+2025-05-29 13:50:50,599 - pdf_ingestion - INFO - 🚀 Universal boost: automation tsinghua (0.720 → 0.900, domain: universal_extraction)
+2025-05-29 13:50:50,615 - pdf_ingestion - INFO - 🚀 Universal boost: control engineering (0.658 → 0.823, domain: universal_extraction)
+2025-05-29 13:50:50,615 - pdf_ingestion - INFO - 🚀 Universal boost: intelligent optimiza (0.624 → 0.780, domain: universal_extraction)
+2025-05-29 13:50:50,615 - pdf_ingestion - INFO - 🚀 Universal boost: thedepartment automation tsinghua (0.595 → 0.744, domain: Art)
+2025-05-29 13:50:50,615 - pdf_ingestion - INFO - 🚀 Universal boost: automation ph degree (0.545 → 0.682, domain: universal_extraction)
+2025-05-29 13:50:50,615 - pdf_ingestion - INFO - 🚀 Universal boost: control theory (0.524 → 0.655, domain: universal_extraction)
+2025-05-29 13:50:50,615 - pdf_ingestion - INFO - 🚀 Universal boost: automation (0.517 → 0.646, domain: universal_extraction)
+2025-05-29 13:50:50,615 - pdf_ingestion - INFO - 🚀 Universal boost: Faithful Logic Embeddings (0.950 → 0.980, domain: Computer Science)
+2025-05-29 13:50:50,615 - pdf_ingestion - INFO - 🚀 Universal boost: shallow embeddings logics (0.608 → 0.760, domain: universal_extraction)
+2025-05-29 13:50:50,615 - pdf_ingestion - INFO - 🚀 Universal boost: Logic Embeddings (0.544 → 0.680, domain: universal_extraction)
+2025-05-29 13:50:50,615 - pdf_ingestion - INFO - 🚀 Universal boost: Benzmüller shallow logic (0.950 → 0.980, domain: universal_extraction)
+2025-05-29 13:50:50,615 - pdf_ingestion - INFO - 🚀 Universal boost: shallow logic embeddings (0.831 → 0.980, domain: universal_extraction)
+2025-05-29 13:50:50,615 - pdf_ingestion - INFO - 🚀 Universal boost: Christoph Benzmüller (0.950 → 0.980, domain: universal_extraction)
+2025-05-29 13:50:50,615 - pdf_ingestion - INFO - 🚀 Universal boost: logic embeddings (0.625 → 0.781, domain: universal_extraction)
+2025-05-29 13:50:50,615 - pdf_ingestion - INFO - 🚀 Universal boost: logic embeddings metalogic (0.607 → 0.759, domain: universal_extraction)
+2025-05-29 13:50:50,615 - pdf_ingestion - INFO - 🚀 Universal boost: logic embeddings modern (0.544 → 0.679, domain: universal_extraction)
+2025-05-29 13:50:50,615 - pdf_ingestion - INFO - 🚀 Universal boost: modal logic (0.931 → 0.980, domain: universal_extraction)
+2025-05-29 13:50:50,615 - pdf_ingestion - INFO - 🚀 Universal boost: propositional modal logic (0.505 → 0.632, domain: universal_extraction)
+2025-05-29 13:50:50,631 - pdf_ingestion - INFO - 🚀 Universal boost: Faithful Logic Embeddings (0.950 → 0.980, domain: Computer Science)
+2025-05-29 13:50:50,648 - pdf_ingestion - INFO - 🚀 Universal boost: modal logic (0.931 → 0.980, domain: universal_extraction)
+2025-05-29 13:50:50,648 - pdf_ingestion - INFO - 🚀 Universal boost: Logic Embeddings (0.544 → 0.680, domain: universal_extraction)
+2025-05-29 13:50:50,648 - pdf_ingestion - INFO - 🚀 Universal boost: Christoph Benzmüller (0.950 → 0.980, domain: universal_extraction)
+2025-05-29 13:50:50,648 - pdf_ingestion - INFO - 🚀 Universal boost: logic terms defined (0.565 → 0.706, domain: universal_extraction)
+2025-05-29 13:50:50,648 - pdf_ingestion - INFO - 🚀 Universal boost: typed interpretation functions (0.515 → 0.644, domain: universal_extraction)
+2025-05-29 13:50:50,648 - pdf_ingestion - INFO - 🚀 Universal boost: Faithful Logic Embeddings (0.950 → 0.980, domain: Computer Science)
+2025-05-29 13:50:50,648 - pdf_ingestion - INFO - 🚀 Universal boost: Christoph Benzmüller (0.950 → 0.980, domain: universal_extraction)
+2025-05-29 13:50:50,648 - pdf_ingestion - INFO - 🚀 Universal boost: maximal shallow (0.797 → 0.980, domain: universal_extraction)
+2025-05-29 13:50:50,648 - pdf_ingestion - INFO - 🚀 Universal boost: minimal shallow (0.687 → 0.859, domain: universal_extraction)
+2025-05-29 13:50:50,648 - pdf_ingestion - INFO - 🚀 Universal boost: hol deep maximal (0.606 → 0.758, domain: universal_extraction)
+2025-05-29 13:50:50,648 - pdf_ingestion - INFO - 🚀 Universal boost: Faithful Logic Embeddings (0.950 → 0.980, domain: Computer Science)
+2025-05-29 13:50:50,648 - pdf_ingestion - INFO - 🚀 Universal boost: Christoph Benzmüller (0.950 → 0.980, domain: universal_extraction)
+2025-05-29 13:50:50,654 - pdf_ingestion - INFO - 🚀 Universal boost: axiom introduced pml (0.746 → 0.932, domain: universal_extraction)
+2025-05-29 13:50:50,654 - pdf_ingestion - INFO - 🚀 Universal boost: propositional symbols embeddings (0.633 → 0.791, domain: universal_extraction)
+2025-05-29 13:50:50,654 - pdf_ingestion - INFO - 🚀 Universal boost: propositional symbols (0.617 → 0.771, domain: universal_extraction)
+2025-05-29 13:50:50,654 - pdf_ingestion - INFO - 🚀 Universal boost: hol represent semantic (0.605 → 0.756, domain: universal_extraction)
+2025-05-29 13:50:50,654 - pdf_ingestion - INFO - 🚀 Universal boost: defined relative truth (0.592 → 0.740, domain: universal_extraction)
+2025-05-29 13:50:50,654 - pdf_ingestion - INFO - 🚀 Universal boost: pml characterized proper (0.573 → 0.717, domain: universal_extraction)
+2025-05-29 13:50:50,654 - pdf_ingestion - INFO - 🚀 Universal boost: relative truth wrt (0.565 → 0.707, domain: universal_extraction)
+2025-05-29 13:50:50,654 - pdf_ingestion - INFO - 🚀 Universal boost: sof propositional symbols (0.561 → 0.701, domain: universal_extraction)
+2025-05-29 13:50:50,654 - pdf_ingestion - INFO - 🚀 Universal boost: Faithful Logic Embeddings (0.950 → 0.980, domain: Computer Science)
+2025-05-29 13:50:50,654 - pdf_ingestion - INFO - 🚀 Universal boost: Hilbert calculus introduced (0.866 → 0.980, domain: universal_extraction)
+2025-05-29 13:50:50,654 - pdf_ingestion - INFO - 🚀 Universal boost: Christoph Benzmüller (0.950 → 0.980, domain: universal_extraction)
+2025-05-29 13:50:50,654 - pdf_ingestion - INFO - 🚀 Universal boost: Faithful Logic Embeddings (0.950 → 0.980, domain: Computer Science)
+2025-05-29 13:50:50,654 - pdf_ingestion - INFO - 🚀 Universal boost: Christoph Benzmüller (0.950 → 0.980, domain: universal_extraction)
+2025-05-29 13:50:50,671 - pdf_ingestion - INFO - 🚀 Universal boost: modal logic (0.931 → 0.980, domain: universal_extraction)
+2025-05-29 13:50:50,671 - pdf_ingestion - INFO - 🚀 Universal boost: provability logic (0.701 → 0.876, domain: universal_extraction)
+2025-05-29 13:50:50,679 - pdf_ingestion - INFO - 🚀 Universal boost: modal logics (0.675 → 0.844, domain: universal_extraction)
+2025-05-29 13:50:50,679 - pdf_ingestion - INFO - 🚀 Universal boost: embedding modal quantifiers (0.643 → 0.804, domain: universal_extraction)
+2025-05-29 13:50:50,679 - pdf_ingestion - INFO - 🚀 Universal boost: proof modal (0.596 → 0.745, domain: Mathematics)
+2025-05-29 13:50:50,679 - pdf_ingestion - INFO - 🚀 Universal boost: Faithful Logic Embeddings (0.950 → 0.980, domain: Computer Science)
+2025-05-29 13:50:50,679 - pdf_ingestion - INFO - 🚀 Universal boost: Logic Embeddings (0.544 → 0.680, domain: universal_extraction)
+2025-05-29 13:50:50,679 - pdf_ingestion - INFO - 🚀 Universal boost: Christoph Benzmüller (0.950 → 0.980, domain: universal_extraction)
+2025-05-29 13:50:50,679 - pdf_ingestion - INFO - 🚀 Universal boost: deep logic embeddings (0.932 → 0.980, domain: universal_extraction)
+2025-05-29 13:50:50,679 - pdf_ingestion - INFO - 🚀 Universal boost: logic embeddings include (0.734 → 0.917, domain: universal_extraction)
+2025-05-29 13:50:50,679 - pdf_ingestion - INFO - 🚀 Universal boost: embedding reasoning (0.648 → 0.810, domain: universal_extraction)
+2025-05-29 13:50:50,679 - pdf_ingestion - INFO - 🚀 Universal boost: shallow embedding reasoning (0.639 → 0.799, domain: universal_extraction)
+2025-05-29 13:50:50,687 - pdf_ingestion - INFO - 🚀 Universal boost: logic embeddings (0.625 → 0.781, domain: universal_extraction)
+2025-05-29 13:50:50,687 - pdf_ingestion - INFO - 🚀 Universal boost: embedding reasoning syntax (0.608 → 0.761, domain: universal_extraction)
+2025-05-29 13:50:50,687 - pdf_ingestion - INFO - 🚀 Universal boost: embedded languages shallow (0.591 → 0.739, domain: universal_extraction)
+2025-05-29 13:50:50,687 - pdf_ingestion - INFO - 🚀 Universal boost: shallow embeddings exemplary (0.564 → 0.705, domain: universal_extraction)
+2025-05-29 13:50:50,687 - pdf_ingestion - INFO - 🚀 Universal boost: shallow embeddings implications (0.559 → 0.699, domain: universal_extraction)
+2025-05-29 13:50:50,687 - pdf_ingestion - INFO - 🚀 Universal boost: shallow embeddings actually (0.554 → 0.693, domain: universal_extraction)
+2025-05-29 13:50:50,687 - pdf_ingestion - INFO - 🚀 Universal boost: embeddings implications (0.540 → 0.675, domain: universal_extraction)
+2025-05-29 13:50:50,687 - pdf_ingestion - INFO - 🚀 Universal boost: embeddings exemplary developments (0.538 → 0.673, domain: universal_extraction)
+2025-05-29 13:50:50,687 - pdf_ingestion - INFO - 🚀 Universal boost: Faithful Logic Embeddings (0.950 → 0.980, domain: Computer Science)
+2025-05-29 13:50:50,687 - pdf_ingestion - INFO - 🚀 Universal boost: Benzmüller (0.950 → 0.980, domain: universal_extraction)
+2025-05-29 13:50:50,687 - pdf_ingestion - INFO - 🚀 Universal boost: Christoph Benzmüller (0.950 → 0.980, domain: universal_extraction)
+2025-05-29 13:50:50,695 - pdf_ingestion - INFO - 🚀 Universal boost: Faithful Logic Embeddings (0.950 → 0.980, domain: Computer Science)
+2025-05-29 13:50:50,704 - pdf_ingestion - INFO - 🚀 Universal boost: automated reasoning (0.811 → 0.980, domain: universal_extraction)
+2025-05-29 13:50:50,704 - pdf_ingestion - INFO - 🚀 Universal boost: Christoph Benzmüller (0.950 → 0.980, domain: universal_extraction)
+2025-05-29 13:50:50,704 - pdf_ingestion - INFO - 🚀 Universal boost: Faithful Logic Embeddings (0.950 → 0.980, domain: Computer Science)
+2025-05-29 13:50:50,711 - pdf_ingestion - INFO - 🚀 Universal boost: Christoph Benzmüller (0.950 → 0.980, domain: universal_extraction)
+2025-05-29 13:50:50,711 - pdf_ingestion - INFO - 🚀 Universal boost: embedding (0.825 → 0.980, domain: universal_extraction)
+2025-05-29 13:50:50,711 - pdf_ingestion - INFO - 🚀 Universal boost: embeddings discussed (0.693 → 0.866, domain: universal_extraction)
+2025-05-29 13:50:50,711 - pdf_ingestion - INFO - 🚀 Universal boost: common embeddings discussed (0.690 → 0.862, domain: universal_extraction)
+2025-05-29 13:50:50,711 - pdf_ingestion - INFO - 🚀 Universal boost: embeddings (0.686 → 0.857, domain: universal_extraction)
+2025-05-29 13:50:50,711 - pdf_ingestion - INFO - 🚀 Universal boost: embeddings studied (0.681 → 0.852, domain: universal_extraction)
+2025-05-29 13:50:50,711 - pdf_ingestion - INFO - 🚀 Universal boost: isabelle hol theory (0.603 → 0.753, domain: universal_extraction)
+2025-05-29 13:50:50,711 - pdf_ingestion - INFO - 🚀 Universal boost: signature common embeddings (0.601 → 0.751, domain: universal_extraction)
+2025-05-29 13:50:50,711 - pdf_ingestion - INFO - 🚀 Universal boost: relational properties introduced (0.589 → 0.736, domain: universal_extraction)
+2025-05-29 13:50:50,711 - pdf_ingestion - INFO - 🚀 Universal boost: common embeddings (0.585 → 0.731, domain: universal_extraction)
+2025-05-29 13:50:50,711 - pdf_ingestion - INFO - 🚀 Universal boost: propositional constant symbols (0.558 → 0.698, domain: universal_extraction)
+2025-05-29 13:50:50,711 - pdf_ingestion - INFO - 🚀 Universal boost: studied imported isabelle (0.556 → 0.695, domain: universal_extraction)
+2025-05-29 13:50:50,711 - pdf_ingestion - INFO - 🚀 Universal boost: truth values symbols (0.544 → 0.681, domain: universal_extraction)
+2025-05-29 13:50:50,711 - pdf_ingestion - INFO - 🚀 Universal boost: embeddings studied imported (0.536 → 0.670, domain: universal_extraction)
+2025-05-29 13:50:50,711 - pdf_ingestion - INFO - 🚀 Universal boost: known relational properties (0.511 → 0.639, domain: universal_extraction)
+2025-05-29 13:50:50,711 - pdf_ingestion - INFO - 🚀 Universal boost: symbols sfor world (0.502 → 0.628, domain: universal_extraction)
+2025-05-29 13:50:50,711 - pdf_ingestion - INFO - 🚀 Universal boost: Faithful Logic Embeddings (0.950 → 0.980, domain: Computer Science)
+2025-05-29 13:50:50,711 - pdf_ingestion - INFO - 🚀 Universal boost: Logic Embeddings (0.544 → 0.680, domain: universal_extraction)
+2025-05-29 13:50:50,711 - pdf_ingestion - INFO - 🚀 Universal boost: Christoph Benzmüller (0.950 → 0.980, domain: universal_extraction)
+2025-05-29 13:50:50,711 - pdf_ingestion - INFO - 🌍 Domain matches found: {'technology': 3, 'Biology': 12, 'Computer Science': 21, 'universal_extraction': 104, 'Art': 1, 'Mathematics': 1}
+2025-05-29 13:50:50,711 - pdf_ingestion - INFO - 🚀 Universal database boosting result: 142 concepts found
+2025-05-29 13:50:50,711 - pdf_ingestion - INFO - 🚀 UNIVERSAL DATABASE BOOST RESULT: 142 concepts
+2025-05-29 13:50:50,727 - pdf_ingestion - INFO - 🔧 UNIVERSAL COMBINED RESULT: 188 total concepts
+2025-05-29 13:50:50,742 - pdf_ingestion - INFO - 🎯 Cross-reference boost: Christoph Benzmüller (1.000 → 0.950)
+2025-05-29 13:50:50,742 - pdf_ingestion - INFO - 🎯 Cross-reference boost: embedding (0.980 → 0.950)
+2025-05-29 13:50:50,742 - pdf_ingestion - INFO - 🎯 Cross-reference boost: embeddings discussed (0.866 → 0.950)
+2025-05-29 13:50:50,742 - pdf_ingestion - INFO - 🎯 Cross-reference boost: common embeddings discussed (0.862 → 0.950)
+2025-05-29 13:50:50,742 - pdf_ingestion - INFO - 🎯 Cross-reference boost: embeddings (0.857 → 0.950)
+2025-05-29 13:50:50,742 - pdf_ingestion - INFO - 🎯 Cross-reference boost: embeddings studied (0.852 → 0.950)
+2025-05-29 13:50:50,742 - pdf_ingestion - INFO - 🎯 Cross-reference boost: isabelle hol theory (0.753 → 0.866)
+2025-05-29 13:50:50,742 - pdf_ingestion - INFO - 🎯 Cross-reference boost: signature common embeddings (0.751 → 0.864)
+2025-05-29 13:50:50,742 - pdf_ingestion - INFO - 🎯 Cross-reference boost: relational properties introduced (0.736 → 0.847)
+2025-05-29 13:50:50,742 - pdf_ingestion - INFO - 🎯 Cross-reference boost: common embeddings (0.731 → 0.840)
+2025-05-29 13:50:50,742 - pdf_ingestion - INFO - 🎯 Cross-reference boost: propositional constant symbols (0.698 → 0.802)
+2025-05-29 13:50:50,742 - pdf_ingestion - INFO - 🎯 Cross-reference boost: studied imported isabelle (0.695 → 0.799)
+2025-05-29 13:50:50,742 - pdf_ingestion - INFO - 🎯 Cross-reference boost: truth values symbols (0.681 → 0.783)
+2025-05-29 13:50:50,742 - pdf_ingestion - INFO - 🎯 Cross-reference boost: embeddings studied imported (0.670 → 0.771)
+2025-05-29 13:50:50,742 - pdf_ingestion - INFO - 🎯 Cross-reference boost: known relational properties (0.639 → 0.735)
+2025-05-29 13:50:50,754 - pdf_ingestion - INFO - 🎯 Cross-reference boost: symbols sfor world (0.628 → 0.722)
+2025-05-29 13:50:50,754 - pdf_ingestion - INFO - 🎯 Cross-reference boost: Benzmüller (0.980 → 0.950)
+2025-05-29 13:50:50,754 - pdf_ingestion - INFO - 🎯 Cross-reference boost: Differential evolution (0.980 → 0.950)
+2025-05-29 13:50:50,754 - pdf_ingestion - INFO - 🎯 Cross-reference boost: evolution algorithm (0.735 → 0.845)
+2025-05-29 13:50:50,754 - pdf_ingestion - INFO - 🎯 Cross-reference boost: evolutionary algorithms (0.788 → 0.906)
+2025-05-29 13:50:50,754 - pdf_ingestion - INFO - 🎯 Cross-reference boost: agent learn (0.801 → 0.921)
+2025-05-29 13:50:50,754 - pdf_ingestion - INFO - 🎯 Cross-reference boost: MMCE LDA (0.731 → 0.841)
+2025-05-29 13:50:50,758 - pdf_ingestion - INFO - 🎯 Cross-reference boost: algorithm training (0.980 → 0.950)
+2025-05-29 13:50:50,774 - pdf_ingestion - INFO - 🎯 Cross-reference boost: evolutionary computation (0.980 → 0.950)
+2025-05-29 13:50:50,774 - pdf_ingestion - INFO - 🎯 Cross-reference boost: evolutionary algorithm (0.980 → 0.950)
+2025-05-29 13:50:50,774 - pdf_ingestion - INFO - 🎯 Cross-reference boost: Faithful Logic Embeddings (0.980 → 0.950)
+2025-05-29 13:50:50,774 - pdf_ingestion - INFO - 🎯 Cross-reference boost: logic embeddings (0.781 → 0.898)
+2025-05-29 13:50:50,774 - pdf_ingestion - INFO - 🎯 Cross-reference boost: modal logic (0.980 → 0.950)
+2025-05-29 13:50:50,774 - pdf_ingestion - INFO - 🔧 FINAL UNIVERSAL EXTRACTION: 134 concepts after deduplication
+2025-05-29 13:50:50,774 - pdf_ingestion - INFO - ✅ FINAL UNIVERSAL CONCEPTS TO BE INJECTED:
+2025-05-29 13:50:50,774 - pdf_ingestion - INFO -    1. Christoph Benzmüller (score: 0.950, method: universal_ner+yake)  🎯
+2025-05-29 13:50:50,774 - pdf_ingestion - INFO -    2. embeddings discussed paper (score: 0.632, method: universal_keybert)
+2025-05-29 13:50:50,774 - pdf_ingestion - INFO -    3. 7 (score: 0.519, method: universal_ner)
+2025-05-29 13:50:50,774 - pdf_ingestion - INFO -    4. uniform embeddings studied (score: 0.499, method: universal_keybert)
+2025-05-29 13:50:50,774 - pdf_ingestion - INFO -    5. introduced type synonyms (score: 0.495, method: universal_keybert)
+2025-05-29 13:50:50,774 - pdf_ingestion - INFO -    6. binary relations accessibility (score: 0.489, method: universal_keybert)
+2025-05-29 13:50:50,774 - pdf_ingestion - INFO -    7. relations accessibility (score: 0.488, method: universal_keybert)
+2025-05-29 13:50:50,774 - pdf_ingestion - INFO -    8. Christoph (score: 0.399, method: universal_yake)
+2025-05-29 13:50:50,774 - pdf_ingestion - INFO -    9. 20 (score: 0.390, method: universal_ner)
+2025-05-29 13:50:50,774 - pdf_ingestion - INFO -   10. 6 (score: 0.390, method: universal_ner)
+2025-05-29 13:50:50,774 - pdf_ingestion - INFO -   11. Rfor (score: 0.390, method: universal_ner)
+2025-05-29 13:50:50,774 - pdf_ingestion - INFO -   12. Sfor (score: 0.390, method: universal_ner)
+2025-05-29 13:50:50,774 - pdf_ingestion - INFO -   13. w. (score: 0.390, method: universal_ner)
+2025-05-29 13:50:50,774 - pdf_ingestion - INFO -   14. 11-19 (score: 0.390, method: universal_ner)
+2025-05-29 13:50:50,788 - pdf_ingestion - INFO -   15. Isabelle/HOL (score: 0.390, method: universal_ner)
+2025-05-29 13:50:50,788 - pdf_ingestion - INFO -   ... and 119 more concepts
+2025-05-29 13:50:50,788 - pdf_ingestion - INFO - 📊 Method distribution: {'universal_ner+yake': 1, 'universal_keybert': 5, 'universal_ner': 8, 'universal_yake': 1}
+2025-05-29 13:50:50,788 - pdf_ingestion - INFO - 🔬 CHUNK 20 RESULTS: 134 concepts
+2025-05-29 13:50:50,788 - pdf_ingestion - INFO -    🌍 134 universal extraction, 🚀 104 boosted, 🎯 28 cross-ref boosted
+2025-05-29 13:50:50,790 - pdf_ingestion - INFO - 🔬 =============== END CHUNK 20 ===============
+2025-05-29 13:50:50,790 - pdf_ingestion - INFO - 🔬 =============== UNIVERSAL CHUNK 21/22 ===============
+2025-05-29 13:50:50,790 - pdf_ingestion - INFO - 📊 Processing chunk 21/22 (130 chars)
+2025-05-29 13:50:50,790 - pdf_ingestion - INFO - 🔧 🌍 UNIVERSAL EXTRACT AND BOOST: threshold: 0.0
+2025-05-29 13:50:50,790 - pdf_ingestion - INFO - 🔬 Chunk length: 130 chars
+2025-05-29 13:50:50,790 - pdf_ingestion - INFO - 🔬 First 300 chars: Faithful Logic Embeddings in HOL – A recipe to have it all 21
+Fig. 8.Experiments with the maximal shallow embedding of PML in HOL.
+2025-05-29 13:50:50,790 - pdf_ingestion - INFO - 🔬 STEP 1: Calling universal extractConceptsFromDocument...
+2025-05-29 13:50:50,790 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL CONCEPT EXTRACTION START
+2025-05-29 13:50:50,790 - ingest_pdf.extractConceptsFromDocument - INFO - 🔬 Text length: 130 chars, Threshold: 0.0
+2025-05-29 13:50:50,790 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION: Processing 130 chars
+2025-05-29 13:50:51,788 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION COMPLETE: 29 concepts extracted
+2025-05-29 13:50:51,788 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 TOP UNIVERSAL CONCEPTS:
+2025-05-29 13:50:51,788 - ingest_pdf.extractConceptsFromDocument - INFO -   1. Faithful Logic Embeddings (score: 1.000, methods: KeyBERT+NER+YAKE)
+2025-05-29 13:50:51,788 - ingest_pdf.extractConceptsFromDocument - INFO -   2. PML (score: 0.620, methods: KeyBERT+NER+YAKE)
+2025-05-29 13:50:51,788 - ingest_pdf.extractConceptsFromDocument - INFO -   3. Logic Embeddings (score: 0.544, methods: KeyBERT+YAKE)
+2025-05-29 13:50:51,788 - ingest_pdf.extractConceptsFromDocument - INFO -   4. Faithful Logic (score: 0.525, methods: KeyBERT+YAKE)
+2025-05-29 13:50:51,803 - ingest_pdf.extractConceptsFromDocument - INFO -   5. HOL (score: 0.439, methods: KeyBERT+YAKE)
+2025-05-29 13:50:51,803 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 EXTRACTION METHOD BREAKDOWN:
+2025-05-29 13:50:51,803 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT+NER+YAKE: 2 concepts
+2025-05-29 13:50:51,803 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT+YAKE: 9 concepts
+2025-05-29 13:50:51,803 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT: 9 concepts
+2025-05-29 13:50:51,803 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER: 1 concepts
+2025-05-29 13:50:51,803 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 YAKE: 8 concepts
+2025-05-29 13:50:51,803 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL EXTRACTION END: 29 concepts ready
+2025-05-29 13:50:51,803 - pdf_ingestion - INFO - 📊 UNIVERSAL SEMANTIC EXTRACTION RESULT: 29 concepts
+2025-05-29 13:50:51,803 - pdf_ingestion - INFO - 📊 RAW UNIVERSAL CONCEPTS (pre-boost):
+2025-05-29 13:50:51,803 - pdf_ingestion - INFO -    1. Faithful Logic Embeddings (score: 1.000, method: universal_keybert+ner+yake)
+2025-05-29 13:50:51,803 - pdf_ingestion - INFO -    2. PML (score: 0.620, method: universal_keybert+ner+yake)
+2025-05-29 13:50:51,803 - pdf_ingestion - INFO -    3. Logic Embeddings (score: 0.544, method: universal_keybert+yake)
+2025-05-29 13:50:51,803 - pdf_ingestion - INFO -    4. Faithful Logic (score: 0.525, method: universal_keybert+yake)
+2025-05-29 13:50:51,803 - pdf_ingestion - INFO -    5. HOL (score: 0.439, method: universal_keybert+yake)
+2025-05-29 13:50:51,803 - pdf_ingestion - INFO -    6. maximal shallow embedding (score: 0.371, method: universal_keybert+yake)
+2025-05-29 13:50:51,803 - pdf_ingestion - INFO -    7. Logic (score: 0.346, method: universal_keybert+yake)
+2025-05-29 13:50:51,803 - pdf_ingestion - INFO -    8. logic embeddings hol (score: 0.339, method: universal_keybert)
+2025-05-29 13:50:51,803 - pdf_ingestion - INFO -    9. shallow embedding (score: 0.338, method: universal_keybert+yake)
+2025-05-29 13:50:51,803 - pdf_ingestion - INFO -   10. Embeddings (score: 0.306, method: universal_keybert+yake)
+2025-05-29 13:50:51,803 - pdf_ingestion - INFO -   ... and 19 more concepts
+2025-05-29 13:50:51,803 - pdf_ingestion - INFO - 🔬 STEP 2: Calling universal boost_known_concepts...
+2025-05-29 13:50:51,803 - pdf_ingestion - INFO - 🔍 UNIVERSAL BOOST: Checking chunk (130 chars) against 474 database concepts
+2025-05-29 13:50:51,803 - pdf_ingestion - INFO - 🔍 First 200 chars of chunk: Faithful Logic Embeddings in HOL – A recipe to have it all 21
+Fig. 8.Experiments with the maximal shallow embedding of PML in HOL.
+2025-05-29 13:50:51,803 - pdf_ingestion - INFO - 🚀 Universal boost: artificial intelligence (0.950 → 0.980, domain: technology)
+2025-05-29 13:50:51,803 - pdf_ingestion - INFO - 🚀 Universal boost: machine learning (0.900 → 0.980, domain: technology)
+2025-05-29 13:50:51,803 - pdf_ingestion - INFO - 🚀 Universal boost: agent learn (0.641 → 0.801, domain: universal_extraction)
+2025-05-29 13:50:51,803 - pdf_ingestion - INFO - 🚀 Universal boost: MMCE LDA (0.562 → 0.731, domain: universal_extraction)
+2025-05-29 13:50:51,803 - pdf_ingestion - INFO - 🚀 Universal boost: MMCE LDA (0.562 → 0.731, domain: universal_extraction)
+2025-05-29 13:50:51,803 - pdf_ingestion - INFO - 🚀 Universal boost: rlde encompassing (0.523 → 0.654, domain: universal_extraction)
+2025-05-29 13:50:51,803 - pdf_ingestion - INFO - 🚀 Universal boost: agent learn (0.641 → 0.801, domain: universal_extraction)
+2025-05-29 13:50:51,803 - pdf_ingestion - INFO - 🚀 Universal boost: learn optimal (0.640 → 0.800, domain: universal_extraction)
+2025-05-29 13:50:51,803 - pdf_ingestion - INFO - 🚀 Universal boost: evolutionary computation (0.828 → 0.980, domain: Biology)
+2025-05-29 13:50:51,803 - pdf_ingestion - INFO - 🚀 Universal boost: Evolutionary Computation (0.950 → 0.980, domain: Biology)
+2025-05-29 13:50:51,803 - pdf_ingestion - INFO - 🚀 Universal boost: Faithful Logic Embeddings (0.950 → 0.980, domain: Computer Science)
+2025-05-29 13:50:51,803 - pdf_ingestion - INFO - 🚀 Universal boost: shallow embeddings logics (0.608 → 0.760, domain: universal_extraction)
+2025-05-29 13:50:51,803 - pdf_ingestion - INFO - 🚀 Universal boost: Logic Embeddings (0.544 → 0.680, domain: universal_extraction)
+2025-05-29 13:50:51,803 - pdf_ingestion - INFO - 🚀 Universal boost: Benzmüller shallow logic (0.950 → 0.980, domain: universal_extraction)
+2025-05-29 13:50:51,803 - pdf_ingestion - INFO - 🚀 Universal boost: shallow logic embeddings (0.831 → 0.980, domain: universal_extraction)
+2025-05-29 13:50:51,803 - pdf_ingestion - INFO - 🚀 Universal boost: logic embeddings (0.625 → 0.781, domain: universal_extraction)
+2025-05-29 13:50:51,803 - pdf_ingestion - INFO - 🚀 Universal boost: logic embeddings metalogic (0.607 → 0.759, domain: universal_extraction)
+2025-05-29 13:50:51,803 - pdf_ingestion - INFO - 🚀 Universal boost: logic embeddings modern (0.544 → 0.679, domain: universal_extraction)
+2025-05-29 13:50:51,803 - pdf_ingestion - INFO - 🚀 Universal boost: modal logic (0.931 → 0.980, domain: universal_extraction)
+2025-05-29 13:50:51,803 - pdf_ingestion - INFO - 🚀 Universal boost: propositional modal logic (0.505 → 0.632, domain: universal_extraction)
+2025-05-29 13:50:51,803 - pdf_ingestion - INFO - 🚀 Universal boost: Faithful Logic Embeddings (0.950 → 0.980, domain: Computer Science)
+2025-05-29 13:50:51,803 - pdf_ingestion - INFO - 🚀 Universal boost: Popositional modal logic (0.644 → 0.805, domain: universal_extraction)
+2025-05-29 13:50:51,803 - pdf_ingestion - INFO - 🚀 Universal boost: modal logic (0.931 → 0.980, domain: universal_extraction)
+2025-05-29 13:50:51,803 - pdf_ingestion - INFO - 🚀 Universal boost: Logic Embeddings (0.544 → 0.680, domain: universal_extraction)
+2025-05-29 13:50:51,803 - pdf_ingestion - INFO - 🚀 Universal boost: higher order logic (0.522 → 0.652, domain: universal_extraction)
+2025-05-29 13:50:51,818 - pdf_ingestion - INFO - 🚀 Universal boost: hol logic terms (0.645 → 0.807, domain: universal_extraction)
+2025-05-29 13:50:51,821 - pdf_ingestion - INFO - 🚀 Universal boost: logic terms defined (0.565 → 0.706, domain: universal_extraction)
+2025-05-29 13:50:51,821 - pdf_ingestion - INFO - 🚀 Universal boost: order logic hol (0.561 → 0.702, domain: universal_extraction)
+2025-05-29 13:50:51,821 - pdf_ingestion - INFO - 🚀 Universal boost: Classical higher-order logic (0.525 → 0.630, domain: universal_extraction)
+2025-05-29 13:50:51,834 - pdf_ingestion - INFO - 🚀 Universal boost: Faithful Logic Embeddings (0.950 → 0.980, domain: Computer Science)
+2025-05-29 13:50:51,834 - pdf_ingestion - INFO - 🚀 Universal boost: logic language PML (0.558 → 0.697, domain: universal_extraction)
+2025-05-29 13:50:51,834 - pdf_ingestion - INFO - 🚀 Universal boost: maximal shallow (0.797 → 0.980, domain: universal_extraction)
+2025-05-29 13:50:51,834 - pdf_ingestion - INFO - 🚀 Universal boost: minimal shallow (0.687 → 0.859, domain: universal_extraction)
+2025-05-29 13:50:51,834 - pdf_ingestion - INFO - 🚀 Universal boost: hol deep maximal (0.606 → 0.758, domain: universal_extraction)
+2025-05-29 13:50:51,838 - pdf_ingestion - INFO - 🚀 Universal boost: Faithful Logic Embeddings (0.950 → 0.980, domain: Computer Science)
+2025-05-29 13:50:51,838 - pdf_ingestion - INFO - 🚀 Universal boost: propositional symbols embeddings (0.633 → 0.791, domain: universal_extraction)
+2025-05-29 13:50:51,838 - pdf_ingestion - INFO - 🚀 Universal boost: Faithful Logic Embeddings (0.950 → 0.980, domain: Computer Science)
+2025-05-29 13:50:51,838 - pdf_ingestion - INFO - 🚀 Universal boost: Faithful Logic Embeddings (0.950 → 0.980, domain: Computer Science)
+2025-05-29 13:50:51,838 - pdf_ingestion - INFO - 🚀 Universal boost: Faithful Logic (0.525 → 0.656, domain: Computer Science)
+2025-05-29 13:50:51,838 - pdf_ingestion - INFO - 🚀 Universal boost: modal logic (0.931 → 0.980, domain: universal_extraction)
+2025-05-29 13:50:51,838 - pdf_ingestion - INFO - 🚀 Universal boost: provability logic (0.701 → 0.876, domain: universal_extraction)
+2025-05-29 13:50:51,838 - pdf_ingestion - INFO - 🚀 Universal boost: modal logics (0.675 → 0.844, domain: universal_extraction)
+2025-05-29 13:50:51,838 - pdf_ingestion - INFO - 🚀 Universal boost: proof modal logic (0.654 → 0.817, domain: Mathematics)
+2025-05-29 13:50:51,838 - pdf_ingestion - INFO - 🚀 Universal boost: embedding modal quantifiers (0.643 → 0.804, domain: universal_extraction)
+2025-05-29 13:50:51,838 - pdf_ingestion - INFO - 🚀 Universal boost: base modal logic (0.624 → 0.780, domain: universal_extraction)
+2025-05-29 13:50:51,838 - pdf_ingestion - INFO - 🚀 Universal boost: modal logic newly (0.610 → 0.762, domain: universal_extraction)
+2025-05-29 13:50:51,838 - pdf_ingestion - INFO - 🚀 Universal boost: proof modal (0.596 → 0.745, domain: Mathematics)
+2025-05-29 13:50:51,838 - pdf_ingestion - INFO - 🚀 Universal boost: modal logic fig (0.568 → 0.710, domain: universal_extraction)
+2025-05-29 13:50:51,838 - pdf_ingestion - INFO - 🚀 Universal boost: Faithful Logic Embeddings (0.950 → 0.980, domain: Computer Science)
+2025-05-29 13:50:51,838 - pdf_ingestion - INFO - 🚀 Universal boost: Faithful Logic (0.525 → 0.656, domain: Computer Science)
+2025-05-29 13:50:51,838 - pdf_ingestion - INFO - 🚀 Universal boost: Logic Embeddings (0.544 → 0.680, domain: universal_extraction)
+2025-05-29 13:50:51,838 - pdf_ingestion - INFO - 🚀 Universal boost: deep logic embeddings (0.932 → 0.980, domain: universal_extraction)
+2025-05-29 13:50:51,838 - pdf_ingestion - INFO - 🚀 Universal boost: logic embeddings include (0.734 → 0.917, domain: universal_extraction)
+2025-05-29 13:50:51,838 - pdf_ingestion - INFO - 🚀 Universal boost: trivial deep logic (0.693 → 0.866, domain: universal_extraction)
+2025-05-29 13:50:51,838 - pdf_ingestion - INFO - 🚀 Universal boost: embedding reasoning (0.648 → 0.810, domain: universal_extraction)
+2025-05-29 13:50:51,838 - pdf_ingestion - INFO - 🚀 Universal boost: shallow embedding reasoning (0.639 → 0.799, domain: universal_extraction)
+2025-05-29 13:50:51,838 - pdf_ingestion - INFO - 🚀 Universal boost: logic embeddings (0.625 → 0.781, domain: universal_extraction)
+2025-05-29 13:50:51,838 - pdf_ingestion - INFO - 🚀 Universal boost: embedding reasoning syntax (0.608 → 0.761, domain: universal_extraction)
+2025-05-29 13:50:51,838 - pdf_ingestion - INFO - 🚀 Universal boost: deep logic (0.605 → 0.757, domain: universal_extraction)
+2025-05-29 13:50:51,838 - pdf_ingestion - INFO - 🚀 Universal boost: embedded languages shallow (0.591 → 0.739, domain: universal_extraction)
+2025-05-29 13:50:51,838 - pdf_ingestion - INFO - 🚀 Universal boost: shallow embeddings exemplary (0.564 → 0.705, domain: universal_extraction)
+2025-05-29 13:50:51,850 - pdf_ingestion - INFO - 🚀 Universal boost: shallow embeddings implications (0.559 → 0.699, domain: universal_extraction)
+2025-05-29 13:50:51,866 - pdf_ingestion - INFO - 🚀 Universal boost: shallow embeddings actually (0.554 → 0.693, domain: universal_extraction)
+2025-05-29 13:50:51,866 - pdf_ingestion - INFO - 🚀 Universal boost: embeddings implications (0.540 → 0.675, domain: universal_extraction)
+2025-05-29 13:50:51,868 - pdf_ingestion - INFO - 🚀 Universal boost: embeddings exemplary developments (0.538 → 0.673, domain: universal_extraction)
+2025-05-29 13:50:51,870 - pdf_ingestion - INFO - 🚀 Universal boost: Faithful Logic Embeddings (0.950 → 0.980, domain: Computer Science)
+2025-05-29 13:50:51,870 - pdf_ingestion - INFO - 🚀 Universal boost: Faithful Logic (0.525 → 0.656, domain: Computer Science)
+2025-05-29 13:50:51,871 - pdf_ingestion - INFO - 🚀 Universal boost: Symbolic Logic (0.788 → 0.980, domain: universal_extraction)
+2025-05-29 13:50:51,873 - pdf_ingestion - INFO - 🚀 Universal boost: higher order logic (0.522 → 0.652, domain: universal_extraction)
+2025-05-29 13:50:51,873 - pdf_ingestion - INFO - 🚀 Universal boost: Faithful Logic Embeddings (0.950 → 0.980, domain: Computer Science)
+2025-05-29 13:50:51,873 - pdf_ingestion - INFO - 🚀 Universal boost: Faithful Logic Embeddings (0.950 → 0.980, domain: Computer Science)
+2025-05-29 13:50:51,873 - pdf_ingestion - INFO - 🚀 Universal boost: embedding (0.825 → 0.980, domain: universal_extraction)
+2025-05-29 13:50:51,874 - pdf_ingestion - INFO - 🚀 Universal boost: embeddings discussed (0.693 → 0.866, domain: universal_extraction)
+2025-05-29 13:50:51,874 - pdf_ingestion - INFO - 🚀 Universal boost: common embeddings discussed (0.690 → 0.862, domain: universal_extraction)
+2025-05-29 13:50:51,874 - pdf_ingestion - INFO - 🚀 Universal boost: embeddings (0.686 → 0.857, domain: universal_extraction)
+2025-05-29 13:50:51,876 - pdf_ingestion - INFO - 🚀 Universal boost: embeddings studied (0.681 → 0.852, domain: universal_extraction)
+2025-05-29 13:50:51,876 - pdf_ingestion - INFO - 🚀 Universal boost: signature common embeddings (0.601 → 0.751, domain: universal_extraction)
+2025-05-29 13:50:51,876 - pdf_ingestion - INFO - 🚀 Universal boost: common embeddings (0.585 → 0.731, domain: universal_extraction)
+2025-05-29 13:50:51,876 - pdf_ingestion - INFO - 🚀 Universal boost: embeddings studied imported (0.536 → 0.670, domain: universal_extraction)
+2025-05-29 13:50:51,876 - pdf_ingestion - INFO - 🚀 Universal boost: Faithful Logic Embeddings (0.950 → 0.980, domain: Computer Science)
+2025-05-29 13:50:51,876 - pdf_ingestion - INFO - 🚀 Universal boost: Logic Embeddings (0.544 → 0.680, domain: universal_extraction)
+2025-05-29 13:50:51,876 - pdf_ingestion - INFO - 🚀 Universal boost: Faithful Logic (0.525 → 0.656, domain: Computer Science)
+2025-05-29 13:50:51,876 - pdf_ingestion - INFO - 🌍 Domain matches found: {'technology': 2, 'universal_extraction': 61, 'Biology': 2, 'Computer Science': 15, 'Mathematics': 2}
+2025-05-29 13:50:51,876 - pdf_ingestion - INFO - 🚀 Universal database boosting result: 82 concepts found
+2025-05-29 13:50:51,876 - pdf_ingestion - INFO - 🚀 UNIVERSAL DATABASE BOOST RESULT: 82 concepts
+2025-05-29 13:50:51,876 - pdf_ingestion - INFO - 🔧 UNIVERSAL COMBINED RESULT: 111 total concepts
+2025-05-29 13:50:51,876 - pdf_ingestion - INFO - 🎯 Cross-reference boost: Faithful Logic Embeddings (1.000 → 0.950)
+2025-05-29 13:50:51,876 - pdf_ingestion - INFO - 🎯 Cross-reference boost: logic embeddings (0.781 → 0.898)
+2025-05-29 13:50:51,882 - pdf_ingestion - INFO - 🎯 Cross-reference boost: Faithful Logic (0.656 → 0.754)
+2025-05-29 13:50:51,898 - pdf_ingestion - INFO - 🎯 Cross-reference boost: embeddings (0.857 → 0.950)
+2025-05-29 13:50:51,898 - pdf_ingestion - INFO - 🎯 Cross-reference boost: embedding (0.980 → 0.950)
+2025-05-29 13:50:51,898 - pdf_ingestion - INFO - 🎯 Cross-reference boost: maximal shallow (0.980 → 0.950)
+2025-05-29 13:50:51,898 - pdf_ingestion - INFO - 🎯 Cross-reference boost: agent learn (0.801 → 0.921)
+2025-05-29 13:50:51,898 - pdf_ingestion - INFO - 🎯 Cross-reference boost: MMCE LDA (0.731 → 0.841)
+2025-05-29 13:50:51,898 - pdf_ingestion - INFO - 🎯 Cross-reference boost: evolutionary computation (0.980 → 0.950)
+2025-05-29 13:50:51,898 - pdf_ingestion - INFO - 🎯 Cross-reference boost: modal logic (0.980 → 0.950)
+2025-05-29 13:50:51,898 - pdf_ingestion - INFO - 🎯 Cross-reference boost: higher order logic (0.652 → 0.750)
+2025-05-29 13:50:51,898 - pdf_ingestion - INFO - 🔧 FINAL UNIVERSAL EXTRACTION: 81 concepts after deduplication
+2025-05-29 13:50:51,904 - pdf_ingestion - INFO - ✅ FINAL UNIVERSAL CONCEPTS TO BE INJECTED:
+2025-05-29 13:50:51,904 - pdf_ingestion - INFO -    1. Faithful Logic Embeddings (score: 0.950, method: universal_keybert+ner+yake) 🎯
+2025-05-29 13:50:51,905 - pdf_ingestion - INFO -    2. PML (score: 0.620, method: universal_keybert+ner+yake)
+2025-05-29 13:50:51,905 - pdf_ingestion - INFO -    3. HOL (score: 0.439, method: universal_keybert+yake)
+2025-05-29 13:50:51,905 - pdf_ingestion - INFO -    4. maximal shallow embedding (score: 0.371, method: universal_keybert+yake)
+2025-05-29 13:50:51,905 - pdf_ingestion - INFO -    5. Logic (score: 0.346, method: universal_keybert+yake)
+2025-05-29 13:50:51,905 - pdf_ingestion - INFO -    6. logic embeddings hol (score: 0.339, method: universal_keybert)
+2025-05-29 13:50:51,905 - pdf_ingestion - INFO -    7. shallow embedding (score: 0.338, method: universal_keybert+yake)
+2025-05-29 13:50:51,905 - pdf_ingestion - INFO -    8. embedding pml hol (score: 0.282, method: universal_keybert)
+2025-05-29 13:50:51,905 - pdf_ingestion - INFO -    9. embeddings hol (score: 0.265, method: universal_keybert)
+2025-05-29 13:50:51,905 - pdf_ingestion - INFO -   10. 21 (score: 0.254, method: universal_ner)
+2025-05-29 13:50:51,905 - pdf_ingestion - INFO -   11. embeddings hol recipe (score: 0.251, method: universal_keybert)
+2025-05-29 13:50:51,905 - pdf_ingestion - INFO -   12. shallow embedding pml (score: 0.249, method: universal_keybert)
+2025-05-29 13:50:51,905 - pdf_ingestion - INFO -   13. PML in HOL (score: 0.241, method: universal_yake)
+2025-05-29 13:50:51,905 - pdf_ingestion - INFO -   14. embedding pml (score: 0.238, method: universal_keybert)
+2025-05-29 13:50:51,905 - pdf_ingestion - INFO -   15. Embeddings in HOL (score: 0.217, method: universal_yake)
+2025-05-29 13:50:51,905 - pdf_ingestion - INFO -   ... and 66 more concepts
+2025-05-29 13:50:51,905 - pdf_ingestion - INFO - 📊 Method distribution: {'universal_keybert+ner+yake': 2, 'universal_keybert+yake': 4, 'universal_keybert': 6, 'universal_ner': 1, 'universal_yake': 2}
+2025-05-29 13:50:51,905 - pdf_ingestion - INFO - 🔬 CHUNK 21 RESULTS: 81 concepts
+2025-05-29 13:50:51,905 - pdf_ingestion - INFO -    🌍 81 universal extraction, 🚀 57 boosted, 🎯 11 cross-ref boosted
+2025-05-29 13:50:51,905 - pdf_ingestion - INFO - 🔬 =============== END CHUNK 21 ===============
+2025-05-29 13:50:51,905 - pdf_ingestion - INFO - 🔬 =============== UNIVERSAL CHUNK 22/22 ===============
+2025-05-29 13:50:51,905 - pdf_ingestion - INFO - 📊 Processing chunk 22/22 (81 chars)
+2025-05-29 13:50:51,905 - pdf_ingestion - INFO - 🔧 🌍 UNIVERSAL EXTRACT AND BOOST: threshold: 0.0
+2025-05-29 13:50:51,914 - pdf_ingestion - INFO - 🔬 Chunk length: 81 chars
+2025-05-29 13:50:51,923 - pdf_ingestion - INFO - 🔬 First 300 chars: 22 Christoph Benzmüller
+Fig. 9.Experiments with the deep embedding of PML in HOL.
+2025-05-29 13:50:51,923 - pdf_ingestion - INFO - 🔬 STEP 1: Calling universal extractConceptsFromDocument...
+2025-05-29 13:50:51,923 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL CONCEPT EXTRACTION START
+2025-05-29 13:50:51,923 - ingest_pdf.extractConceptsFromDocument - INFO - 🔬 Text length: 81 chars, Threshold: 0.0
+2025-05-29 13:50:51,923 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION: Processing 81 chars
+2025-05-29 13:50:52,815 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 UNIVERSAL EXTRACTION COMPLETE: 25 concepts extracted
+2025-05-29 13:50:52,815 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 TOP UNIVERSAL CONCEPTS:
+2025-05-29 13:50:52,830 - ingest_pdf.extractConceptsFromDocument - INFO -   1. Christoph Benzmüller (score: 1.000, methods: KeyBERT+NER+YAKE)
+2025-05-29 13:50:52,830 - ingest_pdf.extractConceptsFromDocument - INFO -   2. PML (score: 0.962, methods: KeyBERT+NER+YAKE)
+2025-05-29 13:50:52,830 - ingest_pdf.extractConceptsFromDocument - INFO -   3. HOL (score: 0.523, methods: KeyBERT+YAKE)
+2025-05-29 13:50:52,830 - ingest_pdf.extractConceptsFromDocument - INFO -   4. Benzmüller (score: 0.487, methods: KeyBERT+YAKE)
+2025-05-29 13:50:52,830 - ingest_pdf.extractConceptsFromDocument - INFO -   5. embedding pml hol (score: 0.466, methods: KeyBERT)
+2025-05-29 13:50:52,830 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 EXTRACTION METHOD BREAKDOWN:
+2025-05-29 13:50:52,830 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT+NER+YAKE: 2 concepts
+2025-05-29 13:50:52,830 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT+YAKE: 5 concepts
+2025-05-29 13:50:52,830 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 KeyBERT: 13 concepts
+2025-05-29 13:50:52,830 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 NER: 1 concepts
+2025-05-29 13:50:52,830 - ingest_pdf.extractConceptsFromDocument - INFO -   📊 YAKE: 4 concepts
+2025-05-29 13:50:52,830 - ingest_pdf.extractConceptsFromDocument - INFO - 🌍 🧬 UNIVERSAL EXTRACTION END: 25 concepts ready
+2025-05-29 13:50:52,830 - pdf_ingestion - INFO - 📊 UNIVERSAL SEMANTIC EXTRACTION RESULT: 25 concepts
+2025-05-29 13:50:52,830 - pdf_ingestion - INFO - 📊 RAW UNIVERSAL CONCEPTS (pre-boost):
+2025-05-29 13:50:52,830 - pdf_ingestion - INFO -    1. Christoph Benzmüller (score: 1.000, method: universal_keybert+ner+yake)
+2025-05-29 13:50:52,830 - pdf_ingestion - INFO -    2. PML (score: 0.962, method: universal_keybert+ner+yake)
+2025-05-29 13:50:52,830 - pdf_ingestion - INFO -    3. HOL (score: 0.523, method: universal_keybert+yake)
+2025-05-29 13:50:52,846 - pdf_ingestion - INFO -    4. Benzmüller (score: 0.487, method: universal_keybert+yake)
+2025-05-29 13:50:52,866 - pdf_ingestion - INFO -    5. embedding pml hol (score: 0.466, method: universal_keybert)
+2025-05-29 13:50:52,872 - pdf_ingestion - INFO -    6. deep embedding pml (score: 0.417, method: universal_keybert)
+2025-05-29 13:50:52,872 - pdf_ingestion - INFO -    7. embedding pml (score: 0.406, method: universal_keybert)
+2025-05-29 13:50:52,872 - pdf_ingestion - INFO -    8. embedding (score: 0.386, method: universal_keybert+yake)
+2025-05-29 13:50:52,872 - pdf_ingestion - INFO -    9. 22 (score: 0.350, method: universal_ner)
+2025-05-29 13:50:52,878 - pdf_ingestion - INFO -   10. pml hol (score: 0.327, method: universal_keybert)
+2025-05-29 13:50:52,878 - pdf_ingestion - INFO -   ... and 15 more concepts
+2025-05-29 13:50:52,878 - pdf_ingestion - INFO - 🔬 STEP 2: Calling universal boost_known_concepts...
+2025-05-29 13:50:52,878 - pdf_ingestion - INFO - 🔍 UNIVERSAL BOOST: Checking chunk (81 chars) against 474 database concepts
+2025-05-29 13:50:52,878 - pdf_ingestion - INFO - 🔍 First 200 chars of chunk: 22 Christoph Benzmüller
+Fig. 9.Experiments with the deep embedding of PML in HOL.
+2025-05-29 13:50:52,878 - pdf_ingestion - INFO - 🚀 Universal boost: machine learning (0.900 → 0.980, domain: technology)
+2025-05-29 13:50:52,878 - pdf_ingestion - INFO - 🚀 Universal boost: Differential evolution (0.950 → 0.980, domain: Biology)
+2025-05-29 13:50:52,878 - pdf_ingestion - INFO - 🚀 Universal boost: differential evolution (0.850 → 0.980, domain: Biology)
+2025-05-29 13:50:52,878 - pdf_ingestion - INFO - 🚀 Universal boost: MMCE LDA (0.562 → 0.731, domain: universal_extraction)
+2025-05-29 13:50:52,894 - pdf_ingestion - INFO - 🚀 Universal boost: MMCE LDA (0.562 → 0.731, domain: universal_extraction)
+2025-05-29 13:50:52,911 - pdf_ingestion - INFO - 🚀 Universal boost: learning episode (0.541 → 0.649, domain: universal_extraction)
+2025-05-29 13:50:52,911 - pdf_ingestion - INFO - 🚀 Universal boost: differential evolution (0.850 → 0.980, domain: Biology)
+2025-05-29 13:50:52,911 - pdf_ingestion - INFO - 🚀 Universal boost: Logic Embeddings (0.544 → 0.680, domain: universal_extraction)
+2025-05-29 13:50:52,911 - pdf_ingestion - INFO - 🚀 Universal boost: Benzmüller shallow logic (0.950 → 0.980, domain: universal_extraction)
+2025-05-29 13:50:52,911 - pdf_ingestion - INFO - 🚀 Universal boost: Christoph Benzmüller (0.950 → 0.980, domain: universal_extraction)
+2025-05-29 13:50:52,911 - pdf_ingestion - INFO - 🚀 Universal boost: logic embeddings (0.625 → 0.781, domain: universal_extraction)
+2025-05-29 13:50:52,925 - pdf_ingestion - INFO - 🚀 Universal boost: modal logic (0.931 → 0.980, domain: universal_extraction)
+2025-05-29 13:50:52,938 - pdf_ingestion - INFO - 🚀 Universal boost: modal logic (0.931 → 0.980, domain: universal_extraction)
+2025-05-29 13:50:52,941 - pdf_ingestion - INFO - 🚀 Universal boost: Logic Embeddings (0.544 → 0.680, domain: universal_extraction)
+2025-05-29 13:50:52,944 - pdf_ingestion - INFO - 🚀 Universal boost: Christoph Benzmüller (0.950 → 0.980, domain: universal_extraction)
+2025-05-29 13:50:52,946 - pdf_ingestion - INFO - 🚀 Universal boost: Christoph Benzmüller (0.950 → 0.980, domain: universal_extraction)
+2025-05-29 13:50:52,947 - pdf_ingestion - INFO - 🚀 Universal boost: Christoph Benzmüller (0.950 → 0.980, domain: universal_extraction)
+2025-05-29 13:50:52,949 - pdf_ingestion - INFO - 🚀 Universal boost: Christoph Benzmüller (0.950 → 0.980, domain: universal_extraction)
+2025-05-29 13:50:52,949 - pdf_ingestion - INFO - 🚀 Universal boost: Christoph Benzmüller (0.950 → 0.980, domain: universal_extraction)
+2025-05-29 13:50:52,950 - pdf_ingestion - INFO - 🚀 Universal boost: modal logic (0.931 → 0.980, domain: universal_extraction)
+2025-05-29 13:50:52,952 - pdf_ingestion - INFO - 🚀 Universal boost: modal logics (0.675 → 0.844, domain: universal_extraction)
+2025-05-29 13:50:52,954 - pdf_ingestion - INFO - 🚀 Universal boost: embedding modal quantifiers (0.643 → 0.804, domain: universal_extraction)
+2025-05-29 13:50:52,967 - pdf_ingestion - INFO - 🚀 Universal boost: proof modal (0.596 → 0.745, domain: Mathematics)
+2025-05-29 13:50:52,970 - pdf_ingestion - INFO - 🚀 Universal boost: Logic Embeddings (0.544 → 0.680, domain: universal_extraction)
+2025-05-29 13:50:52,970 - pdf_ingestion - INFO - 🚀 Universal boost: Christoph Benzmüller (0.950 → 0.980, domain: universal_extraction)
+2025-05-29 13:50:52,970 - pdf_ingestion - INFO - 🚀 Universal boost: embedding reasoning (0.648 → 0.810, domain: universal_extraction)
+2025-05-29 13:50:52,970 - pdf_ingestion - INFO - 🚀 Universal boost: shallow embedding reasoning (0.639 → 0.799, domain: universal_extraction)
+2025-05-29 13:50:52,970 - pdf_ingestion - INFO - 🚀 Universal boost: logic embeddings (0.625 → 0.781, domain: universal_extraction)
+2025-05-29 13:50:52,970 - pdf_ingestion - INFO - 🚀 Universal boost: embedding reasoning syntax (0.608 → 0.761, domain: universal_extraction)
+2025-05-29 13:50:52,970 - pdf_ingestion - INFO - 🚀 Universal boost: Benzmüller (0.950 → 0.980, domain: universal_extraction)
+2025-05-29 13:50:52,970 - pdf_ingestion - INFO - 🚀 Universal boost: Christoph Benzmüller (0.950 → 0.980, domain: universal_extraction)
+2025-05-29 13:50:52,970 - pdf_ingestion - INFO - 🚀 Universal boost: Christoph Benzmüller (0.950 → 0.980, domain: universal_extraction)
+2025-05-29 13:50:52,970 - pdf_ingestion - INFO - 🚀 Universal boost: Christoph Benzmüller (0.950 → 0.980, domain: universal_extraction)
+2025-05-29 13:50:52,970 - pdf_ingestion - INFO - 🚀 Universal boost: embedding (0.825 → 0.980, domain: universal_extraction)
+2025-05-29 13:50:52,986 - pdf_ingestion - INFO - 🚀 Universal boost: embeddings discussed (0.693 → 0.866, domain: universal_extraction)
+2025-05-29 13:50:53,002 - pdf_ingestion - INFO - 🚀 Universal boost: Logic Embeddings (0.544 → 0.680, domain: universal_extraction)
+2025-05-29 13:50:53,002 - pdf_ingestion - INFO - 🚀 Universal boost: Christoph Benzmüller (0.950 → 0.980, domain: universal_extraction)
+2025-05-29 13:50:53,002 - pdf_ingestion - INFO - 🌍 Domain matches found: {'technology': 1, 'Biology': 3, 'universal_extraction': 32, 'Mathematics': 1}
+2025-05-29 13:50:53,002 - pdf_ingestion - INFO - 🚀 Universal database boosting result: 37 concepts found
+2025-05-29 13:50:53,002 - pdf_ingestion - INFO - 🚀 UNIVERSAL DATABASE BOOST RESULT: 37 concepts
+2025-05-29 13:50:53,002 - pdf_ingestion - INFO - 🔧 UNIVERSAL COMBINED RESULT: 62 total concepts
+2025-05-29 13:50:53,002 - pdf_ingestion - INFO - 🎯 Cross-reference boost: Christoph Benzmüller (1.000 → 0.950)
+2025-05-29 13:50:53,002 - pdf_ingestion - INFO - 🎯 Cross-reference boost: Benzmüller (0.980 → 0.950)
+2025-05-29 13:50:53,002 - pdf_ingestion - INFO - 🎯 Cross-reference boost: embedding (0.980 → 0.950)
+2025-05-29 13:50:53,002 - pdf_ingestion - INFO - 🎯 Cross-reference boost: Differential evolution (0.980 → 0.950)
+2025-05-29 13:50:53,002 - pdf_ingestion - INFO - 🎯 Cross-reference boost: MMCE LDA (0.731 → 0.841)
+2025-05-29 13:50:53,002 - pdf_ingestion - INFO - 🎯 Cross-reference boost: logic embeddings (0.781 → 0.898)
+2025-05-29 13:50:53,002 - pdf_ingestion - INFO - 🎯 Cross-reference boost: modal logic (0.980 → 0.950)
+2025-05-29 13:50:53,002 - pdf_ingestion - INFO - 🔧 FINAL UNIVERSAL EXTRACTION: 39 concepts after deduplication
+2025-05-29 13:50:53,002 - pdf_ingestion - INFO - ✅ FINAL UNIVERSAL CONCEPTS TO BE INJECTED:
+2025-05-29 13:50:53,002 - pdf_ingestion - INFO -    1. Christoph Benzmüller (score: 0.950, method: universal_keybert+ner+yake) 🎯
+2025-05-29 13:50:53,017 - pdf_ingestion - INFO -    2. PML (score: 0.962, method: universal_keybert+ner+yake)
+2025-05-29 13:50:53,037 - pdf_ingestion - INFO -    3. HOL (score: 0.523, method: universal_keybert+yake)
+2025-05-29 13:50:53,038 - pdf_ingestion - INFO -    4. embedding pml hol (score: 0.466, method: universal_keybert)
+2025-05-29 13:50:53,038 - pdf_ingestion - INFO -    5. deep embedding pml (score: 0.417, method: universal_keybert)
+2025-05-29 13:50:53,038 - pdf_ingestion - INFO -    6. embedding pml (score: 0.406, method: universal_keybert)
+2025-05-29 13:50:53,038 - pdf_ingestion - INFO -    7. 22 (score: 0.350, method: universal_ner)
+2025-05-29 13:50:53,038 - pdf_ingestion - INFO -    8. pml hol (score: 0.327, method: universal_keybert)
+2025-05-29 13:50:53,038 - pdf_ingestion - INFO -    9. Christoph (score: 0.310, method: universal_yake)
+2025-05-29 13:50:53,038 - pdf_ingestion - INFO -   10. PML in HOL (score: 0.299, method: universal_yake)
+2025-05-29 13:50:53,038 - pdf_ingestion - INFO -   11. experiments deep embedding (score: 0.286, method: universal_keybert)
+2025-05-29 13:50:53,038 - pdf_ingestion - INFO -   12. deep embedding (score: 0.278, method: universal_keybert+yake)
+2025-05-29 13:50:53,038 - pdf_ingestion - INFO -   13. Fig. (score: 0.273, method: universal_yake)
+2025-05-29 13:50:53,038 - pdf_ingestion - INFO -   14. deep (score: 0.254, method: universal_keybert+yake)
+2025-05-29 13:50:53,038 - pdf_ingestion - INFO -   15. experiments deep (score: 0.208, method: universal_keybert)
+2025-05-29 13:50:53,038 - pdf_ingestion - INFO -   ... and 24 more concepts
+2025-05-29 13:50:53,038 - pdf_ingestion - INFO - 📊 Method distribution: {'universal_keybert+ner+yake': 2, 'universal_keybert+yake': 3, 'universal_keybert': 6, 'universal_ner': 1, 'universal_yake': 3}
+2025-05-29 13:50:53,038 - pdf_ingestion - INFO - 🔬 CHUNK 22 RESULTS: 39 concepts
+2025-05-29 13:50:53,038 - pdf_ingestion - INFO -    🌍 39 universal extraction, 🚀 16 boosted, 🎯 7 cross-ref boosted
+2025-05-29 13:50:53,049 - pdf_ingestion - INFO - 🔬 =============== END CHUNK 22 ===============
+2025-05-29 13:50:53,056 - pdf_ingestion - INFO - 📥 RUNNING UNIVERSAL AUTO-PREFILL ANALYSIS...
+2025-05-29 13:50:53,056 - pdf_ingestion - INFO - 📥 UNIVERSAL AUTO-PREFILL: Analyzing 4201 concepts from tmpp_caopzb.pdf
+2025-05-29 13:50:53,082 - pdf_ingestion - INFO - 📥 UNIVERSAL AUTO-PREFILL: No new concepts met prefill criteria (threshold: 0.5)
+2025-05-29 13:50:53,082 - pdf_ingestion - INFO - 🔬 INJECTING 4201 UNIVERSAL CONCEPTS INTO CONCEPTMESH
+2025-05-29 13:50:54,327 - cognitive_interface - INFO - ConceptMesh saved to concept_mesh_data.json (3 diffs)
+2025-05-29 13:50:54,387 - cognitive_interface - INFO - [UI] ConceptMesh update available: tmpp_caopzb.pdf
+2025-05-29 13:50:54,396 - cognitive_interface - INFO - [ConceptMesh] Injected 4201 concepts for 'tmpp_caopzb.pdf' (ID: diff_1748544653088_5345)
+2025-05-29 13:50:54,396 - cognitive_interface - INFO - [ψArc] Logged concept injection trajectory with 4201 eigen IDs
+2025-05-29 13:50:54,396 - pdf_ingestion - INFO - ✅ 🌍 UNIVERSAL PDF INGESTION COMPLETE: tmpp_caopzb.pdf
+2025-05-29 13:50:54,396 - pdf_ingestion - INFO - 📊 FINAL RESULTS: 4201 total concepts
+2025-05-29 13:50:54,396 - pdf_ingestion - INFO -    🌍 4201 universal semantic concepts
+2025-05-29 13:50:54,396 - pdf_ingestion - INFO -    🚀 2898 database boosted concepts
+2025-05-29 13:50:54,396 - pdf_ingestion - INFO -    🎯 460 cross-reference boosted
+2025-05-29 13:50:54,396 - pdf_ingestion - INFO -    📥 0 concepts auto-prefilled to database
+2025-05-29 13:50:54,396 - pdf_ingestion - INFO -    🧬 Universal methods used: ['NER', 'KeyBERT', 'YAKE']
+2025-05-29 13:50:54,396 - pdf_ingestion - INFO -    🌍 Domain distribution: {'unknown': 1303, 'technology': 65, 'Philosophy': 12, 'Biology': 157, 'Computer Science': 241, 'universal_extraction': 2250, 'Mathematics': 159, 'Art': 14}
+2025-05-29 13:50:54,396 - pdf_ingestion - INFO - ⏱️ Processing time: 284.89s
+2025-05-29 13:50:54,406 - pdf_ingestion - INFO - 📊 Database now contains: 474 total concepts
+✅ Extracted 4201 concepts
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [47008]
+P

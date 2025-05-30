@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  banksy-backend:
+    build:
+      context: ./alan_backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - PYTHONPATH=/app
+    volumes:
+      - ./alan_backend:/app
+    command: python server/simulation_api.py
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  tori-frontend:
+    build:
+      context: ./tori_ui_svelte
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - banksy-backend
+    environment:
+      - VITE_BANKSY_API_URL=http://banksy-backend:8000

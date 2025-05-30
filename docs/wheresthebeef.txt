@@ -1,0 +1,586 @@
+{
+  `path`: `C:\\Users\\jason\\Desktop\	ori\\kha\	ori_ui_svelte\\src\\routes\\upload\\+server.ts`,
+  `content`: `import { error, json } from '@sveltejs/kit';
+import type { RequestHandler } from './$types';
+import { writeFile, mkdir } from 'fs/promises';
+import { existsSync } from 'fs';
+import { join } from 'path';
+import { spawn } from 'child_process';
+
+// Simple PDF text extraction (for production, consider using pdf-parse or similar)
+async function extractTextFromPDF(buffer: ArrayBuffer): Promise<string> {
+    // For now, return a placeholder that indicates PDF processing
+    // In production, integrate with pdf-parse library or similar
+    const filename = 'uploaded-document.pdf';
+    
+    // Basic metadata extraction from PDF header
+    const uint8Array = new Uint8Array(buffer);
+    const pdfHeader = new TextDecoder().decode(uint8Array.slice(0, 1024));
+    
+    // Extract any visible text patterns (very basic)
+    const textContent = new TextDecoder('utf-8', { fatal: false }).decode(uint8Array);
+    const extractedText = textContent.replace(/[^\\x20-\\x7E\
+\\r]/g, ' ').trim();
+    
+    // 🔧 FIXED: Removed 2000 character limit - now processes full PDF text
+    return extractedText.length > 100 ? extractedText : 
+           `PDF Document: ${filename}\
+Content extraction requires pdf-parse library for full text analysis.\
+Document uploaded successfully and ready for processing.`;
+}
+
+// 🧬 ENHANCED PDF TEXT CLEANING - Remove artifacts and improve quality
+function cleanPDFText(rawText: string): string {
+    console.log('🧹 CLEANING PDF TEXT - Removing artifacts and noise');
+    console.log(`🔬 Raw text length: ${rawText.length} characters`);
+    
+    let cleanedText = rawText;
+    
+    // 🗑️ Remove PDF structural elements and artifacts
+    const pdfArtifacts = [
+        // PDF structure keywords
+        'stream', 'endstream', 'trailer', 'startxref', 'xref', 
+        'obj', 'endobj', 'embobj', 'catalog', 'procset',
+        'font', 'fontdescriptor', 'encoding', 'widths',
+        'contents', 'resources', 'mediabox', 'cropbox',
+        'length', 'filter', 'flatedecode', 'ascii85decode',
+        
+        // PDF operators and commands
+        'BT', 'ET', 'Tf', 'Tj', 'TJ', 'Td', 'TD', 'Tm', 'T*',
+        'rg', 'RG', 'gs', 'q', 'Q', 'cm', 're', 'f', 'S', 's',
+        
+        // Common PDF noise patterns
+        'version', 'creator', 'producer', 'creationdate', 'moddate',
+        'linearized', 'compressed', 'objectstreams'
+    ];
+    
+    // Create regex patterns to remove artifacts
+    for (const artifact of pdfArtifacts) {
+        // Remove standalone artifacts (case insensitive)
+        const standalonePattern = new RegExp(`\\\\b${artifact}\\\\b`, 'gi');
+        cleanedText = cleanedText.replace(standalonePattern, ' ');
+        
+        // Remove artifacts with numbers/special chars
+        const artifactPattern = new RegExp(`\\\\b${artifact}\\\\s*\\\\d*\\\\s*[\\\\w\\\\d]*\\\\b`, 'gi');
+        cleanedText = cleanedText.replace(artifactPattern, ' ');
+    }
+    
+    // 🧹 Remove common PDF formatting noise
+    cleanedText = cleanedText
+        // Remove excessive whitespace and control characters
+        .replace(/\\s+/g, ' ')
+        .replace(/[\\x00-\\x1F\\x7F-\\x9F]/g, ' ')
+        
+        // Remove standalone numbers and gibberish
+        .replace(/\\b\\d+\\s+\\d+\\s+\\d+\\b/g, ' ')  // \"123 456 789\" patterns
+        .replace(/\\b[A-Za-z]\\s+[A-Za-z]\\s+[A-Za-z]\\b/g, ' ')  // \"A B C\" patterns
+        
+        // Remove PDF coordinate-like patterns
+        .replace(/\\b\\d+\\.\\d+\\s+\\d+\\.\\d+\\s+\\d+\\.\\d+\\b/g, ' ')
+        
+        // Remove excessive punctuation
+        .replace(/[^\\w\\s\\.\\,\\!\\?\\:\\;\\-\\(\\)]/g, ' ')
+        
+        // Clean up multiple spaces
+        .replace(/\\s+/g, ' ')
+        .trim();
+    
+    console.log(`🧹 Cleaned text length: ${cleanedText.length} characters`);
+    console.log(`📊 Removed ${rawText.length - cleanedText.length} characters of noise`);
+    
+    return cleanedText;
+}
+
+// 🐍 ROUTE TO PYTHON PIPELINE - Call enhanced Python extraction
+async function callEnhancedPythonPipeline(buffer: ArrayBuffer, filename: string): Promise<{
+    concepts: any[];
+    extractionMethod: string;
+    success: boolean;
+    processingTime: number;
+    semanticConcepts: number;
+    boostedConcepts: number;
+    conceptCount: number;
+}> {
+    
+    return new Promise((resolve, reject) => {
+        console.log('🐍 🧬 CALLING ENHANCED PYTHON PIPELINE');
+        
+        // Save buffer to temp file
+        const tempDir = join(process.cwd(), 'temp');
+        const tempPath = join(tempDir, `temp_${Date.now()}_${filename}`);
+        
+        writeFile(tempPath, new Uint8Array(buffer))
+            .then(() => {
+                console.log('📁 Temp file created for Python processing');
+                
+                // Call Python pipeline with surgical debug mode
+                const pythonScript = join(process.cwd(), 'ingest_pdf', 'pipeline.py');
+                const pythonArgs = [
+                    '-c', 
+                    `
+import sys
+sys.path.append('${join(process.cwd(), 'ingest_pdf').replace(/\\\\/g, '\\\\\\\\')}')
+from pipeline import ingest_pdf_clean
+import json
+
+try:
+    result = ingest_pdf_clean('${tempPath.replace(/\\\\/g, '\\\\\\\\')}', extraction_threshold=0.0)
+    print(\"PYTHON_RESULT_START\")
+    print(json.dumps(result, indent=2))
+    print(\"PYTHON_RESULT_END\")
+except Exception as e:
+    print(f\"PYTHON_ERROR: {e}\")
+                    `
+                ];
+                
+                console.log('🐍 Spawning Python process for enhanced extraction...');
+                
+                const pythonProcess = spawn('python', pythonArgs, {
+                    stdio: ['pipe', 'pipe', 'pipe'],
+                    shell: true
+                });
+                
+                let stdout = '';
+                let stderr = '';
+                
+                pythonProcess.stdout.on('data', (data) => {
+                    const output = data.toString();
+                    stdout += output;
+                    console.log('🐍 Python:', output);
+                });
+                
+                pythonProcess.stderr.on('data', (data) => {
+                    const output = data.toString();
+                    stderr += output;
+                    console.log('🐍 Python stderr:', output);
+                });
+                
+                pythonProcess.on('close', (code) => {
+                    // Clean up temp file
+                    import('fs').then(fs => {
+                        try { fs.unlinkSync(tempPath); } catch (e) { /* ignore */ }
+                    });
+                    
+                    console.log(`🐍 Python process finished with code: ${code}`);
+                    
+                    if (code === 0) {
+                        try {
+                            // Parse Python result
+                            const resultMatch = stdout.match(/PYTHON_RESULT_START\
+(.*)\
+PYTHON_RESULT_END/s);
+                            if (resultMatch) {
+                                const result = JSON.parse(resultMatch[1]);
+                                
+                                console.log('✅ 🐍 PYTHON PIPELINE SUCCESS!');
+                                console.log(`📊 Python extracted: ${result.concept_count} concepts`);
+                                
+                                // Convert concept names to proper format
+                                const concepts = (result.concept_names || []).map((name: string, index: number) => ({
+                                    name: name,
+                                    score: Math.max(0.4, 0.9 - index * 0.03), // Decreasing scores from 0.9
+                                    method: 'enhanced_python_pipeline',
+                                    source: { 
+                                        python_extraction: true,
+                                        enhanced_pipeline: true,
+                                        surgical_debug: true
+                                    },
+                                    context: `Enhanced Python extraction: ${name}`,
+                                    metadata: {
+                                        extraction_method: 'enhanced_python_pipeline',
+                                        processing_time: result.processing_time_seconds,
+                                        semantic_concepts: result.semantic_concepts,
+                                        boosted_concepts: result.boosted_concepts,
+                                        python_pipeline: true
+                                    }
+                                }));
+                                
+                                resolve({
+                                    concepts: concepts,
+                                    extractionMethod: 'enhanced_python_pipeline',
+                                    success: true,
+                                    processingTime: result.processing_time_seconds || 0,
+                                    semanticConcepts: result.semantic_concepts || 0,
+                                    boostedConcepts: result.boosted_concepts || 0,
+                                    conceptCount: result.concept_count || 0
+                                });
+                            } else {
+                                console.error('❌ Could not parse Python result');
+                                reject(new Error('Could not parse Python pipeline result'));
+                            }
+                        } catch (parseError) {
+                            console.error('❌ Failed to parse Python output:', parseError);
+                            reject(new Error(`Failed to parse Python output: ${parseError}`));
+                        }
+                    } else {
+                        console.error('❌ Python pipeline failed:', stderr);
+                        reject(new Error(`Python process failed: ${stderr}`));
+                    }
+                });
+                
+                pythonProcess.on('error', (error) => {
+                    console.error('❌ Failed to spawn Python process:', error);
+                    reject(new Error(`Failed to spawn Python process: ${error.message}`));
+                });
+                
+                // Set timeout
+                setTimeout(() => {
+                    pythonProcess.kill();
+                    reject(new Error('Python pipeline timeout after 120 seconds'));
+                }, 120000);
+            })
+            .catch(reject);
+    });
+}
+
+// 🧬 ENHANCED SERVER-SIDE CONCEPT EXTRACTION - Now with Python pipeline
+async function extractConceptsEnhanced(buffer: ArrayBuffer, filename: string): Promise<{
+    concepts: any[];
+    extractionMethod: string;
+    success: boolean;
+    processingTime: number;
+    semanticConcepts: number;
+    boostedConcepts: number;
+}> {
+    console.log('🧬 🔬 ENHANCED SERVER EXTRACTION WITH PYTHON PIPELINE');
+    const startTime = Date.now();
+    
+    try {
+        // Step 1: Try Python pipeline first (best results)
+        console.log('🐍 STEP 1: Attempting Python pipeline extraction...');
+        const pythonResult = await callEnhancedPythonPipeline(buffer, filename);
+        
+        if (pythonResult.success && pythonResult.concepts.length > 0) {
+            console.log('✅ 🐍 PYTHON PIPELINE SUCCESS - Using Python results');
+            return pythonResult;
+        } else {
+            console.log('⚠️ Python pipeline returned no concepts, falling back to TypeScript');
+        }
+        
+    } catch (pythonError) {
+        console.log('🔄 Python pipeline failed, using enhanced TypeScript fallback:', pythonError);
+    }
+    
+    // Step 2: Enhanced TypeScript fallback
+    console.log('🔄 STEP 2: Using enhanced TypeScript extraction...');
+    
+    const textContent = new TextDecoder('utf-8', { fatal: false }).decode(buffer);
+    
+    // 🧹 CLEAN THE TEXT FIRST
+    const cleanedText = cleanPDFText(textContent);
+    
+    if (cleanedText.length < 100) {
+        console.log('⚠️ Cleaned text too short, using original text');
+        return await extractConceptsTypeScript(textContent, filename);
+    }
+    
+    console.log('🧹 Using cleaned text for extraction');
+    const concepts = await extractConceptsTypeScript(cleanedText, filename);
+    
+    const processingTime = Date.now() - startTime;
+    
+    return {
+        concepts: concepts.map(c => c.name),
+        extractionMethod: 'enhanced_typescript_with_cleaning',
+        success: true,
+        processingTime: processingTime / 1000,
+        semanticConcepts: concepts.filter(c => c.method?.includes('semantic')).length,
+        boostedConcepts: concepts.filter(c => c.method?.includes('domain')).length
+    };
+}
+
+// Enhanced TypeScript concept extraction - improved thresholds and methods
+async function extractConceptsTypeScript(text: string, filename: string): Promise<any[]> {
+    console.log('🔬 🚀 ENHANCED TYPESCRIPT EXTRACTION');
+    console.log(`📊 Processing ${text.length} characters of cleaned text`);
+    
+    const concepts: any[] = [];
+    const lowerText = text.toLowerCase();
+    
+    // 🎯 LOWERED THRESHOLDS - Be more aggressive
+    const minWordLength = 3;  // Down from 4
+    const minConceptLength = 4;  // Down from 6
+    
+    // 🧬 EXPANDED DOMAIN TERMS - More comprehensive
+    const domainTerms = new Map([
+        // Core AI/ML
+        ['algorithm', 0.85], ['machine learning', 0.9], ['artificial intelligence', 0.9],
+        ['neural network', 0.85], ['deep learning', 0.85], ['learning', 0.7],
+        
+        // Computer Science  
+        ['computer', 0.6], ['computing', 0.65], ['software', 0.6], ['programming', 0.65],
+        ['system', 0.5], ['method', 0.5], ['approach', 0.6], ['technique', 0.65],
+        
+        // Mathematics
+        ['mathematics', 0.8], ['mathematical', 0.75], ['equation', 0.7], ['formula', 0.7],
+        ['theorem', 0.8], ['proof', 0.75], ['analysis', 0.6], ['optimization', 0.75],
+        
+        // Physics
+        ['physics', 0.8], ['quantum', 0.9], ['particle', 0.8], ['field', 0.65],
+        ['energy', 0.6], ['force', 0.6], ['wave', 0.65], ['frequency', 0.7],
+        
+        // Research terms
+        ['research', 0.65], ['study', 0.55], ['experiment', 0.7], ['hypothesis', 0.75],
+        ['methodology', 0.75], ['result', 0.5], ['conclusion', 0.6], ['evaluation', 0.7],
+        
+        // Data/Statistics
+        ['data', 0.6], ['dataset', 0.7], ['statistics', 0.75], ['statistical', 0.7],
+        ['probability', 0.8], ['distribution', 0.7], ['sample', 0.55], ['model', 0.6]
+    ]);
+    
+    // Extract domain terms with expanded matching
+    let domainConceptsFound = 0;
+    for (const [term, confidence] of domainTerms) {
+        const termWords = term.split(' ');
+        
+        if (termWords.length === 1) {
+            // Single word - check for presence
+            if (lowerText.includes(term)) {
+                const frequency = (lowerText.match(new RegExp(term, 'g')) || []).length;
+                const score = Math.min(0.95, confidence + (frequency - 1) * 0.05);
+                
+                concepts.push({
+                    name: term.charAt(0).toUpperCase() + term.slice(1),
+                    score: score,
+                    method: 'enhanced_domain_extraction',
+                    source: { domain_term: true, frequency: frequency },
+                    context: `Enhanced domain extraction: ${term}`,
+                    metadata: { domain_boost: true, confidence: confidence, frequency: frequency }
+                });
+                
+                domainConceptsFound++;
+                console.log(`🎯 DOMAIN TERM: ${term} (score: ${score.toFixed(3)}, freq: ${frequency})`);
+            }
+        } else {
+            // Multi-word - check for phrase presence
+            if (lowerText.includes(term)) {
+                const frequency = (lowerText.match(new RegExp(term.replace(/\\s+/g, '\\\\s+'), 'g')) || []).length;
+                const score = Math.min(0.95, confidence + (frequency - 1) * 0.05);
+                
+                concepts.push({
+                    name: term.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' '),
+                    score: score,
+                    method: 'enhanced_phrase_extraction',
+                    source: { phrase_term: true, frequency: frequency },
+                    context: `Enhanced phrase extraction: ${term}`,
+                    metadata: { phrase_extraction: true, confidence: confidence, frequency: frequency }
+                });
+                
+                domainConceptsFound++;
+                console.log(`🧠 PHRASE TERM: ${term} (score: ${score.toFixed(3)}, freq: ${frequency})`);
+            }
+        }
+    }
+    
+    // 🔍 AGGRESSIVE WORD EXTRACTION - Get more concepts
+    const words = lowerText.split(/\\s+/).filter(word => 
+        word.length >= minWordLength && 
+        /^[a-z]+$/.test(word) &&
+        !['the', 'and', 'or', 'but', 'in', 'on', 'at', 'to', 'for', 'of', 'with', 'by'].includes(word)
+    );
+    
+    const wordFreq = new Map<string, number>();
+    words.forEach(word => {
+        wordFreq.set(word, (wordFreq.get(word) || 0) + 1);
+    });
+    
+    // Extract high-frequency meaningful words
+    let wordConceptsFound = 0;
+    for (const [word, freq] of wordFreq.entries()) {
+        if (freq >= 2 && word.length >= minConceptLength && !domainTerms.has(word)) {
+            const score = Math.min(0.8, 0.3 + (freq / 10)); // Frequency-based scoring
+            
+            concepts.push({
+                name: word.charAt(0).toUpperCase() + word.slice(1),
+                score: score,
+                method: 'enhanced_frequency_extraction',
+                source: { word_frequency: true, frequency: freq },
+                context: `High-frequency term: ${word}`,
+                metadata: { frequency_extraction: true, word_frequency: freq }
+            });
+            
+            wordConceptsFound++;
+            console.log(`📊 FREQUENT WORD: ${word} (score: ${score.toFixed(3)}, freq: ${freq})`);
+            
+            if (wordConceptsFound >= 15) break; // Limit frequent words
+        }
+    }
+    
+    // 🎯 BIGRAM EXTRACTION - Two-word combinations
+    const sentences = text.split(/[.!?]+/).filter(s => s.length > 20);
+    let bigramConceptsFound = 0;
+    
+    for (const sentence of sentences.slice(0, 10)) { // Limit to first 10 sentences
+        const sentenceWords = sentence.toLowerCase().split(/\\s+/)
+            .filter(w => w.length >= 3 && /^[a-z]+$/.test(w));
+        
+        for (let i = 0; i < sentenceWords.length - 1; i++) {
+            const bigram = `${sentenceWords[i]} ${sentenceWords[i + 1]}`;
+            const bigramCapitalized = sentenceWords[i].charAt(0).toUpperCase() + sentenceWords[i].slice(1) + 
+                                    ' ' + sentenceWords[i + 1].charAt(0).toUpperCase() + sentenceWords[i + 1].slice(1);
+            
+            if (bigram.length >= 8 && !concepts.some(c => c.name.toLowerCase() === bigram)) {
+                concepts.push({
+                    name: bigramCapitalized,
+                    score: 0.45 + Math.random() * 0.15, // Random score 0.45-0.6
+                    method: 'enhanced_bigram_extraction',
+                    source: { bigram_extraction: true },
+                    context: `Bigram extraction: ${bigram}`,
+                    metadata: { bigram: true, sentence_context: true }
+                });
+                
+                bigramConceptsFound++;
+                console.log(`🔗 BIGRAM: ${bigramCapitalized} (score: ${concepts[concepts.length-1].score.toFixed(3)})`);
+                
+                if (bigramConceptsFound >= 10) break; // Limit bigrams
+            }
+        }
+        if (bigramConceptsFound >= 10) break;
+    }
+    
+    console.log(`🔬 ENHANCED TYPESCRIPT EXTRACTION COMPLETE:`);
+    console.log(`   🎯 ${domainConceptsFound} domain concepts`);
+    console.log(`   📊 ${wordConceptsFound} frequency concepts`);
+    console.log(`   🔗 ${bigramConceptsFound} bigram concepts`);
+    console.log(`   📊 ${concepts.length} total concepts extracted`);
+    
+    // Sort by score and return top concepts
+    concepts.sort((a, b) => b.score - a.score);
+    return concepts.slice(0, 30); // Return top 30 concepts
+}
+
+// Trigger ELFIN++ onUpload hook
+function triggerELFINUpload(filename: string, text: string, concepts: any[]) {
+    try {
+        console.log('🧬 ELFIN++ onUpload triggered:', {
+            filename,
+            conceptCount: concepts.length,
+            textLength: text.length
+        });
+        
+        return true;
+    } catch (err) {
+        console.warn('ELFIN++ hook failed:', err);
+        return false;
+    }
+}
+
+export const POST: RequestHandler = async ({ request, locals }) => {
+    // 🛡️ Security: Check admin role
+    if (!locals.user || locals.user.role !== 'admin') {
+        throw error(403, 'Admin access required for document uploads');
+    }
+    
+    try {
+        const formData = await request.formData();
+        const file = formData.get('file') as File;
+        
+        if (!file) {
+            throw error(400, 'No file uploaded');
+        }
+        
+        // 🛡️ Security: Validate file type and size
+        const maxSize = 50 * 1024 * 1024; // 50MB limit
+        if (file.size > maxSize) {
+            throw error(400, 'File too large (max 50MB)');
+        }
+        
+        const allowedTypes = ['application/pdf', 'text/plain', 'application/json'];
+        if (!allowedTypes.includes(file.type) && !file.name.toLowerCase().endsWith('.pdf')) {
+            throw error(400, 'Unsupported file type. PDF, TXT, and JSON files only.');
+        }
+        
+        // 🛡️ Security: Sanitize filename
+        const sanitizedFilename = file.name.replace(/[^a-zA-Z0-9.-]/g, '_').substring(0, 100);
+        const timestamp = Date.now();
+        const uniqueFilename = `${timestamp}_${sanitizedFilename}`;
+        
+        // Create storage directory
+        const uploadDir = join(process.cwd(), 'data', 'sphere', 'admin');
+        if (!existsSync(uploadDir)) {
+            await mkdir(uploadDir, { recursive: true });
+        }
+        
+        // Save file to disk
+        const filePath = join(uploadDir, uniqueFilename);
+        const arrayBuffer = await file.arrayBuffer();
+        await writeFile(filePath, new Uint8Array(arrayBuffer));
+        
+        // Extract text content
+        let extractedText: string;
+        if (file.type === 'application/pdf' || file.name.toLowerCase().endsWith('.pdf')) {
+            extractedText = await extractTextFromPDF(arrayBuffer);
+        } else if (file.type === 'text/plain') {
+            extractedText = new TextDecoder().decode(arrayBuffer);
+        } else if (file.type === 'application/json') {
+            extractedText = `JSON Document: ${file.name}\
+` + new TextDecoder().decode(arrayBuffer);
+        } else {
+            extractedText = `Document: ${file.name}\
+Binary content - ${file.size} bytes`;
+        }
+        
+        console.log('🧬 🔬 STARTING ENHANCED SERVER EXTRACTION');
+        console.log('🧬 Document:', file.name, 'Size:', file.size, 'Type:', file.type);
+        
+        // 🧬 ENHANCED CONCEPT EXTRACTION WITH PYTHON PIPELINE
+        const extractionResult = await extractConceptsEnhanced(arrayBuffer, file.name);
+        
+        console.log('🎯 🧬 ENHANCED EXTRACTION COMPLETE:', extractionResult.concepts.length, 'concepts found');
+        console.log('🧠 Method:', extractionResult.extractionMethod);
+        console.log('🧠 Concepts preview:', extractionResult.concepts.slice(0, 5));
+        
+        // Trigger ELFIN++ processing
+        const elfinTriggered = triggerELFINUpload(file.name, extractedText, extractionResult.concepts);
+        
+        // Prepare response data
+        const documentData = {
+            id: `doc_${timestamp}`,
+            filename: file.name,
+            uniqueFilename,
+            size: file.size,
+            type: file.type,
+            concepts: Array.isArray(extractionResult.concepts) ? extractionResult.concepts : [],
+            extractedText: extractedText.substring(0, 500) + (extractedText.length > 500 ? '...' : ''),
+            uploadedAt: new Date().toISOString(),
+            uploadedBy: locals.user.name,
+            filePath,
+            elfinTriggered,
+            summary: `Enhanced extraction found ${extractionResult.concepts.length} concepts using ${extractionResult.extractionMethod}`,
+            extractionMethod: extractionResult.extractionMethod,
+            enhancedExtraction: true,
+            processingTime: extractionResult.processingTime,
+            semanticConcepts: extractionResult.semanticConcepts,
+            boostedConcepts: extractionResult.boostedConcepts,
+            pythonPipelineUsed: extractionResult.extractionMethod.includes('python')
+        };
+        
+        // Log successful upload
+        console.log('📚 🧬 ENHANCED SERVER UPLOAD COMPLETE:', {
+            filename: file.name,
+            size: file.size,
+            concepts: extractionResult.concepts.length,
+            method: extractionResult.extractionMethod,
+            processingTime: extractionResult.processingTime,
+            pythonUsed: extractionResult.extractionMethod.includes('python'),
+            elfinTriggered
+        });
+        
+        return json({
+            success: true,
+            message: `Document uploaded and processed with enhanced extraction (${extractionResult.extractionMethod})`,
+            document: documentData
+        });
+        
+    } catch (err) {
+        console.error('🧬 Enhanced server upload failed:', err);
+        
+        if (err instanceof Error && err.message.includes('Admin access required')) {
+            throw err;
+        }
+        
+        throw error(500, 'Upload processing failed: ' + (err instanceof Error ? err.message : 'Unknown error'));
+    }
+};
+`
+}

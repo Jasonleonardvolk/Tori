@@ -1,0 +1,884 @@
+📄 $types.d.ts
+   📍 tori_ui_svelte\.svelte-kit\types\src\routes\vault\$types.d.ts
+   ⏰ 05/29 14:06  📊 1.0 KB
+
+📄 route_meta_data.json
+   📍 tori_ui_svelte\.svelte-kit\types\route_meta_data.json
+   ⏰ 05/29 14:06  📊 464 B
+
+📄 $types.d.ts
+   📍 tori_ui_svelte\.svelte-kit\types\src\routes\upload\$types.d.ts
+   ⏰ 05/29 14:06  📊 430 B
+
+📄 proxy+page.server.ts
+   📍 tori_ui_svelte\.svelte-kit\types\src\routes\login\proxy+page.server.ts
+   ⏰ 05/29 14:06  📊 1.8 KB
+
+📄 $types.d.ts
+   📍 tori_ui_svelte\.svelte-kit\types\src\routes\login\$types.d.ts
+   ⏰ 05/29 14:06  📊 2.5 KB
+
+📄 $types.d.ts
+   📍 tori_ui_svelte\.svelte-kit\types\src\routes\logout\$types.d.ts
+   ⏰ 05/29 14:06  📊 430 B
+
+📄 $types.d.ts
+   📍 tori_ui_svelte\.svelte-kit\types\src\routes\elfin\$types.d.ts
+   ⏰ 05/29 14:06  📊 1.0 KB
+
+📄 $types.d.ts
+   📍 tori_ui_svelte\.svelte-kit\types\src\routes\.well-known\$types.d.ts
+   ⏰ 05/29 14:06  📊 435 B
+
+📄 $types.d.ts
+   📍 tori_ui_svelte\.svelte-kit\types\src\routes\$types.d.ts
+   ⏰ 05/29 14:06  📊 2.6 KB
+
+📄 proxy+layout.server.ts
+   📍 tori_ui_svelte\.svelte-kit\types\src\routes\proxy+layout.server.ts
+   ⏰ 05/29 14:06  📊 178 B
+
+📄 proxy+page.server.ts
+   📍 tori_ui_svelte\.svelte-kit\types\src\routes\proxy+page.server.ts
+   ⏰ 05/29 14:06  📊 354 B
+
+📄 internal.js
+   📍 tori_ui_svelte\.svelte-kit\generated\server\internal.js
+   ⏰ 05/29 14:06  📊 4.8 KB
+
+📄 root.svelte
+   📍 tori_ui_svelte\.svelte-kit\generated\root.svelte
+   ⏰ 05/29 14:06  📊 1.4 KB
+
+📄 5.js
+   📍 tori_ui_svelte\.svelte-kit\generated\client\nodes\5.js
+   ⏰ 05/29 14:06  📊 81 B
+
+📄 0.js
+   📍 tori_ui_svelte\.svelte-kit\generated\client\nodes\0.js
+   ⏰ 05/29 14:06  📊 77 B
+
+📄 matchers.js
+   📍 tori_ui_svelte\.svelte-kit\generated\client\matchers.js
+   ⏰ 05/29 14:06  📊 27 B
+
+📄 app.js
+   📍 tori_ui_svelte\.svelte-kit\generated\client\app.js
+   ⏰ 05/29 14:06  📊 501 B
+
+📄 1.js
+   📍 tori_ui_svelte\.svelte-kit\generated\client\nodes\1.js
+   ⏰ 05/29 14:06  📊 114 B
+
+📄 3.js
+   📍 tori_ui_svelte\.svelte-kit\generated\client\nodes\3.js
+   ⏰ 05/29 14:06  📊 81 B
+
+📄 2.js
+   📍 tori_ui_svelte\.svelte-kit\generated\client\nodes\2.js
+   ⏰ 05/29 14:06  📊 75 B
+
+📄 4.js
+   📍 tori_ui_svelte\.svelte-kit\generated\client\nodes\4.js
+   ⏰ 05/29 14:06  📊 81 B
+
+📄 ambient.d.ts
+   📍 tori_ui_svelte\.svelte-kit\ambient.d.ts
+   ⏰ 05/29 14:06  📊 9.0 KB
+
+📄 tsconfig.json
+   📍 tori_ui_svelte\.svelte-kit\tsconfig.json
+   ⏰ 05/29 14:06  📊 1.2 KB
+
+📄 concept_events.log
+   📍 concept_events.log
+   ⏰ 05/29 14:06  📊 1.7 KB
+
+📄 +server.ts
+   📍 tori_ui_svelte\src\routes\upload\+server.ts
+   ⏰ 05/29 14:04  📊 10.2 KB
+
+📄 psi_trajectory.json
+   📍 psi_trajectory.json
+   ⏰ 05/29 13:50  📊 122.5 KB
+
+📄 concept_mesh_data.json
+   📍 concept_mesh_data.json
+   ⏰ 05/29 13:50  📊 7.7 MB
+
+📄 pipeline.cpython-311.pyc
+   📍 ingest_pdf\__pycache__\pipeline.cpython-311.pyc
+   ⏰ 05/29 13:21  📊 46.2 KB
+
+📄 pipeline.py
+   📍 ingest_pdf\pipeline.py
+   ⏰ 05/29 13:17  📊 32.2 KB
+
+📄 INFO     Started server process.txt
+   📍 docs\INFO     Started server process.txt
+   ⏰ 05/29 13:08  📊 11.2 KB
+
+📄 current_srcfolder.zip
+   📍 tori_ui_svelte\src\current_srcfolder.zip
+   ⏰ 05/29 12:57  📊 218.7 KB
+
+📄 api_port.json
+   📍 api_port.json
+   ⏰ 05/29 12:35  📊 122 B
+
+📄 check_apis.py
+   📍 check_apis.py
+   ⏰ 05/29 11:54  📊 3.0 KB
+
+📄 START_SIMPLE_API.bat
+   📍 START_SIMPLE_API.bat
+   ⏰ 05/29 11:54  📊 436 B
+
+📄 simple_dynamic_api.py
+   📍 simple_dynamic_api.py
+   ⏰ 05/29 11:54  📊 7.0 KB
+
+📄 test_python_extraction.py
+   📍 test_python_extraction.py
+   ⏰ 05/29 11:41  📊 6.2 KB
+
+📄 debug_results.py
+   📍 debug_results.py
+   ⏰ 05/29 11:40  📊 2.2 KB
+
+📄 test_windows_timeout.py
+   📍 test_windows_timeout.py
+   ⏰ 05/29 11:25  📊 4.2 KB
+
+📄 START_WINDOWS_PROTECTED.bat
+   📍 START_WINDOWS_PROTECTED.bat
+   ⏰ 05/29 11:24  📊 483 B
+
+📄 windows_protected_server.py
+   📍 windows_protected_server.py
+   ⏰ 05/29 11:24  📊 7.0 KB
+
+📄 DEBUG_MENU.bat
+   📍 DEBUG_MENU.bat
+   ⏰ 05/29 11:16  📊 77 B
+
+📄 debug_menu.py
+   📍 debug_menu.py
+   ⏰ 05/29 11:16  📊 2.9 KB
+
+📄 START_PROTECTED.bat
+   📍 START_PROTECTED.bat
+   ⏰ 05/29 11:15  📊 523 B
+
+📄 protected_server.py
+   📍 protected_server.py
+   ⏰ 05/29 11:15  📊 5.5 KB
+
+📄 memory_crash_capture.py
+   📍 memory_crash_capture.py
+   ⏰ 05/29 11:15  📊 5.1 KB
+
+📄 CAPTURE_CRASH.bat
+   📍 CAPTURE_CRASH.bat
+   ⏰ 05/29 11:14  📊 478 B
+
+📄 direct_crash_capture.py
+   📍 direct_crash_capture.py
+   ⏰ 05/29 11:14  📊 3.8 KB
+
+📄 capture_crash.py
+   📍 capture_crash.py
+   ⏰ 05/29 11:14  📊 4.8 KB
+
+📄 cleanup_ports.py
+   📍 cleanup_ports.py
+   ⏰ 05/29 11:02  📊 1.6 KB
+
+📄 START_DYNAMIC_API.bat
+   📍 START_DYNAMIC_API.bat
+   ⏰ 05/29 11:02  📊 445 B
+
+📄 dynamicApi.ts
+   📍 tori_ui_svelte\src\lib\dynamicApi.ts
+   ⏰ 05/29 11:01  📊 4.2 KB
+
+📄 start_dynamic_api.py
+   📍 start_dynamic_api.py
+   ⏰ 05/29 11:00  📊 4.3 KB
+
+📄 update_port.py
+   📍 update_port.py
+   ⏰ 05/29 10:59  📊 1.5 KB
+
+📄 .uvicornignore
+   📍 .uvicornignore
+   ⏰ 05/29 10:55  📊 106 B
+
+📄 cognitive_interface.cpython-311.pyc
+   📍 ingest_pdf\__pycache__\cognitive_interface.cpython-311.pyc
+   ⏰ 05/29 10:53  📊 16.5 KB
+
+📄 time_context.cpython-311.pyc
+   📍 ingest_pdf\__pycache__\time_context.cpython-311.pyc
+   ⏰ 05/29 10:53  📊 10.9 KB
+
+📄 concept_metadata.cpython-311.pyc
+   📍 ingest_pdf\__pycache__\concept_metadata.cpython-311.pyc
+   ⏰ 05/29 10:53  📊 13.6 KB
+
+📄 concept_logger.cpython-311.pyc
+   📍 ingest_pdf\__pycache__\concept_logger.cpython-311.pyc
+   ⏰ 05/29 10:53  📊 24.1 KB
+
+📄 pipeline_validator.cpython-311.pyc
+   📍 ingest_pdf\__pycache__\pipeline_validator.cpython-311.pyc
+   ⏰ 05/29 10:53  📊 13.2 KB
+
+📄 phase_walk.cpython-311.pyc
+   📍 ingest_pdf\__pycache__\phase_walk.cpython-311.pyc
+   ⏰ 05/29 10:53  📊 14.8 KB
+
+📄 memory_gating.cpython-311.pyc
+   📍 ingest_pdf\__pycache__\memory_gating.cpython-311.pyc
+   ⏰ 05/29 10:53  📊 12.8 KB
+
+📄 source_validator.cpython-311.pyc
+   📍 ingest_pdf\__pycache__\source_validator.cpython-311.pyc
+   ⏰ 05/29 10:53  📊 14.0 KB
+
+📄 persistence.cpython-311.pyc
+   📍 ingest_pdf\__pycache__\persistence.cpython-311.pyc
+   ⏰ 05/29 10:53  📊 18.6 KB
+
+📄 models.cpython-311.pyc
+   📍 ingest_pdf\__pycache__\models.cpython-311.pyc
+   ⏰ 05/29 10:53  📊 16.6 KB
+
+📄 threshold_config.cpython-311.pyc
+   📍 ingest_pdf\__pycache__\threshold_config.cpython-311.pyc
+   ⏰ 05/29 10:53  📊 5.4 KB
+
+📄 scoring.cpython-311.pyc
+   📍 ingest_pdf\__pycache__\scoring.cpython-311.pyc
+   ⏰ 05/29 10:53  📊 12.3 KB
+
+📄 broadcast.cpython-311.pyc
+   📍 alan_backend\banksy\__pycache__\broadcast.cpython-311.pyc
+   ⏰ 05/29 10:53  📊 3.8 KB
+
+📄 clock.cpython-311.pyc
+   📍 alan_backend\banksy\__pycache__\clock.cpython-311.pyc
+   ⏰ 05/29 10:53  📊 1.9 KB
+
+📄 banksy_spin.cpython-311.pyc
+   📍 alan_backend\banksy\__pycache__\banksy_spin.cpython-311.pyc
+   ⏰ 05/29 10:53  📊 5.6 KB
+
+📄 __init__.cpython-311.pyc
+   📍 alan_backend\banksy\__pycache__\__init__.cpython-311.pyc
+   ⏰ 05/29 10:53  📊 1.3 KB
+
+📄 test_oscillator_import.py
+   📍 test_oscillator_import.py
+   ⏰ 05/29 10:51  📊 2.2 KB
+
+📄 __init__.py
+   📍 alan_backend\banksy\__init__.py
+   ⏰ 05/29 10:51  📊 1.4 KB
+
+📄 banksy_spin.py
+   📍 alan_backend\banksy\banksy_spin.py
+   ⏰ 05/29 10:51  📊 5.3 KB
+
+📄 alan_psi_sync_bridge.cpython-311.pyc
+   📍 alan_backend\banksy\__pycache__\alan_psi_sync_bridge.cpython-311.pyc
+   ⏰ 05/29 10:35  📊 14.3 KB
+
+📄 koopman_estimator.cpython-311.pyc
+   📍 ingest_pdf\__pycache__\koopman_estimator.cpython-311.pyc
+   ⏰ 05/29 10:35  📊 21.9 KB
+
+📄 psi_sync_monitor.cpython-311.pyc
+   📍 alan_backend\banksy\__pycache__\psi_sync_monitor.cpython-311.pyc
+   ⏰ 05/29 10:35  📊 27.2 KB
+
+📄 psi_koopman_integration.cpython-311.pyc
+   📍 alan_backend\banksy\__pycache__\psi_koopman_integration.cpython-311.pyc
+   ⏰ 05/29 10:35  📊 28.2 KB
+
+📄 __init__.cpython-311.pyc
+   📍 alan_backend\__pycache__\__init__.cpython-311.pyc
+   ⏰ 05/29 10:35  📊 165 B
+
+📄 test_config.py
+   📍 test_config.py
+   ⏰ 05/29 10:18  📊 1.9 KB
+
+📄 config.py
+   📍 alan_backend\config.py
+   ⏰ 05/29 10:17  📊 2.7 KB
+
+📄 __init__.py
+   📍 alan_backend\__init__.py
+   ⏰ 05/29 10:17  📊 23 B
+
+📄 config.yaml
+   📍 banksy\config.yaml
+   ⏰ 05/29 10:17  📊 1.2 KB
+
+📄 main.cpython-311.pyc
+   📍 ingest_pdf\__pycache__\main.cpython-311.pyc
+   ⏰ 05/29 10:08  📊 2.5 KB
+
+📄 main.py
+   📍 ingest_pdf\main.py
+   ⏰ 05/29 10:08  📊 1.3 KB
+
+📄 add_shutdown.py
+   📍 add_shutdown.py
+   ⏰ 05/29 09:41  📊 3.6 KB
+
+📄 shutdown_handlers.py
+   📍 shutdown_handlers.py
+   ⏰ 05/29 09:40  📊 1.5 KB
+
+📄 START_API.bat
+   📍 START_API.bat
+   ⏰ 05/29 09:40  📊 595 B
+
+📄 EXPORT_FIXES_COMPLETE.md
+   📍 EXPORT_FIXES_COMPLETE.md
+   ⏰ 05/29 09:33  📊 1.3 KB
+
+📄 verify_exports.py
+   📍 verify_exports.py
+   ⏰ 05/29 09:33  📊 2.4 KB
+
+📄 holographicMemory.ts
+   📍 tori_ui_svelte\src\lib\cognitive\holographicMemory.ts
+   ⏰ 05/29 09:32  📊 18.3 KB
+
+📄 fix_exports.py
+   📍 fix_exports.py
+   ⏰ 05/29 09:30  📊 1.9 KB
+
+📄 main.py
+   📍 main.py
+   ⏰ 05/29 09:08  📊 13.1 KB
+
+📄 wheresthebeef.txt
+   📍 docs\wheresthebeef.txt
+   ⏰ 05/29 08:49  📊 26.0 KB
+
+📄 python_extraction_api.py
+   📍 python_extraction_api.py
+   ⏰ 05/29 08:25  📊 8.4 KB
+
+📄 test_api_connectivity.py
+   📍 test_api_connectivity.py
+   ⏰ 05/29 08:10  📊 1.8 KB
+
+📄 START_PYTHON_API.bat
+   📍 START_PYTHON_API.bat
+   ⏰ 05/29 08:01  📊 1.4 KB
+
+📄 test_python_api.py
+   📍 test_python_api.py
+   ⏰ 05/29 07:57  📊 2.1 KB
+
+📄 fix_pdf_limit.js
+   📍 fix_pdf_limit.js
+   ⏰ 05/29 07:32  📊 987 B
+
+📄 debug_extraction.js
+   📍 debug_extraction.js
+   ⏰ 05/29 07:27  📊 2.1 KB
+
+📄 extractConceptsFromDocument.cpython-311.pyc
+   📍 ingest_pdf\__pycache__\extractConceptsFromDocument.cpython-311.pyc
+   ⏰ 05/29 07:00  📊 18.3 KB
+
+📄 test_pdf_extraction.py
+   📍 test_pdf_extraction.py
+   ⏰ 05/29 06:58  📊 4.4 KB
+
+📄 2501.12881v1.txt
+   📍 docs\2501.12881v1.txt
+   ⏰ 05/29 06:46  📊 3.4 KB
+
+📄 README_COMPLETE_SYSTEM.md
+   📍 README_COMPLETE_SYSTEM.md
+   ⏰ 05/28 18:44  📊 9.5 KB
+
+📄 demo_complete_system.py
+   📍 demo_complete_system.py
+   ⏰ 05/28 18:43  📊 11.6 KB
+
+📄 setup_video_extraction.py
+   📍 setup_video_extraction.py
+   ⏰ 05/28 18:42  📊 10.0 KB
+
+📄 extractConceptsFromVideo.py
+   📍 ingest_pdf\extractConceptsFromVideo.py
+   ⏰ 05/28 18:41  📊 23.9 KB
+
+📄 Multimodal Video Concept Extraction.txt
+   📍 docs\Multimodal Video Concept Extraction.txt
+   ⏰ 05/28 18:38  📊 43.3 KB
+
+📄 demo_universal_extraction.py
+   📍 demo_universal_extraction.py
+   ⏰ 05/28 18:17  📊 9.8 KB
+
+📄 setup_universal_extraction.py
+   📍 setup_universal_extraction.py
+   ⏰ 05/28 18:16  📊 7.1 KB
+
+📄 extractConceptsFromDocument.py
+   📍 ingest_pdf\extractConceptsFromDocument.py
+   ⏰ 05/28 18:11  📊 15.3 KB
+
+📄 Universal Concept Extraction Module.txt
+   📍 docs\Universal Concept Extraction Module.txt
+   ⏰ 05/28 18:08  📊 23.0 KB
+
+📄 PipelineExtractionImprovements.txt
+   📍 docs\PipelineExtractionImprovements.txt
+   ⏰ 05/28 17:51  📊 101.3 KB
+
+📄 ScholarSpherePanel.svelte
+   📍 tori_ui_svelte\src\lib\components\ScholarSpherePanel.svelte
+   ⏰ 05/28 17:11  📊 15.5 KB
+
+📄 ingestionHelpers.ts
+   📍 tori_ui_svelte\src\lib\cognitive\ingestionHelpers.ts
+   ⏰ 05/28 17:02  📊 9.5 KB
+
+📄 demo_enhanced_pipeline.py
+   📍 demo_enhanced_pipeline.py
+   ⏰ 05/28 16:29  📊 11.9 KB
+
+📄 ghostCollective.ts
+   📍 tori_ui_svelte\src\lib\cognitive\ghostCollective.ts
+   ⏰ 05/28 16:08  📊 15.8 KB
+
+📄 src.zip
+   📍 tori_ui_svelte\src\src.zip
+   ⏰ 05/28 16:01  📊 211.9 KB
+
+📄 conceptMesh.ts
+   📍 lib\stores\conceptMesh.ts
+   ⏰ 05/28 15:55  📊 22.8 KB
+
+📄 conceptMesh.ts
+   📍 tori_ui_svelte\src\lib\stores\conceptMesh.ts
+   ⏰ 05/28 15:54  📊 22.8 KB
+
+📄 README_CLEAN_PIPELINE.md
+   📍 README_CLEAN_PIPELINE.md
+   ⏰ 05/28 15:45  📊 5.1 KB
+
+📄 demo_clean_pipeline.py
+   📍 demo_clean_pipeline.py
+   ⏰ 05/28 15:44  📊 5.8 KB
+
+📄 ingest_pdf.zip
+   📍 ingest_pdf\ingest_pdf.zip
+   ⏰ 05/28 15:03  📊 299.2 KB
+
+📄 ConceptDebugPanel.svelte
+   📍 lib\components\ConceptDebugPanel.svelte
+   ⏰ 05/28 14:51  📊 3.7 KB
+
+📄 ConceptDebugPanel.svelte
+   📍 tori_ui_svelte\src\lib\components\ConceptDebugPanel.svelte
+   ⏰ 05/28 14:51  📊 3.7 KB
+
+📄 +page.svelte
+   📍 routes\+page.svelte
+   ⏰ 05/28 14:39  📊 26.0 KB
+
+📄 +page.svelte
+   📍 tori_ui_svelte\src\routes\+page.svelte
+   ⏰ 05/28 14:39  📊 26.0 KB
+
+📄 ConceptInspector.svelte
+   📍 lib\components\ConceptInspector.svelte
+   ⏰ 05/28 14:22  📊 3.7 KB
+
+📄 ConceptInspector.svelte
+   📍 tori_ui_svelte\src\lib\components\ConceptInspector.svelte
+   ⏰ 05/28 14:22  📊 3.7 KB
+
+📄 onUpload.ts
+   📍 lib\elfin\scripts\onUpload.ts
+   ⏰ 05/28 14:13  📊 5.8 KB
+
+📄 onUpload.ts
+   📍 tori_ui_svelte\src\lib\elfin\scripts\onUpload.ts
+   ⏰ 05/28 14:13  📊 5.8 KB
+
+📄 dynamic_concept_extractor.py
+   📍 ingest-bus\workers\dynamic_concept_extractor.py
+   ⏰ 05/28 14:02  📊 38.5 KB
+
+📄 types.ts
+   📍 lib\stores\types.ts
+   ⏰ 05/28 13:27  📊 5.9 KB
+
+📄 types.ts
+   📍 tori_ui_svelte\src\lib\stores\types.ts
+   ⏰ 05/28 13:27  📊 5.9 KB
+
+📄 clustering_monitor.log
+   📍 ingest_pdf\clustering_monitor.log
+   ⏰ 05/28 13:23  📊 952 B
+
+📄 concept_scoring_integration.py
+   📍 ingest_pdf\concept_scoring_integration.py
+   ⏰ 05/28 13:23  📊 583 B
+
+📄 clustering_integration_example.ts
+   📍 ingest_pdf\clustering_integration_example.ts
+   ⏰ 05/28 13:23  📊 2.2 KB
+
+📄 clustering_demo_results.json
+   📍 ingest_pdf\clustering_demo_results.json
+   ⏰ 05/28 13:23  📊 2.1 KB
+
+📄 clustering_history.json
+   📍 ingest_pdf\clustering_history.json
+   ⏰ 05/28 13:23  📊 392 B
+
+📄 clustering_monitor.cpython-311.pyc
+   📍 ingest_pdf\__pycache__\clustering_monitor.cpython-311.pyc
+   ⏰ 05/28 13:23  📊 23.9 KB
+
+📄 clustering_pipeline.cpython-311.pyc
+   📍 ingest_pdf\__pycache__\clustering_pipeline.cpython-311.pyc
+   ⏰ 05/28 13:23  📊 33.3 KB
+
+📄 testing_config.json
+   📍 ingest_pdf\config\testing_config.json
+   ⏰ 05/28 13:23  📊 1.8 KB
+
+📄 development_config.json
+   📍 ingest_pdf\config\development_config.json
+   ⏰ 05/28 13:23  📊 1.8 KB
+
+📄 production_config.json
+   📍 ingest_pdf\config\production_config.json
+   ⏰ 05/28 13:23  📊 1.9 KB
+
+📄 clustering_config.cpython-311.pyc
+   📍 ingest_pdf\__pycache__\clustering_config.cpython-311.pyc
+   ⏰ 05/28 13:23  📊 21.7 KB
+
+📄 TORI_CLUSTERING_COMPLETE_SUMMARY.md
+   📍 TORI_CLUSTERING_COMPLETE_SUMMARY.md
+   ⏰ 05/28 13:19  📊 11.9 KB
+
+📄 INTEGRATION_GUIDE.md
+   📍 lib\cognitive\INTEGRATION_GUIDE.md
+   ⏰ 05/28 13:18  📊 9.2 KB
+
+📄 INTEGRATION_GUIDE.md
+   📍 tori_ui_svelte\src\lib\cognitive\INTEGRATION_GUIDE.md
+   ⏰ 05/28 13:18  📊 9.2 KB
+
+📄 conceptScoring_enhanced.ts
+   📍 lib\cognitive\conceptScoring_enhanced.ts
+   ⏰ 05/28 13:17  📊 14.4 KB
+
+📄 conceptScoring_enhanced.ts
+   📍 tori_ui_svelte\src\lib\cognitive\conceptScoring_enhanced.ts
+   ⏰ 05/28 13:17  📊 14.4 KB
+
+📄 conceptClusteringBridge.js
+   📍 lib\cognitive\conceptClusteringBridge.js
+   ⏰ 05/28 13:15  📊 12.3 KB
+
+📄 conceptClusteringBridge.js
+   📍 tori_ui_svelte\src\lib\cognitive\conceptClusteringBridge.js
+   ⏰ 05/28 13:15  📊 12.3 KB
+
+📄 setup_clustering_system_fixed.bat
+   📍 ingest_pdf\setup_clustering_system_fixed.bat
+   ⏰ 05/28 13:13  📊 8.0 KB
+
+📄 integration_example.py
+   📍 ingest_pdf\integration_example.py
+   ⏰ 05/28 13:09  📊 544 B
+
+📄 demo_output.txt
+   📍 ingest_pdf\demo_output.txt
+   ⏰ 05/28 13:09  📊 525 B
+
+📄 clustering_enhanced.cpython-311.pyc
+   📍 ingest_pdf\__pycache__\clustering_enhanced.cpython-311.pyc
+   ⏰ 05/28 13:09  📊 20.9 KB
+
+📄 clustering.cpython-311.pyc
+   📍 ingest_pdf\__pycache__\clustering.cpython-311.pyc
+   ⏰ 05/28 13:09  📊 14.3 KB
+
+📄 IMPLEMENTATION_COMPLETE.md
+   📍 ingest_pdf\IMPLEMENTATION_COMPLETE.md
+   ⏰ 05/28 13:05  📊 7.6 KB
+
+📄 enhanced_clustering_integration.py
+   📍 ingest_pdf\enhanced_clustering_integration.py
+   ⏰ 05/28 13:04  📊 13.5 KB
+
+📄 setup_clustering_system.bat
+   📍 ingest_pdf\setup_clustering_system.bat
+   ⏰ 05/28 13:03  📊 6.1 KB
+
+📄 clustering_pipeline.py
+   📍 ingest_pdf\clustering_pipeline.py
+   ⏰ 05/28 13:02  📊 23.7 KB
+
+📄 clustering_config.py
+   📍 ingest_pdf\clustering_config.py
+   ⏰ 05/28 13:00  📊 15.4 KB
+
+📄 clustering_monitor.py
+   📍 ingest_pdf\clustering_monitor.py
+   ⏰ 05/28 12:59  📊 15.3 KB
+
+📄 run_clustering_integration_test.bat
+   📍 ingest_pdf\run_clustering_integration_test.bat
+   ⏰ 05/28 12:57  📊 2.0 KB
+
+📄 run_clustering_demo.bat
+   📍 ingest_pdf\run_clustering_demo.bat
+   ⏰ 05/28 12:57  📊 1.1 KB
+
+📄 5. Evaluation Harness.txt
+   📍 docs\5. Evaluation Harness.txt
+   ⏰ 05/28 12:54  📊 7.0 KB
+
+📄 README_CLUSTERING.md
+   📍 ingest_pdf\README_CLUSTERING.md
+   ⏰ 05/28 12:54  📊 16.1 KB
+
+📄 4. UI Visualization and Filtering (.txt
+   📍 docs\4. UI Visualization and Filtering (.txt
+   ⏰ 05/28 12:54  📊 6.2 KB
+
+📄 3. Concept Lineage and Traceability.txt
+   📍 docs\3. Concept Lineage and Traceability.txt
+   ⏰ 05/28 12:53  📊 2.5 KB
+
+📄 clustering_demo.py
+   📍 ingest_pdf\clustering_demo.py
+   ⏰ 05/28 12:51  📊 14.9 KB
+
+📄 conceptScoring.ts
+   📍 ingest_pdf\conceptScoring.ts
+   ⏰ 05/28 12:50  📊 14.3 KB
+
+📄 2. Composite Scoring and Ranking.txt
+   📍 docs\2. Composite Scoring and Ranking.txt
+   ⏰ 05/28 12:48  📊 7.1 KB
+
+📄 clusterBenchmark.ts
+   📍 ingest_pdf\clusterBenchmark.ts
+   ⏰ 05/28 12:48  📊 20.3 KB
+
+📄 clustering.py
+   📍 ingest_pdf\clustering.py
+   ⏰ 05/28 12:46  📊 10.6 KB
+
+📄 clustering_enhanced.py
+   📍 ingest_pdf\clustering_enhanced.py
+   ⏰ 05/28 12:45  📊 14.6 KB
+
+📄 conceptEvaluator.ts
+   📍 lib\cognitive\conceptEvaluator.ts
+   ⏰ 05/28 12:39  📊 7.3 KB
+
+📄 conceptEvaluator.ts
+   📍 tori_ui_svelte\src\lib\cognitive\conceptEvaluator.ts
+   ⏰ 05/28 12:39  📊 7.3 KB
+
+📄 ConceptInspector.svelte
+   📍 lib\cognitive\ConceptInspector.svelte
+   ⏰ 05/28 12:38  📊 3.3 KB
+
+📄 ConceptInspector.svelte
+   📍 tori_ui_svelte\src\lib\cognitive\ConceptInspector.svelte
+   ⏰ 05/28 12:38  📊 3.3 KB
+
+📄 conceptScoring.ts
+   📍 lib\cognitive\conceptScoring.ts
+   ⏰ 05/28 12:36  📊 9.3 KB
+
+📄 conceptScoring.ts
+   📍 tori_ui_svelte\src\lib\cognitive\conceptScoring.ts
+   ⏰ 05/28 12:36  📊 9.3 KB
+
+📄 persistence.ts
+   📍 lib\stores\persistence.ts
+   ⏰ 05/28 12:19  📊 5.9 KB
+
+📄 persistence.ts
+   📍 tori_ui_svelte\src\lib\stores\persistence.ts
+   ⏰ 05/28 12:19  📊 5.9 KB
+
+📄 Analyzed.txt
+   📍 docs\Analyzed.txt
+   ⏰ 05/28 11:51  📊 19.2 KB
+
+📄 cognitiveEngine.ts
+   📍 lib\cognitive\cognitiveEngine.ts
+   ⏰ 05/28 11:05  📊 18.4 KB
+
+📄 cognitiveEngine.ts
+   📍 tori_ui_svelte\src\lib\cognitive\cognitiveEngine.ts
+   ⏰ 05/28 11:05  📊 18.4 KB
+
+📄 Patches you listed are essential.txt
+   📍 docs\Patches you listed are essential.txt
+   ⏰ 05/28 10:50  📊 1.8 KB
+
+📄 pipeline_with_first_patch.py
+   📍 ingest_pdf\pipeline_with_first_patch.py
+   ⏰ 05/28 10:41  📊 9.7 KB
+
+📄 Patch Bundle – Fixing Concept Inges.txt
+   📍 docs\Patch Bundle – Fixing Concept Inges.txt
+   ⏰ 05/28 10:35  📊 14.8 KB
+
+📄 extract.py
+   📍 ingest-bus\workers\extract.py
+   ⏰ 05/28 10:33  📊 31.9 KB
+
+📄 persistence.py
+   📍 ingest_pdf\persistence.py
+   ⏰ 05/28 10:30  📊 14.8 KB
+
+📄 models.py
+   📍 ingest_pdf\models.py
+   ⏰ 05/28 10:29  📊 12.7 KB
+
+📄 ingestion_health_monitor.py
+   📍 tools\ingestion_health_monitor.py
+   ⏰ 05/28 10:28  📊 21.7 KB
+
+📄 test_ingestion_pipeline.py
+   📍 tools\test_ingestion_pipeline.py
+   ⏰ 05/28 10:21  📊 22.9 KB
+
+📄 compare_ingestion_runs.py
+   📍 tools\compare_ingestion_runs.py
+   ⏰ 05/28 10:19  📊 18.1 KB
+
+📄 diagnose_concepts.ps1
+   📍 tools\diagnose_concepts.ps1
+   ⏰ 05/28 10:17  📊 12.6 KB
+
+📄 diagnose_concepts.py
+   📍 tools\diagnose_concepts.py
+   ⏰ 05/28 10:16  📊 13.1 KB
+
+📄 cognitive_interface.py
+   📍 ingest_pdf\cognitive_interface.py
+   ⏰ 05/28 10:15  📊 10.5 KB
+
+📄 pipeline_validator.py
+   📍 ingest_pdf\pipeline_validator.py
+   ⏰ 05/28 10:14  📊 10.1 KB
+
+📄 scoring.py
+   📍 ingest_pdf\scoring.py
+   ⏰ 05/28 10:13  📊 7.8 KB
+
+📄 concept_logger.py
+   📍 ingest_pdf\concept_logger.py
+   ⏰ 05/28 10:12  📊 20.3 KB
+
+📄 ingestion_settings.json
+   📍 config\ingestion_settings.json
+   ⏰ 05/28 10:10  📊 2.1 KB
+
+📄 threshold_config.py
+   📍 ingest_pdf\threshold_config.py
+   ⏰ 05/28 10:10  📊 5.1 KB
+
+📄 Triage Checklist and Patch Plan for.txt
+   📍 docs\Triage Checklist and Patch Plan for.txt
+   ⏰ 05/28 08:17  📊 41.0 KB
+
+📄 tori_ui_svelte.zip
+   📍 tori_ui_svelte\tori_ui_svelte.zip
+   ⏰ 05/28 07:39  📊 92.7 MB
+
+📄 conceptmesh.zip
+   📍 conceptmesh.zip
+   ⏰ 05/28 07:13  📊 171.3 KB
+
+📄 diagnose_concept_flow.ps1
+   📍 diagnose_concept_flow.ps1
+   ⏰ 05/28 05:32  📊 1.4 KB
+
+📄 TORI_diagnostics.zip
+   📍 export\TORI_diagnostics.zip
+   ⏰ 05/28 05:15  📊 861.7 KB
+
+📄 f.txt
+   📍 export\f.txt
+   ⏰ 05/28 05:13  📊 0 B
+
+📄 ingest-pdf.zip
+   📍 ingest-pdf.zip
+   ⏰ 05/28 04:50  📊 678.8 KB
+
+📄 production_file_handlers.py
+   📍 ingest-bus\workers\production_file_handlers.py
+   ⏰ 05/27 17:06  📊 71.1 KB
+
+📄 dynamic_concept_extractor.py
+   📍 ingest_pdf\dynamic_concept_extractor.py
+   ⏰ 05/27 16:51  📊 14.7 KB
+
+📄 ghost_ops_phase2_integration.py
+   📍 ingest-bus\src\ghost_ops_phase2_integration.py
+   ⏰ 05/27 16:04  📊 25.9 KB
+
+📄 README_VIDEO_PHASE2.md
+   📍 ingest-bus\README_VIDEO_PHASE2.md
+   ⏰ 05/27 16:03  📊 25.3 KB
+
+📄 loop_2025-05-27T12-30-00.json
+   📍 ingest-bus\logs\loopRecord\loop_2025-05-27T12-30-00.json
+   ⏰ 05/27 16:01  📊 1.0 KB
+
+📄 ghost_critic_segment_3.json
+   📍 ingest-bus\persona_snapshots\ghost_critic_segment_3.json
+   ⏰ 05/27 16:01  📊 1.9 KB
+
+📄 ghost_scholar_segment_3.json
+   📍 ingest-bus\persona_snapshots\ghost_scholar_segment_3.json
+   ⏰ 05/27 16:01  📊 1.8 KB
+
+📄 ghost_creator_segment_3.json
+   📍 ingest-bus\persona_snapshots\ghost_creator_segment_3.json
+   ⏰ 05/27 16:00  📊 1.5 KB
+
+📄 ghost_collective_segment_3.json
+   📍 ingest-bus\persona_snapshots\ghost_collective_segment_3.json
+   ⏰ 05/27 16:00  📊 1.3 KB
+
+📄 memoryDivergenceWatcher.py
+   📍 ingest-bus\src\lib\cognitive\memoryDivergenceWatcher.py
+   ⏰ 05/27 16:00  📊 45.1 KB
+
+📄 TrajectoryVisualizer.svelte
+   📍 ingest-bus\src\ui\components\TrajectoryVisualizer.svelte
+   ⏰ 05/27 15:56  📊 23.3 KB
+
+📄 ghostPersonaFeedbackRouter.py
+   📍 ingest-bus\src\agents\ghostPersonaFeedbackRouter.py
+   ⏰ 05/27 15:05  📊 23.5 KB
+
