@@ -1,0 +1,4271 @@
+
+
+2503.23278v2.pdf
+pdf
+
+
+Better Rewrite of MCP Server Architecture.txt
+43 lines
+
+txt
+
+
+BetterRewriteFollowup.txt
+120 lines
+
+txt
+
+THink it's time for some MCP architecture!!!  What is your opinion?
+
+Edit
+
+Engineered comprehensive MCP server architecture with security focus.
+
+18s
+
+
+
+
+Absolutely! Looking at the comprehensive architecture documents you've shared, I can see this is a perfect time to implement a robust MCP server architecture. The Secure Compute Cell (SCC) paradigm combined with the gap analysis provides an excellent blueprint.
+
+Let me create a comprehensive MCP server architecture implementation that incorporates:
+
+The SCC-based design with Trust Kernel
+All the missing components from the gap analysis
+Integration points for MCP:kaizen and MCP:celery
+Full security, observability, and orchestration layers
+I'll start with the core architecture implementation:
+
+
+MCP server implementation best practices 2025
+10 results
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Architected comprehensive MCP server design with cutting-edge components.
+
+9s
+
+
+
+
+Now I'll create a comprehensive MCP server architecture implementation that addresses all the security concerns and incorporates the best practices from 2025. This will be a production-ready system with full security, observability, and orchestration capabilities.
+
+typescript
+// mcp-server-architecture/src/core/types.ts
+
+/**
+ * Core type definitions for the MCP Server Architecture
+ * Implements Secure Compute Cell (SCC) paradigm with Trust Kernel
+ */
+
+export interface SecureComputeCell {
+  id: string;
+  name: string;
+  version: string;
+  manifest: SCCManifest;
+  code: SCCCode;
+  signature: string;
+  created: Date;
+  lastVerified: Date;
+  status: SCCStatus;
+}
+
+export interface SCCManifest {
+  identity: {
+    name: string;
+    hash: string;
+    version: string;
+    author: string;
+  };
+  description: string;
+  capabilities: {
+    tools: ToolDefinition[];
+    resources: ResourceDefinition[];
+    prompts: PromptTemplate[];
+  };
+  contracts: {
+    inputs: InputSchema[];
+    outputs: OutputSchema[];
+    sideEffects: SideEffect[];
+  };
+  security: {
+    permissions: Permission[];
+    resourceLimits: ResourceLimits;
+    networkAccess: NetworkPolicy;
+    sandboxLevel: SandboxLevel;
+  };
+  behavior: {
+    deterministic: boolean;
+    idempotent: boolean;
+    timeout: number;
+    retryPolicy: RetryPolicy;
+  };
+}
+
+export interface SCCCode {
+  entryPoint: string;
+  dependencies: Dependency[];
+  checksum: string;
+  runtime: RuntimeEnvironment;
+  compiledBinary?: Buffer;
+}
+
+export interface ToolDefinition {
+  name: string;
+  description: string;
+  schema: {
+    input: object;
+    output: object;
+  };
+  permissions: string[];
+  rateLimit?: RateLimit;
+}
+
+export interface ResourceDefinition {
+  type: 'database' | 'file' | 'api' | 'memory';
+  name: string;
+  endpoint: string;
+  accessPolicy: AccessPolicy;
+  caching?: CachePolicy;
+}
+
+export interface PromptTemplate {
+  id: string;
+  name: string;
+  template: string;
+  variables: Variable[];
+  context: string[];
+  validation: ValidationRule[];
+}
+
+export interface TrustKernel {
+  id: string;
+  version: string;
+  securityPolicies: SecurityPolicy[];
+  verificationKeys: VerificationKey[];
+  auditLog: AuditLog;
+  metrics: KernelMetrics;
+}
+
+export interface ExecutionContext {
+  id: string;
+  sessionId: string;
+  sccId: string;
+  input: any;
+  state: ExecutionState;
+  resources: ResourceAllocation;
+  monitoring: MonitoringContext;
+  sandbox: SandboxContext;
+}
+
+export enum SCCStatus {
+  PENDING = 'PENDING',
+  VERIFIED = 'VERIFIED',
+  ACTIVE = 'ACTIVE',
+  SUSPENDED = 'SUSPENDED',
+  REVOKED = 'REVOKED'
+}
+
+export enum SandboxLevel {
+  NONE = 0,
+  BASIC = 1,
+  STANDARD = 2,
+  STRICT = 3,
+  PARANOID = 4
+}
+
+export interface Permission {
+  resource: string;
+  actions: string[];
+  conditions?: Condition[];
+}
+
+export interface ResourceLimits {
+  memory: number;
+  cpu: number;
+  storage: number;
+  networkBandwidth: number;
+  executionTime: number;
+}
+
+export interface SecurityPolicy {
+  id: string;
+  name: string;
+  rules: SecurityRule[];
+  enforcement: 'STRICT' | 'PERMISSIVE';
+}
+
+export interface AuditLog {
+  entries: AuditEntry[];
+  retentionDays: number;
+  encryption: EncryptionConfig;
+}
+
+export interface MonitoringContext {
+  metricsCollector: MetricsCollector;
+  tracer: Tracer;
+  profiler: Profiler;
+  anomalyDetector: AnomalyDetector;
+}
+
+export interface MCPServer {
+  id: string;
+  name: string;
+  type: 'kaizen' | 'celery' | 'custom';
+  endpoint: string;
+  transport: TransportConfig;
+  authentication: AuthConfig;
+  capabilities: ServerCapabilities;
+  health: HealthStatus;
+}
+
+export interface PhaseOrchestration {
+  phases: Phase[];
+  currentPhase: string;
+  transitions: PhaseTransition[];
+  checkpoints: Checkpoint[];
+  rollbackStrategy: RollbackStrategy;
+}
+
+export interface ConceptMemoryGraph {
+  nodes: ConceptNode[];
+  edges: ConceptEdge[];
+  index: VectorIndex;
+  queryEngine: QueryEngine;
+  updatePolicy: UpdatePolicy;
+}
+
+export interface TORIIntegration {
+  endpoint: string;
+  filters: ConceptFilter[];
+  policies: ContentPolicy[];
+  pipeline: FilterPipeline;
+}
+typescript
+// mcp-server-architecture/src/core/trust-kernel.ts
+
+import { EventEmitter } from 'events';
+import * as crypto from 'crypto';
+import { SecureComputeCell, SCCManifest, ExecutionContext, SecurityPolicy, AuditEntry } from './types';
+
+/**
+ * Trust Kernel - Core security and execution control for SCCs
+ * Implements verification, isolation, monitoring, and enforcement
+ */
+export class TrustKernel extends EventEmitter {
+  private securityPolicies: Map<string, SecurityPolicy> = new Map();
+  private activeCells: Map<string, SecureComputeCell> = new Map();
+  private executionContexts: Map<string, ExecutionContext> = new Map();
+  private verificationCache: Map<string, VerificationResult> = new Map();
+  private behaviorProfiles: Map<string, BehaviorProfile> = new Map();
+  private auditLog: AuditLog;
+  private anomalyDetector: AnomalyDetector;
+  private metricsCollector: MetricsCollector;
+
+  constructor(config: TrustKernelConfig) {
+    super();
+    this.initializeKernel(config);
+  }
+
+  /**
+   * Verify and register a new SCC
+   */
+  async registerSCC(cell: SecureComputeCell): Promise<RegistrationResult> {
+    try {
+      // Step 1: Verify manifest integrity
+      const manifestValid = await this.verifyManifest(cell.manifest, cell.signature);
+      if (!manifestValid) {
+        throw new SecurityError('Invalid manifest signature');
+      }
+
+      // Step 2: Verify code integrity
+      const codeValid = await this.verifyCodeIntegrity(cell.code, cell.manifest);
+      if (!codeValid) {
+        throw new SecurityError('Code integrity check failed');
+      }
+
+      // Step 3: Static analysis for security violations
+      const analysisResult = await this.performStaticAnalysis(cell);
+      if (analysisResult.violations.length > 0) {
+        throw new SecurityError(`Static analysis violations: ${analysisResult.violations.join(', ')}`);
+      }
+
+      // Step 4: Sandbox test execution
+      const sandboxResult = await this.sandboxTestExecution(cell);
+      if (!sandboxResult.passed) {
+        throw new SecurityError(`Sandbox test failed: ${sandboxResult.reason}`);
+      }
+
+      // Step 5: Create behavior fingerprint
+      const fingerprint = await this.createBehaviorFingerprint(cell);
+      this.behaviorProfiles.set(cell.id, fingerprint);
+
+      // Step 6: Register the cell
+      this.activeCells.set(cell.id, {
+        ...cell,
+        status: SCCStatus.VERIFIED,
+        lastVerified: new Date()
+      });
+
+      // Audit the registration
+      await this.audit({
+        type: 'SCC_REGISTERED',
+        cellId: cell.id,
+        timestamp: new Date(),
+        details: { manifest: cell.manifest }
+      });
+
+      this.emit('scc:registered', cell);
+
+      return {
+        success: true,
+        cellId: cell.id,
+        verificationToken: this.generateVerificationToken(cell)
+      };
+
+    } catch (error) {
+      await this.audit({
+        type: 'SCC_REGISTRATION_FAILED',
+        cellId: cell.id,
+        timestamp: new Date(),
+        error: error.message,
+        details: { manifest: cell.manifest }
+      });
+
+      throw error;
+    }
+  }
+
+  /**
+   * Execute an SCC with full security controls
+   */
+  async executeSCC(
+    cellId: string, 
+    input: any, 
+    sessionId: string
+  ): Promise<ExecutionResult> {
+    const cell = this.activeCells.get(cellId);
+    if (!cell) {
+      throw new Error(`SCC ${cellId} not found`);
+    }
+
+    // Create isolated execution context
+    const context = await this.createExecutionContext(cell, input, sessionId);
+    this.executionContexts.set(context.id, context);
+
+    try {
+      // Pre-execution validation
+      await this.validatePreExecution(cell, context);
+
+      // Start monitoring
+      const monitor = this.startMonitoring(context);
+
+      // Execute in sandbox
+      const result = await this.executeInSandbox(cell, context, monitor);
+
+      // Post-execution validation
+      await this.validatePostExecution(cell, context, result);
+
+      // Clean up resources
+      await this.cleanupExecution(context);
+
+      return result;
+
+    } catch (error) {
+      // Handle execution failure
+      await this.handleExecutionFailure(cell, context, error);
+      throw error;
+
+    } finally {
+      // Always cleanup
+      this.executionContexts.delete(context.id);
+    }
+  }
+
+  /**
+   * Create secure execution context with isolation
+   */
+  private async createExecutionContext(
+    cell: SecureComputeCell,
+    input: any,
+    sessionId: string
+  ): Promise<ExecutionContext> {
+    const contextId = crypto.randomUUID();
+    
+    // Allocate resources based on manifest limits
+    const resources = await this.allocateResources(cell.manifest.security.resourceLimits);
+
+    // Setup sandbox environment
+    const sandbox = await this.setupSandbox(cell.manifest.security.sandboxLevel);
+
+    // Initialize monitoring
+    const monitoring = this.initializeMonitoring(contextId);
+
+    return {
+      id: contextId,
+      sessionId,
+      sccId: cell.id,
+      input: this.sanitizeInput(input, cell.manifest),
+      state: ExecutionState.INITIALIZED,
+      resources,
+      monitoring,
+      sandbox
+    };
+  }
+
+  /**
+   * Execute SCC in sandboxed environment
+   */
+  private async executeInSandbox(
+    cell: SecureComputeCell,
+    context: ExecutionContext,
+    monitor: ExecutionMonitor
+  ): Promise<any> {
+    const sandbox = context.sandbox;
+
+    // Apply security policies
+    await this.applySecurityPolicies(sandbox, cell.manifest.security);
+
+    // Set resource limits
+    await sandbox.setResourceLimits(context.resources);
+
+    // Inject monitoring hooks
+    sandbox.injectMonitor(monitor);
+
+    // Execute with timeout
+    const timeout = cell.manifest.behavior.timeout || 30000;
+    const execution = Promise.race([
+      sandbox.execute(cell.code, context.input),
+      this.createTimeout(timeout)
+    ]);
+
+    // Monitor execution
+    monitor.startRecording();
+    
+    try {
+      const result = await execution;
+      
+      // Validate behavior against profile
+      const behaviorValid = await this.validateBehavior(
+        monitor.getMetrics(),
+        this.behaviorProfiles.get(cell.id)
+      );
+
+      if (!behaviorValid) {
+        throw new SecurityError('Abnormal behavior detected');
+      }
+
+      return result;
+
+    } finally {
+      monitor.stopRecording();
+    }
+  }
+
+  /**
+   * Entropy profiling for anomaly detection
+   */
+  private async performEntropyProfiling(
+    metrics: ExecutionMetrics,
+    profile: BehaviorProfile
+  ): Promise<EntropyAnalysis> {
+    const entropy = {
+      cpu: this.calculateEntropy(metrics.cpu.samples),
+      memory: this.calculateEntropy(metrics.memory.samples),
+      io: this.calculateEntropy(metrics.io.samples),
+      network: this.calculateEntropy(metrics.network.samples)
+    };
+
+    const deviations = {
+      cpu: Math.abs(entropy.cpu - profile.baseline.cpu),
+      memory: Math.abs(entropy.memory - profile.baseline.memory),
+      io: Math.abs(entropy.io - profile.baseline.io),
+      network: Math.abs(entropy.network - profile.baseline.network)
+    };
+
+    const anomalous = Object.values(deviations).some(d => d > profile.threshold);
+
+    return {
+      entropy,
+      deviations,
+      anomalous,
+      confidence: this.calculateConfidence(deviations, profile)
+    };
+  }
+
+  /**
+   * Zero-persistence cleanup after execution
+   */
+  private async cleanupExecution(context: ExecutionContext): Promise<void> {
+    // Wipe memory
+    await context.sandbox.wipeMemory();
+
+    // Delete temporary files
+    await context.sandbox.deleteTempFiles();
+
+    // Clear caches
+    await context.sandbox.clearCaches();
+
+    // Release resources
+    await this.releaseResources(context.resources);
+
+    // Final audit
+    await this.audit({
+      type: 'EXECUTION_CLEANUP',
+      contextId: context.id,
+      timestamp: new Date()
+    });
+  }
+
+  /**
+   * Handle security violations and failures
+   */
+  private async handleSecurityViolation(
+    cell: SecureComputeCell,
+    violation: SecurityViolation
+  ): Promise<void> {
+    // Log violation
+    await this.audit({
+      type: 'SECURITY_VIOLATION',
+      cellId: cell.id,
+      timestamp: new Date(),
+      severity: violation.severity,
+      details: violation
+    });
+
+    // Apply remediation based on severity
+    switch (violation.severity) {
+      case 'CRITICAL':
+        // Revoke cell immediately
+        await this.revokeSCC(cell.id);
+        break;
+      
+      case 'HIGH':
+        // Suspend cell
+        await this.suspendSCC(cell.id);
+        break;
+      
+      case 'MEDIUM':
+        // Increase monitoring
+        await this.increaseMonitoring(cell.id);
+        break;
+      
+      case 'LOW':
+        // Log and continue
+        break;
+    }
+
+    // Notify administrators
+    this.emit('security:violation', violation);
+  }
+
+  /**
+   * Continuous verification of active SCCs
+   */
+  async continuousVerification(): Promise<void> {
+    for (const [cellId, cell] of this.activeCells) {
+      try {
+        // Re-verify periodically
+        const timeSinceVerification = Date.now() - cell.lastVerified.getTime();
+        if (timeSinceVerification > this.verificationInterval) {
+          await this.reverifyCell(cell);
+        }
+
+        // Check for updates
+        const updateAvailable = await this.checkForUpdates(cell);
+        if (updateAvailable) {
+          this.emit('scc:update-available', { cellId, update: updateAvailable });
+        }
+
+      } catch (error) {
+        console.error(`Verification failed for ${cellId}:`, error);
+        await this.handleVerificationFailure(cell, error);
+      }
+    }
+  }
+
+  /**
+   * Advanced audit logging with encryption
+   */
+  private async audit(entry: AuditEntry): Promise<void> {
+    // Encrypt sensitive data
+    const encryptedEntry = await this.encryptAuditEntry(entry);
+
+    // Add to audit log
+    this.auditLog.entries.push(encryptedEntry);
+
+    // Persist to secure storage
+    await this.persistAuditLog();
+
+    // Real-time streaming for monitoring
+    this.emit('audit:entry', entry);
+  }
+}
+
+/**
+ * Supporting types for Trust Kernel
+ */
+interface TrustKernelConfig {
+  securityPolicies: SecurityPolicy[];
+  verificationKeys: VerificationKey[];
+  auditConfig: AuditConfig;
+  monitoringConfig: MonitoringConfig;
+  sandboxConfig: SandboxConfig;
+}
+
+interface VerificationResult {
+  valid: boolean;
+  timestamp: Date;
+  details: any;
+}
+
+interface BehaviorProfile {
+  baseline: {
+    cpu: number;
+    memory: number;
+    io: number;
+    network: number;
+  };
+  threshold: number;
+  patterns: Pattern[];
+}
+
+interface ExecutionMonitor {
+  startRecording(): void;
+  stopRecording(): void;
+  getMetrics(): ExecutionMetrics;
+  detectAnomalies(): Anomaly[];
+}
+
+interface SecurityViolation {
+  type: string;
+  severity: 'LOW' | 'MEDIUM' | 'HIGH' | 'CRITICAL';
+  description: string;
+  timestamp: Date;
+  context: any;
+}
+
+enum ExecutionState {
+  INITIALIZED = 'INITIALIZED',
+  RUNNING = 'RUNNING',
+  COMPLETED = 'COMPLETED',
+  FAILED = 'FAILED',
+  TERMINATED = 'TERMINATED'
+}
+typescript
+// mcp-server-architecture/src/orchestration/phase-orchestrator.ts
+
+import { EventEmitter } from 'events';
+import { SecureComputeCell, PhaseOrchestration, ExecutionContext } from '../core/types';
+import { TrustKernel } from '../core/trust-kernel';
+
+/**
+ * Phase-Aware Task Orchestrator
+ * Manages multi-phase reasoning and complex workflows
+ */
+export class PhaseOrchestrator extends EventEmitter {
+  private trustKernel: TrustKernel;
+  private activeWorkflows: Map<string, WorkflowInstance> = new Map();
+  private phaseDefinitions: Map<string, PhaseDefinition> = new Map();
+  private orchestrationPolicies: OrchestrationPolicy[] = [];
+
+  constructor(trustKernel: TrustKernel, config: OrchestratorConfig) {
+    super();
+    this.trustKernel = trustKernel;
+    this.initializeOrchestrator(config);
+  }
+
+  /**
+   * Define a new phase for orchestration
+   */
+  definePhase(phase: PhaseDefinition): void {
+    this.phaseDefinitions.set(phase.name, phase);
+    
+    // Validate phase transitions
+    this.validatePhaseTransitions(phase);
+    
+    this.emit('phase:defined', phase);
+  }
+
+  /**
+   * Create and start a new workflow instance
+   */
+  async createWorkflow(
+    workflowDef: WorkflowDefinition,
+    input: any,
+    context: WorkflowContext
+  ): Promise<WorkflowInstance> {
+    const workflowId = this.generateWorkflowId();
+    
+    // Build phase graph
+    const phaseGraph = this.buildPhaseGraph(workflowDef);
+    
+    // Create workflow instance
+    const workflow: WorkflowInstance = {
+      id: workflowId,
+      definition: workflowDef,
+      phaseGraph,
+      currentPhase: workflowDef.initialPhase,
+      state: WorkflowState.INITIALIZED,
+      context: {
+        ...context,
+        input,
+        memory: new Map(),
+        checkpoints: []
+      },
+      history: [],
+      startTime: new Date()
+    };
+
+    this.activeWorkflows.set(workflowId, workflow);
+    
+    // Start workflow execution
+    this.executeWorkflow(workflow);
+    
+    return workflow;
+  }
+
+  /**
+   * Execute workflow through phases
+   */
+  private async executeWorkflow(workflow: WorkflowInstance): Promise<void> {
+    try {
+      workflow.state = WorkflowState.RUNNING;
+      
+      while (!this.isTerminalPhase(workflow.currentPhase, workflow)) {
+        // Execute current phase
+        const phaseResult = await this.executePhase(workflow);
+        
+        // Update workflow memory
+        this.updateWorkflowMemory(workflow, phaseResult);
+        
+        // Create checkpoint
+        await this.createCheckpoint(workflow);
+        
+        // Determine next phase
+        const nextPhase = await this.determineNextPhase(workflow, phaseResult);
+        
+        // Transition to next phase
+        await this.transitionPhase(workflow, nextPhase);
+      }
+      
+      workflow.state = WorkflowState.COMPLETED;
+      this.emit('workflow:completed', workflow);
+      
+    } catch (error) {
+      workflow.state = WorkflowState.FAILED;
+      await this.handleWorkflowError(workflow, error);
+    }
+  }
+
+  /**
+   * Execute a single phase with appropriate SCCs
+   */
+  private async executePhase(workflow: WorkflowInstance): Promise<PhaseResult> {
+    const phase = this.phaseDefinitions.get(workflow.currentPhase);
+    if (!phase) {
+      throw new Error(`Phase ${workflow.currentPhase} not defined`);
+    }
+
+    const phaseExecution: PhaseExecution = {
+      phaseId: phase.name,
+      workflowId: workflow.id,
+      startTime: new Date(),
+      cells: []
+    };
+
+    try {
+      // Select appropriate SCCs for this phase
+      const selectedCells = await this.selectCellsForPhase(phase, workflow);
+      
+      // Execute cells based on phase strategy
+      let phaseOutput: any;
+      
+      switch (phase.executionStrategy) {
+        case 'SEQUENTIAL':
+          phaseOutput = await this.executeSequential(selectedCells, workflow);
+          break;
+          
+        case 'PARALLEL':
+          phaseOutput = await this.executeParallel(selectedCells, workflow);
+          break;
+          
+        case 'CONDITIONAL':
+          phaseOutput = await this.executeConditional(selectedCells, workflow, phase);
+          break;
+          
+        case 'ITERATIVE':
+          phaseOutput = await this.executeIterative(selectedCells, workflow, phase);
+          break;
+      }
+
+      phaseExecution.endTime = new Date();
+      phaseExecution.status = 'SUCCESS';
+      phaseExecution.output = phaseOutput;
+
+      // Record phase execution
+      workflow.history.push(phaseExecution);
+
+      return {
+        phase: phase.name,
+        output: phaseOutput,
+        metrics: this.calculatePhaseMetrics(phaseExecution),
+        decisions: this.extractDecisions(phaseOutput)
+      };
+
+    } catch (error) {
+      phaseExecution.endTime = new Date();
+      phaseExecution.status = 'FAILED';
+      phaseExecution.error = error;
+      workflow.history.push(phaseExecution);
+      
+      throw error;
+    }
+  }
+
+  /**
+   * Select appropriate SCCs based on phase requirements
+   */
+  private async selectCellsForPhase(
+    phase: PhaseDefinition,
+    workflow: WorkflowInstance
+  ): Promise<SecureComputeCell[]> {
+    const availableCells = await this.getAvailableCells();
+    const selectedCells: SecureComputeCell[] = [];
+
+    for (const requirement of phase.requirements) {
+      // Find cells matching capability requirements
+      const matchingCells = availableCells.filter(cell => 
+        this.cellMatchesRequirement(cell, requirement, workflow.context)
+      );
+
+      if (matchingCells.length === 0) {
+        throw new Error(`No cell found for requirement: ${requirement.capability}`);
+      }
+
+      // Select best cell based on scoring
+      const bestCell = await this.selectBestCell(matchingCells, requirement, workflow);
+      selectedCells.push(bestCell);
+    }
+
+    return selectedCells;
+  }
+
+  /**
+   * Execute cells in sequence with state passing
+   */
+  private async executeSequential(
+    cells: SecureComputeCell[],
+    workflow: WorkflowInstance
+  ): Promise<any> {
+    let output = workflow.context.input;
+    
+    for (const cell of cells) {
+      // Prepare input with workflow context
+      const cellInput = this.prepareCellInput(cell, output, workflow);
+      
+      // Execute cell
+      const result = await this.trustKernel.executeSCC(
+        cell.id,
+        cellInput,
+        workflow.context.sessionId
+      );
+      
+      // Update output for next cell
+      output = this.mergeCellOutput(output, result);
+      
+      // Update workflow context
+      this.updateWorkflowContext(workflow, cell, result);
+    }
+    
+    return output;
+  }
+
+  /**
+   * Execute cells in parallel and merge results
+   */
+  private async executeParallel(
+    cells: SecureComputeCell[],
+    workflow: WorkflowInstance
+  ): Promise<any> {
+    const executions = cells.map(cell => {
+      const cellInput = this.prepareCellInput(cell, workflow.context.input, workflow);
+      return this.trustKernel.executeSCC(
+        cell.id,
+        cellInput,
+        workflow.context.sessionId
+      );
+    });
+
+    const results = await Promise.all(executions);
+    
+    // Merge parallel results
+    return this.mergeParallelResults(results, cells, workflow);
+  }
+
+  /**
+   * Conditional execution based on runtime decisions
+   */
+  private async executeConditional(
+    cells: SecureComputeCell[],
+    workflow: WorkflowInstance,
+    phase: PhaseDefinition
+  ): Promise<any> {
+    // Evaluate conditions
+    const conditions = await this.evaluateConditions(phase.conditions, workflow);
+    
+    // Select execution path
+    const selectedPath = this.selectExecutionPath(conditions, phase.executionPaths);
+    
+    // Execute cells for selected path
+    const pathCells = cells.filter(cell => 
+      selectedPath.cellIds.includes(cell.id)
+    );
+    
+    return this.executeSequential(pathCells, workflow);
+  }
+
+  /**
+   * Iterative execution with convergence criteria
+   */
+  private async executeIterative(
+    cells: SecureComputeCell[],
+    workflow: WorkflowInstance,
+    phase: PhaseDefinition
+  ): Promise<any> {
+    let iteration = 0;
+    let output = workflow.context.input;
+    let converged = false;
+
+    while (!converged && iteration < phase.maxIterations) {
+      // Execute iteration
+      const iterationResult = await this.executeSequential(cells, workflow);
+      
+      // Check convergence
+      converged = await this.checkConvergence(
+        output,
+        iterationResult,
+        phase.convergenceCriteria
+      );
+      
+      output = iterationResult;
+      iteration++;
+      
+      // Update iteration context
+      workflow.context.memory.set(`iteration_${iteration}`, iterationResult);
+    }
+
+    return output;
+  }
+
+  /**
+   * Create checkpoint for rollback capability
+   */
+  private async createCheckpoint(workflow: WorkflowInstance): Promise<void> {
+    const checkpoint: Checkpoint = {
+      id: this.generateCheckpointId(),
+      workflowId: workflow.id,
+      phase: workflow.currentPhase,
+      timestamp: new Date(),
+      state: this.serializeWorkflowState(workflow),
+      memory: this.serializeMemory(workflow.context.memory)
+    };
+
+    workflow.context.checkpoints.push(checkpoint);
+    
+    // Persist checkpoint
+    await this.persistCheckpoint(checkpoint);
+  }
+
+  /**
+   * Rollback to previous checkpoint
+   */
+  async rollbackWorkflow(
+    workflowId: string,
+    checkpointId: string
+  ): Promise<void> {
+    const workflow = this.activeWorkflows.get(workflowId);
+    if (!workflow) {
+      throw new Error(`Workflow ${workflowId} not found`);
+    }
+
+    const checkpoint = workflow.context.checkpoints.find(cp => cp.id === checkpointId);
+    if (!checkpoint) {
+      throw new Error(`Checkpoint ${checkpointId} not found`);
+    }
+
+    // Restore workflow state
+    this.restoreWorkflowState(workflow, checkpoint);
+    
+    // Resume execution from checkpoint
+    await this.executeWorkflow(workflow);
+  }
+
+  /**
+   * Dynamic phase adaptation based on runtime insights
+   */
+  private async adaptPhaseExecution(
+    workflow: WorkflowInstance,
+    insights: RuntimeInsights
+  ): Promise<void> {
+    // Analyze performance metrics
+    const performanceAnalysis = this.analyzePerformance(workflow, insights);
+    
+    // Adjust resource allocation
+    if (performanceAnalysis.needsMoreResources) {
+      await this.adjustResourceAllocation(workflow, performanceAnalysis);
+    }
+    
+    // Modify phase parameters
+    if (performanceAnalysis.suggestedOptimizations) {
+      await this.applyOptimizations(workflow, performanceAnalysis.suggestedOptimizations);
+    }
+  }
+}
+
+/**
+ * Supporting types for Phase Orchestrator
+ */
+interface PhaseDefinition {
+  name: string;
+  description: string;
+  requirements: PhaseRequirement[];
+  executionStrategy: 'SEQUENTIAL' | 'PARALLEL' | 'CONDITIONAL' | 'ITERATIVE';
+  conditions?: Condition[];
+  executionPaths?: ExecutionPath[];
+  convergenceCriteria?: ConvergenceCriteria;
+  maxIterations?: number;
+  timeout?: number;
+  rollbackEnabled: boolean;
+}
+
+interface WorkflowDefinition {
+  name: string;
+  description: string;
+  phases: string[];
+  initialPhase: string;
+  terminalPhases: string[];
+  transitions: PhaseTransition[];
+  globalTimeout?: number;
+}
+
+interface WorkflowInstance {
+  id: string;
+  definition: WorkflowDefinition;
+  phaseGraph: PhaseGraph;
+  currentPhase: string;
+  state: WorkflowState;
+  context: WorkflowContext;
+  history: PhaseExecution[];
+  startTime: Date;
+  endTime?: Date;
+}
+
+interface PhaseRequirement {
+  capability: string;
+  version?: string;
+  performance?: PerformanceRequirement;
+  security?: SecurityRequirement;
+}
+
+interface WorkflowContext {
+  sessionId: string;
+  input: any;
+  memory: Map<string, any>;
+  checkpoints: Checkpoint[];
+  metadata?: any;
+}
+
+interface PhaseResult {
+  phase: string;
+  output: any;
+  metrics: PhaseMetrics;
+  decisions: Decision[];
+}
+
+interface Checkpoint {
+  id: string;
+  workflowId: string;
+  phase: string;
+  timestamp: Date;
+  state: any;
+  memory: any;
+}
+
+enum WorkflowState {
+  INITIALIZED = 'INITIALIZED',
+  RUNNING = 'RUNNING',
+  PAUSED = 'PAUSED',
+  COMPLETED = 'COMPLETED',
+  FAILED = 'FAILED',
+  ROLLED_BACK = 'ROLLED_BACK'
+}
+typescript
+// mcp-server-architecture/src/integration/mcp-gateway.ts
+
+import { Server } from 'http';
+import * as express from 'express';
+import * as jwt from 'jsonwebtoken';
+import { RateLimiter } from 'rate-limiter-flexible';
+import { TrustKernel } from '../core/trust-kernel';
+import { MCPServer } from '../core/types';
+
+/**
+ * Security Gateway for MCP Servers
+ * Implements authentication, authorization, rate limiting, and intrusion detection
+ */
+export class MCPGateway {
+  private app: express.Application;
+  private server: Server;
+  private trustKernel: TrustKernel;
+  private rateLimiters: Map<string, RateLimiter> = new Map();
+  private authProviders: Map<string, AuthProvider> = new Map();
+  private intrusionDetector: IntrusionDetector;
+  private mcpServers: Map<string, MCPServerConnection> = new Map();
+  
+  constructor(config: GatewayConfig) {
+    this.app = express();
+    this.trustKernel = config.trustKernel;
+    this.initializeGateway(config);
+  }
+
+  /**
+   * Initialize gateway with security middleware
+   */
+  private initializeGateway(config: GatewayConfig): void {
+    // Security headers
+    this.app.use(this.securityHeaders());
+    
+    // Request parsing with limits
+    this.app.use(express.json({ limit: config.maxRequestSize || '10mb' }));
+    
+    // Request logging and monitoring
+    this.app.use(this.requestLogging());
+    
+    // Authentication middleware
+    this.app.use(this.authenticate());
+    
+    // Rate limiting
+    this.app.use(this.rateLimit());
+    
+    // Intrusion detection
+    this.app.use(this.intrusionDetection());
+    
+    // Request validation
+    this.app.use(this.validateRequests());
+    
+    // Setup routes
+    this.setupRoutes();
+    
+    // Error handling
+    this.app.use(this.errorHandler());
+  }
+
+  /**
+   * Security headers middleware
+   */
+  private securityHeaders(): express.RequestHandler {
+    return (req, res, next) => {
+      res.setHeader('X-Content-Type-Options', 'nosniff');
+      res.setHeader('X-Frame-Options', 'DENY');
+      res.setHeader('X-XSS-Protection', '1; mode=block');
+      res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
+      res.setHeader('Content-Security-Policy', "default-src 'self'");
+      next();
+    };
+  }
+
+  /**
+   * Authentication middleware with multiple providers
+   */
+  private authenticate(): express.RequestHandler {
+    return async (req, res, next) => {
+      try {
+        // Extract auth token
+        const token = this.extractToken(req);
+        if (!token) {
+          return res.status(401).json({ error: 'Authentication required' });
+        }
+
+        // Determine auth provider
+        const provider = this.determineAuthProvider(req);
+        const authProvider = this.authProviders.get(provider);
+        
+        if (!authProvider) {
+          return res.status(401).json({ error: 'Invalid auth provider' });
+        }
+
+        // Verify token
+        const authResult = await authProvider.verify(token);
+        if (!authResult.valid) {
+          return res.status(401).json({ error: 'Invalid credentials' });
+        }
+
+        // Attach auth context
+        req.authContext = {
+          userId: authResult.userId,
+          permissions: authResult.permissions,
+          sessionId: authResult.sessionId,
+          provider: provider
+        };
+
+        // Check session validity
+        if (!(await this.isSessionValid(req.authContext.sessionId))) {
+          return res.status(401).json({ error: 'Session expired' });
+        }
+
+        next();
+      } catch (error) {
+        res.status(401).json({ error: 'Authentication failed' });
+      }
+    };
+  }
+
+  /**
+   * Rate limiting per user and endpoint
+   */
+  private rateLimit(): express.RequestHandler {
+    return async (req, res, next) => {
+      const key = `${req.authContext.userId}:${req.path}`;
+      
+      // Get or create rate limiter for this endpoint
+      let limiter = this.rateLimiters.get(req.path);
+      if (!limiter) {
+        limiter = new RateLimiter({
+          points: this.getRateLimitForEndpoint(req.path),
+          duration: 60, // per minute
+          blockDuration: 60 * 5 // 5 minute block
+        });
+        this.rateLimiters.set(req.path, limiter);
+      }
+
+      try {
+        await limiter.consume(key);
+        next();
+      } catch (rejRes) {
+        res.status(429).json({ 
+          error: 'Too many requests',
+          retryAfter: Math.round(rejRes.msBeforeNext / 1000) || 60
+        });
+      }
+    };
+  }
+
+  /**
+   * Intrusion detection middleware
+   */
+  private intrusionDetection(): express.RequestHandler {
+    return async (req, res, next) => {
+      const threat = await this.intrusionDetector.analyze({
+        ip: req.ip,
+        userId: req.authContext?.userId,
+        path: req.path,
+        method: req.method,
+        headers: req.headers,
+        body: req.body,
+        query: req.query
+      });
+
+      if (threat.detected) {
+        // Log threat
+        await this.logSecurityEvent({
+          type: 'INTRUSION_DETECTED',
+          threat: threat,
+          request: this.sanitizeRequest(req),
+          timestamp: new Date()
+        });
+
+        // Block if high severity
+        if (threat.severity === 'HIGH' || threat.severity === 'CRITICAL') {
+          return res.status(403).json({ error: 'Forbidden' });
+        }
+      }
+
+      // Attach threat info for monitoring
+      req.threatInfo = threat;
+      next();
+    };
+  }
+
+  /**
+   * Setup API routes
+   */
+  private setupRoutes(): void {
+    // MCP server discovery
+    this.app.get('/api/v1/servers', this.handleServerDiscovery.bind(this));
+    
+    // MCP server registration
+    this.app.post('/api/v1/servers', this.handleServerRegistration.bind(this));
+    
+    // Tool invocation
+    this.app.post('/api/v1/tools/:serverId/invoke', this.handleToolInvocation.bind(this));
+    
+    // Resource access
+    this.app.get('/api/v1/resources/:serverId/:resourceId', this.handleResourceAccess.bind(this));
+    
+    // Prompt templates
+    this.app.get('/api/v1/prompts/:serverId', this.handlePromptRetrieval.bind(this));
+    
+    // Health check
+    this.app.get('/health', this.handleHealthCheck.bind(this));
+    
+    // Metrics endpoint
+    this.app.get('/metrics', this.handleMetrics.bind(this));
+  }
+
+  /**
+   * Handle tool invocation with security checks
+   */
+  private async handleToolInvocation(
+    req: express.Request,
+    res: express.Response
+  ): Promise<void> {
+    const { serverId } = req.params;
+    const { toolName, input } = req.body;
+
+    try {
+      // Validate server exists and is active
+      const server = this.mcpServers.get(serverId);
+      if (!server || !server.isActive()) {
+        return res.status(404).json({ error: 'Server not found' });
+      }
+
+      // Check user permissions for this tool
+      if (!this.hasToolPermission(req.authContext, serverId, toolName)) {
+        return res.status(403).json({ error: 'Insufficient permissions' });
+      }
+
+      // Validate input against tool schema
+      const validation = await server.validateToolInput(toolName, input);
+      if (!validation.valid) {
+        return res.status(400).json({ 
+          error: 'Invalid input',
+          details: validation.errors 
+        });
+      }
+
+      // Check for malicious patterns
+      const maliciousCheck = await this.checkMaliciousInput(input);
+      if (maliciousCheck.detected) {
+        await this.logSecurityEvent({
+          type: 'MALICIOUS_INPUT',
+          userId: req.authContext.userId,
+          serverId,
+          toolName,
+          pattern: maliciousCheck.pattern
+        });
+        return res.status(400).json({ error: 'Invalid input' });
+      }
+
+      // Execute tool through Trust Kernel
+      const result = await this.trustKernel.executeSCC(
+        server.getToolCell(toolName),
+        {
+          input,
+          context: {
+            userId: req.authContext.userId,
+            sessionId: req.authContext.sessionId,
+            permissions: req.authContext.permissions
+          }
+        },
+        req.authContext.sessionId
+      );
+
+      // Audit successful execution
+      await this.auditToolExecution({
+        userId: req.authContext.userId,
+        serverId,
+        toolName,
+        timestamp: new Date(),
+        success: true
+      });
+
+      res.json({
+        success: true,
+        result: result,
+        executionId: result.executionId
+      });
+
+    } catch (error) {
+      // Audit failed execution
+      await this.auditToolExecution({
+        userId: req.authContext.userId,
+        serverId,
+        toolName,
+        timestamp: new Date(),
+        success: false,
+        error: error.message
+      });
+
+      res.status(500).json({ 
+        error: 'Tool execution failed',
+        message: this.sanitizeError(error)
+      });
+    }
+  }
+
+  /**
+   * OAuth 2.0 Device Flow implementation
+   */
+  async initiateDeviceFlow(clientId: string): Promise<DeviceFlowResponse> {
+    const deviceCode = this.generateDeviceCode();
+    const userCode = this.generateUserCode();
+    
+    // Store device flow session
+    await this.storeDeviceFlowSession({
+      deviceCode,
+      userCode,
+      clientId,
+      expires: Date.now() + 600000, // 10 minutes
+      status: 'pending'
+    });
+
+    return {
+      deviceCode,
+      userCode,
+      verificationUri: `https://${this.config.domain}/device`,
+      expiresIn: 600,
+      interval: 5
+    };
+  }
+
+  /**
+   * Secure tunneling for remote MCP servers
+   */
+  async establishSecureTunnel(
+    serverId: string,
+    credentials: TunnelCredentials
+  ): Promise<SecureTunnel> {
+    // Verify server credentials
+    const server = await this.verifyServerCredentials(serverId, credentials);
+    if (!server) {
+      throw new Error('Invalid server credentials');
+    }
+
+    // Create encrypted tunnel
+    const tunnel = new SecureTunnel({
+      serverId,
+      encryption: 'AES-256-GCM',
+      keyExchange: 'ECDHE',
+      certificateValidation: true
+    });
+
+    // Establish connection
+    await tunnel.connect(server.endpoint);
+
+    // Register tunnel
+    this.tunnels.set(serverId, tunnel);
+
+    return tunnel;
+  }
+
+  /**
+   * Multi-tenant isolation
+   */
+  private enforceMultiTenantIsolation(
+    req: express.Request,
+    tenantId: string
+  ): boolean {
+    // Verify tenant ownership
+    if (req.authContext.tenantId !== tenantId) {
+      return false;
+    }
+
+    // Check resource isolation
+    const resourceTenant = this.extractResourceTenant(req.path);
+    if (resourceTenant && resourceTenant !== tenantId) {
+      return false;
+    }
+
+    // Validate data access boundaries
+    return this.validateDataBoundaries(req.authContext, tenantId);
+  }
+
+  /**
+   * Advanced logging and monitoring
+   */
+  private async logSecurityEvent(event: SecurityEvent): Promise<void> {
+    // Enrich event with context
+    const enrichedEvent = {
+      ...event,
+      gatewayId: this.gatewayId,
+      environment: this.config.environment,
+      metadata: await this.gatherEventMetadata(event)
+    };
+
+    // Send to SIEM
+    await this.siemIntegration.send(enrichedEvent);
+
+    // Store locally for analysis
+    await this.securityEventStore.store(enrichedEvent);
+
+    // Real-time alerting for critical events
+    if (event.severity === 'CRITICAL') {
+      await this.alertingService.sendAlert(enrichedEvent);
+    }
+  }
+
+  /**
+   * Graceful shutdown
+   */
+  async shutdown(): Promise<void> {
+    console.log('Shutting down MCP Gateway...');
+
+    // Stop accepting new connections
+    this.server.close();
+
+    // Close existing connections gracefully
+    await this.closeConnections();
+
+    // Cleanup resources
+    await this.cleanup();
+
+    console.log('MCP Gateway shutdown complete');
+  }
+}
+
+/**
+ * Supporting types for MCP Gateway
+ */
+interface GatewayConfig {
+  trustKernel: TrustKernel;
+  port: number;
+  domain: string;
+  environment: string;
+  maxRequestSize?: string;
+  tls?: TLSConfig;
+  authProviders: AuthProviderConfig[];
+  rateLimits?: RateLimitConfig;
+  monitoring?: MonitoringConfig;
+}
+
+interface AuthProvider {
+  name: string;
+  verify(token: string): Promise<AuthResult>;
+  refresh(refreshToken: string): Promise<AuthResult>;
+}
+
+interface AuthResult {
+  valid: boolean;
+  userId?: string;
+  permissions?: string[];
+  sessionId?: string;
+  metadata?: any;
+}
+
+interface IntrusionDetector {
+  analyze(request: any): Promise<ThreatInfo>;
+  updatePatterns(patterns: ThreatPattern[]): void;
+  getStatistics(): IntrusionStats;
+}
+
+interface ThreatInfo {
+  detected: boolean;
+  severity?: 'LOW' | 'MEDIUM' | 'HIGH' | 'CRITICAL';
+  type?: string;
+  confidence?: number;
+  details?: any;
+}
+
+interface SecurityEvent {
+  type: string;
+  severity?: string;
+  timestamp: Date;
+  [key: string]: any;
+}
+
+interface DeviceFlowResponse {
+  deviceCode: string;
+  userCode: string;
+  verificationUri: string;
+  expiresIn: number;
+  interval: number;
+}
+
+interface SecureTunnel {
+  connect(endpoint: string): Promise<void>;
+  send(data: any): Promise<void>;
+  receive(): Promise<any>;
+  close(): Promise<void>;
+}
+typescript
+// mcp-server-architecture/src/memory/concept-memory-graph.ts
+
+import { EventEmitter } from 'events';
+import { ConceptMemoryGraph, ConceptNode, ConceptEdge } from '../core/types';
+
+/**
+ * Concept Memory Graph for long-term knowledge retention
+ * Implements semantic network with vector embeddings
+ */
+export class ConceptMemoryGraphService extends EventEmitter {
+  private nodes: Map<string, ConceptNode> = new Map();
+  private edges: Map<string, ConceptEdge> = new Map();
+  private vectorIndex: VectorIndex;
+  private queryEngine: GraphQueryEngine;
+  private updateQueue: UpdateQueue;
+  private consistencyChecker: ConsistencyChecker;
+
+  constructor(config: MemoryGraphConfig) {
+    super();
+    this.initializeMemoryGraph(config);
+  }
+
+  /**
+   * Add new concept to the graph
+   */
+  async addConcept(concept: ConceptInput): Promise<ConceptNode> {
+    // Generate embeddings
+    const embedding = await this.generateEmbedding(concept);
+    
+    // Create concept node
+    const node: ConceptNode = {
+      id: this.generateNodeId(),
+      type: concept.type,
+      name: concept.name,
+      description: concept.description,
+      attributes: concept.attributes || {},
+      embedding,
+      metadata: {
+        created: new Date(),
+        updated: new Date(),
+        accessCount: 0,
+        confidence: concept.confidence || 1.0,
+        source: concept.source
+      }
+    };
+
+    // Add to graph
+    this.nodes.set(node.id, node);
+    
+    // Index for similarity search
+    await this.vectorIndex.add(node.id, embedding);
+    
+    // Find and create relationships
+    await this.discoverRelationships(node);
+    
+    // Emit event
+    this.emit('concept:added', node);
+    
+    return node;
+  }
+
+  /**
+   * Query concepts using natural language
+   */
+  async queryConcepts(query: string, options?: QueryOptions): Promise<QueryResult> {
+    // Convert query to embedding
+    const queryEmbedding = await this.generateEmbedding({ description: query });
+    
+    // Vector similarity search
+    const similarNodes = await this.vectorIndex.search(
+      queryEmbedding,
+      options?.topK || 10
+    );
+    
+    // Graph traversal for context
+    const subgraph = await this.extractSubgraph(
+      similarNodes.map(n => n.id),
+      options?.depth || 2
+    );
+    
+    // Apply filters if specified
+    const filteredSubgraph = this.applyFilters(subgraph, options?.filters);
+    
+    // Rank and score results
+    const rankedResults = await this.rankResults(
+      filteredSubgraph,
+      query,
+      queryEmbedding
+    );
+    
+    return {
+      query,
+      results: rankedResults,
+      subgraph: filteredSubgraph,
+      metadata: {
+        queryTime: Date.now(),
+        resultCount: rankedResults.length
+      }
+    };
+  }
+
+  /**
+   * Update concept with new information
+   */
+  async updateConcept(
+    nodeId: string,
+    update: ConceptUpdate
+  ): Promise<ConceptNode> {
+    const node = this.nodes.get(nodeId);
+    if (!node) {
+      throw new Error(`Concept ${nodeId} not found`);
+    }
+
+    // Queue update for consistency
+    await this.updateQueue.enqueue({
+      nodeId,
+      update,
+      timestamp: new Date()
+    });
+
+    // Apply update
+    const updatedNode = await this.applyUpdate(node, update);
+    
+    // Re-index if embedding changed
+    if (update.recompute_embedding) {
+      const newEmbedding = await this.generateEmbedding(updatedNode);
+      updatedNode.embedding = newEmbedding;
+      await this.vectorIndex.update(nodeId, newEmbedding);
+    }
+    
+    // Update relationships
+    await this.updateRelationships(updatedNode);
+    
+    // Check consistency
+    await this.consistencyChecker.verify(updatedNode);
+    
+    this.emit('concept:updated', updatedNode);
+    
+    return updatedNode;
+  }
+
+  /**
+   * Create relationship between concepts
+   */
+  async createRelationship(
+    sourceId: string,
+    targetId: string,
+    relationship: RelationshipInput
+  ): Promise<ConceptEdge> {
+    // Validate nodes exist
+    const source = this.nodes.get(sourceId);
+    const target = this.nodes.get(targetId);
+    
+    if (!source || !target) {
+      throw new Error('Source or target node not found');
+    }
+
+    // Create edge
+    const edge: ConceptEdge = {
+      id: this.generateEdgeId(),
+      source: sourceId,
+      target: targetId,
+      type: relationship.type,
+      weight: relationship.weight || 1.0,
+      attributes: relationship.attributes || {},
+      metadata: {
+        created: new Date(),
+        confidence: relationship.confidence || 1.0
+      }
+    };
+
+    // Add to graph
+    this.edges.set(edge.id, edge);
+    
+    // Update node connections
+    this.updateNodeConnections(source, target, edge);
+    
+    // Propagate changes
+    await this.propagateRelationshipEffects(edge);
+    
+    this.emit('relationship:created', edge);
+    
+    return edge;
+  }
+
+  /**
+   * Discover implicit relationships using embeddings
+   */
+  private async discoverRelationships(node: ConceptNode): Promise<void> {
+    // Find semantically similar concepts
+    const similar = await this.vectorIndex.search(node.embedding, 20);
+    
+    for (const match of similar) {
+      if (match.id === node.id) continue;
+      
+      const targetNode = this.nodes.get(match.id);
+      if (!targetNode) continue;
+      
+      // Calculate relationship strength
+      const strength = this.calculateRelationshipStrength(
+        node,
+        targetNode,
+        match.similarity
+      );
+      
+      if (strength > 0.7) {
+        // Infer relationship type
+        const relType = await this.inferRelationshipType(node, targetNode);
+        
+        // Create implicit relationship
+        await this.createRelationship(node.id, targetNode.id, {
+          type: relType,
+          weight: strength,
+          attributes: {
+            inferred: true,
+            similarity: match.similarity
+          }
+        });
+      }
+    }
+  }
+
+  /**
+   * Extract subgraph around nodes
+   */
+  private async extractSubgraph(
+    nodeIds: string[],
+    depth: number
+  ): Promise<Subgraph> {
+    const visited = new Set<string>();
+    const subgraphNodes = new Map<string, ConceptNode>();
+    const subgraphEdges = new Map<string, ConceptEdge>();
+    
+    // BFS traversal
+    const queue: { nodeId: string; currentDepth: number }[] = 
+      nodeIds.map(id => ({ nodeId: id, currentDepth: 0 }));
+    
+    while (queue.length > 0) {
+      const { nodeId, currentDepth } = queue.shift()!;
+      
+      if (visited.has(nodeId) || currentDepth > depth) {
+        continue;
+      }
+      
+      visited.add(nodeId);
+      
+      // Add node to subgraph
+      const node = this.nodes.get(nodeId);
+      if (node) {
+        subgraphNodes.set(nodeId, node);
+        
+        // Get connected edges
+        const connectedEdges = this.getNodeEdges(nodeId);
+        
+        for (const edge of connectedEdges) {
+          subgraphEdges.set(edge.id, edge);
+          
+          // Add connected nodes to queue
+          const neighborId = edge.source === nodeId ? edge.target : edge.source;
+          if (!visited.has(neighborId)) {
+            queue.push({
+              nodeId: neighborId,
+              currentDepth: currentDepth + 1
+            });
+          }
+        }
+      }
+    }
+    
+    return {
+      nodes: Array.from(subgraphNodes.values()),
+      edges: Array.from(subgraphEdges.values())
+    };
+  }
+
+  /**
+   * Continuous learning from interactions
+   */
+  async learnFromInteraction(interaction: InteractionData): Promise<void> {
+    // Extract concepts from interaction
+    const extractedConcepts = await this.extractConcepts(interaction);
+    
+    // Update or create concepts
+    for (const concept of extractedConcepts) {
+      const existing = await this.findSimilarConcept(concept);
+      
+      if (existing) {
+        // Reinforce existing concept
+        await this.reinforceConcept(existing.id, interaction);
+      } else {
+        // Add new concept
+        await this.addConcept(concept);
+      }
+    }
+    
+    // Update relationship weights based on co-occurrence
+    await this.updateCoOccurrenceRelationships(extractedConcepts);
+    
+    // Prune weak connections
+    await this.pruneWeakConnections();
+  }
+
+  /**
+   * Memory consolidation and optimization
+   */
+  async consolidateMemory(): Promise<ConsolidationResult> {
+    const startTime = Date.now();
+    
+    // Identify redundant concepts
+    const redundancies = await this.findRedundantConcepts();
+    
+    // Merge similar concepts
+    const mergedCount = await this.mergeConcepts(redundancies);
+    
+    // Strengthen important pathways
+    await this.strengthenImportantPathways();
+    
+    // Compress embeddings
+    await this.compressEmbeddings();
+    
+    // Update indices
+    await this.rebuildIndices();
+    
+    const result: ConsolidationResult = {
+      duration: Date.now() - startTime,
+      mergedConcepts: mergedCount,
+      prunedEdges: await this.pruneWeakEdges(),
+      compressedNodes: this.nodes.size,
+      memoryUsage: this.calculateMemoryUsage()
+    };
+    
+    this.emit('memory:consolidated', result);
+    
+    return result;
+  }
+
+  /**
+   * Export memory graph for persistence
+   */
+  async exportGraph(): Promise<MemoryGraphExport> {
+    return {
+      version: '1.0',
+      timestamp: new Date(),
+      nodes: Array.from(this.nodes.values()),
+      edges: Array.from(this.edges.values()),
+      metadata: {
+        nodeCount: this.nodes.size,
+        edgeCount: this.edges.size,
+        indexConfig: this.vectorIndex.getConfig()
+      }
+    };
+  }
+
+  /**
+   * Import memory graph from export
+   */
+  async importGraph(data: MemoryGraphExport): Promise<void> {
+    // Clear existing data
+    this.nodes.clear();
+    this.edges.clear();
+    
+    // Import nodes
+    for (const node of data.nodes) {
+      this.nodes.set(node.id, node);
+      await this.vectorIndex.add(node.id, node.embedding);
+    }
+    
+    // Import edges
+    for (const edge of data.edges) {
+      this.edges.set(edge.id, edge);
+    }
+    
+    // Rebuild indices
+    await this.rebuildIndices();
+    
+    this.emit('memory:imported', {
+      nodeCount: data.nodes.length,
+      edgeCount: data.edges.length
+    });
+  }
+}
+
+/**
+ * Supporting types for Concept Memory Graph
+ */
+interface ConceptInput {
+  type: string;
+  name: string;
+  description: string;
+  attributes?: Record<string, any>;
+  confidence?: number;
+  source?: string;
+}
+
+interface ConceptUpdate {
+  name?: string;
+  description?: string;
+  attributes?: Record<string, any>;
+  confidence?: number;
+  recompute_embedding?: boolean;
+}
+
+interface RelationshipInput {
+  type: string;
+  weight?: number;
+  confidence?: number;
+  attributes?: Record<string, any>;
+}
+
+interface QueryOptions {
+  topK?: number;
+  depth?: number;
+  filters?: ConceptFilter[];
+  includeMetadata?: boolean;
+}
+
+interface QueryResult {
+  query: string;
+  results: RankedConcept[];
+  subgraph: Subgraph;
+  metadata: QueryMetadata;
+}
+
+interface Subgraph {
+  nodes: ConceptNode[];
+  edges: ConceptEdge[];
+}
+
+interface InteractionData {
+  type: string;
+  content: any;
+  timestamp: Date;
+  context?: any;
+}
+
+interface ConsolidationResult {
+  duration: number;
+  mergedConcepts: number;
+  prunedEdges: number;
+  compressedNodes: number;
+  memoryUsage: number;
+}
+
+interface MemoryGraphExport {
+  version: string;
+  timestamp: Date;
+  nodes: ConceptNode[];
+  edges: ConceptEdge[];
+  metadata: any;
+}
+typescript
+// mcp-server-architecture/src/servers/mcp-kaizen.ts
+
+import { SecureComputeCell, SCCManifest } from '../core/types';
+import { TrustKernel } from '../core/trust-kernel';
+import { ConceptMemoryGraphService } from '../memory/concept-memory-graph';
+
+/**
+ * MCP:kaizen - Continuous improvement and learning server
+ * Focuses on optimization, pattern recognition, and knowledge accumulation
+ */
+export class MCPKaizenServer {
+  private trustKernel: TrustKernel;
+  private memoryGraph: ConceptMemoryGraphService;
+  private improvementEngine: ImprovementEngine;
+  private patternRecognizer: PatternRecognizer;
+  private optimizationCells: Map<string, SecureComputeCell> = new Map();
+
+  constructor(config: KaizenConfig) {
+    this.trustKernel = config.trustKernel;
+    this.memoryGraph = config.memoryGraph;
+    this.initializeKaizen(config);
+  }
+
+  /**
+   * Initialize Kaizen server with improvement cells
+   */
+  private async initializeKaizen(config: KaizenConfig): Promise<void> {
+    // Register core improvement cells
+    await this.registerImprovementCells();
+    
+    // Initialize improvement engine
+    this.improvementEngine = new ImprovementEngine({
+      memoryGraph: this.memoryGraph,
+      learningRate: config.learningRate || 0.01,
+      improvementThreshold: config.improvementThreshold || 0.05
+    });
+    
+    // Initialize pattern recognizer
+    this.patternRecognizer = new PatternRecognizer({
+      minSupport: config.patternMinSupport || 0.1,
+      minConfidence: config.patternMinConfidence || 0.7
+    });
+    
+    // Start continuous improvement loop
+    this.startContinuousImprovement();
+  }
+
+  /**
+   * Register improvement-focused SCCs
+   */
+  private async registerImprovementCells(): Promise<void> {
+    // Performance Analyzer Cell
+    const performanceAnalyzer: SecureComputeCell = {
+      id: 'kaizen-performance-analyzer',
+      name: 'Performance Analyzer',
+      version: '1.0.0',
+      manifest: {
+        identity: {
+          name: 'performance-analyzer',
+          hash: this.generateHash('performance-analyzer'),
+          version: '1.0.0',
+          author: 'mcp-kaizen'
+        },
+        description: 'Analyzes system performance and identifies bottlenecks',
+        capabilities: {
+          tools: [{
+            name: 'analyze_performance',
+            description: 'Analyze performance metrics and identify optimization opportunities',
+            schema: {
+              input: {
+                type: 'object',
+                properties: {
+                  metrics: { type: 'array' },
+                  timeRange: { type: 'object' },
+                  threshold: { type: 'number' }
+                }
+              },
+              output: {
+                type: 'object',
+                properties: {
+                  bottlenecks: { type: 'array' },
+                  recommendations: { type: 'array' },
+                  improvements: { type: 'array' }
+                }
+              }
+            },
+            permissions: ['metrics:read', 'analysis:write']
+          }],
+          resources: [],
+          prompts: []
+        },
+        contracts: {
+          inputs: [],
+          outputs: [],
+          sideEffects: []
+        },
+        security: {
+          permissions: [
+            { resource: 'metrics', actions: ['read'] },
+            { resource: 'analysis', actions: ['write'] }
+          ],
+          resourceLimits: {
+            memory: 512 * 1024 * 1024, // 512MB
+            cpu: 2,
+            storage: 1024 * 1024 * 1024, // 1GB
+            networkBandwidth: 10 * 1024 * 1024, // 10MB/s
+            executionTime: 30000 // 30s
+          },
+          networkAccess: { allowed: false },
+          sandboxLevel: SandboxLevel.STANDARD
+        },
+        behavior: {
+          deterministic: true,
+          idempotent: true,
+          timeout: 30000,
+          retryPolicy: {
+            maxRetries: 3,
+            backoff: 'exponential'
+          }
+        }
+      },
+      code: {
+        entryPoint: 'analyzePerformance',
+        dependencies: [],
+        checksum: '',
+        runtime: { type: 'node', version: '20' }
+      },
+      signature: '',
+      created: new Date(),
+      lastVerified: new Date(),
+      status: SCCStatus.PENDING
+    };
+
+    // Register with Trust Kernel
+    await this.trustKernel.registerSCC(performanceAnalyzer);
+    this.optimizationCells.set(performanceAnalyzer.id, performanceAnalyzer);
+
+    // Pattern Learning Cell
+    const patternLearner = this.createPatternLearningCell();
+    await this.trustKernel.registerSCC(patternLearner);
+    this.optimizationCells.set(patternLearner.id, patternLearner);
+
+    // Optimization Suggester Cell
+    const optimizationSuggester = this.createOptimizationCell();
+    await this.trustKernel.registerSCC(optimizationSuggester);
+    this.optimizationCells.set(optimizationSuggester.id, optimizationSuggester);
+
+    // Knowledge Synthesizer Cell
+    const knowledgeSynthesizer = this.createKnowledgeSynthesizerCell();
+    await this.trustKernel.registerSCC(knowledgeSynthesizer);
+    this.optimizationCells.set(knowledgeSynthesizer.id, knowledgeSynthesizer);
+  }
+
+  /**
+   * Continuous improvement loop
+   */
+  private async startContinuousImprovement(): Promise<void> {
+    setInterval(async () => {
+      try {
+        // Collect system metrics
+        const metrics = await this.collectSystemMetrics();
+        
+        // Analyze performance
+        const analysis = await this.analyzePerformance(metrics);
+        
+        // Identify patterns
+        const patterns = await this.identifyPatterns(analysis);
+        
+        // Generate improvements
+        const improvements = await this.generateImprovements(patterns);
+        
+        // Apply improvements
+        await this.applyImprovements(improvements);
+        
+        // Update knowledge graph
+        await this.updateKnowledgeGraph(improvements);
+        
+      } catch (error) {
+        console.error('Continuous improvement error:', error);
+      }
+    }, this.config.improvementInterval || 60000); // Every minute
+  }
+
+  /**
+   * Analyze system performance
+   */
+  private async analyzePerformance(metrics: SystemMetrics): Promise<PerformanceAnalysis> {
+    const analyzerCell = this.optimizationCells.get('kaizen-performance-analyzer');
+    
+    const result = await this.trustKernel.executeSCC(
+      analyzerCell.id,
+      {
+        metrics: metrics.data,
+        timeRange: { start: metrics.startTime, end: metrics.endTime },
+        threshold: 0.8
+      },
+      'kaizen-session'
+    );
+
+    return {
+      bottlenecks: result.bottlenecks,
+      recommendations: result.recommendations,
+      improvements: result.improvements,
+      timestamp: new Date()
+    };
+  }
+
+  /**
+   * Identify patterns in system behavior
+   */
+  private async identifyPatterns(analysis: PerformanceAnalysis): Promise<Pattern[]> {
+    // Use pattern recognizer
+    const patterns = await this.patternRecognizer.findPatterns({
+      data: analysis,
+      minOccurrences: 3,
+      timeWindow: 3600000 // 1 hour
+    });
+
+    // Store patterns in memory graph
+    for (const pattern of patterns) {
+      await this.memoryGraph.addConcept({
+        type: 'pattern',
+        name: pattern.name,
+        description: pattern.description,
+        attributes: {
+          frequency: pattern.frequency,
+          confidence: pattern.confidence,
+          conditions: pattern.conditions
+        }
+      });
+    }
+
+    return patterns;
+  }
+
+  /**
+   * Generate improvement suggestions
+   */
+  private async generateImprovements(patterns: Pattern[]): Promise<Improvement[]> {
+    const improvements: Improvement[] = [];
+
+    for (const pattern of patterns) {
+      // Query knowledge graph for similar patterns
+      const similarPatterns = await this.memoryGraph.queryConcepts(
+        `pattern similar to ${pattern.description}`,
+        { topK: 5 }
+      );
+
+      // Generate improvements based on historical success
+      const improvement = await this.improvementEngine.generate({
+        pattern,
+        historicalData: similarPatterns.results,
+        constraints: this.config.improvementConstraints
+      });
+
+      if (improvement.expectedBenefit > this.config.improvementThreshold) {
+        improvements.push(improvement);
+      }
+    }
+
+    return improvements;
+  }
+
+  /**
+   * Apply improvements to the system
+   */
+  private async applyImprovements(improvements: Improvement[]): Promise<void> {
+    for (const improvement of improvements) {
+      try {
+        // Validate improvement safety
+        const validation = await this.validateImprovement(improvement);
+        if (!validation.safe) {
+          console.warn(`Skipping unsafe improvement: ${improvement.id}`);
+          continue;
+        }
+
+        // Apply improvement
+        await this.executeImprovement(improvement);
+
+        // Monitor impact
+        const impact = await this.monitorImprovementImpact(improvement);
+
+        // Record result
+        await this.recordImprovementResult(improvement, impact);
+
+      } catch (error) {
+        console.error(`Failed to apply improvement ${improvement.id}:`, error);
+        await this.rollbackImprovement(improvement);
+      }
+    }
+  }
+
+  /**
+   * Update knowledge graph with learnings
+   */
+  private async updateKnowledgeGraph(improvements: Improvement[]): Promise<void> {
+    for (const improvement of improvements) {
+      // Add improvement as concept
+      const improvementNode = await this.memoryGraph.addConcept({
+        type: 'improvement',
+        name: improvement.name,
+        description: improvement.description,
+        attributes: {
+          impact: improvement.actualImpact,
+          applied: improvement.applied,
+          timestamp: improvement.timestamp
+        }
+      });
+
+      // Link to related patterns
+      for (const patternId of improvement.relatedPatterns) {
+        await this.memoryGraph.createRelationship(
+          improvementNode.id,
+          patternId,
+          {
+            type: 'addresses',
+            weight: improvement.confidence
+          }
+        );
+      }
+    }
+
+    // Consolidate memory periodically
+    if (Math.random() < 0.1) { // 10% chance
+      await this.memoryGraph.consolidateMemory();
+    }
+  }
+
+  /**
+   * Get Kaizen server capabilities
+   */
+  getCapabilities(): KaizenCapabilities {
+    return {
+      tools: [
+        {
+          name: 'analyze_performance',
+          description: 'Analyze system performance and identify optimization opportunities'
+        },
+        {
+          name: 'learn_pattern',
+          description: 'Learn and recognize patterns in system behavior'
+        },
+        {
+          name: 'suggest_improvement',
+          description: 'Generate improvement suggestions based on analysis'
+        },
+        {
+          name: 'query_knowledge',
+          description: 'Query accumulated knowledge and insights'
+        }
+      ],
+      resources: [
+        {
+          name: 'performance_metrics',
+          type: 'timeseries',
+          description: 'Historical performance metrics'
+        },
+        {
+          name: 'improvement_history',
+          type: 'database',
+          description: 'History of applied improvements and their impacts'
+        }
+      ],
+      prompts: [
+        {
+          name: 'optimization_analysis',
+          template: 'Analyze the following metrics and suggest optimizations: {{metrics}}'
+        }
+      ]
+    };
+  }
+}
+
+/**
+ * Improvement Engine for generating optimizations
+ */
+class ImprovementEngine {
+  private memoryGraph: ConceptMemoryGraphService;
+  private learningRate: number;
+  private improvementThreshold: number;
+
+  constructor(config: ImprovementEngineConfig) {
+    this.memoryGraph = config.memoryGraph;
+    this.learningRate = config.learningRate;
+    this.improvementThreshold = config.improvementThreshold;
+  }
+
+  async generate(input: ImprovementInput): Promise<Improvement> {
+    // Analyze pattern characteristics
+    const characteristics = this.analyzePattern(input.pattern);
+    
+    // Find successful historical improvements
+    const historicalSuccess = await this.findHistoricalSuccess(
+      characteristics,
+      input.historicalData
+    );
+    
+    // Generate improvement based on learning
+    const improvement = this.synthesizeImprovement(
+      characteristics,
+      historicalSuccess,
+      input.constraints
+    );
+    
+    // Calculate expected benefit
+    improvement.expectedBenefit = this.calculateExpectedBenefit(
+      improvement,
+      historicalSuccess
+    );
+    
+    return improvement;
+  }
+
+  private analyzePattern(pattern: Pattern): PatternCharacteristics {
+    return {
+      type: pattern.type,
+      frequency: pattern.frequency,
+      severity: this.calculateSeverity(pattern),
+      context: this.extractContext(pattern),
+      rootCause: this.identifyRootCause(pattern)
+    };
+  }
+
+  private calculateExpectedBenefit(
+    improvement: Improvement,
+    historicalData: any[]
+  ): number {
+    // Use historical data to estimate benefit
+    const similarImprovements = historicalData.filter(h => 
+      this.isSimilarImprovement(improvement, h)
+    );
+    
+    if (similarImprovements.length === 0) {
+      return this.improvementThreshold; // Default to threshold
+    }
+    
+    // Calculate weighted average of historical benefits
+    const totalWeight = similarImprovements.reduce((sum, h) => sum + h.confidence, 0);
+    const weightedBenefit = similarImprovements.reduce(
+      (sum, h) => sum + (h.actualBenefit * h.confidence),
+      0
+    );
+    
+    return weightedBenefit / totalWeight;
+  }
+}
+
+/**
+ * Supporting types for MCP:kaizen
+ */
+interface KaizenConfig {
+  trustKernel: TrustKernel;
+  memoryGraph: ConceptMemoryGraphService;
+  learningRate?: number;
+  improvementThreshold?: number;
+  improvementInterval?: number;
+  patternMinSupport?: number;
+  patternMinConfidence?: number;
+  improvementConstraints?: ImprovementConstraints;
+}
+
+interface SystemMetrics {
+  data: MetricData[];
+  startTime: Date;
+  endTime: Date;
+}
+
+interface PerformanceAnalysis {
+  bottlenecks: Bottleneck[];
+  recommendations: Recommendation[];
+  improvements: PotentialImprovement[];
+  timestamp: Date;
+}
+
+interface Pattern {
+  id: string;
+  name: string;
+  type: string;
+  description: string;
+  frequency: number;
+  confidence: number;
+  conditions: Condition[];
+}
+
+interface Improvement {
+  id: string;
+  name: string;
+  description: string;
+  type: string;
+  expectedBenefit: number;
+  actualImpact?: number;
+  confidence: number;
+  relatedPatterns: string[];
+  applied: boolean;
+  timestamp: Date;
+}
+
+interface KaizenCapabilities {
+  tools: ToolCapability[];
+  resources: ResourceCapability[];
+  prompts: PromptCapability[];
+}
+typescript
+// mcp-server-architecture/src/servers/mcp-celery.ts
+
+import { SecureComputeCell, PhaseOrchestration } from '../core/types';
+import { TrustKernel } from '../core/trust-kernel';
+import { PhaseOrchestrator } from '../orchestration/phase-orchestrator';
+
+/**
+ * MCP:celery - Task orchestration and workflow management server
+ * Focuses on coordinating complex multi-step operations
+ */
+export class MCPCeleryServer {
+  private trustKernel: TrustKernel;
+  private phaseOrchestrator: PhaseOrchestrator;
+  private taskQueue: DistributedTaskQueue;
+  private workflowEngine: WorkflowEngine;
+  private coordinationCells: Map<string, SecureComputeCell> = new Map();
+
+  constructor(config: CeleryConfig) {
+    this.trustKernel = config.trustKernel;
+    this.phaseOrchestrator = new PhaseOrchestrator(config.trustKernel, {
+      maxConcurrentWorkflows: config.maxConcurrentWorkflows || 100,
+      defaultTimeout: config.defaultTimeout || 300000
+    });
+    this.initializeCelery(config);
+  }
+
+  /**
+   * Initialize Celery server with orchestration cells
+   */
+  private async initializeCelery(config: CeleryConfig): Promise<void> {
+    // Initialize distributed task queue
+    this.taskQueue = new DistributedTaskQueue({
+      brokerUrl: config.brokerUrl,
+      resultBackend: config.resultBackend,
+      concurrency: config.concurrency || 10
+    });
+
+    // Initialize workflow engine
+    this.workflowEngine = new WorkflowEngine({
+      phaseOrchestrator: this.phaseOrchestrator,
+      taskQueue: this.taskQueue
+    });
+
+    // Register coordination cells
+    await this.registerCoordinationCells();
+
+    // Define standard workflow phases
+    this.defineStandardPhases();
+
+    // Start task processing
+    await this.startTaskProcessing();
+  }
+
+  /**
+   * Register coordination-focused SCCs
+   */
+  private async registerCoordinationCells(): Promise<void> {
+    // Task Router Cell
+    const taskRouter = this.createTaskRouterCell();
+    await this.trustKernel.registerSCC(taskRouter);
+    this.coordinationCells.set(taskRouter.id, taskRouter);
+
+    // Workflow Coordinator Cell
+    const workflowCoordinator = this.createWorkflowCoordinatorCell();
+    await this.trustKernel.registerSCC(workflowCoordinator);
+    this.coordinationCells.set(workflowCoordinator.id, workflowCoordinator);
+
+    // Result Aggregator Cell
+    const resultAggregator = this.createResultAggregatorCell();
+    await this.trustKernel.registerSCC(resultAggregator);
+    this.coordinationCells.set(resultAggregator.id, resultAggregator);
+
+    // Error Handler Cell
+    const errorHandler = this.createErrorHandlerCell();
+    await this.trustKernel.registerSCC(errorHandler);
+    this.coordinationCells.set(errorHandler.id, errorHandler);
+  }
+
+  /**
+   * Define standard workflow phases
+   */
+  private defineStandardPhases(): void {
+    // Planning Phase
+    this.phaseOrchestrator.definePhase({
+      name: 'planning',
+      description: 'Analyze request and create execution plan',
+      requirements: [
+        { capability: 'intent_analysis' },
+        { capability: 'plan_generation' }
+      ],
+      executionStrategy: 'SEQUENTIAL',
+      timeout: 30000,
+      rollbackEnabled: true
+    });
+
+    // Validation Phase
+    this.phaseOrchestrator.definePhase({
+      name: 'validation',
+      description: 'Validate inputs and preconditions',
+      requirements: [
+        { capability: 'input_validation' },
+        { capability: 'permission_check' }
+      ],
+      executionStrategy: 'PARALLEL',
+      timeout: 15000,
+      rollbackEnabled: false
+    });
+
+    // Execution Phase
+    this.phaseOrchestrator.definePhase({
+      name: 'execution',
+      description: 'Execute main task operations',
+      requirements: [
+        { capability: 'task_execution' }
+      ],
+      executionStrategy: 'CONDITIONAL',
+      timeout: 120000,
+      rollbackEnabled: true
+    });
+
+    // Verification Phase
+    this.phaseOrchestrator.definePhase({
+      name: 'verification',
+      description: 'Verify results and side effects',
+      requirements: [
+        { capability: 'result_verification' },
+        { capability: 'consistency_check' }
+      ],
+      executionStrategy: 'SEQUENTIAL',
+      timeout: 30000,
+      rollbackEnabled: false
+    });
+
+    // Completion Phase
+    this.phaseOrchestrator.definePhase({
+      name: 'completion',
+      description: 'Finalize and return results',
+      requirements: [
+        { capability: 'result_formatting' },
+        { capability: 'notification' }
+      ],
+      executionStrategy: 'PARALLEL',
+      timeout: 15000,
+      rollbackEnabled: false
+    });
+  }
+
+  /**
+   * Create new workflow
+   */
+  async createWorkflow(request: WorkflowRequest): Promise<WorkflowHandle> {
+    // Validate request
+    const validation = await this.validateWorkflowRequest(request);
+    if (!validation.valid) {
+      throw new Error(`Invalid workflow request: ${validation.errors.join(', ')}`);
+    }
+
+    // Create workflow definition
+    const workflowDef = this.buildWorkflowDefinition(request);
+
+    // Start workflow
+    const workflow = await this.phaseOrchestrator.createWorkflow(
+      workflowDef,
+      request.input,
+      {
+        sessionId: request.sessionId,
+        metadata: request.metadata
+      }
+    );
+
+    // Create handle for client
+    const handle: WorkflowHandle = {
+      workflowId: workflow.id,
+      status: workflow.state,
+      startTime: workflow.startTime,
+      getStatus: () => this.getWorkflowStatus(workflow.id),
+      getResult: () => this.getWorkflowResult(workflow.id),
+      cancel: () => this.cancelWorkflow(workflow.id),
+      getHistory: () => this.getWorkflowHistory(workflow.id)
+    };
+
+    return handle;
+  }
+
+  /**
+   * Submit task to queue
+   */
+  async submitTask(task: TaskSubmission): Promise<TaskHandle> {
+    // Create task wrapper
+    const wrappedTask: DistributedTask = {
+      id: this.generateTaskId(),
+      type: task.type,
+      payload: task.payload,
+      priority: task.priority || 'normal',
+      routing_key: this.determineRoutingKey(task),
+      metadata: {
+        submitted: new Date(),
+        submittedBy: task.submittedBy,
+        ttl: task.ttl || 3600000 // 1 hour default
+      }
+    };
+
+    // Submit to queue
+    await this.taskQueue.submit(wrappedTask);
+
+    // Create handle
+    const handle: TaskHandle = {
+      taskId: wrappedTask.id,
+      getStatus: () => this.getTaskStatus(wrappedTask.id),
+      getResult: () => this.getTaskResult(wrappedTask.id),
+      cancel: () => this.cancelTask(wrappedTask.id)
+    };
+
+    return handle;
+  }
+
+  /**
+   * Create task router cell
+   */
+  private createTaskRouterCell(): SecureComputeCell {
+    return {
+      id: 'celery-task-router',
+      name: 'Task Router',
+      version: '1.0.0',
+      manifest: {
+        identity: {
+          name: 'task-router',
+          hash: this.generateHash('task-router'),
+          version: '1.0.0',
+          author: 'mcp-celery'
+        },
+        description: 'Routes tasks to appropriate workers based on type and load',
+        capabilities: {
+          tools: [{
+            name: 'route_task',
+            description: 'Determine optimal routing for task execution',
+            schema: {
+              input: {
+                type: 'object',
+                properties: {
+                  task: { type: 'object' },
+                  workers: { type: 'array' },
+                  loadInfo: { type: 'object' }
+                }
+              },
+              output: {
+                type: 'object',
+                properties: {
+                  selectedWorker: { type: 'string' },
+                  routingKey: { type: 'string' },
+                  estimatedTime: { type: 'number' }
+                }
+              }
+            },
+            permissions: ['queue:read', 'workers:read']
+          }],
+          resources: [],
+          prompts: []
+        },
+        contracts: {
+          inputs: [],
+          outputs: [],
+          sideEffects: []
+        },
+        security: {
+          permissions: [
+            { resource: 'queue', actions: ['read'] },
+            { resource: 'workers', actions: ['read'] }
+          ],
+          resourceLimits: {
+            memory: 256 * 1024 * 1024, // 256MB
+            cpu: 1,
+            storage: 0,
+            networkBandwidth: 1024 * 1024, // 1MB/s
+            executionTime: 5000 // 5s
+          },
+          networkAccess: { allowed: false },
+          sandboxLevel: SandboxLevel.STANDARD
+        },
+        behavior: {
+          deterministic: false, // Load-based routing
+          idempotent: true,
+          timeout: 5000,
+          retryPolicy: {
+            maxRetries: 3,
+            backoff: 'exponential'
+          }
+        }
+      },
+      code: {
+        entryPoint: 'routeTask',
+        dependencies: [],
+        checksum: '',
+        runtime: { type: 'node', version: '20' }
+      },
+      signature: '',
+      created: new Date(),
+      lastVerified: new Date(),
+      status: SCCStatus.PENDING
+    };
+  }
+
+  /**
+   * Process tasks from queue
+   */
+  private async startTaskProcessing(): Promise<void> {
+    this.taskQueue.on('task', async (task: DistributedTask) => {
+      try {
+        // Route task
+        const routing = await this.routeTask(task);
+        
+        // Execute task
+        const result = await this.executeTask(task, routing);
+        
+        // Store result
+        await this.storeTaskResult(task.id, result);
+        
+        // Emit completion
+        this.emit('task:completed', { taskId: task.id, result });
+        
+      } catch (error) {
+        // Handle task failure
+        await this.handleTaskFailure(task, error);
+      }
+    });
+  }
+
+  /**
+   * Execute task with proper coordination
+   */
+  private async executeTask(
+    task: DistributedTask,
+    routing: TaskRouting
+  ): Promise<any> {
+    // Select appropriate cell
+    const cell = await this.selectCellForTask(task, routing);
+    
+    // Prepare execution context
+    const context = {
+      taskId: task.id,
+      routing: routing,
+      priority: task.priority,
+      deadline: new Date(Date.now() + task.metadata.ttl)
+    };
+    
+    // Execute through Trust Kernel
+    const result = await this.trustKernel.executeSCC(
+      cell.id,
+      {
+        task: task.payload,
+        context: context
+      },
+      `celery-task-${task.id}`
+    );
+    
+    return result;
+  }
+
+  /**
+   * Handle complex multi-service orchestration
+   */
+  async orchestrateServices(
+    services: ServiceDefinition[],
+    orchestrationPlan: OrchestrationPlan
+  ): Promise<OrchestrationResult> {
+    // Create service graph
+    const serviceGraph = this.buildServiceGraph(services, orchestrationPlan);
+    
+    // Initialize coordination state
+    const coordinationState = new CoordinationState(serviceGraph);
+    
+    // Execute orchestration
+    const results = new Map<string, any>();
+    
+    for (const stage of orchestrationPlan.stages) {
+      // Get services for this stage
+      const stageServices = this.getStageServices(stage, serviceGraph);
+      
+      // Execute stage
+      const stageResults = await this.executeStage(
+        stage,
+        stageServices,
+        coordinationState
+      );
+      
+      // Merge results
+      stageResults.forEach((result, serviceId) => {
+        results.set(serviceId, result);
+      });
+      
+      // Update coordination state
+      coordinationState.completeStage(stage.id, stageResults);
+    }
+    
+    return {
+      success: true,
+      results: results,
+      timeline: coordinationState.getTimeline(),
+      metrics: coordinationState.getMetrics()
+    };
+  }
+
+  /**
+   * Get Celery server capabilities
+   */
+  getCapabilities(): CeleryCapabilities {
+    return {
+      tools: [
+        {
+          name: 'create_workflow',
+          description: 'Create and execute multi-phase workflow'
+        },
+        {
+          name: 'submit_task',
+          description: 'Submit task to distributed queue'
+        },
+        {
+          name: 'orchestrate_services',
+          description: 'Coordinate multiple services in complex operations'
+        },
+        {
+          name: 'monitor_workflows',
+          description: 'Monitor and manage running workflows'
+        }
+      ],
+      resources: [
+        {
+          name: 'task_queue',
+          type: 'queue',
+          description: 'Distributed task queue'
+        },
+        {
+          name: 'workflow_state',
+          type: 'database',
+          description: 'Workflow execution state'
+        }
+      ],
+      prompts: [
+        {
+          name: 'workflow_planning',
+          template: 'Plan the execution of the following workflow: {{description}}'
+        }
+      ]
+    };
+  }
+}
+
+/**
+ * Distributed Task Queue
+ */
+class DistributedTaskQueue extends EventEmitter {
+  private broker: MessageBroker;
+  private workers: Map<string, WorkerNode> = new Map();
+  private pendingTasks: PriorityQueue<DistributedTask>;
+  private resultBackend: ResultBackend;
+
+  constructor(config: TaskQueueConfig) {
+    super();
+    this.initializeQueue(config);
+  }
+
+  async submit(task: DistributedTask): Promise<void> {
+    // Add to priority queue
+    this.pendingTasks.enqueue(task, this.getPriority(task));
+    
+    // Publish to broker
+    await this.broker.publish(task.routing_key, task);
+    
+    // Emit event
+    this.emit('task:submitted', task);
+  }
+
+  private getPriority(task: DistributedTask): number {
+    const priorities = {
+      'critical': 4,
+      'high': 3,
+      'normal': 2,
+      'low': 1
+    };
+    return priorities[task.priority] || 2;
+  }
+}
+
+/**
+ * Workflow Engine
+ */
+class WorkflowEngine {
+  private phaseOrchestrator: PhaseOrchestrator;
+  private taskQueue: DistributedTaskQueue;
+  private activeWorkflows: Map<string, WorkflowState> = new Map();
+
+  constructor(config: WorkflowEngineConfig) {
+    this.phaseOrchestrator = config.phaseOrchestrator;
+    this.taskQueue = config.taskQueue;
+  }
+
+  async executeWorkflow(
+    definition: WorkflowDefinition,
+    input: any
+  ): Promise<WorkflowResult> {
+    // Initialize workflow state
+    const state = new WorkflowState(definition, input);
+    this.activeWorkflows.set(state.id, state);
+
+    try {
+      // Execute through phase orchestrator
+      const result = await this.phaseOrchestrator.createWorkflow(
+        definition,
+        input,
+        { sessionId: state.sessionId }
+      );
+
+      // Update state
+      state.complete(result);
+      return result;
+
+    } catch (error) {
+      state.fail(error);
+      throw error;
+
+    } finally {
+      // Cleanup
+      this.activeWorkflows.delete(state.id);
+    }
+  }
+}
+
+/**
+ * Supporting types for MCP:celery
+ */
+interface CeleryConfig {
+  trustKernel: TrustKernel;
+  brokerUrl: string;
+  resultBackend: string;
+  concurrency?: number;
+  maxConcurrentWorkflows?: number;
+  defaultTimeout?: number;
+}
+
+interface WorkflowRequest {
+  name: string;
+  type: string;
+  input: any;
+  sessionId: string;
+  metadata?: any;
+  priority?: string;
+}
+
+interface WorkflowHandle {
+  workflowId: string;
+  status: string;
+  startTime: Date;
+  getStatus(): Promise<WorkflowStatus>;
+  getResult(): Promise<any>;
+  cancel(): Promise<void>;
+  getHistory(): Promise<WorkflowHistory>;
+}
+
+interface TaskSubmission {
+  type: string;
+  payload: any;
+  priority?: string;
+  ttl?: number;
+  submittedBy: string;
+}
+
+interface DistributedTask {
+  id: string;
+  type: string;
+  payload: any;
+  priority: string;
+  routing_key: string;
+  metadata: TaskMetadata;
+}
+
+interface ServiceDefinition {
+  id: string;
+  name: string;
+  endpoint: string;
+  capabilities: string[];
+  dependencies?: string[];
+}
+
+interface OrchestrationPlan {
+  stages: OrchestrationStage[];
+  errorHandling: ErrorHandlingStrategy;
+  timeout: number;
+}
+
+interface CeleryCapabilities {
+  tools: ToolCapability[];
+  resources: ResourceCapability[];
+  prompts: PromptCapability[];
+}
+typescript
+// mcp-server-architecture/src/integration/tori-filter.ts
+
+import { TORIIntegration } from '../core/types';
+
+/**
+ * TORI Concept Filtering Pipeline Integration
+ * Provides content filtering and concept tagging
+ */
+export class TORIFilterIntegration {
+  private endpoint: string;
+  private filters: ConceptFilter[] = [];
+  private policies: ContentPolicy[] = [];
+  private pipeline: FilterPipeline;
+
+  constructor(config: TORIConfig) {
+    this.endpoint = config.endpoint;
+    this.initializeTORI(config);
+  }
+
+  /**
+   * Initialize TORI pipeline
+   */
+  private async initializeTORI(config: TORIConfig): Promise<void> {
+    // Load filters
+    this.filters = await this.loadFilters(config.filters);
+    
+    // Load policies
+    this.policies = await this.loadPolicies(config.policies);
+    
+    // Build pipeline
+    this.pipeline = new FilterPipeline({
+      stages: [
+        new ConceptExtractionStage(),
+        new ContentClassificationStage(),
+        new PolicyEnforcementStage(this.policies),
+        new ConceptTaggingStage()
+      ]
+    });
+  }
+
+  /**
+   * Filter input content
+   */
+  async filterInput(content: any, context?: FilterContext): Promise<FilterResult> {
+    // Run through pipeline
+    const result = await this.pipeline.process({
+      content,
+      context,
+      timestamp: new Date()
+    });
+
+    // Check for violations
+    if (result.violations.length > 0) {
+      return {
+        allowed: false,
+        violations: result.violations,
+        filteredContent: null,
+        concepts: []
+      };
+    }
+
+    return {
+      allowed: true,
+      violations: [],
+      filteredContent: result.content,
+      concepts: result.concepts
+    };
+  }
+
+  /**
+   * Filter output content
+   */
+  async filterOutput(content: any, context?: FilterContext): Promise<FilterResult> {
+    // Apply stricter output filtering
+    const result = await this.pipeline.process({
+      content,
+      context,
+      mode: 'output',
+      timestamp: new Date()
+    });
+
+    // Redact sensitive concepts
+    const redacted = await this.redactSensitiveConcepts(
+      result.content,
+      result.concepts
+    );
+
+    return {
+      allowed: !result.hasViolations,
+      violations: result.violations,
+      filteredContent: redacted,
+      concepts: result.concepts.filter(c => !c.sensitive)
+    };
+  }
+
+  /**
+   * Update filter policies
+   */
+  async updatePolicies(updates: PolicyUpdate[]): Promise<void> {
+    for (const update of updates) {
+      const policy = this.policies.find(p => p.id === update.policyId);
+      if (policy) {
+        Object.assign(policy, update.changes);
+      }
+    }
+    
+    // Rebuild pipeline with updated policies
+    await this.pipeline.rebuild();
+  }
+
+  /**
+   * Get filtering statistics
+   */
+  getStatistics(): FilteringStatistics {
+    return {
+      totalFiltered: this.pipeline.getTotalProcessed(),
+      violations: this.pipeline.getViolationStats(),
+      conceptsExtracted: this.pipeline.getConceptStats(),
+      performance: this.pipeline.getPerformanceMetrics()
+    };
+  }
+}
+
+/**
+ * Filter Pipeline
+ */
+class FilterPipeline {
+  private stages: FilterStage[];
+  private stats: PipelineStatistics;
+
+  constructor(config: PipelineConfig) {
+    this.stages = config.stages;
+    this.stats = new PipelineStatistics();
+  }
+
+  async process(input: PipelineInput): Promise<PipelineResult> {
+    let current = input;
+    const stageResults: StageResult[] = [];
+
+    for (const stage of this.stages) {
+      const result = await stage.process(current);
+      stageResults.push(result);
+      
+      if (result.shouldStop) {
+        break;
+      }
+      
+      current = result.output;
+    }
+
+    // Aggregate results
+    return this.aggregateResults(stageResults);
+  }
+
+  async rebuild(): Promise<void> {
+    for (const stage of this.stages) {
+      await stage.reinitialize();
+    }
+  }
+}
+
+/**
+ * Concept Extraction Stage
+ */
+class ConceptExtractionStage implements FilterStage {
+  async process(input: any): Promise<StageResult> {
+    const concepts = await this.extractConcepts(input.content);
+    
+    return {
+      output: {
+        ...input,
+        concepts
+      },
+      shouldStop: false,
+      metrics: {
+        conceptsFound: concepts.length
+      }
+    };
+  }
+
+  private async extractConcepts(content: any): Promise<Concept[]> {
+    // Implementation for concept extraction
+    // This would use NLP and pattern matching
+    return [];
+  }
+
+  async reinitialize(): Promise<void> {
+    // Reload concept patterns
+  }
+}
+
+/**
+ * Supporting types
+ */
+interface TORIConfig {
+  endpoint: string;
+  filters: string[];
+  policies: string[];
+}
+
+interface ConceptFilter {
+  id: string;
+  name: string;
+  pattern: string | RegExp;
+  severity: 'info' | 'warning' | 'error';
+  action: 'allow' | 'block' | 'redact';
+}
+
+interface ContentPolicy {
+  id: string;
+  name: string;
+  rules: PolicyRule[];
+  enforcement: 'strict' | 'permissive';
+}
+
+interface FilterResult {
+  allowed: boolean;
+  violations: Violation[];
+  filteredContent: any;
+  concepts: Concept[];
+}
+
+interface Concept {
+  id: string;
+  type: string;
+  value: string;
+  confidence: number;
+  sensitive?: boolean;
+}
+typescript
+// mcp-server-architecture/src/observability/monitoring.ts
+
+import { EventEmitter } from 'events';
+import * as prom from 'prom-client';
+
+/**
+ * Comprehensive Observability Stack
+ * Implements logging, metrics, tracing, and monitoring
+ */
+export class ObservabilityStack {
+  private metricsRegistry: prom.Registry;
+  private tracer: Tracer;
+  private logger: StructuredLogger;
+  private anomalyDetector: AnomalyDetector;
+  private dashboards: Map<string, Dashboard> = new Map();
+
+  constructor(config: ObservabilityConfig) {
+    this.initializeObservability(config);
+  }
+
+  /**
+   * Initialize observability components
+   */
+  private initializeObservability(config: ObservabilityConfig): void {
+    // Initialize metrics
+    this.metricsRegistry = new prom.Registry();
+    this.setupMetrics();
+
+    // Initialize tracing
+    this.tracer = new Tracer({
+      serviceName: config.serviceName,
+      endpoint: config.tracingEndpoint
+    });
+
+    // Initialize structured logging
+    this.logger = new StructuredLogger({
+      level: config.logLevel,
+      format: 'json',
+      destination: config.logDestination
+    });
+
+    // Initialize anomaly detection
+    this.anomalyDetector = new AnomalyDetector({
+      windowSize: config.anomalyWindowSize || 3600000,
+      sensitivity: config.anomalySensitivity || 0.95
+    });
+
+    // Setup dashboards
+    this.setupDashboards(config.dashboards);
+  }
+
+  /**
+   * Setup Prometheus metrics
+   */
+  private setupMetrics(): void {
+    // SCC execution metrics
+    const sccExecutionDuration = new prom.Histogram({
+      name: 'scc_execution_duration_seconds',
+      help: 'SCC execution duration in seconds',
+      labelNames: ['scc_id', 'status'],
+      buckets: [0.1, 0.5, 1, 2, 5, 10]
+    });
+    this.metricsRegistry.registerMetric(sccExecutionDuration);
+
+    // Trust Kernel metrics
+    const trustKernelVerifications = new prom.Counter({
+      name: 'trust_kernel_verifications_total',
+      help: 'Total number of Trust Kernel verifications',
+      labelNames: ['result']
+    });
+    this.metricsRegistry.registerMetric(trustKernelVerifications);
+
+    // Workflow metrics
+    const workflowsActive = new prom.Gauge({
+      name: 'workflows_active',
+      help: 'Number of active workflows',
+      labelNames: ['type']
+    });
+    this.metricsRegistry.registerMetric(workflowsActive);
+
+    // Memory graph metrics
+    const memoryGraphNodes = new prom.Gauge({
+      name: 'memory_graph_nodes_total',
+      help: 'Total nodes in memory graph'
+    });
+    this.metricsRegistry.registerMetric(memoryGraphNodes);
+
+    // Gateway metrics
+    const gatewayRequests = new prom.Counter({
+      name: 'gateway_requests_total',
+      help: 'Total gateway requests',
+      labelNames: ['method', 'endpoint', 'status']
+    });
+    this.metricsRegistry.registerMetric(gatewayRequests);
+
+    // Security metrics
+    const securityViolations = new prom.Counter({
+      name: 'security_violations_total',
+      help: 'Total security violations detected',
+      labelNames: ['type', 'severity']
+    });
+    this.metricsRegistry.registerMetric(securityViolations);
+  }
+
+  /**
+   * Create span for distributed tracing
+   */
+  createSpan(name: string, parent?: Span): Span {
+    return this.tracer.startSpan(name, {
+      parent,
+      attributes: {
+        'mcp.component': 'server',
+        'mcp.version': '1.0.0'
+      }
+    });
+  }
+
+  /**
+   * Log structured event
+   */
+  log(level: LogLevel, message: string, context?: any): void {
+    this.logger.log({
+      level,
+      message,
+      timestamp: new Date(),
+      context,
+      correlationId: this.getCurrentCorrelationId()
+    });
+  }
+
+  /**
+   * Record metric
+   */
+  recordMetric(name: string, value: number, labels?: Record<string, string>): void {
+    const metric = this.metricsRegistry.getSingleMetric(name);
+    if (metric) {
+      if (metric instanceof prom.Counter) {
+        metric.inc(labels, value);
+      } else if (metric instanceof prom.Gauge) {
+        metric.set(labels, value);
+      } else if (metric instanceof prom.Histogram) {
+        metric.observe(labels, value);
+      }
+    }
+  }
+
+  /**
+   * Detect anomalies in metrics
+   */
+  async detectAnomalies(metricName: string): Promise<AnomalyReport> {
+    const timeseries = await this.getMetricTimeseries(metricName);
+    return this.anomalyDetector.analyze(timeseries);
+  }
+
+  /**
+   * Setup monitoring dashboards
+   */
+  private setupDashboards(dashboardConfigs: DashboardConfig[]): void {
+    for (const config of dashboardConfigs) {
+      const dashboard = new Dashboard({
+        name: config.name,
+        panels: config.panels,
+        refreshInterval: config.refreshInterval
+      });
+      this.dashboards.set(config.name, dashboard);
+    }
+  }
+
+  /**
+   * Export metrics for Prometheus
+   */
+  getMetrics(): string {
+    return this.metricsRegistry.metrics();
+  }
+
+  /**
+   * Get real-time dashboard data
+   */
+  getDashboardData(dashboardName: string): DashboardData {
+    const dashboard = this.dashboards.get(dashboardName);
+    if (!dashboard) {
+      throw new Error(`Dashboard ${dashboardName} not found`);
+    }
+    return dashboard.getData();
+  }
+}
+
+/**
+ * Structured Logger
+ */
+class StructuredLogger {
+  private config: LoggerConfig;
+
+  constructor(config: LoggerConfig) {
+    this.config = config;
+  }
+
+  log(entry: LogEntry): void {
+    // Format and output log entry
+    const formatted = this.format(entry);
+    this.output(formatted);
+  }
+
+  private format(entry: LogEntry): string {
+    return JSON.stringify({
+      ...entry,
+      service: this.config.serviceName,
+      environment: this.config.environment
+    });
+  }
+
+  private output(formatted: string): void {
+    // Output to configured destination
+    if (this.config.destination === 'stdout') {
+      console.log(formatted);
+    } else {
+      // Write to file or external service
+    }
+  }
+}
+
+/**
+ * Tracer for distributed tracing
+ */
+class Tracer {
+  private config: TracerConfig;
+  private activeSpans: Map<string, Span> = new Map();
+
+  constructor(config: TracerConfig) {
+    this.config = config;
+  }
+
+  startSpan(name: string, options?: SpanOptions): Span {
+    const span = new Span({
+      name,
+      startTime: Date.now(),
+      parent: options?.parent,
+      attributes: options?.attributes || {}
+    });
+
+    this.activeSpans.set(span.id, span);
+    return span;
+  }
+
+  endSpan(spanId: string): void {
+    const span = this.activeSpans.get(spanId);
+    if (span) {
+      span.end();
+      this.exportSpan(span);
+      this.activeSpans.delete(spanId);
+    }
+  }
+
+  private exportSpan(span: Span): void {
+    // Export to tracing backend
+  }
+}
+
+/**
+ * Anomaly Detector
+ */
+class AnomalyDetector {
+  private config: AnomalyConfig;
+  private models: Map<string, AnomalyModel> = new Map();
+
+  constructor(config: AnomalyConfig) {
+    this.config = config;
+  }
+
+  async analyze(timeseries: TimeSeries): Promise<AnomalyReport> {
+    // Get or create model for this metric
+    let model = this.models.get(timeseries.name);
+    if (!model) {
+      model = new AnomalyModel(timeseries.name);
+      this.models.set(timeseries.name, model);
+    }
+
+    // Train model if needed
+    if (!model.isTrained()) {
+      await model.train(timeseries.historical);
+    }
+
+    // Detect anomalies
+    const anomalies = await model.detect(timeseries.recent);
+
+    return {
+      metric: timeseries.name,
+      anomalies,
+      confidence: model.getConfidence(),
+      timestamp: new Date()
+    };
+  }
+}
+
+/**
+ * Dashboard for real-time monitoring
+ */
+class Dashboard {
+  private config: DashboardConfig;
+  private panels: Map<string, Panel> = new Map();
+
+  constructor(config: DashboardConfig) {
+    this.config = config;
+    this.initializePanels();
+  }
+
+  private initializePanels(): void {
+    for (const panelConfig of this.config.panels) {
+      const panel = new Panel(panelConfig);
+      this.panels.set(panelConfig.id, panel);
+    }
+  }
+
+  getData(): DashboardData {
+    const panelData: PanelData[] = [];
+    
+    for (const panel of this.panels.values()) {
+      panelData.push(panel.getData());
+    }
+
+    return {
+      name: this.config.name,
+      panels: panelData,
+      lastUpdated: new Date()
+    };
+  }
+}
+
+/**
+ * Supporting types
+ */
+interface ObservabilityConfig {
+  serviceName: string;
+  environment: string;
+  logLevel: string;
+  logDestination: string;
+  tracingEndpoint: string;
+  metricsPort: number;
+  anomalyWindowSize?: number;
+  anomalySensitivity?: number;
+  dashboards: DashboardConfig[];
+}
+
+interface LogEntry {
+  level: LogLevel;
+  message: string;
+  timestamp: Date;
+  context?: any;
+  correlationId?: string;
+}
+
+interface Span {
+  id: string;
+  name: string;
+  startTime: number;
+  endTime?: number;
+  parent?: Span;
+  attributes: Record<string, any>;
+  end(): void;
+}
+
+interface TimeSeries {
+  name: string;
+  historical: DataPoint[];
+  recent: DataPoint[];
+}
+
+interface AnomalyReport {
+  metric: string;
+  anomalies: Anomaly[];
+  confidence: number;
+  timestamp: Date;
+}
+
+interface DashboardData {
+  name: string;
+  panels: PanelData[];
+  lastUpdated: Date;
+}
+
+type LogLevel = 'debug' | 'info' | 'warn' | 'error' | 'fatal';
+typescript
+// mcp-server-architecture/src/resilience/auto-repair.ts
+
+import { EventEmitter } from 'events';
+
+/**
+ * Auto-Repair and Self-Healing System
+ * Implements automatic recovery and resilience patterns
+ */
+export class AutoRepairSystem extends EventEmitter {
+  private healthCheckers: Map<string, HealthChecker> = new Map();
+  private repairStrategies: Map<string, RepairStrategy> = new Map();
+  private circuitBreakers: Map<string, CircuitBreaker> = new Map();
+  private recoveryPolicies: RecoveryPolicy[] = [];
+  private incidentHistory: IncidentHistory;
+
+  constructor(config: AutoRepairConfig) {
+    super();
+    this.initializeAutoRepair(config);
+  }
+
+  /**
+   * Initialize auto-repair system
+   */
+  private initializeAutoRepair(config: AutoRepairConfig): void {
+    // Initialize incident history
+    this.incidentHistory = new IncidentHistory({
+      retentionDays: config.incidentRetentionDays || 30
+    });
+
+    // Register health checkers
+    this.registerHealthCheckers(config.healthCheckers);
+
+    // Register repair strategies
+    this.registerRepairStrategies(config.repairStrategies);
+
+    // Initialize recovery policies
+    this.recoveryPolicies = config.recoveryPolicies;
+
+    // Start monitoring
+    this.startHealthMonitoring();
+  }
+
+  /**
+   * Register component health checker
+   */
+  registerHealthChecker(componentId: string, checker: HealthChecker): void {
+    this.healthCheckers.set(componentId, checker);
+    
+    // Create circuit breaker for component
+    const circuitBreaker = new CircuitBreaker({
+      componentId,
+      threshold: 5,
+      timeout: 60000,
+      resetTimeout: 300000
+    });
+    this.circuitBreakers.set(componentId, circuitBreaker);
+  }
+
+  /**
+   * Register repair strategy
+   */
+  registerRepairStrategy(failureType: string, strategy: RepairStrategy): void {
+    this.repairStrategies.set(failureType, strategy);
+  }
+
+  /**
+   * Start continuous health monitoring
+   */
+  private startHealthMonitoring(): void {
+    setInterval(async () => {
+      for (const [componentId, checker] of this.healthCheckers) {
+        try {
+          await this.checkComponentHealth(componentId, checker);
+        } catch (error) {
+          console.error(`Health check failed for ${componentId}:`, error);
+        }
+      }
+    }, 10000); // Every 10 seconds
+  }
+
+  /**
+   * Check component health
+   */
+  private async checkComponentHealth(
+    componentId: string,
+    checker: HealthChecker
+  ): Promise<void> {
+    const circuitBreaker = this.circuitBreakers.get(componentId);
+    
+    // Check if circuit is open
+    if (circuitBreaker?.isOpen()) {
+      // Try to reset if timeout passed
+      if (circuitBreaker.canReset()) {
+        await this.attemptRecovery(componentId);
+      }
+      return;
+    }
+
+    // Perform health check
+    const health = await checker.check();
+    
+    if (!health.healthy) {
+      // Record failure
+      circuitBreaker?.recordFailure();
+      
+      // Create incident
+      const incident = await this.createIncident(componentId, health);
+      
+      // Attempt repair
+      await this.attemptRepair(incident);
+    } else {
+      // Record success
+      circuitBreaker?.recordSuccess();
+    }
+  }
+
+  /**
+   * Create incident from health check failure
+   */
+  private async createIncident(
+    componentId: string,
+    health: HealthStatus
+  ): Promise<Incident> {
+    const incident: Incident = {
+      id: this.generateIncidentId(),
+      componentId,
+      timestamp: new Date(),
+      severity: this.calculateSeverity(health),
+      symptoms: health.issues || [],
+      status: 'OPEN',
+      attempts: []
+    };
+
+    // Store incident
+    await this.incidentHistory.record(incident);
+    
+    // Emit event
+    this.emit('incident:created', incident);
+    
+    return incident;
+  }
+
+  /**
+   * Attempt to repair component
+   */
+  private async attemptRepair(incident: Incident): Promise<void> {
+    // Find applicable repair strategies
+    const strategies = this.findApplicableStrategies(incident);
+    
+    for (const strategy of strategies) {
+      const attempt: RepairAttempt = {
+        strategyId: strategy.id,
+        timestamp: new Date(),
+        status: 'IN_PROGRESS'
+      };
+      
+      incident.attempts.push(attempt);
+      
+      try {
+        // Execute repair strategy
+        const result = await strategy.execute(incident);
+        
+        if (result.success) {
+          attempt.status = 'SUCCESS';
+          incident.status = 'RESOLVED';
+          incident.resolvedAt = new Date();
+          
+          // Verify fix
+          await this.verifyRepair(incident);
+          
+          // Emit success
+          this.emit('repair:success', { incident, strategy });
+          
+          break;
+        } else {
+          attempt.status = 'FAILED';
+          attempt.error = result.error;
+        }
+        
+      } catch (error) {
+        attempt.status = 'FAILED';
+        attempt.error = error.message;
+        
+        // Log failure
+        console.error(`Repair strategy ${strategy.id} failed:`, error);
+      }
+    }
+    
+    // If all strategies failed
+    if (incident.status === 'OPEN') {
+      await this.escalateIncident(incident);
+    }
+  }
+
+  /**
+   * Find applicable repair strategies
+   */
+  private findApplicableStrategies(incident: Incident): RepairStrategy[] {
+    const strategies: RepairStrategy[] = [];
+    
+    for (const [type, strategy] of this.repairStrategies) {
+      if (strategy.canHandle(incident)) {
+        strategies.push(strategy);
+      }
+    }
+    
+    // Sort by priority
+    return strategies.sort((a, b) => b.priority - a.priority);
+  }
+
+  /**
+   * Verify repair was successful
+   */
+  private async verifyRepair(incident: Incident): Promise<void> {
+    const checker = this.healthCheckers.get(incident.componentId);
+    if (!checker) return;
+
+    // Wait before verification
+    await new Promise(resolve => setTimeout(resolve, 5000));
+    
+    // Check health
+    const health = await checker.check();
+    
+    if (!health.healthy) {
+      // Repair failed, reopen incident
+      incident.status = 'OPEN';
+      incident.resolvedAt = undefined;
+      
+      // Try next strategy
+      await this.attemptRepair(incident);
+    }
+  }
+
+  /**
+   * Escalate unresolved incident
+   */
+  private async escalateIncident(incident: Incident): Promise<void> {
+    incident.status = 'ESCALATED';
+    
+    // Apply escalation policy
+    const policy = this.findEscalationPolicy(incident);
+    if (policy) {
+      await policy.escalate(incident);
+    }
+    
+    // Emit escalation
+    this.emit('incident:escalated', incident);
+  }
+
+  /**
+   * Attempt recovery after circuit breaker trip
+   */
+  private async attemptRecovery(componentId: string): Promise<void> {
+    const circuitBreaker = this.circuitBreakers.get(componentId);
+    if (!circuitBreaker) return;
+
+    try {
+      // Find recovery strategy
+      const strategy = this.repairStrategies.get('circuit_recovery');
+      if (strategy) {
+        const result = await strategy.execute({
+          componentId,
+          type: 'circuit_breaker_recovery'
+        });
+        
+        if (result.success) {
+          circuitBreaker.reset();
+          this.emit('recovery:success', { componentId });
+        }
+      }
+    } catch (error) {
+      console.error(`Recovery failed for ${componentId}:`, error);
+    }
+  }
+
+  /**
+   * Get repair statistics
+   */
+  getStatistics(): RepairStatistics {
+    return {
+      totalIncidents: this.incidentHistory.getTotal(),
+      resolvedIncidents: this.incidentHistory.getResolved(),
+      escalatedIncidents: this.incidentHistory.getEscalated(),
+      mttr: this.incidentHistory.getMTTR(),
+      successRate: this.incidentHistory.getSuccessRate()
+    };
+  }
+}
+
+/**
+ * Circuit Breaker implementation
+ */
+class CircuitBreaker {
+  private componentId: string;
+  private state: 'CLOSED' | 'OPEN' | 'HALF_OPEN' = 'CLOSED';
+  private failures: number = 0;
+  private lastFailureTime?: Date;
+  private config: CircuitBreakerConfig;
+
+  constructor(config: CircuitBreakerConfig) {
+    this.componentId = config.componentId;
+    this.config = config;
+  }
+
+  isOpen(): boolean {
+    return this.state === 'OPEN';
+  }
+
+  canReset(): boolean {
+    if (this.state !== 'OPEN' || !this.lastFailureTime) {
+      return false;
+    }
+    
+    const elapsed = Date.now() - this.lastFailureTime.getTime();
+    return elapsed >= this.config.resetTimeout;
+  }
+
+  recordFailure(): void {
+    this.failures++;
+    this.lastFailureTime = new Date();
+    
+    if (this.failures >= this.config.threshold) {
+      this.state = 'OPEN';
+    }
+  }
+
+  recordSuccess(): void {
+    if (this.state === 'HALF_OPEN') {
+      this.reset();
+    }
+  }
+
+  reset(): void {
+    this.state = 'CLOSED';
+    this.failures = 0;
+    this.lastFailureTime = undefined;
+  }
+}
+
+/**
+ * Repair Strategy base class
+ */
+abstract class RepairStrategy {
+  id: string;
+  priority: number;
+
+  constructor(id: string, priority: number) {
+    this.id = id;
+    this.priority = priority;
+  }
+
+  abstract canHandle(incident: Incident): boolean;
+  abstract execute(context: any): Promise<RepairResult>;
+}
+
+/**
+ * Restart Strategy
+ */
+class RestartStrategy extends RepairStrategy {
+  constructor() {
+    super('restart', 10);
+  }
+
+  canHandle(incident: Incident): boolean {
+    return incident.symptoms.some(s => 
+      s.type === 'unresponsive' || s.type === 'crashed'
+    );
+  }
+
+  async execute(context: any): Promise<RepairResult> {
+    try {
+      // Implement restart logic
+      await this.restartComponent(context.componentId);
+      
+      return {
+        success: true,
+        message: 'Component restarted successfully'
+      };
+    } catch (error) {
+      return {
+        success: false,
+        error: error.message
+      };
+    }
+  }
+
+  private async restartComponent(componentId: string): Promise<void> {
+    // Implementation specific to component type
+  }
+}
+
+/**
+ * Supporting types
+ */
+interface AutoRepairConfig {
+  healthCheckers: HealthCheckerConfig[];
+  repairStrategies: RepairStrategyConfig[];
+  recoveryPolicies: RecoveryPolicy[];
+  incidentRetentionDays?: number;
+}
+
+interface HealthChecker {
+  check(): Promise<HealthStatus>;
+}
+
+interface HealthStatus {
+  healthy: boolean;
+  issues?: HealthIssue[];
+  metrics?: HealthMetrics;
+}
+
+interface Incident {
+  id: string;
+  componentId: string;
+  timestamp: Date;
+  severity: 'LOW' | 'MEDIUM' | 'HIGH' | 'CRITICAL';
+  symptoms: HealthIssue[];
+  status: 'OPEN' | 'RESOLVED' | 'ESCALATED';
+  attempts: RepairAttempt[];
+  resolvedAt?: Date;
+}
+
+interface RepairAttempt {
+  strategyId: string;
+  timestamp: Date;
+  status: 'IN_PROGRESS' | 'SUCCESS' | 'FAILED';
+  error?: string;
+}
+
+interface RepairResult {
+  success: boolean;
+  message?: string;
+  error?: string;
+}
+
+interface RepairStatistics {
+  totalIncidents: number;
+  resolvedIncidents: number;
+  escalatedIncidents: number;
+  mttr: number;
+  successRate: number;
+}
+typescript
+// mcp-server-architecture/src/main.ts
+
+import { TrustKernel } from './core/trust-kernel';
+import { MCPGateway } from './integration/mcp-gateway';
+import { ConceptMemoryGraphService } from './memory/concept-memory-graph';
+import { MCPKaizenServer } from './servers/mcp-kaizen';
+import { MCPCeleryServer } from './servers/mcp-celery';
+import { TORIFilterIntegration } from './integration/tori-filter';
+import { ObservabilityStack } from './observability/monitoring';
+import { AutoRepairSystem } from './resilience/auto-repair';
+
+/**
+ * Main entry point for MCP Server Architecture
+ * Initializes and orchestrates all components
+ */
+export class MCPServerArchitecture {
+  private trustKernel: TrustKernel;
+  private gateway: MCPGateway;
+  private memoryGraph: ConceptMemoryGraphService;
+  private kaizenServer: MCPKaizenServer;
+  private celeryServer: MCPCeleryServer;
+  private toriFilter: TORIFilterIntegration;
+  private observability: ObservabilityStack;
+  private autoRepair: AutoRepairSystem;
+
+  constructor(config: ArchitectureConfig) {
+    this.initializeArchitecture(config);
+  }
+
+  /**
+   * Initialize all components
+   */
+  private async initializeArchitecture(config: ArchitectureConfig): Promise<void> {
+    console.log('Initializing MCP Server Architecture...');
+
+    // Initialize observability first
+    this.observability = new ObservabilityStack({
+      serviceName: 'mcp-server-architecture',
+      environment: config.environment,
+      logLevel: config.logLevel || 'info',
+      logDestination: config.logDestination || 'stdout',
+      tracingEndpoint: config.tracingEndpoint,
+      metricsPort: config.metricsPort || 9090,
+      dashboards: this.getDefaultDashboards()
+    });
+
+    // Initialize Trust Kernel
+    this.trustKer
+
+
+
+
+
+
+
+

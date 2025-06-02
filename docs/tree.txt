@@ -1,0 +1,955 @@
+>> Show-Tree $RootPath
+>>
+├─ .git
+├─ .github
+│  ├─ PULL_REQUEST_TEMPLATE
+│  ├─ workflows
+├─ .pytest_cache
+│  ├─ v
+│  │  ├─ cache
+├─ .roo
+├─ .turbo
+│  ├─ cache
+│  ├─ cookies
+│  ├─ daemon
+├─ .vscode
+├─ .yarn
+│  ├─ releases
+├─ alan_backend
+│  ├─ .github
+│  │  ├─ workflows
+│  ├─ banksy
+│  │  ├─ tests
+│  │  ├─ __pycache__
+│  │  │  ├─ alan_psi_sync_bridge.cpython-311.pyc
+│  │  │  ├─ banksy_spin.cpython-311.pyc
+│  │  │  ├─ broadcast.cpython-311.pyc
+│  │  │  ├─ clock.cpython-311.pyc
+│  │  │  ├─ psi_koopman_integration.cpython-311.pyc
+│  │  │  ├─ psi_sync_monitor.cpython-311.pyc
+│  │  │  ├─ __init__.cpython-311.pyc
+│  │  ├─ banksy_spin.py
+│  │  ├─ __init__.py
+│  ├─ core
+│  │  ├─ controller
+│  │  ├─ elfin_bridge
+│  │  ├─ memory
+│  │  ├─ oscillator
+│  │  ├─ tests
+│  ├─ elfin
+│  │  ├─ .github
+│  │  │  ├─ workflows
+│  │  ├─ .husky
+│  │  ├─ .vscode
+│  │  ├─ analyzer
+│  │  │  ├─ test_files
+│  │  │  ├─ __pycache__
+│  │  ├─ barrier
+│  │  ├─ benchmarks
+│  │  │  ├─ examples
+│  │  │  ├─ systems
+│  │  ├─ ci
+│  │  ├─ cli
+│  │  ├─ codegen
+│  │  ├─ compiler
+│  │  │  ├─ ast
+│  │  │  │  ├─ __pycache__
+│  │  │  ├─ codegen
+│  │  │  ├─ grammar
+│  │  │  │  ├─ __pycache__
+│  │  │  ├─ passes
+│  │  │  │  ├─ __pycache__
+│  │  │  ├─ tests
+│  │  │  │  ├─ __pycache__
+│  │  │  ├─ __pycache__
+│  │  ├─ debug
+│  │  ├─ docs
+│  │  ├─ errors
+│  │  ├─ examples
+│  │  │  ├─ generated
+│  │  │  ├─ generated_no_units
+│  │  │  ├─ projects
+│  │  │  │  ├─ robotics
+│  │  │  │  │  ├─ controllers
+│  │  │  │  │  ├─ math
+│  │  ├─ formatting
+│  │  ├─ integration
+│  │  ├─ koopman
+│  │  │  ├─ tests
+│  │  ├─ learning
+│  │  │  ├─ examples
+│  │  │  ├─ integration
+│  │  │  ├─ models
+│  │  │  ├─ training
+│  │  ├─ linting
+│  │  ├─ lsp
+│  │  ├─ modules
+│  │  ├─ outputs
+│  │  ├─ packages
+│  │  ├─ packaging
+│  │  ├─ parser
+│  │  │  ├─ __pycache__
+│  │  ├─ proto
+│  │  ├─ runtime
+│  │  ├─ scripts
+│  │  ├─ stability
+│  │  │  ├─ agents
+│  │  │  ├─ backends
+│  │  │  ├─ configs
+│  │  │  ├─ core
+│  │  │  ├─ demos
+│  │  │  ├─ samplers
+│  │  │  ├─ tests
+│  │  │  ├─ training
+│  │  │  ├─ verify
+│  │  │  ├─ __pycache__
+│  │  ├─ std
+│  │  ├─ templates
+│  │  │  ├─ aerial
+│  │  │  │  ├─ src
+│  │  │  ├─ hybrid
+│  │  │  │  ├─ src
+│  │  │  ├─ manipulator
+│  │  │  │  ├─ src
+│  │  │  ├─ mobile
+│  │  │  │  ├─ output
+│  │  │  │  ├─ src
+│  │  │  ├─ quadrotor
+│  │  │  │  ├─ src
+│  │  │  ├─ std
+│  │  ├─ tests
+│  │  │  ├─ golden
+│  │  │  │  ├─ formatter
+│  │  │  ├─ modules
+│  │  │  │  ├─ fixtures
+│  │  │  │  │  ├─ math
+│  │  │  │  │  ├─ sensors
+│  │  │  ├─ __pycache__
+│  │  ├─ units
+│  │  │  ├─ __pycache__
+│  │  ├─ utils
+│  │  │  ├─ __pycache__
+│  │  ├─ validation
+│  │  ├─ visualization
+│  │  │  ├─ static
+│  │  ├─ __pycache__
+│  ├─ planner
+│  │  ├─ tests
+│  ├─ routes
+│  ├─ scripts
+│  ├─ server
+│  ├─ snapshot
+│  ├─ __pycache__
+│  │  ├─ __init__.cpython-311.pyc
+│  ├─ config.py
+│  ├─ __init__.py
+├─ alan_core
+│  ├─ examples
+│  ├─ fuzz
+│  │  ├─ corpus
+│  │  │  ├─ fuzz_controller_step
+│  │  │  ├─ fuzz_roundtrip
+│  │  ├─ fuzz_targets
+│  ├─ src
+│  │  ├─ controller
+│  │  ├─ elfin
+│  │  ├─ oscillator
+│  │  ├─ snapshot
+│  ├─ tests
+├─ apps
+│  ├─ chat
+│  │  ├─ src
+│  ├─ chatenterprise
+│  │  ├─ src
+│  ├─ ide
+│  │  ├─ public
+│  │  ├─ src
+├─ backend
+│  ├─ routes
+│  │  ├─ mcp
+├─ backups
+├─ backup_20250530_110222
+│  ├─ extractConceptsFromDocument_backup.py
+│  ├─ main_backup.py
+│  ├─ pipeline_backup.py
+├─ banksy
+│  ├─ config.yaml
+├─ build
+│  ├─ assets
+│  ├─ static
+│  │  ├─ css
+│  │  ├─ js
+├─ chatenterprise
+│  ├─ src
+│  │  ├─ components
+├─ ci
+├─ concept-mesh
+│  ├─ docs
+│  ├─ src
+│  │  ├─ agents
+│  │  │  ├─ planner
+│  │  ├─ auth
+│  │  ├─ bin
+│  │  ├─ cli
+│  │  ├─ diff
+│  │  ├─ ingest
+│  │  ├─ mesh
+│  │  ├─ psiarc
+│  │  ├─ safety
+│  │  ├─ tools
+│  │  ├─ ui
+│  │  ├─ ffi_bridge.rs
+│  │  ├─ lib.rs
+│  │  ├─ soliton_memory.rs
+│  ├─ tests
+│  ├─ ui
+│  │  ├─ components
+│  ├─ Cargo.toml
+├─ config
+│  ├─ ingestion_settings.json
+├─ conversations
+├─ coverage
+│  ├─ lcov-report
+├─ dashboard
+│  ├─ src
+│  │  ├─ components
+│  │  ├─ hooks
+├─ data
+├─ database
+│  ├─ grafana
+│  │  ├─ dashboards
+│  ├─ supabase
+│  │  ├─ functions
+│  │  │  ├─ ingest
+│  │  ├─ tables
+├─ dist
+│  ├─ assets
+├─ docs
+│  ├─ affective computing
+│  ├─ better
+│  ├─ chat
+│  │  ├─ av
+│  ├─ ci
+│  ├─ contextual understanding
+│  ├─ conversations
+│  │  ├─ 3259
+│  │  │  ├─ extracted
+│  │  ├─ cline
+│  │  ├─ cline_split
+│  ├─ dashboards
+│  ├─ ELFIN
+│  │  ├─ AkornSimilar
+│  │  ├─ dark soliton
+│  │  ├─ Epoch test
+│  │  ├─ nnlf
+│  ├─ errors
+│  ├─ First upload
+│  ├─ hologram
+│  ├─ lyapunov_analysis
+│  ├─ memory
+│  │  ├─ temporal pattern
+│  │  ├─ temporal spectral
+│  ├─ persona
+│  │  ├─ audio
+│  ├─ safety_recipes
+│  ├─ sprint
+│  ├─ Status
+│  ├─ StrategicMarketingPlan
+│  ├─ wiki
+│  ├─ Canwedo4d.json
+│  ├─ Full Audit and Production Deployment Plan for TORI Digital Consciousness.docx
+│  ├─ I understand you want to download all papers and publications from 2025 from these prestigious academic sites.docx
+│  ├─ RevisedMasterPlanandStrategicAnalysis05_12_25.docx
+│  ├─ 🧠 TURING.docx
+├─ elfin
+│  ├─ grammar
+├─ elfin_lsp
+│  ├─ adapters
+│  │  ├─ __pycache__
+│  ├─ elfin_lsp.egg-info
+│  ├─ providers
+│  │  ├─ __pycache__
+│  ├─ tests
+│  │  ├─ __pycache__
+│  ├─ __pycache__
+├─ examples
+├─ export
+│  ├─ TORI_diagnostics.zip
+├─ gateway
+│  ├─ secrets
+├─ generated
+├─ grafana
+├─ ide_frontend
+│  ├─ .turbo
+│  ├─ build
+│  │  ├─ assets
+│  │  ├─ esm-test
+│  ├─ docs
+│  ├─ node_modules
+│  ├─ public
+│  │  ├─ esm-test
+│  ├─ src
+│  │  ├─ agents
+│  │  ├─ components
+│  │  │  ├─ AgentPanel
+│  │  │  ├─ BucketViewer
+│  │  │  ├─ ChatHistory
+│  │  │  ├─ ConceptEditorPanel
+│  │  │  ├─ ConceptFieldCanvas
+│  │  │  ├─ ConceptGraphVisualizer
+│  │  │  ├─ DeveloperStateMonitor
+│  │  │  ├─ ElfinDebug
+│  │  │  ├─ FieldMeditationMode
+│  │  │  ├─ LyapunovPredictabilityPanel
+│  │  │  ├─ PersonaSelector
+│  │  │  ├─ QuickActionsBar
+│  │  │  ├─ QuickActionsPanel
+│  │  │  ├─ RipplePreview
+│  │  │  ├─ SemanticCommitDemo
+│  │  │  ├─ SemanticCommitPanel
+│  │  │  ├─ SemanticSearchPanel
+│  │  │  ├─ settings
+│  │  │  ├─ SourceValidationAdmin
+│  │  │  ├─ TimeoutNotice
+│  │  ├─ diagnostics
+│  │  ├─ ghost
+│  │  │  ├─ psi_trajectory
+│  │  │  │  ├─ bench
+│  │  │  │  ├─ bin
+│  │  │  │  ├─ demo
+│  │  │  │  ├─ fuzz
+│  │  │  │  │  ├─ corpus
+│  │  │  │  │  │  ├─ crypto
+│  │  │  │  │  │  ├─ frame_decoder
+│  │  │  │  │  │  ├─ kernel_dispatcher
+│  │  │  │  ├─ profiling
+│  │  │  │  ├─ rs_impl
+│  │  │  │  │  ├─ src
+│  │  │  │  ├─ tests
+│  │  │  │  ├─ utils
+│  │  ├─ hooks
+│  │  ├─ memory
+│  │  ├─ routes
+│  │  ├─ services
+│  │  ├─ state
+│  │  ├─ telemetry
+│  │  ├─ timecapsule
+│  │  ├─ types
+│  │  ├─ utils
+│  │  │  ├─ affective
+│  │  ├─ vis
+│  │  ├─ zoning
+│  │  ├─ __tests__
+│  │  │  ├─ accessibility
+│  │  │  ├─ components
+│  │  │  │  ├─ PersonaSelector
+│  │  │  │  │  ├─ __mocks__
+│  │  │  ├─ e2e
+│  │  │  ├─ integration
+│  │  │  │  ├─ ExecutionTracer_FieldMeditationMode
+│  │  │  │  ├─ Exporter_ConceptGraphService
+│  │  │  │  ├─ MCPClient_DebugAgent
+│  │  │  │  ├─ RefactorService_EditorSyncService
+│  │  │  ├─ performance
+│  │  │  ├─ security
+│  │  │  ├─ services
+│  │  │  ├─ __mocks__
+│  ├─ tests
+│  │  ├─ e2e
+│  │  ├─ support
+│  ├─ __mocks__
+├─ ImSpecial
+│  ├─ demo_soliton_consciousness.js
+│  ├─ soliton_user.js
+├─ ingest-bus
+│  ├─ .vscode
+│  ├─ docs
+│  ├─ examples
+│  ├─ helm
+│  ├─ logs
+│  │  ├─ loopRecord
+│  │  │  ├─ loop_2025-05-27T12-30-00.json
+│  ├─ models
+│  │  ├─ __pycache__
+│  ├─ persona_snapshots
+│  │  ├─ ghost_collective_segment_3.json
+│  │  ├─ ghost_creator_segment_3.json
+│  │  ├─ ghost_critic_segment_3.json
+│  │  ├─ ghost_scholar_segment_3.json
+│  ├─ routes
+│  │  ├─ __pycache__
+│  │  ├─ enhanced_queue.py
+│  ├─ scripts
+│  ├─ src
+│  │  ├─ agents
+│  │  │  ├─ ghostPersonaFeedbackRouter.py
+│  │  ├─ api
+│  │  ├─ lib
+│  │  │  ├─ cognitive
+│  │  │  │  ├─ memoryDivergenceWatcher.py
+│  │  ├─ mcp
+│  │  ├─ models
+│  │  ├─ routes
+│  │  │  ├─ realtime_video_streaming.py
+│  │  │  ├─ video_ingestion.py
+│  │  ├─ services
+│  │  │  ├─ realtime_video_processor.py
+│  │  │  ├─ video_ingestion_service.py
+│  │  │  ├─ video_memory_integration.py
+│  │  ├─ static
+│  │  ├─ ui
+│  │  │  ├─ components
+│  │  │  │  ├─ TrajectoryVisualizer.svelte
+│  │  ├─ utils
+│  │  ├─ ghost_ops_phase2_integration.py
+│  ├─ tests
+│  ├─ utils
+│  │  ├─ __pycache__
+│  ├─ workers
+│  │  ├─ __pycache__
+│  │  ├─ admin_psi_mesh_ui.py
+│  │  ├─ dynamic_concept_extractor.py
+│  │  ├─ enhanced_extract.py
+│  │  ├─ extract.py
+│  │  ├─ integration_coordinator.py
+│  │  ├─ live_reingest_manager.py
+│  │  ├─ production_file_handlers.py
+│  │  ├─ psi_mesh_integration.py
+│  │  ├─ psi_mesh_verification_layer.py
+│  │  ├─ third_party_gateway.py
+│  ├─ __pycache__
+│  ├─ main_complete.py
+│  ├─ main_enhanced.py
+│  ├─ main_video.py
+│  ├─ setup_video_system.py
+│  ├─ start-video-system.bat
+├─ ingest_pdf
+│  ├─ config
+│  │  ├─ development_config.json
+│  │  ├─ production_config.json
+│  │  ├─ testing_config.json
+│  ├─ data
+│  ├─ extracted_conversations
+│  ├─ temp
+│  ├─ __pycache__
+│  │  ├─ clustering.cpython-311.pyc
+│  │  ├─ clustering_config.cpython-311.pyc
+│  │  ├─ clustering_enhanced.cpython-311.pyc
+│  │  ├─ clustering_monitor.cpython-311.pyc
+│  │  ├─ clustering_pipeline.cpython-311.pyc
+│  │  ├─ cognitive_interface.cpython-311.pyc
+│  │  ├─ concept_logger.cpython-311.pyc
+│  │  ├─ concept_metadata.cpython-311.pyc
+│  │  ├─ extractConceptsFromDocument.cpython-311.pyc
+│  │  ├─ extract_blocks.cpython-311.pyc
+│  │  ├─ koopman_estimator.cpython-311.pyc
+│  │  ├─ main.cpython-311.pyc
+│  │  ├─ memory_gating.cpython-311.pyc
+│  │  ├─ models.cpython-311.pyc
+│  │  ├─ persistence.cpython-311.pyc
+│  │  ├─ phase_walk.cpython-311.pyc
+│  │  ├─ pipeline.cpython-311.pyc
+│  │  ├─ pipeline_validator.cpython-311.pyc
+│  │  ├─ scoring.cpython-311.pyc
+│  │  ├─ source_validator.cpython-311.pyc
+│  │  ├─ threshold_config.cpython-311.pyc
+│  │  ├─ time_context.cpython-311.pyc
+│  ├─ clusterBenchmark.ts
+│  ├─ clustering.py
+│  ├─ clustering_config.py
+│  ├─ clustering_demo.py
+│  ├─ clustering_demo_results.json
+│  ├─ clustering_enhanced.py
+│  ├─ clustering_history.json
+│  ├─ clustering_integration_example.ts
+│  ├─ clustering_monitor.log
+│  ├─ clustering_monitor.py
+│  ├─ clustering_pipeline.py
+│  ├─ cognitive_interface.py
+│  ├─ conceptScoring.ts
+│  ├─ concept_logger.py
+│  ├─ concept_scoring_integration.py
+│  ├─ dynamic_concept_extractor.py
+│  ├─ enhanced_clustering_integration.py
+│  ├─ extractConceptsFromDocument.py
+│  ├─ extractConceptsFromVideo.py
+│  ├─ extract_blocks.py
+│  ├─ ingest_pdf.zip
+│  ├─ integration_example.py
+│  ├─ main.py
+│  ├─ models.py
+│  ├─ persistence.py
+│  ├─ pipeline.py
+│  ├─ pipeline_validator.py
+│  ├─ pipeline_with_first_patch.py
+│  ├─ run_clustering_demo.bat
+│  ├─ run_clustering_integration_test.bat
+│  ├─ scoring.py
+│  ├─ setup_clustering_system.bat
+│  ├─ setup_clustering_system_fixed.bat
+│  ├─ threshold_config.py
+├─ jobs
+├─ lib
+│  ├─ cognitive
+│  │  ├─ braidMemory.ts
+│  │  ├─ closureGuard.ts
+│  │  ├─ cognitiveEngine.ts
+│  │  ├─ cognitiveEngine_phase3.ts
+│  │  ├─ cognitiveState.ts
+│  │  ├─ conceptClusteringBridge.js
+│  │  ├─ conceptEvaluator.ts
+│  │  ├─ ConceptInspector.svelte
+│  │  ├─ conceptScoring.ts
+│  │  ├─ conceptScoring_enhanced.ts
+│  │  ├─ contradictionMonitor.ts
+│  │  ├─ ghostCollective.ts
+│  │  ├─ holographicMemory.ts
+│  │  ├─ index.ts
+│  │  ├─ index_phase3.ts
+│  │  ├─ loopRecord.ts
+│  │  ├─ memoryMetrics.ts
+│  │  ├─ paradoxAnalyzer.ts
+│  │  ├─ phaseController.ts
+│  ├─ components
+│  │  ├─ ChatPanel.svelte
+│  │  ├─ ConceptDebugPanel.svelte
+│  │  ├─ ConceptInspector.svelte
+│  │  ├─ ConversationLog.svelte
+│  │  ├─ DocumentSummary.svelte
+│  │  ├─ GhostOverlay.svelte
+│  │  ├─ HolographicVisualization.svelte
+│  │  ├─ MemoryDrawer.svelte
+│  │  ├─ MemoryPanel.svelte
+│  │  ├─ PersonaSelector.svelte
+│  │  ├─ ScholarSpherePanel.svelte
+│  │  ├─ SuggestionBar.svelte
+│  │  ├─ ThoughtspacePlaceholder.svelte
+│  │  ├─ ThoughtspaceRenderer.svelte
+│  │  ├─ UploadPanel.svelte
+│  │  ├─ UserAuth.svelte
+│  │  ├─ UserSettings.svelte
+│  │  ├─ VaultViewer.svelte
+│  ├─ elfin
+│  │  ├─ commands
+│  │  │  ├─ ghost.ts
+│  │  │  ├─ project.ts
+│  │  │  ├─ vault.ts
+│  │  ├─ scripts
+│  │  │  ├─ onConceptChange.ts
+│  │  │  ├─ onGhostStateChange.ts
+│  │  │  ├─ onUpload.ts
+│  │  ├─ ghostPersonaEngine.ts
+│  │  ├─ interpreter.ts
+│  │  ├─ scriptEngine.ts
+│  │  ├─ types.ts
+│  ├─ services
+│  │  ├─ api.ts
+│  │  ├─ enhancedApi.ts
+│  ├─ stores
+│  │  ├─ conceptMesh.ts
+│  │  ├─ ghostPersona.ts
+│  │  ├─ index.ts
+│  │  ├─ persistence.ts
+│  │  ├─ types.ts
+│  │  ├─ user.ts
+│  ├─ browser-elfin.ts
+│  ├─ client-init.ts
+│  ├─ config.ts
+│  ├─ toriInit.ts
+├─ logs
+│  ├─ ingest-bus
+│  ├─ memory
+├─ mcp
+│  ├─ more
+├─ memory
+│  ├─ __pycache__
+├─ node_modules
+├─ output
+│  ├─ processed_pdfs
+│  ├─ processed_pdfs_recursive
+├─ outputs
+│  ├─ baseline
+│  ├─ with_instability
+├─ packages
+│  ├─ data-model
+│  │  ├─ dist
+│  │  ├─ node_modules
+│  │  ├─ src
+│  │  │  ├─ concept
+│  │  │  ├─ persona
+│  ├─ ingest
+│  │  ├─ dist
+│  │  ├─ node_modules
+│  │  ├─ src
+│  │  │  ├─ config
+│  │  │  ├─ types
+│  ├─ runtime-bridge
+│  │  ├─ dist
+│  │  │  ├─ types
+│  │  ├─ node_modules
+│  │  ├─ python
+│  │  ├─ src
+│  │  │  ├─ types
+│  ├─ ui-kit
+│  │  ├─ .storybook
+│  │  ├─ dist
+│  │  │  ├─ components
+│  │  │  │  ├─ WebSocketStatus
+│  │  ├─ node_modules
+│  │  ├─ scripts
+│  │  ├─ src
+│  │  │  ├─ components
+│  │  │  │  ├─ ChatHistory
+│  │  │  │  ├─ CodeWorkspace
+│  │  │  │  ├─ ErrorBoundary
+│  │  │  │  ├─ PersonaBar
+│  │  │  │  ├─ QuickActionsBar
+│  │  │  │  ├─ WebSocketStatus
+│  │  │  ├─ languages
+│  │  │  │  ├─ elfin
+│  │  │  ├─ types
+├─ pcc
+├─ prometheus
+│  ├─ rules
+├─ psiarc_logs
+├─ public
+│  ├─ assets
+├─ puppeteer-screenshots
+│  ├─ 2025-05-09T19-13-22
+├─ registry
+│  ├─ corpus
+│  ├─ index
+│  │  ├─ c
+│  │  │  ├─ v
+│  │  ├─ e
+│  │  │  ├─ lf
+│  ├─ kaizen
+│  │  ├─ components
+│  │  ├─ KAIZ-001
+│  │  ├─ schemas
+│  │  ├─ auto_kaizen.py
+│  │  ├─ auto_kaizen_thresholds.yaml
+│  │  ├─ kaizen_hooks.py
+│  ├─ mcp
+├─ routes
+│  ├─ .well-known
+│  │  ├─ +server.ts
+│  ├─ elfin
+│  │  ├─ +page.svelte
+│  ├─ login
+│  │  ├─ +page.server.ts
+│  │  ├─ +page.svelte
+│  ├─ logout
+│  │  ├─ +server.ts
+│  ├─ upload
+│  │  ├─ +server.ts
+│  ├─ vault
+│  │  ├─ +page.svelte
+│  ├─ +layout.server.ts
+│  ├─ +layout.svelte
+│  ├─ +page.server.ts
+│  ├─ +page.svelte
+├─ screenshots
+├─ scripts
+│  ├─ ci
+├─ server
+│  ├─ node_modules
+├─ src
+│  ├─ components
+│  │  ├─ agents
+│  │  │  ├─ DebuggerSentinel.ts
+│  │  │  ├─ RefactorerEngine.ts
+│  │  │  ├─ ScholarReflector.tsx
+│  │  ├─ banksy
+│  │  │  ├─ BanksyApiClient.ts
+│  │  │  ├─ BanksyOscillatorPanel.tsx
+│  │  │  ├─ index.ts
+│  │  │  ├─ PhaseVisualization.tsx
+│  │  ├─ ghost
+│  │  │  ├─ GhostChronicle.tsx
+│  │  │  ├─ GhostLetterGenerator.tsx
+│  │  ├─ QuickActionsBar
+│  │  ├─ QuickActionsPanel
+│  │  ├─ ui
+│  │  │  ├─ AgentFieldProjector.tsx
+│  │  │  ├─ ConceptDiffVisualizer.tsx
+│  │  │  ├─ HologramCanvas.tsx
+│  │  │  ├─ holoObject.jsx
+│  │  │  ├─ QuoteCanvas.tsx
+│  │  │  ├─ SplashEngine.tsx
+│  │  │  ├─ ThemeToggle.tsx
+│  │  ├─ ToriCognitionEngine.tsx
+│  ├─ hooks
+│  ├─ services
+│  │  ├─ GhostMemoryVault.ts
+│  │  ├─ GhostSolitonIntegration.ts
+│  │  ├─ ingest_audio.py
+│  │  ├─ ingest_video.py
+│  │  ├─ QuoteBank.ts
+│  ├─ styles
+│  │  ├─ toristyle-light.css
+│  ├─ __pycache__
+├─ std
+├─ syntaxes
+├─ temp
+├─ templates
+├─ tests
+├─ tools
+│  ├─ vscode-elfin
+│  │  ├─ images
+│  │  ├─ node_modules
+│  │  ├─ syntaxes
+│  ├─ compare_ingestion_runs.py
+│  ├─ diagnose_concepts.ps1
+│  ├─ diagnose_concepts.py
+│  ├─ ingestion_health_monitor.py
+│  ├─ test_ingestion_pipeline.py
+├─ Tori
+│  ├─ .vscode
+│  ├─ config
+│  ├─ lib
+│  ├─ mcp_gateway
+│  │  ├─ config
+│  ├─ mcp_services
+│  │  ├─ episodic_vault
+│  │  ├─ koopman_learner
+│  │  ├─ sleep_scheduler
+│  │  ├─ sparse_pruner
+│  ├─ proto
+│  │  ├─ vault.proto
+│  ├─ requirements
+│  ├─ scripts
+│  │  ├─ dev
+│  ├─ src
+│  │  ├─ components
+│  │  ├─ koopman_estimator.py
+│  │  ├─ lyapunov_spike_detector.py
+│  │  ├─ memory_sculptor.py
+│  ├─ test_data
+│  ├─ regenerate-grpc-protos.bat
+│  ├─ test_ghost_ai_integration.py
+│  ├─ test_grpc_integration.py
+│  ├─ test_koopman_grpc.py
+│  ├─ test_koopman_lyapunov_integration.py
+│  ├─ test_vault_grpc.py
+├─ toricore
+│  ├─ ingestRouter.py
+│  ├─ integration_test_complete.py
+├─ tori_chat_frontend
+│  ├─ .turbo
+│  ├─ .yarn
+│  ├─ dashboard
+│  ├─ dist
+│  │  ├─ assets
+│  │  ├─ src
+│  ├─ node_modules
+│  ├─ src
+│  │  ├─ api
+│  │  ├─ components
+│  │  │  ├─ CoherenceRibbon
+│  │  │  ├─ PccStatus
+│  │  │  ├─ PhaseHeatmap
+│  │  │  ├─ QuickActionsBar
+│  │  │  │  ├─ QuickActionsBar.css
+│  │  │  │  ├─ QuickActionsBar.jsx
+│  │  │  ├─ QuickActionsPanel
+│  │  │  │  ├─ QuickActionsPanel.css
+│  │  │  │  ├─ QuickActionsPanel.jsx
+│  │  │  ├─ SpectralDashboard
+│  │  │  ├─ AgentBadge.jsx
+│  │  │  ├─ ConversationHistory.jsx
+│  │  │  ├─ GhostMessageBubble.jsx
+│  │  │  ├─ GhostMessageOverlay.jsx
+│  │  │  ├─ MemoryVaultDashboard.jsx
+│  │  │  ├─ PhaseCoherenceIndicator.jsx
+│  │  │  ├─ ThemeToggle.jsx
+│  │  │  ├─ ToriCodeEditor.jsx
+│  │  │  ├─ ToripackViewer.jsx
+│  │  ├─ contexts
+│  │  ├─ ghost
+│  │  │  ├─ ghostMemoryAgent.js
+│  │  │  ├─ ghostPersonaEngine.js
+│  │  ├─ hooks
+│  │  ├─ services
+│  │  │  ├─ agentSuggestionsService.js
+│  │  │  ├─ lyapunovMonitor.js
+│  │  │  ├─ pdfIngestionPipeline.js
+│  │  │  ├─ psiarcTestEndpoints.js
+│  │  │  ├─ solitonMemory.js
+│  │  ├─ state
+│  │  ├─ styles
+│  │  │  ├─ toristyle-light.css
+│  │  ├─ App.css
+│  │  ├─ App.jsx
+│  ├─ uploads
+│  ├─ compile-soliton-engine.bat
+│  ├─ emergency-fix.bat
+│  ├─ emergency-fix.sh
+│  ├─ fix-dependencies.bat
+│  ├─ package-lock.json
+│  ├─ package.json
+│  ├─ production-deployment-check.sh
+│  ├─ server.js
+│  ├─ server_with_ghost_ai.js
+│  ├─ verify-phase2-complete.bat
+│  ├─ verify-phase3-complete.bat
+│  ├─ yarn.lock
+├─ tori_ui_svelte
+│  ├─ .svelte-kit
+│  │  ├─ generated
+│  │  │  ├─ client
+│  │  │  │  ├─ nodes
+│  │  │  │  │  ├─ 0.js
+│  │  │  │  │  ├─ 1.js
+│  │  │  │  │  ├─ 2.js
+│  │  │  │  │  ├─ 3.js
+│  │  │  │  │  ├─ 4.js
+│  │  │  │  │  ├─ 5.js
+│  │  │  │  │  ├─ 6.js
+│  │  │  │  ├─ app.js
+│  │  │  │  ├─ matchers.js
+│  │  │  ├─ server
+│  │  │  │  ├─ internal.js
+│  │  │  ├─ root.svelte
+│  │  ├─ types
+│  │  │  ├─ src
+│  │  │  │  ├─ routes
+│  │  │  │  │  ├─ .well-known
+│  │  │  │  │  │  ├─ $types.d.ts
+│  │  │  │  │  ├─ elfin
+│  │  │  │  │  │  ├─ $types.d.ts
+│  │  │  │  │  ├─ login
+│  │  │  │  │  │  ├─ $types.d.ts
+│  │  │  │  │  │  ├─ proxy+page.server.ts
+│  │  │  │  │  ├─ logout
+│  │  │  │  │  │  ├─ $types.d.ts
+│  │  │  │  │  ├─ upload
+│  │  │  │  │  │  ├─ $types.d.ts
+│  │  │  │  │  ├─ vault
+│  │  │  │  │  │  ├─ $types.d.ts
+│  │  │  │  │  ├─ $types.d.ts
+│  │  │  │  │  ├─ proxy+layout.server.ts
+│  │  │  │  │  ├─ proxy+page.server.ts
+│  │  │  ├─ route_meta_data.json
+│  │  ├─ ambient.d.ts
+│  │  ├─ tsconfig.json
+│  ├─ data
+│  ├─ node_modules
+│  ├─ src
+│  │  ├─ lib
+│  │  │  ├─ cognitive
+│  │  │  │  ├─ braidMemory.ts
+│  │  │  │  ├─ closureGuard.ts
+│  │  │  │  ├─ cognitiveEngine.ts
+│  │  │  │  ├─ cognitiveEngine_phase3.ts
+│  │  │  │  ├─ cognitiveState.ts
+│  │  │  │  ├─ conceptClusteringBridge.js
+│  │  │  │  ├─ conceptEvaluator.ts
+│  │  │  │  ├─ ConceptInspector.svelte
+│  │  │  │  ├─ conceptScoring.ts
+│  │  │  │  ├─ conceptScoring_enhanced.ts
+│  │  │  │  ├─ contradictionMonitor.ts
+│  │  │  │  ├─ ghostCollective.ts
+│  │  │  │  ├─ holographicMemory.ts
+│  │  │  │  ├─ index.ts
+│  │  │  │  ├─ index_phase3.ts
+│  │  │  │  ├─ ingestionHelpers.ts
+│  │  │  │  ├─ loopRecord.ts
+│  │  │  │  ├─ memoryMetrics.ts
+│  │  │  │  ├─ paradoxAnalyzer.ts
+│  │  │  │  ├─ phaseController.ts
+│  │  │  ├─ components
+│  │  │  │  ├─ ChatPanel.svelte
+│  │  │  │  ├─ ConceptDebugPanel.svelte
+│  │  │  │  ├─ ConceptInspector.svelte
+│  │  │  │  ├─ ConversationLog.svelte
+│  │  │  │  ├─ DocumentSummary.svelte
+│  │  │  │  ├─ GhostOverlay.svelte
+│  │  │  │  ├─ HolographicVisualization.svelte
+│  │  │  │  ├─ MemoryDrawer.svelte
+│  │  │  │  ├─ MemoryPanel.svelte
+│  │  │  │  ├─ PersonaSelector.svelte
+│  │  │  │  ├─ ScholarSpherePanel.svelte
+│  │  │  │  ├─ SuggestionBar.svelte
+│  │  │  │  ├─ ThoughtspacePlaceholder.svelte
+│  │  │  │  ├─ ThoughtspaceRenderer.svelte
+│  │  │  │  ├─ UploadPanel.svelte
+│  │  │  │  ├─ UserAuth.svelte
+│  │  │  │  ├─ UserSettings.svelte
+│  │  │  │  ├─ VaultViewer.svelte
+│  │  │  ├─ elfin
+│  │  │  │  ├─ commands
+│  │  │  │  │  ├─ ghost.ts
+│  │  │  │  │  ├─ project.ts
+│  │  │  │  │  ├─ vault.ts
+│  │  │  │  ├─ scripts
+│  │  │  │  │  ├─ onConceptChange.ts
+│  │  │  │  │  ├─ onGhostStateChange.ts
+│  │  │  │  │  ├─ onUpload.ts
+│  │  │  │  ├─ ghostPersonaEngine.ts
+│  │  │  │  ├─ interpreter.ts
+│  │  │  │  ├─ scriptEngine.ts
+│  │  │  │  ├─ types.ts
+│  │  │  ├─ services
+│  │  │  │  ├─ api.ts
+│  │  │  │  ├─ enhancedApi.ts
+│  │  │  ├─ stores
+│  │  │  │  ├─ conceptMesh.ts
+│  │  │  │  ├─ ghostPersona.ts
+│  │  │  │  ├─ index.ts
+│  │  │  │  ├─ persistence.ts
+│  │  │  │  ├─ types.ts
+│  │  │  │  ├─ user.ts
+│  │  │  ├─ browser-elfin.ts
+│  │  │  ├─ client-init.ts
+│  │  │  ├─ config.ts
+│  │  │  ├─ dynamicApi.ts
+│  │  │  ├─ toriInit.ts
+│  │  ├─ routes
+│  │  │  ├─ .well-known
+│  │  │  │  ├─ +server.ts
+│  │  │  ├─ elfin
+│  │  │  │  ├─ +page.svelte
+│  │  │  ├─ login
+│  │  │  │  ├─ +page.server.ts
+│  │  │  │  ├─ +page.svelte
+│  │  │  ├─ logout
+│  │  │  │  ├─ +server.ts
+│  │  │  ├─ upload
+│  │  │  │  ├─ +page.svelte
+│  │  │  │  ├─ +server.ts
+│  │  │  ├─ vault
+│  │  │  │  ├─ +page.svelte
+│  │  │  ├─ +layout.server.ts
+│  │  │  ├─ +layout.svelte
+│  │  │  ├─ +page.server.ts
+│  │  │  ├─ +page.svelte
+│  │  ├─ app.css
+│  │  ├─ app.d.ts
+│  │  ├─ app.html
+│  │  ├─ current_srcfolder.zip
+│  │  ├─ hooks.server.ts
+│  │  ├─ src.zip
+│  ├─ static
+│  │  ├─ favicon.png
+│  │  ├─ manifest.json
+│  ├─ .env
+│  ├─ .env.production
+│  ├─ build-prod.bat
+│  ├─ css-diagnostic.js
+│  ├─ deploy-production.bat
+│  ├─ install-concurrently.bat
+│  ├─ install-concurrently.sh
+│  ├─ package-lock.json
+│  ├─ package.json
+│  ├─ postcss.config.js
+│  ├─ server.js
+│  ├─ start-dev.bat
+│  ├─ svelte.config.js
+│  ├─ tailwind.config.js
+│  ├─ tori_ui_svelte.zip
+│  ├─ tsconfig.json
+│  ├─ vite.config.js
+├─ uiux
+├─ uploads
+├─ users

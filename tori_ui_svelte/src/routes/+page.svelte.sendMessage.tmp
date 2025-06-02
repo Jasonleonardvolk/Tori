@@ -1,0 +1,166 @@
+  async function sendMessage() {
+    if (!messageInput.trim() || isTyping || !data.user) return;
+    
+    const userMessage = {
+      id: `msg_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+      role: 'user' as const,
+      content: messageInput.trim(),
+      timestamp: new Date()
+    };
+    
+    conversationHistory = [...conversationHistory, userMessage];
+    const currentMessage = messageInput;
+    messageInput = '';
+    isTyping = true;
+    
+    // Auto-scroll for user's message
+    shouldAutoScroll = true;
+    
+    // ✨ Store user message in Soliton Memory (FIXED PARAMETERS)
+    let solitonResult: any = null;
+    try {
+      solitonResult = await solitonMemory.storeMemory(
+        userMessage.id,     // conceptId (NOT userId!)
+        currentMessage,     // content
+        0.8                // importance
+      );
+      console.log('🌊 User message stored in Soliton Memory:', solitonResult);
+      
+      // Trigger phase monitoring for Ghost AI
+      if (typeof window !== 'undefined') {
+        document.dispatchEvent(new CustomEvent('tori-soliton-phase-change', {
+          detail: {
+            phaseAngle: solitonResult.phaseTag,
+            amplitude: solitonResult.amplitude,
+            frequency: 1.0,
+            stability: 0.8
+          }
+        }));
+      }
+    } catch (error) {
+      console.warn('Failed to store user message in Soliton Memory:', error);
+    }
+    
+    try {
+      // 🔍 Find related memories using phase correlation
+      let relatedMemories: any[] = [];
+      try {
+        relatedMemories = await solitonMemory.findRelatedMemories(
+          userMessage.id,
+          5 // max results
+        );
+        console.log(`🔗 Found ${relatedMemories.length} related memories`);
+      } catch (error) {
+        console.warn('Failed to find related memories:', error);
+      }
+      
+      // STEP 2-4: Use Enhanced API Service for ULTIMATE processing
+      const context = {
+        userQuery: currentMessage,
+        currentConcepts: [...new Set($conceptMesh.flatMap(d => d.concepts))],
+        conversationHistory: conversationHistory.slice(-10), // Last 10 messages for context
+        userProfile: data.user,
+        // 🌊 NEW: Add soliton memory context
+        relatedMemories: relatedMemories,
+        memoryPhaseContext: relatedMemories.map(m => ({
+          content: m.content,
+          phase: m.phaseTag,
+          strength: m.amplitude,
+          stability: m.stability
+        })),
+        solitonPhase: solitonResult?.phaseTag
+      };
+      
+      console.log('🌌👻🧬🎯🌊 ULTIMATE: All systems processing with Soliton Memory...');
+      const enhancedResponse = await enhancedApiService.generateResponse(context);
+      
+      const assistantMessage = {
+        id: `msg_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+        role: 'assistant' as const,
+        content: enhancedResponse.response,
+        timestamp: new Date(),
+        concepts: enhancedResponse.newConcepts,
+        loopId: enhancedResponse.loopId,
+        braidStats: enhancedResponse.braidMetrics,
+        processingMethod: enhancedResponse.processingMethod,
+        confidence: enhancedResponse.confidence,
+        systemInsights: enhancedResponse.systemInsights,
+        activePersona: enhancedResponse.activePersona,
+        holographicData: enhancedResponse.holographicData,
+        conceptNodes: enhancedResponse.conceptNodes,
+        // 🌊 NEW: Add memory context
+        memoryContext: {
+          relatedMemories: relatedMemories.length,
+          phaseCoherence: relatedMemories.length > 0 ? 0.8 : 0.0
+        }
+      };
+      
+      conversationHistory = [...conversationHistory, assistantMessage];
+      
+      // ✨ Store assistant response in Soliton Memory (FIXED PARAMETERS)
+      try {
+        const aiMemoryResult = await solitonMemory.storeMemory(
+          assistantMessage.id,        // conceptId
+          enhancedResponse.response,  // content
+          0.9                        // Higher importance for AI responses
+        );
+        console.log('🌊 AI response stored in Soliton Memory:', aiMemoryResult);
+        
+        // Check if memory needs protection based on emotional content
+        if (enhancedResponse.activePersona?.name === 'Unsettled' || 
+            enhancedResponse.response.toLowerCase().includes('protect') ||
+            enhancedResponse.response.toLowerCase().includes('sensitive')) {
+          await solitonMemory.vaultMemory(assistantMessage.id, 'UserSealed');
+          console.log('🔒 Sensitive memory auto-vaulted for protection');
+        }
+      } catch (error) {
+        console.warn('Failed to store AI response in Soliton Memory:', error);
+      }
+      
+      // Add to concept mesh with FULL system metadata including Soliton
+      if (enhancedResponse.newConcepts && enhancedResponse.newConcepts.length > 0) {
+        addConceptDiff({
+          type: 'chat',
+          title: `Ultimate AI: ${currentMessage.substring(0, 50)}...`,
+          concepts: enhancedResponse.newConcepts,
+          summary: `Ultimate AI processing via ${enhancedResponse.processingMethod}. Confidence: ${Math.round(enhancedResponse.confidence * 100)}%${enhancedResponse.activePersona ? ` (${enhancedResponse.activePersona.name})` : ''}${enhancedResponse.conceptNodes ? ` | ${enhancedResponse.conceptNodes.length} 3D nodes` : ''} | 🌊 ${relatedMemories.length} memories`,
+          metadata: {
+            messageCount: conversationHistory.length,
+            userMessage: currentMessage,
+            processingMethod: enhancedResponse.processingMethod,
+            confidence: enhancedResponse.confidence,
+            systemInsights: enhancedResponse.systemInsights,
+            loopId: enhancedResponse.loopId,
+            braidMetrics: enhancedResponse.braidMetrics,
+            emergentConnections: enhancedResponse.emergentConnections,
+            activePersona: enhancedResponse.activePersona,
+            holographicData: enhancedResponse.holographicData,
+            conceptNodes: enhancedResponse.conceptNodes,
+            // 🌊 NEW: Soliton memory metadata
+            solitonMemory: {
+              userPhase: solitonResult?.phaseTag,
+              relatedMemoryCount: relatedMemories.length,
+              memoryIntegrity: 1.0
+            },
+            fullSystemIntegration: true,
+            timestamp: new Date()
+          }
+        });
+      }
+      
+    } catch (error) {
+      console.error('Ultimate AI processing failed:', error);
+      
+      const errorMessage = {
+        id: `msg_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+        role: 'assistant' as const,
+        content: "I'm having trouble with my advanced processing systems right now. Let me try a simpler approach...",
+        timestamp: new Date(),
+        processingMethod: 'fallback'
+      };
+      
+      conversationHistory = [...conversationHistory, errorMessage];
+    } finally {
+      isTyping = false;
+    }
+  }

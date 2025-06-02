@@ -43,6 +43,7 @@ declare module '$env/static/private' {
 	export const APPDATA: string;
 	export const ChocolateyInstall: string;
 	export const ChocolateyLastPathUpdate: string;
+	export const choice: string;
 	export const COLOR: string;
 	export const CommonProgramFiles: string;
 	export const CommonProgramW6432: string;
@@ -159,6 +160,7 @@ declare module '$env/dynamic/private' {
 		APPDATA: string;
 		ChocolateyInstall: string;
 		ChocolateyLastPathUpdate: string;
+		choice: string;
 		COLOR: string;
 		CommonProgramFiles: string;
 		CommonProgramW6432: string;

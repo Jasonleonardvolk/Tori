@@ -1,0 +1,65 @@
+  onMount(async () => {
+    mounted = true;
+    
+    // STEP 1-4: Load ALL cognitive systems
+    try {
+      const cognitive = await import('$lib/cognitive');
+      braidMemory = cognitive.braidMemory;
+      cognitiveEngine = cognitive.cognitiveEngine;
+      holographicMemory = cognitive.holographicMemory;
+      ghostCollective = cognitive.ghostCollective;
+      
+      console.log('🧬 ALL SYSTEMS LOADED:', {
+        braidMemory: !!braidMemory,
+        cognitiveEngine: !!cognitiveEngine,
+        holographicMemory: !!holographicMemory,
+        ghostCollective: !!ghostCollective
+      });
+    } catch (error) {
+      console.warn('⚠️ Some cognitive systems not available:', error);
+    }
+    
+    // 🌊 INITIALIZE SOLITON MEMORY SYSTEM
+    console.log('🌊 Initializing Soliton Memory System...');
+    try {
+      const userId = data.user?.name || 'default_user';
+      const initResult = await solitonMemory.initializeUser(userId);
+      console.log('✨ Soliton Memory initialized:', initResult);
+      
+      // Get initial memory stats
+      const stats = await solitonMemory.getMemoryStats();
+      console.log('📊 Initial Memory Stats:', stats);
+      
+      // Store foundational memory about this session
+      await solitonMemory.storeMemory(
+        `session_${Date.now()}`,
+        `New session started for ${data.user?.name || 'User'} with TORI consciousness interface`,
+        1.0 // Maximum importance
+      );
+    } catch (error) {
+      console.error('Failed to initialize Soliton Memory:', error);
+    }
+    
+    // STEP 2-4: Initialize Enhanced API Service
+    console.log('🚀 Enhanced API Service v4.0 initialized with full system integration');
+    
+    // Load conversation history from localStorage
+    const saved = localStorage.getItem('tori-conversation-history');
+    if (saved) {
+      try {
+        const loadedHistory = JSON.parse(saved).map((msg: any) => ({
+          ...msg,
+          timestamp: new Date(msg.timestamp)
+        }));
+        conversationHistory = loadedHistory;
+        lastMessageCount = loadedHistory.length;
+        
+        // Auto-scroll to bottom after loading history
+        tick().then(() => scrollToBottom(true));
+      } catch (e) {
+        console.warn('Failed to load conversation history:', e);
+      }
+    }
+    
+    console.log('🎯 TORI main page loaded with FULL SYSTEM INTEGRATION and auto-scroll');
+  });

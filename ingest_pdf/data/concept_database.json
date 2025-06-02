@@ -44050,5 +44050,546 @@
       "discovery_date": "2025-05-30T13:26:08.782864",
       "domain_detected": "universal_extraction"
     }
+  },
+  {
+    "name": "Loschmidt",
+    "priority": 0.97,
+    "category": "universal_extraction",
+    "aliases": [],
+    "boost_multiplier": 1.4,
+    "source": {
+      "auto_prefill": true,
+      "purity_based": true,
+      "purity_decision": "DOUBLE_CONSENSUS",
+      "universal_extraction": true,
+      "document": "1748656677761_2501.16995v1.pdf",
+      "extraction_method": "universal_ner+yake",
+      "original_score": 1.0,
+      "purity_score": 1.2,
+      "discovery_date": "2025-05-31T04:12:14.665379",
+      "domain_detected": "universal_extraction"
+    }
+  },
+  {
+    "name": "Germany",
+    "priority": 0.8213,
+    "category": "universal_extraction",
+    "aliases": [],
+    "boost_multiplier": 1.4,
+    "source": {
+      "auto_prefill": true,
+      "purity_based": true,
+      "purity_decision": "DOUBLE_CONSENSUS",
+      "universal_extraction": true,
+      "document": "1748656677761_2501.16995v1.pdf",
+      "extraction_method": "universal_ner+yake",
+      "original_score": 0.8213,
+      "purity_score": 0.986,
+      "discovery_date": "2025-05-31T04:12:14.665379",
+      "domain_detected": "universal_extraction"
+    }
+  },
+  {
+    "name": "Physics",
+    "priority": 0.6293,
+    "category": "universal_extraction",
+    "aliases": [],
+    "boost_multiplier": 1.4,
+    "source": {
+      "auto_prefill": true,
+      "purity_based": true,
+      "purity_decision": "DOUBLE_CONSENSUS",
+      "universal_extraction": true,
+      "document": "1748656677761_2501.16995v1.pdf",
+      "extraction_method": "universal_ner+yake",
+      "original_score": 0.6293,
+      "purity_score": 0.755,
+      "discovery_date": "2025-05-31T04:12:14.665379",
+      "domain_detected": "universal_extraction"
+    }
+  },
+  {
+    "name": "Budapest",
+    "priority": 0.7118,
+    "category": "universal_extraction",
+    "aliases": [],
+    "boost_multiplier": 1.4,
+    "source": {
+      "auto_prefill": true,
+      "purity_based": true,
+      "purity_decision": "DOUBLE_CONSENSUS",
+      "universal_extraction": true,
+      "document": "1748683166886_2310.19310v1.pdf",
+      "extraction_method": "universal_ner+yake",
+      "original_score": 0.7118,
+      "purity_score": 0.854,
+      "discovery_date": "2025-05-31T04:19:53.624727",
+      "domain_detected": "universal_extraction"
+    }
+  },
+  {
+    "name": "Hata no-Nelson model",
+    "priority": 0.75,
+    "category": "universal_extraction",
+    "aliases": [
+      "no-nelson",
+      "model"
+    ],
+    "boost_multiplier": 1.3,
+    "source": {
+      "auto_prefill": true,
+      "purity_based": true,
+      "purity_decision": "TITLE_ABSTRACT_BOOST",
+      "universal_extraction": true,
+      "document": "1748683166886_2310.19310v1.pdf",
+      "extraction_method": "universal_yake",
+      "original_score": 0.75,
+      "purity_score": 0.75,
+      "discovery_date": "2025-05-31T04:19:53.627261",
+      "domain_detected": "universal_extraction"
+    }
+  },
+  {
+    "name": "Data Lakes",
+    "priority": 0.8216,
+    "category": "universal_extraction",
+    "aliases": [
+      "DL",
+      "lakes"
+    ],
+    "boost_multiplier": 1.4,
+    "source": {
+      "auto_prefill": true,
+      "purity_based": true,
+      "purity_decision": "DOUBLE_CONSENSUS",
+      "universal_extraction": true,
+      "document": "1748687999913_2505.11270v1.pdf",
+      "extraction_method": "universal_ner+yake",
+      "original_score": 0.8216,
+      "purity_score": 0.986,
+      "discovery_date": "2025-05-31T05:41:22.382234",
+      "domain_detected": "universal_extraction"
+    }
+  },
+  {
+    "name": "MCP Augmentor",
+    "priority": 0.799,
+    "category": "universal_extraction",
+    "aliases": [
+      "MA",
+      "augmentor"
+    ],
+    "boost_multiplier": 1.4,
+    "source": {
+      "auto_prefill": true,
+      "purity_based": true,
+      "purity_decision": "DOUBLE_CONSENSUS",
+      "universal_extraction": true,
+      "document": "1748687999913_2505.11270v1.pdf",
+      "extraction_method": "universal_ner+yake",
+      "original_score": 0.799,
+      "purity_score": 0.959,
+      "discovery_date": "2025-05-31T05:41:22.393273",
+      "domain_detected": "universal_extraction"
+    }
+  },
+  {
+    "name": "Shaolei Zhang",
+    "priority": 0.7415,
+    "category": "universal_extraction",
+    "aliases": [
+      "SZ",
+      "shaolei",
+      "zhang"
+    ],
+    "boost_multiplier": 1.4,
+    "source": {
+      "auto_prefill": true,
+      "purity_based": true,
+      "purity_decision": "DOUBLE_CONSENSUS",
+      "universal_extraction": true,
+      "document": "1748687999913_2505.11270v1.pdf",
+      "extraction_method": "universal_ner+yake",
+      "original_score": 0.7415,
+      "purity_score": 0.89,
+      "discovery_date": "2025-05-31T05:41:22.393273",
+      "domain_detected": "universal_extraction"
+    }
+  },
+  {
+    "name": "Quehuan Liu",
+    "priority": 0.698,
+    "category": "universal_extraction",
+    "aliases": [
+      "QL",
+      "quehuan"
+    ],
+    "boost_multiplier": 1.4,
+    "source": {
+      "auto_prefill": true,
+      "purity_based": true,
+      "purity_decision": "DOUBLE_CONSENSUS",
+      "universal_extraction": true,
+      "document": "1748687999913_2505.11270v1.pdf",
+      "extraction_method": "universal_ner+yake",
+      "original_score": 0.698,
+      "purity_score": 0.838,
+      "discovery_date": "2025-05-31T05:41:22.398275",
+      "domain_detected": "universal_extraction"
+    }
+  },
+  {
+    "name": "Sibei Chen",
+    "priority": 0.698,
+    "category": "universal_extraction",
+    "aliases": [
+      "SC",
+      "sibei"
+    ],
+    "boost_multiplier": 1.4,
+    "source": {
+      "auto_prefill": true,
+      "purity_based": true,
+      "purity_decision": "DOUBLE_CONSENSUS",
+      "universal_extraction": true,
+      "document": "1748687999913_2505.11270v1.pdf",
+      "extraction_method": "universal_ner+yake",
+      "original_score": 0.698,
+      "purity_score": 0.838,
+      "discovery_date": "2025-05-31T05:41:22.398275",
+      "domain_detected": "universal_extraction"
+    }
+  },
+  {
+    "name": "ofhumanoidrobotsinunfamiliar scenariosandthehighlyprogrammed",
+    "priority": 0.97,
+    "category": "universal_extraction",
+    "aliases": [
+      "OS",
+      "ofhumanoidrobotsinunfamiliar",
+      "scenariosandthehighlyprogrammed"
+    ],
+    "boost_multiplier": 1.35,
+    "source": {
+      "auto_prefill": true,
+      "purity_based": true,
+      "purity_decision": "DOUBLE_CONSENSUS",
+      "universal_extraction": true,
+      "document": "1748688089307_2505.19339v1.pdf",
+      "extraction_method": "universal_keybert+yake",
+      "original_score": 1.0,
+      "purity_score": 1.2,
+      "discovery_date": "2025-05-31T05:42:38.636868",
+      "domain_detected": "universal_extraction"
+    }
+  },
+  {
+    "name": "Thesignalsofproprioceptivepollandtactilearraybelongto",
+    "priority": 0.8466,
+    "category": "universal_extraction",
+    "aliases": [],
+    "boost_multiplier": 1.4,
+    "source": {
+      "auto_prefill": true,
+      "purity_based": true,
+      "purity_decision": "DOUBLE_CONSENSUS",
+      "universal_extraction": true,
+      "document": "1748688089307_2505.19339v1.pdf",
+      "extraction_method": "universal_ner+yake",
+      "original_score": 0.8466,
+      "purity_score": 1.016,
+      "discovery_date": "2025-05-31T05:42:38.636868",
+      "domain_detected": "universal_extraction"
+    }
+  },
+  {
+    "name": "theabilityofhumanoidrobotstorespondtonewtasksof immediateperceptionincomplexenvironments",
+    "priority": 0.8403,
+    "category": "universal_extraction",
+    "aliases": [
+      "TI",
+      "theabilityofhumanoidrobotstorespondtonewtasksof",
+      "immediateperceptionincomplexenvironments"
+    ],
+    "boost_multiplier": 1.35,
+    "source": {
+      "auto_prefill": true,
+      "purity_based": true,
+      "purity_decision": "DOUBLE_CONSENSUS",
+      "universal_extraction": true,
+      "document": "1748688089307_2505.19339v1.pdf",
+      "extraction_method": "universal_keybert+yake",
+      "original_score": 0.8403,
+      "purity_score": 1.008,
+      "discovery_date": "2025-05-31T05:42:38.636868",
+      "domain_detected": "universal_extraction"
+    }
+  },
+  {
+    "name": "thevisionbackbonethroughtheimagesequenceprocessing flow thedesignfollowstheprinciplesofresidualstacking",
+    "priority": 0.9243,
+    "category": "universal_extraction",
+    "aliases": [
+      "thevisionbackbonethroughtheimagesequenceprocessing",
+      "thedesignfollowstheprinciplesofresidualstacking"
+    ],
+    "boost_multiplier": 1.35,
+    "source": {
+      "auto_prefill": true,
+      "purity_based": true,
+      "purity_decision": "HIGH_CONF",
+      "universal_extraction": true,
+      "document": "1748688089307_2505.19339v1.pdf",
+      "extraction_method": "universal_keybert",
+      "original_score": 0.9243,
+      "purity_score": 0.924,
+      "discovery_date": "2025-05-31T05:42:38.636868",
+      "domain_detected": "universal_extraction"
+    }
+  },
+  {
+    "name": "designsadynamicarchitectureconnectingcontinuousthought machines",
+    "priority": 0.7401,
+    "category": "Computer Science",
+    "aliases": [
+      "DM",
+      "designsadynamicarchitectureconnectingcontinuousthought",
+      "machines"
+    ],
+    "boost_multiplier": 1.35,
+    "source": {
+      "auto_prefill": true,
+      "purity_based": true,
+      "purity_decision": "DOUBLE_CONSENSUS",
+      "universal_extraction": true,
+      "document": "1748688089307_2505.19339v1.pdf",
+      "extraction_method": "universal_keybert+yake",
+      "original_score": 0.7401,
+      "purity_score": 0.888,
+      "discovery_date": "2025-05-31T05:42:38.644815",
+      "domain_detected": "Computer Science"
+    }
+  },
+  {
+    "name": "thatmcpmaysufferfromtoolpoisoning commandinjection andversionrollingvulnerabilitiesinthetoolscheduling",
+    "priority": 0.8689,
+    "category": "universal_extraction",
+    "aliases": [
+      "thatmcpmaysufferfromtoolpoisoning",
+      "commandinjection",
+      "andversionrollingvulnerabilitiesinthetoolscheduling"
+    ],
+    "boost_multiplier": 1.35,
+    "source": {
+      "auto_prefill": true,
+      "purity_based": true,
+      "purity_decision": "HIGH_CONF",
+      "universal_extraction": true,
+      "document": "1748688089307_2505.19339v1.pdf",
+      "extraction_method": "universal_keybert",
+      "original_score": 0.8689,
+      "purity_score": 0.869,
+      "discovery_date": "2025-05-31T05:42:38.644815",
+      "domain_detected": "universal_extraction"
+    }
+  },
+  {
+    "name": "layerdefensestrategy itrevealed thatmcpmaysufferfromtoolpoisoning",
+    "priority": 0.8573,
+    "category": "universal_extraction",
+    "aliases": [
+      "layerdefensestrategy",
+      "itrevealed",
+      "thatmcpmaysufferfromtoolpoisoning"
+    ],
+    "boost_multiplier": 1.35,
+    "source": {
+      "auto_prefill": true,
+      "purity_based": true,
+      "purity_decision": "HIGH_CONF",
+      "universal_extraction": true,
+      "document": "1748688089307_2505.19339v1.pdf",
+      "extraction_method": "universal_keybert",
+      "original_score": 0.8573,
+      "purity_score": 0.857,
+      "discovery_date": "2025-05-31T05:42:38.644815",
+      "domain_detected": "universal_extraction"
+    }
+  },
+  {
+    "name": "parameterupdatemechanismtosynchronouslymaintain thinkingconsistencyandresourceefficiency",
+    "priority": 0.8503,
+    "category": "Computer Science",
+    "aliases": [
+      "PT",
+      "parameterupdatemechanismtosynchronouslymaintain",
+      "thinkingconsistencyandresourceefficiency"
+    ],
+    "boost_multiplier": 1.35,
+    "source": {
+      "auto_prefill": true,
+      "purity_based": true,
+      "purity_decision": "HIGH_CONF",
+      "universal_extraction": true,
+      "document": "1748688089307_2505.19339v1.pdf",
+      "extraction_method": "universal_keybert",
+      "original_score": 0.8503,
+      "purity_score": 0.85,
+      "discovery_date": "2025-05-31T05:42:38.644815",
+      "domain_detected": "Computer Science"
+    }
+  },
+  {
+    "name": "apiexternal tools",
+    "priority": 0.97,
+    "category": "universal_extraction",
+    "aliases": [
+      "AT",
+      "apiexternal",
+      "tools"
+    ],
+    "boost_multiplier": 1.4,
+    "source": {
+      "auto_prefill": true,
+      "purity_based": true,
+      "purity_decision": "DOUBLE_CONSENSUS",
+      "universal_extraction": true,
+      "document": "1748688165952_2503.23278v2.pdf",
+      "extraction_method": "universal_keybert+ner",
+      "original_score": 1.0,
+      "purity_score": 1.2,
+      "discovery_date": "2025-05-31T05:43:58.678312",
+      "domain_detected": "universal_extraction"
+    }
+  },
+  {
+    "name": "MCP Client",
+    "priority": 0.97,
+    "category": "universal_extraction",
+    "aliases": [
+      "MC",
+      "client"
+    ],
+    "boost_multiplier": 1.5,
+    "source": {
+      "auto_prefill": true,
+      "purity_based": true,
+      "purity_decision": "TRIPLE_CONSENSUS",
+      "universal_extraction": true,
+      "document": "1748688165952_2503.23278v2.pdf",
+      "extraction_method": "universal_keybert+ner+yake",
+      "original_score": 1.0,
+      "purity_score": 1.2,
+      "discovery_date": "2025-05-31T05:43:58.678312",
+      "domain_detected": "universal_extraction"
+    }
+  },
+  {
+    "name": "China",
+    "priority": 0.7652,
+    "category": "universal_extraction",
+    "aliases": [],
+    "boost_multiplier": 1.4,
+    "source": {
+      "auto_prefill": true,
+      "purity_based": true,
+      "purity_decision": "DOUBLE_CONSENSUS",
+      "universal_extraction": true,
+      "document": "1748688165952_2503.23278v2.pdf",
+      "extraction_method": "universal_ner+yake",
+      "original_score": 0.7652,
+      "purity_score": 0.918,
+      "discovery_date": "2025-05-31T05:43:58.678312",
+      "domain_detected": "universal_extraction"
+    }
+  },
+  {
+    "name": "coding agent",
+    "priority": 0.97,
+    "category": "universal_extraction",
+    "aliases": [
+      "CA",
+      "coding",
+      "agent"
+    ],
+    "boost_multiplier": 1.35,
+    "source": {
+      "auto_prefill": true,
+      "purity_based": true,
+      "purity_decision": "DOUBLE_CONSENSUS",
+      "universal_extraction": true,
+      "document": "1748688242771_2505.22954v1.pdf",
+      "extraction_method": "universal_keybert+yake",
+      "original_score": 1.0,
+      "purity_score": 1.2,
+      "discovery_date": "2025-05-31T05:44:58.548644",
+      "domain_detected": "universal_extraction"
+    }
+  },
+  {
+    "name": "hosted MCP Servers",
+    "priority": 0.9156,
+    "category": "universal_extraction",
+    "aliases": [
+      "hosted",
+      "servers"
+    ],
+    "boost_multiplier": 1.35,
+    "source": {
+      "auto_prefill": true,
+      "purity_based": true,
+      "purity_decision": "DOUBLE_CONSENSUS",
+      "universal_extraction": true,
+      "document": "1748688302568_2504.19997v1.pdf",
+      "extraction_method": "universal_keybert+yake",
+      "original_score": 0.9156,
+      "purity_score": 1.099,
+      "discovery_date": "2025-05-31T05:45:14.174932",
+      "domain_detected": "universal_extraction"
+    }
+  },
+  {
+    "name": "Enterprise AI Integration",
+    "priority": 0.8904,
+    "category": "Computer Science",
+    "aliases": [
+      "enterprise",
+      "integration"
+    ],
+    "boost_multiplier": 1.35,
+    "source": {
+      "auto_prefill": true,
+      "purity_based": true,
+      "purity_decision": "DOUBLE_CONSENSUS",
+      "universal_extraction": true,
+      "document": "1748688302568_2504.19997v1.pdf",
+      "extraction_method": "universal_keybert+yake",
+      "original_score": 0.8904,
+      "purity_score": 1.068,
+      "discovery_date": "2025-05-31T05:45:14.174932",
+      "domain_detected": "Computer Science"
+    }
+  },
+  {
+    "name": "Ivo Brett CISSP",
+    "priority": 0.8347,
+    "category": "universal_extraction",
+    "aliases": [
+      "brett",
+      "cissp"
+    ],
+    "boost_multiplier": 1.4,
+    "source": {
+      "auto_prefill": true,
+      "purity_based": true,
+      "purity_decision": "DOUBLE_CONSENSUS",
+      "universal_extraction": true,
+      "document": "1748688302568_2504.19997v1.pdf",
+      "extraction_method": "universal_ner+yake",
+      "original_score": 0.8347,
+      "purity_score": 1.002,
+      "discovery_date": "2025-05-31T05:45:14.174932",
+      "domain_detected": "universal_extraction"
+    }
   }
 ]

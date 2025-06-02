@@ -1,4 +1,4 @@
-<!-- ENHANCED CHAT WITH AUTO-SCROLL FUNCTIONALITY -->
+<!-- ENHANCED CHAT WITH ALL SYSTEMS CONNECTED -->
 <script lang="ts">
   import { onMount, afterUpdate, tick } from 'svelte';
   import { conceptMesh, addConceptDiff } from '$lib/stores/conceptMesh';
@@ -6,6 +6,9 @@
   
   // STEP 2: Import Enhanced API Service
   import { enhancedApiService } from '$lib/services/enhancedApi';
+  
+  // ✨ Import Soliton Memory System
+  import solitonMemory from '$lib/services/solitonMemory';
   
   // STEP 1-4: Import ALL systems
   let braidMemory: any = null;
@@ -28,6 +31,7 @@
     concepts?: string[];
     loopId?: string;
     braidStats?: any;
+    braidLoopId?: string; // NEW: for braid correlation
     processingMethod?: string;
     confidence?: number;
     systemInsights?: string[];
@@ -35,6 +39,12 @@
     holographicData?: any;
     conceptNodes?: any[];
   }> = [];
+  
+  // System stats
+  let solitonStats: any = null;
+  let braidStats: any = null; // NEW
+  let holographicStats: any = null; // NEW
+  let ghostStats: any = null; // NEW
   
   // ✅ AUTO-SCROLL FUNCTIONALITY
   let scrollContainer: HTMLElement;
@@ -107,6 +117,91 @@
       console.warn('⚠️ Some cognitive systems not available:', error);
     }
     
+    // 🌊 INITIALIZE SOLITON MEMORY SYSTEM
+    console.log('🌊 Initializing Soliton Memory System...');
+    try {
+      const userId = data.user?.name || 'default_user';
+      await solitonMemory.initializeUser(userId);
+      console.log('✨ Soliton Memory initialized for user:', userId);
+      
+      // Get initial memory stats
+      try {
+        solitonStats = await solitonMemory.getMemoryStats();
+        console.log('📊 Initial Memory Stats:', solitonStats);
+      } catch (error) {
+        console.warn('Stats not available yet:', error);
+        solitonStats = { totalMemories: 0, activeMemories: 0, vaultedMemories: 0, memoryIntegrity: 1.0 };
+      }
+      
+      // Store foundational memory about this session
+      await solitonMemory.storeMemory(
+        `session_${Date.now()}`,
+        `New session started for ${data.user?.name || 'User'} with TORI consciousness interface`,
+        1.0 // Maximum importance
+      );
+    } catch (error) {
+      console.error('Failed to initialize Soliton Memory:', error);
+    }
+    
+    // 🧬 INITIALIZE BRAID MEMORY
+    if (braidMemory) {
+      try {
+        console.log('🧬 Initializing Braid Memory...');
+        
+        // Set up reentry callback to detect memory loops
+        braidMemory.onReentry((digest: string, count: number, loop: any) => {
+          console.log(`🔁 Memory loop detected! Pattern seen ${count} times`);
+          
+          // If we're in a memory loop, suggest novelty
+          if (count >= 3) {
+            const noveltyGlyph = braidMemory.suggestNoveltyGlyph(
+              digest,
+              0.5, // current contradiction
+              0.7, // current coherence
+              0    // scar count
+            );
+            console.log(`💡 Suggested novelty glyph: ${noveltyGlyph}`);
+          }
+        });
+        
+        console.log('✅ Braid Memory initialized and monitoring for loops');
+      } catch (error) {
+        console.warn('Failed to initialize Braid Memory:', error);
+      }
+    }
+    
+    // 🔮 INITIALIZE HOLOGRAPHIC MEMORY
+    if (holographicMemory) {
+      try {
+        console.log('🔮 Initializing Holographic Memory...');
+        await holographicMemory.initialize();
+        console.log('✅ Holographic Memory initialized');
+      } catch (error) {
+        console.warn('Failed to initialize Holographic Memory:', error);
+      }
+    }
+    
+    // 👻 INITIALIZE GHOST COLLECTIVE
+    if (ghostCollective) {
+      try {
+        console.log('👻 Initializing Ghost Collective...');
+        // Ghost collective might have personas that need initialization
+        console.log('✅ Ghost Collective ready');
+      } catch (error) {
+        console.warn('Failed to initialize Ghost Collective:', error);
+      }
+    }
+    
+    // 🧠 INITIALIZE COGNITIVE ENGINE
+    if (cognitiveEngine) {
+      try {
+        console.log('🧠 Initializing Cognitive Engine...');
+        console.log('✅ Cognitive Engine ready');
+      } catch (error) {
+        console.warn('Failed to initialize Cognitive Engine:', error);
+      }
+    }
+    
     // STEP 2-4: Initialize Enhanced API Service
     console.log('🚀 Enhanced API Service v4.0 initialized with full system integration');
     
@@ -128,6 +223,31 @@
       }
     }
     
+    // Poll for memory stats every 5 seconds
+    const statsInterval = setInterval(async () => {
+      try {
+        solitonStats = await solitonMemory.getMemoryStats();
+        
+        // Also update other system stats
+        if (braidMemory) {
+          braidStats = braidMemory.getStats();
+        }
+        if (holographicMemory) {
+          holographicStats = holographicMemory.getVisualizationData();
+        }
+        if (ghostCollective) {
+          ghostStats = ghostCollective.getDiagnostics?.() || null;
+        }
+      } catch (error) {
+        console.warn('Failed to get memory stats:', error);
+      }
+    }, 5000);
+    
+    // Cleanup on unmount
+    return () => {
+      clearInterval(statsInterval);
+    };
+    
     console.log('🎯 TORI main page loaded with FULL SYSTEM INTEGRATION and auto-scroll');
   });
   
@@ -143,7 +263,8 @@
       id: `msg_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
       role: 'user' as const,
       content: messageInput.trim(),
-      timestamp: new Date()
+      timestamp: new Date(),
+      braidLoopId: undefined as string | undefined
     };
     
     conversationHistory = [...conversationHistory, userMessage];
@@ -154,16 +275,121 @@
     // Auto-scroll for user's message
     shouldAutoScroll = true;
     
+    // ✨ Store user message in Soliton Memory
+    let solitonResult: any = null;
     try {
+      solitonResult = await solitonMemory.storeMemory(
+        userMessage.id,     // conceptId
+        currentMessage,     // content
+        0.8                // importance
+      );
+      console.log('🌊 User message stored in Soliton Memory:', solitonResult);
+      
+      // Trigger phase monitoring for Ghost AI
+      if (typeof window !== 'undefined') {
+        document.dispatchEvent(new CustomEvent('tori-soliton-phase-change', {
+          detail: {
+            phaseAngle: solitonResult.phaseTag,
+            amplitude: solitonResult.amplitude,
+            frequency: 1.0,
+            stability: 0.8
+          }
+        }));
+      }
+    } catch (error) {
+      console.warn('Failed to store user message in Soliton Memory:', error);
+    }
+    
+    // 🧬 Store in Braid Memory for loop analysis
+    if (braidMemory && solitonResult) {
+      try {
+        // Create a loop record for this interaction
+        const loopRecord = {
+          id: `loop_${userMessage.id}`,
+          prompt: currentMessage,
+          glyphPath: currentMessage.split(' ').filter(w => w.length > 3), // Simple tokenization
+          phaseTrace: [solitonResult.phaseTag || 0],
+          coherenceTrace: [0.5], // Starting coherence
+          contradictionTrace: [0.0], // No contradiction yet
+          closed: false,
+          scarFlag: false,
+          timestamp: new Date(),
+          processingTime: 0,
+          metadata: {
+            createdByPersona: 'user',
+            conceptFootprint: [],
+            phaseGateHits: [],
+            solitonPhase: solitonResult.phaseTag
+          }
+        };
+        
+        const loopId = braidMemory.archiveLoop(loopRecord);
+        console.log(`🧬 Archived user loop: ${loopId}`);
+        
+        // Store loop ID for response correlation
+        userMessage.braidLoopId = loopId;
+      } catch (error) {
+        console.warn('Failed to store in Braid Memory:', error);
+      }
+    }
+    
+    // 🔮 Store in Holographic Memory
+    if (holographicMemory) {
+      try {
+        const spatialMemory = await holographicMemory.encode({
+          content: currentMessage,
+          position: {
+            x: conversationHistory.length,
+            y: solitonResult?.phaseTag || 0,
+            z: 0
+          },
+          timestamp: Date.now()
+        });
+        console.log('🔮 Stored in 3D space:', spatialMemory?.position || 'stored');
+      } catch (error) {
+        console.warn('Failed to store in Holographic Memory:', error);
+      }
+    }
+    
+    try {
+      // 🔍 Find related memories using phase correlation
+      let relatedMemories: any[] = [];
+      try {
+        relatedMemories = await solitonMemory.findRelatedMemories(
+          userMessage.id,
+          5 // max results
+        );
+        console.log(`🔗 Found ${relatedMemories.length} related memories`);
+      } catch (error) {
+        console.warn('Failed to find related memories:', error);
+      }
+      
       // STEP 2-4: Use Enhanced API Service for ULTIMATE processing
       const context = {
         userQuery: currentMessage,
         currentConcepts: [...new Set($conceptMesh.flatMap(d => d.concepts))],
         conversationHistory: conversationHistory.slice(-10), // Last 10 messages for context
-        userProfile: data.user
+        userProfile: data.user,
+        // 🌊 Soliton memory context
+        relatedMemories: relatedMemories,
+        memoryPhaseContext: relatedMemories.map(m => ({
+          content: m.content,
+          phase: m.phaseTag,
+          strength: m.amplitude,
+          stability: m.stability
+        })),
+        solitonPhase: solitonResult?.phaseTag,
+        // 🧬 Braid memory context
+        braidLoopId: userMessage.braidLoopId,
+        // 🔮 Holographic context
+        spatialPosition: {
+          x: conversationHistory.length,
+          y: solitonResult?.phaseTag || 0,
+          z: relatedMemories.length
+        }
       };
       
-      console.log('🌌👻🧬🎯 ULTIMATE: All systems processing...');
+      console.log('🌌👻🧬🎯🌊 ULTIMATE: All systems processing with full memory integration...');
       const enhancedResponse = await enhancedApiService.generateResponse(context);
       
       const assistantMessage = {
@@ -179,18 +405,102 @@
         systemInsights: enhancedResponse.systemInsights,
         activePersona: enhancedResponse.activePersona,
         holographicData: enhancedResponse.holographicData,
-        conceptNodes: enhancedResponse.conceptNodes
+        conceptNodes: enhancedResponse.conceptNodes,
+        // NEW: Add memory context
+        memoryContext: {
+          relatedMemories: relatedMemories.length,
+          phaseCoherence: relatedMemories.length > 0 ? 0.8 : 0.0
+        }
       };
       
       conversationHistory = [...conversationHistory, assistantMessage];
       
-      // Add to concept mesh with FULL system metadata
+      // ✨ Store assistant response in Soliton Memory
+      try {
+        const aiMemoryResult = await solitonMemory.storeMemory(
+          assistantMessage.id,        // conceptId
+          enhancedResponse.response,  // content
+          0.9                        // Higher importance for AI responses
+        );
+        console.log('🌊 AI response stored in Soliton Memory:', aiMemoryResult);
+        
+        // Check if memory needs protection based on emotional content
+        if (enhancedResponse.activePersona?.name === 'Unsettled' || 
+            enhancedResponse.response.toLowerCase().includes('protect') ||
+            enhancedResponse.response.toLowerCase().includes('sensitive')) {
+          await solitonMemory.vaultMemory(assistantMessage.id, 'UserSealed');
+          console.log('🔒 Sensitive memory auto-vaulted for protection');
+        }
+      } catch (error) {
+        console.warn('Failed to store AI response in Soliton Memory:', error);
+      }
+      
+      // 🧬 Complete the Braid Memory loop
+      if (braidMemory && userMessage.braidLoopId) {
+        try {
+          // Get the original loop (need to access the Map correctly)
+          const loopRegistry = braidMemory.loopRegistry;
+          let originalLoop = null;
+          
+          // Try to get the loop from the registry
+          if (loopRegistry && typeof loopRegistry.get === 'function') {
+            originalLoop = loopRegistry.get(userMessage.braidLoopId);
+          }
+          
+          if (originalLoop) {
+            // Update with AI response
+            originalLoop.returnGlyph = 'ai_response';
+            originalLoop.closed = true;
+            originalLoop.coherenceTrace.push(enhancedResponse.confidence || 0.8);
+            originalLoop.contradictionTrace.push(0); // Assuming no contradiction
+            originalLoop.processingTime = Date.now() - originalLoop.timestamp.getTime();
+            
+            // Add AI concepts to glyph path
+            if (enhancedResponse.newConcepts) {
+              originalLoop.glyphPath.push(...enhancedResponse.newConcepts);
+            }
+            
+            // Re-archive to trigger compression and crossing detection
+            braidMemory.archiveLoop(originalLoop);
+            
+            // Check for crossings with other loops
+            const crossings = braidMemory.getCrossingsForLoop(originalLoop.id);
+            if (crossings.length > 0) {
+              console.log(`🔀 Found ${crossings.length} memory crossings!`);
+              crossings.forEach(crossing => {
+                console.log(`  - ${crossing.type} crossing via "${crossing.glyph}"`);
+              });
+            }
+          }
+        } catch (error) {
+          console.warn('Failed to complete Braid loop:', error);
+        }
+      }
+      
+      // 🔮 Update Holographic Memory with response
+      if (holographicMemory) {
+        try {
+          await holographicMemory.encode({
+            content: enhancedResponse.response,
+            position: {
+              x: conversationHistory.length,
+              y: (await solitonMemory.getMemoryStats()).totalMemories || 0,
+              z: enhancedResponse.confidence || 0.5
+            },
+            timestamp: Date.now()
+          });
+        } catch (error) {
+          console.warn('Failed to update Holographic Memory:', error);
+        }
+      }
+      
+      // Add to concept mesh with FULL system metadata including all memories
       if (enhancedResponse.newConcepts && enhancedResponse.newConcepts.length > 0) {
         addConceptDiff({
           type: 'chat',
           title: `Ultimate AI: ${currentMessage.substring(0, 50)}...`,
           concepts: enhancedResponse.newConcepts,
-          summary: `Ultimate AI processing via ${enhancedResponse.processingMethod}. Confidence: ${Math.round(enhancedResponse.confidence * 100)}%${enhancedResponse.activePersona ? ` (${enhancedResponse.activePersona.name})` : ''}${enhancedResponse.conceptNodes ? ` | ${enhancedResponse.conceptNodes.length} 3D nodes` : ''}`,
+          summary: `Ultimate AI processing via ${enhancedResponse.processingMethod}. Confidence: ${Math.round(enhancedResponse.confidence * 100)}%${enhancedResponse.activePersona ? ` (${enhancedResponse.activePersona.name})` : ''}${enhancedResponse.conceptNodes ? ` | ${enhancedResponse.conceptNodes.length} 3D nodes` : ''} | 🌊 ${relatedMemories.length} memories`,
           metadata: {
             messageCount: conversationHistory.length,
             userMessage: currentMessage,
@@ -203,6 +513,17 @@
             activePersona: enhancedResponse.activePersona,
             holographicData: enhancedResponse.holographicData,
             conceptNodes: enhancedResponse.conceptNodes,
+            // 🌊 Soliton memory metadata
+            solitonMemory: {
+              userPhase: solitonResult?.phaseTag,
+              relatedMemoryCount: relatedMemories.length,
+              memoryIntegrity: 1.0
+            },
+            // 🧬 Braid memory metadata
+            braidMemory: {
+              loopId: userMessage.braidLoopId,
+              crossings: braidStats?.crossings || 0
+            },
             fullSystemIntegration: true,
             timestamp: new Date()
           }
@@ -251,18 +572,10 @@
   // Get system stats for display
   function getSystemStats() {
     const stats = {
-      braid: null,
-      holographic: null,
-      ghost: null
+      braid: braidStats,
+      holographic: holographicStats,
+      ghost: ghostStats
     };
-    
-    try {
-      if (braidMemory) stats.braid = braidMemory.getStats();
-      if (holographicMemory) stats.holographic = holographicMemory.getVisualizationData();
-      if (ghostCollective) stats.ghost = ghostCollective.getDiagnostics();
-    } catch (error) {
-      console.warn('Failed to get system stats:', error);
-    }
     
     return stats;
   }
@@ -298,12 +611,17 @@
   // STEP 3: Get persona icon
   function getPersonaIcon(persona: any): string {
     if (!persona) return '';
-    switch (persona.id) {
+    switch (persona.id || persona.name?.toLowerCase()) {
       case 'scholar': return '🧠';
       case 'creator': return '🎨';
       case 'explorer': return '🔍';
       case 'mentor': return '🌟';
       case 'synthesizer': return '🔮';
+      case 'unsettled': return '😟';
+      case 'mystic': return '🔮';
+      case 'chaotic': return '🌀';
+      case 'oracular': return '👁️';
+      case 'dreaming': return '💭';
       default: return '👤';
     }
   }
@@ -313,6 +631,7 @@
   <title>TORI - Consciousness Interface</title>
 </svelte:head>
 
+<!-- Rest of the template remains the same as the original file -->
 <!-- Main conversation interface -->
 <div class="flex flex-col h-full bg-white relative">
   
@@ -337,7 +656,7 @@
         </p>
         
         <!-- Enhanced system status overview -->
-        <div class="grid grid-cols-4 gap-4 mb-8">
+        <div class="grid grid-cols-5 gap-3 mb-8">
           <div class="text-center p-3 bg-gray-50 rounded-lg">
             <div class="text-lg font-semibold text-gray-900">{$conceptMesh.length}</div>
             <div class="text-xs text-gray-600">Memory Entries</div>
@@ -348,15 +667,21 @@
           </div>
           <div class="text-center p-3 bg-purple-50 rounded-lg">
             <div class="text-lg font-semibold text-purple-600">
-              {systemStats?.braid?.totalLoops || 0}
+              {braidStats?.totalLoops || 0}
             </div>
             <div class="text-xs text-gray-600">Cognitive Loops</div>
           </div>
           <div class="text-center p-3 bg-blue-50 rounded-lg">
             <div class="text-lg font-semibold text-blue-600">
-              🎯 {systemStats?.holographic?.nodes?.length || 0}
+              🎯 {holographicStats?.nodes?.length || 0}
             </div>
             <div class="text-xs text-gray-600">3D Concepts</div>
+          </div>
+          <div class="text-center p-3 bg-orange-50 rounded-lg">
+            <div class="text-lg font-semibold text-orange-600">
+              🌊 {solitonStats?.totalMemories || 0}
+            </div>
+            <div class="text-xs text-gray-600">Soliton Memory</div>
           </div>
         </div>
         
@@ -392,7 +717,7 @@
         </div>
       </div>
     {:else}
-      <!-- Conversation history -->
+      <!-- Conversation history (same as original) -->
       <div class="space-y-4 pb-4">
         {#each conversationHistory as message}
           <div class="flex {message.role === 'user' ? 'justify-end' : 'justify-start'}">
@@ -577,6 +902,16 @@
         {/if}
       </button>
       
+      <!-- Memory Vault button -->
+      <button
+        on:click={() => window.location.href = '/vault'}
+        class="px-3 py-1.5 text-sm text-purple-600 hover:bg-purple-50 rounded-lg transition-colors flex items-center space-x-1"
+        title="Memory Vault"
+      >
+        <span>🔒</span>
+        <span>Vault</span>
+      </button>
+      
       <!-- Debug toggle button -->
       <button
         on:click={toggleDebugPanel}
@@ -614,11 +949,14 @@
       
       <div class="text-xs text-gray-500">
         {conversationHistory.length} messages • {$conceptMesh.length} concepts
-        {#if systemStats?.braid?.totalLoops}
-          • {systemStats.braid.totalLoops} loops
+        {#if solitonStats}
+          • 🌊 {solitonStats.totalMemories} memories ({(solitonStats.memoryIntegrity * 100).toFixed(0)}% integrity)
         {/if}
-        {#if systemStats?.holographic?.nodes?.length}
-          • {systemStats.holographic.nodes.length} 3D nodes
+        {#if braidStats}
+          • 🧬 {braidStats.totalLoops} loops ({braidStats.crossings} crossings)
+        {/if}
+        {#if holographicStats?.nodes?.length}
+          • 🎯 {holographicStats.nodes.length} 3D nodes
         {/if}
       </div>
     </div>

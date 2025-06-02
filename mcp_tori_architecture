@@ -1,0 +1,30 @@
+// Integration Flow
+digraph "MCP-TORI Architecture" {
+	bgcolor=lightgray rankdir=LR
+	node [fontname=Arial shape=box style="rounded,filled"]
+	UI [label="Svelte Frontend
+:5173" fillcolor=lightblue]
+	PY [label="Python Backend
+run_stable_server.py
+:8002" fillcolor=lightgreen]
+	TORI [label="TORI Pipeline
+pipeline.py" fillcolor=yellow]
+	BRIDGE [label="MCP Bridge
+mcp_bridge_real_tori.py" fillcolor=orange]
+	MCP [label="MCP Gateway
+:8080" fillcolor=lightcoral]
+	TK [label="Trust Kernel" fillcolor=pink]
+	KAIZEN [label="MCP:kaizen" fillcolor=lavender]
+	CELERY [label="MCP:celery" fillcolor=lavender]
+	UI -> PY [label="User Input"]
+	PY -> TORI [label=Filter]
+	TORI -> BRIDGE [label=Filtered]
+	BRIDGE -> MCP [label="HTTP/WS"]
+	MCP -> TK [label=Verify]
+	TK -> KAIZEN
+	TK -> CELERY
+	MCP -> BRIDGE [label=Response style=dashed]
+	BRIDGE -> TORI [label=Filter style=dashed]
+	TORI -> PY [label=Safe style=dashed]
+	PY -> UI [label=Display style=dashed]
+}

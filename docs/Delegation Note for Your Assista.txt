@@ -1,0 +1,59 @@
+📝 Delegation Note for Your Assistant
+Subject:
+MCP + TORI System Integration Review — Compliance & Pipeline Audit Task
+
+Hi [Assistant’s Name],
+
+Objective:
+Please review and verify that our MCP modules, new pipeline, and all key workflows are fully integrated with TORI’s policy/compliance/concept filter system, and that every data and workflow entry/exit point is properly routed through our compliance hooks (no leaks, no bypasses).
+
+How to approach this:
+Start with the new modular MCP tree structure (use the most recent one from ChatGPT):
+
+Each main file/module has clear responsibilities.
+
+The TORIFilterIntegration instance is the only allowed way to perform policy, concept, or compliance checks.
+
+Your job:
+
+For each data/workflow entry point (API request, orchestrator phase, memory insert, output/export, etc), make sure content is filtered by TORI before any processing, storage, or output.
+
+No content should bypass the pipeline. All content must be checked—on ingress and (if applicable) before leaving the system.
+
+Specifically check:
+
+mcp-gateway.ts — Are all incoming API requests filtered by TORI before they’re processed or stored?
+
+phase-orchestrator.ts — Do all phase steps check compliance/policy with TORI before and after phase logic?
+
+concept-memory-graph.ts — Is any data written or retrieved without going through a TORI filter?
+
+Any batch jobs, importers, or “side scripts” — Do they use the same pathway, or could they leak unfiltered content?
+
+All other modules: Is TORI called at every entry/exit or potential “pinch point”?
+
+How to verify:
+
+Trace the code paths (even if by hand or using your IDE’s “Find References”) for every point where content enters, is stored, or leaves the system.
+
+Check that TORIFilterIntegration is used consistently, and always before any processing/storage/output.
+
+Log/audit: Make sure every policy decision is logged for traceability.
+
+If you find a “leak” or missing filter:
+
+Propose/implement a fix: Wrap that path in a call to the appropriate TORI compliance check.
+
+Add tests to ensure the filter can’t be bypassed accidentally.
+
+If in doubt:
+
+Ask ChatGPT (in this chat), or flag it for Jason’s review.
+
+Success Criteria / Deliverable:
+A written summary: “All data entry/exit points are routed through TORI filters — no leaks.”
+
+If anything is missing: a checklist of integration points to fix, with code locations and suggested changes.
+
+(Optional but ideal) An updated pipeline diagram showing the policy/compliance checkpoints in context.
+

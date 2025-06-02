@@ -1,0 +1,60 @@
+MCP-TORI ECOSYSTEM - COMPLETE FILE LIST
+======================================
+
+🎯 ENTRY POINTS
+===============
+run_stable_server.py
+mcp-server-architecture/src/main.ts
+
+🔗 PYTHON CORE FILES
+====================
+mcp_bridge_real_tori.py
+ingest_pdf/pipeline.py
+ingest_pdf/source_validator.py
+ingest_pdf/pipeline_validator.py
+ingest_pdf/main.py
+
+🔗 TYPESCRIPT MCP ARCHITECTURE
+==============================
+mcp-server-architecture/src/core/types.ts
+mcp-server-architecture/src/core/trust-kernel.ts
+mcp-server-architecture/src/core/phase-orchestrator.ts
+mcp-server-architecture/src/integration/mcp-gateway.ts
+mcp-server-architecture/src/integration/tori-filter.ts
+mcp-server-architecture/src/integration/python-bridge.ts
+mcp-server-architecture/src/servers/mcp-kaizen.ts
+mcp-server-architecture/src/servers/mcp-celery.ts
+mcp-server-architecture/src/observability/monitoring.ts
+mcp-server-architecture/src/memory/concept-memory-graph.ts
+mcp-server-architecture/src/resilience/auto-repair.ts
+
+📦 CONFIGURATION FILES
+======================
+mcp-server-architecture/package.json
+mcp-server-architecture/tsconfig.json
+mcp-server-architecture/package-lock.json
+
+🧪 TESTING & VALIDATION
+=======================
+test_tori_standalone.py
+test_real_tori_filtering.py
+tests/test_mcp_tori_integration.py
+
+🔧 SETUP & UTILITIES
+====================
+setup_mcp_bridge.sh
+Show-MCPStructure.ps1
+visualize_architecture.py
+
+📚 DOCUMENTATION
+================
+PERFECT_MCP_TORI_INTEGRATION_PLAN.md
+MCP_TORI_ECOSYSTEM_MAP.md
+
+🗃️ LEGACY/REFERENCE
+===================
+mcp_bridge.py
+test.js
+
+TOTAL FUNCTIONAL FILES: 30
+==========================
