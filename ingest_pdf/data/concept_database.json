@@ -44591,5 +44591,93 @@
       "discovery_date": "2025-05-31T05:45:14.174932",
       "domain_detected": "universal_extraction"
     }
+  },
+  {
+    "name": "topological superconductors",
+    "priority": 0.97,
+    "category": "universal_extraction",
+    "aliases": [
+      "TS",
+      "topological",
+      "superconductors"
+    ],
+    "boost_multiplier": 1.35,
+    "source": {
+      "auto_prefill": true,
+      "purity_based": true,
+      "purity_decision": "DOUBLE_CONSENSUS",
+      "universal_extraction": true,
+      "document": "2504_16841v1_1748956250.pdf",
+      "extraction_method": "universal_keybert+yake",
+      "original_score": 1.0,
+      "purity_score": 1.2,
+      "discovery_date": "2025-06-03T08:11:24.679318",
+      "domain_detected": "universal_extraction"
+    }
+  },
+  {
+    "name": "majorana fermions",
+    "priority": 0.97,
+    "category": "universal_extraction",
+    "aliases": [
+      "MF",
+      "majorana",
+      "fermions"
+    ],
+    "boost_multiplier": 1.5,
+    "source": {
+      "auto_prefill": true,
+      "purity_based": true,
+      "purity_decision": "TRIPLE_CONSENSUS",
+      "universal_extraction": true,
+      "document": "2504_16841v1_1748956250.pdf",
+      "extraction_method": "universal_keybert+ner+yake",
+      "original_score": 1.0,
+      "purity_score": 1.2,
+      "discovery_date": "2025-06-03T08:11:24.679318",
+      "domain_detected": "universal_extraction"
+    }
+  },
+  {
+    "name": "Elastic Weight Consolidation",
+    "priority": 0.9457,
+    "category": "universal_extraction",
+    "aliases": [
+      "elastic",
+      "weight",
+      "consolidation"
+    ],
+    "boost_multiplier": 1.4,
+    "source": {
+      "auto_prefill": true,
+      "purity_based": true,
+      "purity_decision": "DOUBLE_CONSENSUS",
+      "universal_extraction": true,
+      "document": "upload_1748975521467_2504.02489v1.pdf",
+      "extraction_method": "universal_ner+yake",
+      "original_score": 0.9457,
+      "purity_score": 1.135,
+      "discovery_date": "2025-06-03T13:32:20.847771",
+      "domain_detected": "universal_extraction"
+    }
+  },
+  {
+    "name": "Meta-Learning",
+    "priority": 0.7427,
+    "category": "Computer Science",
+    "aliases": [],
+    "boost_multiplier": 1.4,
+    "source": {
+      "auto_prefill": true,
+      "purity_based": true,
+      "purity_decision": "DOUBLE_CONSENSUS",
+      "universal_extraction": true,
+      "document": "upload_1748975521467_2504.02489v1.pdf",
+      "extraction_method": "universal_ner+yake",
+      "original_score": 0.7427,
+      "purity_score": 0.891,
+      "discovery_date": "2025-06-03T13:32:20.847771",
+      "domain_detected": "Computer Science"
+    }
   }
 ]

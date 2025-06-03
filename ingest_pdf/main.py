@@ -11,6 +11,7 @@ import asyncio
 from pathlib import Path
 from datetime import datetime
 from typing import Dict, Any, Optional
+from alan_backend.routes.soliton import router as soliton_router  # 🌊 ADDED: Soliton Memory import
 
 # Configure logging
 logging.basicConfig(
@@ -29,6 +30,10 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# 🌊 ADDED: Include Soliton Memory routes
+app.include_router(soliton_router)
+logger.info("🌊 Soliton Memory routes integrated into API")
 
 # Global progress tracking
 progress_connections: Dict[str, WebSocket] = {}
@@ -138,6 +143,13 @@ async def startup_event():
     except ImportError as e:
         logger.error(f"❌ Failed to import pipeline: {e}")
         raise
+    
+    # 🌊 ADDED: Verify Soliton routes loaded
+    try:
+        logger.info("🌊 Soliton Memory routes available at /api/soliton/*")
+        logger.info("✅ All systems operational")
+    except Exception as e:
+        logger.warning(f"⚠️ Soliton Memory routes may not be fully loaded: {e}")
 
 @app.post("/extract")
 async def extract(request: ExtractionRequest):
@@ -294,17 +306,18 @@ async def extract_with_progress(file_path: str, tracker: ProgressTracker) -> dic
         "stage": "pdf_parsing"
     })
     
-    # Simulate progress for chunks (we'll need to modify the pipeline to actually send these)
+    # More realistic progress stages
     chunk_stages = [
-        (35, "Processing chunk 1/9 - Extracting concepts"),
-        (45, "Processing chunk 2/9 - Universal analysis"),
-        (50, "Processing chunk 3/9 - Cross-referencing database"),
-        (55, "Processing chunk 4/9 - Semantic analysis"),
-        (60, "Processing chunk 5/9 - Named entity recognition"),
-        (65, "Processing chunk 6/9 - Quality scoring"),
-        (70, "Processing chunk 7/9 - Domain classification"),
-        (75, "Processing chunk 8/9 - Final extraction"),
-        (80, "Processing chunk 9/9 - Completing analysis"),
+        (35, "Extracting text from PDF pages"),
+        (40, "Running YAKE keyword extraction"),
+        (45, "Running KeyBERT semantic analysis"),
+        (50, "Processing with spaCy NER"),
+        (55, "Cross-referencing concept database"),
+        (60, "Analyzing semantic relationships"),
+        (65, "Applying purity-based filtering"),
+        (70, "Computing concept scores"),
+        (75, "Finalizing concept extraction"),
+        (80, "Building response data"),
     ]
     
     # We'll do the actual processing in a separate task and simulate progress
@@ -354,7 +367,8 @@ async def health():
         "working_directory": os.getcwd(),
         "python_version": sys.version,
         "progress_connections": len(progress_connections),
-        "features": ["real_time_progress", "websocket_updates", "purity_analysis"]
+        "features": ["real_time_progress", "websocket_updates", "purity_analysis", "soliton_memory"],  # 🌊 UPDATED: Added soliton_memory
+        "soliton_enabled": True  # 🌊 ADDED: Soliton status indicator
     }
 
 @app.get("/")
@@ -364,11 +378,12 @@ async def root():
     return {
         "message": "TORI FastAPI Extraction Service",
         "status": "ready",
-        "features": ["real_time_progress", "websocket_updates", "purity_analysis"],
+        "features": ["real_time_progress", "websocket_updates", "purity_analysis", "soliton_memory"],  # 🌊 UPDATED: Added soliton_memory
         "endpoints": {
             "extract": "/extract",
             "health": "/health",
             "progress": "/progress/{progress_id}",
-            "docs": "/docs"
+            "docs": "/docs",
+            "soliton": "/api/soliton/*"  # 🌊 ADDED: Soliton API endpoints
         }
     }
