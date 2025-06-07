@@ -1,0 +1,649 @@
+{
+  "metadata": {
+    "export_time": "2025-06-06T14:18:50.073620",
+    "monitoring_version": "3.0"
+  },
+  "health_metrics": [
+    {
+      "timestamp": "2025-06-06T13:30:08.375026",
+      "cpu_usage": 1.8,
+      "memory_usage": 24.9,
+      "memory_available": 47.83774185180664,
+      "disk_usage": 53.6,
+      "process_count": 309,
+      "response_time_avg": 0.0,
+      "error_rate": 0.0,
+      "active_sessions": 0,
+      "websocket_connections": 0
+    },
+    {
+      "timestamp": "2025-06-06T13:31:09.395869",
+      "cpu_usage": 8.4,
+      "memory_usage": 24.9,
+      "memory_available": 47.86149215698242,
+      "disk_usage": 53.6,
+      "process_count": 309,
+      "response_time_avg": 0.0,
+      "error_rate": 0.0,
+      "active_sessions": 0,
+      "websocket_connections": 0
+    },
+    {
+      "timestamp": "2025-06-06T13:32:10.432234",
+      "cpu_usage": 8.6,
+      "memory_usage": 24.9,
+      "memory_available": 47.821651458740234,
+      "disk_usage": 53.6,
+      "process_count": 306,
+      "response_time_avg": 0.0,
+      "error_rate": 0.0,
+      "active_sessions": 0,
+      "websocket_connections": 0
+    },
+    {
+      "timestamp": "2025-06-06T13:33:11.450154",
+      "cpu_usage": 10.5,
+      "memory_usage": 25.4,
+      "memory_available": 47.50016784667969,
+      "disk_usage": 53.6,
+      "process_count": 313,
+      "response_time_avg": 0.0,
+      "error_rate": 0.0,
+      "active_sessions": 0,
+      "websocket_connections": 0
+    },
+    {
+      "timestamp": "2025-06-06T13:34:12.467490",
+      "cpu_usage": 5.0,
+      "memory_usage": 25.1,
+      "memory_available": 47.71718978881836,
+      "disk_usage": 53.6,
+      "process_count": 311,
+      "response_time_avg": 0.0,
+      "error_rate": 0.0,
+      "active_sessions": 0,
+      "websocket_connections": 0
+    },
+    {
+      "timestamp": "2025-06-06T13:35:13.480804",
+      "cpu_usage": 4.5,
+      "memory_usage": 25.4,
+      "memory_available": 47.55033493041992,
+      "disk_usage": 53.6,
+      "process_count": 310,
+      "response_time_avg": 0.0,
+      "error_rate": 0.0,
+      "active_sessions": 0,
+      "websocket_connections": 0
+    },
+    {
+      "timestamp": "2025-06-06T13:36:14.517581",
+      "cpu_usage": 6.0,
+      "memory_usage": 24.9,
+      "memory_available": 47.8170280456543,
+      "disk_usage": 53.6,
+      "process_count": 306,
+      "response_time_avg": 0.0,
+      "error_rate": 0.0,
+      "active_sessions": 0,
+      "websocket_connections": 0
+    },
+    {
+      "timestamp": "2025-06-06T13:37:15.549240",
+      "cpu_usage": 4.4,
+      "memory_usage": 25.0,
+      "memory_available": 47.802589416503906,
+      "disk_usage": 53.6,
+      "process_count": 309,
+      "response_time_avg": 0.0,
+      "error_rate": 0.0,
+      "active_sessions": 0,
+      "websocket_connections": 0
+    },
+    {
+      "timestamp": "2025-06-06T13:38:16.577091",
+      "cpu_usage": 12.0,
+      "memory_usage": 25.0,
+      "memory_available": 47.75652313232422,
+      "disk_usage": 53.6,
+      "process_count": 308,
+      "response_time_avg": 0.0,
+      "error_rate": 0.0,
+      "active_sessions": 0,
+      "websocket_connections": 0
+    },
+    {
+      "timestamp": "2025-06-06T13:39:17.651161",
+      "cpu_usage": 18.3,
+      "memory_usage": 25.1,
+      "memory_available": 47.691986083984375,
+      "disk_usage": 53.6,
+      "process_count": 309,
+      "response_time_avg": 0.0,
+      "error_rate": 0.0,
+      "active_sessions": 0,
+      "websocket_connections": 0
+    },
+    {
+      "timestamp": "2025-06-06T13:40:18.654482",
+      "cpu_usage": 5.4,
+      "memory_usage": 25.0,
+      "memory_available": 47.7614631652832,
+      "disk_usage": 53.6,
+      "process_count": 310,
+      "response_time_avg": 0.0,
+      "error_rate": 0.0,
+      "active_sessions": 0,
+      "websocket_connections": 0
+    },
+    {
+      "timestamp": "2025-06-06T13:41:19.672966",
+      "cpu_usage": 3.4,
+      "memory_usage": 25.3,
+      "memory_available": 47.61151885986328,
+      "disk_usage": 53.6,
+      "process_count": 306,
+      "response_time_avg": 0.0,
+      "error_rate": 0.0,
+      "active_sessions": 0,
+      "websocket_connections": 0
+    },
+    {
+      "timestamp": "2025-06-06T13:42:20.699746",
+      "cpu_usage": 6.1,
+      "memory_usage": 24.9,
+      "memory_available": 47.822879791259766,
+      "disk_usage": 53.6,
+      "process_count": 305,
+      "response_time_avg": 0.0,
+      "error_rate": 0.0,
+      "active_sessions": 0,
+      "websocket_connections": 0
+    },
+    {
+      "timestamp": "2025-06-06T13:43:21.711541",
+      "cpu_usage": 4.2,
+      "memory_usage": 24.9,
+      "memory_available": 47.83065414428711,
+      "disk_usage": 53.6,
+      "process_count": 304,
+      "response_time_avg": 0.0,
+      "error_rate": 0.0,
+      "active_sessions": 0,
+      "websocket_connections": 0
+    },
+    {
+      "timestamp": "2025-06-06T13:44:22.747391",
+      "cpu_usage": 3.4,
+      "memory_usage": 25.0,
+      "memory_available": 47.777732849121094,
+      "disk_usage": 53.6,
+      "process_count": 304,
+      "response_time_avg": 0.0,
+      "error_rate": 0.0,
+      "active_sessions": 0,
+      "websocket_connections": 0
+    },
+    {
+      "timestamp": "2025-06-06T13:45:23.772185",
+      "cpu_usage": 6.5,
+      "memory_usage": 24.9,
+      "memory_available": 47.8216552734375,
+      "disk_usage": 53.6,
+      "process_count": 305,
+      "response_time_avg": 0.0,
+      "error_rate": 0.0,
+      "active_sessions": 0,
+      "websocket_connections": 0
+    },
+    {
+      "timestamp": "2025-06-06T13:46:24.791322",
+      "cpu_usage": 3.0,
+      "memory_usage": 24.9,
+      "memory_available": 47.83064651489258,
+      "disk_usage": 53.6,
+      "process_count": 305,
+      "response_time_avg": 0.0,
+      "error_rate": 0.0,
+      "active_sessions": 0,
+      "websocket_connections": 0
+    },
+    {
+      "timestamp": "2025-06-06T13:47:25.847589",
+      "cpu_usage": 20.3,
+      "memory_usage": 25.2,
+      "memory_available": 47.64523696899414,
+      "disk_usage": 53.6,
+      "process_count": 312,
+      "response_time_avg": 0.0,
+      "error_rate": 0.0,
+      "active_sessions": 0,
+      "websocket_connections": 0
+    },
+    {
+      "timestamp": "2025-06-06T13:48:26.884204",
+      "cpu_usage": 6.9,
+      "memory_usage": 25.1,
+      "memory_available": 47.708309173583984,
+      "disk_usage": 53.6,
+      "process_count": 313,
+      "response_time_avg": 0.0,
+      "error_rate": 0.0,
+      "active_sessions": 0,
+      "websocket_connections": 0
+    },
+    {
+      "timestamp": "2025-06-06T13:49:27.896260",
+      "cpu_usage": 10.8,
+      "memory_usage": 25.0,
+      "memory_available": 47.775856018066406,
+      "disk_usage": 53.6,
+      "process_count": 310,
+      "response_time_avg": 0.0,
+      "error_rate": 0.0,
+      "active_sessions": 0,
+      "websocket_connections": 0
+    },
+    {
+      "timestamp": "2025-06-06T13:50:28.935329",
+      "cpu_usage": 10.9,
+      "memory_usage": 26.0,
+      "memory_available": 47.13081741333008,
+      "disk_usage": 53.6,
+      "process_count": 311,
+      "response_time_avg": 0.0,
+      "error_rate": 0.0,
+      "active_sessions": 0,
+      "websocket_connections": 0
+    },
+    {
+      "timestamp": "2025-06-06T13:51:29.970052",
+      "cpu_usage": 4.4,
+      "memory_usage": 26.0,
+      "memory_available": 47.1454963684082,
+      "disk_usage": 53.6,
+      "process_count": 309,
+      "response_time_avg": 0.0,
+      "error_rate": 0.0,
+      "active_sessions": 0,
+      "websocket_connections": 0
+    },
+    {
+      "timestamp": "2025-06-06T13:52:30.989971",
+      "cpu_usage": 7.9,
+      "memory_usage": 25.6,
+      "memory_available": 47.363258361816406,
+      "disk_usage": 53.6,
+      "process_count": 308,
+      "response_time_avg": 0.0,
+      "error_rate": 0.0,
+      "active_sessions": 0,
+      "websocket_connections": 0
+    },
+    {
+      "timestamp": "2025-06-06T13:53:31.982461",
+      "cpu_usage": 3.8,
+      "memory_usage": 25.9,
+      "memory_available": 47.22186279296875,
+      "disk_usage": 53.6,
+      "process_count": 312,
+      "response_time_avg": 0.0,
+      "error_rate": 0.0,
+      "active_sessions": 0,
+      "websocket_connections": 0
+    },
+    {
+      "timestamp": "2025-06-06T13:54:32.997868",
+      "cpu_usage": 6.5,
+      "memory_usage": 25.6,
+      "memory_available": 47.37400436401367,
+      "disk_usage": 53.6,
+      "process_count": 311,
+      "response_time_avg": 0.0,
+      "error_rate": 0.0,
+      "active_sessions": 0,
+      "websocket_connections": 0
+    },
+    {
+      "timestamp": "2025-06-06T13:55:34.029725",
+      "cpu_usage": 12.0,
+      "memory_usage": 25.6,
+      "memory_available": 47.38471984863281,
+      "disk_usage": 53.6,
+      "process_count": 311,
+      "response_time_avg": 0.0,
+      "error_rate": 0.0,
+      "active_sessions": 0,
+      "websocket_connections": 0
+    },
+    {
+      "timestamp": "2025-06-06T13:56:35.062540",
+      "cpu_usage": 8.6,
+      "memory_usage": 26.0,
+      "memory_available": 47.1126823425293,
+      "disk_usage": 53.6,
+      "process_count": 307,
+      "response_time_avg": 0.0,
+      "error_rate": 0.0,
+      "active_sessions": 0,
+      "websocket_connections": 0
+    },
+    {
+      "timestamp": "2025-06-06T13:57:36.084383",
+      "cpu_usage": 5.8,
+      "memory_usage": 25.5,
+      "memory_available": 47.449607849121094,
+      "disk_usage": 53.6,
+      "process_count": 306,
+      "response_time_avg": 0.0,
+      "error_rate": 0.0,
+      "active_sessions": 0,
+      "websocket_connections": 0
+    },
+    {
+      "timestamp": "2025-06-06T13:58:37.083076",
+      "cpu_usage": 3.9,
+      "memory_usage": 25.6,
+      "memory_available": 47.36579132080078,
+      "disk_usage": 53.6,
+      "process_count": 307,
+      "response_time_avg": 0.0,
+      "error_rate": 0.0,
+      "active_sessions": 0,
+      "websocket_connections": 0
+    },
+    {
+      "timestamp": "2025-06-06T13:59:38.084013",
+      "cpu_usage": 8.9,
+      "memory_usage": 26.1,
+      "memory_available": 47.048011779785156,
+      "disk_usage": 53.6,
+      "process_count": 306,
+      "response_time_avg": 0.0,
+      "error_rate": 0.0,
+      "active_sessions": 0,
+      "websocket_connections": 0
+    },
+    {
+      "timestamp": "2025-06-06T14:00:39.072202",
+      "cpu_usage": 1.9,
+      "memory_usage": 25.4,
+      "memory_available": 47.52385711669922,
+      "disk_usage": 53.6,
+      "process_count": 306,
+      "response_time_avg": 0.0,
+      "error_rate": 0.0,
+      "active_sessions": 0,
+      "websocket_connections": 0
+    },
+    {
+      "timestamp": "2025-06-06T14:01:40.082461",
+      "cpu_usage": 1.5,
+      "memory_usage": 25.4,
+      "memory_available": 47.51082229614258,
+      "disk_usage": 53.6,
+      "process_count": 305,
+      "response_time_avg": 0.0,
+      "error_rate": 0.0,
+      "active_sessions": 0,
+      "websocket_connections": 0
+    },
+    {
+      "timestamp": "2025-06-06T14:02:41.081238",
+      "cpu_usage": 4.6,
+      "memory_usage": 26.3,
+      "memory_available": 46.969608306884766,
+      "disk_usage": 53.6,
+      "process_count": 309,
+      "response_time_avg": 0.0,
+      "error_rate": 0.0,
+      "active_sessions": 0,
+      "websocket_connections": 0
+    },
+    {
+      "timestamp": "2025-06-06T14:03:42.110401",
+      "cpu_usage": 3.0,
+      "memory_usage": 25.8,
+      "memory_available": 47.23846435546875,
+      "disk_usage": 53.6,
+      "process_count": 305,
+      "response_time_avg": 0.0,
+      "error_rate": 0.0,
+      "active_sessions": 0,
+      "websocket_connections": 0
+    },
+    {
+      "timestamp": "2025-06-06T14:04:43.145984",
+      "cpu_usage": 2.4,
+      "memory_usage": 27.4,
+      "memory_available": 46.2396240234375,
+      "disk_usage": 53.6,
+      "process_count": 312,
+      "response_time_avg": 0.0,
+      "error_rate": 0.0,
+      "active_sessions": 0,
+      "websocket_connections": 0
+    },
+    {
+      "timestamp": "2025-06-06T14:05:44.157648",
+      "cpu_usage": 4.9,
+      "memory_usage": 27.0,
+      "memory_available": 46.532691955566406,
+      "disk_usage": 53.7,
+      "process_count": 314,
+      "response_time_avg": 0.0,
+      "error_rate": 0.0,
+      "active_sessions": 0,
+      "websocket_connections": 0
+    },
+    {
+      "timestamp": "2025-06-06T14:06:45.177903",
+      "cpu_usage": 3.6,
+      "memory_usage": 26.9,
+      "memory_available": 46.533390045166016,
+      "disk_usage": 53.7,
+      "process_count": 315,
+      "response_time_avg": 0.0,
+      "error_rate": 0.0,
+      "active_sessions": 0,
+      "websocket_connections": 0
+    },
+    {
+      "timestamp": "2025-06-06T14:07:46.188100",
+      "cpu_usage": 3.3,
+      "memory_usage": 26.8,
+      "memory_available": 46.63289260864258,
+      "disk_usage": 53.7,
+      "process_count": 317,
+      "response_time_avg": 0.0,
+      "error_rate": 0.0,
+      "active_sessions": 0,
+      "websocket_connections": 0
+    },
+    {
+      "timestamp": "2025-06-06T14:08:47.212144",
+      "cpu_usage": 7.9,
+      "memory_usage": 26.9,
+      "memory_available": 46.551780700683594,
+      "disk_usage": 53.7,
+      "process_count": 317,
+      "response_time_avg": 0.0,
+      "error_rate": 0.0,
+      "active_sessions": 0,
+      "websocket_connections": 0
+    },
+    {
+      "timestamp": "2025-06-06T14:09:48.221503",
+      "cpu_usage": 8.2,
+      "memory_usage": 28.1,
+      "memory_available": 45.77766418457031,
+      "disk_usage": 53.7,
+      "process_count": 318,
+      "response_time_avg": 0.0,
+      "error_rate": 0.0,
+      "active_sessions": 0,
+      "websocket_connections": 0
+    },
+    {
+      "timestamp": "2025-06-06T14:10:49.243165",
+      "cpu_usage": 5.9,
+      "memory_usage": 27.2,
+      "memory_available": 46.37062072753906,
+      "disk_usage": 53.7,
+      "process_count": 317,
+      "response_time_avg": 0.0,
+      "error_rate": 0.0,
+      "active_sessions": 0,
+      "websocket_connections": 0
+    },
+    {
+      "timestamp": "2025-06-06T14:11:50.268609",
+      "cpu_usage": 7.4,
+      "memory_usage": 27.1,
+      "memory_available": 46.41911315917969,
+      "disk_usage": 53.7,
+      "process_count": 315,
+      "response_time_avg": 0.0,
+      "error_rate": 0.0,
+      "active_sessions": 0,
+      "websocket_connections": 0
+    },
+    {
+      "timestamp": "2025-06-06T14:12:51.285893",
+      "cpu_usage": 2.8,
+      "memory_usage": 27.2,
+      "memory_available": 46.37189483642578,
+      "disk_usage": 53.7,
+      "process_count": 314,
+      "response_time_avg": 0.0,
+      "error_rate": 0.0,
+      "active_sessions": 0,
+      "websocket_connections": 0
+    },
+    {
+      "timestamp": "2025-06-06T14:13:52.301783",
+      "cpu_usage": 5.9,
+      "memory_usage": 26.9,
+      "memory_available": 46.56747817993164,
+      "disk_usage": 53.7,
+      "process_count": 314,
+      "response_time_avg": 0.0,
+      "error_rate": 0.0,
+      "active_sessions": 0,
+      "websocket_connections": 0
+    },
+    {
+      "timestamp": "2025-06-06T14:14:53.334068",
+      "cpu_usage": 7.8,
+      "memory_usage": 27.2,
+      "memory_available": 46.35423278808594,
+      "disk_usage": 53.7,
+      "process_count": 313,
+      "response_time_avg": 0.0,
+      "error_rate": 0.0,
+      "active_sessions": 0,
+      "websocket_connections": 0
+    },
+    {
+      "timestamp": "2025-06-06T14:15:54.357667",
+      "cpu_usage": 15.1,
+      "memory_usage": 27.2,
+      "memory_available": 46.35747146606445,
+      "disk_usage": 53.7,
+      "process_count": 316,
+      "response_time_avg": 0.0,
+      "error_rate": 0.0,
+      "active_sessions": 0,
+      "websocket_connections": 0
+    },
+    {
+      "timestamp": "2025-06-06T14:16:55.365968",
+      "cpu_usage": 9.4,
+      "memory_usage": 27.2,
+      "memory_available": 46.39354705810547,
+      "disk_usage": 53.7,
+      "process_count": 309,
+      "response_time_avg": 0.0,
+      "error_rate": 0.0,
+      "active_sessions": 0,
+      "websocket_connections": 0
+    },
+    {
+      "timestamp": "2025-06-06T14:17:56.388573",
+      "cpu_usage": 3.1,
+      "memory_usage": 27.4,
+      "memory_available": 46.236209869384766,
+      "disk_usage": 53.7,
+      "process_count": 310,
+      "response_time_avg": 0.0,
+      "error_rate": 0.0,
+      "active_sessions": 0,
+      "websocket_connections": 0
+    }
+  ],
+  "performance_alerts": [],
+  "health_score": {
+    "overall_health": 0.7193333333333333,
+    "system_health": 0.7193333333333333,
+    "components": {
+      "cpu_health": 0.969,
+      "memory_health": 0.726,
+      "disk_health": 0.46299999999999997
+    }
+  },
+  "monitoring_status": {
+    "monitoring_info": {
+      "status": "active",
+      "metrics_collected": 48,
+      "alerts_generated": 0,
+      "monitoring_uptime": "active"
+    },
+    "health_score": {
+      "overall_health": 0.7193333333333333,
+      "system_health": 0.7193333333333333,
+      "components": {
+        "cpu_health": 0.969,
+        "memory_health": 0.726,
+        "disk_health": 0.46299999999999997
+      }
+    },
+    "current_metrics": {
+      "timestamp": {
+        "_datetime": true,
+        "value": "2025-06-06T14:17:56.388573"
+      },
+      "cpu_usage": 3.1,
+      "memory_usage": 27.4,
+      "memory_available": 46.236209869384766,
+      "disk_usage": 53.7,
+      "process_count": 310,
+      "response_time_avg": 0.0,
+      "error_rate": 0.0,
+      "active_sessions": 0,
+      "websocket_connections": 0
+    },
+    "thresholds": {
+      "cpu_usage": {
+        "warning": 80.0,
+        "critical": 95.0
+      },
+      "memory_usage": {
+        "warning": 85.0,
+        "critical": 95.0
+      },
+      "disk_usage": {
+        "warning": 90.0,
+        "critical": 98.0
+      },
+      "response_time_avg": {
+        "warning": 2.0,
+        "critical": 5.0
+      },
+      "error_rate": {
+        "warning": 0.05,
+        "critical": 0.15
+      }
+    }
+  },
+  "error_counts": {}
+}

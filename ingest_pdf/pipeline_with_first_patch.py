@@ -7,22 +7,102 @@ import hashlib
 import PyPDF2
 import logging
 from datetime import datetime
-from .extract_blocks import extract_concept_blocks
-from .features import build_feature_matrix
-from .spectral import spectral_embed
-from .clustering import run_oscillator_clustering, cluster_cohesion
-from .scoring import score_clusters, resonance_score, narrative_centrality, build_cluster_adjacency, filter_concepts
-from .keywords import extract_keywords
-from .models import ConceptTuple
-from .persistence import save_concepts
-from .lyapunov import concept_predictability, document_chaos_profile
-from .source_validator import validate_source, SourceValidationResult
-from .memory_gating import apply_memory_gating
-from .phase_walk import PhaseCoherentWalk
-from .pipeline_validator import validate_concepts
-from .concept_logger import default_concept_logger as concept_logger, log_loop_record, log_concept_summary, warn_empty_segment
-from .threshold_config import MIN_CONFIDENCE, FALLBACK_MIN_COUNT
-from .cognitive_interface import add_concept_diff
+try:
+    # Try absolute import first
+    from extract_blocks import extract_concept_blocks
+except ImportError:
+    # Fallback to relative import
+    from .extract_blocks import extract_concept_blocks
+try:
+    # Try absolute import first
+    from features import build_feature_matrix
+except ImportError:
+    # Fallback to relative import
+    from .features import build_feature_matrix
+try:
+    # Try absolute import first
+    from spectral import spectral_embed
+except ImportError:
+    # Fallback to relative import
+    from .spectral import spectral_embed
+try:
+    # Try absolute import first
+    from clustering import run_oscillator_clustering, cluster_cohesion
+except ImportError:
+    # Fallback to relative import
+    from .clustering import run_oscillator_clustering, cluster_cohesion
+try:
+    # Try absolute import first
+    from scoring import score_clusters, resonance_score, narrative_centrality, build_cluster_adjacency, filter_concepts
+except ImportError:
+    # Fallback to relative import
+    from .scoring import score_clusters, resonance_score, narrative_centrality, build_cluster_adjacency, filter_concepts
+try:
+    # Try absolute import first
+    from keywords import extract_keywords
+except ImportError:
+    # Fallback to relative import
+    from .keywords import extract_keywords
+try:
+    # Try absolute import first
+    from models import ConceptTuple
+except ImportError:
+    # Fallback to relative import
+    from .models import ConceptTuple
+try:
+    # Try absolute import first
+    from persistence import save_concepts
+except ImportError:
+    # Fallback to relative import
+    from .persistence import save_concepts
+try:
+    # Try absolute import first
+    from lyapunov import concept_predictability, document_chaos_profile
+except ImportError:
+    # Fallback to relative import
+    from .lyapunov import concept_predictability, document_chaos_profile
+try:
+    # Try absolute import first
+    from source_validator import validate_source, SourceValidationResult
+except ImportError:
+    # Fallback to relative import
+    from .source_validator import validate_source, SourceValidationResult
+try:
+    # Try absolute import first
+    from memory_gating import apply_memory_gating
+except ImportError:
+    # Fallback to relative import
+    from .memory_gating import apply_memory_gating
+try:
+    # Try absolute import first
+    from phase_walk import PhaseCoherentWalk
+except ImportError:
+    # Fallback to relative import
+    from .phase_walk import PhaseCoherentWalk
+try:
+    # Try absolute import first
+    from pipeline_validator import validate_concepts
+except ImportError:
+    # Fallback to relative import
+    from .pipeline_validator import validate_concepts
+try:
+    # Try absolute import first
+    from concept_logger import default_concept_logger as concept_logger, log_loop_record, log_concept_summary, warn_empty_segment
+except ImportError:
+    # Fallback to relative import
+    from .concept_logger import default_concept_logger as concept_logger, log_loop_record, log_concept_summary, warn_empty_segment
+try:
+    # Try absolute import first
+    from threshold_config import MIN_CONFIDENCE, FALLBACK_MIN_COUNT
+except ImportError:
+    # Fallback to relative import
+    from .threshold_config import MIN_CONFIDENCE, FALLBACK_MIN_COUNT
+try:
+    # Try absolute import first
+    from cognitive_interface import add_concept_diff
+except ImportError:
+    # Fallback to relative import
+    from .cognitive_interface import add_concept_diff
 
 # Configure logging
 logger = logging.getLogger("pdf_ingestion")

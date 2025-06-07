@@ -23,7 +23,12 @@ import matplotlib.pyplot as plt
 from matplotlib import cm
 
 # Import Koopman components
-from .koopman_estimator import KoopmanEstimator, KoopmanEigenMode
+try:
+    # Try absolute import first
+    from koopman_estimator import KoopmanEstimator, KoopmanEigenMode
+except ImportError:
+    # Fallback to relative import
+    from .koopman_estimator import KoopmanEstimator, KoopmanEigenMode
 
 # Configure logger
 logger = logging.getLogger("eigen_alignment")

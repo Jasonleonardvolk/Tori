@@ -22,7 +22,12 @@ from dataclasses import dataclass, field, asdict
 import json
 import logging
 
-from .time_context import TimeContext, default_time_context
+try:
+    # Try absolute import first
+    from time_context import TimeContext, default_time_context
+except ImportError:
+    # Fallback to relative import
+    from .time_context import TimeContext, default_time_context
 
 # Configure logger
 logger = logging.getLogger("concept_metadata")

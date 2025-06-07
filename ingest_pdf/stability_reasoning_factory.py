@@ -10,10 +10,30 @@ import logging
 import os
 from typing import Dict, Any, Optional, Union
 
-from .stability_reasoning import StabilityReasoning, default_stability_reasoning
-from .concept_metadata import ConceptMetadata
-from .time_context import TimeContext, default_time_context
-from .concept_logger import ConceptLogger, default_concept_logger
+try:
+    # Try absolute import first
+    from stability_reasoning import StabilityReasoning, default_stability_reasoning
+except ImportError:
+    # Fallback to relative import
+    from .stability_reasoning import StabilityReasoning, default_stability_reasoning
+try:
+    # Try absolute import first
+    from concept_metadata import ConceptMetadata
+except ImportError:
+    # Fallback to relative import
+    from .concept_metadata import ConceptMetadata
+try:
+    # Try absolute import first
+    from time_context import TimeContext, default_time_context
+except ImportError:
+    # Fallback to relative import
+    from .time_context import TimeContext, default_time_context
+try:
+    # Try absolute import first
+    from concept_logger import ConceptLogger, default_concept_logger
+except ImportError:
+    # Fallback to relative import
+    from .concept_logger import ConceptLogger, default_concept_logger
 
 # Import from runtime bridge
 from packages.runtime_bridge.python.stability_bridge import (

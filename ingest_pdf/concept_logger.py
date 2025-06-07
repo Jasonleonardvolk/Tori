@@ -24,8 +24,18 @@ from typing import List, Dict, Any, Optional, Set, Union, Tuple
 import threading
 
 try:
-    from .models import ConceptTuple
-    from .concept_metadata import ConceptMetadata
+    try:
+        # Try absolute import first
+        from models import ConceptTuple
+    except ImportError:
+        # Fallback to relative import
+        from .models import ConceptTuple
+    try:
+        # Try absolute import first
+        from concept_metadata import ConceptMetadata
+    except ImportError:
+        # Fallback to relative import
+        from .concept_metadata import ConceptMetadata
 except ImportError:
     # Handle case where concept_metadata doesn't exist yet
     ConceptTuple = None

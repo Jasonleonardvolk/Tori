@@ -24,10 +24,30 @@ import heapq
 from collections import defaultdict
 import warnings
 
-from .models import ConceptTuple
-from .spectral_monitor import get_cognitive_spectral_monitor
-from .fractality import get_cognitive_fractal_analyzer
-from .introspection import get_introspection_system
+try:
+    # Try absolute import first
+    from models import ConceptTuple
+except ImportError:
+    # Fallback to relative import
+    from .models import ConceptTuple
+try:
+    # Try absolute import first
+    from spectral_monitor import get_cognitive_spectral_monitor
+except ImportError:
+    # Fallback to relative import
+    from .spectral_monitor import get_cognitive_spectral_monitor
+try:
+    # Try absolute import first
+    from fractality import get_cognitive_fractal_analyzer
+except ImportError:
+    # Fallback to relative import
+    from .fractality import get_cognitive_fractal_analyzer
+try:
+    # Try absolute import first
+    from introspection import get_introspection_system
+except ImportError:
+    # Fallback to relative import
+    from .introspection import get_introspection_system
 
 # Configure logger
 logger = logging.getLogger("alan_expert_router")

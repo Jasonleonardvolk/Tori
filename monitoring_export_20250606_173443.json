@@ -1,0 +1,205 @@
+{
+  "metadata": {
+    "export_time": "2025-06-06T17:34:43.476945",
+    "monitoring_version": "3.0"
+  },
+  "health_metrics": [
+    {
+      "timestamp": "2025-06-06T17:24:05.074032",
+      "cpu_usage": 4.6,
+      "memory_usage": 29.8,
+      "memory_available": 44.70399856567383,
+      "disk_usage": 53.7,
+      "process_count": 326,
+      "response_time_avg": 0.0,
+      "error_rate": 0.0,
+      "active_sessions": 0,
+      "websocket_connections": 0
+    },
+    {
+      "timestamp": "2025-06-06T17:25:06.111251",
+      "cpu_usage": 4.1,
+      "memory_usage": 30.1,
+      "memory_available": 44.54742431640625,
+      "disk_usage": 53.7,
+      "process_count": 327,
+      "response_time_avg": 0.0,
+      "error_rate": 0.0,
+      "active_sessions": 0,
+      "websocket_connections": 0
+    },
+    {
+      "timestamp": "2025-06-06T17:26:07.141359",
+      "cpu_usage": 10.0,
+      "memory_usage": 30.0,
+      "memory_available": 44.591819763183594,
+      "disk_usage": 53.7,
+      "process_count": 326,
+      "response_time_avg": 0.0,
+      "error_rate": 0.0,
+      "active_sessions": 0,
+      "websocket_connections": 0
+    },
+    {
+      "timestamp": "2025-06-06T17:27:08.167140",
+      "cpu_usage": 9.8,
+      "memory_usage": 30.0,
+      "memory_available": 44.610713958740234,
+      "disk_usage": 53.7,
+      "process_count": 325,
+      "response_time_avg": 0.0,
+      "error_rate": 0.0,
+      "active_sessions": 0,
+      "websocket_connections": 0
+    },
+    {
+      "timestamp": "2025-06-06T17:28:09.190812",
+      "cpu_usage": 7.2,
+      "memory_usage": 29.8,
+      "memory_available": 44.704200744628906,
+      "disk_usage": 53.7,
+      "process_count": 324,
+      "response_time_avg": 0.0,
+      "error_rate": 0.0,
+      "active_sessions": 0,
+      "websocket_connections": 0
+    },
+    {
+      "timestamp": "2025-06-06T17:29:10.229922",
+      "cpu_usage": 4.8,
+      "memory_usage": 30.1,
+      "memory_available": 44.50718688964844,
+      "disk_usage": 53.7,
+      "process_count": 325,
+      "response_time_avg": 0.0,
+      "error_rate": 0.0,
+      "active_sessions": 0,
+      "websocket_connections": 0
+    },
+    {
+      "timestamp": "2025-06-06T17:30:11.241583",
+      "cpu_usage": 3.1,
+      "memory_usage": 29.9,
+      "memory_available": 44.64425277709961,
+      "disk_usage": 53.7,
+      "process_count": 326,
+      "response_time_avg": 0.0,
+      "error_rate": 0.0,
+      "active_sessions": 0,
+      "websocket_connections": 0
+    },
+    {
+      "timestamp": "2025-06-06T17:31:12.245500",
+      "cpu_usage": 6.2,
+      "memory_usage": 30.4,
+      "memory_available": 44.321895599365234,
+      "disk_usage": 53.7,
+      "process_count": 327,
+      "response_time_avg": 0.0,
+      "error_rate": 0.0,
+      "active_sessions": 0,
+      "websocket_connections": 0
+    },
+    {
+      "timestamp": "2025-06-06T17:32:13.271729",
+      "cpu_usage": 3.5,
+      "memory_usage": 30.9,
+      "memory_available": 44.03433609008789,
+      "disk_usage": 53.7,
+      "process_count": 324,
+      "response_time_avg": 0.0,
+      "error_rate": 0.0,
+      "active_sessions": 0,
+      "websocket_connections": 0
+    },
+    {
+      "timestamp": "2025-06-06T17:33:14.284488",
+      "cpu_usage": 14.6,
+      "memory_usage": 30.7,
+      "memory_available": 44.14748001098633,
+      "disk_usage": 53.7,
+      "process_count": 324,
+      "response_time_avg": 0.0,
+      "error_rate": 0.0,
+      "active_sessions": 0,
+      "websocket_connections": 0
+    },
+    {
+      "timestamp": "2025-06-06T17:34:15.277001",
+      "cpu_usage": 6.1,
+      "memory_usage": 31.0,
+      "memory_available": 43.93424606323242,
+      "disk_usage": 53.7,
+      "process_count": 329,
+      "response_time_avg": 0.0,
+      "error_rate": 0.0,
+      "active_sessions": 0,
+      "websocket_connections": 0
+    }
+  ],
+  "performance_alerts": [],
+  "health_score": {
+    "overall_health": 0.6973333333333334,
+    "system_health": 0.6973333333333334,
+    "components": {
+      "cpu_health": 0.9390000000000001,
+      "memory_health": 0.69,
+      "disk_health": 0.46299999999999997
+    }
+  },
+  "monitoring_status": {
+    "monitoring_info": {
+      "status": "active",
+      "metrics_collected": 11,
+      "alerts_generated": 0,
+      "monitoring_uptime": "active"
+    },
+    "health_score": {
+      "overall_health": 0.6973333333333334,
+      "system_health": 0.6973333333333334,
+      "components": {
+        "cpu_health": 0.9390000000000001,
+        "memory_health": 0.69,
+        "disk_health": 0.46299999999999997
+      }
+    },
+    "current_metrics": {
+      "timestamp": {
+        "_datetime": true,
+        "value": "2025-06-06T17:34:15.277001"
+      },
+      "cpu_usage": 6.1,
+      "memory_usage": 31.0,
+      "memory_available": 43.93424606323242,
+      "disk_usage": 53.7,
+      "process_count": 329,
+      "response_time_avg": 0.0,
+      "error_rate": 0.0,
+      "active_sessions": 0,
+      "websocket_connections": 0
+    },
+    "thresholds": {
+      "cpu_usage": {
+        "warning": 80.0,
+        "critical": 95.0
+      },
+      "memory_usage": {
+        "warning": 85.0,
+        "critical": 95.0
+      },
+      "disk_usage": {
+        "warning": 90.0,
+        "critical": 98.0
+      },
+      "response_time_avg": {
+        "warning": 2.0,
+        "critical": 5.0
+      },
+      "error_rate": {
+        "warning": 0.05,
+        "critical": 0.15
+      }
+    }
+  },
+  "error_counts": {}
+}

@@ -241,47 +241,122 @@ def run_oscillator_clustering_with_metrics(
     
     return result
 
-# Import enhanced clustering methods from clustering_enhanced
-try:
-    from .clustering_enhanced import (
-        kmeans_clustering,
-        hdbscan_clustering, 
-        affinity_propagation_clustering,
-        benchmark_all_clustering_methods,
-        compute_silhouette_score
-    )
-except ImportError:
-    # Fallback implementations for when clustering_enhanced is not available
-    def kmeans_clustering(emb: np.ndarray, k: Optional[int] = None, max_iter: int = 100) -> Dict[str, Any]:
-        """Simplified K-means implementation."""
-        start_time = time.perf_counter()
-        n = emb.shape[0]
-        if k is None:
-            k = max(1, int(np.sqrt(n / 2)))
-        
-        labels = run_oscillator_clustering(emb)  # Fallback to oscillator
-        
-        # Build clusters dict
-        clusters = {}
-        for i, label in enumerate(labels):
-            if label not in clusters:
-                clusters[label] = []
-            clusters[label].append(i)
-        
-        # Calculate cohesion scores
-        cohesion_scores = {}
-        for cid, members in clusters.items():
-            cohesion_scores[cid] = cluster_cohesion(emb, members)
-        
-        return {
-            "labels": labels,
-            "clusters": clusters,
-            "cohesion_scores": cohesion_scores,
-            "runtime": time.perf_counter() - start_time,
-            "method": "kmeans_fallback"
-        }
+# Enhanced clustering methods - fallback implementations
+def kmeans_clustering(emb: np.ndarray, k: Optional[int] = None, max_iter: int = 100) -> Dict[str, Any]:
+    """Simplified K-means implementation."""
+    start_time = time.perf_counter()
+    n = emb.shape[0]
+    if k is None:
+        k = max(1, int(np.sqrt(n / 2)))
     
-    def benchmark_all_clustering_methods(emb: np.ndarray, methods: List[str] = None, enable_logging: bool = True) -> Dict[str, Dict[str, Any]]:
-        """Fallback benchmark that only uses oscillator clustering."""
-        result = run_oscillator_clustering_with_metrics(emb, enable_logging=enable_logging)
-        return {"oscillator": result}
+    labels = run_oscillator_clustering(emb)  # Fallback to oscillator
+    
+    # Build clusters dict
+    clusters = {}
+    for i, label in enumerate(labels):
+        if label not in clusters:
+            clusters[label] = []
+        clusters[label].append(i)
+    
+    # Calculate cohesion scores
+    cohesion_scores = {}
+    for cid, members in clusters.items():
+        cohesion_scores[cid] = cluster_cohesion(emb, members)
+    
+    return {
+        "labels": labels,
+        "clusters": clusters,
+        "cohesion_scores": cohesion_scores,
+        "runtime": time.perf_counter() - start_time,
+        "method": "kmeans_fallback"
+    }
+
+def hdbscan_clustering(emb: np.ndarray, min_cluster_size: int = 5) -> Dict[str, Any]:
+    """HDBSCAN fallback implementation."""
+    start_time = time.perf_counter()
+    labels = run_oscillator_clustering(emb)
+    
+    # Build clusters dict
+    clusters = {}
+    for i, label in enumerate(labels):
+        if label not in clusters:
+            clusters[label] = []
+        clusters[label].append(i)
+    
+    # Calculate cohesion scores
+    cohesion_scores = {}
+    for cid, members in clusters.items():
+        cohesion_scores[cid] = cluster_cohesion(emb, members)
+    
+    return {
+        "labels": labels,
+        "clusters": clusters,
+        "cohesion_scores": cohesion_scores,
+        "runtime": time.perf_counter() - start_time,
+        "method": "hdbscan_fallback"
+    }
+
+def affinity_propagation_clustering(emb: np.ndarray, damping: float = 0.5) -> Dict[str, Any]:
+    """Affinity Propagation fallback implementation."""
+    start_time = time.perf_counter()
+    labels = run_oscillator_clustering(emb)
+    
+    # Build clusters dict
+    clusters = {}
+    for i, label in enumerate(labels):
+        if label not in clusters:
+            clusters[label] = []
+        clusters[label].append(i)
+    
+    # Calculate cohesion scores
+    cohesion_scores = {}
+    for cid, members in clusters.items():
+        cohesion_scores[cid] = cluster_cohesion(emb, members)
+    
+    return {
+        "labels": labels,
+        "clusters": clusters,
+        "cohesion_scores": cohesion_scores,
+        "runtime": time.perf_counter() - start_time,
+        "method": "affinity_propagation_fallback"
+    }
+
+def benchmark_all_clustering_methods(emb: np.ndarray, methods: List[str] = None, enable_logging: bool = True) -> Dict[str, Dict[str, Any]]:
+    """Fallback benchmark that only uses oscillator clustering."""
+    result = run_oscillator_clustering_with_metrics(emb, enable_logging=enable_logging)
+    return {"oscillator": result}
+
+def compute_silhouette_score(emb: np.ndarray, labels: List[int]) -> float:
+    """Compute silhouette score for clustering evaluation."""
+    if len(set(labels)) < 2:
+        return 0.0
+    
+    n = len(labels)
+    scores = []
+    
+    for i in range(n):
+        # Same cluster distances
+        same_cluster = [j for j in range(n) if labels[j] == labels[i] and j != i]
+        if not same_cluster:
+            continue
+            
+        a = np.mean([np.linalg.norm(emb[i] - emb[j]) for j in same_cluster])
+        
+        # Different cluster distances
+        other_clusters = set(labels) - {labels[i]}
+        if not other_clusters:
+            continue
+            
+        b_values = []
+        for cluster in other_clusters:
+            cluster_points = [j for j in range(n) if labels[j] == cluster]
+            if cluster_points:
+                b_cluster = np.mean([np.linalg.norm(emb[i] - emb[j]) for j in cluster_points])
+                b_values.append(b_cluster)
+        
+        if b_values:
+            b = min(b_values)
+            score = (b - a) / max(a, b)
+            scores.append(score)
+    
+    return np.mean(scores) if scores else 0.0

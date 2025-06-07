@@ -4,7 +4,12 @@ from collections import Counter
 
 # Import threshold configuration
 try:
-    from .threshold_config import MIN_CONFIDENCE, get_threshold_for_media_type, get_adaptive_threshold
+    try:
+        # Try absolute import first
+        from threshold_config import MIN_CONFIDENCE, get_threshold_for_media_type, get_adaptive_threshold
+    except ImportError:
+        # Fallback to relative import
+        from .threshold_config import MIN_CONFIDENCE, get_threshold_for_media_type, get_adaptive_threshold
 except ImportError:
     # Fallback if threshold_config is not available
     MIN_CONFIDENCE = 0.5

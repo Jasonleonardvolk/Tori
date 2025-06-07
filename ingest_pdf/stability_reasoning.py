@@ -22,10 +22,30 @@ import math
 import numpy as np
 from dataclasses import dataclass, field
 
-from .concept_metadata import ConceptMetadata
-from .concept_logger import ConceptLogger, default_concept_logger
-from .time_context import TimeContext, default_time_context
-from .models import ConceptTuple
+try:
+    # Try absolute import first
+    from concept_metadata import ConceptMetadata
+except ImportError:
+    # Fallback to relative import
+    from .concept_metadata import ConceptMetadata
+try:
+    # Try absolute import first
+    from concept_logger import ConceptLogger, default_concept_logger
+except ImportError:
+    # Fallback to relative import
+    from .concept_logger import ConceptLogger, default_concept_logger
+try:
+    # Try absolute import first
+    from time_context import TimeContext, default_time_context
+except ImportError:
+    # Fallback to relative import
+    from .time_context import TimeContext, default_time_context
+try:
+    # Try absolute import first
+    from models import ConceptTuple
+except ImportError:
+    # Fallback to relative import
+    from .models import ConceptTuple
 
 # Configure logger
 logger = logging.getLogger("stability_reasoning")

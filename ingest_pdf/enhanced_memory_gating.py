@@ -20,8 +20,18 @@ import uuid
 import math
 from dataclasses import dataclass, field
 
-from .models import ConceptTuple
-from .memory_gating import calculate_spectral_entropy, cosine_similarity, jaccard_similarity
+try:
+    # Try absolute import first
+    from models import ConceptTuple
+except ImportError:
+    # Fallback to relative import
+    from .models import ConceptTuple
+try:
+    # Try absolute import first
+    from memory_gating import calculate_spectral_entropy, cosine_similarity, jaccard_similarity
+except ImportError:
+    # Fallback to relative import
+    from .memory_gating import calculate_spectral_entropy, cosine_similarity, jaccard_similarity
 
 # Configure logger
 logger = logging.getLogger("enhanced_memory_gating")

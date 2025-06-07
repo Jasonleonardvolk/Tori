@@ -1,0 +1,1423 @@
+Implement the three-tier architecture with multi-tenant backend
+
+2. Multi-Tenant Setup?
+PARTIALLY READY. You have the foundation, but need:
+
+✅ Current: Single-user concept storage (localStorage)
+🔧 Need: NO database.  see uploaded conversation
+🔧 Need: User authentication and organization support
+🔧 Need: Three-tier search (Private → Org → Foundation)
+
+
+🏢 2. Multi-Tenant Knowledge Architecture
+CRITICAL INSIGHT: You need a multi-layer knowledge system!
+Proposed Architecture:
+┌─────────────────────────────────────────────┐
+│              ADMIN LAYER                    │
+│         (Your Global Knowledge)             │
+│  ┌─────────────────────────────────────┐   │
+│  │     Foundation Knowledge Base       │   │
+│  │   • Darwin, Evolution, Physics      │   │
+│  │   • Business Strategy, AI/ML        │   │
+│  │   • Your Corporate Knowledge        │   │
+│  └─────────────────────────────────────┘   │
+└─────────────────────────────────────────────┘
+              ↓ (Inherited by all users)
+┌─────────────────────────────────────────────┐
+│              USER LAYER                     │
+│         (Private User Knowledge)            │
+│  ┌─────────────────────────────────────┐   │
+│  │       User's Private Concepts       │   │
+│  │   • Their uploaded documents        │   │
+│  │   • Their conversation history      │   │
+│  │   • Their specific domain knowledge │   │
+│  └─────────────────────────────────────┘   │
+└─────────────────────────────────────────────┘
+Current State Analysis:Llocal__filesystem__read_fileRequest{
+  `path`: `C:\\Users\\jason\\Desktop\	ori\\kha\	ori_ui_svelte\\src\\lib\\stores\\conceptMesh.ts`
+}Responseimport { writable, derived, get } from 'svelte/store';
+import type { ConceptDiff, SystemState, ConceptNode } from './types';
+
+// ===================================================================
+// TORI PRODUCTION CONCEPT MESH - COMPLETE COGNITIVE INTEGRATION
+// Production Ready: June 3, 2025
+// Features: Soliton Memory, Holographic, BraidMemory, Ghost Collective
+// Pipeline: Context-Aware Purity-Based Universal Processing
+// ===================================================================
+
+// Enhanced concept structure for full pipeline integration
+export interface EnhancedConcept {
+  eigenfunction_id: string;
+  name: string;
+  confidence: number;
+  context: string;
+  cluster_id?: number | string;
+  title?: string;
+  timestamp?: string;
+  strength?: number;
+  type?: string;
+  metadata?: Record<string, any>;
+  
+  // NEW: Enhanced pipeline metadata
+  purity?: number;
+  frequency?: number;
+  section?: string;
+  paragraph?: string;
+  summary?: string;
+  domain?: string;
+  
+  // NEW: Cognitive system fields
+  solitonPhase?: number;
+  holographicPosition?: { x: number; y: number; z: number };
+  braidLoopId?: string;
+  ghostPersona?: string;
+  
+  // NEW: Future-ready fields
+  wormholeConnections?: string[];
+  scarMarkers?: string[];
+  auditStatus?: 'pending' | 'verified' | 'flagged';
+}
+
+// Production concept interface with full metadata preservation
+export interface ProductionConcept {
+  name: string;
+  score: number;
+  method?: string;
+  source?: any;
+  context?: string;
+  metadata?: Record<string, any>;
+  
+  // NEW: Pipeline-specific fields
+  purity?: number;
+  frequency?: number;
+  section?: string;
+  paragraph?: string;
+  summary?: string;
+  domain?: string;
+  extractionMethod?: string;
+  
+  // NEW: Cognitive enrichment
+  solitonPhase?: number;
+  phaseTag?: string;
+  memoryVaulted?: boolean;
+  braidLoopDetected?: boolean;
+  ghostPersonaMatch?: string;
+  
+  // NEW: Quality metrics
+  qualityScore?: number;
+  expertiseLevel?: 'novice' | 'intermediate' | 'expert' | 'specialist';
+  contradictionLevel?: number;
+  coherenceContribution?: number;
+}
+
+// Enhanced ConceptDiff with complete production metadata
+export interface ProductionConceptDiff extends ConceptDiff {
+  enrichedConcepts?: EnhancedConcept[];
+  
+  // NEW: Processing pipeline metadata
+  pipelineMethod?: string;
+  pipelineVersion?: string;
+  processingTime?: number;
+  qualityMetrics?: {
+    averagePurity: number;
+    averageFrequency: number;
+    domainCoverage: number;
+    expertiseLevel: string;
+    contradictionLevel: number;
+  };
+  
+  // NEW: Cognitive system integration
+  solitonMemoryId?: string;
+  holographicClusterId?: string;
+  braidLoopCount?: number;
+  ghostPersonaActivated?: string[];
+  
+  // NEW: Multi-scale support
+  sectionBreakdown?: Array<{
+    section: string;
+    concepts: string[];
+    summary: string;
+  }>;
+  
+  // NEW: Future-ready fields
+  wormholeTargets?: string[];
+  scarDetected?: boolean;
+  auditRequired?: boolean;
+}
+
+// ===================================================================
+// SYSTEM STATE MANAGEMENT
+// ===================================================================
+
+const initialDiffs: ProductionConceptDiff[] = [];
+const initialSystemState: SystemState = {
+  status: 'idle',
+  coherenceLevel: 0.8
+};
+
+// Core stores
+export const conceptMesh = writable<ProductionConceptDiff[]>(initialDiffs);
+export const systemState = writable<SystemState>(initialSystemState);
+export const conceptNodes = writable<Record<string, ConceptNode>>({});
+
+// Enhanced cognitive system stores
+export const systemCoherence = writable<number>(0.8);
+export const thoughtspaceVisible = writable<boolean>(true);
+export const activeConcept = writable<string | null>(null);
+export const lastTriggeredGhost = writable<string | null>(null);
+export const systemEntropy = writable<number>(20);
+
+// NEW: Production system monitoring
+export const memoryIntegrity = writable<number>(95);
+export const processingMetrics = writable<{
+  totalDocs: number;
+  totalConcepts: number;
+  averageProcessingTime: number;
+  qualityScore: number;
+  cognitiveLoad: number;
+}>({
+  totalDocs: 0,
+  totalConcepts: 0,
+  averageProcessingTime: 0,
+  qualityScore: 0.8,
+  cognitiveLoad: 0.2
+});
+
+// NEW: Cognitive system status
+export const cognitiveSystemStatus = writable<{
+  solitonMemory: { active: boolean; integrity: number; memoryCount: number };
+  holographicMemory: { active: boolean; nodeCount: number; dimensionality: number };
+  braidMemory: { active: boolean; loopCount: number; crossings: number };
+  ghostCollective: { active: boolean; activePersonas: string[]; reasoning: string };
+}>({
+  solitonMemory: { active: false, integrity: 95, memoryCount: 0 },
+  holographicMemory: { active: false, nodeCount: 0, dimensionality: 3 },
+  braidMemory: { active: false, loopCount: 0, crossings: 0 },
+  ghostCollective: { active: false, activePersonas: [], reasoning: 'standby' }
+});
+
+// ===================================================================
+// STORAGE MANAGEMENT - ENHANCED FOR PRODUCTION
+// ===================================================================
+
+const STORAGE_KEY = 'tori-concept-mesh-production';
+const COGNITIVE_STATE_KEY = 'tori-cognitive-state';
+const VERSION = '2.0.0-production';
+
+/**
+ * Enhanced storage management with cognitive state preservation
+ */
+function saveProductionState(diffs: ProductionConceptDiff[]): void {
+  try {
+    const payload = {
+      version: VERSION,
+      timestamp: new Date().toISOString(),
+      diffs: diffs,
+      nodeCount: diffs.length,
+      cognitiveState: get(cognitiveSystemStatus),
+      metrics: get(processingMetrics),
+      integrity: get(memoryIntegrity)
+    };
+    
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+    console.log(`💾 Production concept mesh saved - ${diffs.length} diffs, integrity: ${payload.integrity}%`);
+    
+  } catch (error) {
+    console.warn('❌ Failed to save production state:', error);
+    
+    if (error instanceof Error && error.name === 'QuotaExceededError') {
+      console.warn('🗑️ Storage quota exceeded, performing cleanup');
+      performStorageCleanup();
+    }
+  }
+}
+
+/**
+ * Load production state with full cognitive system restoration
+ */
+function loadProductionState(): void {
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    
+    if (!stored) {
+      console.log('📊 No previous production state found - starting fresh');
+      initializeCognitiveSystems();
+      return;
+    }
+    
+    const parsed = JSON.parse(stored);
+    
+    if (!parsed.diffs || !Array.isArray(parsed.diffs)) {
+      console.warn('⚠️ Invalid production state data, starting fresh');
+      initializeCognitiveSystems();
+      return;
+    }
+    
+    // Restore concept mesh with enhanced metadata
+    const restoredDiffs: ProductionConceptDiff[] = parsed.diffs.map((diff: any) => ({
+      ...diff,
+      timestamp: new Date(diff.timestamp)
+    }));
+    
+    conceptMesh.set(restoredDiffs);
+    
+    // Restore cognitive system states
+    if (parsed.cognitiveState) {
+      cognitiveSystemStatus.set(parsed.cognitiveState);
+    }
+    
+    if (parsed.metrics) {
+      processingMetrics.set(parsed.metrics);
+    }
+    
+    if (parsed.integrity) {
+      memoryIntegrity.set(parsed.integrity);
+    }
+    
+    // Rebuild concept nodes with cognitive awareness
+    const allConcepts = restoredDiffs.flatMap(diff => 
+      Array.isArray(diff.concepts) ? diff.concepts : []
+    );
+    
+    rebuildProductionConceptNodes(allConcepts);
+    
+    console.log(`📊 Production state restored - ${restoredDiffs.length} diffs, ${allConcepts.length} concepts`);
+    console.log(`🧠 Cognitive systems status: ${Object.values(parsed.cognitiveState || {}).filter(s => s.active).length} active`);
+    
+  } catch (error) {
+    console.warn('❌ Failed to load production state:', error);
+    localStorage.removeItem(STORAGE_KEY);
+    console.log('🗑️ Corrupted state data cleared, initializing fresh');
+    initializeCognitiveSystems();
+  }
+}
+
+/**
+ * Initialize cognitive systems for fresh start
+ */
+function initializeCognitiveSystems(): void {
+  console.log('🚀 Initializing cognitive systems for production');
+  
+  // Set default cognitive states
+  cognitiveSystemStatus.update(current => ({
+    ...current,
+    solitonMemory: { active: true, integrity: 95, memoryCount: 0 },
+    holographicMemory: { active: true, nodeCount: 0, dimensionality: 3 },
+    braidMemory: { active: true, loopCount: 0, crossings: 0 },
+    ghostCollective: { active: true, activePersonas: [], reasoning: 'ready' }
+  }));
+  
+  console.log('✅ All cognitive systems initialized and ready');
+}
+
+/**
+ * Storage cleanup for quota management
+ */
+function performStorageCleanup(): void {
+  try {
+    // Remove old data keys
+    const keysToRemove = ['tori-concept-mesh', 'old-concept-data'];
+    keysToRemove.forEach(key => localStorage.removeItem(key));
+    
+    // Compress current data by removing old diffs
+    const current = get(conceptMesh);
+    if (current.length > 100) {
+      const recentDiffs = current.slice(-50); // Keep only last 50 diffs
+      conceptMesh.set(recentDiffs);
+      saveProductionState(recentDiffs);
+      console.log('🗑️ Storage cleanup: kept 50 most recent diffs');
+    }
+  } catch (error) {
+    console.warn('❌ Storage cleanup failed:', error);
+  }
+}
+
+/**
+ * Rebuild concept nodes with full cognitive integration
+ */
+function rebuildProductionConceptNodes(concepts: string[]): void {
+  const nodeMap: Record<string, ConceptNode> = {};
+  
+  concepts.forEach((conceptName, index) => {
+    if (typeof conceptName === 'string' && conceptName.trim()) {
+      nodeMap[conceptName] = {
+        id: `prod_concept_${index}_${Date.now()}`,
+        name: conceptName,
+        strength: 0.6 + Math.random() * 0.3,
+        type: 'production',
+        position: {
+          x: (Math.random() - 0.5) * 4,
+          y: (Math.random() - 0.5) * 4,
+          z: (Math.random() - 0.5) * 4
+        },
+        highlighted: false,
+        connections: [],
+        lastActive: new Date(),
+        contradictionLevel: 0,
+        coherenceContribution: 0.1,
+        loopReferences: [],
+        
+        // NEW: Cognitive system integration
+        solitonPhase: Math.random() * 2 * Math.PI,
+        holographicCluster: Math.floor(Math.random() * 5) + 1,
+        braidLoopId: null,
+        ghostPersonaAffinity: 'neutral'
+      };
+    }
+  });
+  
+  conceptNodes.set(nodeMap);
+  
+  // Update cognitive system metrics
+  cognitiveSystemStatus.update(current => ({
+    ...current,
+    holographicMemory: { ...current.holographicMemory, nodeCount: Object.keys(nodeMap).length }
+  }));
+  
+  console.log(`🔄 Rebuilt ${Object.keys(nodeMap).length} production concept nodes with cognitive integration`);
+}
+
+// ===================================================================
+// CONCEPT VALIDATION AND NORMALIZATION - PRODUCTION GRADE
+// ===================================================================
+
+/**
+ * Production-grade concept validation with pipeline metadata preservation
+ */
+function validateAndNormalizeProductionConcepts(concepts: any): ProductionConcept[] {
+  if (!concepts) {
+    console.warn('🚨 Concepts parameter is null or undefined');
+    return [];
+  }
+  
+  if (!Array.isArray(concepts)) {
+    console.warn('🚨 Concepts parameter is not an array:', typeof concepts, concepts);
+    return [];
+  }
+  
+  return concepts.map((concept, index) => {
+    // Handle string concepts
+    if (typeof concept === 'string') {
+      return {
+        name: concept,
+        score: 0.5,
+        method: 'string_conversion',
+        extractionMethod: 'context_aware_purity_based_universal_pipeline'
+      };
+    }
+    
+    // Handle object concepts with full metadata preservation
+    if (typeof concept === 'object' && concept !== null) {
+      const normalizedConcept: ProductionConcept = {
+        name: concept.name || concept.toString() || `Unnamed Concept ${index}`,
+        score: concept.score || concept.confidence || concept.purity || 0.5,
+        method: concept.method || 'production_extraction',
+        source: concept.source,
+        context: concept.context,
+        metadata: concept.metadata || {},
+        
+        // NEW: Pipeline metadata preservation
+        purity: concept.purity,
+        frequency: concept.frequency,
+        section: concept.section,
+        paragraph: concept.paragraph,
+        summary: concept.summary,
+        domain: concept.domain,
+        extractionMethod: concept.extractionMethod || 'context_aware_purity_based_universal_pipeline',
+        
+        // NEW: Quality assessment
+        qualityScore: calculateConceptQuality(concept),
+        expertiseLevel: determineExpertiseLevel(concept),
+        contradictionLevel: 0,
+        coherenceContribution: Math.min(1.0, (concept.score || 0.5) * 0.8)
+      };
+      
+      return normalizedConcept;
+    }
+    
+    // Fallback for unexpected types
+    console.warn(`🚨 Unexpected concept type at index ${index}:`, typeof concept, concept);
+    return {
+      name: `Unknown Concept ${index}`,
+      score: 0.1,
+      method: 'fallback',
+      extractionMethod: 'fallback'
+    };
+  });
+}
+
+/**
+ * Calculate concept quality score based on multiple factors
+ */
+function calculateConceptQuality(concept: any): number {
+  let quality = 0.5; // Base quality
+  
+  // Boost for purity score
+  if (concept.purity && concept.purity > 0.7) quality += 0.2;
+  
+  // Boost for context availability
+  if (concept.context && concept.context.length > 50) quality += 0.1;
+  
+  // Boost for section/paragraph data
+  if (concept.section || concept.paragraph) quality += 0.1;
+  
+  // Boost for frequency data
+  if (concept.frequency && concept.frequency > 2) quality += 0.1;
+  
+  // Boost for domain specialization
+  if (concept.domain && concept.domain !== 'general') quality += 0.1;
+  
+  return Math.min(1.0, quality);
+}
+
+/**
+ * Determine expertise level based on concept characteristics
+ */
+function determineExpertiseLevel(concept: any): 'novice' | 'intermediate' | 'expert' | 'specialist' {
+  const score = concept.score || concept.purity || 0.5;
+  const hasContext = concept.context && concept.context.length > 100;
+  const hasDomain = concept.domain && concept.domain !== 'general';
+  
+  if (score > 0.9 && hasContext && hasDomain) return 'specialist';
+  if (score > 0.8 && hasContext) return 'expert';
+  if (score > 0.6) return 'intermediate';
+  return 'novice';
+}
+
+// ===================================================================
+// MAIN CONCEPT MESH INTEGRATION - PRODUCTION READY
+// ===================================================================
+
+/**
+ * Production concept mesh integration with full cognitive system support
+ */
+export function addConceptDiff(docId: string, concepts: any, metadata?: Record<string, any>) {
+  // Enhanced defensive guards
+  if (!docId || typeof docId !== 'string') {
+    console.warn("❌ addConceptDiff received invalid docId:", docId);
+    return;
+  }
+  
+  // Validate and normalize with production enhancements
+  const validatedConcepts = validateAndNormalizeProductionConcepts(concepts);
+  
+  if (validatedConcepts.length === 0) {
+    console.warn("❌ addConceptDiff received no valid concepts for docId:", docId);
+    console.warn("   Original input:", concepts);
+    return;
+  }
+  
+  // Production logging with metrics
+  console.log(`✅ Production ConceptMesh Update: ${validatedConcepts.length} concepts from "${docId}"`);
+  console.log(`📊 Quality metrics: Avg score: ${(validatedConcepts.reduce((sum, c) => sum + c.score, 0) / validatedConcepts.length).toFixed(3)}`);
+  
+  if (validatedConcepts.length < 5) {
+    console.warn("⚠️ Low concept yield. Pipeline optimization may be needed.");
+  }
+  
+  // Log concept details for production monitoring
+  validatedConcepts.forEach((c, index) => {
+    const score = typeof c.score === 'number' ? c.score.toFixed(3) : 'N/A';
+    const quality = c.qualityScore ? c.qualityScore.toFixed(3) : 'N/A';
+    console.debug(`🧠 Concept ${index + 1}: ${c.name} | Score: ${score} | Quality: ${quality} | Method: ${c.extractionMethod}`);
+  });
+  
+  try {
+    // Create enhanced production diff
+    const productionDiff: ProductionConceptDiff = {
+      id: `prod_diff_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+      type: metadata?.source === 'pdf_ingest' ? 'document' : 'general',
+      title: docId,
+      concepts: validatedConcepts.map(c => c.name),
+      summary: generateProductionSummary(validatedConcepts, docId),
+      timestamp: new Date(),
+      metadata: {
+        ...metadata,
+        version: VERSION,
+        pipelineMethod: 'context_aware_purity_based_universal_pipeline',
+        processingTime: metadata?.processingTime || 0,
+        conceptScores: validatedConcepts.reduce((acc, c) => ({ ...acc, [c.name]: c.score }), {}),
+        qualityMetrics: calculateDiffQualityMetrics(validatedConcepts),
+        cognitiveEnrichment: true,
+        memoryIntegrity: get(memoryIntegrity)
+      },
+      
+      // NEW: Enhanced production metadata
+      pipelineMethod: 'context_aware_purity_based_universal_pipeline',
+      pipelineVersion: VERSION,
+      processingTime: metadata?.processingTime || 0,
+      qualityMetrics: calculateDiffQualityMetrics(validatedConcepts),
+      
+      // NEW: Multi-scale section breakdown
+      sectionBreakdown: generateSectionBreakdown(validatedConcepts),
+      
+      // NEW: Cognitive system integration placeholders
+      solitonMemoryId: `soliton_${Date.now()}`,
+      holographicClusterId: `cluster_${Math.floor(Math.random() * 10)}`,
+      braidLoopCount: 0,
+      ghostPersonaActivated: []
+    };
+    
+    // Create enriched concepts for ConceptInspector
+    const enrichedConcepts: EnhancedConcept[] = validatedConcepts.map((concept, index) => ({
+      eigenfunction_id: `${productionDiff.id}_concept_${index}`,
+      name: concept.name,
+      confidence: concept.score,
+      context: concept.context || `Production extraction from "${docId}" - ${concept.name}`,
+      cluster_id: Math.floor(concept.score * 5) + 1,
+      title: docId,
+      timestamp: productionDiff.timestamp.toISOString(),
+      strength: concept.score,
+      type: concept.expertiseLevel || 'general',
+      metadata: {
+        source: metadata?.source || 'production',
+        extractionMethod: concept.extractionMethod,
+        diffId: productionDiff.id,
+        qualityScore: concept.qualityScore,
+        expertiseLevel: concept.expertiseLevel,
+        ...concept.metadata
+      },
+      
+      // NEW: Enhanced pipeline data
+      purity: concept.purity,
+      frequency: concept.frequency,
+      section: concept.section,
+      paragraph: concept.paragraph,
+      summary: concept.summary,
+      domain: concept.domain,
+      
+      // NEW: Cognitive system integration
+      solitonPhase: Math.random() * 2 * Math.PI,
+      holographicPosition: {
+        x: (Math.random() - 0.5) * 4,
+        y: (Math.random() - 0.5) * 4,
+        z: (Math.random() - 0.5) * 4
+      },
+      braidLoopId: null,
+      ghostPersona: null,
+      
+      // NEW: Future-ready fields
+      wormholeConnections: [],
+      scarMarkers: [],
+      auditStatus: 'pending'
+    }));
+    
+    productionDiff.enrichedConcepts = enrichedConcepts;
+    
+    // Update concept mesh with production state saving
+    conceptMesh.update((current) => {
+      const updated = [...current, productionDiff];
+      saveProductionState(updated);
+      
+      // Update processing metrics
+      updateProcessingMetrics(productionDiff);
+      
+      console.log(`📊 Production ConceptDiff integrated [${validatedConcepts.length} concepts] for "${docId}"`);
+      return updated;
+    });
+    
+    // Update concept nodes with cognitive awareness
+    updateProductionConceptNodes(validatedConcepts);
+    
+    // Trigger cognitive system processing
+    processCognitiveIntegration(productionDiff, validatedConcepts);
+    
+    // Dispatch production event
+    if (typeof window !== 'undefined') {
+      const contradictionDelta = calculateProductionContradictionDelta(productionDiff);
+      window.dispatchEvent(new CustomEvent('tori:production-concept-diff', {
+        detail: { 
+          delta: contradictionDelta, 
+          diff: productionDiff, 
+          concepts: validatedConcepts,
+          metrics: productionDiff.qualityMetrics,
+          cognitiveStatus: get(cognitiveSystemStatus)
+        }
+      }));
+    }
+    
+    console.log(`🚀 Production mesh integration complete - ${validatedConcepts.length} concepts from "${docId}" fully integrated into cognitive architecture`);
+    
+  } catch (error) {
+    console.error(`❌ Production mesh integration error for "${docId}":`, error);
+    console.error('   Concepts that caused error:', validatedConcepts);
+    
+    // Production error recovery
+    recoverFromIntegrationError(docId, concepts, error);
+  }
+}
+
+/**
+ * Generate production-quality summary
+ */
+function generateProductionSummary(concepts: ProductionConcept[], docId: string): string {
+  const avgScore = concepts.reduce((sum, c) => sum + c.score, 0) / concepts.length;
+  const highQualityConcepts = concepts.filter(c => c.score > 0.8).length;
+  const domainCoverage = new Set(concepts.map(c => c.domain).filter(Boolean)).size;
+  
+  return `Production extraction: ${concepts.length} concepts from "${docId}" | Avg quality: ${avgScore.toFixed(3)} | High-quality: ${highQualityConcepts} | Domain coverage: ${domainCoverage}`;
+}
+
+/**
+ * Calculate comprehensive quality metrics for diff
+ */
+function calculateDiffQualityMetrics(concepts: ProductionConcept[]) {
+  const purityScores = concepts.map(c => c.purity || 0.5);
+  const frequencyScores = concepts.map(c => c.frequency || 1);
+  const domains = new Set(concepts.map(c => c.domain).filter(Boolean));
+  
+  return {
+    averagePurity: purityScores.reduce((sum, p) => sum + p, 0) / purityScores.length,
+    averageFrequency: frequencyScores.reduce((sum, f) => sum + f, 0) / frequencyScores.length,
+    domainCoverage: domains.size,
+    expertiseLevel: concepts.filter(c => c.expertiseLevel === 'expert' || c.expertiseLevel === 'specialist').length > concepts.length * 0.3 ? 'high' : 'standard',
+    contradictionLevel: concepts.reduce((sum, c) => sum + (c.contradictionLevel || 0), 0) / concepts.length
+  };
+}
+
+/**
+ * Generate section breakdown for multi-scale hierarchy
+ */
+function generateSectionBreakdown(concepts: ProductionConcept[]) {
+  const sectionMap = new Map<string, string[]>();
+  
+  concepts.forEach(concept => {
+    const section = concept.section || 'general';
+    if (!sectionMap.has(section)) {
+      sectionMap.set(section, []);
+    }
+    sectionMap.get(section)!.push(concept.name);
+  });
+  
+  return Array.from(sectionMap.entries()).map(([section, conceptNames]) => ({
+    section,
+    concepts: conceptNames,
+    summary: `${conceptNames.length} concepts from ${section}`
+  }));
+}
+
+/**
+ * Update processing metrics for production monitoring
+ */
+function updateProcessingMetrics(diff: ProductionConceptDiff): void {
+  processingMetrics.update(current => ({
+    totalDocs: current.totalDocs + 1,
+    totalConcepts: current.totalConcepts + diff.concepts.length,
+    averageProcessingTime: ((current.averageProcessingTime * current.totalDocs) + (diff.processingTime || 0)) / (current.totalDocs + 1),
+    qualityScore: ((current.qualityScore * current.totalDocs) + (diff.qualityMetrics?.averagePurity || 0.5)) / (current.totalDocs + 1),
+    cognitiveLoad: Math.min(1.0, current.cognitiveLoad + (diff.concepts.length * 0.01))
+  }));
+}
+
+/**
+ * Process cognitive system integration
+ */
+function processCognitiveIntegration(diff: ProductionConceptDiff, concepts: ProductionConcept[]): void {
+  // Soliton Memory integration
+  concepts.forEach(concept => {
+    concept.solitonPhase = Math.random() * 2 * Math.PI;
+    concept.phaseTag = `phase_${Math.floor(concept.solitonPhase * 100)}`;
+  });
+  
+  // Update cognitive system status
+  cognitiveSystemStatus.update(current => ({
+    ...current,
+    solitonMemory: {
+      ...current.solitonMemory,
+      memoryCount: current.solitonMemory.memoryCount + concepts.length,
+      integrity: Math.max(90, current.solitonMemory.integrity - (concepts.length * 0.1))
+    },
+    holographicMemory: {
+      ...current.holographicMemory,
+      nodeCount: current.holographicMemory.nodeCount + concepts.length
+    },
+    braidMemory: {
+      ...current.braidMemory,
+      loopCount: current.braidMemory.loopCount + Math.floor(concepts.length / 10)
+    },
+    ghostCollective: {
+      ...current.ghostCollective,
+      reasoning: concepts.length > 10 ? 'deep_analysis' : 'standard'
+    }
+  }));
+  
+  console.log(`🧠 Cognitive integration processed for ${concepts.length} concepts`);
+}
+
+/**
+ * Production contradiction delta calculation
+ */
+function calculateProductionContradictionDelta(diff: ProductionConceptDiff): number {
+  let delta = 0;
+  
+  // Base from concept count and quality
+  delta += Math.min(0.5, diff.concepts.length * 0.03);
+  
+  // Quality adjustment
+  if (diff.qualityMetrics) {
+    delta -= (diff.qualityMetrics.averagePurity - 0.5) * 0.2;
+    delta += diff.qualityMetrics.contradictionLevel * 0.3;
+  }
+  
+  // Processing time impact
+  if (diff.processingTime && diff.processingTime > 30) {
+    delta += 0.1; // Longer processing suggests complexity
+  }
+  
+  // Multi-scale complexity
+  if (diff.sectionBreakdown && diff.sectionBreakdown.length > 5) {
+    delta += 0.1;
+  }
+  
+  return Math.min(1.0, Math.max(0.0, delta));
+}
+
+/**
+ * Error recovery for production environment
+ */
+function recoverFromIntegrationError(docId: string, concepts: any, error: any): void {
+  console.warn(`🔧 Attempting error recovery for "${docId}"`);
+  
+  try {
+    // Create minimal safe diff
+    const recoveryDiff: ProductionConceptDiff = {
+      id: `recovery_${Date.now()}`,
+      type: 'error_recovery',
+      title: `Recovery: ${docId}`,
+      concepts: [`Error Recovery: ${docId}`],
+      summary: `Error recovery performed for ${docId}`,
+      timestamp: new Date(),
+      metadata: {
+        errorRecovery: true,
+        originalError: error.message,
+        originalConceptCount: Array.isArray(concepts) ? concepts.length : 0
+      }
+    };
+    
+    conceptMesh.update(current => [...current, recoveryDiff]);
+    console.log(`✅ Error recovery successful for "${docId}"`);
+    
+  } catch (recoveryError) {
+    console.error(`❌ Error recovery failed for "${docId}":`, recoveryError);
+  }
+}
+
+// ===================================================================
+// ENHANCED CONCEPT NODE MANAGEMENT
+// ===================================================================
+
+/**
+ * Update concept nodes with full production cognitive integration
+ */
+function updateProductionConceptNodes(concepts: ProductionConcept[]) {
+  if (!Array.isArray(concepts)) {
+    console.warn("❌ updateProductionConceptNodes received non-array:", concepts);
+    return;
+  }
+  
+  conceptNodes.update(current => {
+    const updated = { ...current };
+    
+    concepts.forEach(concept => {
+      if (typeof concept.name === 'string' && concept.name.trim()) {
+        const conceptName = concept.name;
+        
+        if (!updated[conceptName]) {
+          // Create new production concept node
+          updated[conceptName] = {
+            id: `prod_concept_${Date.now()}_${Math.random().toString(36).substr(2, 4)}`,
+            name: conceptName,
+            strength: concept.score || 0.7,
+            type: concept.expertiseLevel || 'general',
+            position: concept.holographicPosition || {
+              x: (Math.random() - 0.5) * 4,
+              y: (Math.random() - 0.5) * 4,
+              z: (Math.random() - 0.5) * 4
+            },
+            highlighted: true,
+            connections: [],
+            lastActive: new Date(),
+            contradictionLevel: concept.contradictionLevel || 0,
+            coherenceContribution: concept.coherenceContribution || 0.1,
+            loopReferences: [],
+            
+            // NEW: Production cognitive fields
+            solitonPhase: concept.solitonPhase || Math.random() * 2 * Math.PI,
+            holographicCluster: Math.floor((concept.score || 0.5) * 5) + 1,
+            braidLoopId: concept.braidLoopDetected ? `loop_${Date.now()}` : null,
+            ghostPersonaAffinity: concept.ghostPersonaMatch || 'neutral',
+            
+            // NEW: Quality and expertise tracking
+            qualityScore: concept.qualityScore || 0.5,
+            expertiseLevel: concept.expertiseLevel || 'novice',
+            domain: concept.domain,
+            
+            // NEW: Pipeline metadata
+            extractionMethod: concept.extractionMethod,
+            purity: concept.purity,
+            frequency: concept.frequency
+          };
+        } else {
+          // Update existing concept with production enhancements
+          updated[conceptName].lastActive = new Date();
+          updated[conceptName].highlighted = true;
+          updated[conceptName].strength = Math.min(1.0, updated[conceptName].strength + 0.1);
+          updated[conceptName].qualityScore = Math.max(updated[conceptName].qualityScore || 0, concept.qualityScore || 0);
+          
+          if (concept.expertiseLevel && concept.expertiseLevel !== 'novice') {
+            updated[conceptName].expertiseLevel = concept.expertiseLevel;
+          }
+        }
+      }
+    });
+    
+    return updated;
+  });
+  
+  console.log(`🔄 Updated ${concepts.length} production concept nodes with cognitive integration`);
+}
+
+// ===================================================================
+// COGNITIVE SYSTEM INTERACTION FUNCTIONS
+// ===================================================================
+
+/**
+ * Connect concepts with cognitive system awareness
+ */
+export function connectConcepts(concept1: string, concept2: string, strength: number = 0.5): void {
+  console.log(`🔗 Production concept connection: ${concept1} ↔ ${concept2} (strength: ${strength})`);
+  
+  conceptNodes.update(current => {
+    const updated = { ...current };
+    
+    // Ensure both concepts exist with production defaults
+    [concept1, concept2].forEach(conceptName => {
+      if (!updated[conceptName]) {
+        updated[conceptName] = createProductionConceptNode(conceptName);
+      }
+    });
+    
+    // Create bidirectional connection with cognitive metadata
+    const connection = {
+      target: concept2,
+      strength: strength,
+      type: 'semantic',
+      established: new Date(),
+      
+      // NEW: Cognitive connection metadata
+      solitonResonance: Math.random() * 0.5,
+      holographicDistance: Math.random() * 2,
+      braidEntanglement: strength > 0.8,
+      ghostMediation: null
+    };
+    
+    // Add connections
+    if (!updated[concept1].connections.some(conn => conn.target === concept2)) {
+      updated[concept1].connections.push(connection);
+    }
+    
+    if (!updated[concept2].connections.some(conn => conn.target === concept1)) {
+      updated[concept2].connections.push({
+        ...connection,
+        target: concept1
+      });
+    }
+    
+    // Update cognitive metrics
+    updated[concept1].lastActive = new Date();
+    updated[concept2].lastActive = new Date();
+    updated[concept1].coherenceContribution += strength * 0.1;
+    updated[concept2].coherenceContribution += strength * 0.1;
+    
+    return updated;
+  });
+  
+  // Update system coherence
+  systemCoherence.update(current => Math.min(1.0, current + strength * 0.05));
+  
+  // Update cognitive system status
+  cognitiveSystemStatus.update(current => ({
+    ...current,
+    braidMemory: {
+      ...current.braidMemory,
+      crossings: current.braidMemory.crossings + (strength > 0.8 ? 1 : 0)
+    }
+  }));
+}
+
+/**
+ * Create production-grade concept node
+ */
+function createProductionConceptNode(conceptName: string): ConceptNode {
+  return {
+    id: `prod_concept_${Date.now()}_${Math.random().toString(36).substr(2, 4)}`,
+    name: conceptName,
+    strength: 0.7,
+    type: 'production',
+    position: {
+      x: (Math.random() - 0.5) * 4,
+      y: (Math.random() - 0.5) * 4,
+      z: (Math.random() - 0.5) * 4
+    },
+    highlighted: false,
+    connections: [],
+    lastActive: new Date(),
+    contradictionLevel: 0,
+    coherenceContribution: 0.1,
+    loopReferences: [],
+    
+    // Production cognitive fields
+    solitonPhase: Math.random() * 2 * Math.PI,
+    holographicCluster: Math.floor(Math.random() * 5) + 1,
+    braidLoopId: null,
+    ghostPersonaAffinity: 'neutral',
+    qualityScore: 0.5,
+    expertiseLevel: 'novice'
+  };
+}
+
+/**
+ * Activate concept with full cognitive integration
+ */
+export function activateConcept(conceptName: string): void {
+  console.log('🎯 Production concept activation:', conceptName);
+  
+  activeConcept.set(conceptName);
+  updateSystemEntropy(-3); // More significant entropy reduction
+  
+  // Update cognitive systems
+  cognitiveSystemStatus.update(current => ({
+    ...current,
+    solitonMemory: {
+      ...current.solitonMemory,
+      integrity: Math.min(100, current.solitonMemory.integrity + 1)
+    },
+    ghostCollective: {
+      ...current.ghostCollective,
+      reasoning: 'concept_focused'
+    }
+  }));
+  
+  // Trigger holographic visualization
+  highlightConceptsProduction([{ name: conceptName, strength: 0.9, type: 'activated' }]);
+}
+
+/**
+ * Production concept highlighting with cognitive awareness
+ */
+export async function highlightConceptsProduction(concepts: Array<{ name: string; strength?: number; type?: string }>): Promise<void> {
+  if (!Array.isArray(concepts)) {
+    console.warn("❌ highlightConceptsProduction received non-array:", concepts);
+    return;
+  }
+  
+  console.log('✨ Production concept highlighting:', concepts);
+  
+  conceptNodes.update(current => {
+    const updated = { ...current };
+    
+    concepts.forEach(concept => {
+      if (concept && typeof concept.name === 'string') {
+        const conceptName = concept.name;
+        
+        if (!updated[conceptName]) {
+          updated[conceptName] = createProductionConceptNode(conceptName);
+        }
+        
+        // Enhanced highlighting with cognitive metadata
+        updated[conceptName].highlighted = true;
+        updated[conceptName].lastActive = new Date();
+        updated[conceptName].strength = Math.max(updated[conceptName].strength, concept.strength || 0.7);
+        updated[conceptName].type = concept.type || updated[conceptName].type;
+        
+        // Update cognitive fields
+        if (updated[conceptName].solitonPhase !== undefined) {
+          updated[conceptName].solitonPhase += 0.1; // Phase shift on activation
+        }
+      }
+    });
+    
+    return updated;
+  });
+  
+  // Set active concept
+  if (concepts.length > 0 && concepts[0] && concepts[0].name) {
+    setActiveConcept(concepts[0].name);
+  }
+  
+  // Update holographic memory
+  cognitiveSystemStatus.update(current => ({
+    ...current,
+    holographicMemory: {
+      ...current.holographicMemory,
+      dimensionality: Math.min(5, current.holographicMemory.dimensionality + concepts.length * 0.1)
+    }
+  }));
+  
+  // Auto-fade highlighting
+  setTimeout(() => {
+    conceptNodes.update(current => {
+      const updated = { ...current };
+      concepts.forEach(concept => {
+        if (concept && concept.name && updated[concept.name]) {
+          updated[concept.name].highlighted = false;
+        }
+      });
+      return updated;
+    });
+  }, 8000); // Longer highlight duration for production
+}
+
+// ===================================================================
+// SYSTEM MANAGEMENT AND MONITORING
+// ===================================================================
+
+/**
+ * Set active concept with production logging
+ */
+export function setActiveConcept(concept: string | null): void {
+  activeConcept.set(concept);
+  console.log('🎯 Production active concept set to:', concept);
+  
+  if (concept) {
+    // Update metrics
+    processingMetrics.update(current => ({
+      ...current,
+      cognitiveLoad: Math.min(1.0, current.cognitiveLoad + 0.05)
+    }));
+  }
+}
+
+/**
+ * Set last triggered ghost with cognitive tracking
+ */
+export function setLastTriggeredGhost(ghost: string | null): void {
+  lastTriggeredGhost.set(ghost);
+  console.log('👻 Production ghost trigger:', ghost);
+  
+  if (ghost) {
+    cognitiveSystemStatus.update(current => ({
+      ...current,
+      ghostCollective: {
+        ...current.ghostCollective,
+        activePersonas: [...current.ghostCollective.activePersonas.filter(p => p !== ghost), ghost].slice(-5)
+      }
+    }));
+  }
+}
+
+/**
+ * Update system entropy with cognitive feedback loops
+ */
+export function updateSystemEntropy(delta: number): void {
+  systemEntropy.update(current => {
+    const newEntropy = Math.max(0, Math.min(100, current + delta));
+    
+    // Update coherence (inverse relationship)
+    const newCoherence = (100 - newEntropy) / 100;
+    systemCoherence.set(newCoherence);
+    
+    // Update memory integrity based on coherence
+    memoryIntegrity.update(integrity => Math.max(80, Math.min(100, integrity + (newCoherence - 0.8) * 20)));
+    
+    console.log(`📊 Production entropy: ${current} → ${newEntropy} (Δ${delta}) | Coherence: ${newCoherence.toFixed(3)}`);
+    return newEntropy;
+  });
+}
+
+/**
+ * Clear concept mesh with production state management
+ */
+export function clearConceptMesh() {
+  conceptMesh.set([]);
+  conceptNodes.set({});
+  activeConcept.set(null);
+  lastTriggeredGhost.set(null);
+  systemEntropy.set(20);
+  systemCoherence.set(0.8);
+  memoryIntegrity.set(95);
+  
+  // Reset processing metrics
+  processingMetrics.set({
+    totalDocs: 0,
+    totalConcepts: 0,
+    averageProcessingTime: 0,
+    qualityScore: 0.8,
+    cognitiveLoad: 0.2
+  });
+  
+  // Reset cognitive systems
+  initializeCognitiveSystems();
+  
+  if (typeof localStorage !== 'undefined') {
+    localStorage.removeItem(STORAGE_KEY);
+    localStorage.removeItem(COGNITIVE_STATE_KEY);
+  }
+  
+  console.log('🗑️ Production concept mesh cleared and cognitive systems reset');
+}
+
+/**
+ * Get production network statistics
+ */
+export function getProductionNetworkStats() {
+  const currentMesh = get(conceptMesh);
+  const currentNodes = get(conceptNodes);
+  const metrics = get(processingMetrics);
+  const cognitive = get(cognitiveSystemStatus);
+  
+  const nodeCount = Object.keys(currentNodes).length;
+  const connectionCount = Object.values(currentNodes).reduce((sum, node) => sum + node.connections.length, 0) / 2;
+  const density = nodeCount > 1 ? connectionCount / (nodeCount * (nodeCount - 1) / 2) : 0;
+  
+  return {
+    // Basic network stats
+    nodeCount,
+    connectionCount,
+    density,
+    
+    // Production metrics
+    totalDocuments: metrics.totalDocs,
+    totalConcepts: metrics.totalConcepts,
+    averageProcessingTime: metrics.averageProcessingTime,
+    qualityScore: metrics.qualityScore,
+    cognitiveLoad: metrics.cognitiveLoad,
+    
+    // Cognitive system stats
+    solitonMemoryCount: cognitive.solitonMemory.memoryCount,
+    solitonIntegrity: cognitive.solitonMemory.integrity,
+    holographicNodes: cognitive.holographicMemory.nodeCount,
+    braidLoops: cognitive.braidMemory.loopCount,
+    braidCrossings: cognitive.braidMemory.crossings,
+    activePersonas: cognitive.ghostCollective.activePersonas.length,
+    
+    // System health
+    memoryIntegrity: get(memoryIntegrity),
+    systemCoherence: get(systemCoherence),
+    systemEntropy: get(systemEntropy)
+  };
+}
+
+// ===================================================================
+// DERIVED STORES AND INSPECTORS
+// ===================================================================
+
+/**
+ * Enhanced inspector concepts for production use
+ */
+export const inspectorConcepts = writable<EnhancedConcept[]>([]);
+
+// Update inspector with production-grade concepts
+conceptMesh.subscribe($mesh => {
+  const productionConcepts: EnhancedConcept[] = $mesh.flatMap(diff => {
+    const productionDiff = diff as ProductionConceptDiff;
+    
+    if (productionDiff.enrichedConcepts) {
+      return productionDiff.enrichedConcepts;
+    } else {
+      // Create enhanced concepts from basic diff
+      return diff.concepts.map((concept, index) => ({
+        eigenfunction_id: `${diff.id}_concept_${index}`,
+        name: typeof concept === 'string' ? concept : concept.name || concept.toString(),
+        confidence: 0.7 + Math.random() * 0.3,
+        context: `Production extraction from "${diff.title}" - ${typeof concept === 'string' ? concept : concept.name}`,
+        cluster_id: Math.floor(Math.random() * 5) + 1,
+        title: diff.title,
+        timestamp: diff.timestamp.toISOString(),
+        strength: 0.8,
+        type: diff.type,
+        
+        // Production defaults
+        purity: 0.7,
+        frequency: 1,
+        section: 'general',
+        domain: 'general',
+        solitonPhase: Math.random() * 2 * Math.PI,
+        holographicPosition: {
+          x: (Math.random() - 0.5) * 4,
+          y: (Math.random() - 0.5) * 4,
+          z: (Math.random() - 0.5) * 4
+        },
+        auditStatus: 'pending'
+      }));
+    }
+  });
+  
+  inspectorConcepts.set(productionConcepts);
+});
+
+/**
+ * Production debug helper with enhanced diagnostics
+ */
+export function debugProductionPdfContent() {
+  const meshStore = get(conceptMesh);
+  const cognitive = get(cognitiveSystemStatus);
+  const metrics = get(processingMetrics);
+  
+  console.log('=== PRODUCTION PDF CONTENT DEBUG ===');
+  console.log('📊 System Status:', {
+    memoryIntegrity: get(memoryIntegrity),
+    systemCoherence: get(systemCoherence),
+    cognitiveLoad: metrics.cognitiveLoad
+  });
+  
+  let pdfConceptCount = 0;
+  let withContextCount = 0;
+  let qualityMetrics = { high: 0, medium: 0, low: 0 };
+  
+  meshStore.forEach(doc => {
+    const productionDoc = doc as ProductionConceptDiff;
+    
+    if (productionDoc.metadata?.source === 'scholarsphere_enhanced_server' || 
+        productionDoc.pipelineMethod === 'context_aware_purity_based_universal_pipeline') {
+      
+      console.log('📄 Production Document:', productionDoc.title);
+      console.log('  🔧 Pipeline:', productionDoc.pipelineMethod);
+      console.log('  ⏱️ Processing time:', productionDoc.processingTime, 'seconds');
+      console.log('  📊 Quality metrics:', productionDoc.qualityMetrics);
+      
+      if (productionDoc.enrichedConcepts) {
+        productionDoc.enrichedConcepts.forEach(concept => {
+          pdfConceptCount++;
+          
+          if (concept.context && concept.context.length > 50) {
+            withContextCount++;
+            console.log('  ✅', concept.name, '- RICH CONTEXT:', {
+              purity: concept.purity,
+              frequency: concept.frequency,
+              section: concept.section,
+              domain: concept.domain,
+              context: concept.context.substring(0, 100) + '...'
+            });
+          } else {
+            console.log('  ❌', concept.name, '- LIMITED CONTEXT');
+          }
+          
+          // Quality assessment
+          if (concept.confidence > 0.8) qualityMetrics.high++;
+          else if (concept.confidence > 0.5) qualityMetrics.medium++;
+          else qualityMetrics.low++;
+        });
+      }
+    }
+  });
+  
+  console.log('📊 Production Summary:', {
+    conceptsWithContext: `${withContextCount}/${pdfConceptCount}`,
+    qualityDistribution: qualityMetrics,
+    cognitiveSystemsActive: Object.values(cognitive).filter(s => s.active).length,
+    memoryIntegrity: `${get(memoryIntegrity)}%`
+  });
+  console.log('================================');
+}
+
+// ===================================================================
+// AUTOMATIC SYSTEM MAINTENANCE
+// ===================================================================
+
+// Production concept decay and maintenance
+if (typeof window !== 'undefined') {
+  // Enhanced concept decay with cognitive awareness
+  setInterval(() => {
+    conceptNodes.update(current => {
+      const updated = { ...current };
+      const now = new Date();
+      
+      Object.values(updated).forEach(node => {
+        const timeSinceActive = now.getTime() - node.lastActive.getTime();
+        
+        // Progressive decay based on inactivity
+        if (timeSinceActive > 45000 && node.highlighted) {
+          node.highlighted = false;
+        }
+        
+        if (timeSinceActive > 120000) {
+          node.strength = Math.max(0.1, node.strength * 0.98);
+          
+          // Decay cognitive fields
+          if (node.contradictionLevel !== undefined) {
+            node.contradictionLevel = Math.max(0, node.contradictionLevel * 0.95);
+          }
+          
+          if (node.solitonPhase !== undefined) {
+            node.solitonPhase += 0.01; // Gentle phase drift
+          }
+        }
+      });
+      
+      return updated;
+    });
+    
+    // Update memory integrity based on system usage
+    memoryIntegrity.update(current => {
+      const nodeCount = Object.keys(get(conceptNodes)).length;
+      const targetIntegrity = Math.max(85, 100 - (nodeCount * 0.1));
+      return current * 0.99 + targetIntegrity * 0.01; // Gradual adjustment
+    });
+    
+  }, 7000); // More frequent updates for production
+  
+  // Cognitive system health monitoring
+  setInterval(() => {
+    const metrics = get(processingMetrics);
+    const integrity = get(memoryIntegrity);
+    
+    // Auto-recovery for low integrity
+    if (integrity < 90) {
+      console.log('🔧 Auto-recovery: Memory integrity below 90%, performing maintenance');
+      memoryIntegrity.update(current => Math.min(95, current + 2));
+    }
+    
+    // Cognitive load management
+    if (metrics.cognitiveLoad > 0.8) {
+      console.log('🧠 Cognitive load high, reducing system entropy');
+      updateSystemEntropy(-5);
+      
+      processingMetrics.update(current => ({
+        ...current,
+        cognitiveLoad: Math.max(0.2, current.cognitiveLoad * 0.9)
+      }));
+    }
+    
+  }, 30000); // Health check every 30 seconds
+}
+
+// ===================================================================
+// INITIALIZATION AND SETUP
+// ===================================================================
+
+// Initialize production environment
+if (typeof window !== 'undefined') {
+  loadProductionState();
+  
+  // Add production debug helpers to window
+  (window as any).debugProductionPdfContent = debugProductionPdfContent;
+  (window as any).getProductionStats = getProductionNetworkStats;
+  (window as any).clearProductionMesh = clearConceptMesh;
+  
+  console.log('🚀 TORI Production ConceptMesh initialized');
+  console.log('🧠 All cognitive systems ready');
+  console.log('📊 Production monitoring active');
+  console.log('🔧 Auto-maintenance enabled');
+}
+
+// Export legacy compatibility function
+export const addConceptDiffLegacy = addConceptDiff;
+export const highlightConcepts = highlightConceptsProduction;
+export const removeConceptDiff = (id: string) => {
+  conceptMesh.update(current => current.filter(diff => diff.id !== id));
+};
+
+console.log('✅ TORI Production ConceptMesh - FULLY LOADED AND OPERATIONAL');
+console.log('🎯 Features: Enhanced Pipeline, Soliton Memory, Cognitive Integration, Production Monitoring');
+console.log('🚀 Ready for production use with complete cognitive architecture');
+Looking at your current concept mesh system, YOU'RE ALREADY SET UP for multi-tenant architecture! But we need to enhance it:
+🎯 Current Status: SINGLE-TENANT (Browser Storage)
+Right now: All concepts stored in localStorage per browser session
+
+✅ Works great for individual users
+❌ Not scalable for organizations
+❌ No admin foundation layer
+
+🚀 RECOMMENDED MULTI-TENANT ARCHITECTURE
+Let me create the enhanced system:Llocal__filesystem__write_file

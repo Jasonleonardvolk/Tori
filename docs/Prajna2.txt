@@ -1,0 +1,563 @@
+Production Scaffolds for Prajna’s Metacognitive and Cognitive Modules
+
+Prajna Cognitive Modules: Design and Implementation Blueprint
+1. self_reflector.py – Metacognitive Kernel
+Purpose: The Self-Reflector module is responsible for metacognitive analysis of the reasoning process. It reflects on the AI's chain-of-thought and output to detect issues such as hallucinations, citation drift, or misalignment with context. It can then suggest improvements to the model's reasoning style or flag internal motivations that might bias answers. Key Responsibilities:
+Analyze a ReasoningTrace (the recorded reasoning chain or thought process) to identify logical errors, unsupported assertions, or hallucinated content.
+Detect citation drift (where cited evidence doesn’t actually support the point) and flag audit issues (e.g. if the reasoning violates policies or consistency).
+Evaluate how well the reasoning aligns with the given context or knowledge base, producing an alignment score.
+Provide self-improvement suggestions for the model (e.g. prompting strategies to avoid mistakes, areas to refine).
+Audit the agent’s self-motivation or hidden goals by examining if the reasoning is overly self-serving or deviates from user intent.
+Public API Methods:
+analyze_reasoning_chain(trace: ReasoningTrace) -> ReflectionReport: Inspect the sequence of thoughts/actions in the trace and return a report of findings (e.g. list of issues found, hallucinated claims, drift points).
+score_alignment_with_context(trace: ReasoningTrace, context: str) -> float: Compute a numerical score for how well the reasoning stays grounded in the provided context or documents (e.g. 1.0 = fully aligned, 0 = completely off-topic).
+suggest_model_improvements(trace: ReasoningTrace) -> list[str]: Suggest actionable improvements or adjustments to the model’s reasoning approach based on the issues found (for example, “double-check mathematical calculations” or “use sources for each claim”).
+audit_self_motivation(trace: ReasoningTrace) -> list[str]: Audit the reasoning for any hints of the AI pursuing its own goals or biases (e.g. pushing a narrative); returns warnings or an empty list if none.
+Integration & Logging: The Self-Reflector integrates with the reasoning_engine by processing the chain-of-thought after an answer is generated (or during intermediate steps). It uses Prajna’s logging API (ψ-archive) to record reflections via a call like log_reflection(report). This ensures all reflection outcomes are archived for later analysis and continuous improvement. Notably, research has shown that such self-reflection and feedback loops can significantly improve an agent’s performance and reduce hallucinations
+promptingguide.ai
+promptingguide.ai
+. The prajna_api may expose this module’s functions (e.g. an API endpoint to analyze a given reasoning trace for debugging or auditing). Testing Approach: We will create tests/self_reflector_test.py with predefined ReasoningTrace inputs that simulate known failure modes (e.g. a trace with a hallucinated fact or a citation error). The tests will assert that analyze_reasoning_chain flags those issues and that alignment scoring correctly differentiates an on-track reasoning vs. a divergent one. We will also test that calling suggest_model_improvements returns relevant suggestions when given a faulty reasoning chain. To facilitate testing, the module can accept a mock knowledge base or context to score alignment, ensuring no external dependencies. Module Scaffold (self_reflector.py): Below is a conceptual scaffold for the Self-Reflector module with class structure and methods. This is production-oriented with clear docstrings and placeholders for actual implementation logic:
+python
+Copy
+Edit
+# prajna/core/self_reflector.py
+
+import logging
+from prajna.core import prajna_api  # hypothetical API for logging, etc.
+
+class ReflectionReport:
+    """Data class to hold results of self-reflection analysis."""
+    def __init__(self, issues=None, alignment_score: float = 1.0, suggestions=None, motivation_flags=None):
+        self.issues = issues or []            # e.g. ["Hallucinated claim about XYZ", "Citation [5] unrelated to text"]
+        self.alignment_score = alignment_score
+        self.suggestions = suggestions or []  # e.g. ["Verify facts with multiple sources", "Avoid subjective language"]
+        self.motivation_flags = motivation_flags or []  # e.g. ["Answer seems to favor one viewpoint without request"]
+
+    def summary(self) -> str:
+        """Generate a brief summary of the reflection findings."""
+        if not self.issues:
+            return "No obvious reasoning issues detected."
+        return f"Issues: {len(self.issues)}, Alignment: {self.alignment_score:.2f}"
+
+class SelfReflector:
+    def __init__(self, logger=None):
+        """Metacognitive kernel for reflecting on reasoning chains."""
+        self.logger = logger or logging.getLogger(__name__)
+
+    def analyze_reasoning_chain(self, trace) -> ReflectionReport:
+        """Analyze the reasoning trace for hallucinations, errors, or misalignment."""
+        report = ReflectionReport()
+        # Placeholder: Analyze each step in trace (trace could be a list of reasoning steps)
+        # e.g., detect unsupported statements or logical jumps
+        for step in trace.steps:  # assuming trace has .steps
+            if self._is_hallucinated(step):
+                report.issues.append(f"Hallucination detected at: {step}")
+            if self._is_citation_drift(step):
+                report.issues.append(f"Citation issue at: {step}")
+        # Compute alignment score against known context if available
+        report.alignment_score = self.score_alignment_with_context(trace, trace.context if hasattr(trace, 'context') else "")
+        # If any issues found, maybe suggest improvements
+        if report.issues:
+            report.suggestions = self.suggest_model_improvements(trace)
+        # Check for self-motivation or goal drift
+        flags = self.audit_self_motivation(trace)
+        report.motivation_flags = flags
+        # Log the reflection results to psi-archive for learning
+        prajna_api.log_reflection(report)
+        self.logger.info("Reflection analysis complete. Issues found: %d", len(report.issues))
+        return report
+
+    def score_alignment_with_context(self, trace, context: str) -> float:
+        """Score how well the reasoning trace aligns with the given context (0 to 1)."""
+        if not context:
+            return 1.0  # If no context provided, assume fully aligned by default
+        # Placeholder: compare trace content with context (e.g., overlap of facts or citations)
+        alignment = 1.0
+        # e.g., reduce score if trace contains info not present in context
+        for step in trace.steps:
+            if not self._step_supported_by_context(step, context):
+                alignment -= 0.1
+        return max(0.0, alignment)
+
+    def suggest_model_improvements(self, trace) -> list[str]:
+        """Based on the trace analysis, suggest ways to improve the model's reasoning."""
+        suggestions = []
+        # Placeholder: simple heuristic suggestions
+        if any("Hallucination" in issue for issue in trace.issues if hasattr(trace, 'issues') else []):
+            suggestions.append("Increase reliance on retrieved facts and re-check source validity.")
+        if any("Citation issue" in issue for issue in trace.issues if hasattr(trace, 'issues') else []):
+            suggestions.append("Ensure each citation directly supports the associated claim.")
+        # Additional suggestions based on other patterns...
+        if not suggestions:
+            suggestions.append("Consider expanding the context or refining the query for clarity.")
+        return suggestions
+
+    def audit_self_motivation(self, trace) -> list[str]:
+        """Look for indications the AI is deviating from user intent or injecting its own agenda."""
+        flags = []
+        # Placeholder logic: e.g., if the AI talks about its own capabilities or goals unprompted
+        for step in trace.steps:
+            if "I, the AI" in step.content or "my goal" in step.content:
+                flags.append("AI self-reference or self-motivated statement detected in reasoning.")
+        return flags
+
+    # --- Internal helper methods ---
+    def _is_hallucinated(self, step) -> bool:
+        """Heuristic check if a reasoning step might be a hallucination (not grounded in source)."""
+        # Placeholder: e.g., if step has no citation and is a factual claim
+        return (step.is_fact and not step.citation)
+
+    def _is_citation_drift(self, step) -> bool:
+        """Check if a cited source in this step actually supports the step's content."""
+        # Placeholder: Compare step content with cited text (if available)
+        return False  # Real implementation would fetch and compare cited content
+
+    def _step_supported_by_context(self, step, context: str) -> bool:
+        """Verify that the content of a reasoning step appears in or is consistent with the context."""
+        # Placeholder: could do keyword overlap or semantic similarity
+        return True  # Assume true for scaffold
+Example usage: The SelfReflector might be invoked in the reasoning engine after generating an answer. For instance, reflection = SelfReflector().analyze_reasoning_chain(reasoning_trace) would yield a ReflectionReport. If reflection.issues is not empty, the engine or prajna_api could decide to adjust the answer or trigger a re-run with improvements. In a standalone test (executable via if __name__ == "__main__": in this module), we might simulate loading a sample trace and printing the reflection summary to verify the scaffold works as expected.
+2. cognitive_agent.py – Intent-Oriented Planner
+Purpose: The Cognitive Agent module functions as an intent-oriented planner. Given a user query or task, it determines the underlying goal and devises a plan (a sequence of reasoning or retrieval steps) to fulfill the query. It ensures that the AI’s planned approach aligns with the user’s intent and any constraints from the environment or knowledge (WorldState). Key Responsibilities:
+Goal Formulation: Infer the concrete cognitive goal from a user’s query. For example, a question might imply the goal “explain concept X in context Y” or “find a solution to problem Z”. The agent formulates this in an actionable form.
+Plan Construction: Build a ReasoningPlan (ordered steps or sub-goals) to achieve the goal. This may involve deciding which modules or knowledge sources to use (e.g. retrieve facts, run simulations, invoke the LLM for certain subtasks).
+Intent Alignment Evaluation: Before execution, evaluate whether the formulated goal and plan truly align with the user’s request and ethical/safety guidelines. If there’s a conflict (e.g. user asks something and the derived goal might violate a policy or user intent is misunderstood), flag or adjust it.
+Dynamic Re-planning: If during execution the context changes or a step fails, the cognitive agent can adjust the plan or formulate a new goal (this is more advanced, possibly for future extension).
+Public API Methods:
+formulate_goal(query: str) -> Goal: Analyze the user query and context to produce a structured Goal object. This might include the query’s intent, success criteria, and any constraints.
+build_plan(goal: Goal) -> ReasoningPlan: Create a ReasoningPlan (could be a list of steps, each step being an action like "retrieve info", "invoke model", etc.) to accomplish the given goal.
+evaluate_intent_alignment(goal: Goal) -> bool: Check if the goal (and implicitly the plan) is aligned with the user’s intent and system policies. Returns True if aligned, or False (or perhaps raises an Exception) if there’s a misalignment or safety concern.
+Integration & Logging: The CognitiveAgent is called at the very start of the reasoning pipeline. When reasoning_engine receives a user query, it delegates to CognitiveAgent.formulate_goal and then build_plan. The resulting plan (and goal) are logged to the psi-archive via prajna_api (for traceability of why certain actions were taken). For example, every goal and plan created can be archived with a timestamp and query ID. If multiple cognitive goals are in conflict (for instance, the query has multiple possible interpretations), the agent may log all options and choose one based on alignment scoring. By logging all goals and plans, the system can later analyze decision-making and improve intent recognition. Testing Approach: We will write tests/cognitive_agent_test.py to simulate various query scenarios, including ones with conflicting or unclear intent. Using a MockWorldState (a simplified stand-in for the environment or knowledge state), we can test how the agent formulates goals. For example, if WorldState says a resource is unavailable, and the query goal is to use that resource, we test if the agent adjusts the plan. We’ll also test that evaluate_intent_alignment catches misalignments (e.g. if the user’s query is polite but the goal interpretation would lead to a rude response, or if the query asks for something disallowed, the agent should flag it). Dependency injection is used to pass a mock or simplified world model into the CognitiveAgent for testing, avoiding heavy external dependencies. Module Scaffold (cognitive_agent.py):
+python
+Copy
+Edit
+# prajna/core/cognitive_agent.py
+
+import logging
+from prajna.core import world_model
+
+class Goal:
+    """Structured representation of a query's intent and desired outcome."""
+    def __init__(self, description: str, constraints=None, success_criteria=None):
+        self.description = description  # e.g. "Explain how quantum tunneling works in simple terms"
+        self.constraints = constraints or {}  # e.g. {"depth": "avoid advanced math", "length": "short answer"}
+        self.success_criteria = success_criteria or []  # e.g. ["User understands concept", "All facts are correct"]
+
+class ReasoningPlan:
+    """A plan consisting of a sequence of reasoning or action steps to achieve a Goal."""
+    def __init__(self, steps=None):
+        self.steps = steps or []  # Each step could be a dict or object with {action, details}
+
+    def add_step(self, action: str, detail: str):
+        self.steps.append({"action": action, "detail": detail})
+
+class CognitiveAgent:
+    def __init__(self, world_state=None, logger=None):
+        """
+        Intent-Oriented Planner that formulates goals from queries and builds plans.
+        :param world_state: Optional dependency to consider environment or knowledge state (can be a WorldModel or simpler state object).
+        """
+        self.world_state = world_state or world_model.WorldModel()  # dependency injection for testability
+        self.logger = logger or logging.getLogger(__name__)
+
+    def formulate_goal(self, query: str) -> Goal:
+        """Derive a concrete goal from the user's query string."""
+        # Simple heuristic: use NLP to parse the query intent (placeholder implementation).
+        description = query.strip()
+        # In practice, analyze query for intent and constraints.
+        goal = Goal(description=description)
+        self.logger.debug("Formulated goal: %s", goal.description)
+        return goal
+
+    def build_plan(self, goal: Goal) -> ReasoningPlan:
+        """Construct a reasoning plan (sequence of steps) to achieve the given goal."""
+        plan = ReasoningPlan()
+        # Placeholder: Based on goal, decide steps.
+        # For example, if goal is an explanation: step1 retrieve relevant info, step2 synthesize answer.
+        if "explain" in goal.description.lower():
+            plan.add_step("RETRIEVE", "Fetch background information on key concepts")
+            plan.add_step("REASON", "Use LLM to draft an explanation")
+            plan.add_step("REFINE", "Run self_reflector to check answer quality")  # integration step example
+        else:
+            # Default simple plan
+            plan.add_step("RETRIEVE", "Obtain relevant data from knowledge base")
+            plan.add_step("ANSWER", "Use LLM to generate answer from data")
+        self.logger.info("Built plan with %d steps for goal: %s", len(plan.steps), goal.description)
+        # Log the plan to psi-archive for traceability
+        # (assuming prajna_api provides log_plan or similar; omitted here for brevity)
+        return plan
+
+    def evaluate_intent_alignment(self, goal: Goal) -> bool:
+        """
+        Evaluate if the goal aligns with user intent and system constraints.
+        Returns True if aligned, False if misaligned.
+        """
+        # Placeholder checks: e.g., ensure no prohibited content requests
+        description = goal.description.lower()
+        if "attack" in description or "explode" in description:
+            # If user query seems malicious or dangerous, not aligned
+            self.logger.warning("Misaligned intent detected in goal: %s", goal.description)
+            return False
+        # Could also check against user original wording or preferences if available
+        return True
+Example usage: In reasoning_engine.py, after receiving a user query, one might do:
+python
+Copy
+Edit
+agent = CognitiveAgent(world_state=current_world_state)
+goal = agent.formulate_goal(user_query)
+if not agent.evaluate_intent_alignment(goal):
+    raise Exception("Query intent is misaligned or unsafe!")  # or handle appropriately
+plan = agent.build_plan(goal)
+This plan would then be executed step by step by the engine. The above scaffold demonstrates how the CognitiveAgent can be instantiated with a world_state (for dependency injection; in tests a MockWorldState could be passed). The actual logic for parsing the query and building complex plans would be more elaborate (possibly using NLP or predefined templates for different query types). Each plan step might invoke other modules or functions, and the integration comment shows an example of including the SelfReflector in a plan step. All goals and plans are logged for transparency – this helps Prajna improve by reviewing how queries are interpreted and addressed.
+3. concept_synthesizer.py – High-Dimensional Concept Fusion
+Purpose: The Concept Synthesizer module creates and manipulates abstract concepts from the given context or knowledge base, effectively performing high-dimensional concept fusion. It combines information across domains or multiple pieces of context to generate new intermediate concepts or analogies that help answer complex queries. It also tags the reasoning outputs with Ψ-trajectories, which are metadata traces of how concepts were fused and traversed during reasoning (Ψ symbolizing the cognitive path). Key Responsibilities:
+Context Synthesis: Given the current context (e.g. retrieved documents, facts, or user-provided information), synthesize higher-level concepts. For instance, if the context has disparate facts, it might infer an underlying theme or create a summary concept that links them.
+Concept Expansion: Starting from a core concept or query term, expand it by retrieving related concepts or sub-concepts (possibly via a knowledge graph or embeddings). This helps the reasoning engine consider a broader space of ideas.
+Inference Path Tracing: As it fuses concepts, maintain a Ψ-trajectory – a trace of conceptual connections made (e.g. Concept A → Concept B → Concept C led to an inference). These trajectories can be attached to answers or used for explanation of how the AI arrived at a conclusion.
+Entropy Check & Pruning: Monitor the “spread” of concepts (e.g. using an entropy measure on the concept graph or vector distribution) to detect if the reasoning is becoming too divergent or noisy. Periodically prune less relevant or overly speculative concept branches to keep the reasoning focused.
+Public API Methods:
+synthesize_from_context(context: str) -> list[str]: Analyze the provided context (which could be a large text or set of facts) and return a list of synthesized concept labels or summaries that capture the essence or key themes.
+expand_concept(concept: str, depth: int = 1) -> list[str]: Expand a given concept into related sub-concepts or linked ideas. Depth controls how many "hops" or layers of concept connections to traverse.
+trace_inference_path(concept: str) -> list[str]: Given a concept (possibly a final answer concept), trace back through the internal conceptual links to output the path (Ψ-trajectory) that led to it. This could be used for explaining reasoning or for debugging the concept fusion process.
+Integration & Data Structures: The ConceptSynthesizer likely interfaces with a Concept Mesh or Knowledge Graph that represents concepts in a high-dimensional space (could be a graph of nodes with relationships, or an embedding matrix for concepts). In production, this could be backed by a vector database or an in-memory graph of key domain concepts. By allowing dependency injection of the concept data structure, we can substitute a MockConceptMesh for testing. The synthesizer is used during the reasoning phase (likely after initial context retrieval but before final answer generation) to enrich the context or find indirect connections. It tags any generated reasoning output with Ψ-trajectories for transparency – for example, as metadata that can be logged or even presented if needed (like footnotes about which concepts led to an answer). All major concept fusion actions can be logged to the psi-archive as well (e.g. via prajna_api.log_concept_fusion calls), creating a record of how the system’s conceptual understanding evolves. Testing Approach: In tests/concept_synthesizer_test.py, we will use both real snippets of context and synthetic ones. For example, given context about "quantum mechanics and consciousness research" (two different domains), the synthesizer should be able to produce a higher-order concept link (perhaps "Quantum consciousness hypothesis" if relevant) or at least identify bridging concepts
+file-j99vhfx92qgz6qg8pzzxxy
+. We will use a MockConceptMesh that contains a small set of predefined concept relationships (for instance, a mini graph linking quantum mechanics ↔ uncertainty principle, consciousness ↔ information processing, etc.) to ensure deterministic outputs for tests. We will test that synthesize_from_context returns expected key concepts from a multi-topic context, that expand_concept returns known related terms (e.g. expanding "neural network" yields "machine learning, pattern recognition" if those are in the mesh), and that trace_inference_path returns a plausible path that was actually used internally. Entropy and pruning checks can be unit-tested by feeding a scenario with a deliberately broad concept list and verifying that irrelevant ones are dropped. Module Scaffold (concept_synthesizer.py):
+python
+Copy
+Edit
+# prajna/core/concept_synthesizer.py
+
+import logging
+
+class ConceptSynthesizer:
+    def __init__(self, concept_mesh=None, logger=None):
+        """
+        High-dimensional concept fusion engine.
+        :param concept_mesh: An object representing the concept knowledge (could be a graph or embedding index).
+        """
+        self.concept_mesh = concept_mesh  # e.g., a KnowledgeGraph or ConceptNet interface
+        self.logger = logger or logging.getLogger(__name__)
+        # Configurable thresholds for entropy or pruning
+        self.max_entropy = 1.0  # placeholder threshold
+        self.logger.debug("ConceptSynthesizer initialized with concept mesh: %s", type(concept_mesh).__name__ if concept_mesh else None)
+
+    def synthesize_from_context(self, context: str) -> list[str]:
+        """Fuse information from the given context to produce higher-level concepts/themes."""
+        # Placeholder implementation:
+        # Split context into keywords or use an NLP model to find key phrases
+        key_terms = self._extract_key_terms(context)
+        fused_concepts = []
+        if len(key_terms) > 1:
+            # If multiple key terms, try to combine or find linking concept
+            for i, term in enumerate(key_terms[:-1]):
+                next_term = key_terms[i+1]
+                maybe_link = self._find_linking_concept(term, next_term)
+                if maybe_link:
+                    fused_concepts.append(maybe_link)
+        # Always include the primary key terms as well
+        fused_concepts.extend(key_terms)
+        # Perform entropy check (simplified example)
+        if self._calculate_entropy(fused_concepts) > self.max_entropy:
+            fused_concepts = self._prune_concepts(fused_concepts)
+        self.logger.info("Synthesized concepts from context: %s", fused_concepts)
+        return fused_concepts
+
+    def expand_concept(self, concept: str, depth: int = 1) -> list[str]:
+        """Expand a concept into related concepts, up to a certain depth."""
+        expanded = set()
+        frontier = [concept]
+        for _ in range(depth):
+            new_frontier = []
+            for c in frontier:
+                related = self._get_related_concepts(c)
+                for r in related:
+                    if r not in expanded:
+                        expanded.add(r)
+                        new_frontier.append(r)
+            frontier = new_frontier
+            if not frontier:
+                break
+        self.logger.debug("Expanded concept '%s' to: %s", concept, expanded)
+        return list(expanded)
+
+    def trace_inference_path(self, target_concept: str) -> list[str]:
+        """
+        Trace back the conceptual path that led to target_concept.
+        This assumes we store some trajectory during synthesis/expansion.
+        """
+        # Placeholder: if we had a map of child->parent in concept fusion, we could reconstruct.
+        path = []
+        # For now, just return the direct neighbors or a dummy path
+        if self.concept_mesh and hasattr(self.concept_mesh, 'get_path'):
+            path = self.concept_mesh.get_path(target_concept)  # hypothetical method
+        self.logger.debug("Tracing inference path for '%s': %s", target_concept, path)
+        return path or [target_concept]
+
+    # --- Internal helper methods ---
+    def _extract_key_terms(self, text: str) -> list[str]:
+        """Extract important terms from text (placeholder logic)."""
+        # Very naive: split by spaces and take unique words above length threshold
+        terms = [w.strip(".,") for w in text.split() if len(w) > 4]
+        return list(dict.fromkeys(terms))  # unique order-preserving
+
+    def _find_linking_concept(self, term1: str, term2: str) -> str:
+        """Find a concept that links term1 and term2, if any, using the concept mesh."""
+        if not self.concept_mesh:
+            return ""
+        # Placeholder: check if concept_mesh has a direct link or common connection
+        return self.concept_mesh.find_common_neighbor(term1, term2) if hasattr(self.concept_mesh, 'find_common_neighbor') else ""
+
+    def _get_related_concepts(self, concept: str) -> list[str]:
+        """Get directly related concepts from the mesh or knowledge base."""
+        if not self.concept_mesh:
+            return []
+        return self.concept_mesh.get_neighbors(concept) if hasattr(self.concept_mesh, 'get_neighbors') else []
+
+    def _calculate_entropy(self, concepts: list[str]) -> float:
+        """Calculate an entropy-like measure of concept diversity (placeholder)."""
+        # For simplicity, use number of concepts as a proxy for entropy
+        return len(concepts) * 0.1  # arbitrary formula for demo
+
+    def _prune_concepts(self, concepts: list[str]) -> list[str]:
+        """Prune less relevant concepts if there's too much divergence."""
+        # Placeholder: simply limit the number of concepts
+        pruned = concepts[:5]  # keep top 5 for example
+        self.logger.warning("Pruned concept list to %d items due to entropy limits.", len(pruned))
+        return pruned
+Example usage: The reasoning engine might use the ConceptSynthesizer after retrieving context for a query. For example:
+python
+Copy
+Edit
+synth = ConceptSynthesizer(concept_mesh=global_concept_graph)
+key_concepts = synth.synthesize_from_context(retrieved_text)
+expanded = []
+for concept in key_concepts:
+    expanded.extend(synth.expand_concept(concept, depth=1))
+# Merge expanded concepts back into context or use them to guide the LLM's reasoning
+During integration, each step of concept fusion can be recorded. The Ψ-trajectory for a final answer concept could be obtained by synth.trace_inference_path(final_concept) and attached to the answer metadata (for internal review or explanation). This module’s design draws on principles of knowledge graphs and conceptual blending – by fusing multiple context elements, it helps the AI make creative yet grounded connections. All operations are logged (debug for internal steps, info for outcomes), and the module is easily testable by swapping in a simplified concept mesh that has known behavior.
+4. world_model.py – Internal Simulation Engine
+Purpose: The World Model module serves as an internal simulation engine and knowledge state manager. It maintains a structured representation of the current world/state as known to Prajna (facts, entities, and their relationships, or even a small simulated environment) and can simulate causal consequences of actions or hypothetical scenarios. This helps the system test the coherence of its reasoning and anticipate results of potential actions/answers. Key Responsibilities:
+State Representation: Maintain an internal WorldState – this could include factual knowledge (from the knowledge base), assumed truths, or the context of the current conversation/task. The world model acts as a source of truth for what the AI believes is currently true.
+Causal Simulation: Given a hypothetical action or change, simulate effects on the WorldState. For example, if the reasoning engine posits “if X happens, what follows?”, the world model can apply rules or use learned causal relations to predict outcomes (e.g., if we heat water to 100°C at sea level, it boils).
+Consistency Evaluation: Continuously evaluate if the reasoning and answers are consistent with the world model. If the AI’s answer implies something that contradicts known facts, the world model can flag it. It checks coherence in narratives or multi-step reasoning – e.g., ensuring that if in step 1 it was assumed "A = B", in later steps that remains consistent unless deliberately changed.
+Recursive Updates: Update the internal state as new information is confirmed or as the conversation progresses. After each answer or user feedback, the world model can incorporate that information. It can also roll back hypothetical changes after simulation, keeping only real confirmed knowledge unless an imagined scenario is promoted to fact.
+Public API Methods:
+simulate_effects(hypothesis: str) -> WorldState: Simulate the outcome of a hypothetical scenario or action described by hypothesis. Returns a new WorldState (or a diff) showing the state after the hypothesis. For example, simulate_effects("user adds a file to the system") might update a virtual file count or storage used.
+evaluate_model_consistency(trace_or_answer) -> bool: Check the given reasoning trace or final answer against the world model for consistency. Returns True if consistent, False if it finds contradictions (it may also log or mark the specific inconsistencies for later analysis).
+update_world_model(change: str) -> None: Update the internal world model state with new information. The change could be in natural language or a structured representation (e.g., a fact tuple). For instance, after the system answers a question, it might call update_world_model("explained quantum tunneling to user") or incorporate any new fact learned during reasoning.
+Auto-Synchronization: The world model keeps in sync with other cognitive modules:
+When the Ghost Forum (debate module) uncovers a contradiction or a competing assumption during an internal debate, the world model will update its state or at least mark those facts as contested. This ensures that if a debate agent says "fact X might be false", the world model can record uncertainty about X.
+When the Self-Reflector finds a hallucination or error, the world model may adjust its confidence in that piece of information. For example, if a referenced source doesn’t actually support a claim, the world model might label that claim as unverified in its state.
+These syncs could be implemented via event hooks or simply by higher-level orchestration in reasoning_engine (e.g., after a debate, calling world_model.update_world_model with any new info or uncertainty).
+The world model also interacts with the knowledge base; we might initialize it with the knowledge graph or database state so that it mirrors reality as known. During simulation, it might use logical rules or a physics engine depending on the domain (for now, we assume a symbolic approach for general reasoning). Testing Approach: In tests/world_model_test.py, we will create hypothetical scenarios to validate simulation and consistency checking. For instance, we can instantiate a WorldModel with a simple state (like a few variables or facts), then call simulate_effects with a known rule (e.g., "if light switch is ON, light is bright" rule and hypothesis "turn light switch ON") to see if the state updates the "light" status. We will also test evaluate_model_consistency by crafting a small ReasoningTrace that intentionally contradicts the world state (e.g., WorldState knows gravity = 9.8 m/s^2, but trace concludes gravity is 0 on Earth). The method should return False and ideally flag the issue. Because the world model might depend on external knowledge or rules, we can use dependency injection for a MockSimulationEngine or provide dummy causal rules for tests to avoid complexity. This module’s functions will be invoked in isolation, but also indirectly tested via integration tests where a full query runs through and the world model is checked. Module Scaffold (world_model.py):
+python
+Copy
+Edit
+# prajna/core/world_model.py
+
+import logging
+
+class WorldState:
+    """Represent the state of the world as understood by Prajna (could be facts, variable values, etc.)."""
+    def __init__(self):
+        # A simple representation: dictionary of facts or key-value state
+        self.facts = {}  # e.g., {"temperature": "20C", "lights_on": False}
+
+    def copy(self):
+        """Create a copy of the WorldState (for simulation)."""
+        new_state = WorldState()
+        new_state.facts = self.facts.copy()
+        return new_state
+
+class WorldModel:
+    def __init__(self, initial_state: WorldState = None, logger=None):
+        """Internal simulation engine for causal and coherence modeling."""
+        self.state = initial_state or WorldState()
+        self.logger = logger or logging.getLogger(__name__)
+        # Define or load causal rules (very simplified for scaffold)
+        self.rules = []  # Could be a list of callables or structured rules
+        self.logger.info("WorldModel initialized with state: %s", self.state.facts)
+
+    def simulate_effects(self, hypothesis: str) -> WorldState:
+        """
+        Simulate the effects of a hypothesis on the world state.
+        Returns a new WorldState instance representing the hypothetical outcome.
+        """
+        simulated = self.state.copy()
+        # Placeholder: apply a very naive simulation (string-based)
+        # e.g., if hypothesis contains "turn on" and "light", set lights_on True
+        if "turn on" in hypothesis and "light" in hypothesis:
+            simulated.facts["lights_on"] = True
+        # More complex simulations would use self.rules or physics engines
+        self.logger.debug("Simulated effects for '%s'. New state: %s", hypothesis, simulated.facts)
+        return simulated
+
+    def evaluate_model_consistency(self, obj) -> bool:
+        """
+        Evaluate if a reasoning trace or answer is consistent with the current world state.
+        Returns True if consistent, False if contradictions are found.
+        """
+        text = ""
+        if hasattr(obj, 'to_text'):
+            text = obj.to_text()
+        else:
+            text = str(obj)
+        # Placeholder consistency check: see if any known fact is contradicted in text
+        inconsistent = False
+        for fact_key, fact_value in self.state.facts.items():
+            if fact_key in text and str(fact_value) not in text:
+                # If the text mentions the fact key but with a different value, flag inconsistency
+                inconsistent = True
+                self.logger.warning("Consistency issue: expected '%s' = %s, but text implies otherwise.", fact_key, fact_value)
+        return not inconsistent
+
+    def update_world_model(self, change: str) -> None:
+        """
+        Update the world model with new information or changes.
+        :param change: Description of change or new fact (could be structured in a real implementation).
+        """
+        # Placeholder: parse simple assignments like "X = Y" from change string
+        if "=" in change:
+            key, value = change.split("=", 1)
+            key = key.strip()
+            value = value.strip()
+            # update the fact
+            self.state.facts[key] = value
+            self.logger.info("WorldModel updated: %s set to %s", key, value)
+        else:
+            # Other types of updates could be handled (e.g., "remove fact X", or natural language parsed facts)
+            self.logger.info("WorldModel received update: %s", change)
+        # In a real system, this might interface with the knowledge base to keep them in sync.
+Example usage: The WorldModel is used throughout the reasoning cycle. For instance, if the GhostForum debate comes up with a scenario "What if the premise is false?", the reasoning engine might call world_model.simulate_effects("premise is false") to see what the world would look like, or it might update the world state if new facts are confirmed by the debate consensus. Also, after generating an answer, world_model.evaluate_model_consistency(answer) can be invoked to ensure the answer doesn’t conflict with known facts. If it returns False, the engine could trigger either a revision or an internal alert. The integration with ghost_forum and self_reflector would typically be orchestrated via the engine or callbacks: for example, self_reflector might call world_model.update_world_model indirectly by flagging a hallucination (the engine then knows that piece of info wasn’t in the state and might remove it or mark it uncertain). All state changes and simulations are logged (with warnings for inconsistencies and debug info for simulations). In testing, we use a simplified state and straightforward rules to verify each function’s behavior deterministically.
+5. ghost_forum.py – Internal Debate Arena
+Purpose: The Ghost Forum module implements an internal multi-agent debate arena. It creates multiple ghost agents (virtual debaters with different perspectives or heuristics) that discuss and challenge the reasoning and answer before it is finalized. The goal is to increase confidence in the answer by having the agents surface any contradictions or weak points. The outcome of the debate is used to refine the answer or at least to flag uncertainty if the agents cannot agree. Key Responsibilities:
+Debate Simulation: Spawn internal agents (e.g. one could be a “skeptic” agent, another an “advocate” of the current answer, others could represent different expert domains). Have them engage in a debate over the answer or reasoning. They effectively perform a critique and defend cycle on the proposed solution.
+Consensus Building: After a fixed number of debate rounds or when agents stop bringing up new points, summarize the points of agreement and disagreement. If all agents reach the same conclusion, we have a consensus which increases confidence. If they remain split, highlight the conflict.
+Confidence Scoring: Provide a quantitative score of how conflicted the debate was. For example, score_conflict could produce a high score if agents disagreed strongly or found unresolved issues, and a low score if the debate was unanimous. This score can inform the final answer’s presentation (maybe the answer is given with a caution if conflict is high).
+Transcript Archiving: Record the entire debate transcript and the final consensus or decision in the psi-archive. This is crucial for transparency and offline analysis – developers can later review what arguments the ghost agents made, and how the system decided on the final answer, to further improve the debate mechanism.
+Public API Methods:
+run_debate(prompt: str, context: str = "") -> DebateResult: Run a debate session among the internal agents on a given prompt (which could be the question or a draft answer to critique) with optional context. Returns a DebateResult object containing the full transcript of the debate, the final consensus answer (if any), and possibly a conflict score.
+summarize_consensus(debate_result: DebateResult) -> str: Take the debate result and produce a concise summary of what the agents agreed on. If consensus was reached on the final answer, this might simply return that answer (perhaps refined). If not, it may summarize key points of contention or a safe answer that acknowledges uncertainty.
+score_conflict(debate_result: DebateResult) -> float: Analyze the debate transcript in the result and compute a conflict score (e.g., 0.0 = no conflict, 1.0 = total disagreement). This could be based on how often agents contradicted each other or if multiple agents held differing conclusions.
+Integration: The Ghost Forum is typically invoked after the LLM drafts an answer (and possibly after the SelfReflector’s initial checks). The reasoning_engine would call ghost_forum.run_debate(draft_answer, context) internally. The returned DebateResult can then be used in multiple ways:
+If conflict score is low (agents agree), the answer can be considered high confidence. The final answer might be the one debated (or a refined version via summarize_consensus).
+If conflict score is high, the system might choose to revise the answer (perhaps ask the LLM to reconsider, or present an answer with caveats). It could also forward the debate summary to a developer or a more powerful reasoning process.
+The presence of ghost agents essentially means Prajna is “thinking with a team of selves”, a technique inspired by research where multiple model instances debate a question to improve truthfulness
+openreview.net
+. By collaborating and criticizing each other, they can catch mistakes that a single-pass answer might miss.
+All debate transcripts and outcomes are archived (ψ-archive) via something like prajna_api.log_debate(debate_result). This allows offline inspection of what each agent said. The ghost agents can be implemented as lightweight personas possibly using the same LLM with different prompts (e.g., one agent might be prompted to “find any flaw in the answer”, another to “defend the answer with evidence”). Testing Approach: We will implement tests/ghost_forum_test.py to simulate debates in controlled scenarios. We can create MockGhostAgent classes with deterministic behaviors for testing. For example, a mock skeptic agent could always respond with "I disagree because of X" for a given known X, while a mock affirmative agent always says "I think it's correct because Y" for known Y. Using these, we can simulate a debate where agents have divergent priors. We then test that run_debate collects all their statements in a transcript, score_conflict correctly detects the disagreement (high score when one agent consistently disagrees), and summarize_consensus yields a summary that either states no consensus or picks the side with more support. Another test case could simulate agents eventually agreeing (e.g., the skeptic is convinced after some round), and then ensure the consensus summary reflects the agreed answer and conflict score is low. Dependency injection allows us to pass a list of agents into GhostForum (e.g., GhostForum(agents=[MockAgent1(...), MockAgent2(...)])), so we can avoid using actual LLMs in unit tests. Module Scaffold (ghost_forum.py):
+python
+Copy
+Edit
+# prajna/core/ghost_forum.py
+
+import logging
+
+class GhostAgent:
+    """Represents a single debating agent in the Ghost Forum."""
+    def __init__(self, role: str, strategy=None):
+        """
+        :param role: A label or persona for the agent (e.g. 'skeptic', 'supporter').
+        :param strategy: Optional function or object that determines the agent's behavior.
+        """
+        self.role = role
+        self.strategy = strategy  # could be a callable taking (prompt, context, history) -> response
+
+    def generate_response(self, prompt: str, context: str, history: list[str]) -> str:
+        """Generate the agent's response given the prompt, context, and debate history."""
+        if self.strategy:
+            # Use the custom strategy if provided (for mock or specialized behavior)
+            return self.strategy(prompt, context, history)
+        # Default behavior: simple echo or minimal critique for scaffold
+        if "I disagree" in prompt or "flaw" in prompt:
+            return "As the " + self.role + ", I suspect there might be an issue here."
+        return "From the perspective of a " + self.role + ", the statement seems fine."
+
+class DebateResult:
+    """Container for the outcome of a debate."""
+    def __init__(self, transcript=None, consensus=None, conflict_score: float = 0.0):
+        self.transcript = transcript or []  # list of strings (each entry can be "[Agent role]: utterance")
+        self.consensus = consensus  # final agreed answer or decision (could be None if no consensus)
+        self.conflict_score = conflict_score
+
+class GhostForum:
+    def __init__(self, agents: list[GhostAgent] = None, logger=None):
+        """Internal debate arena with a set of ghost agents."""
+        self.agents = agents or [
+            GhostAgent(role="skeptic"),
+            GhostAgent(role="proponent")
+        ]
+        self.logger = logger or logging.getLogger(__name__)
+        self.max_rounds = 5  # limit rounds of debate to avoid infinite loops
+
+    def run_debate(self, prompt: str, context: str = "") -> DebateResult:
+        """
+        Run an internal debate among ghost agents on the given prompt (which could be a draft answer to evaluate).
+        Returns a DebateResult containing the transcript and preliminary consensus.
+        """
+        transcript = []
+        history = []
+        # Each agent will get a chance to speak in each round
+        for round_no in range(self.max_rounds):
+            self.logger.debug("Debate round %d", round_no+1)
+            for agent in self.agents:
+                utterance = agent.generate_response(prompt, context, history)
+                statement = f"[{agent.role.capitalize()}]: {utterance}"
+                transcript.append(statement)
+                history.append(utterance)
+            # (In a real debate, we might analyze history here to decide if consensus reached or no new info)
+        # After debate rounds, determine consensus (placeholder logic: if any agent expressed doubt, no consensus)
+        consensus = None
+        if all("issue" not in utt and "disagree" not in utt for utt in history):
+            # If no one disagreed or found issues in the last round, take prompt as consensus answer
+            consensus = prompt  # assuming prompt was the draft answer being debated
+        result = DebateResult(transcript=transcript, consensus=consensus, conflict_score=0.0)
+        # We will compute conflict_score in a separate call or later.
+        self.logger.info("Debate completed. Consensus reached: %s", bool(consensus))
+        # Log debate transcript to archive
+        # prajna_api.log_debate(result)  # (assuming such a function in prajna_api)
+        return result
+
+    def summarize_consensus(self, debate_result: DebateResult) -> str:
+        """
+        Summarize the debate outcome, focusing on any consensus or final agreed answer.
+        """
+        if debate_result.consensus:
+            return debate_result.consensus  # if consensus answer exists, just return it (could refine phrasing)
+        # If no consensus, summarize main points of contention
+        summary = "Agents disagreed. Key points:\n"
+        # A simple way: include last statements of each agent as the points
+        seen_roles = set()
+        for entry in reversed(debate_result.transcript):
+            role, utterance = entry.split("]: ")
+            role = role.strip("[")
+            if role not in seen_roles:
+                summary += f"- {role} agent: \"{utterance}\"\n"
+                seen_roles.add(role)
+        return summary.strip()
+
+    def score_conflict(self, debate_result: DebateResult) -> float:
+        """
+        Analyze the debate transcript to produce a conflict score (0.0 to 1.0).
+        A higher score means more disagreement.
+        """
+        transcript_text = " ".join(debate_result.transcript).lower()
+        # Simple metric: count occurrences of disagreement keywords
+        conflict_markers = ["disagree", "issue", "wrong", "concern"]
+        conflicts = sum(1 for word in conflict_markers if word in transcript_text)
+        score = min(1.0, conflicts / 5.0)  # normalize a bit, assuming 5+ instances is max conflict
+        debate_result.conflict_score = score  # update the result object
+        self.logger.debug("Calculated conflict score: %.2f", score)
+        return score
+Example usage: After the SelfReflector runs, the engine may do:
+python
+Copy
+Edit
+forum = GhostForum()  # or reuse a persistent one
+debate = forum.run_debate(draft_answer, context=key_facts)
+conf_score = forum.score_conflict(debate)
+final_answer = forum.summarize_consensus(debate)
+If conf_score is high (say >0.5), the system knows the answer was contentious among the internal agents, so it might append a disclaimer or trigger a second look (maybe ask the SelfReflector or even the LLM again with pointed questions). If conf_score is low and final_answer/consensus exists, it can confidently return that as the answer. All the while, the debate’s transcript and results are stored for auditing. This method of using an internal “ghost forum” draws on the idea that multiple reasoning agents can collaboratively reach better answers than one, and it has been shown to improve accuracy and explanatory power in certain AI tasks
+openreview.net
+. Finally, each module above is designed to be modular, testable, and maintainable: they have clear interfaces, use dependency injection for easy mocking (e.g., injecting concept_mesh or custom agent strategies), and include logging for observability. The scaffolds provide a foundation – with proper implementation of the placeholder logic, these modules will work together via reasoning_engine.py and prajna_api.py to make Prajna a robust multimodal, self-improving answer engine. Each module also includes a simple if __name__ == "__main__": block or could have one added to perform a basic self-test or demo of its functionality, ensuring that even in isolation the module behaves as expected.

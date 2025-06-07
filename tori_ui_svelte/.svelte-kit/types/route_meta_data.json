@@ -7,6 +7,9 @@
 	"/.well-known": [
 		"src/routes/.well-known/+server.ts"
 	],
+	"/api/chat": [
+		"src/routes/api/chat/+server.ts"
+	],
 	"/api/soliton/[...path]": [
 		"src/routes/api/soliton/[...path]/+server.ts"
 	],

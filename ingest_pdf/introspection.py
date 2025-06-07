@@ -14,8 +14,18 @@ from collections import defaultdict
 import numpy as np
 from pathlib import Path
 
-from .models import ConceptTuple
-from .memory_gating import calculate_spectral_entropy
+try:
+    # Try absolute import first
+    from models import ConceptTuple
+except ImportError:
+    # Fallback to relative import
+    from .models import ConceptTuple
+try:
+    # Try absolute import first
+    from memory_gating import calculate_spectral_entropy
+except ImportError:
+    # Fallback to relative import
+    from .memory_gating import calculate_spectral_entropy
 
 # Configure logger
 logger = logging.getLogger("alan_introspection")

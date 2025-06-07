@@ -34,13 +34,48 @@ from pathlib import Path
 import concurrent.futures
 from collections import defaultdict
 
-from .models import ConceptTuple
-from .koopman_phase_graph import get_koopman_phase_graph, SourceDocument
-from .spectral_monitor import get_cognitive_spectral_monitor
-from .fractality import get_cognitive_fractal_analyzer
-from .source_validator import validate_source
-from .memory_gating import apply_memory_gate
-from .fft_privacy import get_fft_privacy_engine
+try:
+    # Try absolute import first
+    from models import ConceptTuple
+except ImportError:
+    # Fallback to relative import
+    from .models import ConceptTuple
+try:
+    # Try absolute import first
+    from koopman_phase_graph import get_koopman_phase_graph, SourceDocument
+except ImportError:
+    # Fallback to relative import
+    from .koopman_phase_graph import get_koopman_phase_graph, SourceDocument
+try:
+    # Try absolute import first
+    from spectral_monitor import get_cognitive_spectral_monitor
+except ImportError:
+    # Fallback to relative import
+    from .spectral_monitor import get_cognitive_spectral_monitor
+try:
+    # Try absolute import first
+    from fractality import get_cognitive_fractal_analyzer
+except ImportError:
+    # Fallback to relative import
+    from .fractality import get_cognitive_fractal_analyzer
+try:
+    # Try absolute import first
+    from source_validator import validate_source
+except ImportError:
+    # Fallback to relative import
+    from .source_validator import validate_source
+try:
+    # Try absolute import first
+    from memory_gating import apply_memory_gate
+except ImportError:
+    # Fallback to relative import
+    from .memory_gating import apply_memory_gate
+try:
+    # Try absolute import first
+    from fft_privacy import get_fft_privacy_engine
+except ImportError:
+    # Fallback to relative import
+    from .fft_privacy import get_fft_privacy_engine
 
 # Configure logger
 logger = logging.getLogger("alan_canonical_ingestion")

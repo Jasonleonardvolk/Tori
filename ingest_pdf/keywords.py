@@ -1,7 +1,18 @@
 from collections import Counter, defaultdict
 from typing import List, Sequence
 import re
-from .features import _tokenise
+
+try:
+    # Try absolute import first
+    from features import _tokenise
+except ImportError:
+    # Fallback to relative import
+    try:
+        # Try absolute import first
+        from features import _tokenise
+    except ImportError:
+        # Fallback to relative import
+        from .features import _tokenise
 _stop = {"the","and","for","with","that","this","from","into","using","over","such"}
 
 # N-gram extraction (up to trigrams)

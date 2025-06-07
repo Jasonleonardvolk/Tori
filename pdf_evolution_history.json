@@ -1,0 +1,278 @@
+{
+  "evolution_events": [
+    {
+      "event_id": "pdf_evolution_0",
+      "timestamp": "2025-06-06T08:48:19.450086",
+      "trigger_source": "pdf_processing",
+      "trigger_reasons": [
+        "high_quality_academic",
+        "rich_concept_content"
+      ],
+      "source_pdf": {
+        "title": "2411.09169v1",
+        "document_type": "academic_paper",
+        "research_field": "mathematics",
+        "concepts_count": 100
+      },
+      "evolution_results": {
+        "concepts_evolved": 0,
+        "new_concept_names": [],
+        "evolution_strategies": []
+      },
+      "system_state": {
+        "pdfs_processed": 1,
+        "total_evolution_cycles": 0,
+        "total_concepts_bred": 0
+      }
+    },
+    {
+      "event_id": "pdf_evolution_1",
+      "timestamp": "2025-06-06T08:48:19.847273",
+      "trigger_source": "pdf_processing",
+      "trigger_reasons": [
+        "high_quality_academic",
+        "rich_concept_content"
+      ],
+      "source_pdf": {
+        "title": "2411.09169v1",
+        "document_type": "academic_paper",
+        "research_field": "mathematics",
+        "concepts_count": 100
+      },
+      "evolution_results": {
+        "concepts_evolved": 0,
+        "new_concept_names": [],
+        "evolution_strategies": []
+      },
+      "system_state": {
+        "pdfs_processed": 2,
+        "total_evolution_cycles": 1,
+        "total_concepts_bred": 0
+      }
+    },
+    {
+      "event_id": "pdf_evolution_2",
+      "timestamp": "2025-06-06T08:48:20.260162",
+      "trigger_source": "pdf_processing",
+      "trigger_reasons": [
+        "rich_concept_content",
+        "cross_domain_potential"
+      ],
+      "source_pdf": {
+        "title": "2501.09762v1",
+        "document_type": "presentation",
+        "research_field": "physics",
+        "concepts_count": 100
+      },
+      "evolution_results": {
+        "concepts_evolved": 0,
+        "new_concept_names": [],
+        "evolution_strategies": []
+      },
+      "system_state": {
+        "pdfs_processed": 3,
+        "total_evolution_cycles": 2,
+        "total_concepts_bred": 0
+      }
+    },
+    {
+      "event_id": "pdf_evolution_3",
+      "timestamp": "2025-06-06T08:48:20.649107",
+      "trigger_source": "pdf_processing",
+      "trigger_reasons": [
+        "rich_concept_content",
+        "cross_domain_potential"
+      ],
+      "source_pdf": {
+        "title": "2501.09762v1",
+        "document_type": "presentation",
+        "research_field": "physics",
+        "concepts_count": 100
+      },
+      "evolution_results": {
+        "concepts_evolved": 0,
+        "new_concept_names": [],
+        "evolution_strategies": []
+      },
+      "system_state": {
+        "pdfs_processed": 4,
+        "total_evolution_cycles": 3,
+        "total_concepts_bred": 0
+      }
+    },
+    {
+      "event_id": "pdf_evolution_4",
+      "timestamp": "2025-06-06T08:48:21.191881",
+      "trigger_source": "pdf_processing",
+      "trigger_reasons": [
+        "regular_interval",
+        "rich_concept_content"
+      ],
+      "source_pdf": {
+        "title": "Lin.PDF",
+        "document_type": "academic_paper",
+        "research_field": "mathematics",
+        "concepts_count": 100
+      },
+      "evolution_results": {
+        "concepts_evolved": 0,
+        "new_concept_names": [],
+        "evolution_strategies": []
+      },
+      "system_state": {
+        "pdfs_processed": 5,
+        "total_evolution_cycles": 4,
+        "total_concepts_bred": 0
+      }
+    },
+    {
+      "event_id": "pdf_evolution_5",
+      "timestamp": "2025-06-06T08:48:21.710958",
+      "trigger_source": "pdf_processing",
+      "trigger_reasons": [
+        "rich_concept_content"
+      ],
+      "source_pdf": {
+        "title": "Lin.PDF",
+        "document_type": "academic_paper",
+        "research_field": "mathematics",
+        "concepts_count": 100
+      },
+      "evolution_results": {
+        "concepts_evolved": 0,
+        "new_concept_names": [],
+        "evolution_strategies": []
+      },
+      "system_state": {
+        "pdfs_processed": 6,
+        "total_evolution_cycles": 5,
+        "total_concepts_bred": 0
+      }
+    },
+    {
+      "event_id": "pdf_evolution_6",
+      "timestamp": "2025-06-06T08:48:22.144237",
+      "trigger_source": "pdf_processing",
+      "trigger_reasons": [
+        "rich_concept_content"
+      ],
+      "source_pdf": {
+        "title": "Lin.PDF",
+        "document_type": "academic_paper",
+        "research_field": "mathematics",
+        "concepts_count": 100
+      },
+      "evolution_results": {
+        "concepts_evolved": 0,
+        "new_concept_names": [],
+        "evolution_strategies": []
+      },
+      "system_state": {
+        "pdfs_processed": 7,
+        "total_evolution_cycles": 6,
+        "total_concepts_bred": 0
+      }
+    },
+    {
+      "event_id": "pdf_evolution_7",
+      "timestamp": "2025-06-06T08:48:22.547198",
+      "trigger_source": "pdf_processing",
+      "trigger_reasons": [
+        "rich_concept_content"
+      ],
+      "source_pdf": {
+        "title": "arXiv:2403.06849v2  [math.GT]  21 Mar 2024",
+        "document_type": "academic_paper",
+        "research_field": "mathematics",
+        "concepts_count": 100
+      },
+      "evolution_results": {
+        "concepts_evolved": 0,
+        "new_concept_names": [],
+        "evolution_strategies": []
+      },
+      "system_state": {
+        "pdfs_processed": 8,
+        "total_evolution_cycles": 7,
+        "total_concepts_bred": 0
+      }
+    },
+    {
+      "event_id": "pdf_evolution_8",
+      "timestamp": "2025-06-06T08:48:22.901975",
+      "trigger_source": "pdf_processing",
+      "trigger_reasons": [
+        "high_quality_academic",
+        "rich_concept_content",
+        "cross_domain_potential"
+      ],
+      "source_pdf": {
+        "title": "arXiv:2502.06470v1  [cs.CL]  10 Feb 2025",
+        "document_type": "academic_paper",
+        "research_field": "computer_science",
+        "concepts_count": 100
+      },
+      "evolution_results": {
+        "concepts_evolved": 0,
+        "new_concept_names": [],
+        "evolution_strategies": []
+      },
+      "system_state": {
+        "pdfs_processed": 9,
+        "total_evolution_cycles": 8,
+        "total_concepts_bred": 0
+      }
+    },
+    {
+      "event_id": "pdf_evolution_9",
+      "timestamp": "2025-06-06T08:48:23.274208",
+      "trigger_source": "pdf_processing",
+      "trigger_reasons": [
+        "regular_interval",
+        "high_quality_academic",
+        "rich_concept_content",
+        "cross_domain_potential"
+      ],
+      "source_pdf": {
+        "title": "arXiv:2502.06470v1  [cs.CL]  10 Feb 2025",
+        "document_type": "academic_paper",
+        "research_field": "computer_science",
+        "concepts_count": 100
+      },
+      "evolution_results": {
+        "concepts_evolved": 0,
+        "new_concept_names": [],
+        "evolution_strategies": []
+      },
+      "system_state": {
+        "pdfs_processed": 10,
+        "total_evolution_cycles": 9,
+        "total_concepts_bred": 0
+      }
+    },
+    {
+      "event_id": "pdf_evolution_0",
+      "timestamp": "2025-06-06T09:05:23.847344",
+      "trigger_source": "pdf_processing",
+      "trigger_reasons": [
+        "regular_interval"
+      ],
+      "source_pdf": {
+        "title": "2501.15841v1",
+        "document_type": "research_document",
+        "research_field": "",
+        "concepts_count": 3
+      },
+      "evolution_results": {
+        "concepts_evolved": 0,
+        "new_concept_names": [],
+        "evolution_strategies": []
+      },
+      "system_state": {
+        "pdfs_processed": 5,
+        "total_evolution_cycles": 0,
+        "total_concepts_bred": 0
+      }
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "system_info": {
+    "name": "DARWIN GODEL CONSCIOUSNESS",
+    "version": "1.0.0-WINDOWS-COMPATIBLE",
+    "uptime_seconds": 616.4648342132568,
+    "consciousness_active": false,
+    "consciousness_cycles": 3,
+    "evolution_events": 4
+  },
+  "components": {
+    "enhanced_prajna": true,
+    "darwin_godel_orchestrator": true,
+    "evolution_metrics": true,
+    "pdf_integrator": true
+  },
+  "enhanced_prajna_status": {
+    "system_type": "Enhanced Prajna Cognitive System",
+    "consciousness_active": true,
+    "performance_metrics": {
+      "total_queries": 3,
+      "success_rate": 1.0,
+      "consciousness_level": 0.1,
+      "concepts_tracked": 0
+    },
+    "reasoning_history": {
+      "total_sessions": 3,
+      "recent_performance": [
+        0.68,
+        0.68,
+        0.68
+      ]
+    },
+    "cognitive_goals": {
+      "active_goals": 0,
+      "goal_descriptions": []
+    },
+    "system_health": {
+      "language_model_active": true,
+      "concept_mesh_active": true,
+      "soliton_memory_active": true,
+      "evolution_bridge_active": true
+    },
+    "consciousness_snapshot": {
+      "consciousness_level": 0.75,
+      "bridge_active": false,
+      "evolution_cycles": 0,
+      "active_concepts": 0,
+      "queue_size": 0,
+      "latest_cognitive_state": {
+        "reasoning_success_rate": 0.5,
+        "cognitive_gaps": [
+          "reasoning_performance_gap"
+        ],
+        "performance_metrics": {
+          "reasoning_success_rate": 0.5,
+          "concept_efficiency": 0.0,
+          "evolution_responsiveness": 0.0,
+          "consciousness_coherence": 0.75
+        }
+      },
+      "system_health": {
+        "concept_mesh_connected": true,
+        "soliton_memory_connected": true,
+        "mesh_mutator_active": true,
+        "synthesizer_active": true
+      }
+    }
+  },
+  "orchestrator_status": {
+    "meta_evolution_state": {
+      "generation": 1,
+      "active_strategies": [
+        

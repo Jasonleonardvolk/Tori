@@ -1,0 +1,18 @@
+{
+  "timestamp": "2025-06-07T18:37:55.050615",
+  "stage": "api_startup",
+  "status": "ready",
+  "details": {
+    "port": 8002,
+    "urls": {
+      "api": "http://localhost:8002",
+      "health": "http://localhost:8002/health",
+      "docs": "http://localhost:8002/docs"
+    }
+  },
+  "api_port": 8002,
+  "prajna_port": 8001,
+  "mcp_running": true,
+  "prajna_running": true,
+  "bridge_ready": false
+}

@@ -1,0 +1,68 @@
+{
+  "metadata": {
+    "export_time": "2025-06-06T14:27:30.715204",
+    "system_version": "Phase 3 Production",
+    "startup_time": "2025-06-06T14:23:31.258982",
+    "uptime_seconds": 239.427651
+  },
+  "system_stats": {
+    "total_evolutions": 0,
+    "successful_evolutions": 0,
+    "failed_evolutions": 0,
+    "emergency_reverts": 0,
+    "uptime_seconds": 239.427651
+  },
+  "governance_status": {
+    "governance_info": {
+      "evolution_mode": "suggest_only",
+      "total_proposals": 0,
+      "proposal_breakdown": {},
+      "checkpoints_available": 2,
+      "system_stability": 0.9
+    },
+    "performance_metrics": {
+      "answer_accuracy": 0.85,
+      "system_stability": 0.9,
+      "evolution_acceptance_rate": 0.0,
+      "revert_rate": 0.0,
+      "mesh_coherence": 0.75,
+      "concept_churn": 0.1,
+      "explainability_index": 0.85
+    },
+    "proposal_statistics": {
+      "total_proposals": 0,
+      "approved_proposals": 0,
+      "rejected_proposals": 0,
+      "successful_implementations": 0,
+      "reverted_implementations": 0
+    },
+    "safety_thresholds": {
+      "min_success_rate": 0.95,
+      "max_revert_rate": 0.05,
+      "min_explainability": 0.8,
+      "max_proposal_age_hours": 24,
+      "emergency_revert_threshold": 0.7
+    },
+    "recent_proposals": []
+  },
+  "monitoring_summary": {
+    "monitoring_export_file": "monitoring_export_20250606_142730.json",
+    "health_score": {
+      "overall_health": 0.6973333333333334,
+      "system_health": 0.6973333333333334,
+      "components": {
+        "cpu_health": 0.908,
+        "memory_health": 0.7210000000000001,
+        "disk_health": 0.46299999999999997
+      }
+    },
+    "total_alerts": 0,
+    "total_metrics": 4
+  },
+  "lineage_summary": {
+    "lineage_export_file": "phase2_advanced_lineage_export_20250606_142730.json",
+    "total_concepts": 6,
+    "total_relationships": 0,
+    "total_evolution_events": 6
+  }
+}

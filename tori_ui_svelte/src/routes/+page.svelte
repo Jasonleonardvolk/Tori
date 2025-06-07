@@ -3,10 +3,8 @@
   import { conceptMesh, addConceptDiff } from '$lib/stores/conceptMesh';
   import ConceptDebugPanel from '$lib/components/ConceptDebugPanel.svelte';
   
-  // STEP 2: Import Enhanced API Service
-  import { enhancedApiService } from '$lib/services/enhancedApi';
   
-  // âœ¨ Import Soliton Memory System
+  // ✨ Import Soliton Memory System
   import solitonMemory from '$lib/services/solitonMemory';
   
   // STEP 1-4: Import ALL systems
@@ -15,19 +13,6 @@
   let holographicMemory: any = null;
   let ghostCollective: any = null;
 
-  let file = null;
-  let result = null;
-  let error = null;
-
-  async function handleUpload() {
-    error = null;
-    try {
-      result = await uploadAndExtract(file);
-    } catch (e) {
-      error = e.message;
-    }
-  }
-  
   let files;
 
   // Get user data from server via layout
@@ -60,7 +45,7 @@
   let holographicStats: any = null; // NEW
   let ghostStats: any = null; // NEW
   
-  // âœ… AUTO-SCROLL FUNCTIONALITY
+  // ✅ AUTO-SCROLL FUNCTIONALITY
   let scrollContainer: HTMLElement;
   let isUserScrolledUp = false;
   let showScrollToBottom = false;
@@ -110,128 +95,132 @@
     scrollToBottom(true);
   }
   
-  onMount(async () => {
+  onMount(() => {
     mounted = true;
     
-    // STEP 1-4: Load ALL cognitive systems
-    try {
-      const cognitive = await import('$lib/cognitive');
-      braidMemory = cognitive.braidMemory;
-      cognitiveEngine = cognitive.cognitiveEngine;
-      holographicMemory = cognitive.holographicMemory;
-      ghostCollective = cognitive.ghostCollective;
-      
-      console.log('ðŸ§¬ ALL SYSTEMS LOADED:', {
-        braidMemory: !!braidMemory,
-        cognitiveEngine: !!cognitiveEngine,
-        holographicMemory: !!holographicMemory,
-        ghostCollective: !!ghostCollective
-      });
-    } catch (error) {
-      console.warn('âš ï¸ Some cognitive systems not available:', error);
-    }
-    
-    // ðŸŒŠ INITIALIZE SOLITON MEMORY SYSTEM
-    console.log('ðŸŒŠ Initializing Soliton Memory System...');
-    try {
-      const userId = data.user?.name || 'default_user';
-      await solitonMemory.initializeUser(userId);
-      console.log('âœ¨ Soliton Memory initialized for user:', userId);
-      
-      // Get initial memory stats
+    (async () => {
+      // STEP 1-4: Load ALL cognitive systems
       try {
-        solitonStats = await solitonMemory.getMemoryStats();
-        console.log('ðŸ“Š Initial Memory Stats:', solitonStats);
-      } catch (error) {
-        console.warn('Stats not available yet:', error);
-        solitonStats = { totalMemories: 0, activeMemories: 0, vaultedMemories: 0, memoryIntegrity: 1.0 };
-      }
-      
-      // Store foundational memory about this session
-      await solitonMemory.storeMemory(
-        `session_${Date.now()}`,
-        `New session started for ${data.user?.name || 'User'} with TORI consciousness interface`,
-        1.0 // Maximum importance
-      );
-    } catch (error) {
-      console.error('Failed to initialize Soliton Memory:', error);
-    }
-    
-    // ðŸ§¬ INITIALIZE BRAID MEMORY
-    if (braidMemory) {
-      try {
-        console.log('ðŸ§¬ Initializing Braid Memory...');
+        const cognitive = await import('$lib/cognitive');
+        braidMemory = cognitive.braidMemory;
+        cognitiveEngine = cognitive.cognitiveEngine;
+        holographicMemory = cognitive.holographicMemory;
+        ghostCollective = cognitive.ghostCollective;
         
-        // Set up reentry callback to detect memory loops
-        braidMemory.onReentry((digest: string, count: number, loop: any) => {
-          console.log(`ðŸ” Memory loop detected! Pattern seen ${count} times`);
-          
-          // If we're in a memory loop, suggest novelty
-          if (count >= 3) {
-            const noveltyGlyph = braidMemory.suggestNoveltyGlyph(
-              digest,
-              0.5, // current contradiction
-              0.7, // current coherence
-              0    // scar count
-            );
-            console.log(`ðŸ’¡ Suggested novelty glyph: ${noveltyGlyph}`);
-          }
+        console.log('🧬 ALL SYSTEMS LOADED:', {
+          braidMemory: !!braidMemory,
+          cognitiveEngine: !!cognitiveEngine,
+          holographicMemory: !!holographicMemory,
+          ghostCollective: !!ghostCollective
         });
-        
-        console.log('âœ… Braid Memory initialized and monitoring for loops');
       } catch (error) {
-        console.warn('Failed to initialize Braid Memory:', error);
+        console.warn('⚠️ Some cognitive systems not available:', error);
       }
-    }
-    
-   // ðŸ”® INITIALIZE HOLOGRAPHIC MEMORY
+      
+      // 🌊 INITIALIZE SOLITON MEMORY SYSTEM
+      console.log('🌊 Initializing Soliton Memory System...');
+      try {
+        const userId = data.user?.name || 'default_user';
+        await solitonMemory.initializeUser(userId);
+        console.log('✨ Soliton Memory initialized for user:', userId);
+        
+        // Get initial memory stats
+        try {
+          solitonStats = await solitonMemory.getMemoryStats();
+          console.log('📊 Initial Memory Stats:', solitonStats);
+        } catch (error) {
+          console.warn('Stats not available yet:', error);
+          solitonStats = { totalMemories: 0, activeMemories: 0, vaultedMemories: 0, memoryIntegrity: 1.0 };
+        }
+        
+        // Store foundational memory about this session
+        await solitonMemory.storeMemory(
+          `session_${Date.now()}`,
+          `New session started for ${data.user?.name || 'User'} with TORI consciousness interface`,
+          1.0 // Maximum importance
+        );
+      } catch (error) {
+        console.error('Failed to initialize Soliton Memory:', error);
+      }
+      
+      // 🧬 INITIALIZE BRAID MEMORY
+      if (braidMemory) {
+        try {
+          console.log('🧬 Initializing Braid Memory...');
+          
+          // Set up reentry callback to detect memory loops
+          braidMemory.onReentry((digest: string, count: number, loop: any) => {
+            console.log(`🔁 Memory loop detected! Pattern seen ${count} times`);
+            
+            // If we're in a memory loop, suggest novelty
+            if (count >= 3) {
+              const noveltyGlyph = braidMemory.suggestNoveltyGlyph(
+                digest,
+                0.5, // current contradiction
+                0.7, // current coherence
+                0    // scar count
+              );
+              console.log(`💡 Suggested novelty glyph: ${noveltyGlyph}`);
+            }
+          });
+          
+          console.log('✅ Braid Memory initialized and monitoring for loops');
+        } catch (error) {
+          console.warn('Failed to initialize Braid Memory:', error);
+        }
+      }
+      
+     // 🔮 INITIALIZE HOLOGRAPHIC MEMORY
 if (holographicMemory && typeof holographicMemory.initialize === 'function') {
-    holographicMemory.initialize();
+      holographicMemory.initialize();
 } else {
-    console.warn('HolographicMemory: initialize() not found');
+      console.warn('HolographicMemory: initialize() not found');
 }
 
-// ðŸ‘» INITIALIZE GHOST COLLECTIVE
+// 👻 INITIALIZE GHOST COLLECTIVE
 if (ghostCollective) {
-    try {
-        console.log('ðŸ‘» Initializing Ghost Collective...');
-        // Ghost collective might have personas that need initialization
-        console.log('âœ… Ghost Collective ready');
-    } catch (error) {
-        console.warn('Failed to initialize Ghost Collective:', error);
-    }
-}
-    
-    // ðŸ§  INITIALIZE COGNITIVE ENGINE
-    if (cognitiveEngine) {
       try {
-        console.log('ðŸ§  Initializing Cognitive Engine...');
-        console.log('âœ… Cognitive Engine ready');
+          console.log('👻 Initializing Ghost Collective...');
+          // Ghost collective might have personas that need initialization
+          console.log('✅ Ghost Collective ready');
       } catch (error) {
-        console.warn('Failed to initialize Cognitive Engine:', error);
+          console.warn('Failed to initialize Ghost Collective:', error);
       }
-    }
-    
-    // STEP 2-4: Initialize Enhanced API Service
-    console.log('ðŸš€ Enhanced API Service v4.0 initialized with full system integration');
-    
-    // Load conversation history from localStorage
-    const saved = localStorage.getItem('tori-conversation-history');
-    if (saved) {
-      try {
-        const loadedHistory = JSON.parse(saved).map((msg: any) => ({
-          ...msg,
-          timestamp: new Date(msg.timestamp)
-        }));
-        conversationHistory = loadedHistory;
-        lastMessageCount = loadedHistory.length;
-        
-        // Auto-scroll to bottom after loading history
-        tick().then(() => scrollToBottom(true));
-      } catch (e) {
-        console.warn('Failed to load conversation history:', e);
+}
+      
+      // 🧠 INITIALIZE COGNITIVE ENGINE
+      if (cognitiveEngine) {
+        try {
+          console.log('🧠 Initializing Cognitive Engine...');
+          console.log('✅ Cognitive Engine ready');
+        } catch (error) {
+          console.warn('Failed to initialize Cognitive Engine:', error);
+        }
       }
-    }
+      
+      // STEP 2-4: Initialize Enhanced API Service
+      console.log('🚀 Enhanced API Service v4.0 initialized with full system integration');
+      
+      // Load conversation history from localStorage
+      const saved = localStorage.getItem('tori-conversation-history');
+      if (saved) {
+        try {
+          const loadedHistory = JSON.parse(saved).map((msg: any) => ({
+            ...msg,
+            timestamp: new Date(msg.timestamp)
+          }));
+          conversationHistory = loadedHistory;
+          lastMessageCount = loadedHistory.length;
+          
+          // Auto-scroll to bottom after loading history
+          tick().then(() => scrollToBottom(true));
+        } catch (e) {
+          console.warn('Failed to load conversation history:', e);
+        }
+      }
+      
+      console.log('🎯 TORI main page loaded with FULL SYSTEM INTEGRATION and auto-scroll');
+    })();
     
     // Poll for memory stats every 5 seconds
     const statsInterval = setInterval(async () => {
@@ -257,8 +246,6 @@ if (ghostCollective) {
     return () => {
       clearInterval(statsInterval);
     };
-    
-    console.log('ðŸŽ¯ TORI main page loaded with FULL SYSTEM INTEGRATION and auto-scroll');
   });
   
   // Auto-save conversation history
@@ -270,7 +257,7 @@ if (ghostCollective) {
     if (!messageInput.trim() || isTyping || !data.user) return;
     
     const userMessage = {
-      id: `msg_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+      id: `msg_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`,
       role: 'user' as const,
       content: messageInput.trim(),
       timestamp: new Date(),
@@ -285,7 +272,7 @@ if (ghostCollective) {
     // Auto-scroll for user's message
     shouldAutoScroll = true;
     
-    // âœ¨ Store user message in Soliton Memory
+    // ✨ Store user message in Soliton Memory
     let solitonResult: any = null;
     try {
       solitonResult = await solitonMemory.storeMemory(
@@ -293,7 +280,7 @@ if (ghostCollective) {
         currentMessage,     // content
         0.8                // importance
       );
-      console.log('ðŸŒŠ User message stored in Soliton Memory:', solitonResult);
+      console.log('🌊 User message stored in Soliton Memory:', solitonResult);
       
       // Trigger phase monitoring for Ghost AI
       if (typeof window !== 'undefined') {
@@ -310,7 +297,7 @@ if (ghostCollective) {
       console.warn('Failed to store user message in Soliton Memory:', error);
     }
     
-    // ðŸ§¬ Store in Braid Memory for loop analysis
+    // 🧬 Store in Braid Memory for loop analysis
     if (braidMemory && solitonResult) {
       try {
         // Create a loop record for this interaction
@@ -334,7 +321,7 @@ if (ghostCollective) {
         };
         
         const loopId = braidMemory.archiveLoop(loopRecord);
-        console.log(`ðŸ§¬ Archived user loop: ${loopId}`);
+        console.log(`🧬 Archived user loop: ${loopId}`);
         
         // Store loop ID for response correlation
         userMessage.braidLoopId = loopId;
@@ -343,7 +330,7 @@ if (ghostCollective) {
       }
     }
     
-    // ðŸ”® Store in Holographic Memory
+    // 🔮 Store in Holographic Memory
     if (holographicMemory) {
       try {
         const spatialMemory = await holographicMemory.encode({
@@ -355,55 +342,71 @@ if (ghostCollective) {
           },
           timestamp: Date.now()
         });
-        console.log('ðŸ”® Stored in 3D space:', spatialMemory?.position || 'stored');
+        console.log('🔮 Stored in 3D space:', spatialMemory?.position || 'stored');
       } catch (error) {
         console.warn('Failed to store in Holographic Memory:', error);
       }
     }
     
     try {
-      // ðŸ” Find related memories using phase correlation
+      // 🔍 Find related memories using phase correlation
       let relatedMemories: any[] = [];
       try {
         relatedMemories = await solitonMemory.findRelatedMemories(
           userMessage.id,
           5 // max results
         );
-        console.log(`ðŸ”— Found ${relatedMemories.length} related memories`);
+        console.log(`🔗 Found ${relatedMemories.length} related memories`);
       } catch (error) {
         console.warn('Failed to find related memories:', error);
       }
       
-      // STEP 2-4: Use Enhanced API Service for ULTIMATE processing
-      const context = {
-        userQuery: currentMessage,
-        currentConcepts: [...new Set($conceptMesh.flatMap(d => d.concepts))],
-        conversationHistory: conversationHistory.slice(-10), // Last 10 messages for context
-        userProfile: data.user,
-        // ðŸŒŠ Soliton memory context
-        relatedMemories: relatedMemories,
-        memoryPhaseContext: relatedMemories.map(m => ({
-          content: m.content,
-          phase: m.phaseTag,
-          strength: m.amplitude,
-          stability: m.stability
+      // 🚀 NEW: Use our REAL chat API instead of enhancedApiService
+      console.log('🤖 Calling REAL chat API:', currentMessage);
+      const chatResponse = await fetch('/api/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          message: currentMessage,
+          userId: data.user?.name || 'anonymous'
+        })
+      });
+
+      if (!chatResponse.ok) {
+        throw new Error(`Chat API error: ${chatResponse.status}`);
+      }
+
+      const chatResult = await chatResponse.json();
+      console.log('✅ Real chat API response:', chatResult);
+
+      // Create enhanced response object to match expected format
+      const enhancedResponse = {
+        response: chatResult.response,
+        newConcepts: chatResult.concepts_found || [],
+        confidence: chatResult.confidence || 0.8,
+        processingMethod: 'real_chat_api',
+        systemInsights: [
+          `Found ${(chatResult.concepts_found || []).length} relevant concepts`,
+          `Confidence: ${Math.round((chatResult.confidence || 0.8) * 100)}%`,
+          `Processing time: ${(chatResult.processing_time || 0).toFixed(3)}s`,
+          `Soliton Memory used: ${chatResult.soliton_memory_used ? 'Yes' : 'No'}`
+        ],
+        activePersona: { name: 'TORI AI', id: 'tori' },
+        conceptNodes: (chatResult.concepts_found || []).map((concept, i) => ({
+          id: `concept_${i}`,
+          name: concept,
+          position: { x: i, y: 0, z: 0 }
         })),
-        solitonPhase: solitonResult?.phaseTag,
-        // ðŸ§¬ Braid memory context
-        braidLoopId: userMessage.braidLoopId,
-        // ðŸ”® Holographic context
-        spatialPosition: {
-          x: conversationHistory.length,
-          y: solitonResult?.phaseTag || 0,
-          z: relatedMemories.length
-        }
+        loopId: `chat_${Date.now()}`,
+        braidMetrics: { crossings: 0 },
+        emergentConnections: [],
+        holographicData: null
       };
       
-      console.log('ðŸŒŒðŸ‘»ðŸ§¬ðŸŽ¯ðŸŒŠ ULTIMATE: All systems processing with full memory integration...');
-      const enhancedResponse = await enhancedApiService.generateResponse(context);
-      
       const assistantMessage = {
-        id: `msg_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+        id: `msg_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`,
         role: 'assistant' as const,
         content: enhancedResponse.response,
         timestamp: new Date(),
@@ -425,27 +428,27 @@ if (ghostCollective) {
       
       conversationHistory = [...conversationHistory, assistantMessage];
       
-      // âœ¨ Store assistant response in Soliton Memory
+      // ✨ Store assistant response in Soliton Memory
       try {
         const aiMemoryResult = await solitonMemory.storeMemory(
           assistantMessage.id,        // conceptId
           enhancedResponse.response,  // content
           0.9                        // Higher importance for AI responses
         );
-        console.log('ðŸŒŠ AI response stored in Soliton Memory:', aiMemoryResult);
+        console.log('🌊 AI response stored in Soliton Memory:', aiMemoryResult);
         
         // Check if memory needs protection based on emotional content
         if (enhancedResponse.activePersona?.name === 'Unsettled' || 
             enhancedResponse.response.toLowerCase().includes('protect') ||
             enhancedResponse.response.toLowerCase().includes('sensitive')) {
           await solitonMemory.vaultMemory(assistantMessage.id, 'UserSealed');
-          console.log('ðŸ”’ Sensitive memory auto-vaulted for protection');
+          console.log('🔐 Sensitive memory auto-vaulted for protection');
         }
       } catch (error) {
         console.warn('Failed to store AI response in Soliton Memory:', error);
       }
       
-      // ðŸ§¬ Complete the Braid Memory loop
+      // 🧬 Complete the Braid Memory loop
       if (braidMemory && userMessage.braidLoopId) {
         try {
           // Get the original loop (need to access the Map correctly)
@@ -476,7 +479,7 @@ if (ghostCollective) {
             // Check for crossings with other loops
             const crossings = braidMemory.getCrossingsForLoop(originalLoop.id);
             if (crossings.length > 0) {
-              console.log(`ðŸ”€ Found ${crossings.length} memory crossings!`);
+              console.log(`🔀 Found ${crossings.length} memory crossings!`);
               crossings.forEach(crossing => {
                 console.log(`  - ${crossing.type} crossing via "${crossing.glyph}"`);
               });
@@ -487,7 +490,7 @@ if (ghostCollective) {
         }
       }
       
-      // ðŸ”® Update Holographic Memory with response
+      // 🔮 Update Holographic Memory with response
       if (holographicMemory) {
         try {
           await holographicMemory.encode({
@@ -508,9 +511,9 @@ if (ghostCollective) {
       if (enhancedResponse.newConcepts && enhancedResponse.newConcepts.length > 0) {
         addConceptDiff({
           type: 'chat',
-          title: `Ultimate AI: ${currentMessage.substring(0, 50)}...`,
+          title: `Ultimate AI: ${currentMessage.length > 50 ? currentMessage.substring(0, 50) + '...' : currentMessage}`,
           concepts: enhancedResponse.newConcepts,
-          summary: `Ultimate AI processing via ${enhancedResponse.processingMethod}. Confidence: ${Math.round(enhancedResponse.confidence * 100)}%${enhancedResponse.activePersona ? ` (${enhancedResponse.activePersona.name})` : ''}${enhancedResponse.conceptNodes ? ` | ${enhancedResponse.conceptNodes.length} 3D nodes` : ''} | ðŸŒŠ ${relatedMemories.length} memories`,
+          summary: `Ultimate AI processing via ${enhancedResponse.processingMethod}. Confidence: ${Math.round(enhancedResponse.confidence * 100)}%${enhancedResponse.activePersona ? ` (${enhancedResponse.activePersona.name})` : ''}${enhancedResponse.conceptNodes ? ` | ${enhancedResponse.conceptNodes.length} 3D nodes` : ''} | 🌊 ${relatedMemories.length} memories`,
           metadata: {
             messageCount: conversationHistory.length,
             userMessage: currentMessage,
@@ -523,13 +526,13 @@ if (ghostCollective) {
             activePersona: enhancedResponse.activePersona,
             holographicData: enhancedResponse.holographicData,
             conceptNodes: enhancedResponse.conceptNodes,
-            // ðŸŒŠ Soliton memory metadata
+            // 🌊 Soliton memory metadata
             solitonMemory: {
               userPhase: solitonResult?.phaseTag,
               relatedMemoryCount: relatedMemories.length,
               memoryIntegrity: 1.0
             },
-            // ðŸ§¬ Braid memory metadata
+            // 🧬 Braid memory metadata
             braidMemory: {
               loopId: userMessage.braidLoopId,
               crossings: braidStats?.crossings || 0
@@ -544,7 +547,7 @@ if (ghostCollective) {
       console.error('Ultimate AI processing failed:', error);
       
       const errorMessage = {
-        id: `msg_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+        id: `msg_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`,
         role: 'assistant' as const,
         content: "I'm having trouble with my advanced processing systems right now. Let me try a simpler approach...",
         timestamp: new Date(),
@@ -595,13 +598,14 @@ if (ghostCollective) {
   // STEP 3: Get processing method icon (enhanced)
   function getProcessingIcon(method: string): string {
     switch (method) {
-      case 'revolutionary_synthesis': return 'ðŸŒŒ';
-      case 'holographic_synthesis': return 'ðŸŽ¯';
-      case 'ghost_collective': return 'ðŸ‘»';
-      case 'cognitive_engine': return 'ðŸ§¬';
-      case 'braid_memory': return 'ðŸ”—';
-      case 'simple': return 'âš¡';
-      default: return 'ðŸ¤–';
+      case 'revolutionary_synthesis': return '🌌';
+      case 'holographic_synthesis': return '🎯';
+      case 'ghost_collective': return '👻';
+      case 'cognitive_engine': return '🧬';
+      case 'braid_memory': return '🔗';
+      case 'simple': return '⚡';
+      case 'real_chat_api': return '🤖';
+      default: return '🤖';
     }
   }
   
@@ -614,6 +618,7 @@ if (ghostCollective) {
       case 'cognitive_engine': return 'Cognitive Engine';
       case 'braid_memory': return 'BraidMemory';
       case 'simple': return 'Enhanced';
+      case 'real_chat_api': return 'TORI AI';
       default: return 'Standard';
     }
   }
@@ -622,17 +627,18 @@ if (ghostCollective) {
   function getPersonaIcon(persona: any): string {
     if (!persona) return '';
     switch (persona.id || persona.name?.toLowerCase()) {
-      case 'scholar': return 'ðŸ§ ';
-      case 'creator': return 'ðŸŽ¨';
-      case 'explorer': return 'ðŸ”';
-      case 'mentor': return 'ðŸŒŸ';
-      case 'synthesizer': return 'ðŸ”®';
-      case 'unsettled': return 'ðŸ˜Ÿ';
-      case 'mystic': return 'ðŸ”®';
-      case 'chaotic': return 'ðŸŒ€';
-      case 'oracular': return 'ðŸ‘ï¸';
-      case 'dreaming': return 'ðŸ’­';
-      default: return 'ðŸ‘¤';
+      case 'scholar': return '🧠';
+      case 'creator': return '🎨';
+      case 'explorer': return '🔍';
+      case 'mentor': return '🌟';
+      case 'synthesizer': return '🔮';
+      case 'unsettled': return '😟';
+      case 'mystic': return '🔮';
+      case 'chaotic': return '🌀';
+      case 'oracular': return '👁️';
+      case 'dreaming': return '💭';
+      case 'tori': return '🤖';
+      default: return '👤';
     }
   }
 </script>
@@ -641,11 +647,10 @@ if (ghostCollective) {
   <title>TORI - Consciousness Interface</title>
 </svelte:head>
 
-<!-- Rest of the template remains the same as the original file -->
 <!-- Main conversation interface -->
 <div class="flex flex-col h-full bg-white relative">
   
-  <!-- âœ… CONVERSATION AREA WITH AUTO-SCROLL -->
+  <!-- ✅ CONVERSATION AREA WITH AUTO-SCROLL -->
   <div 
     class="flex-1 overflow-y-auto px-6 py-4" 
     bind:this={scrollContainer}
@@ -659,7 +664,7 @@ if (ghostCollective) {
         </div>
         
         <h2 class="text-2xl font-bold text-gray-900 mb-2">
-          Welcome back, {data.user?.name.split(' ')[0] || 'User'}
+          Welcome back, {data.user?.name ? (data.user.name.split(' ')[0] || 'User') : 'User'}
         </h2>
         <p class="text-gray-600 mb-6 max-w-md">
           Your TORI consciousness interface is ready with <strong>FULL SYSTEM INTEGRATION</strong>: Revolutionary AI + Ghost Collective + BraidMemory + Holographic Memory. What would you like to explore today?
@@ -672,7 +677,7 @@ if (ghostCollective) {
             <div class="text-xs text-gray-600">Memory Entries</div>
           </div>
           <div class="text-center p-3 bg-green-50 rounded-lg">
-            <div class="text-lg font-semibold text-green-600">ðŸ‘» Personas</div>
+            <div class="text-lg font-semibold text-green-600">👻 Personas</div>
             <div class="text-xs text-gray-600">Ghost Collective</div>
           </div>
           <div class="text-center p-3 bg-purple-50 rounded-lg">
@@ -683,13 +688,13 @@ if (ghostCollective) {
           </div>
           <div class="text-center p-3 bg-blue-50 rounded-lg">
             <div class="text-lg font-semibold text-blue-600">
-              ðŸŽ¯ {holographicStats?.nodes?.length || 0}
+              🎯 {holographicStats?.nodes?.length || 0}
             </div>
             <div class="text-xs text-gray-600">3D Concepts</div>
           </div>
           <div class="text-center p-3 bg-orange-50 rounded-lg">
             <div class="text-lg font-semibold text-orange-600">
-              ðŸŒŠ {solitonStats?.totalMemories || 0}
+              🌊 {solitonStats?.totalMemories || 0}
             </div>
             <div class="text-xs text-gray-600">Soliton Memory</div>
           </div>
@@ -703,25 +708,25 @@ if (ghostCollective) {
               class="px-3 py-1 text-sm bg-blue-50 hover:bg-blue-100 text-blue-700 rounded-full transition-colors"
               on:click={() => messageInput = "How does machine learning work? Analyze it deeply with all your systems."}
             >
-              ðŸ§  Ultimate Scholar Mode
+              🧠 Ultimate Scholar Mode
             </button>
             <button 
               class="px-3 py-1 text-sm bg-purple-50 hover:bg-purple-100 text-purple-700 rounded-full transition-colors"
               on:click={() => messageInput = "Create an innovative visualization of AI consciousness in 3D space"}
             >
-              ðŸŽ¨ 3D Creator Mode
+              🎨 3D Creator Mode
             </button>
             <button 
               class="px-3 py-1 text-sm bg-green-50 hover:bg-green-100 text-green-700 rounded-full transition-colors"
               on:click={() => messageInput = "How do all these cognitive systems connect and work together?"}
             >
-              ðŸ” System Explorer
+              🔍 System Explorer
             </button>
             <button 
               class="px-3 py-1 text-sm bg-orange-50 hover:bg-orange-100 text-orange-700 rounded-full transition-colors"
               on:click={() => messageInput = "Show me my holographic memory patterns and emergent clusters"}
             >
-              ðŸŽ¯ Holographic Memory
+              🎯 Holographic Memory
             </button>
           </div>
         </div>
@@ -766,7 +771,7 @@ if (ghostCollective) {
                 <!-- STEP 4: Holographic nodes indicator -->
                 {#if message.conceptNodes && message.conceptNodes.length > 0 && message.role === 'assistant'}
                   <span class="text-xs text-blue-600 bg-blue-50 px-2 py-1 rounded-full flex items-center space-x-1">
-                    <span class="text-base">ðŸŽ¯</span>
+                    <span class="text-base">🎯</span>
                     <span>{message.conceptNodes.length} nodes</span>
                   </span>
                 {/if}
@@ -781,7 +786,7 @@ if (ghostCollective) {
                 <!-- STEP 1: Loop ID -->
                 {#if message.loopId}
                   <span class="text-xs text-purple-600 bg-purple-50 px-1 rounded">
-                    ðŸ§¬ {message.loopId.substring(0, 8)}
+                    🧬 {message.loopId ? message.loopId.substring(0, 8) : 'N/A'}
                   </span>
                 {/if}
                 
@@ -814,7 +819,7 @@ if (ghostCollective) {
                   </summary>
                   <div class="mt-1 text-xs text-gray-500 space-y-1">
                     {#each message.systemInsights as insight}
-                      <div>â€¢ {insight}</div>
+                      <div>• {insight}</div>
                     {/each}
                   </div>
                 </details>
@@ -828,16 +833,16 @@ if (ghostCollective) {
                 : 'bg-gray-300 text-gray-600 order-2 mr-3'
             }">
               {#if message.role === 'user' && data.user}
-                {data.user.name.charAt(0).toUpperCase()}
+                {data.user.name ? data.user.name.charAt(0).toUpperCase() : 'U'}
               {:else if message.role === 'user'}
-                ðŸ‘¤
+                👤
               {:else}
                 {#if message.activePersona}
                   {getPersonaIcon(message.activePersona)}
                 {:else if message.processingMethod}
                   {getProcessingIcon(message.processingMethod)}
                 {:else}
-                  ðŸ¤–
+                  🤖
                 {/if}
               {/if}
             </div>
@@ -848,7 +853,7 @@ if (ghostCollective) {
         {#if isTyping}
           <div class="flex justify-start">
             <div class="w-8 h-8 rounded-full bg-gradient-to-br from-purple-400 to-blue-500 text-white flex items-center justify-center flex-shrink-0 mr-3">
-              ðŸŒŒ
+              🌌
             </div>
             <div class="bg-gray-100 px-4 py-3 rounded-2xl max-w-[80%]">
               <div class="flex space-x-1 items-center">
@@ -867,7 +872,7 @@ if (ghostCollective) {
     {/if}
   </div>
   
-  <!-- âœ… SCROLL TO BOTTOM BUTTON (appears when user scrolls up) -->
+  <!-- ✅ SCROLL TO BOTTOM BUTTON (appears when user scrolls up) -->
   {#if showScrollToBottom}
     <div class="absolute bottom-24 right-6 z-10">
       <button
@@ -918,7 +923,7 @@ if (ghostCollective) {
         class="px-3 py-1.5 text-sm text-purple-600 hover:bg-purple-50 rounded-lg transition-colors flex items-center space-x-1"
         title="Memory Vault"
       >
-        <span>ðŸ”’</span>
+        <span>🔐</span>
         <span>Vault</span>
       </button>
       
@@ -928,7 +933,7 @@ if (ghostCollective) {
         class="px-4 py-3 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-2xl transition-colors"
         title="Toggle concept debug panel"
       >
-        ðŸ§ 
+        🧠
       </button>
       
       <!-- Clear conversation button -->
@@ -938,7 +943,7 @@ if (ghostCollective) {
           class="px-4 py-3 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-2xl transition-colors"
           title="Clear conversation"
         >
-          ðŸ—‘ï¸
+          🗑️
         </button>
       {/if}
     </div>
@@ -946,38 +951,38 @@ if (ghostCollective) {
     <!-- Enhanced input hints -->
     <div class="flex items-center justify-between mt-2 px-1">
       <div class="text-xs text-gray-500">
-        ðŸŒŒ Revolutionary â€¢ ðŸ‘» Ghost Collective â€¢ ðŸ§¬ BraidMemory â€¢ ðŸŽ¯ Holographic Memory â€¢ ðŸš€ Ultimate AI
+        🌌 Revolutionary • 👻 Ghost Collective • 🧬 BraidMemory • 🎯 Holographic Memory • 🚀 Ultimate AI
         {#if isUserScrolledUp}
-          â€¢ â¬†ï¸ Scroll position preserved
+          • ⬆️ Scroll position preserved
         {:else}
-          â€¢ â¬‡ï¸ Auto-scroll active
+          • ⬇️ Auto-scroll active
         {/if}
         {#if showDebugPanel}
-          â€¢ ðŸ§  Debug panel active
+          • 🧠 Debug panel active
         {/if}
       </div>
       
       <div class="text-xs text-gray-500">
-        {conversationHistory.length} messages â€¢ {$conceptMesh.length} concepts
+        {conversationHistory.length} messages • {$conceptMesh.length} concepts
         {#if solitonStats}
-          â€¢ ðŸŒŠ {solitonStats.totalMemories} memories ({(solitonStats.memoryIntegrity * 100).toFixed(0)}% integrity)
+          • 🌊 {solitonStats.totalMemories} memories ({(solitonStats.memoryIntegrity * 100).toFixed(0)}% integrity)
         {/if}
         {#if braidStats}
-          â€¢ ðŸ§¬ {braidStats.totalLoops} loops ({braidStats.crossings} crossings)
+          • 🧬 {braidStats.totalLoops} loops ({braidStats.crossings} crossings)
         {/if}
         {#if holographicStats?.nodes?.length}
-          â€¢ ðŸŽ¯ {holographicStats.nodes.length} 3D nodes
+          • 🎯 {holographicStats.nodes.length} 3D nodes
         {/if}
       </div>
     </div>
   </div>
   
-  <!-- ðŸ§  CONCEPT DEBUG PANEL (collapsible) -->
+  <!-- 🧠 CONCEPT DEBUG PANEL (collapsible) -->
   {#if showDebugPanel}
     <div class="border-t border-gray-200 bg-gray-50 p-4 max-h-96 overflow-y-auto">
       <div class="flex items-center justify-between mb-3">
         <h3 class="text-sm font-semibold text-gray-700 flex items-center space-x-2">
-          <span>ðŸ§ </span>
+          <span>🧠</span>
           <span>Concept Debug Panel</span>
           <span class="text-xs text-gray-500">({$conceptMesh.length} entries)</span>
         </h3>
@@ -985,7 +990,7 @@ if (ghostCollective) {
           on:click={toggleDebugPanel}
           class="text-gray-400 hover:text-gray-600 text-sm"
         >
-          âœ•
+          ✕
         </button>
       </div>
       
@@ -1020,12 +1025,12 @@ if (ghostCollective) {
     display: none;
   }
   
-  /* âœ… Smooth scrolling behavior */
+  /* ✅ Smooth scrolling behavior */
   .flex-1.overflow-y-auto {
     scroll-behavior: smooth;
   }
   
-  /* âœ… Custom scrollbar styling */
+  /* ✅ Custom scrollbar styling */
   .flex-1.overflow-y-auto::-webkit-scrollbar {
     width: 6px;
   }
@@ -1043,7 +1048,7 @@ if (ghostCollective) {
     background: #94a3b8;
   }
   
-  /* âœ… Debug panel scrollbar styling */
+  /* ✅ Debug panel scrollbar styling */
   .max-h-96.overflow-y-auto::-webkit-scrollbar {
     width: 4px;
   }

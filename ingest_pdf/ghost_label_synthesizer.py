@@ -31,10 +31,30 @@ import math
 from collections import defaultdict
 import uuid
 
-from .models import ConceptTuple
-from .koopman_phase_graph import get_koopman_phase_graph, ConceptNode
-from .memory_sculptor import get_memory_sculptor
-from .ontology_refactor_engine import get_ontology_refactor_engine
+try:
+    # Try absolute import first
+    from models import ConceptTuple
+except ImportError:
+    # Fallback to relative import
+    from .models import ConceptTuple
+try:
+    # Try absolute import first
+    from koopman_phase_graph import get_koopman_phase_graph, ConceptNode
+except ImportError:
+    # Fallback to relative import
+    from .koopman_phase_graph import get_koopman_phase_graph, ConceptNode
+try:
+    # Try absolute import first
+    from memory_sculptor import get_memory_sculptor
+except ImportError:
+    # Fallback to relative import
+    from .memory_sculptor import get_memory_sculptor
+try:
+    # Try absolute import first
+    from ontology_refactor_engine import get_ontology_refactor_engine
+except ImportError:
+    # Fallback to relative import
+    from .ontology_refactor_engine import get_ontology_refactor_engine
 
 # Configure logger
 logger = logging.getLogger("alan_ghost_label_synthesizer")

@@ -36,13 +36,48 @@ from sklearn.metrics.pairwise import cosine_similarity
 import networkx as nx
 
 # Import existing TORI modules
-from .extract_blocks import extract_concept_blocks
-from .features import build_feature_matrix, _tokenise
-from .spectral import spectral_embed
-from .clustering import run_oscillator_clustering, cluster_cohesion
-from .scoring import score_clusters, resonance_score, narrative_centrality, build_cluster_adjacency
-from .keywords import extract_keywords
-from .models import ConceptTuple
+try:
+    # Try absolute import first
+    from extract_blocks import extract_concept_blocks
+except ImportError:
+    # Fallback to relative import
+    from .extract_blocks import extract_concept_blocks
+try:
+    # Try absolute import first
+    from features import build_feature_matrix, _tokenise
+except ImportError:
+    # Fallback to relative import
+    from .features import build_feature_matrix, _tokenise
+try:
+    # Try absolute import first
+    from spectral import spectral_embed
+except ImportError:
+    # Fallback to relative import
+    from .spectral import spectral_embed
+try:
+    # Try absolute import first
+    from clustering import run_oscillator_clustering, cluster_cohesion
+except ImportError:
+    # Fallback to relative import
+    from .clustering import run_oscillator_clustering, cluster_cohesion
+try:
+    # Try absolute import first
+    from scoring import score_clusters, resonance_score, narrative_centrality, build_cluster_adjacency
+except ImportError:
+    # Fallback to relative import
+    from .scoring import score_clusters, resonance_score, narrative_centrality, build_cluster_adjacency
+try:
+    # Try absolute import first
+    from keywords import extract_keywords
+except ImportError:
+    # Fallback to relative import
+    from .keywords import extract_keywords
+try:
+    # Try absolute import first
+    from models import ConceptTuple
+except ImportError:
+    # Fallback to relative import
+    from .models import ConceptTuple
 
 # Configure logging
 logger = logging.getLogger("tori.dynamic_concept_extractor")

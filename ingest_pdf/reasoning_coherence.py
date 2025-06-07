@@ -24,7 +24,12 @@ import warnings
 import math
 from collections import defaultdict
 
-from .models import ConceptTuple
+try:
+    # Try absolute import first
+    from models import ConceptTuple
+except ImportError:
+    # Fallback to relative import
+    from .models import ConceptTuple
 
 # Configure logger
 logger = logging.getLogger("alan_reasoning_coherence")

@@ -10,7 +10,12 @@ from typing import List, Dict, Any, Set, Tuple, Optional
 from collections import defaultdict, Counter
 import re
 import logging
-from .models import ConceptTuple
+try:
+    # Try absolute import first
+    from models import ConceptTuple
+except ImportError:
+    # Fallback to relative import
+    from .models import ConceptTuple
 
 # Configure logger
 logger = logging.getLogger("eigenfunction_labeler")

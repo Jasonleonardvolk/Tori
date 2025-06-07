@@ -18,11 +18,36 @@ from pathlib import Path
 from typing import List, Dict, Any, Optional, Tuple
 from datetime import datetime
 
-from .pipeline import ingest_pdf_and_update_index
-from .memory_sculptor import MemorySculptor, run_memory_cleanup
-from .eigenfunction_labeler import EigenfunctionLabeler, label_concept_eigenfunctions
-from .phase_walk import PhaseCoherentWalk
-from .models import ConceptTuple
+try:
+    # Try absolute import first
+    from pipeline import ingest_pdf_and_update_index
+except ImportError:
+    # Fallback to relative import
+    from .pipeline import ingest_pdf_and_update_index
+try:
+    # Try absolute import first
+    from memory_sculptor import MemorySculptor, run_memory_cleanup
+except ImportError:
+    # Fallback to relative import
+    from .memory_sculptor import MemorySculptor, run_memory_cleanup
+try:
+    # Try absolute import first
+    from eigenfunction_labeler import EigenfunctionLabeler, label_concept_eigenfunctions
+except ImportError:
+    # Fallback to relative import
+    from .eigenfunction_labeler import EigenfunctionLabeler, label_concept_eigenfunctions
+try:
+    # Try absolute import first
+    from phase_walk import PhaseCoherentWalk
+except ImportError:
+    # Fallback to relative import
+    from .phase_walk import PhaseCoherentWalk
+try:
+    # Try absolute import first
+    from models import ConceptTuple
+except ImportError:
+    # Fallback to relative import
+    from .models import ConceptTuple
 
 # Configure logging
 logging.basicConfig(

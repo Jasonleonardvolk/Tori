@@ -1,0 +1,25 @@
+2025-06-07 12:27:57 | INFO     | tori.main | 🚀 Enhanced logging session started: 20250607_122757
+2025-06-07 12:27:57 | INFO     | tori.main | 📂 Log directory: C:\Users\jason\Desktop\tori\kha\logs\session_20250607_122757
+2025-06-07 12:27:57 | INFO     | tori.main | 📋 Multi-tenant config loaded: True
+2025-06-07 12:27:57 | INFO     | tori.main | 🚀 Enhanced TORI Launcher initialized
+2025-06-07 12:27:57 | INFO     | tori.main | 📂 Working directory: C:\Users\jason\Desktop\tori\kha
+2025-06-07 12:27:57 | INFO     | tori.main | 🏢 Multi-tenant mode: True
+2025-06-07 12:27:57 | INFO     | tori.main | Enhanced TORI Launcher started with comprehensive logging
+2025-06-07 12:27:57 | INFO     | tori.main | 📊 Status: prajna_startup -> starting
+2025-06-07 12:27:57 | DEBUG    | tori.main | 📋 Details: {'message': 'Starting Prajna voice system...'}
+2025-06-07 12:27:57 | INFO     | tori.main | 🧠 Starting Prajna - TORI's Voice and Language Model...
+2025-06-07 12:27:57 | INFO     | tori.main | 🔍 Searching for available Prajna port starting from 8001
+2025-06-07 12:27:57 | INFO     | tori.main | ✅ Found available Prajna port: 8001
+2025-06-07 12:27:57 | INFO     | tori.main | 🚀 Starting Prajna on port 8001 in PRODUCTION MODE...
+2025-06-07 12:27:57 | INFO     | tori.main | ⏳ Waiting for Prajna to initialize (production mode)...
+2025-06-07 12:27:59 | INFO     | tori.main | ✅ Prajna voice system started successfully!
+2025-06-07 12:28:02 | INFO     | tori.main | 🧪 Prajna test query successful!
+2025-06-07 12:28:02 | INFO     | tori.main | 📊 Status: prajna_startup -> success
+2025-06-07 12:28:02 | DEBUG    | tori.main | 📋 Details: {'port': 8001, 'api_url': 'http://localhost:8001/api/answer', 'docs_url': 'http://localhost:8001/docs', 'mode': 'production'}
+2025-06-07 12:30:00 | INFO     | tori.main | 🧹 Starting enhanced cleanup...
+2025-06-07 12:30:00 | INFO     | tori.main | 🛑 Terminating Prajna process...
+2025-06-07 12:30:00 | INFO     | tori.main | ✅ Prajna process terminated
+2025-06-07 12:30:00 | INFO     | tori.main | 📋 Session Summary:
+2025-06-07 12:30:00 | INFO     | tori.main |    📁 Log files: C:\Users\jason\Desktop\tori\kha\logs\session_20250607_122757
+2025-06-07 12:30:00 | INFO     | tori.main |    🆔 Session ID: 20250607_122757
+2025-06-07 12:30:00 | INFO     | tori.main | ✅ Enhanced cleanup complete

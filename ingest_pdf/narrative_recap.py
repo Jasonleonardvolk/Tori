@@ -22,9 +22,24 @@ from typing import List, Dict, Any, Optional, Set, Tuple, Union
 from collections import defaultdict, Counter
 import math
 
-from .concept_logger import ConceptLogger, default_concept_logger
-from .concept_metadata import ConceptMetadata 
-from .time_context import TimeContext, default_time_context
+try:
+    # Try absolute import first
+    from concept_logger import ConceptLogger, default_concept_logger
+except ImportError:
+    # Fallback to relative import
+    from .concept_logger import ConceptLogger, default_concept_logger
+try:
+    # Try absolute import first
+    from concept_metadata import ConceptMetadata 
+except ImportError:
+    # Fallback to relative import
+    from .concept_metadata import ConceptMetadata 
+try:
+    # Try absolute import first
+    from time_context import TimeContext, default_time_context
+except ImportError:
+    # Fallback to relative import
+    from .time_context import TimeContext, default_time_context
 
 # Configure logger
 logger = logging.getLogger("narrative_recap")

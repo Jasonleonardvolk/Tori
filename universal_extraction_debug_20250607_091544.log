@@ -1,0 +1,55 @@
+Starting universal concept extraction debug for: C:\Users\jason\Desktop\tori\kha\data\memory\2407.15527v2.pdf
+
+============================================================
+COMPARISON WITH ORIGINAL APPROACH
+============================================================
+--- Running UNIVERSAL extraction on: C:\Users\jason\Desktop\tori\kha\data\memory\2407.15527v2.pdf ---
+
+=== PDF SECTIONS FOUND ===
+[Abstract]: 3 chars
+Preview: and...
+--------------------------------------------------
+[Introduction]: 22 chars
+Preview: accurately reflect the...
+--------------------------------------------------
+Title: Interpretable Concept-Based Memory Reasoning
+
+=== EXTRACTING FROM SECTION: Abstract ===
+Found 0 concepts in Abstract
+
+=== EXTRACTING FROM SECTION: Introduction ===
+Found 3 concepts in Introduction
+  - accurately reflect: score=1.0 methods=KeyBERT+YAKE
+  - accurately: score=0.5593 methods=KeyBERT+YAKE
+  - reflect: score=0.3787 methods=KeyBERT+YAKE
+
+=== TOTAL CONCEPTS EXTRACTED: 3 ===
+
+=== FINAL UNIQUE CONCEPTS: 3 ===
+  accurately reflect
+    Score: 1.0
+    Methods: KeyBERT+YAKE
+    Sections: ['Introduction']
+    Method Count: 2
+------------------------------
+  accurately
+    Score: 0.5593
+    Methods: KeyBERT+YAKE
+    Sections: ['Introduction']
+    Method Count: 2
+------------------------------
+  reflect
+    Score: 0.3787
+    Methods: KeyBERT+YAKE
+    Sections: ['Introduction']
+    Method Count: 2
+------------------------------
+
+=== COMPARISON RESULTS ===
+Universal Debug: 3 concepts
+Pipeline Direct: 3 concepts
+
+=== PIPELINE CONCEPTS ===
+  accurately reflect: 1.0
+  accurately: 0.5593
+  reflect: 0.3787

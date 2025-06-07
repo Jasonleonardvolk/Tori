@@ -1,0 +1,249 @@
+{
+  "metadata": {
+    "export_time": "2025-06-06T14:23:08.869761",
+    "phase": "Phase 2 Alpha Advanced Lineage",
+    "version": "2.0"
+  },
+  "comprehensive_coherence": {
+    "global_metrics": {
+      "average_coherence": 0.5,
+      "coherence_variance": 0.0,
+      "coherence_stability": 1.0,
+      "total_concepts": 6
+    },
+    "concept_coherence": {
+      "concept_from_python.pdf_neural_architecture": {
+        "semantic_coherence": 1.0,
+        "usage_coherence": 0.5,
+        "relational_coherence": 0.5,
+        "temporal_coherence": 0.3,
+        "contextual_coherence": 0.2,
+        "emergent_coherence": 0.3333333333333333,
+        "phase_alignment": 0.7
+      },
+      "concept_from_python.pdf_hyperdimensional_computing": {
+        "semantic_coherence": 1.0,
+        "usage_coherence": 0.5,
+        "relational_coherence": 0.5,
+        "temporal_coherence": 0.3,
+        "contextual_coherence": 0.2,
+        "emergent_coherence": 0.3333333333333333,
+        "phase_alignment": 0.7
+      },
+      "concept_from_python.pdf_quantum_cognition": {
+        "semantic_coherence": 1.0,
+        "usage_coherence": 0.5,
+        "relational_coherence": 0.5,
+        "temporal_coherence": 0.3,
+        "contextual_coherence": 0.2,
+        "emergent_coherence": 0.3333333333333333,
+        "phase_alignment": 0.7
+      },
+      "concept_from_2506.04220v1.pdf_neural_architecture": {
+        "semantic_coherence": 1.0,
+        "usage_coherence": 0.5,
+        "relational_coherence": 0.5,
+        "temporal_coherence": 0.3,
+        "contextual_coherence": 0.2,
+        "emergent_coherence": 0.3333333333333333,
+        "phase_alignment": 0.7
+      },
+      "concept_from_2506.04220v1.pdf_hyperdimensional_computing": {
+        "semantic_coherence": 1.0,
+        "usage_coherence": 0.5,
+        "relational_coherence": 0.5,
+        "temporal_coherence": 0.3,
+        "contextual_coherence": 0.2,
+        "emergent_coherence": 0.3333333333333333,
+        "phase_alignment": 0.7
+      },
+      "concept_from_2506.04220v1.pdf_quantum_cognition": {
+        "semantic_coherence": 1.0,
+        "usage_coherence": 0.5,
+        "relational_coherence": 0.5,
+        "temporal_coherence": 0.3,
+        "contextual_coherence": 0.2,
+        "emergent_coherence": 0.3333333333333333,
+        "phase_alignment": 0.7
+      }
+    },
+    "relationship_coherence": {
+      "average_strength": 0.0,
+      "average_confidence": 0.0,
+      "relationship_diversity": 0.0,
+      "bidirectional_ratio": 0.0
+    },
+    "phase_coherence": {
+      "phase_distribution": {
+        "mature": 1.0
+      },
+      "phase_transitions": {},
+      "phase_harmony": -0.0
+    },
+    "emergence_coherence": {
+      "average_novelty": 1.0,
+      "average_complexity": 0.0,
+      "average_impact": 0.0,
+      "emergence_frequency": 1.0
+    }
+  },
+  "network_topology": {
+    "basic_metrics": {
+      "num_nodes": 6,
+      "num_edges": 0,
+      "density": 0,
+      "is_connected": false
+    },
+    "centrality_analysis": {
+      "top_degree_central": [
+        {
+          "concept_id": "concept_from_python.pdf_neural_architecture",
+          "centrality": 0.0
+        },
+        {
+          "concept_id": "concept_from_python.pdf_hyperdimensional_computing",
+          "centrality": 0.0
+        },
+        {
+          "concept_id": "concept_from_python.pdf_quantum_cognition",
+          "centrality": 0.0
+        },
+        {
+          "concept_id": "concept_from_2506.04220v1.pdf_neural_architecture",
+          "centrality": 0.0
+        },
+        {
+          "concept_id": "concept_from_2506.04220v1.pdf_hyperdimensional_computing",
+          "centrality": 0.0
+        }
+      ],
+      "top_betweenness_central": [
+        {
+          "concept_id": "concept_from_python.pdf_neural_architecture",
+          "centrality": 0.0
+        },
+        {
+          "concept_id": "concept_from_python.pdf_hyperdimensional_computing",
+          "centrality": 0.0
+        },
+        {
+          "concept_id": "concept_from_python.pdf_quantum_cognition",
+          "centrality": 0.0
+        },
+        {
+          "concept_id": "concept_from_2506.04220v1.pdf_neural_architecture",
+          "centrality": 0.0
+        },
+        {
+          "concept_id": "concept_from_2506.04220v1.pdf_hyperdimensional_computing",
+          "centrality": 0.0
+        }
+      ]
+    },
+    "community_structure": {
+      "num_communities": 6,
+      "communities": [
+        {
+          "community_id": 0,
+          "size": 1,
+          "concepts": [
+            "concept_from_python.pdf_neural_architecture"
+          ]
+        },
+        {
+          "community_id": 1,
+          "size": 1,
+          "concepts": [
+            "concept_from_python.pdf_hyperdimensional_computing"
+          ]
+        },
+        {
+          "community_id": 2,
+          "size": 1,
+          "concepts": [
+            "concept_from_python.pdf_quantum_cognition"
+          ]
+        },
+        {
+          "community_id": 3,
+          "size": 1,
+          "concepts": [
+            "concept_from_2506.04220v1.pdf_neural_architecture"
+          ]
+        },
+        {
+          "community_id": 4,
+          "size": 1,
+          "concepts": [
+            "concept_from_2506.04220v1.pdf_hyperdimensional_computing"
+          ]
+        },
+        {
+          "community_id": 5,
+          "size": 1,
+          "concepts": [
+            "concept_from_2506.04220v1.pdf_quantum_cognition"
+          ]
+        }
+      ]
+    },
+    "emergence_hotspots": [],
+    "critical_paths": []
+  },
+  "emergence_patterns": {
+    "emergence_candidates": [],
+    "emergence_clusters": [],
+    "novelty_indicators": {
+      "concept_creation_rate": 1.0,
+      "relationship_diversity": 0.0,
+      "phase_transition_rate": 0.0,
+      "semantic_expansion": 1.0
+    },
+    "complexity_measures": {
+      "network_density": 0.0,
+      "clustering_coefficient": 0.0,
+      "path_diversity": 0.0,
+      "hierarchical_depth": 0.0
+    },
+    "impact_assessments": {
+      "coherence_improvement": 0.0,
+      "network_growth": 1.0,
+      "capability_expansion": 0.0,
+      "knowledge_integration": 0.0
+    }
+  },
+  "ledger_status": {
+    "ledger_info": {
+      "phase": "Phase 2 Alpha",
+      "version": "2.0",
+      "total_concepts": 6,
+      "total_relationships": 0,
+      "total_evolution_events": 6,
+      "network_nodes": 6,
+      "network_edges": 0
+    },
+    "phase_distribution": {
+      "nascent": 0,
+      "stabilizing": 0,
+      "mature": 6,
+      "specializing": 0,
+      "abstracting": 0,
+      "transcending": 0
+    },
+    "relationship_distribution": {
+      "parent_child": 0,
+      "sibling": 0,
+      "fusion": 0,
+      "fission": 0,
+      "bridge": 0,
+      "abstraction": 0,
+      "specialization": 0,
+      "analogy": 0,
+      "opposition": 0
+    },
+    "recent_activity": {
+      "recent_concepts": 6,
+      "recent_evolution_events": 6
+    }
+  }
+}

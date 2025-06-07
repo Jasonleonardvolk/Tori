@@ -35,21 +35,32 @@ sys.path.insert(0, str(current_dir))
 
 # Import your extraction functions
 try:
-    from pipeline import ingest_pdf_clean
-    print("✅ Successfully imported ingest_pdf_clean")
+    # First try absolute import from ingest_pdf package
+    from ingest_pdf.pipeline import ingest_pdf_clean
+    print("✅ Successfully imported ingest_pdf_clean (absolute import)")
 except ImportError as e:
-    print(f"❌ Failed to import ingest_pdf_clean: {e}")
+    print(f"❌ Failed to import from ingest_pdf package: {e}")
     try:
-        # Try alternative import paths
-        from ingest_pdf.pipeline import ingest_pdf_clean
-        print("✅ Successfully imported ingest_pdf_clean (alternative path)")
+        # If that fails, add ingest_pdf to path and try relative import
+        sys.path.insert(0, str(ingest_pdf_dir))
+        from pipeline import ingest_pdf_clean
+        print("✅ Successfully imported ingest_pdf_clean (relative import)")
     except ImportError as e2:
-        print(f"❌ Failed to import from ingest_pdf: {e2}")
+        print(f"❌ Failed to import pipeline: {e2}")
         print("Available files in ingest_pdf/:")
         if ingest_pdf_dir.exists():
             for f in ingest_pdf_dir.iterdir():
                 print(f"  - {f.name}")
-        sys.exit(1)
+        print("\n⚠️ FALLBACK: Creating dummy ingest_pdf_clean function")
+        def ingest_pdf_clean(file_path, extraction_threshold=0.0):
+            return {
+                "filename": Path(file_path).name,
+                "concept_count": 0,
+                "concept_names": [],
+                "status": "error", 
+                "error_message": "Pipeline import failed - using fallback",
+                "processing_time_seconds": 0.1
+            }
 
 # Configure logging
 logging.basicConfig(

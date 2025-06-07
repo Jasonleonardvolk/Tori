@@ -1,0 +1,91 @@
+{
+  "metadata": {
+    "export_time": "2025-06-06T12:15:14.282001",
+    "phase": "Phase 2 Alpha Advanced Lineage",
+    "version": "2.0"
+  },
+  "comprehensive_coherence": {
+    "global_metrics": {},
+    "concept_coherence": {},
+    "relationship_coherence": {
+      "average_strength": 0.0,
+      "average_confidence": 0.0,
+      "relationship_diversity": 0.0,
+      "bidirectional_ratio": 0.0
+    },
+    "phase_coherence": {
+      "phase_distribution": {},
+      "phase_transitions": {},
+      "phase_harmony": 0.0
+    },
+    "emergence_coherence": {
+      "average_novelty": 0.0,
+      "average_complexity": 0.0,
+      "average_impact": 0.0,
+      "emergence_frequency": 0.0
+    }
+  },
+  "network_topology": {
+    "basic_metrics": {},
+    "centrality_analysis": {},
+    "community_structure": {},
+    "emergence_hotspots": [],
+    "critical_paths": []
+  },
+  "emergence_patterns": {
+    "emergence_candidates": [],
+    "emergence_clusters": [],
+    "novelty_indicators": {
+      "concept_creation_rate": 0.0,
+      "relationship_diversity": 0.0,
+      "phase_transition_rate": 0.0,
+      "semantic_expansion": 0.0
+    },
+    "complexity_measures": {
+      "network_density": 0.0,
+      "clustering_coefficient": 0.0,
+      "path_diversity": 0.0,
+      "hierarchical_depth": 0.0
+    },
+    "impact_assessments": {
+      "coherence_improvement": 0.0,
+      "network_growth": 0.0,
+      "capability_expansion": 0.0,
+      "knowledge_integration": 0.0
+    }
+  },
+  "ledger_status": {
+    "ledger_info": {
+      "phase": "Phase 2 Alpha",
+      "version": "2.0",
+      "total_concepts": 0,
+      "total_relationships": 0,
+      "total_evolution_events": 0,
+      "network_nodes": 0,
+      "network_edges": 0
+    },
+    "phase_distribution": {
+      "nascent": 0,
+      "stabilizing": 0,
+      "mature": 0,
+      "specializing": 0,
+      "abstracting": 0,
+      "transcending": 0
+    },
+    "relationship_distribution": {
+      "parent_child": 0,
+      "sibling": 0,
+      "fusion": 0,
+      "fission": 0,
+      "bridge": 0,
+      "abstraction": 0,
+      "specialization": 0,
+      "analogy": 0,
+      "opposition": 0
+    },
+    "recent_activity": {
+      "recent_concepts": 0,
+      "recent_evolution_events": 0
+    }
+  }
+}

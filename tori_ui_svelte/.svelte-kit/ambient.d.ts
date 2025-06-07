@@ -5,9 +5,9 @@
 /// <reference types="@sveltejs/kit" />
 
 /**
- * Environment variables [loaded by Vite](https://vitejs.dev/guide/env-and-mode.html#env-files) from `.env` files and `process.env`. Like [`$env/dynamic/private`](https://kit.svelte.dev/docs/modules#$env-dynamic-private), this module cannot be imported into client-side code. This module only includes variables that _do not_ begin with [`config.kit.env.publicPrefix`](https://kit.svelte.dev/docs/configuration#env) _and do_ start with [`config.kit.env.privatePrefix`](https://kit.svelte.dev/docs/configuration#env) (if configured).
+ * Environment variables [loaded by Vite](https://vitejs.dev/guide/env-and-mode.html#env-files) from `.env` files and `process.env`. Like [`$env/dynamic/private`](https://svelte.dev/docs/kit/$env-dynamic-private), this module cannot be imported into client-side code. This module only includes variables that _do not_ begin with [`config.kit.env.publicPrefix`](https://svelte.dev/docs/kit/configuration#env) _and do_ start with [`config.kit.env.privatePrefix`](https://svelte.dev/docs/kit/configuration#env) (if configured).
  * 
- * _Unlike_ [`$env/dynamic/private`](https://kit.svelte.dev/docs/modules#$env-dynamic-private), the values exported from this module are statically injected into your bundle at build time, enabling optimisations like dead code elimination.
+ * _Unlike_ [`$env/dynamic/private`](https://svelte.dev/docs/kit/$env-dynamic-private), the values exported from this module are statically injected into your bundle at build time, enabling optimisations like dead code elimination.
  * 
  * ```ts
  * import { API_KEY } from '$env/static/private';
@@ -41,23 +41,25 @@ declare module '$env/static/private' {
 	export const ALLUSERSPROFILE: string;
 	export const APIFY_TOKEN: string;
 	export const APPDATA: string;
-	export const ChocolateyInstall: string;
-	export const ChocolateyLastPathUpdate: string;
+	export const CHOCOLATEYINSTALL: string;
+	export const CHOCOLATEYLASTPATHUPDATE: string;
 	export const COLOR: string;
-	export const CommonProgramFiles: string;
-	export const CommonProgramW6432: string;
+	export const COMMONPROGRAMFILES: string;
+	export const COMMONPROGRAMW6432: string;
 	export const COMPUTERNAME: string;
-	export const ComSpec: string;
+	export const COMSPEC: string;
 	export const CUDA_PATH: string;
 	export const CUDA_PATH_V12_8: string;
 	export const DEEPSEEK_API_KEY: string;
-	export const DriverData: string;
+	export const DRIVERDATA: string;
 	export const EDITOR: string;
 	export const EXA_API_KEY: string;
 	export const HOME: string;
 	export const HOMEDRIVE: string;
 	export const HOMEPATH: string;
 	export const INIT_CWD: string;
+	export const KMP_DUPLICATE_LIB_OK: string;
+	export const KMP_INIT_AT_FORK: string;
 	export const LOCALAPPDATA: string;
 	export const LOGONSERVER: string;
 	export const NODE: string;
@@ -85,38 +87,39 @@ declare module '$env/static/private' {
 	export const npm_package_version: string;
 	export const NPM_PREFIX_NPM_CLI_JS: string;
 	export const NUMBER_OF_PROCESSORS: string;
-	export const OneDrive: string;
-	export const OnlineServices: string;
+	export const ONEDRIVE: string;
+	export const ONLINESERVICES: string;
 	export const OS: string;
-	export const Path: string;
+	export const PATH: string;
 	export const PATHEXT: string;
-	export const platformcode: string;
+	export const PLATFORMCODE: string;
+	export const PORT: string;
 	export const PROCESSOR_ARCHITECTURE: string;
 	export const PROCESSOR_IDENTIFIER: string;
 	export const PROCESSOR_LEVEL: string;
 	export const PROCESSOR_REVISION: string;
-	export const ProgramData: string;
-	export const ProgramFiles: string;
-	export const ProgramW6432: string;
+	export const PROGRAMDATA: string;
+	export const PROGRAMFILES: string;
+	export const PROGRAMW6432: string;
 	export const PROMPT: string;
-	export const PSModulePath: string;
+	export const PSMODULEPATH: string;
 	export const PUBLIC: string;
-	export const RegionCode: string;
+	export const REGIONCODE: string;
 	export const RWKV_FORCE_CPU: string;
-	export const SystemDrive: string;
-	export const SystemRoot: string;
+	export const SYSTEMDRIVE: string;
+	export const SYSTEMROOT: string;
 	export const TEMP: string;
 	export const TMP: string;
 	export const USERDOMAIN: string;
 	export const USERDOMAIN_ROAMINGPROFILE: string;
 	export const USERNAME: string;
 	export const USERPROFILE: string;
-	export const windir: string;
+	export const WINDIR: string;
 	export const ZES_ENABLE_SYSMAN: string;
 }
 
 /**
- * Similar to [`$env/static/private`](https://kit.svelte.dev/docs/modules#$env-static-private), except that it only includes environment variables that begin with [`config.kit.env.publicPrefix`](https://kit.svelte.dev/docs/configuration#env) (which defaults to `PUBLIC_`), and can therefore safely be exposed to client-side code.
+ * Similar to [`$env/static/private`](https://svelte.dev/docs/kit/$env-static-private), except that it only includes environment variables that begin with [`config.kit.env.publicPrefix`](https://svelte.dev/docs/kit/configuration#env) (which defaults to `PUBLIC_`), and can therefore safely be exposed to client-side code.
  * 
  * Values are replaced statically at build time.
  * 
@@ -129,9 +132,11 @@ declare module '$env/static/public' {
 }
 
 /**
- * This module provides access to runtime environment variables, as defined by the platform you're running on. For example if you're using [`adapter-node`](https://github.com/sveltejs/kit/tree/master/packages/adapter-node) (or running [`vite preview`](https://kit.svelte.dev/docs/cli)), this is equivalent to `process.env`. This module only includes variables that _do not_ begin with [`config.kit.env.publicPrefix`](https://kit.svelte.dev/docs/configuration#env) _and do_ start with [`config.kit.env.privatePrefix`](https://kit.svelte.dev/docs/configuration#env) (if configured).
+ * This module provides access to runtime environment variables, as defined by the platform you're running on. For example if you're using [`adapter-node`](https://github.com/sveltejs/kit/tree/main/packages/adapter-node) (or running [`vite preview`](https://svelte.dev/docs/kit/cli)), this is equivalent to `process.env`. This module only includes variables that _do not_ begin with [`config.kit.env.publicPrefix`](https://svelte.dev/docs/kit/configuration#env) _and do_ start with [`config.kit.env.privatePrefix`](https://svelte.dev/docs/kit/configuration#env) (if configured).
  * 
  * This module cannot be imported into client-side code.
+ * 
+ * Dynamic environment variables cannot be used during prerendering.
  * 
  * ```ts
  * import { env } from '$env/dynamic/private';
@@ -157,23 +162,25 @@ declare module '$env/dynamic/private' {
 		ALLUSERSPROFILE: string;
 		APIFY_TOKEN: string;
 		APPDATA: string;
-		ChocolateyInstall: string;
-		ChocolateyLastPathUpdate: string;
+		CHOCOLATEYINSTALL: string;
+		CHOCOLATEYLASTPATHUPDATE: string;
 		COLOR: string;
-		CommonProgramFiles: string;
-		CommonProgramW6432: string;
+		COMMONPROGRAMFILES: string;
+		COMMONPROGRAMW6432: string;
 		COMPUTERNAME: string;
-		ComSpec: string;
+		COMSPEC: string;
 		CUDA_PATH: string;
 		CUDA_PATH_V12_8: string;
 		DEEPSEEK_API_KEY: string;
-		DriverData: string;
+		DRIVERDATA: string;
 		EDITOR: string;
 		EXA_API_KEY: string;
 		HOME: string;
 		HOMEDRIVE: string;
 		HOMEPATH: string;
 		INIT_CWD: string;
+		KMP_DUPLICATE_LIB_OK: string;
+		KMP_INIT_AT_FORK: string;
 		LOCALAPPDATA: string;
 		LOGONSERVER: string;
 		NODE: string;
@@ -201,33 +208,34 @@ declare module '$env/dynamic/private' {
 		npm_package_version: string;
 		NPM_PREFIX_NPM_CLI_JS: string;
 		NUMBER_OF_PROCESSORS: string;
-		OneDrive: string;
-		OnlineServices: string;
+		ONEDRIVE: string;
+		ONLINESERVICES: string;
 		OS: string;
-		Path: string;
+		PATH: string;
 		PATHEXT: string;
-		platformcode: string;
+		PLATFORMCODE: string;
+		PORT: string;
 		PROCESSOR_ARCHITECTURE: string;
 		PROCESSOR_IDENTIFIER: string;
 		PROCESSOR_LEVEL: string;
 		PROCESSOR_REVISION: string;
-		ProgramData: string;
-		ProgramFiles: string;
-		ProgramW6432: string;
+		PROGRAMDATA: string;
+		PROGRAMFILES: string;
+		PROGRAMW6432: string;
 		PROMPT: string;
-		PSModulePath: string;
+		PSMODULEPATH: string;
 		PUBLIC: string;
-		RegionCode: string;
+		REGIONCODE: string;
 		RWKV_FORCE_CPU: string;
-		SystemDrive: string;
-		SystemRoot: string;
+		SYSTEMDRIVE: string;
+		SYSTEMROOT: string;
 		TEMP: string;
 		TMP: string;
 		USERDOMAIN: string;
 		USERDOMAIN_ROAMINGPROFILE: string;
 		USERNAME: string;
 		USERPROFILE: string;
-		windir: string;
+		WINDIR: string;
 		ZES_ENABLE_SYSMAN: string;
 		[key: `PUBLIC_${string}`]: undefined;
 		[key: `${string}`]: string | undefined;
@@ -235,9 +243,11 @@ declare module '$env/dynamic/private' {
 }
 
 /**
- * Similar to [`$env/dynamic/private`](https://kit.svelte.dev/docs/modules#$env-dynamic-private), but only includes variables that begin with [`config.kit.env.publicPrefix`](https://kit.svelte.dev/docs/configuration#env) (which defaults to `PUBLIC_`), and can therefore safely be exposed to client-side code.
+ * Similar to [`$env/dynamic/private`](https://svelte.dev/docs/kit/$env-dynamic-private), but only includes variables that begin with [`config.kit.env.publicPrefix`](https://svelte.dev/docs/kit/configuration#env) (which defaults to `PUBLIC_`), and can therefore safely be exposed to client-side code.
  * 
  * Note that public dynamic environment variables must all be sent from the server to the client, causing larger network requests — when possible, use `$env/static/public` instead.
+ * 
+ * Dynamic environment variables cannot be used during prerendering.
  * 
  * ```ts
  * import { env } from '$env/dynamic/public';

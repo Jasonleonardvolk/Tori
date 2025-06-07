@@ -275,12 +275,297 @@ export interface ComplianceFlag {
   details?: string;
 }
 
-// ====== (Everything else you already defined: fill in from original as needed) ======
+// ====== Missing Type Definitions ======
 
-// ... Dependency, InputSchema, OutputSchema, SideEffect, NetworkPolicy, RetryPolicy, etc.
-// ... Variable, ValidationRule, AuditEntry, EncryptionConfig, MetricsCollector, Tracer, Profiler, AnomalyDetector
-// ... Phase, PhaseTransition, Checkpoint, RollbackStrategy, ConceptNode, ConceptEdge, VectorIndex, QueryEngine, UpdatePolicy
-// ... ConceptFilter, ContentPolicy, FilterPipeline
+export interface InputSchema {
+  type: string;
+  properties: Record<string, any>;
+  required?: string[];
+}
+
+export interface OutputSchema {
+  type: string;
+  properties: Record<string, any>;
+}
+
+export interface SideEffect {
+  type: string;
+  description: string;
+  severity: 'low' | 'medium' | 'high';
+}
+
+export interface NetworkPolicy {
+  allowed: boolean;
+  endpoints?: string[];
+  protocols?: string[];
+}
+
+export interface RetryPolicy {
+  maxRetries: number;
+  backoffStrategy: 'linear' | 'exponential';
+  baseDelay: number;
+}
+
+export interface Dependency {
+  name: string;
+  version: string;
+  type: 'npm' | 'system' | 'internal';
+}
+
+export interface RuntimeEnvironment {
+  type: 'node' | 'python' | 'docker';
+  version: string;
+  config: Record<string, any>;
+}
+
+export interface RateLimit {
+  requests: number;
+  window: number; // seconds
+  burst?: number;
+}
+
+export interface AccessPolicy {
+  type: 'allow' | 'deny';
+  rules: string[];
+}
+
+export interface CachePolicy {
+  enabled: boolean;
+  ttl: number;
+  maxSize?: number;
+}
+
+export interface Variable {
+  name: string;
+  type: string;
+  required: boolean;
+  description?: string;
+}
+
+export interface ValidationRule {
+  field: string;
+  rule: string;
+  message: string;
+}
+
+export interface VerificationKey {
+  id: string;
+  algorithm: string;
+  publicKey: string;
+}
+
+export interface KernelMetrics {
+  uptime: number;
+  requestCount: number;
+  errorRate: number;
+  averageResponseTime: number;
+}
+
+export interface ExecutionState {
+  status: 'pending' | 'running' | 'completed' | 'failed';
+  progress: number;
+  startTime: Date;
+  endTime?: Date;
+}
+
+export interface ResourceAllocation {
+  memory: number;
+  cpu: number;
+  storage: number;
+}
+
+export interface SandboxContext {
+  id: string;
+  type: string;
+  restrictions: string[];
+}
+
+export interface Condition {
+  field: string;
+  operator: string;
+  value: any;
+}
+
+export interface SecurityRule {
+  id: string;
+  pattern: string;
+  action: 'allow' | 'deny' | 'audit';
+}
+
+export interface AuditEntry {
+  id: string;
+  timestamp: Date;
+  event: string;
+  user?: string;
+  details: Record<string, any>;
+}
+
+export interface EncryptionConfig {
+  algorithm: string;
+  keyId: string;
+  enabled: boolean;
+}
+
+export interface MetricsCollector {
+  collect: (metric: Metric) => void;
+  getMetrics: () => Metric[];
+}
+
+export interface Tracer {
+  trace: (operation: string) => void;
+  getTraces: () => any[];
+}
+
+export interface Profiler {
+  start: () => void;
+  stop: () => any;
+}
+
+export interface AnomalyDetector {
+  detect: (data: any) => boolean;
+  threshold: number;
+}
+
+export interface TransportConfig {
+  protocol: 'http' | 'websocket' | 'grpc';
+  host: string;
+  port: number;
+  secure: boolean;
+}
+
+export interface AuthConfig {
+  type: 'none' | 'bearer' | 'oauth';
+  credentials?: Record<string, any>;
+}
+
+export interface ServerCapabilities {
+  tools: string[];
+  resources: string[];
+  prompts: string[];
+}
+
+export interface HealthStatus {
+  status: 'healthy' | 'degraded' | 'unhealthy';
+  checks: Record<string, any>;
+  lastCheck: Date;
+}
+
+export interface Phase {
+  id: string;
+  name: string;
+  description: string;
+  duration?: number;
+}
+
+export interface PhaseTransition {
+  from: string;
+  to: string;
+  condition: string;
+}
+
+export interface Checkpoint {
+  id: string;
+  phase: string;
+  timestamp: Date;
+  state: any;
+}
+
+export interface RollbackStrategy {
+  enabled: boolean;
+  checkpoints: number;
+  strategy: 'immediate' | 'graceful';
+}
+
+export interface ConceptNode {
+  id: string;
+  label: string;
+  properties: Record<string, any>;
+  vector?: number[];
+}
+
+export interface ConceptEdge {
+  from: string;
+  to: string;
+  relationship: string;
+  weight: number;
+}
+
+export interface VectorIndex {
+  dimensions: number;
+  algorithm: string;
+  config: Record<string, any>;
+}
+
+export interface QueryEngine {
+  query: (input: ConceptQuery) => any[];
+  index: (nodes: ConceptNode[]) => void;
+}
+
+export interface UpdatePolicy {
+  strategy: 'replace' | 'merge' | 'append';
+  validation: boolean;
+}
+
+export interface ConceptFilter {
+  type: string;
+  pattern: string;
+  action: 'allow' | 'block' | 'transform';
+}
+
+export interface ContentPolicy {
+  id: string;
+  name: string;
+  rules: string[];
+  enforcement: 'strict' | 'lenient';
+}
+
+export interface FilterPipeline {
+  filters: ConceptFilter[];
+  policies: ContentPolicy[];
+  order: string[];
+}
+
+export interface LogEvent {
+  timestamp: Date;
+  level: 'debug' | 'info' | 'warn' | 'error';
+  message: string;
+  context?: Record<string, any>;
+}
+
+export interface Metric {
+  name: string;
+  value: number;
+  timestamp: Date;
+  tags?: Record<string, string>;
+}
+
+export interface MCPRequest {
+  id: string;
+  method: string;
+  params: any;
+  timestamp: Date;
+}
+
+export interface MCPResponse {
+  id: string;
+  result?: any;
+  error?: any;
+  timestamp: Date;
+}
+
+export interface ConceptQuery {
+  type: 'semantic' | 'exact' | 'fuzzy';
+  query: string;
+  limit?: number;
+  filters?: Record<string, any>;
+}
+
+export interface FilterResult {
+  allowed: boolean;
+  concepts: ConceptNode[];
+  blocked: ConceptNode[];
+  modified: ConceptNode[];
+}
 
 /**
  * [INTEGRATION COMMENT]
@@ -292,4 +577,3 @@ export interface ComplianceFlag {
  * - Pass this file through every module, and use the optional fields (`provenance`, `complianceFlags`) everywhere you persist, log, or transmit core data.
  * - The MCP + TORI integration is as future-proof and auditable as possible from the type layer!
  */
-

@@ -29,9 +29,24 @@ import math
 from collections import defaultdict
 import uuid
 
-from .models import ConceptTuple
-from .koopman_phase_graph import get_koopman_phase_graph, ConceptNode, KoopmanMode
-from .spectral_monitor import get_cognitive_spectral_monitor
+try:
+    # Try absolute import first
+    from models import ConceptTuple
+except ImportError:
+    # Fallback to relative import
+    from .models import ConceptTuple
+try:
+    # Try absolute import first
+    from koopman_phase_graph import get_koopman_phase_graph, ConceptNode, KoopmanMode
+except ImportError:
+    # Fallback to relative import
+    from .koopman_phase_graph import get_koopman_phase_graph, ConceptNode, KoopmanMode
+try:
+    # Try absolute import first
+    from spectral_monitor import get_cognitive_spectral_monitor
+except ImportError:
+    # Fallback to relative import
+    from .spectral_monitor import get_cognitive_spectral_monitor
 
 # Configure logger
 logger = logging.getLogger("alan_memory_sculptor")

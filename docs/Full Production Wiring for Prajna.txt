@@ -1,0 +1,435 @@
+Full Production Wiring for Prajna in TORI Stack
+
+Prajna LLM Answer Synthesizer: Implementation & Wiring Plan
+Overview of the Prajna Pipeline
+Prajna is the local "brain" module of the TORI system responsible for turning user queries and stored knowledge into helpful answers. It follows a retrieval-augmented generation pipeline with clear, modular phases:
+API Input – The frontend (Svelte UI) sends a user’s question (and optional context hints like focus_concept) via an HTTP POST to a backend endpoint (/api/answer).
+Context Retrieval – The backend context_builder module gathers relevant information from the system's Soliton Memory (personal/chat memory) and Concept Mesh (knowledge graph from PDFs, videos, images, etc.). This yields a compiled text context with source references, ensuring Prajna "speaks" only from known context.
+LLM Answer Synthesis – A local LLM (e.g. RWKV, LLaMA, or similar loaded model) receives a prompt containing the retrieved context and the user’s query. It generates a raw answer using only the provided context (no internet or external API calls). This occurs in the local_llm_server module (Prajna’s core inference engine).
+Audit & Ghost Analysis – The raw answer is post-processed by an “alien overlay” audit and optional Ghost feedback systems (in alien_overlay.py). These checks detect unsupported statements (hallucinations or logical leaps) and assign a trust score. They can also identify “ghost questions” – implicit sub-questions the model answered or left unanswered – to flag reasoning gaps.
+Structured Response – Prajna returns a JSON payload to the frontend containing the final answer, the sources used, and any audit/leap data or ghost annotations. The Svelte UI then renders the answer along with source citations and trust indicators, providing transparency to the user.
+This design meets the key system requirements:
+No External Knowledge: The LLM prompt is constructed only from retrieved internal context (Soliton memory + concept mesh content). Prajna does not call the internet or any external model for answering.
+Modular Architecture: Each phase is encapsulated in its own module/function (retrieval, synthesis, audit, etc.), making the system maintainable and extensible. For example, you can improve the context_builder or swap out the LLM without affecting other parts.
+Phase-Stable & Modality-Agnostic: Every query goes through the same sequence of phases. The context retrieval unifies text from all modalities (PDF text, video transcripts, image OCR, etc. all stored in the memory layer) so the LLM always sees a consistent text context regardless of source. No shortcuts or bypasses – the concept mesh content is always merged into the prompt to give the AI access to relevant knowledge.
+Local Inference Only: The answer generation runs on a private local model (loaded via local_llm_server.py). This could be an in-memory model (RWKV, LLaMA, etc.) or a locally hosted inference server, ensuring data privacy and offline capability.
+Below, we provide code-ready scaffolding for each component in the Prajna pipeline, along with explanations of how they integrate in a production setting.
+Prajna API Endpoint (prajna_api.py)
+The Prajna API is a backend HTTP interface (e.g. using FastAPI) that the frontend calls to get answers. It orchestrates the entire pipeline for each query. The /api/answer endpoint will:
+Parse the incoming request JSON for the user's query and any optional parameters (like focus_concept to guide context retrieval).
+Invoke the context_builder.build_context() function to retrieve relevant knowledge from Soliton Memory and the Concept Mesh.
+Assemble a prompt containing the retrieved context and the query, then call local_llm_server.generate_answer() to get the model’s answer.
+Pass the model’s answer and context into the auditing layer (alien_overlay.audit_answer and alien_overlay.ghost_feedback) to produce trust metrics and detect reasoning gaps.
+Return a JSON response with the answer, the sources used, and any audit/ghost data for the frontend to display.
+python
+Copy
+Edit
+# prajna_api.py
+from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel
+from context_builder import build_context, ContextResult
+from local_llm_server import generate_answer
+from alien_overlay import audit_answer, ghost_feedback
+
+app = FastAPI()
+
+# Define request model for clarity (if using Pydantic for body parsing)
+class AnswerRequest(BaseModel):
+    user_query: str
+    focus_concept: str | None = None
+
+# Define response structure (optional, for documentation or validation)
+class AnswerResponse(BaseModel):
+    answer: str
+    sources: list[str]
+    audit: dict | None = None
+    ghost_overlays: dict | None = None
+
+@app.post("/api/answer", response_model=AnswerResponse)
+async def answer_endpoint(request: AnswerRequest):
+    """Handle answer requests by retrieving context, generating answer, and auditing it."""
+    try:
+        user_query = request.user_query
+        focus = request.focus_concept
+
+        # 1. Retrieve relevant context from memory and knowledge sources
+        context: ContextResult = build_context(user_query, focus)
+
+        # 2. Assemble prompt for LLM (context + question).
+        # Instruct the model to use only the provided context.
+        prompt = (
+            "Below is relevant information from memory and documents:\n"
+            f"{context.text}\n"
+            "Using ONLY this information, answer the following question:\n"
+            f"Q: {user_query}\nA: "
+        )
+
+        # 3. Generate answer with local LLM (Prajna's core brain)
+        raw_answer: str = generate_answer(prompt)
+
+        # 4. Audit the answer for hallucinations or leaps using Alien Overlay and Ghost
+        audit_data = audit_answer(raw_answer, context)
+        ghost_data = ghost_feedback(raw_answer, context)
+
+        # 5. Structure the response with answer, sources, and any audit/ghost info
+        response_payload = {
+            "answer": raw_answer,
+            "sources": context.sources,
+            "audit": audit_data,
+            "ghost_overlays": ghost_data
+        }
+        return response_payload
+
+    except Exception as e:
+        # Catch-all for errors to return a 500 response if something fails
+        raise HTTPException(status_code=500, detail=str(e))
+Explanation: In answer_endpoint, we first parse the user_query and an optional focus_concept from the request. We then call build_context to gather a ContextResult – a small object containing the combined context text and a list of source identifiers (e.g. document titles or URLs for citations). Next, we create a prompt string that clearly delineates the retrieved info and the user’s question, instructing the model to use only that info. We call generate_answer(prompt) which uses the local LLM (loaded elsewhere) to produce an answer string. After that, we pass both the answer and the context into two auditing functions: audit_answer (the "alien overlay" check) and ghost_feedback. These return dictionaries with the trust score, flags, and any ghost question analysis. Finally, we return a JSON containing everything. The FastAPI response_model (using Pydantic) is optional but helps enforce the output structure (with keys: answer, sources, audit, ghost_overlays).
+Integration note: We ensure any heavy initialization (loading the LLM model, loading the concept mesh data, etc.) is done at startup or module import – not per request – so this endpoint remains fast. For example, importing local_llm_server will load the model once, and context_builder may load indexes at import. FastAPI could also use an @app.on_event("startup") to load resources if needed. This design allows the /api/answer endpoint to handle each query quickly by reusing the loaded memory and model.
+Context Retrieval (context_builder.py)
+The context builder is responsible for fetching all relevant knowledge for a given query from TORI’s memory systems. It interacts with:
+Soliton Memory – the persistent, physics-inspired memory engine (perhaps via a Python interface or API) that stores prior user dialogues, personal notes, and other dynamically learned data. This is used to retrieve contextual memories (e.g. recent chat history or user-specific info relevant to the question).
+Concept Mesh – the knowledge graph and document index built from sources like PDFs, textbooks, diagrams, videos (transcripts), etc. This provides factual passages or definitions related to key concepts in the query.
+Multimodal Content APIs – if needed, interfaces to handle non-text content (for example, if an image or video is directly relevant, its caption or transcript would be retrieved). In practice, such data is likely already ingested into the concept mesh or stored alongside as text, so the retrieval treats all content as text snippets.
+The build_context function will likely perform these steps:
+Concept Extraction: Identify important terms or concepts in the query (you might use simple keyword extraction or the provided focus_concept if the user specified one). This guides the retrieval to relevant nodes in the concept mesh.
+Memory Recall: Query the Soliton Memory for any entries (chat messages, notes, etc.) related to the query or focus concept. For example, if the user is following up on a previous question, relevant recent dialogue should be pulled in.
+Knowledge Lookup: Query the Concept Mesh for documents or nodes matching the query terms. This could involve a direct graph lookup by concept name, a semantic embedding search, or a combination. The result would be one or more paragraphs or summaries that contain the information needed.
+Merge and Rank: Combine the results from memory and concept mesh, filter out duplicates or less relevant snippets, and order them (for example, by relevance score or source reliability).
+Compile Context Text: Format the selected snippets into a cohesive context block (e.g. plain text or lightly annotated) and collect source identifiers for citation. Ensure this context text is not too large for the model (you might impose a limit like top 3-5 most relevant pieces).
+Below is a scaffolding for context_builder.py:
+python
+
+# context_builder.py
+from typing import List, Optional
+# (Assume we have some interfaces to the memory systems)
+# Pseudo-classes for Soliton Memory and Concept Mesh interactions:
+class SolitonMemory:
+    def __init__(self):
+        # Initialize or connect to Soliton memory (possibly via FFI or API)
+        pass
+    def retrieve(self, query: str, concepts: List[str]) -> List[dict]:
+        """Retrieve relevant memories (e.g. past chats or notes) related to the query."""
+        # Implementation could use phase correlation or vector search internally.
+        # Here we return a list of snippets: each snippet could be {"text": "...", "source": "..."}.
+        return []
+
+class ConceptMesh:
+    def __init__(self):
+        # Load or connect to the concept mesh/knowledge graph (e.g. from a database or in-memory structure)
+        pass
+    def query(self, query: str, concepts: List[str]) -> List[dict]:
+        """Retrieve relevant knowledge snippets (from PDFs, docs, etc.) for the query."""
+        # Implementation might find nodes matching concept names or do an embedding similarity search.
+        # Returns a list of snippets with text and source.
+        return []
+
+# Initialize memory and knowledge interfaces (could also be done on module import)
+soliton_mem = SolitonMemory()
+concept_mesh = ConceptMesh()
+
+# Define a simple container for context results
+class ContextResult:
+    def __init__(self, text: str, sources: List[str]):
+        self.text = text        # Combined context text
+        self.sources = sources  # List of source references for that text
+
+def extract_concepts(query: str) -> List[str]:
+    """Basic keyword/concept extraction from the query (fallback if no focus_concept given)."""
+    # For simplicity, split by spaces and filter stopwords; in practice use NLP or a provided concept list.
+    keywords = [word.strip("?,.") for word in query.split()]
+    # Filter out very common words (naive stop-word removal)
+    stopwords = {"what", "is", "the", "and", "or", "of", "in", "a", "to", "how"}
+    concepts = [w for w in keywords if w.lower() not in stopwords]
+    return concepts or keywords  # if extraction fails, fallback to all words
+
+def build_context(user_query: str, focus_concept: Optional[str] = None) -> ContextResult:
+    """Retrieve and compile relevant context from Soliton Memory and Concept Mesh for the query."""
+    # 1. Identify key concepts from the query
+    concept_list = [focus_concept] if focus_concept else extract_concepts(user_query)
+
+    # 2. Retrieve related snippets from Soliton Memory (personal & conversational context)
+    memory_snippets = soliton_mem.retrieve(user_query, concepts=concept_list)
+
+    # 3. Retrieve related snippets from Concept Mesh (documents/knowledge context)
+    knowledge_snippets = concept_mesh.query(user_query, concepts=concept_list)
+
+    # 4. Merge and rank snippets by relevance (for simplicity, just concatenate here)
+    all_snippets = (memory_snippets or []) + (knowledge_snippets or [])
+    # (In production, sort `all_snippets` by some relevance score or timestamp, etc.)
+
+    # 5. Limit the total context to avoid prompt overflow (e.g., top 5 snippets)
+    max_snippets = 5
+    selected = all_snippets[:max_snippets]
+
+    # 6. Compile the context text and sources list
+    context_text_lines: List[str] = []
+    sources: List[str] = []
+    for snippet in selected:
+        text = snippet.get("text", "").strip()
+        src = snippet.get("source", "memory")  # default to "memory" if no source
+        if text:
+            # Optionally label sources in the text for clarity (e.g., "[Source: XYZ]")
+            context_text_lines.append(text)
+            sources.append(src)
+    combined_text = "\n\n".join(context_text_lines)
+
+    return ContextResult(text=combined_text, sources=sources)
+Explanation: In this scaffold, we define dummy SolitonMemory and ConceptMesh classes with retrieve and query methods respectively. In a real system, these would interface with your actual memory engine and knowledge graph:
+soliton_mem.retrieve could perform a phase-based lookup or vector similarity search in the Soliton memory lattice to find recent messages or notes related to the query. For example, if the user query is follow-up to something discussed a few turns ago, the matching memory will be pulled.
+concept_mesh.query might search the knowledge graph for any node or document fragment that matches the query terms. For instance, if the query is about "Mattis magnetization," this method would find the PDF or text where that concept is described.
+We then combine results. The code simply concatenates memory and knowledge snippets, but a smarter ranking (based on relevance or confidence) can be applied. We also truncate to at most 5 snippets to keep the context concise (to fit model input limits). Each snippet is expected to have a text (the content to use) and a source (like a document title, filename, or memory identifier). We gather all snippet texts into one combined_text string (separated by blank lines for readability) and collect all source names in a list. The ContextResult object holds the combined context text and sources. In the prompt assembly (in prajna_api.py above), we simply insert context.text. This means the prompt will contain all the relevant info the model needs. By structuring our system this way, Prajna remains modality-agnostic – whether the snippet came from a PDF, an image caption, or a chat memory, it’s just text to the LLM. The original source type doesn’t matter at prompt time, though we do keep track of sources for transparency.
+Integration notes: In a production implementation, you would replace the SolitonMemory and ConceptMesh stubs with real connections:
+If Soliton Memory is implemented in Rust, you might expose a Python API (via FFI or a REST endpoint) to query it. The retrieve function would call that interface with the query or concept filters and get back results.
+If the Concept Mesh is maintained in a separate service (e.g. a Node.js process or a database of extracted text), you might similarly call an API or query the database from Python. Alternatively, if concept data is dumped into an embedding index, you could use a vector search library (like FAISS or Whoosh for text) to get relevant passages.
+Ensure that all relevant data (including transcripts for videos or OCR for images) is indexed so that concept_mesh.query can retrieve them. For example, if the query references an image concept, the system should have stored a description of that image during ingestion, which would then be returned as a snippet here.
+Local LLM Inference (local_llm_server.py)
+This module encapsulates the local language model that generates answers. The goal is to use a private model (running on the server’s hardware) to avoid external APIs. It might be a large model (like LLaMA 2, GPT-J, RWKV, etc.) loaded via a library such as Hugging Face Transformers or a specialized runtime (like ollama or llama.cpp bindings). For production, choose a model that fits your hardware and latency requirements. Key points for this component:
+The model should be loaded once (at server startup) to avoid repeated overhead. This could be done at import time or via an initialization function.
+The generate_answer(prompt) function should pass the prompt to the model and return the generated text. You may want to configure parameters like max tokens, temperature, etc., to suit your needs (ensuring it stays focused on the context).
+Because we only feed context and question, the model’s answer will be based solely on that information. To enforce the "no external knowledge" rule, you can also add a system instruction in the prompt like "If the answer is not in the provided context, respond that you don't know" (this can help prevent hallucination, though our audit layer will catch any that slip through).
+Here's a generic implementation outline for local_llm_server.py:
+python
+
+# local_llm_server.py
+# Import or load your chosen local model
+# (For example, using transformers library or a custom wrapper)
+from transformers import pipeline
+
+# Load the model and tokenizer (example with a local model name or path)
+# Note: adjust 'model_name' to your actual model. Use an instruct-tuned model for better answers.
+model_name = "/path/to/local/model"  # placeholder path or identifier
+try:
+    nlp = pipeline("text-generation", model=model_name, device=0)  # device=0 for GPU, or use device_map for large models
+except Exception as e:
+    print(f"Model load failed: {e}")
+    # Handle model loading errors (e.g., model file not found or not enough memory)
+    nlp = None
+
+def generate_answer(prompt: str) -> str:
+    """Generate an answer from the local LLM given a prompt containing context and question."""
+    if nlp is None:
+        raise RuntimeError("LLM model is not loaded")
+    # Generate text with some reasonable limits
+    result = nlp(prompt, max_length=512, num_return_sequences=1, do_sample=False)
+    # `pipeline` returns a list of sequences; take the first
+    answer_text = result[0]['generated_text'] if result else ""
+    # Since our prompt includes the question, the model's output may include the prompt text as well.
+    # If so, strip the prompt part (some models echo the input) to get the pure answer.
+    if answer_text.startswith(prompt):
+        answer_text = answer_text[len(prompt):]
+    return answer_text.strip()
+Explanation: This code uses Hugging Face's pipeline for simplicity. We attempt to load a text-generation pipeline with a local model (the model_name could be a folder path to a model on disk, or an identifier if you've cached it). In practice, you might use a more efficient method for large models (like AutoModelForCausalLM.from_pretrained with optimization, or a lighter library if using RWKV). The generate_answer function runs the model on the prompt and returns the generated answer text. We set do_sample=False for deterministic output (using greedy or beam search) to keep answers stable and focused. We also handle a case where the model might prepend the prompt in the output (some models do that); we strip it out to avoid repeating context back to the user. This function is called by the API layer for each query. Since the model is already in memory (nlp pipeline is loaded globally), each call is just a forward pass on the model. If the model is large, you might want to ensure only one generation at a time (depending on your serving strategy) or use a queue if concurrency is needed. For initial testing, though, sequential calls are fine.
+Note: You can fine-tune how the prompt is fed to the model depending on model type. For example, some instruct models expect a special format or prefix (like Alpaca models expect something like "### Instruction:\n...\n### Response:\n"). Make sure to format the prompt accordingly for your chosen model. In our example, we provided a straightforward prompt with context and question which works for many QA-tuned models.
+Answer Audit and Ghost Feedback (alien_overlay.py)
+After the LLM produces an answer, we want to audit its trustworthiness before sending it back. The alien_overlay module implements two kinds of checks:
+Alien Overlay (Audit): Detects alien content, i.e., parts of the answer that are not supported by the provided context. This helps flag hallucinations or unsupported claims. It can also produce a trust score that reflects how much of the answer is grounded in the known context.
+Ghost Feedback: Analyzes the answer for logical gaps or “leaps” in reasoning. In other words, it looks for implicit questions the model answered without explicit context (ghost questions) or points where the model might have needed additional info. This is like an internal reviewer that highlights if the answer might have glossed over something. The ghost feedback can be used to overlay markers on the answer (for example, highlighting sentences that might be leaps, or listing follow-up questions that arise from the answer).
+In a sophisticated setup, these could be done by another LLM or rule-based system. For now, we provide a basic implementation:
+The audit will do a simple string or semantic comparison: e.g., split the answer into sentences and check each against the context text. If a sentence has keywords not present in any context snippet, mark it as potentially unsupported. We then lower the trust score accordingly. This is a heuristic; a more advanced version could use embeddings or a second-pass LLM query like "does the context support this sentence?".
+The ghost analysis might look for question marks in the answer (indicating the model posed a question or uncertainty) or known knowledge gaps. We can also imagine using the concept mesh to see if the answer mentions a concept not actually explained by the given context – that concept could be a "ghost" that might warrant a follow-up.
+Here's an example scaffold for alien_overlay.py:
+python
+
+# alien_overlay.py
+import re
+from context_builder import ContextResult
+
+def audit_answer(answer: str, context: ContextResult) -> dict:
+    """
+    Analyze the answer against the provided context to detect unsupported claims.
+    Returns a report with a trust score and any flagged unsupported segments.
+    """
+    # Initialize with full trust (1.0 = 100%). We will deduct points for issues.
+    report = {"trust_score": 1.0, "unsupported": []}
+
+    # Normalize context text for comparison (lowercase and remove punctuation for simple matching)
+    context_text = context.text.lower()
+    # Split answer into sentences for granular checking
+    sentences = re.split(r'(?<=[.!?]) +', answer)  # split on sentence boundaries
+    for sent in sentences:
+        sent_clean = sent.strip()
+        if not sent_clean:
+            continue
+        # Check if the sentence (or its main keywords) appear in context
+        # Simple check: look for a matching substring or key terms
+        sent_lower = re.sub(r'[^a-z0-9 ]', '', sent_clean.lower())  # remove punctuation for match
+        if sent_lower and sent_lower not in context_text:
+            # If the whole sentence not in context text, check keywords
+            words = [w for w in sent_lower.split() if len(w) > 3]  # words longer than 3 letters
+            # If none of the keywords are in context_text, flag this sentence
+            if all(w not in context_text for w in words):
+                report["unsupported"].append(sent_clean)
+                report["trust_score"] -= 0.2  # penalize trust for unsupported statement
+
+    # Clamp trust_score to [0,1]
+    if report["trust_score"] < 0:
+        report["trust_score"] = 0.0
+    # Optionally round the trust_score to two decimals
+    report["trust_score"] = round(report["trust_score"], 2)
+    return report
+
+def ghost_feedback(answer: str, context: ContextResult) -> dict:
+    """
+    Identify potential reasoning leaps or implicit questions ("ghost questions") in the answer.
+    Returns data that can be used to overlay or highlight such issues.
+    """
+    feedback = {"leaps_detected": False, "ghost_questions": []}
+    # Example heuristic: if the answer contains any question mark, it might indicate uncertainty or a question asked by the model itself
+    if "?" in answer:
+        feedback["leaps_detected"] = True
+        # Extract any questions posed in the answer
+        q_sentences = [s.strip() for s in answer.split('?') if '?' in s or s.endswith('?')]
+        feedback["ghost_questions"].extend([q + "?" for q in q_sentences if q])
+    # Another heuristic: look for phrases like "assuming that", "it is possible that", which might indicate the model filled a gap
+    if re.search(r'\b(assume|assuming|perhaps|possibly|might)\b', answer.lower()):
+        feedback["leaps_detected"] = True
+        ghost_q = "Implicit assumption or uncertainty detected in answer."
+        feedback["ghost_questions"].append(ghost_q)
+
+    return feedback
+Explanation: The audit_answer function creates a report dictionary with an initial trust_score of 1.0 (meaning 100% confidence if everything is supported). It then goes through each sentence of the answer:
+We lowercase and strip punctuation from the answer sentence and the entire context to do comparisons. If a sentence (or its significant words) cannot be found in the context, we treat it as unsupported. For each such unsupported piece, we append it to a list (report["unsupported"]) and deduct some trust (here 0.2 per sentence) from the score. The exact scoring scheme can be tuned; here, if five sentences were completely unsupported, the trust could drop to 0.0.
+By the end, trust_score will be between 0.0 and 1.0. A high score means the answer seems well-grounded in the provided info, while a low score suggests it included content not obviously in context (potential hallucination). We return both the score and the list of unsupported sentences for transparency (the frontend or logs can show which parts were flagged).
+The ghost_feedback function is more heuristic. In this simple form, it checks:
+If the answer itself contains any question marks ?, which might mean the model asked a follow-up question or showed uncertainty, we mark leaps_detected = True and capture those questions as ghost_questions. (In a refined system, these could be fed back into another retrieval step, but for now we just report them).
+It also searches for language that hints at assumptions or uncertainty (like "perhaps", "assuming", "might"). If found, we flag a possible implicit reasoning leap and add a generic note in ghost_questions.
+In a more advanced implementation, ghost feedback might involve prompting a secondary model to explicitly list any unstated sub-questions the answer implies. For example, after getting the answer, you could ask another local LLM: "Analyze the above answer and list any implicit questions or assumptions that were made." This could yield more insight, but it’s a heavier process. The provided approach is a lightweight starting point. The output of these functions (audit_data and ghost_data) is included in the final API response. The frontend can use this to display a trust meter (perhaps green/yellow/red based on trust_score) and to highlight any flagged sentences or ghost questions to the user.
+Production considerations: Adjust the audit and ghost logic based on real-world performance. For instance, you might integrate this with the Ghost persona system mentioned in TORI (a dedicated auditing agent running in parallel). That Ghost could be implemented as a separate thread or process that monitors the main LLM’s output and performs a more thorough check using the memory mesh (even possibly attempting to answer ghost questions by retrieving more context). Our design keeps the door open for such extensions by isolating the audit step in its own module.
+Frontend Integration (+page.svelte)
+On the frontend side, we need to wire up the chat interface to call our new Prajna API and display the results. The Svelte page (e.g., src/routes/+page.svelte in a SvelteKit app) will handle user input and output rendering. Key integration points:
+Sending the query: When the user submits a question in the chat UI, we trigger a function (e.g., sendQuery) that sends an HTTP POST to /api/answer with the user_query and any focus_concept (if the UI allows the user to pick or if we determine one programmatically). In our case, focus_concept is optional; we can send null or omit it if not used.
+Receiving the answer: Once the backend responds, we get a JSON containing the answer text, sources list, and audit/ghost info. We then update the UI: display the answer, list the sources (we could show them as links or just names), and possibly an indicator of the trust score or any ghost question warnings.
+Chat history: We maintain the conversation history on the UI so that the user can see past Q&A. Each new question and answer pair gets added to this history. (The backend itself can also incorporate past context via Soliton Memory as we did, but the frontend history is for user display).
+Here's an example snippet of how +page.svelte might incorporate the call (assuming we use the fetch API to hit our Python backend):
+svelte
+
+<script lang="ts">
+  import { onMount } from 'svelte';
+  let userInput: string = "";
+  let chatHistory: { question: string; answer: string; sources: string[]; audit?: any; ghost_overlays?: any }[] = [];
+
+  async function sendQuery() {
+    if (!userInput) return;
+    const payload = {
+      user_query: userInput,
+      focus_concept: null  // or a specific concept if provided by UI
+    };
+    try {
+      const res = await fetch('/api/answer', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      if (!res.ok) {
+        console.error("Error from backend:", await res.text());
+        return;
+      }
+      const result = await res.json();
+      // Append the Q&A to the chat history
+      chatHistory = [...chatHistory, { 
+        question: userInput, 
+        answer: result.answer, 
+        sources: result.sources || [], 
+        audit: result.audit, 
+        ghost_overlays: result.ghost_overlays 
+      }];
+    } catch (e) {
+      console.error("Request failed:", e);
+    } finally {
+      userInput = "";  // reset input field
+    }
+  }
+</script>
+
+<div class="chat-container">
+  <!-- Chat history display -->
+  {#each chatHistory as entry}
+    <div class="message user-question"><strong>User:</strong> {entry.question}</div>
+    <div class="message ai-answer"><strong>Prajna:</strong> {entry.answer}</div>
+    {#if entry.sources && entry.sources.length > 0}
+      <div class="sources">Sources:
+        <ul>
+          {#each entry.sources as src}
+            <li>{src}</li>
+          {/each}
+        </ul>
+      </div>
+    {/if}
+    {#if entry.audit}
+      <!-- Display trust score -->
+      <div class="audit-info">Trust Score: {(entry.audit.trust_score * 100).toFixed(0)}%</div>
+      {#if entry.audit.unsupported && entry.audit.unsupported.length > 0}
+        <div class="audit-warnings">
+          ⚠️ Unsupported statements: 
+          <ul>
+            {#each entry.audit.unsupported as stmt}
+              <li>"{stmt}"</li>
+            {/each}
+          </ul>
+        </div>
+      {/if}
+    {/if}
+    {#if entry.ghost_overlays && entry.ghost_overlays.leaps_detected}
+      <!-- If ghost detected any implicit questions or leaps, show a notice -->
+      <div class="ghost-feedback">
+        🤔 Note: The answer might have gaps or unanswered sub-questions.
+        {#if entry.ghost_overlays.ghost_questions.length > 0}
+          <ul>
+            {#each entry.ghost_overlays.ghost_questions as q}
+              <li>Ghost question: {q}</li>
+            {/each}
+          </ul>
+        {/if}
+      </div>
+    {/if}
+  {/each}
+
+  <!-- Input box for new question -->
+  <div class="input-area">
+    <input bind:value={userInput} placeholder="Ask a question..." on:keydown={(e) => { if(e.key === 'Enter') sendQuery(); }} />
+    <button on:click={sendQuery}>Send</button>
+  </div>
+</div>
+Explanation: In this Svelte component, we maintain a chatHistory array of Q&A entries. The sendQuery function sends the user input to our /api/answer endpoint. On success, it parses the JSON and pushes a new entry to the history with the question and answer (and accompanying metadata). The UI then loops over chatHistory to render each exchange:
+We label the user question and the Prajna answer for clarity.
+If sources are returned, we display them as a list (these could be clickable if we had URLs – e.g., if sources included actual links or filenames, we might hyperlink them so the user can verify information).
+If audit data is present, we show a trust score (converted to percentage for user-friendliness) and list any unsupported statements flagged (prefixed with a warning icon).
+If the ghost overlay indicated reasoning leaps, we inform the user with a note. We also list any ghost questions that were identified, which could prompt the user to ask a follow-up or for the system to retrieve more info in a future iteration.
+The input field is wired such that pressing Enter or clicking Send will call sendQuery(). We clear the input after sending for convenience. This frontend setup ensures that the full pipeline is visible to the user: they not only get an answer but also see where that answer came from (sources) and how reliable it is (trust score and warnings). This transparency is crucial for building user trust in the system, especially since Prajna is confined to using provided context.
+End-to-End Flow Verification
+With the above components wired together, the Prajna pipeline functions as follows for each user query:
+User Input: The user enters a question in the Svelte UI and hits send. For example, suppose they ask: "What is Mattis magnetization and why is it important?".
+API Call: The frontend sends this to /api/answer. The FastAPI backend (prajna_api.py) receives the JSON and invokes build_context(user_query="What is Mattis magnetization and why is it important?", focus_concept=None).
+Context Retrieval: The context_builder:
+Extracts key concepts (["Mattis", "magnetization", "important"] in this simple example).
+Queries Concept Mesh: finds that "Mattis magnetization" is mentioned in a PDF document about magnetism (returns a snippet defining it, with source "PhysicsNotes.pdf").
+Queries Soliton Memory: perhaps finds nothing relevant in chat history (since this is a new topic).
+Merges results: we get a definition paragraph from PhysicsNotes.pdf. The combined context text might be: "Mattis magnetization refers to ... (definition) ... It is important because ... (explanation) ...". The sources list would contain ["PhysicsNotes.pdf"].
+Prompt Assembly: Prajna API constructs the prompt with that context text followed by the question. It might look like:
+vbnet
+
+Below is relevant information from memory and documents:
+Mattis magnetization refers to the alignment of spins in ...
+It is important because it helps explain ...
+
+Using ONLY this information, answer the following question:
+Q: What is Mattis magnetization and why is it important?
+A:
+LLM Generation: The local model (say a fine-tuned LLaMA) processes the prompt and generates an answer. Because the context provided contains the definition and importance, the model’s answer will likely summarize those points in a cohesive way, for example: "Mattis magnetization is a concept in magnetism describing ... It is important as it provides insight into ... (etc.)" – ideally phrased in a user-friendly manner.
+Auditing: The audit_answer function checks each statement in the answer against the context. If the answer sticks to the definitions given, it will find all key terms in the context and not flag anything. The trust_score would remain high (close to 1.0). If the model had introduced an outside fact (not present in context), that sentence would be flagged and the trust score reduced.
+Ghost Feedback: If the answer completely answered both parts ("what is it" and "why is it important"), there may be no ghost questions. If the answer, say, only explained what it is but not why it's important, that missing part could be considered an implicit question. Our simple ghost check might not catch that subtlety, but in principle this system could detect that the "why important" part was unanswered and flag a ghost question like "Why is Mattis magnetization important?". In our basic implementation, ghost feedback might remain empty (leaps_detected: false).
+Response to Frontend: The API sends back a JSON with:
+
+{
+  "answer": "Mattis magnetization is ... (detailed answer)...",
+  "sources": ["PhysicsNotes.pdf"],
+  "audit": {"trust_score": 1.0, "unsupported": []},
+  "ghost_overlays": {"leaps_detected": false, "ghost_questions": []}
+}
+UI Rendering: The Svelte app adds this to the history. The user sees the answer text, a label "Sources: PhysicsNotes.pdf", and a trust score of 100%. No warnings or ghost notes are shown since everything was supported. The user can be confident in the answer and even click the source if we link it (to read more in the PDF, outside this system).
+Finally, because the system is modular, we can iterate and improve each part independently:
+If the answers are not detailed enough, we can refine the prompt or switch to a stronger local model.
+If the context retrieval misses relevant info, we can improve the build_context logic (for instance, use more advanced concept-matching or include more snippets).
+If we find the LLM sometimes pulls in outside knowledge (hallucinates), we can tighten the prompt instructions or enhance the auditing (perhaps even feeding back audit results to the model for a second pass correction, if desired).
+We can also expand the ghost analysis to automatically fetch answers to ghost questions (using the same context builder) and append them to the answer or suggest them to the user. This would make the system interactive and self-improving.
+In summary, the Prajna module is now fully wired into the TORI architecture: the Soliton Memory and Concept Mesh feed it facts, the local LLM (Prajna’s core) synthesizes an answer, and the Ghost/Overlay subsystems ensure the answer stays accurate and trustworthy. This end-to-end integration transforms the previously static "indexed memory" system into a dynamic Q&A system ready for production use.

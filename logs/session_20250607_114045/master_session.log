@@ -1,0 +1,37 @@
+2025-06-07 11:40:45 | INFO     | [tori.main] | 🚀 Enhanced logging session started: 20250607_114045
+2025-06-07 11:40:45 | INFO     | [tori.main] | 📂 Log directory: C:\Users\jason\Desktop\tori\kha\logs\session_20250607_114045
+2025-06-07 11:40:45 | INFO     | [tori.main] | 📋 Multi-tenant config loaded: True
+2025-06-07 11:40:45 | INFO     | [tori.main] | 🚀 Enhanced TORI Launcher initialized
+2025-06-07 11:40:45 | INFO     | [tori.main] | 📂 Working directory: C:\Users\jason\Desktop\tori\kha
+2025-06-07 11:40:45 | INFO     | [tori.main] | 🏢 Multi-tenant mode: True
+2025-06-07 11:40:45 | INFO     | [tori.main] | Enhanced TORI Launcher started with comprehensive logging
+2025-06-07 11:40:45 | INFO     | [tori.main] | 📊 Status: prajna_startup -> starting
+2025-06-07 11:40:45 | DEBUG    | [tori.main] | 📋 Details: {'message': 'Starting Prajna voice system...'}
+2025-06-07 11:40:45 | INFO     | [tori.main] | 🧠 Starting Prajna - TORI's Voice and Language Model...
+2025-06-07 11:40:45 | INFO     | [tori.prajna] | === PRAJNA STARTUP SEQUENCE BEGIN ===
+2025-06-07 11:40:45 | INFO     | [tori.main] | 🔍 Searching for available Prajna port starting from 8001
+2025-06-07 11:40:45 | INFO     | [tori.main] | ✅ Found available Prajna port: 8001
+2025-06-07 11:40:45 | INFO     | [tori.prajna] | Assigned port: 8001
+2025-06-07 11:40:45 | INFO     | [tori.prajna] | Using start script: C:\Users\jason\Desktop\tori\kha\prajna\start_prajna.py
+2025-06-07 11:40:45 | INFO     | [tori.prajna] | Command: C:\ALANPY311\python.exe C:\Users\jason\Desktop\tori\kha\prajna\start_prajna.py --port 8001 --host 0.0.0.0 --log-level INFO
+2025-06-07 11:40:45 | INFO     | [tori.main] | 🚀 Starting Prajna on port 8001 in PRODUCTION MODE...
+2025-06-07 11:40:45 | INFO     | [tori.prajna] | PYTHONPATH set to: C:\Users\jason\Desktop\tori\kha\prajna
+2025-06-07 11:40:45 | INFO     | [tori.prajna] | Working directory: C:\Users\jason\Desktop\tori\kha\prajna
+2025-06-07 11:40:45 | INFO     | [tori.prajna] | Process started with PID: 25964
+2025-06-07 11:40:45 | INFO     | [tori.main] | ⏳ Waiting for Prajna to initialize (production mode)...
+2025-06-07 11:40:45 | INFO     | [tori.prajna] | Waiting for health check on port 8001 (max 60 attempts)
+2025-06-07 11:40:46 | ERROR    | [tori.prajna] | Error monitoring STDERR: 'str' object has no attribute 'decode'
+2025-06-07 11:40:49 | DEBUG    | [tori.prajna] | Health check attempt 1: HTTPConnectionPool(host='localhost', port=8001): Max retries exceeded with url: /api/health (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x000001EEF3CDD350>, 'Connection to localhost timed out. (connect timeout=2)'))
+2025-06-07 11:40:50 | ERROR    | [tori.prajna] | Process exited early with code: 1
+2025-06-07 11:40:50 | ERROR    | [tori.main] | ❌ Prajna process exited early with code: 1
+2025-06-07 11:40:50 | WARNING  | [tori.main] | ⚠️ Prajna failed to start within 60 seconds
+2025-06-07 11:40:50 | ERROR    | [tori.prajna] | Prajna startup timeout - failed to respond to health checks
+2025-06-07 11:40:50 | ERROR    | [tori.prajna] | Process exited with code: 1
+2025-06-07 11:40:50 | INFO     | [tori.prajna] | === PRAJNA STARTUP SEQUENCE FAILED ===
+2025-06-07 11:40:50 | INFO     | [tori.main] | 📊 Status: prajna_startup -> failed
+2025-06-07 11:40:50 | DEBUG    | [tori.main] | 📋 Details: {'error': 'Health check timeout'}
+2025-06-07 11:42:36 | INFO     | [tori.main] | 🧹 Starting enhanced cleanup...
+2025-06-07 11:42:36 | INFO     | [tori.main] | 📋 Session Summary:
+2025-06-07 11:42:36 | INFO     | [tori.main] |    📁 Log files: C:\Users\jason\Desktop\tori\kha\logs\session_20250607_114045
+2025-06-07 11:42:36 | INFO     | [tori.main] |    🆔 Session ID: 20250607_114045
+2025-06-07 11:42:36 | INFO     | [tori.main] | ✅ Enhanced cleanup complete

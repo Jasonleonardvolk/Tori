@@ -10,7 +10,17 @@ try:
 except ImportError:
     CONCEPT_STORE_AVAILABLE = False
 
-from .models import ConceptTuple, ConceptExtractionResult
+try:
+    # Try absolute import first
+    from models import ConceptTuple, ConceptExtractionResult
+except ImportError:
+    # Fallback to relative import
+    try:
+        # Try absolute import first
+        from models import ConceptTuple, ConceptExtractionResult
+    except ImportError:
+        # Fallback to relative import
+        from .models import ConceptTuple, ConceptExtractionResult
 
 def save_concepts(
     tuples: List[ConceptTuple], 

@@ -41,10 +41,30 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 # Import ALAN components
 try:
-    from .koopman_estimator import KoopmanEstimator, KoopmanEigenMode
-    from .eigen_alignment import EigenAlignment, AlignmentResult
-    from .lyapunov_spike_detector import LyapunovSpikeDetector, StabilityAnalysis
-    from .models import ConceptTuple
+    try:
+        # Try absolute import first
+        from koopman_estimator import KoopmanEstimator, KoopmanEigenMode
+    except ImportError:
+        # Fallback to relative import
+        from .koopman_estimator import KoopmanEstimator, KoopmanEigenMode
+    try:
+        # Try absolute import first
+        from eigen_alignment import EigenAlignment, AlignmentResult
+    except ImportError:
+        # Fallback to relative import
+        from .eigen_alignment import EigenAlignment, AlignmentResult
+    try:
+        # Try absolute import first
+        from lyapunov_spike_detector import LyapunovSpikeDetector, StabilityAnalysis
+    except ImportError:
+        # Fallback to relative import
+        from .lyapunov_spike_detector import LyapunovSpikeDetector, StabilityAnalysis
+    try:
+        # Try absolute import first
+        from models import ConceptTuple
+    except ImportError:
+        # Fallback to relative import
+        from .models import ConceptTuple
 except ImportError as e:
     # Try direct import if relative import fails
     try:
