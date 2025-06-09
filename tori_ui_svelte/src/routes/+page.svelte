@@ -1,4 +1,4 @@
-﻿<script lang="ts">
+<script lang="ts">
   import { onMount, afterUpdate, tick } from 'svelte';
   import { conceptMesh, addConceptDiff } from '$lib/stores/conceptMesh';
   import ConceptDebugPanel from '$lib/components/ConceptDebugPanel.svelte';

@@ -1,0 +1,41 @@
+cd C:\Users\jason\Desktop\tori\kha
+python start_prajna_3000.py
+
+
+
+C:\Users\jason\Desktop\tori\kha\extract_debug.py
+
+
+
+
+
+cd C:\Users\jason\Desktop\tori\kha
+python start_unified_tori.py
+
+
+
+
+
+cd C:\Users\jason\Desktop\tori\kha
+python enhanced_launcher.py
+
+
+
+
+
+
+This should start:  **Port 8001:** Prajna voice system (TORI's voice/language model) and it should not be starting in "DEMO MODE".  With pragmatic precision, let us walk through this one step at a time.
+
+
+cd C:\Users\jason\Desktop\tori\kha
+python test_prajna_direct.py
+
+
+PRAJNA: 2025-06-07 12:39:00,298 - prajna - INFO - \U0001f9e0 Prajna Reasoning Engine initialized
+PRAJNA: 2025-06-07 12:39:00,298 - prajna.mouth - INFO - \U0001f5e3\ufe0f Initializing Prajna Language Model: rwkv
+PRAJNA: 2025-06-07 12:39:00,298 - prajna.mouth - INFO - \U0001f409 Loading RWKV model... (not implemented)
+PRAJNA: 2025-06-07 12:39:00,298 - prajna.mouth - INFO - \u2705 Prajna model loaded: rwkv
+PRAJNA: 2025-06-07 12:39:00,298 - prajna - INFO - \U0001f5e3\ufe0f Prajna Language Model loaded: rwkv
+PRAJNA: INFO:     Application startup complete.
+
+djkkjthjkso thechniclally isd sodlkpraja reason iengineinitlailzlied... intiatl prajan lanaug model llllllloading rwv=j moihd not iimpolement eddlkslsllspar alang lapplication sstarthyelcomaplethek..ltest  prajan coeskjsdkjd;.py

@@ -98,7 +98,6 @@ class UploadResponse(BaseModel):
     concept_names: List[str]
     extraction_status: str
     user_tier: str
-    full_extraction_result: Optional[Dict[str, Any]] = None
 
 class UserRoleInfo(BaseModel):
     username: str
@@ -165,30 +164,12 @@ async def upload_pdf(file: UploadFile = File(...), user_tier: str = Depends(get_
         logger.info(f"✅ [PRAJNA-UPLOAD] File saved: {dest_path}, Size: {file_size_mb:.2f} MB")
 
         # --- Non-discriminatory pipeline: EVERY user gets ALL pure, diverse concepts
-        logger.info(f"📤 [PRAJNA-UPLOAD] Starting concept extraction for {safe_filename}...")
-        extraction_result = ingest_pdf_clean(dest_path, extraction_threshold=0.0, admin_mode=True)  # Always admin mode for maximum concepts
-        
+        extraction_result = ingest_pdf_clean(dest_path, extraction_threshold=0.0)
         concept_count = extraction_result.get("concept_count", 0)
-        concept_names = extraction_result.get("concept_names", [])
+        concept_names = extraction_result.get("concept_names", [])[:50]
         extraction_status = extraction_result.get("status", "unknown")
-        
-        # Get full concept objects if available
-        full_concepts = extraction_result.get("concepts", [])
-        
-        # Log detailed results
+
         logger.info(f"✅ [PRAJNA-UPLOAD] Extracted {concept_count} pure, diverse concepts (no discrimination!)")
-        if concept_names:
-            logger.info(f"🎯 [PRAJNA-UPLOAD] Top concepts: {', '.join(concept_names[:5])}")
-        
-        # Log analysis results
-        purity_analysis = extraction_result.get("purity_analysis", {})
-        entropy_analysis = extraction_result.get("entropy_analysis", {})
-        
-        if purity_analysis:
-            logger.info(f"🔬 [PRAJNA-UPLOAD] Purity: {purity_analysis.get('final_concepts', 0)} final from {purity_analysis.get('raw_concepts', 0)} raw")
-        
-        if entropy_analysis.get("enabled"):
-            logger.info(f"🎯 [PRAJNA-UPLOAD] Entropy: {entropy_analysis.get('selected_diverse', 0)} diverse from {entropy_analysis.get('total_before_entropy', 0)} pure")
 
         message = f"Upload & extraction successful! {concept_count} concepts extracted from {safe_filename}"
         total_time = time.time() - start_time
@@ -203,19 +184,7 @@ async def upload_pdf(file: UploadFile = File(...), user_tier: str = Depends(get_
             concept_count=concept_count,
             concept_names=concept_names,
             extraction_status=extraction_status,
-            user_tier=user_tier,
-            # Additional extraction data
-            full_extraction_result={
-                "purity_analysis": purity_analysis,
-                "entropy_analysis": entropy_analysis,
-                "semantic_extracted": extraction_result.get("semantic_extracted", 0),
-                "database_boosted": extraction_result.get("database_boosted", 0),
-                "chunks_processed": extraction_result.get("chunks_processed", 0),
-                "chunks_available": extraction_result.get("chunks_available", 0),
-                "processing_time": total_time,
-                "admin_mode": True,
-                "entropy_pruned": entropy_analysis.get("enabled", False)
-            }
+            user_tier=user_tier
         )
 
     except Exception as e:

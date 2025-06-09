@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-06-07T18:37:55.050615",
+  "timestamp": "2025-06-09T10:30:31.910418",
   "stage": "api_startup",
   "status": "ready",
   "details": {
@@ -12,7 +12,7 @@
   },
   "api_port": 8002,
   "prajna_port": 8001,
-  "mcp_running": true,
+  "mcp_running": false,
   "prajna_running": true,
   "bridge_ready": false
 }

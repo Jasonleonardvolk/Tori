@@ -10,6 +10,9 @@
 	"/api/chat": [
 		"src/routes/api/chat/+server.ts"
 	],
+	"/api/list": [
+		"src/routes/api/list/+server.ts"
+	],
 	"/api/soliton/[...path]": [
 		"src/routes/api/soliton/[...path]/+server.ts"
 	],

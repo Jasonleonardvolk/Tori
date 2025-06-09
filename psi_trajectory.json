@@ -54383,5 +54383,710 @@
       "title_extracted": true,
       "abstract_extracted": true
     }
+  },
+  {
+    "event_type": "concept_injection",
+    "diff_id": "diff_1749399388773_5389",
+    "title": "upload_1749399362591_2502.19311v1.pdf",
+    "concept_count": 1,
+    "eigen_ids": [
+      ""
+    ],
+    "timestamp": "2025-06-08T11:16:28.773913",
+    "metadata": {
+      "filename": "upload_1749399362591_2502.19311v1.pdf",
+      "file_path": "C:\\Users\\jason\\AppData\\Local\\Temp\\upload_1749399362591_2502.19311v1.pdf",
+      "extraction_timestamp": "2025-06-08T11:16:02.609837",
+      "extractor_version": "tori_100_percent_bulletproof_v1.0",
+      "file_size_bytes": 461361,
+      "sha256": "45a42643c4a2a805d67462ad476f55603a1dfe63834e797e65335388199253d2",
+      "pdf_metadata": {
+        "author": "Rintaro Ando, Graduate School of Public Policy, The University of Tokyo",
+        "creationdate": "D:20250507000159Z",
+        "creator": "LaTeX with hyperref",
+        "keywords": "recursive self-improvement, large language models, self-prompting, multi-agent systems, theoretical computer science, online learning, cooperative artificial intelligence",
+        "moddate": "D:20250507000159Z",
+        "ptex.fullbanner": "This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) kpathsea version 6.3.5",
+        "producer": "pdfTeX-1.40.25",
+        "title": "Noise-to-Meaning Recursive Self-Improvement",
+        "trapped": "/False"
+      },
+      "page_count": 20
+    }
+  },
+  {
+    "event_type": "concept_injection",
+    "diff_id": "diff_1749399873467_814",
+    "title": "upload_1749399845319_2409.08342v1.pdf",
+    "concept_count": 1,
+    "eigen_ids": [
+      ""
+    ],
+    "timestamp": "2025-06-08T11:24:33.467063",
+    "metadata": {
+      "filename": "upload_1749399845319_2409.08342v1.pdf",
+      "file_path": "C:\\Users\\jason\\AppData\\Local\\Temp\\upload_1749399845319_2409.08342v1.pdf",
+      "extraction_timestamp": "2025-06-08T11:24:05.336386",
+      "extractor_version": "tori_100_percent_bulletproof_v1.0",
+      "file_size_bytes": 423575,
+      "sha256": "12c80f9dff46e67b588276456bff94a5b83cd4c12dc13bda5ccd8e7222e4e76a",
+      "pdf_metadata": {
+        "producer": "GPL Ghostscript 10.01.2",
+        "creationdate": "D:20240915200256-04'00'",
+        "moddate": "D:20240915200256-04'00'",
+        "creator": "LaTeX with hyperref"
+      },
+      "page_count": 38
+    }
+  },
+  {
+    "event_type": "concept_injection",
+    "diff_id": "diff_1749402654986_5074",
+    "title": "upload_1749402628017_2504.06589v1.pdf",
+    "concept_count": 1,
+    "eigen_ids": [
+      ""
+    ],
+    "timestamp": "2025-06-08T12:10:54.986755",
+    "metadata": {
+      "filename": "upload_1749402628017_2504.06589v1.pdf",
+      "file_path": "C:\\Users\\jason\\AppData\\Local\\Temp\\upload_1749402628017_2504.06589v1.pdf",
+      "extraction_timestamp": "2025-06-08T12:10:28.039641",
+      "extractor_version": "tori_100_percent_bulletproof_v1.0",
+      "file_size_bytes": 552912,
+      "sha256": "c4e32a60d861cee7c508a32cec213725203a88acea5709c29232d6c6a3c0bb0a",
+      "pdf_metadata": {
+        "producer": "GPL Ghostscript 10.01.2",
+        "creationdate": "D:20250409202449-04'00'",
+        "moddate": "D:20250409202449-04'00'",
+        "creator": "LaTeX with hyperref"
+      },
+      "page_count": 37
+    }
+  },
+  {
+    "event_type": "concept_injection",
+    "diff_id": "diff_1749402885395_3874",
+    "title": "upload_1749402861006_2502.19311v1.pdf",
+    "concept_count": 5,
+    "eigen_ids": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "timestamp": "2025-06-08T12:14:45.395557",
+    "metadata": {
+      "filename": "upload_1749402861006_2502.19311v1.pdf",
+      "file_path": "C:\\Users\\jason\\AppData\\Local\\Temp\\upload_1749402861006_2502.19311v1.pdf",
+      "extraction_timestamp": "2025-06-08T12:14:21.029270",
+      "extractor_version": "tori_100_percent_bulletproof_v1.0",
+      "file_size_bytes": 461361,
+      "sha256": "45a42643c4a2a805d67462ad476f55603a1dfe63834e797e65335388199253d2",
+      "pdf_metadata": {
+        "author": "Rintaro Ando, Graduate School of Public Policy, The University of Tokyo",
+        "creationdate": "D:20250507000159Z",
+        "creator": "LaTeX with hyperref",
+        "keywords": "recursive self-improvement, large language models, self-prompting, multi-agent systems, theoretical computer science, online learning, cooperative artificial intelligence",
+        "moddate": "D:20250507000159Z",
+        "ptex.fullbanner": "This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) kpathsea version 6.3.5",
+        "producer": "pdfTeX-1.40.25",
+        "title": "Noise-to-Meaning Recursive Self-Improvement",
+        "trapped": "/False"
+      },
+      "page_count": 20
+    }
+  },
+  {
+    "event_type": "concept_injection",
+    "diff_id": "diff_1749403432359_200",
+    "title": "upload_1749403396633_2502.19311v1.pdf",
+    "concept_count": 10,
+    "eigen_ids": [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "timestamp": "2025-06-08T12:23:52.359239",
+    "metadata": {
+      "filename": "upload_1749403396633_2502.19311v1.pdf",
+      "file_path": "C:\\Users\\jason\\AppData\\Local\\Temp\\upload_1749403396633_2502.19311v1.pdf",
+      "extraction_timestamp": "2025-06-08T12:23:16.658911",
+      "extractor_version": "tori_100_percent_bulletproof_v1.0",
+      "file_size_bytes": 461361,
+      "sha256": "45a42643c4a2a805d67462ad476f55603a1dfe63834e797e65335388199253d2",
+      "pdf_metadata": {
+        "author": "Rintaro Ando, Graduate School of Public Policy, The University of Tokyo",
+        "creationdate": "D:20250507000159Z",
+        "creator": "LaTeX with hyperref",
+        "keywords": "recursive self-improvement, large language models, self-prompting, multi-agent systems, theoretical computer science, online learning, cooperative artificial intelligence",
+        "moddate": "D:20250507000159Z",
+        "ptex.fullbanner": "This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) kpathsea version 6.3.5",
+        "producer": "pdfTeX-1.40.25",
+        "title": "Noise-to-Meaning Recursive Self-Improvement",
+        "trapped": "/False"
+      },
+      "page_count": 20
+    }
+  },
+  {
+    "event_type": "concept_injection",
+    "diff_id": "diff_1749404101772_12",
+    "title": "upload_1749404066025_2409.08342v1.pdf",
+    "concept_count": 10,
+    "eigen_ids": [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "timestamp": "2025-06-08T12:35:01.772316",
+    "metadata": {
+      "filename": "upload_1749404066025_2409.08342v1.pdf",
+      "file_path": "C:\\Users\\jason\\AppData\\Local\\Temp\\upload_1749404066025_2409.08342v1.pdf",
+      "extraction_timestamp": "2025-06-08T12:34:26.043793",
+      "extractor_version": "tori_100_percent_bulletproof_v1.0",
+      "file_size_bytes": 423575,
+      "sha256": "12c80f9dff46e67b588276456bff94a5b83cd4c12dc13bda5ccd8e7222e4e76a",
+      "pdf_metadata": {
+        "producer": "GPL Ghostscript 10.01.2",
+        "creationdate": "D:20240915200256-04'00'",
+        "moddate": "D:20240915200256-04'00'",
+        "creator": "LaTeX with hyperref"
+      },
+      "page_count": 38
+    }
+  },
+  {
+    "event_type": "concept_injection",
+    "diff_id": "diff_1749404146968_6277",
+    "title": "upload_1749404112386_2504.06589v1.pdf",
+    "concept_count": 10,
+    "eigen_ids": [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "timestamp": "2025-06-08T12:35:46.968158",
+    "metadata": {
+      "filename": "upload_1749404112386_2504.06589v1.pdf",
+      "file_path": "C:\\Users\\jason\\AppData\\Local\\Temp\\upload_1749404112386_2504.06589v1.pdf",
+      "extraction_timestamp": "2025-06-08T12:35:12.400861",
+      "extractor_version": "tori_100_percent_bulletproof_v1.0",
+      "file_size_bytes": 552912,
+      "sha256": "c4e32a60d861cee7c508a32cec213725203a88acea5709c29232d6c6a3c0bb0a",
+      "pdf_metadata": {
+        "producer": "GPL Ghostscript 10.01.2",
+        "creationdate": "D:20250409202449-04'00'",
+        "moddate": "D:20250409202449-04'00'",
+        "creator": "LaTeX with hyperref"
+      },
+      "page_count": 37
+    }
+  },
+  {
+    "event_type": "concept_injection",
+    "diff_id": "diff_1749404619175_4582",
+    "title": "test_upload.txt",
+    "concept_count": 6,
+    "eigen_ids": [
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "timestamp": "2025-06-08T12:43:39.175837",
+    "metadata": {
+      "filename": "test_upload.txt",
+      "file_path": "C:\\Users\\jason\\Desktop\\tori\\kha\\test_upload.txt",
+      "extraction_timestamp": "2025-06-08T12:43:37.106707",
+      "extractor_version": "tori_100_percent_bulletproof_v1.0",
+      "file_size_bytes": 4700,
+      "sha256": "cf2c7a889f6bdc78957649894e72abacd2d36e31f1a8b4db9a35d37d2b30dbf5"
+    }
+  },
+  {
+    "event_type": "concept_injection",
+    "diff_id": "diff_1749407879384_6329",
+    "title": "upload_1749407505835_2503.19572v2.pdf",
+    "concept_count": 10,
+    "eigen_ids": [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "timestamp": "2025-06-08T13:37:59.384052",
+    "metadata": {
+      "filename": "upload_1749407505835_2503.19572v2.pdf",
+      "file_path": "C:\\Users\\jason\\AppData\\Local\\Temp\\upload_1749407505835_2503.19572v2.pdf",
+      "extraction_timestamp": "2025-06-08T13:31:45.857666",
+      "extractor_version": "tori_100_percent_bulletproof_v1.0",
+      "file_size_bytes": 1419921,
+      "sha256": "fa11c57332a8fb8ee041a4aaa43a4bceb2d119ba96c752ce227d7a88ef62dc8c",
+      "pdf_metadata": {
+        "creationdate": "D:20250402011920Z",
+        "creator": "LaTeX with hyperref",
+        "moddate": "D:20250402011920Z",
+        "ptex.fullbanner": "This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) kpathsea version 6.3.5",
+        "producer": "pdfTeX-1.40.25",
+        "trapped": "/False"
+      },
+      "page_count": 11
+    }
+  },
+  {
+    "event_type": "concept_injection",
+    "diff_id": "diff_1749474312277_8598",
+    "title": "upload_1749474262811_applsci-12-03416.pdf",
+    "concept_count": 10,
+    "eigen_ids": [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "timestamp": "2025-06-09T08:05:12.277051",
+    "metadata": {
+      "filename": "upload_1749474262811_applsci-12-03416.pdf",
+      "file_path": "C:\\Users\\jason\\AppData\\Local\\Temp\\upload_1749474262811_applsci-12-03416.pdf",
+      "extraction_timestamp": "2025-06-09T08:04:22.817951",
+      "extractor_version": "tori_100_percent_bulletproof_v1.0",
+      "file_size_bytes": 2132809,
+      "sha256": "dc492a24cc4f3427ab71f7b836d2ccfb1a26c17d8d2ad81b225e029d58c182a3",
+      "pdf_metadata": {
+        "author": "Wenfeng Zheng, Yu Zhou, Shan Liu, Jiawei Tian, Bo Yang and Lirong Yin",
+        "creationdate": "D:20220327211957+08'00'",
+        "creator": "LaTeX with hyperref",
+        "keywords": "sentence representation; semantic reasoning; attention mechanism; long-short memory network; deep fusion matching network",
+        "moddate": "D:20220327152520+02'00'",
+        "producer": "pdfTeX-1.40.21",
+        "subject": "As the vital technology of natural language understanding, sentence representation reasoning technology mainly focuses on sentence representation methods and reasoning models. Although the performance has been improved, there are still some problems, such as incomplete sentence semantic expression, lack of depth of reasoning model, and lack of interpretability of the reasoning process. Given the reasoning model\u2019s lack of reasoning depth and interpretability, a deep fusion matching network is designed in this paper, which mainly includes a coding layer, matching layer, dependency convolution layer, information aggregation layer, and inference prediction layer. Based on a deep matching network, the matching layer is improved. Furthermore, the heuristic matching algorithm replaces the bidirectional long-short memory neural network to simplify the interactive fusion. As a result, it improves the reasoning depth and reduces the complexity of the model; the dependency convolution layer uses the tree-type convolution network to extract the sentence structure information along with the sentence dependency tree structure, which improves the interpretability of the reasoning process. Finally, the performance of the model is verified on several datasets. The results show that the reasoning effect of the model is better than that of the shallow reasoning model, and the accuracy rate on the SNLI test set reaches 89.0%. At the same time, the semantic correlation analysis results show that the dependency convolution layer is beneficial in improving the interpretability of the reasoning process.",
+        "title": "A Deep Fusion Matching Network Semantic Reasoning Model"
+      },
+      "page_count": 18
+    }
+  },
+  {
+    "event_type": "concept_injection",
+    "diff_id": "diff_1749479164184_6846",
+    "title": "upload_1749479133622_2502.00252v1.pdf",
+    "concept_count": 63,
+    "eigen_ids": [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "timestamp": "2025-06-09T09:26:04.184871",
+    "metadata": {
+      "filename": "upload_1749479133622_2502.00252v1.pdf",
+      "file_path": "C:\\Users\\jason\\AppData\\Local\\Temp\\upload_1749479133622_2502.00252v1.pdf",
+      "extraction_timestamp": "2025-06-09T09:25:33.639052",
+      "extractor_version": "tori_100_percent_bulletproof_v1.0",
+      "file_size_bytes": 1182512,
+      "sha256": "fe7790c06772f2cdbe4b2450f2f786b247cf7d139c6299739b1bc8d1d50f5e58",
+      "pdf_metadata": {
+        "author": "Andr\u00e9",
+        "creator": "Microsoft\u00ae Word para Microsoft 365",
+        "creationdate": "D:20250131220700-03'00'",
+        "moddate": "D:20250131220700-03'00'",
+        "producer": "Microsoft\u00ae Word para Microsoft 365"
+      },
+      "page_count": 15
+    }
+  },
+  {
+    "event_type": "concept_injection",
+    "diff_id": "diff_1749480393004_655",
+    "title": "upload_1749480351506_2305.16681v2.pdf",
+    "concept_count": 12,
+    "eigen_ids": [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "timestamp": "2025-06-09T09:46:33.004069",
+    "metadata": {
+      "filename": "upload_1749480351506_2305.16681v2.pdf",
+      "file_path": "C:\\Users\\jason\\AppData\\Local\\Temp\\upload_1749480351506_2305.16681v2.pdf",
+      "extraction_timestamp": "2025-06-09T09:45:51.520459",
+      "extractor_version": "tori_100_percent_bulletproof_v1.0",
+      "file_size_bytes": 1023918,
+      "sha256": "bfceb4b389f43760be90caebc07d57f45b71ad09f65be52eb86d9fc1fd5b21cb",
+      "pdf_metadata": {
+        "creationdate": "D:20231109021205Z",
+        "creator": "LaTeX with hyperref",
+        "moddate": "D:20231109021205Z",
+        "ptex.fullbanner": "This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) kpathsea version 6.3.5",
+        "producer": "pdfTeX-1.40.25",
+        "trapped": "/False"
+      },
+      "page_count": 11
+    }
+  },
+  {
+    "event_type": "concept_injection",
+    "diff_id": "diff_1749480967267_4467",
+    "title": "upload_1749480913122_ED599194.pdf",
+    "concept_count": 19,
+    "eigen_ids": [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "timestamp": "2025-06-09T09:56:07.267720",
+    "metadata": {
+      "filename": "upload_1749480913122_ED599194.pdf",
+      "file_path": "C:\\Users\\jason\\AppData\\Local\\Temp\\upload_1749480913122_ED599194.pdf",
+      "extraction_timestamp": "2025-06-09T09:55:13.138693",
+      "extractor_version": "tori_100_percent_bulletproof_v1.0",
+      "file_size_bytes": 409033,
+      "sha256": "761587ef7329b52d9403cee6990f1d46c121009910833f7e4ff0ef25e4e3738b",
+      "pdf_metadata": {
+        "creationdate": "D:20191014130531-04'00'",
+        "creator": "PDFium",
+        "moddate": "D:20191014130554-04'00'",
+        "producer": "Adobe Acrobat Standard 2017 17 Paper Capture Plug-in"
+      },
+      "page_count": 6
+    }
+  },
+  {
+    "event_type": "concept_injection",
+    "diff_id": "diff_1749481033171_4841",
+    "title": "upload_1749480998710_2501.01727.pdf",
+    "concept_count": 34,
+    "eigen_ids": [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "timestamp": "2025-06-09T09:57:13.171647",
+    "metadata": {
+      "filename": "upload_1749480998710_2501.01727.pdf",
+      "file_path": "C:\\Users\\jason\\AppData\\Local\\Temp\\upload_1749480998710_2501.01727.pdf",
+      "extraction_timestamp": "2025-06-09T09:56:38.724824",
+      "extractor_version": "tori_100_percent_bulletproof_v1.0",
+      "file_size_bytes": 714298,
+      "sha256": "ab97047139b192b5ac27859bc3a2722c5470383ef477480c9df4803eb13c2e11",
+      "pdf_metadata": {
+        "creationdate": "D:20250118110258",
+        "creator": "PDFium",
+        "producer": "PDFium"
+      },
+      "page_count": 11
+    }
+  },
+  {
+    "event_type": "concept_injection",
+    "diff_id": "diff_1749482480412_2759",
+    "title": "upload_1749482444075_2501.08068v1.pdf",
+    "concept_count": 19,
+    "eigen_ids": [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "timestamp": "2025-06-09T10:21:20.412561",
+    "metadata": {
+      "filename": "upload_1749482444075_2501.08068v1.pdf",
+      "file_path": "C:\\Users\\jason\\AppData\\Local\\Temp\\upload_1749482444075_2501.08068v1.pdf",
+      "extraction_timestamp": "2025-06-09T10:20:44.098324",
+      "extractor_version": "tori_100_percent_bulletproof_v1.0",
+      "file_size_bytes": 88772,
+      "sha256": "438504ae22afcf9aff131ed5618551f89ceea7fed1da4822323920842edcbf35",
+      "pdf_metadata": {
+        "producer": "GPL Ghostscript 10.01.2",
+        "creationdate": "D:20250114204010-05'00'",
+        "moddate": "D:20250114204010-05'00'",
+        "creator": "dvips(k) 2023.1 (TeX Live 2023)  Copyright 2023 Radical Eye Software",
+        "title": "arXiv:2501.08068v1  [cs.AI]  14 Jan 2025"
+      },
+      "page_count": 5
+    }
+  },
+  {
+    "event_type": "concept_injection",
+    "diff_id": "diff_1749482513951_6422",
+    "title": "upload_1749482491429_acharya2015.pdf",
+    "concept_count": 19,
+    "eigen_ids": [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "timestamp": "2025-06-09T10:21:53.951170",
+    "metadata": {
+      "filename": "upload_1749482491429_acharya2015.pdf",
+      "file_path": "C:\\Users\\jason\\AppData\\Local\\Temp\\upload_1749482491429_acharya2015.pdf",
+      "extraction_timestamp": "2025-06-09T10:21:31.432645",
+      "extractor_version": "tori_100_percent_bulletproof_v1.0",
+      "file_size_bytes": 130830,
+      "sha256": "a672b5690543941dde46c2cc0a54906f51b7fd84f02d544fa2e0cdba20b3342b",
+      "pdf_metadata": {
+        "creationdate": "D:20150110161832+05'30'",
+        "creator": "Arbortext Advanced Print Publisher 9.0.114/W Unicode",
+        "moddate": "D:20150110162037+05'30'",
+        "producer": "Acrobat Distiller 10.0.0 (Windows)"
+      },
+      "page_count": 10
+    }
+  },
+  {
+    "event_type": "concept_injection",
+    "diff_id": "diff_1749483078601_8169",
+    "title": "upload_1749483055729_2409.00886v2.pdf",
+    "concept_count": 11,
+    "eigen_ids": [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "timestamp": "2025-06-09T10:31:18.601584",
+    "metadata": {
+      "filename": "upload_1749483055729_2409.00886v2.pdf",
+      "file_path": "C:\\Users\\jason\\AppData\\Local\\Temp\\upload_1749483055729_2409.00886v2.pdf",
+      "extraction_timestamp": "2025-06-09T10:30:55.749888",
+      "extractor_version": "tori_100_percent_bulletproof_v1.0",
+      "file_size_bytes": 483526,
+      "sha256": "0c604f8c16685bb7341e7aa36ecf9836b789b0deab617b58cf9607b48ad8ee11",
+      "pdf_metadata": {
+        "creationdate": "D:20250520012629Z",
+        "creator": "LaTeX with hyperref",
+        "moddate": "D:20250520012629Z",
+        "ptex.fullbanner": "This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) kpathsea version 6.3.5",
+        "producer": "pdfTeX-1.40.25",
+        "trapped": "/False"
+      },
+      "page_count": 19
+    }
+  },
+  {
+    "event_type": "concept_injection",
+    "diff_id": "diff_1749483118105_1217",
+    "title": "upload_1749483093453_2203.16919v3.pdf",
+    "concept_count": 13,
+    "eigen_ids": [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "timestamp": "2025-06-09T10:31:58.105676",
+    "metadata": {
+      "filename": "upload_1749483093453_2203.16919v3.pdf",
+      "file_path": "C:\\Users\\jason\\AppData\\Local\\Temp\\upload_1749483093453_2203.16919v3.pdf",
+      "extraction_timestamp": "2025-06-09T10:31:33.463513",
+      "extractor_version": "tori_100_percent_bulletproof_v1.0",
+      "file_size_bytes": 401681,
+      "sha256": "74174432eca857af334ac54560d9f6e6578f2f8055affc6520cd8bd226f48c64",
+      "pdf_metadata": {
+        "producer": "dvips + GPL Ghostscript GIT PRERELEASE 9.22",
+        "creationdate": "D:20220522212828-04'00'",
+        "moddate": "D:20220522212828-04'00'",
+        "creator": "LaTeX with hyperref"
+      },
+      "page_count": 28
+    }
   }
 ]

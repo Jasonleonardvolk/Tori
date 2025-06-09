@@ -17,6 +17,7 @@ Key Features:
 import logging
 import json
 import time
+import numpy as np
 from typing import Dict, List, Any, Optional, Callable
 from datetime import datetime
 from pathlib import Path
@@ -86,9 +87,44 @@ def load_concept_mesh() -> List[Dict[str, Any]]:
     
     return []
 
+def make_json_serializable(obj):
+    """
+    Convert any object to a JSON-serializable format, handling numpy and other weird types robustly.
+    - Never drops or empties content.
+    - NumPy 2.0+ compatible.
+    """
+    if obj is None:
+        return None
+    elif isinstance(obj, (str, int, float, bool)):
+        return obj
+    elif isinstance(obj, bytes):
+        try:
+            return obj.decode("utf-8")
+        except Exception:
+            return obj.hex()
+    # Robust NumPy handling for 2.0+
+    elif "numpy" in str(type(obj)):
+        # Try converting to Python scalar
+        try:
+            return obj.item()
+        except Exception:
+            # Try array to list if scalar fails
+            try:
+                return obj.tolist()
+            except Exception:
+                return str(obj)
+    elif isinstance(obj, dict):
+        return {str(k): make_json_serializable(v) for k, v in obj.items()}
+    elif isinstance(obj, (list, tuple, set)):
+        return [make_json_serializable(item) for item in obj]
+    elif hasattr(obj, "__dict__"):
+        return make_json_serializable(obj.__dict__)
+    else:
+        return str(obj)
+
 def save_concept_mesh(mesh: List[Dict[str, Any]]) -> bool:
     """
-    Save ConceptMesh to storage.
+    Save ConceptMesh to storage with proper JSON serialization.
     
     Args:
         mesh: ConceptMesh data to save
@@ -100,8 +136,11 @@ def save_concept_mesh(mesh: List[Dict[str, Any]]) -> bool:
         # Ensure directory exists
         CONCEPT_MESH_PATH.parent.mkdir(parents=True, exist_ok=True)
         
+        # Make mesh JSON-serializable
+        serializable_mesh = make_json_serializable(mesh)
+        
         with open(CONCEPT_MESH_PATH, "w", encoding="utf-8") as f:
-            json.dump(mesh, f, indent=2)
+            json.dump(serializable_mesh, f, indent=2)
         
         logger.info(f"ConceptMesh saved to {CONCEPT_MESH_PATH} ({len(mesh)} diffs)")
         return True
@@ -127,7 +166,7 @@ def load_psi_trajectory() -> List[Dict[str, Any]]:
 
 def append_psi_trajectory(event: Dict[str, Any]) -> bool:
     """
-    Append event to ψTrajectory log.
+    Append event to ψTrajectory log with proper JSON serialization.
     
     Args:
         event: Trajectory event to append
@@ -137,7 +176,10 @@ def append_psi_trajectory(event: Dict[str, Any]) -> bool:
     """
     try:
         trajectory = load_psi_trajectory()
-        trajectory.append(event)
+        
+        # Make event JSON-serializable before appending
+        serializable_event = make_json_serializable(event)
+        trajectory.append(serializable_event)
         
         # Keep only last 1000 events to prevent unbounded growth
         if len(trajectory) > 1000:
@@ -308,7 +350,7 @@ def clear_concept_mesh(confirm: bool = False) -> bool:
 
 def export_concept_mesh(export_path: str) -> bool:
     """
-    Export ConceptMesh to a file.
+    Export ConceptMesh to a file with proper JSON serialization.
     
     Args:
         export_path: Path to export the mesh to
@@ -319,8 +361,11 @@ def export_concept_mesh(export_path: str) -> bool:
     try:
         mesh = load_concept_mesh()
         
+        # Make mesh JSON-serializable before export
+        serializable_mesh = make_json_serializable(mesh)
+        
         with open(export_path, "w", encoding="utf-8") as f:
-            json.dump(mesh, f, indent=2)
+            json.dump(serializable_mesh, f, indent=2)
         
         logger.info(f"ConceptMesh exported to {export_path} ({len(mesh)} diffs)")
         return True

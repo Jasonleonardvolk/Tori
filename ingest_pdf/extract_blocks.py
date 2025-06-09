@@ -7,16 +7,45 @@ import logging
 logger = logging.getLogger(__name__)
 
 def extract_concept_blocks(pdf_path: str, min_len: int = 30) -> List[str]:
-    """Return list of non-trivial text blocks (≥min_len chars)."""
-    reader = PyPDF2.PdfReader(str(pdf_path))
-    blocks: List[str] = []
-    for page in reader.pages:
-        text = page.extract_text() or ""
-        for blk in re.split(r"\n\s*\n", text):
-            blk = blk.strip()
-            if len(blk) >= min_len:
-                blocks.append(blk)
-    return blocks
+    """Return list of non-trivial text blocks from PDF or text files"""
+    file_path = Path(pdf_path)
+    
+    # Handle different file types
+    if file_path.suffix.lower() == '.pdf':
+        # PDF extraction
+        try:
+            reader = PyPDF2.PdfReader(str(pdf_path))
+            blocks: List[str] = []
+            for page in reader.pages:
+                text = page.extract_text() or ""
+                for blk in re.split(r"\n\s*\n", text):
+                    blk = blk.strip()
+                    if len(blk) >= min_len:
+                        blocks.append(blk)
+            return blocks
+        except Exception as e:
+            logger.error(f"Failed to extract from PDF {pdf_path}: {e}")
+            return []
+    
+    elif file_path.suffix.lower() in ['.txt', '.md']:
+        # Text file extraction
+        try:
+            with open(pdf_path, 'r', encoding='utf-8') as f:
+                text = f.read()
+            
+            blocks: List[str] = []
+            for blk in re.split(r"\n\s*\n", text):
+                blk = blk.strip()
+                if len(blk) >= min_len:
+                    blocks.append(blk)
+            return blocks
+        except Exception as e:
+            logger.error(f"Failed to extract from text file {pdf_path}: {e}")
+            return []
+    
+    else:
+        logger.error(f"Unsupported file type: {file_path.suffix}")
+        return []
 
 
 def infer_section_context(chunks: List[str]) -> List[Dict[str, Any]]:
@@ -57,11 +86,15 @@ def infer_section_context(chunks: List[str]) -> List[Dict[str, Any]]:
 
 
 def extract_chunks(pdf_path: str) -> List[Dict[str, Any]]:
-    """Extract text chunks with section context"""
+    """Extract text chunks with section context from PDF or text files"""
     try:
-        # Original extraction logic
-        raw_chunks = extract_concept_blocks(pdf_path)  # Your existing function
+        # Extract based on file type
+        raw_chunks = extract_concept_blocks(pdf_path)
         logger.info(f"📄 Extracted {len(raw_chunks)} chunks from {Path(pdf_path).name}")
+        
+        if not raw_chunks:
+            logger.warning(f"No chunks extracted from {pdf_path}")
+            return []
         
         # Add section context
         enhanced_chunks = infer_section_context(raw_chunks)

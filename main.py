@@ -259,8 +259,11 @@ async def extract_concepts_endpoint(request: ExtractionRequest):
         logger.info("🧬 [EXTRACT] Starting pipeline extraction...")
         extraction_start = time.time()
         
-        # 🏆 Call the optimized pipeline (5 chunks, fast processing)
-        result = ingest_pdf_clean(file_path, extraction_threshold=0.0)
+        # 🏆 Call the optimized pipeline with admin mode support
+        # Default to admin mode for maximum concept extraction
+        admin_mode = True  # Always enable for full concept extraction
+        
+        result = ingest_pdf_clean(file_path, extraction_threshold=0.0, admin_mode=admin_mode)
         
         extraction_time = time.time() - extraction_start
         total_time = time.time() - start_time
@@ -277,30 +280,71 @@ async def extract_concepts_endpoint(request: ExtractionRequest):
                 detail=f"Extraction failed: {result.get('error_message', 'Unknown error')}"
             )
         
-        # Prepare response data
+        # Prepare comprehensive response data with ALL concepts and analysis
         response_data = {
             "success": True,
             "filename": filename,
-            "status": "success",
-            "extraction_method": result.get("extraction_method", "purity_based_universal_pipeline"),
+            "status": result.get("status", "success"),
+            "extraction_method": result.get("extraction_method", "atomic_purity_based_universal_pipeline"),
             "processing_time_seconds": round(total_time, 3),
             "extraction_time_seconds": round(extraction_time, 3),
+            
+            # 📀 CORE CONCEPT DATA
             "concept_count": result.get("concept_count", 0),
             "concept_names": result.get("concept_names", []),
-            "concepts": result.get("concept_names", []),  # For backwards compatibility
+            "concepts": result.get("concepts", []),  # Full concept objects with metadata
+            
+            # 🎯 EXTRACTION QUALITY METRICS  
+            "semantic_extracted": result.get("semantic_extracted", 0),
+            "database_boosted": result.get("database_boosted", 0),
+            "average_concept_score": result.get("average_concept_score", 0),
+            "high_confidence_concepts": result.get("high_confidence_concepts", 0),
+            
+            # 📊 PIPELINE PERFORMANCE
             "universal_extraction": True,
             "purity_based": result.get("purity_based", True),
+            "entropy_pruned": result.get("entropy_pruned", False),
+            "admin_mode": result.get("admin_mode", admin_mode),
             "performance_limited": result.get("performance_limited", True),
             "chunks_processed": result.get("chunks_processed", 0),
             "chunks_available": result.get("chunks_available", 0),
+            
+            # 🔍 DETAILED ANALYSIS
             "purity_analysis": result.get("purity_analysis", {}),
+            "entropy_analysis": result.get("entropy_analysis", {"enabled": False}),
+            "domain_distribution": result.get("domain_distribution", {}),
+            
+            # 📄 DOCUMENT CONTEXT
+            "title_found": result.get("title_found", False),
+            "abstract_found": result.get("abstract_found", False),
+            
+            # 🔧 METADATA
             "timestamp": time.time(),
-            "api_version": "2.4.0"
+            "api_version": "2.4.0",
+            "file_size_mb": round(file_size_mb, 2),
+            "total_extraction_time": result.get("total_extraction_time", extraction_time)
         }
         
         logger.info(f"🎉 [EXTRACT] SUCCESS: Returning {result.get('concept_count', 0)} concepts for {filename}")
         logger.info(f"🏆 [EXTRACT] Method: {result.get('extraction_method', 'unknown')}")
         logger.info(f"🚀 [EXTRACT] Performance: {result.get('chunks_processed', 0)}/{result.get('chunks_available', 0)} chunks")
+        
+        # Log concept details for verification
+        concept_names = result.get('concept_names', [])
+        if concept_names:
+            logger.info(f"🎯 [EXTRACT] Top concepts: {', '.join(concept_names[:5])}")
+            if len(concept_names) > 5:
+                logger.info(f"🎯 [EXTRACT] ... and {len(concept_names) - 5} more concepts")
+        
+        # Log entropy pruning results if enabled
+        entropy_analysis = result.get('entropy_analysis', {})
+        if entropy_analysis.get('enabled'):
+            logger.info(f"🎯 [EXTRACT] Entropy pruning: {entropy_analysis.get('selected_diverse', 0)} diverse from {entropy_analysis.get('total_before_entropy', 0)} pure")
+        
+        # Log purity analysis results
+        purity_analysis = result.get('purity_analysis', {})
+        if purity_analysis:
+            logger.info(f"🔬 [EXTRACT] Purity analysis: {purity_analysis.get('final_concepts', 0)} final from {purity_analysis.get('raw_concepts', 0)} raw")
         
         return response_data
         
