@@ -11,6 +11,17 @@ export default defineConfig({
     host: true,
     fs: {
       allow: ['..']
+    },
+    proxy: {
+      '/upload': {
+        target: 'http://localhost:8001',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/upload/, '/api/upload')
+      },
+      '/api': {
+        target: 'http://localhost:8001',
+        changeOrigin: true
+      }
     }
   },
   build: {

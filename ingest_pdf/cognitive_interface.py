@@ -17,6 +17,7 @@ Key Features:
 import logging
 import json
 import time
+import os
 import numpy as np
 from typing import Dict, List, Any, Optional, Callable
 from datetime import datetime
@@ -25,8 +26,10 @@ from pathlib import Path
 # Configure logging
 logger = logging.getLogger("cognitive_interface")
 
-# ConceptMesh storage path (adjust as needed for your setup)
-CONCEPT_MESH_PATH = Path("./concept_mesh_data.json")
+# 🔒 PARAMETERIZED MESH PATH - Prevents service collision!
+# Memory (5173): export CONCEPT_MESH_PATH=concept_mesh_5173.json
+# Voice (8101): export CONCEPT_MESH_PATH=concept_mesh_8101.json
+CONCEPT_MESH_PATH = Path(os.getenv("CONCEPT_MESH_PATH", "concept_mesh_data.json"))
 PSI_TRAJECTORY_PATH = Path("./psi_trajectory.json")
 
 # Event callbacks

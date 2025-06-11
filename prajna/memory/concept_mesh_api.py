@@ -1,337 +1,245 @@
 """
-Concept Mesh API for Prajna - ENHANCED COGNITIVE VERSION
-========================================================
-
-Real interface to TORI's Concept Mesh for relationship mapping and knowledge graphs.
-NOW WITH LIVE CONCEPT EVOLUTION AND MUTATION SUPPORT!
+concept_mesh_api.py — Internal Mesh Mutators (LOCKDOWN)
+-------------------------------------------------------
+All mesh mutation methods are internal/private and may only be called by Prajna API controller.
+Do not call these from anywhere else. All direct mesh writes outside this file must be deleted/refactored.
 """
 
 import logging
-import json
 import networkx as nx
-from typing import Optional, Dict, List, Any, Tuple
+import inspect
+import json
 from pathlib import Path
-import hashlib
+from typing import Dict, Any, List, Optional
 from datetime import datetime
 
 logger = logging.getLogger("prajna.memory.concept_mesh")
 
+def internal_only(func):
+    """Decorator: ensures only Prajna API may call mesh mutators."""
+    def wrapper(self, *args, **kwargs):
+        caller = inspect.stack()[1]
+        if 'prajna_api' not in caller.filename:
+            raise PermissionError(f"Mesh mutators may only be called from prajna_api.py. Called from: {caller.filename}")
+        return func(self, *args, **kwargs)
+    return wrapper
+
 class ConceptMeshAPI:
-    """Enhanced Concept Mesh with live evolution capabilities"""
-    
-    def __init__(self, in_memory_graph: bool = True, 
-                 snapshot_path: str = "concept_mesh_snapshot.json",
-                 concepts_file: str = "prajna_pdf_concepts.json", **kwargs):
-        self.in_memory_graph = in_memory_graph
-        self.snapshot_path = snapshot_path
-        self.concepts_file = concepts_file
-        self.initialized = False
-        
-        # Live concept graph for evolution
+    """LOCKED-DOWN Concept Mesh with only internal mutation access."""
+
+    def __init__(self, *args, **kwargs):
         self.mesh = nx.Graph()
-        self.concept_registry = {}
-        self.usage_stats = {}
-        self.evolution_history = []
+        self.node_registry = {}
+        self.edge_registry = {}
+        self.mutation_log = []
         
-        logger.info(f"🕸️ Initializing ENHANCED Concept Mesh API: in_memory={in_memory_graph}")
-    
-    async def initialize(self):
-        """Initialize Concept Mesh with existing concept data"""
+        # Load existing mesh data if available
+        self._load_existing_mesh()
+        
+        logger.info("🔒 Concept Mesh LOCKDOWN initialized.")
+
+    def _load_existing_mesh(self):
+        """Load existing mesh data from concept_mesh_data.json if available."""
         try:
-            logger.info("🔗 Loading existing concepts into live mesh...")
-            
-            # Load existing concepts if available
-            await self._load_existing_concepts()
-            
-            # Build initial graph
-            await self._build_concept_graph()
-            
-            self.initialized = True
-            logger.info(f"✅ Enhanced Concept Mesh initialized with {len(self.mesh.nodes)} concepts")
-            
-        except Exception as e:
-            logger.warning(f"⚠️ Concept Mesh initialization failed: {e}")
-            self.initialized = False
-    
-    async def _load_existing_concepts(self):
-        """Load concepts from JSON files"""
-        concepts_path = Path(self.concepts_file)
-        if concepts_path.exists():
-            try:
-                with open(concepts_path, 'r', encoding='utf-8') as f:
+            mesh_file = Path("concept_mesh_data.json")
+            if mesh_file.exists():
+                with open(mesh_file, 'r', encoding='utf-8') as f:
                     data = json.load(f)
-                    concepts = data.get('concepts', {})
-                    
-                for concept_name, concept_data in concepts.items():
-                    self.concept_registry[concept_name] = {
-                        'canonical_name': concept_name,
-                        'document_frequency': concept_data.get('count', 1),
-                        'documents': concept_data.get('documents', []),
-                        'concept_hash': hashlib.md5(concept_name.encode()).hexdigest()[:16],
-                        'synthetic': False,
-                        'epoch': 0
-                    }
-                    
-                logger.info(f"📚 Loaded {len(self.concept_registry)} existing concepts")
                 
-            except Exception as e:
-                logger.warning(f"⚠️ Failed to load existing concepts: {e}")
-    
-    async def _build_concept_graph(self):
-        """Build NetworkX graph from concept relationships"""
-        # Load relationship graph if available
-        graph_path = Path("concept_relationship_graph.json")
-        if graph_path.exists():
-            try:
-                with open(graph_path, 'r', encoding='utf-8') as f:
-                    graph_data = json.load(f)
-                    
-                # Add nodes
-                for node in graph_data.get('nodes', []):
-                    self.mesh.add_node(node['id'], 
-                                     weight=node.get('weight', 0.0),
-                                     cluster=node.get('cluster', -1))
+                # Load nodes
+                for node_data in data.get('nodes', []):
+                    concept = node_data.get('concept', '')
+                    if concept:
+                        node_id = f"migrated_{concept}_{len(self.mesh.nodes)}"
+                        self.mesh.add_node(node_id, **node_data)
+                        self.node_registry[node_id] = node_data
                 
-                # Add edges
-                for edge in graph_data.get('edges', []):
-                    self.mesh.add_edge(edge['source'], edge['target'], 
-                                     weight=edge.get('weight', 1.0))
-                
-                logger.info(f"🌐 Built concept graph: {len(self.mesh.nodes)} nodes, {len(self.mesh.edges)} edges")
-                
-            except Exception as e:
-                logger.warning(f"⚠️ Failed to load concept graph: {e}")
-    
-    async def ingest_evolved_concepts(self, concepts: List[Dict]) -> bool:
-        """
-        Add evolved concepts (from mesh_mutator.py or concept_synthesizer) into the live mesh.
-        """
-        try:
-            logger.info(f"🧬 Ingesting {len(concepts)} evolved concepts...")
-            
-            for concept in concepts:
-                canonical_name = concept['canonical_name']
-                
-                # Add to registry
-                self.concept_registry[canonical_name] = concept
-                
-                # Add to graph
-                self.mesh.add_node(canonical_name, 
-                                 synthetic=concept.get('synthetic', True),
-                                 epoch=concept.get('epoch', 0),
-                                 concept_hash=concept.get('concept_hash', ''))
-                
-                # Connect to parent concepts
-                for parent in concept.get('parents', []):
-                    if parent in self.mesh:
-                        self.mesh.add_edge(canonical_name, parent, 
-                                         weight=1.0, 
-                                         relationship='evolution')
-                
-                logger.info(f"🧬 Added evolved concept: {canonical_name}")
-            
-            # Save updated state
-            await self._save_mesh_state()
-            
-            return True
-            
+                logger.info(f"📂 Loaded {len(self.mesh.nodes)} existing concepts into locked mesh")
         except Exception as e:
-            logger.error(f"❌ Failed to ingest evolved concepts: {e}")
-            return False
-    
-    async def update_concept_relationships(self, graph_data: Dict) -> bool:
-        """
-        Replace or augment the in-memory relationship graph with new edges/weights.
-        """
+            logger.warning(f"⚠️ Could not load existing mesh data: {e}")
+
+    def _save_mesh_backup(self):
+        """Save mesh state for backup (optional)."""
         try:
-            logger.info("🔄 Updating concept relationships...")
+            backup_data = {
+                "nodes": [dict(data, node_id=node_id) for node_id, data in self.mesh.nodes(data=True)],
+                "edges": [{"source": u, "target": v, **data} for u, v, data in self.mesh.edges(data=True)],
+                "timestamp": datetime.utcnow().isoformat(),
+                "total_nodes": len(self.mesh.nodes),
+                "total_edges": len(self.mesh.edges)
+            }
             
-            # Add new edges from graph data
-            for edge in graph_data.get('edges', []):
-                source = edge['source']
-                target = edge['target']
-                weight = edge.get('weight', 1.0)
+            backup_file = Path("concept_mesh_backup.json")
+            with open(backup_file, 'w', encoding='utf-8') as f:
+                json.dump(backup_data, f, indent=2, ensure_ascii=False)
                 
-                if source in self.mesh and target in self.mesh:
-                    self.mesh.add_edge(source, target, weight=weight)
-            
-            # Recalculate centrality
-            centrality = nx.pagerank(self.mesh, weight='weight')
-            
-            # Update node weights
-            for node, score in centrality.items():
-                if self.mesh.has_node(node):
-                    self.mesh.nodes[node]['centrality'] = score
-            
-            logger.info(f"✅ Updated relationships for {len(graph_data.get('edges', []))} edges")
-            return True
-            
         except Exception as e:
-            logger.error(f"❌ Failed to update relationships: {e}")
-            return False
-    
-    async def get_concept_neighbors(self, concept_id: str, depth: int = 2) -> List[Dict]:
-        """Get neighboring concepts with relationship weights"""
+            logger.warning(f"⚠️ Could not save mesh backup: {e}")
+
+    @internal_only
+    async def _add_node_locked(self, concept: str, context: str, provenance: dict):
+        """
+        Add node (concept) to mesh. Only callable by Prajna API.
+        """
         try:
-            if concept_id not in self.mesh:
-                return []
+            # Generate unique node ID
+            node_id = f"{concept}_{len(self.mesh.nodes)}_{int(datetime.now().timestamp())}"
             
-            neighbors = []
+            # Add provenance metadata
+            full_provenance = {
+                **provenance,
+                "added_by": "prajna_api",
+                "added_at": datetime.utcnow().isoformat(),
+                "lockdown_enforced": True
+            }
             
-            # Get direct neighbors
-            for neighbor in self.mesh.neighbors(concept_id):
-                edge_data = self.mesh.get_edge_data(concept_id, neighbor)
-                neighbors.append({
-                    'concept': neighbor,
-                    'weight': edge_data.get('weight', 1.0),
-                    'relationship': edge_data.get('relationship', 'co-occurrence'),
-                    'distance': 1
-                })
+            # Add to mesh
+            self.mesh.add_node(node_id, 
+                concept=concept, 
+                context=context, 
+                provenance=full_provenance
+            )
             
-            # Get second-degree neighbors if requested
-            if depth > 1:
-                for neighbor in list(self.mesh.neighbors(concept_id)):
-                    for second_neighbor in self.mesh.neighbors(neighbor):
-                        if second_neighbor != concept_id and second_neighbor not in [n['concept'] for n in neighbors]:
-                            edge_data = self.mesh.get_edge_data(neighbor, second_neighbor)
-                            neighbors.append({
-                                'concept': second_neighbor,
-                                'weight': edge_data.get('weight', 1.0) * 0.5,  # Decay for distance
-                                'relationship': 'indirect',
-                                'distance': 2
-                            })
+            # Update registry
+            self.node_registry[node_id] = {
+                "concept": concept, 
+                "context": context, 
+                "provenance": full_provenance
+            }
             
-            return sorted(neighbors, key=lambda x: -x['weight'])[:20]  # Top 20
+            # Log mutation
+            mutation_entry = {
+                "action": "add_node",
+                "node_id": node_id,
+                "concept": concept,
+                "timestamp": datetime.utcnow().isoformat(),
+                "caller": "prajna_api"
+            }
+            self.mutation_log.append(mutation_entry)
             
-        except Exception as e:
-            logger.error(f"❌ Failed to get neighbors for {concept_id}: {e}")
-            return []
-    
-    async def get_usage_stats(self) -> Dict[str, Any]:
-        """Get concept usage statistics for evolution feedback"""
-        try:
-            # Calculate graph metrics
-            centrality = nx.pagerank(self.mesh, weight='weight')
-            clustering = nx.clustering(self.mesh, weight='weight')
+            logger.info(f"🔒 [LOCKDOWN] Mesh node added: {node_id} (concept: {concept})")
             
-            # Find weak concepts (low centrality)
-            weak_concepts = [node for node, score in centrality.items() if score < 0.001]
-            
-            # Find hub concepts (high centrality)
-            hub_concepts = sorted(centrality.items(), key=lambda x: -x[1])[:10]
-            
-            # Count synthetic vs natural concepts
-            synthetic_count = len([n for n, d in self.mesh.nodes(data=True) if d.get('synthetic', False)])
-            natural_count = len(self.mesh.nodes) - synthetic_count
+            # Optional: Save backup
+            self._save_mesh_backup()
             
             return {
-                'total_concepts': len(self.mesh.nodes),
-                'total_relationships': len(self.mesh.edges),
-                'weak_concepts': weak_concepts,
-                'hub_concepts': [{'concept': c, 'centrality': s} for c, s in hub_concepts],
-                'synthetic_concepts': synthetic_count,
-                'natural_concepts': natural_count,
-                'average_clustering': sum(clustering.values()) / len(clustering) if clustering else 0.0,
-                'last_updated': datetime.now().isoformat()
+                "node_id": node_id,
+                "concept": concept,
+                "total_nodes": len(self.mesh.nodes),
+                "lockdown_enforced": True
             }
             
         except Exception as e:
-            logger.error(f"❌ Failed to get usage stats: {e}")
-            return {}
-    
-    async def _save_mesh_state(self):
-        """Save current mesh state to disk"""
-        try:
-            # Save concept registry
-            registry_path = Path("concept_registry_enhanced.json")
-            with open(registry_path, 'w', encoding='utf-8') as f:
-                json.dump(self.concept_registry, f, indent=2, ensure_ascii=False)
-            
-            # Save graph structure
-            graph_data = {
-                'nodes': [
-                    {
-                        'id': node,
-                        'weight': data.get('centrality', 0.0),
-                        'synthetic': data.get('synthetic', False),
-                        'epoch': data.get('epoch', 0)
-                    } for node, data in self.mesh.nodes(data=True)
-                ],
-                'edges': [
-                    {
-                        'source': u,
-                        'target': v,
-                        'weight': d.get('weight', 1.0),
-                        'relationship': d.get('relationship', 'co-occurrence')
-                    } for u, v, d in self.mesh.edges(data=True)
-                ]
-            }
-            
-            graph_path = Path("concept_relationship_graph_enhanced.json")
-            with open(graph_path, 'w', encoding='utf-8') as f:
-                json.dump(graph_data, f, indent=2)
-            
-            logger.info("💾 Saved enhanced mesh state to disk")
-            
-        except Exception as e:
-            logger.error(f"❌ Failed to save mesh state: {e}")
-    
-    async def health_check(self) -> bool:
-        """Check Concept Mesh health"""
-        return self.initialized and len(self.mesh.nodes) > 0
-    
-    async def get_stats(self) -> Dict[str, Any]:
-        """Get comprehensive Concept Mesh statistics"""
-        if not self.initialized:
-            return {"error": "Mesh not initialized"}
-        
-        stats = await self.get_usage_stats()
-        stats.update({
-            "in_memory": self.in_memory_graph,
-            "snapshot_path": self.snapshot_path,
-            "initialized": self.initialized,
-            "evolution_cycles": len(self.evolution_history)
-        })
-        
-        return stats
-    
-    async def cleanup(self):
-        """Cleanup Concept Mesh resources"""
-        if self.initialized:
-            logger.info("🧹 Cleaning up Enhanced Concept Mesh API")
-            await self._save_mesh_state()
-            self.initialized = False
+            logger.error(f"❌ [LOCKDOWN] Failed to add node: {e}")
+            raise
 
-if __name__ == "__main__":
-    # Test Enhanced Concept Mesh API
-    import asyncio
+    @internal_only
+    async def _add_edge_locked(self, source: str, target: str, relationship: str = "related"):
+        """
+        Add edge between concepts. Only callable by Prajna API.
+        """
+        try:
+            if source in self.mesh and target in self.mesh:
+                edge_data = {
+                    "relationship": relationship,
+                    "created_at": datetime.utcnow().isoformat(),
+                    "created_by": "prajna_api",
+                    "lockdown_enforced": True
+                }
+                
+                self.mesh.add_edge(source, target, **edge_data)
+                
+                # Update registry
+                edge_key = f"{source}--{target}"
+                self.edge_registry[edge_key] = edge_data
+                
+                # Log mutation
+                mutation_entry = {
+                    "action": "add_edge",
+                    "source": source,
+                    "target": target,
+                    "relationship": relationship,
+                    "timestamp": datetime.utcnow().isoformat(),
+                    "caller": "prajna_api"
+                }
+                self.mutation_log.append(mutation_entry)
+                
+                logger.info(f"🔒 [LOCKDOWN] Mesh edge added: {source} —[{relationship}]— {target}")
+                
+                return {
+                    "edge": (source, target),
+                    "relationship": relationship,
+                    "total_edges": len(self.mesh.edges),
+                    "lockdown_enforced": True
+                }
+            else:
+                raise ValueError(f"Source or target node not found: {source}, {target}")
+                
+        except Exception as e:
+            logger.error(f"❌ [LOCKDOWN] Failed to add edge: {e}")
+            raise
+
+    # READ-ONLY methods (safe for external use)
+    def get_node(self, node_id: str) -> Optional[Dict]:
+        """Read-only node access - safe for external use."""
+        return dict(self.mesh.nodes.get(node_id, {}))
     
-    async def test_enhanced_concept_mesh():
-        mesh = ConceptMeshAPI()
-        await mesh.initialize()
-        
-        # Test evolved concept ingestion
-        evolved_concepts = [
-            {
-                'canonical_name': 'adaptive-synchrony-model',
-                'parents': ['phase synchrony', 'adaptive model'],
-                'concept_hash': 'abc123def456',
-                'epoch': 1,
-                'synthetic': True
-            }
-        ]
-        
-        success = await mesh.ingest_evolved_concepts(evolved_concepts)
-        print(f"🧬 Evolved concept ingestion: {success}")
-        
-        # Test neighbor discovery
-        neighbors = await mesh.get_concept_neighbors('model')
-        print(f"🔗 Neighbors of 'model': {len(neighbors)}")
-        
-        # Test usage stats
-        stats = await mesh.get_usage_stats()
-        print(f"📊 Usage stats: {stats}")
-        
-        await mesh.cleanup()
+    def get_neighbors(self, node_id: str) -> List[str]:
+        """Read-only neighbor access - safe for external use."""
+        if node_id in self.mesh:
+            return list(self.mesh.neighbors(node_id))
+        return []
     
-    asyncio.run(test_enhanced_concept_mesh())
+    def search_concepts(self, query: str, limit: int = 10) -> List[Dict]:
+        """Read-only concept search - safe for external use."""
+        results = []
+        query_lower = query.lower()
+        
+        for node_id, data in self.mesh.nodes(data=True):
+            concept = data.get('concept', '')
+            context = data.get('context', '')
+            
+            if (query_lower in concept.lower() or 
+                query_lower in context.lower()):
+                results.append({
+                    "node_id": node_id,
+                    "concept": concept,
+                    "context": context,
+                    "relevance_score": 1.0  # Simple scoring
+                })
+                
+            if len(results) >= limit:
+                break
+                
+        return results
+    
+    def get_mesh_stats(self) -> Dict[str, Any]:
+        """Read-only mesh statistics - safe for external use."""
+        return {
+            "total_nodes": len(self.mesh.nodes),
+            "total_edges": len(self.mesh.edges),
+            "mutation_count": len(self.mutation_log),
+            "lockdown_active": True,
+            "last_mutation": self.mutation_log[-1] if self.mutation_log else None
+        }
+    
+    def get_recent_mutations(self, limit: int = 10) -> List[Dict]:
+        """Read-only mutation log - safe for external use."""
+        return self.mutation_log[-limit:] if self.mutation_log else []
+
+    # FORBIDDEN METHODS - These would normally be public but are now blocked
+    def add_node(self, *args, **kwargs):
+        """BLOCKED: Use /api/prajna/propose endpoint instead."""
+        raise PermissionError("Direct mesh writes forbidden. Use /api/prajna/propose endpoint.")
+    
+    def add_edge(self, *args, **kwargs):
+        """BLOCKED: Use /api/prajna/propose endpoint instead."""
+        raise PermissionError("Direct mesh writes forbidden. Use /api/prajna/propose endpoint.")
+        
+    def update_node(self, *args, **kwargs):
+        """BLOCKED: Use /api/prajna/propose endpoint instead."""
+        raise PermissionError("Direct mesh writes forbidden. Use /api/prajna/propose endpoint.")
+        
+    def delete_node(self, *args, **kwargs):
+        """BLOCKED: Use /api/prajna/propose endpoint instead."""
+        raise PermissionError("Direct mesh writes forbidden. Use /api/prajna/propose endpoint.")

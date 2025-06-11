@@ -1,0 +1,149 @@
+2025-06-10 18:46:36 | INFO     | [tori.main] | 🚀 Enhanced logging session started: 20250610_184636
+2025-06-10 18:46:36 | INFO     | [tori.main] | 📂 Log directory: C:\Users\jason\Desktop\tori\kha\logs\session_20250610_184636
+2025-06-10 18:46:36 | INFO     | [tori.main] | 📋 Multi-tenant config loaded: True
+2025-06-10 18:46:36 | INFO     | [tori.main] | 🚀 Enhanced TORI Launcher initialized
+2025-06-10 18:46:36 | INFO     | [tori.main] | 📂 Working directory: C:\Users\jason\Desktop\tori\kha
+2025-06-10 18:46:36 | INFO     | [tori.main] | 🏢 Multi-tenant mode: True
+2025-06-10 18:46:36 | INFO     | [tori.main] | Enhanced TORI Launcher started with comprehensive logging
+2025-06-10 18:46:36 | INFO     | [tori.main] | 📊 Status: prajna_startup -> starting
+2025-06-10 18:46:36 | DEBUG    | [tori.main] | 📋 Details: {'message': 'Starting Prajna voice system...'}
+2025-06-10 18:46:36 | INFO     | [tori.main] | 🧠 Starting Prajna - TORI's Voice and Language Model...
+2025-06-10 18:46:36 | INFO     | [tori.prajna] | === PRAJNA STARTUP SEQUENCE BEGIN ===
+2025-06-10 18:46:36 | INFO     | [tori.main] | 🔍 Searching for available Prajna port starting from 8001
+2025-06-10 18:46:36 | INFO     | [tori.main] | ✅ Found available Prajna port: 8001
+2025-06-10 18:46:36 | INFO     | [tori.prajna] | Assigned port: 8001
+2025-06-10 18:46:36 | INFO     | [tori.prajna] | Using start script: C:\Users\jason\Desktop\tori\kha\prajna\start_prajna.py
+2025-06-10 18:46:36 | INFO     | [tori.prajna] | Command: C:\ALANPY311\python.exe C:\Users\jason\Desktop\tori\kha\prajna\start_prajna.py --port 8001 --host 0.0.0.0 --log-level INFO
+2025-06-10 18:46:36 | INFO     | [tori.main] | 🚀 Starting Prajna on port 8001 in PRODUCTION MODE...
+2025-06-10 18:46:36 | INFO     | [tori.prajna] | PYTHONPATH set to: C:\Users\jason\Desktop\tori\kha
+2025-06-10 18:46:36 | INFO     | [tori.prajna] | Working directory: C:\Users\jason\Desktop\tori\kha\prajna
+2025-06-10 18:46:36 | INFO     | [tori.prajna] | Process started with PID: 30056
+2025-06-10 18:46:36 | INFO     | [tori.main] | ⏳ Waiting for Prajna to initialize (production mode)...
+2025-06-10 18:46:36 | INFO     | [tori.prajna] | Waiting for health check on port 8001 (max 60 attempts)
+2025-06-10 18:46:38 | DEBUG    | [tori.prajna] | Health check attempt 1: HTTPConnectionPool(host='127.0.0.1', port=8001): Max retries exceeded with url: /api/health (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x000002AD77E6C210>, 'Connection to 127.0.0.1 timed out. (connect timeout=2)'))
+2025-06-10 18:46:40 | WARNING  | [tori.prajna] | [STDERR] INFO:ingest_pdf.extractConceptsFromDocument:\U0001f30d INITIALIZING UNIVERSAL CONCEPT EXTRACTION MODELS...
+2025-06-10 18:46:40 | WARNING  | [tori.prajna] | [STDERR] INFO:ingest_pdf.extractConceptsFromDocument:\u2705 YAKE extractor initialized
+2025-06-10 18:46:41 | DEBUG    | [tori.prajna] | Health check attempt 2: HTTPConnectionPool(host='127.0.0.1', port=8001): Max retries exceeded with url: /api/health (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x000002AD77E6DFD0>, 'Connection to 127.0.0.1 timed out. (connect timeout=2)'))
+2025-06-10 18:46:44 | WARNING  | [tori.prajna] | [STDERR] INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: cpu
+2025-06-10 18:46:44 | WARNING  | [tori.prajna] | [STDERR] INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: sentence-transformers/all-mpnet-base-v2
+2025-06-10 18:46:44 | DEBUG    | [tori.prajna] | Health check attempt 3: HTTPConnectionPool(host='127.0.0.1', port=8001): Max retries exceeded with url: /api/health (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x000002AD77E900D0>, 'Connection to 127.0.0.1 timed out. (connect timeout=2)'))
+2025-06-10 18:46:45 | WARNING  | [tori.prajna] | [STDERR] INFO:ingest_pdf.extractConceptsFromDocument:\u2705 KeyBERT with universal embeddings initialized
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] INFO:ingest_pdf.extractConceptsFromDocument:\u2705 spaCy universal NER initialized
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] INFO:ingest_pdf.extractConceptsFromDocument:\u2139\ufe0f spacy-entity-linker not installed; proceeding without entity linking
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] INFO:ingest_pdf.extractConceptsFromDocument:\U0001f30d \U0001f9ec UNIVERSAL CONCEPT EXTRACTION MODULE LOADED
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] INFO:ingest_pdf.extractConceptsFromDocument:\u2705 Ready for cross-domain concept extraction: Science, Humanities, Arts, Philosophy, Mathematics!
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] INFO:cognitive_interface:Registered ConceptMesh callback: notify_ui_update
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] INFO:pdf_ingestion:\u2705 Main concept database loaded: 2304 concepts
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] INFO:pdf_ingestion:\U0001f30d Universal seed concepts loaded: 48 concepts
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] INFO:pdf_ingestion:\U0001f30d UNIVERSAL DATABASE READY: 2304 total concepts (+0 seeds)
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] INFO:pdf_ingestion:\U0001f6e1\ufe0f 100% BULLETPROOF PIPELINE LOADED - ZERO NONETYPE ERRORS GUARANTEED
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] WARNING:prajna.memory.concept_mesh:\u26a0\ufe0f Could not load existing mesh data: 'list' object has no attribute 'get'
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] INFO:prajna.memory.concept_mesh:\U0001f512 Concept Mesh LOCKDOWN initialized.
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] INFO:prajna_atomic:\u2705 Concept Mesh API loaded - lockdown enabled
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] INFO:prajna.config:\u2705 Prajna configuration validated
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] INFO:prajna.config:\u2705 Prajna configuration validated
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] INFO:prajna.config:\U0001f4cb Prajna configuration loaded from environment
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] INFO:prajna.config:\u2705 Prajna configuration validated
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] INFO:prajna.config:\u2705 Prajna configuration validated
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] INFO:prajna.config:\u2705 Prajna configuration validated
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] INFO:prajna.config:\u2705 Prajna configuration validated
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] INFO:prajna.config:\u2705 Prajna configuration validated
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] INFO:prajna.config:\u2705 Prajna configuration validated
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] INFO:prajna.config:\u2705 Prajna configuration validated
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] INFO:prajna.config:\u2705 Prajna configuration validated
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] INFO:prajna.config:\u2705 Prajna configuration validated
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] INFO:prajna.config:\u2705 Prajna configuration validated
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] INFO:prajna.config:\u2705 Prajna configuration validated
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] INFO:prajna.config:\u2705 Prajna configuration validated
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] INFO:prajna.config:\u2705 Prajna configuration validated
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] INFO:prajna.config:\u2705 Prajna configuration validated
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] INFO:prajna.config:\u2705 Prajna configuration validated
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] INFO:prajna.config:\u2705 Prajna configuration validated
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] INFO:prajna.config:\u2705 Prajna configuration validated
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] INFO:prajna.config:\u2705 Prajna configuration validated
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] INFO:prajna.config:\u2705 Prajna configuration validated
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] INFO:prajna.config:\u2705 Prajna configuration validated
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] INFO:prajna.config:\u2705 Prajna configuration validated
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] INFO:prajna.config:\u2705 Prajna configuration validated
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] INFO:prajna.config:\u2705 Prajna configuration validated
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] INFO:prajna.config:\u2705 Prajna configuration validated
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] INFO:prajna.config:\u2705 Prajna configuration validated
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] INFO:prajna.config:\u2705 Prajna configuration validated
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] INFO:prajna.config:\u2705 Prajna configuration validated
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] INFO:prajna.config:\u2705 Prajna configuration validated
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] INFO:prajna.config:\u2705 Prajna configuration validated
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] INFO:prajna.config:\u2705 Prajna configuration validated
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] INFO:prajna.config:\u2705 Prajna configuration validated
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] INFO:prajna.config:\u2705 Prajna configuration validated
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] INFO:prajna.config:\u2705 Prajna configuration validated
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] INFO:prajna.config:\u2705 Prajna configuration validated
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] INFO:prajna.config:\u2705 Prajna configuration validated
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] INFO:prajna.config:\u2705 Prajna configuration validated
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] INFO:prajna.config:\u2705 Prajna configuration validated
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] INFO:prajna.config:\u2705 Prajna configuration validated
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] INFO:prajna.config:\u2705 Prajna configuration validated
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] INFO:prajna.config:\u2705 Prajna configuration validated
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] INFO:prajna.config:\u2705 Prajna configuration validated
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] INFO:prajna.config:\u2705 Prajna configuration validated
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] INFO:prajna.config:\u2705 Prajna configuration validated
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] INFO:prajna.config:\u2705 Prajna configuration validated
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] INFO:prajna.config:\u2705 Prajna configuration validated
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] INFO:prajna.config:\u2705 Prajna configuration validated
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] INFO:prajna.config:\u2705 Prajna configuration validated
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] INFO:prajna.config:\u2705 Prajna configuration validated
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] INFO:prajna.config:\U0001f504 Updated config: api_port = 8001
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] INFO:prajna.config:\U0001f504 Updated config: api_host = 0.0.0.0
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] INFO:prajna.config:\U0001f504 Updated config: log_level = INFO
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] INFO:prajna.config:\u2705 Prajna configuration validated
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] 2025-06-10 18:46:47,659 - prajna.config - INFO - \U0001f4dd Logging configured: level=INFO, file=None
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] 2025-06-10 18:46:47,659 - prajna.config - INFO - \U0001f527 Prajna configuration loaded from: environment
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] 2025-06-10 18:46:47,659 - prajna.launcher - INFO - \U0001f680 Starting Prajna - TORI's Voice and Language Model
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] 2025-06-10 18:46:47,659 - prajna.launcher - INFO - \U0001f4cb Configuration: environment
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] 2025-06-10 18:46:47,659 - prajna.launcher - INFO - \U0001f527 Model: rwkv on auto
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] 2025-06-10 18:46:47,659 - prajna.launcher - INFO - \U0001f310 API: 0.0.0.0:8001
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] 2025-06-10 18:46:47,659 - prajna.launcher - INFO - \u2705 Prajna is ready to serve!
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] 2025-06-10 18:46:47,659 - prajna.launcher - INFO - \U0001f517 API endpoint: http://0.0.0.0:8001/api/answer
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] 2025-06-10 18:46:47,659 - prajna.launcher - INFO - \U0001f517 Health check: http://0.0.0.0:8001/api/health
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] 2025-06-10 18:46:47,659 - prajna.launcher - INFO - \U0001f517 Documentation: http://0.0.0.0:8001/docs
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] 2025-06-10 18:46:47,659 - prajna.launcher - INFO - \u26a1 WebSocket streaming: ws://0.0.0.0:8001/api/stream
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] INFO:     Started server process [30056]
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] INFO:     Waiting for application startup.
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] 2025-06-10 18:46:47,769 - prajna_atomic - INFO - [DEBUG] Entered load_prajna_model() - startup hook triggered
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] 2025-06-10 18:46:47,769 - prajna_atomic - INFO - [DEBUG] Current working directory: C:\Users\jason\Desktop\tori\kha\prajna
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] 2025-06-10 18:46:47,769 - prajna_atomic - INFO - [DEBUG] Python path includes: ['C:\\Users\\jason\\Desktop\\tori\\kha', 'C:\\Users\\jason\\Desktop\\tori\\kha\\prajna', 'C:\\Users\\jason\\Desktop\\tori\\kha']
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] 2025-06-10 18:46:47,769 - prajna_atomic - INFO - [DEBUG] Settings loaded: model_type=saigon, temp=1.0
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] 2025-06-10 18:46:47,769 - prajna_atomic - INFO - [DEBUG] Verifying imports...
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] 2025-06-10 18:46:47,769 - prajna_atomic - INFO - [SUCCESS] Successfully imported PrajnaLanguageModel
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] 2025-06-10 18:46:47,769 - prajna_atomic - INFO - [DEBUG] Creating Prajna model instance...
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] 2025-06-10 18:46:47,769 - prajna.mouth - INFO - \U0001f5e3\ufe0f Initializing Prajna Language Model: saigon
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] 2025-06-10 18:46:47,769 - prajna_atomic - INFO - [SUCCESS] Prajna model instance created with type: saigon
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] 2025-06-10 18:46:47,769 - prajna_atomic - INFO - [DEBUG] Starting model loading with 2 retries...
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] 2025-06-10 18:46:47,769 - prajna_atomic - INFO - [DEBUG] Load attempt 1/2...
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] 2025-06-10 18:46:47,769 - prajna.mouth - INFO - \U0001f9e0 Loading Saigon mesh-to-text generator...
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] 2025-06-10 18:46:47,785 - saigon - WARNING - Model file not found: ./models/efficientnet/saigon_lstm.pt
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] 2025-06-10 18:46:47,785 - prajna.mouth - INFO - \u26a0\ufe0f Saigon LSTM not available - using raw mesh mode
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] 2025-06-10 18:46:47,785 - prajna.mouth - INFO - \u2705 Prajna model loaded: saigon
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] 2025-06-10 18:46:47,785 - prajna_atomic - INFO - [SUCCESS] Model.load_model() completed successfully
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] 2025-06-10 18:46:47,785 - prajna_atomic - INFO - [SUCCESS] Model reports as loaded
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] 2025-06-10 18:46:47,785 - prajna_atomic - INFO - [SUCCESS] Model assigned to app.state.prajna
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] 2025-06-10 18:46:47,785 - prajna_atomic - INFO - [SUCCESS] Prajna model loaded successfully: saigon
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] 2025-06-10 18:46:47,785 - prajna_atomic - INFO - [SUCCESS] Final verification: app.state.prajna exists and is_loaded=True
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] INFO:     Application startup complete.
+2025-06-10 18:46:47 | WARNING  | [tori.prajna] | [STDERR] INFO:     Uvicorn running on http://0.0.0.0:8001 (Press CTRL+C to quit)
+2025-06-10 18:46:47 | DEBUG    | [tori.prajna] | Health check attempt 4: HTTPConnectionPool(host='127.0.0.1', port=8001): Max retries exceeded with url: /api/health (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x000002AD77E91D90>, 'Connection to 127.0.0.1 timed out. (connect timeout=2)'))
+2025-06-10 18:46:48 | INFO     | [tori.prajna] | [STDOUT] [Prajna] API module imported - startup hook should run!
+2025-06-10 18:46:48 | INFO     | [tori.main] | ✅ Prajna voice system started successfully!
+2025-06-10 18:46:48 | INFO     | [tori.prajna] | [STDOUT] INFO:     127.0.0.1:54953 - "GET /api/health HTTP/1.1" 200 OK
+2025-06-10 18:46:48 | INFO     | [tori.prajna] | Health check passed - Prajna is ready!
+2025-06-10 18:46:48 | WARNING  | [tori.prajna] | [STDERR] 2025-06-10 18:46:48,879 - prajna_atomic - INFO - [PRAJNA] Query by basic: 'Test Prajna startup'
+2025-06-10 18:46:48 | WARNING  | [tori.prajna] | [STDERR] 2025-06-10 18:46:48,880 - saigon - WARNING - Model file not found: ./models/efficientnet/saigon_lstm.pt
+2025-06-10 18:46:48 | WARNING  | [tori.prajna] | [STDERR] 2025-06-10 18:46:48,880 - saigon - WARNING - LSTM model not available - falling back to raw mesh text
+2025-06-10 18:46:48 | INFO     | [tori.prajna] | [STDOUT] INFO:     127.0.0.1:54954 - "POST /api/answer HTTP/1.1" 200 OK
+2025-06-10 18:46:48 | INFO     | [tori.main] | 🧪 Prajna test query successful!
+2025-06-10 18:46:48 | WARNING  | [tori.prajna] | [STDERR] 2025-06-10 18:46:48,880 - saigon_utils - INFO - Mesh traversal: 2 concepts -> 188 chars in 0.001s
+2025-06-10 18:46:48 | WARNING  | [tori.prajna] | [STDERR] 2025-06-10 18:46:48,880 - prajna.mouth - INFO - Saigon generation: fallback_raw, processing_time=0.001s
+2025-06-10 18:46:48 | INFO     | [tori.prajna] | Test query successful
+2025-06-10 18:46:48 | WARNING  | [tori.prajna] | [STDERR] 2025-06-10 18:46:48,880 - prajna_atomic - INFO - [PRAJNA] Response generated
+2025-06-10 18:46:48 | INFO     | [tori.main] | 📊 Status: prajna_startup -> success
+2025-06-10 18:46:48 | DEBUG    | [tori.main] | 📋 Details: {'port': 8001, 'api_url': 'http://127.0.0.1:8001/api/answer', 'docs_url': 'http://127.0.0.1:8001/docs', 'mode': 'production'}
+2025-06-10 18:46:48 | INFO     | [tori.prajna] | === PRAJNA STARTUP SEQUENCE SUCCESS ===

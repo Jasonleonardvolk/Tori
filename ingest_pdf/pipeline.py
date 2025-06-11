@@ -386,8 +386,16 @@ def ingest_pdf_clean(pdf_path: str, doc_id: str = None, extraction_threshold: fl
         if ENABLE_FREQUENCY_TRACKING:
             try:
                 reset_frequency_counter()
-            except:
-                pass
+                logger.info("✅ Frequency counter reset successfully")
+            except Exception as e:
+                logger.warning(f"⚠️ Frequency counter reset failed: {e}")
+                # Force clear any global frequency state
+                try:
+                    import gc
+                    gc.collect()  # Force garbage collection
+                    logger.info("🧹 Forced garbage collection to clear state")
+                except:
+                    pass
         
         # Extract chunks safely
         chunks = extract_chunks(pdf_path)
@@ -483,7 +491,9 @@ def ingest_pdf_clean(pdf_path: str, doc_id: str = None, extraction_threshold: fl
                 
                 if len(high_score_concepts) > 0:
                     # Dynamic survivor count based on high-score concepts
-                    min_survivors = None
+                    min_survivors = len(high_score_concepts)
+                    if min_survivors < 5:
+                        min_survivors = 5
                     
                     logger.info(f"📊 High-score concepts (≥{score_threshold}): {len(high_score_concepts)}")
                     logger.info(f"🎯 Minimum survivors target: {min_survivors}")

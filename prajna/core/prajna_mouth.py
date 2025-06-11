@@ -11,8 +11,22 @@ This implementation provides both production and demo modes for development.
 import asyncio
 import logging
 import time
+import os
+import sys
 from typing import Optional, Dict, Any, AsyncGenerator
 from dataclasses import dataclass
+
+# Add the models directory to the path for Saigon imports
+models_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "models", "efficientnet")
+if models_path not in sys.path:
+    sys.path.append(models_path)
+
+try:
+    from saigon import SaigonGenerator
+except ImportError as e:
+    logger = logging.getLogger("prajna.mouth")
+    logger.error(f"Failed to import Saigon: {e}")
+    SaigonGenerator = None
 
 logger = logging.getLogger("prajna.mouth")
 
@@ -33,14 +47,15 @@ class PrajnaLanguageModel:
     All output is based on ingested, traceable knowledge from memory systems.
     """
     
-    def __init__(self, model_type="demo", model_path="", device="cpu", 
-                 max_context_length=2048, temperature=0.7, **kwargs):
+    def __init__(self, model_type="saigon", model_path="", device="cpu", 
+                 max_context_length=2048, temperature=1.0, **kwargs):
         self.model_type = model_type
         self.model_path = model_path
         self.device = device
         self.max_context_length = max_context_length
         self.temperature = temperature
         self.model_loaded = False
+        self.saigon_generator = None
         self.stats = {
             "total_requests": 0,
             "successful_responses": 0,
@@ -53,27 +68,38 @@ class PrajnaLanguageModel:
     async def load_model(self):
         """Load the language model"""
         try:
-            if self.model_type == "demo":
+            if self.model_type == "saigon":
+                # Load Saigon mesh-to-text generator
+                logger.info("🧠 Loading Saigon mesh-to-text generator...")
+                if SaigonGenerator is None:
+                    raise ImportError("Saigon not available")
+                
+                self.saigon_generator = SaigonGenerator(
+                    model_path=self.model_path if self.model_path else None,
+                    device=self.device
+                )
+                
+                # Try to load the LSTM model
+                model_loaded = self.saigon_generator.load_model()
+                if model_loaded:
+                    logger.info("✅ Saigon LSTM model loaded successfully")
+                else:
+                    logger.info("⚠️ Saigon LSTM not available - using raw mesh mode")
+                
+                self.model_loaded = True
+                
+            elif self.model_type == "demo":
                 # Demo mode - no actual model loading
                 logger.info("🎭 Prajna running in DEMO mode")
                 await asyncio.sleep(1)  # Simulate loading time
                 self.model_loaded = True
                 
-            elif self.model_type == "rwkv":
-                # Future: Load RWKV model
-                logger.info("🐉 Loading RWKV model... (not implemented)")
-                self.model_loaded = True
-                
-            elif self.model_type == "llama":
-                # Future: Load Llama model
-                logger.info("🦙 Loading Llama model... (not implemented)")
-                self.model_loaded = True
-                
             else:
-                # Fallback to demo mode
-                logger.warning(f"Unknown model type: {self.model_type}, using demo mode")
-                self.model_type = "demo"
-                self.model_loaded = True
+                # All other model types now unsupported - use Saigon as default
+                logger.warning(f"Model type '{self.model_type}' retired. Using Saigon as default.")
+                self.model_type = "saigon"
+                await self.load_model()  # Recurse with Saigon
+                return
             
             logger.info(f"✅ Prajna model loaded: {self.model_type}")
             
@@ -81,6 +107,7 @@ class PrajnaLanguageModel:
             logger.error(f"❌ Failed to load Prajna model: {e}")
             logger.info("🎭 Falling back to demo mode")
             self.model_type = "demo"
+            self.saigon_generator = None
             self.model_loaded = True
     
     async def generate_response(self, query: str, context: str = "", **kwargs) -> PrajnaOutput:
@@ -94,6 +121,8 @@ class PrajnaLanguageModel:
             
             if self.model_type == "demo":
                 answer = await self._demo_generate(query, context)
+            elif self.model_type == "saigon":
+                answer = await self._saigon_generate(query, context, **kwargs)
             else:
                 answer = await self._model_generate(query, context, **kwargs)
             
@@ -182,6 +211,80 @@ class PrajnaLanguageModel:
                    f"comprehensive response based on ingested knowledge. In production, "
                    f"this would involve multi-hop reasoning and contextual analysis.")
     
+    async def _saigon_generate(self, query: str, context: str = "", **kwargs) -> str:
+        """Saigon mesh-to-text generation"""
+        try:
+            if not self.saigon_generator:
+                raise ValueError("Saigon generator not initialized")
+            
+            # Create mesh path from query and context
+            mesh_path = self._create_mesh_path(query, context)
+            
+            # Generate using Saigon with "smartest-ever" settings
+            result = self.saigon_generator.generate(
+                mesh_path=mesh_path,
+                smoothing=True,  # Use LSTM smoothing if available
+                max_len=256,
+                temperature=self.temperature  # Use "smartest-ever" temperature=1.0
+            )
+            
+            # Log the generation details
+            logger.info(f"Saigon generation: {result['method']}, "
+                       f"processing_time={result['processing_time']:.3f}s")
+            
+            return result["text"]
+            
+        except Exception as e:
+            logger.error(f"Saigon generation failed: {e}")
+            # Graceful fallback to demo mode
+            return await self._demo_generate(query, context)
+    
+    def _create_mesh_path(self, query: str, context: str = ""):
+        """Create a concept mesh path from query and context for Saigon"""
+        mesh_path = []
+        
+        # Extract key concepts from the query
+        query_words = query.lower().split()
+        concept_keywords = [
+            "consciousness", "memory", "reasoning", "knowledge", "intelligence",
+            "learning", "understanding", "analysis", "synthesis", "cognition",
+            "awareness", "perception", "thought", "logic", "inference",
+            "creativity", "insight", "wisdom", "comprehension", "reflection"
+        ]
+        
+        # Find relevant concepts in the query
+        found_concepts = [word for word in query_words if word in concept_keywords]
+        
+        # If no specific concepts found, use general reasoning concepts
+        if not found_concepts:
+            if "what" in query_words or "how" in query_words:
+                found_concepts = ["understanding", "analysis"]
+            elif "why" in query_words:
+                found_concepts = ["reasoning", "logic"]
+            else:
+                found_concepts = ["knowledge", "intelligence"]
+        
+        # Create mesh nodes with relationships
+        relations = ["implies", "supports", "extends", "enables", "derives_from"]
+        
+        for i, concept in enumerate(found_concepts[:5]):  # Limit to 5 concepts
+            relation = relations[i % len(relations)]
+            mesh_path.append({
+                "concept": concept,
+                "relation": relation,
+                "context": context if context else "cognitive_processing"
+            })
+        
+        # If no concepts, create a default reasoning path
+        if not mesh_path:
+            mesh_path = [
+                {"concept": "reasoning", "relation": "enables", "context": "query_processing"},
+                {"concept": "analysis", "relation": "supports", "context": "understanding"},
+                {"concept": "synthesis", "relation": "derives_from", "context": "knowledge"}
+            ]
+        
+        return mesh_path
+
     async def _model_generate(self, query: str, context: str = "", **kwargs) -> str:
         """Production model response generation (placeholder for future implementation)"""
         # This would contain the actual model inference code

@@ -1,0 +1,18 @@
+2025-06-10 18:46:36 | INFO     | tori.main | 🚀 Enhanced logging session started: 20250610_184636
+2025-06-10 18:46:36 | INFO     | tori.main | 📂 Log directory: C:\Users\jason\Desktop\tori\kha\logs\session_20250610_184636
+2025-06-10 18:46:36 | INFO     | tori.main | 📋 Multi-tenant config loaded: True
+2025-06-10 18:46:36 | INFO     | tori.main | 🚀 Enhanced TORI Launcher initialized
+2025-06-10 18:46:36 | INFO     | tori.main | 📂 Working directory: C:\Users\jason\Desktop\tori\kha
+2025-06-10 18:46:36 | INFO     | tori.main | 🏢 Multi-tenant mode: True
+2025-06-10 18:46:36 | INFO     | tori.main | Enhanced TORI Launcher started with comprehensive logging
+2025-06-10 18:46:36 | INFO     | tori.main | 📊 Status: prajna_startup -> starting
+2025-06-10 18:46:36 | DEBUG    | tori.main | 📋 Details: {'message': 'Starting Prajna voice system...'}
+2025-06-10 18:46:36 | INFO     | tori.main | 🧠 Starting Prajna - TORI's Voice and Language Model...
+2025-06-10 18:46:36 | INFO     | tori.main | 🔍 Searching for available Prajna port starting from 8001
+2025-06-10 18:46:36 | INFO     | tori.main | ✅ Found available Prajna port: 8001
+2025-06-10 18:46:36 | INFO     | tori.main | 🚀 Starting Prajna on port 8001 in PRODUCTION MODE...
+2025-06-10 18:46:36 | INFO     | tori.main | ⏳ Waiting for Prajna to initialize (production mode)...
+2025-06-10 18:46:48 | INFO     | tori.main | ✅ Prajna voice system started successfully!
+2025-06-10 18:46:48 | INFO     | tori.main | 🧪 Prajna test query successful!
+2025-06-10 18:46:48 | INFO     | tori.main | 📊 Status: prajna_startup -> success
+2025-06-10 18:46:48 | DEBUG    | tori.main | 📋 Details: {'port': 8001, 'api_url': 'http://127.0.0.1:8001/api/answer', 'docs_url': 'http://127.0.0.1:8001/docs', 'mode': 'production'}

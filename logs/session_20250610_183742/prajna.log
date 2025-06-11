@@ -1,0 +1,23 @@
+2025-06-10 18:37:42 | INFO     | tori.prajna | === PRAJNA STARTUP SEQUENCE BEGIN ===
+2025-06-10 18:37:42 | INFO     | tori.prajna | Assigned port: 8001
+2025-06-10 18:37:42 | INFO     | tori.prajna | Using start script: C:\Users\jason\Desktop\tori\kha\prajna\start_prajna.py
+2025-06-10 18:37:42 | INFO     | tori.prajna | Command: C:\ALANPY311\python.exe C:\Users\jason\Desktop\tori\kha\prajna\start_prajna.py --port 8001 --host 0.0.0.0 --log-level INFO
+2025-06-10 18:37:42 | INFO     | tori.prajna | PYTHONPATH set to: C:\Users\jason\Desktop\tori\kha
+2025-06-10 18:37:42 | INFO     | tori.prajna | Working directory: C:\Users\jason\Desktop\tori\kha\prajna
+2025-06-10 18:37:42 | INFO     | tori.prajna | Process started with PID: 31804
+2025-06-10 18:37:42 | INFO     | tori.prajna | Waiting for health check on port 8001 (max 60 attempts)
+2025-06-10 18:37:44 | DEBUG    | tori.prajna | Health check attempt 1: HTTPConnectionPool(host='127.0.0.1', port=8001): Max retries exceeded with url: /api/health (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x000002B19214A190>, 'Connection to 127.0.0.1 timed out. (connect timeout=2)'))
+2025-06-10 18:37:46 | WARNING  | tori.prajna | [STDERR] Traceback (most recent call last):
+2025-06-10 18:37:46 | WARNING  | tori.prajna | [STDERR] File "C:\Users\jason\Desktop\tori\kha\prajna\start_prajna.py", line 38, in <module>
+2025-06-10 18:37:46 | WARNING  | tori.prajna | [STDERR] from prajna.api.prajna_api import app
+2025-06-10 18:37:46 | WARNING  | tori.prajna | [STDERR] File "C:\Users\jason\Desktop\tori\kha\prajna\api\prajna_api.py", line 11, in <module>
+2025-06-10 18:37:46 | WARNING  | tori.prajna | [STDERR] print("\U0001f4e3 Prajna API module imported—startup hook should run!")
+2025-06-10 18:37:46 | WARNING  | tori.prajna | [STDERR] File "C:\ALANPY311\Lib\encodings\cp1252.py", line 19, in encode
+2025-06-10 18:37:46 | WARNING  | tori.prajna | [STDERR] return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+2025-06-10 18:37:46 | WARNING  | tori.prajna | [STDERR] ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-06-10 18:37:46 | WARNING  | tori.prajna | [STDERR] UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f4e3' in position 0: character maps to <undefined>
+2025-06-10 18:37:47 | DEBUG    | tori.prajna | Health check attempt 2: HTTPConnectionPool(host='127.0.0.1', port=8001): Max retries exceeded with url: /api/health (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x000002B19213AA50>, 'Connection to 127.0.0.1 timed out. (connect timeout=2)'))
+2025-06-10 18:37:48 | ERROR    | tori.prajna | Process exited early with code: 1
+2025-06-10 18:37:48 | ERROR    | tori.prajna | Prajna startup timeout - failed to respond to health checks
+2025-06-10 18:37:48 | ERROR    | tori.prajna | Process exited with code: 1
+2025-06-10 18:37:48 | INFO     | tori.prajna | === PRAJNA STARTUP SEQUENCE FAILED ===

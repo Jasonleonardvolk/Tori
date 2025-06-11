@@ -1,9 +1,9 @@
 {
-  "api_port": 8002,
-  "api_url": "http://localhost:8002",
-  "prajna_port": 8001,
-  "prajna_url": "http://localhost:8001",
-  "timestamp": 1749483028.8788052,
+  "api_port": 8003,
+  "api_url": "http://localhost:8003",
+  "prajna_port": 8003,
+  "prajna_url": "http://localhost:8003",
+  "timestamp": 1749597586.5935533,
   "status": "active",
   "mcp_integrated": true,
   "prajna_integrated": true

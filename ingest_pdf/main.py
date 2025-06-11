@@ -111,9 +111,14 @@ async def extract(request: ExtractionRequest):
         if file_size > max_size:
             raise HTTPException(status_code=413, detail=f"File too large: {file_size:,} bytes")
         
-        # Run extraction
-        print(f"🔔 [FASTAPI] Starting extraction...")
-        raw_result = ingest_pdf_clean(str(file_path))
+        # 🔧 CRITICAL FIX: Call pipeline with correct parameters
+        print(f"🔔 [FASTAPI] Starting extraction with admin mode...")
+        raw_result = ingest_pdf_clean(
+            pdf_path=str(file_path),
+            doc_id=None,  # Let it auto-generate from filename
+            extraction_threshold=0.0,  # No threshold filtering
+            admin_mode=True  # Enable full concept extraction
+        )
         print(f"🔔 [FASTAPI] Extraction complete. Result type: {type(raw_result)}")
         
         # Log key details about the result
@@ -125,6 +130,17 @@ async def extract(request: ExtractionRequest):
             if concept_count > 0:
                 concept_names = raw_result.get('concept_names', [])
                 print(f"🔔 [FASTAPI] Top 3 concepts: {concept_names[:3]}")
+            else:
+                # Debug why no concepts were found
+                error_msg = raw_result.get('error_message', 'No error message')
+                print(f"🔔 [FASTAPI] No concepts found. Error: {error_msg}")
+                
+                # Check if purity analysis has details
+                purity_analysis = raw_result.get('purity_analysis', {})
+                if purity_analysis:
+                    raw_concepts = purity_analysis.get('raw_concepts', 0)
+                    pure_concepts = purity_analysis.get('pure_concepts', 0)
+                    print(f"🔔 [FASTAPI] Purity analysis: {raw_concepts} raw -> {pure_concepts} pure")
         
         # CRITICAL: Convert to JSON-serializable format
         clean_result = ensure_serializable(raw_result)
@@ -150,6 +166,8 @@ async def extract(request: ExtractionRequest):
         raise
     except Exception as e:
         print(f"🔔 [FASTAPI] EXCEPTION: {type(e).__name__}: {e}")
+        import traceback
+        print(f"🔔 [FASTAPI] TRACEBACK: {traceback.format_exc()}")
         
         # Bulletproof error response
         error_response = {
@@ -176,7 +194,8 @@ async def health():
     return {
         "status": "healthy",
         "message": "FastAPI bulletproof extraction service is running",
-        "timestamp": datetime.now().isoformat()
+        "timestamp": datetime.now().isoformat(),
+        "pipeline_ready": True
     }
 
 @app.get("/test")
@@ -193,6 +212,33 @@ async def test_endpoint():
         }
     }
 
+@app.get("/debug/pipeline")
+async def debug_pipeline():
+    """Debug endpoint to test pipeline directly"""
+    try:
+        # Test the pipeline import and basic functionality
+        from ingest_pdf.pipeline import ingest_pdf_clean
+        
+        # Try to call with a non-existent file to test error handling
+        test_result = ingest_pdf_clean(
+            pdf_path="nonexistent_test_file.pdf",
+            doc_id="test",
+            extraction_threshold=0.0,
+            admin_mode=True
+        )
+        
+        return {
+            "pipeline_import": "success",
+            "test_call_result": ensure_serializable(test_result),
+            "expected_error": "File should not exist, so should get error response"
+        }
+    except Exception as e:
+        return {
+            "pipeline_import": "failed",
+            "error": str(e),
+            "traceback": traceback.format_exc()
+        }
+
 @app.get("/debug/last-upload")
 async def debug_last_upload():
     """Debug endpoint to check last upload files"""
@@ -207,7 +253,8 @@ async def debug_last_upload():
                 recent_files.append({
                     "name": f.name,
                     "size_mb": round(f.stat().st_size / (1024*1024), 2),
-                    "modified": datetime.fromtimestamp(f.stat().st_mtime).isoformat()
+                    "modified": datetime.fromtimestamp(f.stat().st_mtime).isoformat(),
+                    "exists": f.exists()
                 })
             
             return {
@@ -226,10 +273,13 @@ async def root():
     return {
         "message": "TORI Bulletproof FastAPI Extraction Service",
         "status": "ready",
-        "features": ["bulletproof_serialization", "concept_extraction", "purity_analysis"],
+        "features": ["bulletproof_serialization", "concept_extraction", "purity_analysis", "admin_mode"],
         "endpoints": {
             "extract": "/extract",
             "health": "/health",
+            "test": "/test",
+            "debug_pipeline": "/debug/pipeline",
+            "debug_uploads": "/debug/last-upload",
             "docs": "/docs"
         },
         "timestamp": datetime.now().isoformat()
@@ -249,6 +299,17 @@ async def startup_event():
     try:
         from ingest_pdf.pipeline import ingest_pdf_clean
         logger.info("✅ Pipeline module loaded successfully")
+        
+        # Test pipeline with dummy call
+        try:
+            test_result = ingest_pdf_clean("test_nonexistent.pdf", admin_mode=True)
+            if test_result.get('status') == 'error':
+                logger.info("✅ Pipeline responds correctly to test call")
+            else:
+                logger.warning(f"⚠️ Unexpected test result: {test_result}")
+        except Exception as e:
+            logger.error(f"❌ Pipeline test call failed: {e}")
+            
     except ImportError as e:
         logger.error(f"❌ Failed to import pipeline: {e}")
         raise

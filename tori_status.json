@@ -1,16 +1,15 @@
 {
-  "timestamp": "2025-06-09T10:30:31.910418",
-  "stage": "api_startup",
-  "status": "ready",
+  "timestamp": "2025-06-10T18:46:48.884996",
+  "stage": "prajna_startup",
+  "status": "success",
   "details": {
-    "port": 8002,
-    "urls": {
-      "api": "http://localhost:8002",
-      "health": "http://localhost:8002/health",
-      "docs": "http://localhost:8002/docs"
-    }
+    "port": 8001,
+    "api_url": "http://127.0.0.1:8001/api/answer",
+    "docs_url": "http://127.0.0.1:8001/docs",
+    "mode": "production"
   },
-  "api_port": 8002,
+  "session_id": "20250610_184636",
+  "api_port": null,
   "prajna_port": 8001,
   "mcp_running": false,
   "prajna_running": true,
